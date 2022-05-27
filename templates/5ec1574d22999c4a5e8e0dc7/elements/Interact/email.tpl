@@ -129,7 +129,7 @@ children: []
 import axios from 'axios'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{% set ph %}
+{% set bpr %}
 {% if element.values.functionName %}
 {% set functionName = element.values.functionName %}
 {% else %}
@@ -158,5 +158,5 @@ const {{ functionName }} = (to, extra:any = {}) => {
     })
   }
 {% endset %}
-{{ save_delayed('ph',ph) }}
+{{ save_delayed('bpr',bpr) }}
 {{ content | raw }}

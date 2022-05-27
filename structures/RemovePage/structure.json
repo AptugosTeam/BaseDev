@@ -1,0 +1,16 @@
+{
+  "_id": "fjkgf4TrgXSvrR0tt",
+  "name": "Remove Page",
+  "desc": "",
+  "icon": "",
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "pageID",
+      "display": "Page ID",
+      "type": "text",
+      "helpText": "Page ID to remove"
+    }
+  ],
+  "afterRun": ""
+}

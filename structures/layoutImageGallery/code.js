@@ -197,7 +197,7 @@ const PH = [{
             "cascades": false,
             "value": "loadFromRedux",
             "values": {
-                "data": "R89I0aqU",
+                "data": Parameters.table_unique_id,
                 "variableName": "galleryImages"
             },
             "prevent_delete": false

@@ -11,7 +11,7 @@ options:
     settings:
       default: 'true'
   - name: style
-    display: Image Style
+    display: Page Style
     type: text
   - name: cache
     display: Cache

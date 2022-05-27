@@ -21,14 +21,14 @@ unique_id: 6IVx7DRZ
         "display": "From",
         "value": "reference",
         "type": "select",
-        "options": "aptugo.tableUtils.getAllFields().map(field => { return { label: field[1], value: field[0] } })",
+        "options": "aptugoUtils.getAllFields().map(field => { return { label: field[1], value: field[0] } })",
         "isrequired": true
       },
       {
         "display": "ReferencedKey",
         "value": "referencekey",
         "type": "select",
-        "options": "[{ label: 'Standard Key', value: '_id' }, ...aptugo.tableUtils.getAllFields().map(field => { return { label: field[1], value: field[0] } })]"
+        "options": "[{ label: 'Standard Key', value: '_id' }, ...aptugoUtils.getAllFields().map(field => { return { label: field[1], value: field[0] } })]"
       },
       {
         "display": "Display",

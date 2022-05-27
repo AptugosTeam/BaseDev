@@ -658,7 +658,8 @@ const PH = {
 	"cascades": false,
 	"value": "Container",
 	"values": {
-		"maxWidth": "lg"
+		"maxWidth": "lg",
+		"className": "theme.aboutUs"
 	},
 	"prevent_delete": false
 }

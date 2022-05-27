@@ -31,20 +31,6 @@ const appRootPH = {
 		"children": []
 	},{
 					"children": [
-						{
-							"path": "mergeDeep.tpl",
-							"completePath": "elements/Programming/Snippets/mergeDeep.tpl",
-							"type": "element",
-							"icon": "ico-paper",
-							"sourceType": "javascript",
-							"helpText": "Merges several objects with all their properties",
-							"open": false,
-							"name": "mergeDeep",
-							"prevent_delete": false,
-							"cascades": false,
-							"children": [],
-							"value": "mergeDeep"
-					},
 							{
 									"name": "SelectedLanguage",
 									"path": "useState.tpl",
