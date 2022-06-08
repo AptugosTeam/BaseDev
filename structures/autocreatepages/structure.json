@@ -1,6 +1,7 @@
 {
   "_id": "5e7f681182eb69b8d2751e98",
-  "name": "autocreatepages",
+  "name": "Autocreate ABM pages",
+  "runable": true,
   "Created_date": {
     "$date": "2020-03-28T15:06:57.286Z"
   },

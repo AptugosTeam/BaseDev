@@ -59,11 +59,20 @@ module.exports = (app) => {
   app.get('/api/{{ table.name | friendly | lower }}', async (req, res, next) => {
     const mc = new memCache()
     const url = '{{ table.source }}'
+
+    {% if table.headerparameters %}
+      let extraHeaders = {
+        {% for header in table.headerparameters|split('\n') %}
+          {% set splitted = header|split(':') %}
+          '{{ splitted[0] }}': '{{ splitted[1] }}',
+        {% endfor %}
+      }
+    {% endif %}
     
     var data = mc.getMemCache(url)
     if (!data) {
-      var axiosdata = await axios.get(url)
-      data = axiosdata.{{ table.pathtodata }}
+      var axiosdata = await axios.get(url{% if table.headerparameters %}, { headers: extraHeaders }{% endif %})
+      data = axiosdata.data.{{ table.pathtodata }}
       mc.save(url, data)
     }
     res.json(paginate(data, { page: req.query.page || 1 }))
@@ -76,7 +85,7 @@ module.exports = (app) => {
     var data = mc.getMemCache(url)
     if (!data) {
       var axiosdata = await axios.get(url)
-      data = axiosdata.{{ table.pathtodata }}
+      data = axiosdata.data.{{ table.pathtodata }}
       mc.save(url, data)
     }
     

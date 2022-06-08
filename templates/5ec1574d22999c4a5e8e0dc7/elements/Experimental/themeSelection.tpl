@@ -38,10 +38,10 @@ options:
         element = arguments[0];
         var selectedAsset = (element.values?.useAsset && element.values?.useAsset !== 'none') ? element.values?.useAsset : null;
         if (selectedAsset) {
-          const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id === selectedAsset);
-          const currentPage = aptugo.pageUtils.findContainerPage(element).unique_id;
-          const cssinfo = aptugo.assetUtils.grabCssSelectors(assetInfo)
-          aptugo.variables.setPageVariable(currentPage, element.unique_id, { theme: cssinfo, hidden: selectedAsset })
+          const assetInfo = aptugoUtils.assets.stylesheets().find(ss => ss.id === selectedAsset);
+          const currentPage = aptugoUtils.helpers.findContainerPage(element).unique_id;
+          const cssinfo = aptugoUtils.assets.grabCssSelectors(assetInfo);
+          aptugoUtils.variables.setPageVariable(currentPage, element.unique_id, { theme: cssinfo, hidden: selectedAsset })
         }
 sourceType: javascript
 children: []

@@ -94,15 +94,18 @@ async function authenticate({ email, password, model, passwordField }) {
         return reject({ message: 'Email not found' })
       }
 
-      bcrypt.compare(password, user[passwordField]).then((isMatch) => {
-        if (isMatch) {
-          const { Password, ...userWithoutPassword } = user._doc
-          const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
-          resolve({ accessToken: token, data: userWithoutPassword })
-        } else {
-          reject({ message: 'Password incorrect' })
-        }
-      })
+      if (!user[passwordField]) reject({ message: 'User does not have a password', user: user })
+      else {
+        bcrypt.compare(password, user[passwordField]).then((isMatch) => {
+          if (isMatch) {
+            const { Password, ...userWithoutPassword } = user._doc
+            const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+            resolve({ accessToken: token, data: userWithoutPassword })
+          } else {
+            reject({ message: 'Password incorrect' })
+          }
+        })
+      }
     })
   })
 }

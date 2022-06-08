@@ -1,0 +1,25 @@
+{
+  "_id": "5f7b8c4b498ed2ff91c6d3cb",
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "type",
+      "display": "Asset Type",
+      "type": "text",
+      "helpText": "Asset Type (stylesheet, image, etc)"
+    },
+    {
+      "name": "path",
+      "display": "Asset Path",
+      "type": "text",
+      "helpText": "Path to the source asset file"
+    }
+  ],
+  "afterRun": "",
+  "Created_date": {
+    "$date": "2020-10-05T21:12:43.630Z"
+  },
+  "__v": 0,
+  "desc": "Adds and Updates assets",
+  "name": "Create Asset"
+}

@@ -72,7 +72,7 @@ require('./app/routes/{{ table.name | friendly | lower }}.routes.js')(app)
 
 {{ insert_setting('ServerRoute') | raw }}
 
-app.use('/api/images', express.static('./uploads'))
+app.use('/images', express.static({{ insert_setting('imagesFolder')|default("__dirname + '/../dist/img'") }}))
 
 let tries = 0
 

@@ -1,6 +1,7 @@
 {
   "_id": "layoutHeroImage",
   "name": "Layout: Hero Image",
+  "runable": true,
   "desc": "",
   "icon": "icon.png",
   "type": "layout",

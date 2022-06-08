@@ -1,6 +1,7 @@
 {
   "_id": "5f1997f0c76f1f45054347d8",
   "type": "structure",
+  "runable": true,
   "parameters": [
     {
       "name": "User Table",
