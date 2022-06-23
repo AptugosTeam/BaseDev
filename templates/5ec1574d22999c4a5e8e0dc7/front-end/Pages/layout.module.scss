@@ -264,8 +264,7 @@ img {
 
 .footerWithSidebarClosed {
   position: fixed;
-  margin-left: 57px;
-  width: calc(100% - 57px);
+  width: 100%;
   bottom: 0;
   z-index: 5;
 }

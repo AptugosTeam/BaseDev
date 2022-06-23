@@ -14,19 +14,14 @@ const composeEnhancer = process.env.NODE_ENV === 'development' ? composeWithDevT
   name: 'WebsiteVB'
 }) : null
 
-const asyncFunctionMiddleware = (storeAPI:any) => (next:any) => async (action:any) => {
-  if (typeof action === 'function') {
-    return action(storeAPI.dispatch, storeAPI.getState)
-  }
-  return next(action)
-}
-
 {% if hasTables %}
 const store = createStore(
   rootReducer,
   initialState,
-  process.env.NODE_ENV === 'development' ? composeEnhancer(applyMiddleware(asyncFunctionMiddleware)) : applyMiddleware(asyncFunctionMiddleware)
+  process.env.NODE_ENV === 'development' ? composeEnhancer(applyMiddleware(epicMiddleware)) : applyMiddleware(epicMiddleware)
 )
+
+epicMiddleware.run(rootEpic)
 {% else %}
 const store = {}
 {% endif %}

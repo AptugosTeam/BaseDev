@@ -37,7 +37,7 @@ const {{ referencedTable | lower }}AutocompleteData = useSelector((state: IState
 {{ save_delayed('ph',ph) }}
 {% set ph %}
 const [{{ columnName }}Options, set{{ columnName }}Options] = React.useState<{ label: String, value: String }[]>([])
-const typeInSearch{{ referencedTable }} = (typedIn) => {
+const typeInSearch{{ field.column_name | friendly }}{{ referencedTable }} = (typedIn) => {
   const searchOptions = { searchString: typedIn, searchField: '{{ referencedField.column_name | friendly }}', page: 1, limit: 10 }
   axios.get('{{ settings.apiURL }}/api/{{ referencedTable | lower }}/search/', { params: searchOptions }).then(result => { 
     set{{ columnName }}Options(result.data.docs.map({{ referencedField.table.singleName | friendly | lower }} => { return { label: {{ referencedField.table.singleName | friendly | lower }}.{{ referencedField.column_name | friendly }}, value: {{ referencedField.table.singleName | friendly | lower }}.{{ referencekey }} }}))
@@ -60,7 +60,7 @@ React.useEffect(() => {
 <Autocomplete
   {% if field.displaytype == 'chips' %}chips{% endif %}
   value={ {{ columnName }}Value }
-  onType={ typeInSearch{{ referencedTable }} }
+  onType={ typeInSearch{{ field.column_name | friendly }}{{ referencedTable }} }
   onChange={(newValue) => handle{{ tableName }}Change('{{ columnName }}')(newValue?.length ? newValue.map(item => ({ _id: item.value !== 'new' ? item.value : null, {{ referencedField.column_name | friendly }}: item.label })) : [])}
   loading={ {{ referencedTable | lower }}AutocompleteData.loadingStatus === 'loading' }
   {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}

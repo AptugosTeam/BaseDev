@@ -6,11 +6,9 @@ unique_id: Ue5mTTDJ
 import React from 'react'
 import 'react-native-gesture-handler'
 import { Provider as StateProvider } from 'react-redux'
-import { NativeRouter, Route, Routes, Link } from "react-router-native";
-
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
 import store from './store/store'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 {% for page in application.pages | plain('type','page')  %}
   {% if page.filename %}
@@ -18,20 +16,23 @@ import store from './store/store'
   {% endif %}
 {% endfor %}
 
-const Stack = createStackNavigator()
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
     <StateProvider store={store}>
-      <NativeRouter>
-        <Routes>
-          {% for page in application.pages | plain('type','page') %}
-            {% if page.filename %}
-              <Route path='{{ page.path }}' element={<{{ page.name | friendly }} />} />
-            {% endif %}
-          {% endfor %}
-        </Routes>
-      </NativeRouter>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={ { headerShown: false } } initialRouteName="/">
+        {% for page in application.pages | plain('type','page') %}
+          {% if page.filename %}
+            <Stack.Screen
+              name='{{ page.path }}'
+              component={ {{ page.name | friendly }} }
+            />
+          {% endif %}
+        {% endfor %}
+        </Stack.Navigator>
+      </NavigationContainer>
     </StateProvider>
   )
 }

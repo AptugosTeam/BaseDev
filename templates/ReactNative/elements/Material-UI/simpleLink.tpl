@@ -27,13 +27,10 @@ options:
 sourceType: javascript
 children: []
 */
-{% set bpr %}
-import { Link } from "react-router-native"
-{% endset %}
-{{ save_delayed('bpr', bpr ) }}
-<Link
-    to={{ element.values.destination|textOrVariable }}
-    key='{{ element.unique_id }}'
+<Button
+  key='{{ element.unique_id }}'
+  title="Go to Details... again"
+  onPress={() => navigation.push( {{ element.values.destination|textOrVariable }} )}
 >
   {{ content | raw }}
-</Link>
+</Button>

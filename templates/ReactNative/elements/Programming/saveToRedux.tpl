@@ -12,6 +12,7 @@ options:
     options: >-
       return aptugo.store.getState().application.tables.map(({ unique_id, name
       }) => [unique_id, name])
+    required: true
   - name: condition
     display: Condition
     type: text

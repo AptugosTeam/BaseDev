@@ -1,11 +1,11 @@
 /*
-path: addAlternative.tpl
+path: updateAlternative.tpl
 type: file
-unique_id: uGLTtaRR
+unique_id: uGLTtaTT
 icon: field
 children: []
 */
-{% if table.beforeCreate %}{{ table.beforeCreate }}{% endif %}
+{% if table.beforeUpdate %}{{ table.beforeUpdate }}{% endif %}
 let final = {}
     walkObject = (obj, ref = { ...final }, saveAsArray = false) => {
       let parsedValues = ref
@@ -73,11 +73,10 @@ let final = {}
     })
 
     req.body = final
-    {{ table.name | friendly | lower }}
-      .createAsPromise({ req, res })
-      .then((result) => {
+    {{ table.name | friendly | lower }}.update({ req, res })
+      .then(result => {
         res.send(result)
-      })
-      .catch((e) => {
-        res.status(e.code || 500).send(e)
-      })
+    })
+    .catch(e => {
+      res.status(500).send(e)
+    })

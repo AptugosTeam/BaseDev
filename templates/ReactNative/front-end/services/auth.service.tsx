@@ -3,6 +3,7 @@ path: auth.service.tsx
 completePath: front-end/services/auth.service.tsx
 unique_id: dDixye51
 */
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
 
 const API_URL = '{{ settings.apiURL }}/api/users/'
@@ -16,8 +17,8 @@ class AuthService {
       })
       .then((response) => {
         if (response.data.accessToken) {
-          // localStorage.setItem('token', response.data.accessToken)
-          // localStorage.setItem('user', JSON.stringify(response.data.data))
+          AsyncStorage.setItem('token', response.data.accessToken)
+          AsyncStorage.setItem('user', JSON.stringify(response.data.data))
         }
         return response.data
       })
@@ -36,9 +37,9 @@ class AuthService {
     })
   }
 
-  getCurrentUser() {
-    return {}
-    // return JSON.parse(localStorage.getItem('user'))
+  async getCurrentUser() {
+    const user = await AsyncStorage.getItem('user')
+    return user ? JSON.parse(user) : {}
   }
 
   recoverPassword({ email, subject, message, name }) {

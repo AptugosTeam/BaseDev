@@ -24,11 +24,7 @@ options:
   - name: variant
     display: Variant
     type: dropdown
-    options: standard;filled;outlined
-  - name: margin
-    display: Margin
-    type: dropdown
-    options: normal;dense;none
+    options: flat;outlined
   - name: className
     display: ClassName
     type: text
@@ -44,7 +40,7 @@ options:
   - name: type
     display: Type
     type: dropdown
-    options: text;password;date;number
+    options: text;password;date;number;textarea
 children: []
 */
 {% set bpr %}
@@ -56,12 +52,20 @@ import { TextInput } from 'react-native-paper'
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.placeholder %}placeholder="{{ element.values.placeholder }}"{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
-    {% if element.values.margin %}margin="{{ element.values.margin }}"{% endif %}
     {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
     {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
     {% if element.values.theme %}theme={ {{ element.values.theme }} }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
-    fullWidth
+    {% if element.values.type == 'number' %}keyboardType='numeric'{% endif %}
+    {% if element.values.type == 'textarea' %}
+      multiline
+      type="text"
+    {% endif %}
+    {% if element.values.type != 'textarea' %}
+      type="{{ element.values.type|default('text') }}"
+    {% endif %}
+    outlineColor='transparent'
+    activeOutlineColor='#3A528A'
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChangeText={ {{ element.values.onChange }} }{% endif %}
 />

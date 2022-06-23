@@ -9,6 +9,7 @@ options:
   - name: data
     display: Data
     type: dropdown
+    required: true
     options: >-
       return aptugo.store.getState().application.tables.map(({ unique_id, name
       }) => [unique_id, name])

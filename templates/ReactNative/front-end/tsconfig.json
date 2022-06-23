@@ -6,6 +6,7 @@ unique_id: alNzyRKN
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "noImplicitAny": false,
     "strict": true
   }
 }

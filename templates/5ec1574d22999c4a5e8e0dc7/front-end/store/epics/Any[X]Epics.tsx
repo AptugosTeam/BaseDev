@@ -11,7 +11,7 @@ children: []
 import { combineEpics, Epic } from "redux-observable";
 import { switchMap, map, startWith, catchError, filter, mergeMap } from "rxjs/operators";
 import axios from "axios";
-import {buildFormData} from './index'
+import buildFormData from './buildFormData'
 import {
   {{ table.name | friendly | capitalize }}Action,
   {{ table.name | friendly | capitalize }}ActionTypes,

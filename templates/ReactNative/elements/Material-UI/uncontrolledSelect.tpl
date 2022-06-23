@@ -37,24 +37,14 @@ options:
     options: ''
 children: []
 */
-
-
 {% set bpr %}
-import { TextInput } from 'react-native-paper'
-import MenuItem from '@mui/material/MenuItem'
+import SelectDropdown from 'react-native-select-dropdown'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-<TextInput
-    {% if element.values.Autofocus %}autoFocus{% endif %}
-    {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
-    margin='{{ element.values.margin|default("dense") }}'
-    {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
-    {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-    select
-    {% if element.values.fullwidth %}fullWidth{% endif %}
-    {% if element.values.value %}value={{ element.values.value }}{% endif %}
-    {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
->
-{% if element.values.showall %}<MenuItem value=""><em>All</em></MenuItem>{% endif %}
-{ {{ element.values.options }}.map((item: { value: any, name: string } | any, index: number) => <MenuItem value={item.value ? item.value : item} key={index}>{item.name ? item.name : item}</MenuItem> )}
-</TextInput>
+<SelectDropdown
+  {% if element.values.value %}defaultValue={{ element.values.value }}{% endif %}
+  data={ {{ element.values.options }} }
+  buttonStyle={theme.inputSelector}
+  buttonTextStyle={theme.inputSelectorText}
+  {% if element.values.onChange %}onSelect={ {{ element.values.onChange }} }{% endif %}
+/>

@@ -6,14 +6,14 @@ icon: ico-field
 helpText: Retrieves a stored value
 settings:
   - name: Packages
-    value: '"@react-native-async-storage/async-storage": "^1.15.14",'
+    value: '"@react-native-async-storage/async-storage": "^1.17.6",'
 options:
   - name: variableName
     display: Name
     type: text
     options: ''
   - name: onLoad
-    display: On Load
+    display: Store In Variable
     type: text
     options: ''
 children: []
@@ -22,6 +22,5 @@ children: []
 import AsyncStorage from '@react-native-async-storage/async-storage'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-AsyncStorage.getItem('{{ element.values.variableName }}').then(res => {
-  {{ element.values.onLoad }}
-})
+let {{ element.values.onLoad }}
+AsyncStorage.getItem('{{ element.values.variableName }}').then(res => { {{ element.values.onLoad }} = res })

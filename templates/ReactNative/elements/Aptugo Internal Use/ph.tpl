@@ -8,7 +8,7 @@ import { Provider as PaperProvider } from 'react-native-paper'
 import { SafeAreaView } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-const {{ page.name | friendly }}: FunctionComponent = (props: any) => {
+const {{ page.name | friendly }} = ({ navigation }) => {
   {% for delay in delayed %}
     {{ delay }}
   {% endfor %}

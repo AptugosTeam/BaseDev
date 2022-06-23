@@ -189,7 +189,6 @@ img {
 }
 
 .withSidebarClosed {
-  margin-left: 57px;
   padding: 2rem;
   height: calc(100% - 51px);
   box-sizing: border-box;
@@ -261,8 +260,7 @@ img {
 
 .footerWithSidebarClosed {
   position: fixed;
-  margin-left: 57px;
-  width: calc(100% - 57px);
+  width: 100%;
   bottom: 0;
   z-index: 5;
 }

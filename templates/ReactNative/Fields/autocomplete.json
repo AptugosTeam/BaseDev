@@ -14,19 +14,21 @@ unique_id: 6IVx7DRZ
         "display": "Relationship Type",
         "value": "relationshipType",
         "type": "select",
-        "options": "[{ label: '1 to many', value: '1:m'}, { label: 'many to 1', value: 'm:1'}, { label: '1 to 1', value: '1:1'}]"
+        "options": "[{ label: '1 to many', value: '1:m'}, { label: 'many to 1', value: 'm:1'}, { label: '1 to 1', value: '1:1'}]",
+        "isrequired": true
       },
       {
         "display": "From",
         "value": "reference",
         "type": "select",
-        "options": "aptugo.tableUtils.getAllFields().map(field => { return { label: field[1], value: field[0] } })"
+        "options": "aptugoUtils.getAllFields().map(field => { return { label: field[1], value: field[0] } })",
+        "isrequired": true
       },
       {
         "display": "ReferencedKey",
         "value": "referencekey",
         "type": "select",
-        "options": "[{ label: 'Standard Key', value: '_id' }, ...aptugo.tableUtils.getAllFields().map(field => { return { label: field[1], value: field[0] } })]"
+        "options": "[{ label: 'Standard Key', value: '_id' }, ...aptugoUtils.getAllFields().map(field => { return { label: field[1], value: field[0] } })]"
       },
       {
         "display": "Display",

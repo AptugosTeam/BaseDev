@@ -16,13 +16,13 @@ options:
 children: []
 */
 {% set bpr %}
-import { Link } from "react-router-native"
+import { Button } from 'react-native-paper'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<Link
-    to={{ element.values.destination|textOrVariable }}
-    key='{{ element.unique_id }}'
+<Button
+  key='{{ element.unique_id }}'
+  {% if element.values.innerText %}title={{ element.values.innerText|textOrVariable }}{% endif %}
+  onPress={() => navigation.push( `{{ element.values.destination }}` )}
 >
-    {% if element.values.innerText %}<Text>{{ element.values.innerText }}</Text>{% endif %}
-    {{ content | raw }}
-</Link>
+  {{ content | raw }}
+</Button>

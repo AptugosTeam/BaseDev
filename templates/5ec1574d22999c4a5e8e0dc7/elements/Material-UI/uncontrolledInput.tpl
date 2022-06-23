@@ -37,6 +37,9 @@ options:
     display: fieldname
     type: text
     options: ''
+  - name: fullwidth
+    display: Use full width?
+    type: checkbox
   - name: type
     display: Type
     type: dropdown
@@ -66,7 +69,7 @@ import TextField from '@mui/material/TextField'
     {% if element.values.type != 'textarea' %}
       type="{{ element.values.type|default('text') }}"
     {% endif %}
-    fullWidth
+    {% if element.values.fullWidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
 />

@@ -23,10 +23,23 @@ import { TextInput } from 'react-native-paper'
     label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     type="text"
     fullWidth
-    className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
-    variant="{{ element.values.variant|default('standard') }}"
+    style={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
+    mode="{{ element.values.variant|default('outlined') }}"
     value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
-    onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
+    onChangeText={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
     error={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}'}
     helperText={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}' && {{ tableName | lower }}Data.errMessage}
+    outlineColor="transparent"
+    activeOutlineColor="#3A528A"
+    theme={ {
+        colors: {
+            placeholder: '#C4D1FF',
+            text: '#C3D1FF',
+        },
+    } }
 />
+
+                
+                
+                
+                

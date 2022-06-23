@@ -8,9 +8,7 @@ sourceType: typescript
 subtype: Any
 children: []
 */
-import axios from 'axios'
-import { I{{ table.name | friendly | capitalize }}Item, Ipaginated{{ table.name | friendly | capitalize }} } from "../models"
-import { buildFormData } from '../epics/index'
+import { I{{ table.name | friendly | capitalize }}Item, Ipaginated{{ table.name | friendly | capitalize }} } from "../models";
 
 export enum {{ table.name | friendly | capitalize }}ActionTypes {
   SEARCH_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/search',
@@ -39,69 +37,12 @@ export enum {{ table.name | friendly | capitalize }}ActionTypes {
   EDITING_{{ table.name | friendly | upper }}_FAILED = '{{ table.name | friendly | lower }}/editing_failed'
 }
 
-{% set capitalizedTable = table.name | friendly | capitalize %}
-{% set lowerSingleTable = table.singleName | friendly | lower %}
-
-export const add{{ capitalizedTable }} = ({{ lowerSingleTable }}: I{{ capitalizedTable }}Item) => async(dispatch:any) => {
-  const data = new FormData()
-  buildFormData(data, {{ lowerSingleTable }})
-  const config = {
-    headers: {
-      'content-type': 'multipart/form-data',
-    },
+export function search{{ table.name | friendly | capitalize }}(searchOptions: TSearchOptions | string, keep?: boolean): ISearch{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.SEARCH_{{ table.name | friendly | upper }},
+    searchOptions: typeof searchOptions === 'string' ? { searchString: searchOptions } : searchOptions,
+    keep: keep
   }
-  return axios.post('{{ settings.apiURL }}/api/{{ table.name | friendly | lower }}/', data, config).then(res => {
-    dispatch({
-      type: {{ table.name | friendly | capitalize }}ActionTypes.ADD_{{ table.name | friendly | upper }},
-      payload: res.data,
-    })
-    Promise.resolve(res.data)
-  }).catch(e => {
-    dispatch({ type: {{ table.name | friendly | capitalize }}ActionTypes.ADDING_{{ table.name | friendly | upper }}_FAILED, error: e})
-    Promise.reject(e)
-  })
-}
-
-export const load{{ capitalizedTable }} = (loadOptions: TSearchOptions) => async (dispatch: any) => {
-  return axios
-    .get('{{ settings.apiURL }}/api/{{ table.name | friendly | lower }}/', { params: loadOptions })
-    .then((res) => {
-      dispatch({
-        type: {{ table.name | friendly | capitalize }}ActionTypes.LOADED_{{ table.name | friendly | upper }},
-        payload: {
-          {{ table.name | friendly | lower }}: res.data
-        }
-      })
-      Promise.resolve(res.data)
-    })
-    .catch((e) => {
-      dispatch({ 
-        type: {{ table.name | friendly | capitalize }}ActionTypes.LOADING_{{ table.name | friendly | upper }}_FAILED,
-        error: e
-      })
-      Promise.reject(e)
-    })
-}
-
-export const search{{ capitalizedTable }} = (searchOptions: TSearchOptions | string, keep?: boolean) => async (dispatch: any) => {
-  return axios
-    .get('{{ settings.apiURL }}/api/{{ table.name | friendly | lower }}/search/', { params: searchOptions })
-    .then((res) => {
-      dispatch({
-        type: {{ table.name | friendly | capitalize }}ActionTypes.FOUND_{{ table.name | friendly | upper }},
-        keep: keep,
-        payload: {
-          {{ table.name | friendly | lower }}: res.data,
-        }
-      })
-    })
-    .catch((e) => {
-      dispatch({ 
-        type: {{ table.name | friendly | capitalize }}ActionTypes.SEARCHING_{{ table.name | friendly | upper }}_FAILED,
-        error: e
-      })
-      Promise.reject(e)
-    })
 }
 
 export function searching{{ table.name | friendly | capitalize }}(): ISearching{{ table.name | friendly | capitalize }}Action {
@@ -126,6 +67,13 @@ export function searching{{ table.name | friendly | capitalize }}Failed(): ISear
   }
 }
 
+export function load{{ table.name | friendly | capitalize }}(loadOptions: TSearchOptions): ILoad{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.LOAD_{{ table.name | friendly | upper }},
+    loadOptions: loadOptions
+  }
+}
+
 export function loading{{ table.name | friendly | capitalize }}(): ILoading{{ table.name | friendly | capitalize }}Action {
   return {
     type: {{ table.name | friendly | capitalize }}ActionTypes.LOADING_{{ table.name | friendly | upper }}
@@ -144,6 +92,28 @@ export function loaded{{ table.name | friendly | capitalize }}({{ table.name | f
 export function loading{{ table.name | friendly | capitalize }}Failed(): ILoading{{ table.name | friendly | capitalize }}FailedAction {
   return {
     type: {{ table.name | friendly | capitalize }}ActionTypes.LOADING_{{ table.name | friendly | upper }}_FAILED
+  }
+}
+
+export function add{{ table.name | friendly | capitalize }}({{ table.singleName | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item): IAdd{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.ADD_{{ table.name | friendly | upper }},
+    payload: {{ table.singleName | friendly | lower }}
+  }
+}
+
+export function adding{{ table.name | friendly | capitalize }}(): IAdding{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.ADDING_{{ table.name | friendly | upper }}
+  }
+}
+
+export function added{{ table.name | friendly | capitalize }}({{ table.name | friendly | lower }}: Ipaginated{{ table.name | friendly | capitalize }}): IAdded{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.ADDED_{{ table.name | friendly | upper }},
+    payload: {
+      {{ table.name | friendly | lower }}
+    }
   }
 }
 

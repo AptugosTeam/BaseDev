@@ -41,7 +41,7 @@ settings:
     value: |
       const stripe = require('stripe')('{{ type == 'Development' ? element.values.devApiKey : element.values.apikey }}');
 
-      app.post('/create-checkout-session/:qty?/:productid?', async (req, res) => {
+      app.post('/create-checkout-session/:qty?/:productid?/:mode?', async (req, res) => {
         const session = await stripe.checkout.sessions.create({
           line_items: [
             {
@@ -49,7 +49,8 @@ settings:
               quantity: req.params.qty || 1,
             },
           ],
-          mode: 'payment',
+          mode: req.params.mode || 'payment',
+          client_reference_id: req.body.client_reference_id || null,
           success_url: `{{ element.values.successURL }}`,
           cancel_url: `{{ element.values.cancelURL }}`,
         });
