@@ -13,16 +13,20 @@ options:
     display: Destination
     type: text
     options: ''
+  - name: parameters
+    display: Parameters
+    type: text
+    options: ''
 children: []
 */
 {% set bpr %}
-import { Button } from 'react-native-paper'
+import { TouchableOpacity } from "react-native"
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<Button
+<TouchableOpacity
   key='{{ element.unique_id }}'
-  {% if element.values.innerText %}title={{ element.values.innerText|textOrVariable }}{% endif %}
-  onPress={() => navigation.push( `{{ element.values.destination }}` )}
+  onPress={() => navigation.push( `{{ element.values.destination }}`{% if element.values.parameters %}, { {{ element.values.parameters }} }{%endif%} )}  
 >
-  {{ content | raw }}
-</Button>
+{% if element.values.innerText %}title={{ element.values.innerText|textOrVariable }}{% endif %}
+{{ content | raw }}
+</TouchableOpacity>

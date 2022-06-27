@@ -25,9 +25,24 @@ export default function App() {
         <Stack.Navigator screenOptions={ { headerShown: false } } initialRouteName="/">
         {% for page in application.pages | plain('type','page') %}
           {% if page.filename %}
+            {% set splitParts = page.path|split('/') %}
+            {% set initialPath = '' %}
+            {% set params = '' %}
+            {% for part in splitParts %}
+              {% if part %}
+                {% if part|first == ':' %}
+                  {% set params = params ~ part|slice(1) ~ ': null,' %}
+                {% else %}
+                  {% set initialPath = initialPath ~ '/' ~ part %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
             <Stack.Screen
-              name='{{ page.path }}'
+              name='{{ initialPath|default("/") }}'
               component={ {{ page.name | friendly }} }
+              {% if params %}
+              initialParams={ { {{params}} } }
+              {% endif %}
             />
           {% endif %}
         {% endfor %}

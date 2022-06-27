@@ -27,10 +27,13 @@ options:
 sourceType: javascript
 children: []
 */
-<Button
+{% set bpr %}
+import { TouchableOpacity } from "react-native"
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
+<TouchableOpacity
   key='{{ element.unique_id }}'
-  title="Go to Details... again"
   onPress={() => navigation.push( {{ element.values.destination|textOrVariable }} )}
 >
   {{ content | raw }}
-</Button>
+</TouchableOpacity>
