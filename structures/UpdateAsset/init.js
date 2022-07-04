@@ -1,19 +1,20 @@
-const existing = Application.assets.find(asset => asset.id === Parameters.asset.id)
+let assetId = Parameters.asset.id ? Parameters.asset.id : Parameters.asset
+const existing = Application.assets.find(asset => asset.id === assetId)
+
 let newAsset
 let _id = null
 if (existing) {
-    var foundIndex = Application.assets.findIndex(asset => asset.id == Parameters.asset.id)
+    var foundIndex = Application.assets.findIndex(asset => asset.id == assetId)
     Application.assets[foundIndex] = Parameters.asset
-    _id = Parameters.asset.id
     newAsset = {
         type: Parameters.asset.type,
-        id: Parameters.asset.id || aptugo.generateID(),
+        id: assetId || aptugo.generateID(),
         name: Parameters.asset.name || Parameters.asset.source.name
     }
 } else {
     newAsset = {
         type: Parameters.asset.type,
-        id: Parameters.asset.id || aptugo.generateID(),
+        id: assetId || aptugo.generateID(),
         name: Parameters.asset.name || Parameters.asset.source.name
     }
 
@@ -24,20 +25,21 @@ if (existing) {
     }
 
     Application.assets.push(newAsset)
-    _id = newAsset.id
+    assetId = newAsset.id
 }
 
 if (Parameters.asset.fileContents) {
-    if ( window.sendAptugoCommand ) {
-        window.sendAptugoCommand({
-            section: 'assets',
-            command: 'setfile',
-            options: `--app ${Application.settings.name} --id '${_id}' --filename '${newAsset.name}'`,
-            file: JSON.stringify(Parameters.asset.fileContents)
-        }).then(res => {
-            console.log('Asset created')
-        })
-    }
+    aptugo.run({ _: ['assets', 'setfile'], binary: false, app: Application._id, id: assetId }, { file: JSON.stringify(Parameters.asset.fileContents) })
+    // if ( window.sendAptugoCommand ) {
+    //     window.sendAptugoCommand({
+    //         section: 'assets',
+    //         command: 'setfile',
+    //         options: `--app ${Application.settings.name} --id '${assetId}' --filename '${newAsset.name}'`,
+    //         file: JSON.stringify(Parameters.asset.fileContents)
+    //     }).then(res => {
+    //         console.log('Asset created')
+    //     })
+    // }
 }
 
 return Application

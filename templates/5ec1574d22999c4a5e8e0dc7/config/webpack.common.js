@@ -55,6 +55,6 @@ module.exports = {
     'react-dom': 'ReactDOM',
   },
   performance: {
-    hints: 'warning',
+    hints: false,
   },
 }
