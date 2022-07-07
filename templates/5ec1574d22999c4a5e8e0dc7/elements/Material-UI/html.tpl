@@ -10,7 +10,7 @@ options:
     type: text
     options: ''
 settings:
-  - name: DevPackages
+  - name: Packages
     value: '"react-html-parser": "^2.0.2",'
 children: []
 */

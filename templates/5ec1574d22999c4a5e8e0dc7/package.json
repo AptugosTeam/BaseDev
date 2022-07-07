@@ -17,7 +17,7 @@ unique_id: 0i8AxGw6
     "start": "concurrently \"pnpm run dev:api\" \"pnpm run dev:client\"",
     "dev:client": "webpack serve --config=config/webpack.dev.js",
     "dev:api": "nodemon --signal SIGTERM  --delay 5 --exec babel-node back-end/index.js",
-    "postinstall": "cd back-end && pnpm install"
+    "postinstall": "cd back-end && npm install"
 {% set npmScripts = insert_setting('npmScripts') %}
 {% if npmScripts %},{{ insert_setting('npmScripts') | raw }}{% endif %}
   },
