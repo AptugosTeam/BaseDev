@@ -19,6 +19,10 @@ options:
   - name: placeholderText
     display: Placeholder Text
     type: text
+  - name: searchField
+    display: Search Field
+    type: dropdown
+    options: return [['useVar','Use a Variable'], ...aptugo.tableUtils.getAllFields()]
 */
 {% set table = element.values.table | tableData %}
 {% set bpr %}
@@ -38,7 +42,11 @@ let searchTimeout = null
 const searchFor{{ table.name | friendly }} = (event) => {
     if (searchTimeout) clearTimeout(searchTimeout)
     searchTimeout = setTimeout(() => {
-      settableloadoptions({ ...tableloadoptions, searchString: event.target.value })
+      settableloadoptions({
+        ...tableloadoptions,
+        searchString: event.target.value,
+        {% if element.values.searchField %}searchField: '{{ (element.values.searchField | fieldData).column_name }}'{% endif %}
+      })
     },500)
 }
 {% endset %}

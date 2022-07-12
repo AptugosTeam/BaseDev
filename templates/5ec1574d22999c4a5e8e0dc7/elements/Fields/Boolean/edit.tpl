@@ -22,4 +22,3 @@ import FormControlLabel from '@mui/material/FormControlLabel'
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     label={{ field.prompt|default(field.column_name)  | textOrVariable }}
 />
-
