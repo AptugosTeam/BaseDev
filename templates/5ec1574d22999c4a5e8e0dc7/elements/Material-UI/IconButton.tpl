@@ -22,7 +22,7 @@ options:
     display: Icon
     type: dropdown
     options: >-
-      None;AcUnit;Add;AddShoppingCart;CallMade;HelpOutline;Home;Link;MoreVert;Send;ShoppingBasket;ShoppingCart;SportsBasketball;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
+      None;AcUnit;Add;AddShoppingCart;CallMade;ChevronLeft;ChevronRight;HelpOutline;Home;Link;MoreVert;Search;Send;ShoppingBasket;ShoppingCart;SportsBasketball;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
   - name: iconstyle
     display: Icon Style
     type: dropdown

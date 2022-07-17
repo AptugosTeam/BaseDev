@@ -15,7 +15,7 @@ options:
     options: ''
   - name: onChange
     display: On Change
-    type: text
+    type: function
     options: ''
   - name: placeholder
     display: Placeholder
@@ -71,5 +71,5 @@ import TextField from '@mui/material/TextField'
     {% endif %}
     {% if element.values.fullWidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
-    {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
+    {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
 />

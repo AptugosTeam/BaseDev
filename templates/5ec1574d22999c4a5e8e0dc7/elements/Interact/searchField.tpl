@@ -23,7 +23,21 @@ options:
     display: Search Field
     type: dropdown
     options: return [['useVar','Use a Variable'], ...aptugo.tableUtils.getAllFields()]
+  - name: updateVarName
+    display: Update Variable Name
+    type: dropdown
+    options: >-
+      return [['default','Use default name'], ...aptugo.variables.variables.filter(v => v.type !== 'Function').map(v => [v.name, v.name])]
+  - name: updateFunctionName
+    display: Update Function Name
+    type: dropdown
+    options: >-
+      return [['default','Use default name'], ...aptugo.variables.variables.filter(v => v.type === 'Function').map(v => [v.name, v.name])]
 */
+{% set updateFunctionName = element.values.updateFunctionName|default('settableloadoptions') %}
+{% if updateFunctionName == 'default' %}{% set updateFunctionName = 'settableloadoptions' %}{% endif %}
+{% set updateVarName = element.values.updateVarName|default('tableloadoptions') %}
+{% if updateVarName == 'default' %}{% set updateVarName = 'tableloadoptions' %}{% endif %}
 {% set table = element.values.table | tableData %}
 {% set bpr %}
   import { useDispatch } from 'react-redux'
@@ -39,13 +53,13 @@ import { load{{ table.name | friendly | capitalize }}, search{{ table.name | fr
 {{ save_delayed('bpr', bpr ) }}
 {% set ph %}
 let searchTimeout = null
-const searchFor{{ table.name | friendly }} = (event) => {
+const searchFor{{ table.name | friendly }} = (event, field = null) => {
     if (searchTimeout) clearTimeout(searchTimeout)
     searchTimeout = setTimeout(() => {
-      settableloadoptions({
-        ...tableloadoptions,
+      {{updateFunctionName}}({
+        ...{{updateVarName}},
         searchString: event.target.value,
-        {% if element.values.searchField %}searchField: '{{ (element.values.searchField | fieldData).column_name }}'{% endif %}
+        searchField: field
       })
     },500)
 }
@@ -54,5 +68,14 @@ const searchFor{{ table.name | friendly }} = (event) => {
 {% if not element.values.avoidLoad %}
   {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
 {% endif %}
-{% set searchFieldParams = { element: { values: { onChange: 'searchFor' ~ table.name|friendly, placeholder: element.values.placeholderText | default('Search ' ~ table.singleName|friendly ~ '...'), variant: 'outlined', margin: 'normal', className: 'theme.extensibleInput' } } } %}
+{% if element.values.searchField %}
+  {% set searchFieldParams = {
+    element: {
+      values: { 
+        onChange: '(e) => { searchFor' ~ table.name|friendly  ~ '(e, "' ~ (element.values.searchField | fieldData).column_name ~ '") }', placeholder: element.values.placeholderText | default('Search ' ~ table.singleName|friendly ~ '...'), variant: 'outlined', margin: 'normal', className: 'theme.extensibleInput' } } } %}
+{% else %}
+  {% set searchFieldParams = { element: { values: { onChange: 'searchFor' ~ table.name|friendly, placeholder: element.values.placeholderText | default('Search ' ~ table.singleName|friendly ~ '...'), variant: 'outlined', margin: 'normal', className: 'theme.extensibleInput' } } } %}
+{% endif %}
 {% include includeTemplate('uncontrolledInput.tpl') with searchFieldParams %}
+
+
