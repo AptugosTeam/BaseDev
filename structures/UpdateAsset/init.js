@@ -29,7 +29,7 @@ if (existing) {
 }
 
 if (Parameters.asset.fileContents) {
-    aptugo.run({ _: ['assets', 'setfile'], binary: false, app: Application._id, id: assetId }, { file: JSON.stringify(Parameters.asset.fileContents) })
+    aptugo.run({ _: ['assets', 'setfile'], binary: false, app: Application._id, id: assetId, details: newAsset }, { file: JSON.stringify(Parameters.asset.fileContents) })
     // if ( window.sendAptugoCommand ) {
     //     window.sendAptugoCommand({
     //         section: 'assets',

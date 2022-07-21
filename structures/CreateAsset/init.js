@@ -6,7 +6,11 @@ let newAsset = {
   name: Parameters.name
 }
 
-aptugo.run({ _: ['assets', 'setfile'], binary: true, app: Application._id, filename: newAsset.name, id: newAsset.id }, { file: aptugo.readFile(Parameters.path) })
+let file = '// Asset created by Aptugo'
+if (!Parameters.empty) {
+  file = aptugo.readFile(Parameters.path)
+}
+aptugo.run({ _: ['assets', 'setfile'], binary: true, app: Application._id, filename: newAsset.name, id: newAsset.id }, { file: file })
 
 Application.assets.push(newAsset)
 
