@@ -16,7 +16,7 @@ options:
     options: default;primary;secondary;action;disabled
   - name: className
     display: className
-    type: text
+    type: styles
 */
 
 

@@ -15,11 +15,11 @@ options:
     options: ''
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: activeClassname
     display: ClassName (active)
-    type: text
+    type: styles
     options: ''
   - name: linkText
     display: Text

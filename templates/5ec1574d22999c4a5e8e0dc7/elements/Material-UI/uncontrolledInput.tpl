@@ -31,7 +31,7 @@ options:
     options: normal;dense;none
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: fieldname
     display: fieldname
