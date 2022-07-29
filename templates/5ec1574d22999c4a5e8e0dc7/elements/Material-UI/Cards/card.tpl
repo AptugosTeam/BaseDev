@@ -8,16 +8,17 @@ helpText: >-
   choice
 sourceType: javascript
 options:
-  - name: maxWidth
-    display: Width
+  - name: sx
+    display: Max Width
     type: text
-    options: 
+    options: ''
 */
 {% set bpr %}
 import Card from '@mui/material/Card'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<Card sx={{ maxWidth: element.values.maxWidth }}
+<Card sx={ { {% if element.values.sx %} maxWidth:{{ element.values.sx }} {% endif %}} }
 >
   {{ content | raw }}
 </Card>
+
