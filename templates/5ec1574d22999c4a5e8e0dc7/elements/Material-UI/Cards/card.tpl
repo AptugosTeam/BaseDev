@@ -17,7 +17,7 @@ options:
 import Card from '@mui/material/Card'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<Card sx={ { {% if element.values.sx %} maxWidth:{{ element.values.sx }} {% endif %}} }
+<Card sx={ { height: 'fit-content', {% if element.values.sx %} maxWidth:'{{ element.values.sx }}' {% endif %}} }
 >
   {{ content | raw }}
 </Card>
