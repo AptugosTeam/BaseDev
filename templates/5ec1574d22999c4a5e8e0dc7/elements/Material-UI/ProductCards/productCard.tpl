@@ -15,6 +15,8 @@ options:
 childs:
   - name: Header
     element: productCardHeader
+  - name: Media
+    element: productCardMedia
   - name: Content
     element: productCardContent
   - name: Actions
