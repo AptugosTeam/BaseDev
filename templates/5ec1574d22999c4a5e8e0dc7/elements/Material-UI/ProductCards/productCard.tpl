@@ -12,6 +12,10 @@ options:
     display: Max Width (in px)
     type: text
     options: ''
+  - name: class
+    display: ClassName
+    type: styles
+    options: ''
 childs:
   - name: Header
     element: productCardHeader
@@ -28,6 +32,7 @@ import Card from '@mui/material/Card'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <Card sx={ { height: 'fit-content', {% if element.values.sx %} maxWidth:'{{ element.values.sx }}px' {% endif %}} }
+  {% if element.values.class %}className={ {{element.values.class}} }{% endif %}
 >
   {{ content | raw }}
 </Card>
