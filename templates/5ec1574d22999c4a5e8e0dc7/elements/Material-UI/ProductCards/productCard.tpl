@@ -13,10 +13,13 @@ options:
     type: text
     options: ''
 childs:
-  -name: Card Header
+  - name: Header
     element: productCardHeader
-  - name: Card Content
+  - name: Content
     element: productCardContent
+  - name: Actions
+    element: productCardActions
+children: []
 */
 {% set bpr %}
 import Card from '@mui/material/Card'
