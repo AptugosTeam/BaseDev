@@ -19,9 +19,6 @@ options:
     display: ClassName
     type: styles
     options: ''
-childs:
-  - name: Image
-    element: image
 */
 {% set bpr %}
 import CardMedia from '@mui/material/CardMedia'
