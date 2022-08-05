@@ -10,7 +10,8 @@
     {
       "name": "parentPage",
       "display": "Container Page",
-      "type": "text",
+      "type": "dropdown",
+      "options": "return Object.keys(aptugo.pages).map(pageID => { return [pageID,aptugo.pages[pageID].name]})",
       "helpText": "Unique ID for the container page"
     }
   ]
