@@ -1,16 +1,18 @@
 {
-    "_id": "layoutAboutUs",
-    "name": "Layout: About Us",
-    "desc": "",
-    "icon": "icon.png",
-    "type": "layout",
-    "afterRun": "",
-    "parameters": [
-      {
-        "name": "parentPage",
-        "display": "Container Page",
-        "type": "text",
-        "helpText": "Unique ID for the container page"
-      }
-    ]
-  }
+  "_id": "layoutAboutUs",
+  "name": "Layout: About Us",
+  "runable": true,
+  "desc": "",
+  "icon": "icon.png",
+  "type": "layout",
+  "afterRun": "",
+  "parameters": [
+    {
+      "name": "parentPage",
+      "display": "Container Page",
+      "type": "dropdown",
+      "options": "return Object.keys(aptugo.pages).map(pageID => { return [pageID,aptugo.pages[pageID].name]})",
+      "helpText": "Unique ID for the container page"
+    }
+  ]
+}
