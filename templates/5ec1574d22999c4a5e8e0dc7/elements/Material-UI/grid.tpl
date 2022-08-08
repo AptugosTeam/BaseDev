@@ -20,58 +20,64 @@ options:
     options: flex-start;center;flex-end;space-between;space-around;space-evenly
     settings:
       propertyCondition: container
-      condition: '"true"'
+      condition: true
   - name: align
     display: Align
     type: dropdown
     options: flex-start;center;flex-end;stretch;baseline
     settings:
       propertyCondition: container
-      condition: '"true"'
+      condition: true
   - name: direction
     display: Direction
     type: dropdown
     options: column;column-reverse;row;row-reverse
     settings:
       propertyCondition: container
-      condition: '"true"'
+      condition: true
   - name: wrap
     display: Wrap
     type: dropdown
     options: nowrap;wrap-reverse;wrap
     settings:
       propertyCondition: container
-      condition: '"true"'
+      condition: true
   - name: spacing
     display: Spacing
     type: text
     settings:
       propertyCondition: container
-      condition: '"true"'
+      condition: true
   - name: item
     display: Is an item
     type: checkbox
     options: ''
     settings:
       default: false
+  - name: extrasmallcolumns
+    display: Columns (extra small)
+    type: text
+    settings:
+      propertyCondition: item
+      condition: true
   - name: smallcolumns
     display: Columns (small)
     type: text
     settings:
       propertyCondition: item
-      condition: '"true"'
+      condition: true
   - name: midcolumns
     display: Columns (mid)
     type: text
     settings:
       propertyCondition: item
-      condition: '"true"'
+      condition: true
   - name: largecolumns
     display: Columns (large)
     type: text
     settings:
       propertyCondition: item
-      condition: '"true"'
+      condition: true
 helpText: >-
   The Material Design responsive layout grid adapts to screen size and
   orientation, ensuring consistency across layouts.
@@ -92,8 +98,10 @@ import Grid from '@mui/material/Grid'
   {% endif %}
   {% if element.values.item %}
     item
-    {% if element.values.smallcolumns %}xs={ {{ element.values.smallcolumns }} }{% endif %}
+    {% if element.values.extrasmallcolumns %}xs={ {{ element.values.extrasmallcolumns }} }{% endif %}
+    {% if element.values.smallcolumns %}sm={ {{ element.values.smallcolumns }} }{% endif %}
     {% if element.values.midcolumns %}md={ {{ element.values.midcolumns }} }{% endif %}
+    {% if element.values.large %}lg={ {{ element.values.large }} }{% endif %}
   {% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
 >
