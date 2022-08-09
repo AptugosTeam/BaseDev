@@ -1,9 +1,9 @@
 /*
 path: productCardMedia.tpl
 completePath: elements/Material-UI/Cards/productCardMedia.tpl
-unique_id: vcZRUSTu
+unique_id: vcZRUSMX
 icon: ico-image
-helpText: Easily use images from Assets or the web
+helpText: Easily use images from Assets
 options:
   - name: useAsset
     display: Use an asset
