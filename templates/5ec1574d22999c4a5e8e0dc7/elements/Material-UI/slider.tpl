@@ -19,7 +19,7 @@ options:
   - name: valueLabelDisplay
     display: Label display
     type: dropdown
-    options: auto;on;off
+    options: return [['auto','Mouse Hover'], ['on','Always'], ['off','Never']]
   - name: color
     display: Color
     type: dropdown
