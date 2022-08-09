@@ -27,7 +27,7 @@ options:
     options: ''
   - name: classNameList
     display: ClassName (for items)
-    type: text
+    type: styles
     options: ''
 */
 
