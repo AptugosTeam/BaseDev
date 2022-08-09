@@ -24,9 +24,10 @@ import AptugoGmail from '../services/gmail.service'
 {{ save_delayed('bpr',bpr) }}
 const getMessages = (filter = null) => {
   {% if element.values.filter %}if (!filter) filter = {{ element.values.filter | textOrVariable }}{% endif %}
-  AptugoGmail.listThreads(filter).then( (result) => {
-    const promises = result.threads.map((item, index) => {
-      return AptugoGmail.getThread(item.id).then(res => { 
+
+  AptugoGmail.listMessages(filter).then( (result) => {
+    const promises = result.messages.map((item, index) => {
+      return AptugoGmail.getMessage(item.id).then(res => { 
         return { ...item, ...res }
       })
     })

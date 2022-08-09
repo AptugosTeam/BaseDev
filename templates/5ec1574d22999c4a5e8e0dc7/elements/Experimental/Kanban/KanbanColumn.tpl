@@ -30,9 +30,6 @@ options:
     type: text
     options: ''
 */
-
-
-
 <KanbanColumn channel={columnItem} key={columnIndex} {% if element.values.className %}className={{ element.values.className | textOrVariable }}{% endif %}>
   <div>
     <div className='kanbanHeader'>{{ element.values.ColumnTitle }}{% if element.values.Subtitle %}<span>{{ element.values.Subtitle }}</span>{% endif %}</div>
