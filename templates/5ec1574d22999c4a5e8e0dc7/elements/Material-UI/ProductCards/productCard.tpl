@@ -2,7 +2,7 @@
 path: productCard.tpl
 completePath: elements/Material-UI/Cards/productCard.tpl
 unique_id: 6cMXRUS3
-icon: ico-text
+icon: ico-field
 helpText: >-
   Insert simple text anywhere. Can hold variables, code, and anything of your
   choice

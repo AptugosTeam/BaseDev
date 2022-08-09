@@ -2,6 +2,7 @@
 path: cardActions.tpl
 completePath: elements/Material-UI/Cards/cardActions.tpl
 unique_id: 7k9qd8nA
+icon: ico-field
 options:
   - name: disableSpacing
     display: Disable Spacing
@@ -12,6 +13,9 @@ options:
 import CardActions from '@mui/material/CardActions'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<CardActions {% if element.values.disableSpacing %} disableSpacing {% endif %}>
+<CardActions 
+{% if element.values.disableSpacing %} 
+  disableSpacing 
+{% endif %}>
 {{ content | raw }}
 </CardActions>
