@@ -29,6 +29,7 @@ options:
 import CardContent from '@mui/material/CardContent'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import Collapse from '@mui/material/Collapse'
+
 import IconButton, { IconButtonProps } from '@mui/material/IconButton'
 import { styled } from '@mui/material/styles'
 import ExpandMore from '@mui/icons-material/ExpandMore'
@@ -59,6 +60,7 @@ const handleExpandClick = () => {
 >
 {% if element.values.discount %}<span style={ { color: 'white', backgroundColor: 'red', fontWeight: '600', float: 'right', borderRadius: '10px', padding: '3px', margin: '0px 5px' } }>{{ element.values.discount }}% Off</span>{% endif %}
 {% if element.values.price %}<span style={ { color: 'red', fontWeight: '600', float: 'right', padding: '3px', margin: '0px 5px' } }>{{ element.values.price }}</span>{% endif %} <br />
+{% if element.values.description %}
   <ExpandMore
       expand={expanded}
       onClick={handleExpandClick}
@@ -68,7 +70,8 @@ const handleExpandClick = () => {
     <ExpandMoreIcon />
     </ExpandMore>
 <Collapse in={expanded} timeout="auto" unmountOnExit>
-{% if element.values.description %}<span style={ { color: 'gray', fontWeight: '400' } }>{{ element.values.description }}</span>{% endif %}
-{{ content | raw }}
+<span style={ { color: 'gray', fontWeight: '400' } }>{{ element.values.description }}</span>
 </Collapse>
+{% endif %}
+{{ content | raw }}
 </CardContent>

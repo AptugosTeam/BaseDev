@@ -45,15 +45,17 @@ children: []
   {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Slider 
- {% if element.values.Disabled %}
- disabled 
- {% endif %}
- defaultValue={ {{ element.values.defaultValue|default(0) }} }
- valueLabelDisplay='{{ element.values.valueLabelDisplay|default("auto") }}'
- aria-label="Disabled slider"
-color= "{{ element.values.color|default(primary) }}"
-step={ {{element.values.step|default(1)}} }
-{% if element.values.marks %} marks={true} {% endif %}
-min={ {{element.values.min|default(0)}} }
-max={ {{element.values.max|default(100)}} }
+  {% if element.values.Disabled %}
+    disabled 
+  {% endif %}
+  defaultValue={ {{ element.values.defaultValue|default(0) }} }
+  valueLabelDisplay='{{ element.values.valueLabelDisplay|default("auto") }}'
+  aria-label="Disabled slider"
+  color= "{{ element.values.color|default(primary) }}"
+  step={ {{element.values.step|default(1)}} }
+  {% if element.values.marks %}
+    marks
+  {% endif %}
+  min={ {{element.values.min|default(0)}} }
+  max={ {{element.values.max|default(100)}} }
 />
