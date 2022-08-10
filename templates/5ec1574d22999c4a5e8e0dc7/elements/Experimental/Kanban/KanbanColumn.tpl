@@ -23,11 +23,11 @@ options:
     options: ''
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: classNameList
     display: ClassName (for items)
-    type: text
+    type: styles
     options: ''
 */
 <KanbanColumn channel={columnItem} key={columnIndex} {% if element.values.className %}className={{ element.values.className | textOrVariable }}{% endif %}>

@@ -14,7 +14,7 @@ options:
     options: NavLink;A
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: style
     display: Extra Styles

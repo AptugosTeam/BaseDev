@@ -10,7 +10,7 @@ options:
     options: ''
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: justify
     display: Justify

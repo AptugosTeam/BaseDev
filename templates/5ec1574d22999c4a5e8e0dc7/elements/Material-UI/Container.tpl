@@ -21,7 +21,7 @@ options:
     options: lg;md;sm;xl;xs;false
   - name: className
     display: className
-    type: text
+    type: styles
     options: ''
 sourceType: javascript
 children: []

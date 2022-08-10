@@ -60,7 +60,7 @@ options:
       condition: edit
   - name: classname
     display: ClassName
-    type: text
+    type: styles
   - name: autosave
     display: Autosave on Change
     type: checkbox

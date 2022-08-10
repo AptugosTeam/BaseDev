@@ -33,7 +33,7 @@ options:
     type: checkbox
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
 children: []
 */

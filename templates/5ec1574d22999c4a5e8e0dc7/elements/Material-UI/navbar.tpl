@@ -19,7 +19,7 @@ options:
     options: absolute;fixed;relative;static;sticky
   - name: ClassName
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: Elevation
     display: Elevation

@@ -18,11 +18,11 @@ options:
     options: ''
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: classNameList
     display: ClassName (list)
-    type: text
+    type: styles
     options: ''
   - name: onDrop
     display: On Drop
