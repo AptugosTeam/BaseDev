@@ -60,8 +60,15 @@ const handleExpandClick = () => {
     className={ theme.productCardContent }
   {% endif %}
 >
-{% if element.values.discount %}<span className={theme.productCardContentDiscount}>{{ element.values.discount }}% Off</span>{% endif %}
-{% if element.values.price %}<span className={theme.productCardContentPrice}>{{ element.values.price }}</span>{% endif %} <br />
+{% if element.values.price %}
+    {% if element.values.discount %}
+        <span className={theme.productCardContentDiscount}>{{ element.values.discount }}% Off</span>
+        <span className={theme.productCardContentPriceCrossedOut}>$ {{ element.values.price }}</span>
+        <span className={theme.productCardContentPrice}>$ { (Number({{ element.values.price }})/100)*(100-Number({{ element.values.discount }})) }</span>
+        {% else %}
+        <span className={theme.productCardContentPrice}>$ {{ element.values.price }}</span>
+    {% endif %}
+{% endif %} <br />
 {% if element.values.description %}
   <ExpandMore
       expand={expanded}
