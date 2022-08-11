@@ -603,7 +603,7 @@ $white: #FFFFFF;
 }
 
 .productCardContent {
-  span:first-child{
+  .productCardContentDiscount {
     color: white;
     background-color: red;
     font-weight:600;
@@ -612,7 +612,7 @@ $white: #FFFFFF;
     padding: 3px;
     margin: 0px 5px;
   }
-  span {
+  .productCardContentPrice {
     color: red;
     font-weight: 600;
     float: right;
