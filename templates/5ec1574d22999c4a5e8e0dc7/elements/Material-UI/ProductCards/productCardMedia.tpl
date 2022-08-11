@@ -54,6 +54,7 @@ import CardMedia from '@mui/material/CardMedia'
       {% if element.values.width %} width:'{{ element.values.width }}px' {%endif%}
       {% if element.values.width and element.values.height%}, {%endif%}
       {% if element.values.height %} height:'{{ element.values.height }}px' {%endif%}
+      ,padding: '0'
     } } 
     {% endif %}
 />

@@ -56,10 +56,12 @@ const handleExpandClick = () => {
 <CardContent sx= { { display: 'flex', flexDirection: 'column', alignItems: 'flex-end' } }
   {% if element.values.class %}
     className={ {{element.values.class}} }
+    {% else %}
+    className={ theme.productCardContent }
   {% endif %}
 >
-{% if element.values.discount %}<span style={ { color: 'white', backgroundColor: 'red', fontWeight: '600', float: 'right', borderRadius: '10px', padding: '3px', margin: '0px 5px' } }>{{ element.values.discount }}% Off</span>{% endif %}
-{% if element.values.price %}<span style={ { color: 'red', fontWeight: '600', float: 'right', padding: '3px', margin: '0px 5px' } }>{{ element.values.price }}</span>{% endif %} <br />
+{% if element.values.discount %}<span>{{ element.values.discount }}% Off</span>{% endif %}
+{% if element.values.price %}<span>{{ element.values.price }}</span>{% endif %} <br />
 {% if element.values.description %}
   <ExpandMore
       expand={expanded}
@@ -70,7 +72,7 @@ const handleExpandClick = () => {
     <ExpandMoreIcon />
     </ExpandMore>
 <Collapse in={expanded} timeout="auto" unmountOnExit>
-<span style={ { color: 'gray', fontWeight: '400' } }>{{ element.values.description }}</span>
+<div>{{ element.values.description }}</div>
 </Collapse>
 {% endif %}
 {{ content | raw }}
