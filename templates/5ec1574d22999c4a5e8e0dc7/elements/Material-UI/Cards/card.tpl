@@ -16,6 +16,16 @@ options:
     display: ClassName
     type: styles
     options: ''
+childs:
+  - name: Product Card Header
+    element: productCardHeader
+  - name: Product Card Media
+    element: productCardMedia
+  - name: Product Card Content
+    element: productCardContent
+  - name: Product Card Actions
+    element: productCardActions
+children: []
 */
 {% set bpr %}
 import Card from '@mui/material/Card'
