@@ -17,14 +17,14 @@ options:
     type: styles
     options: ''
 childs:
-  - name: Product Card Header
-    element: productCardHeader
-  - name: Product Card Media
-    element: productCardMedia
-  - name: Product Card Content
-    element: productCardContent
-  - name: Product Card Actions
-    element: productCardActions
+  - name:  Card Header
+    element: cardHeader
+  - name:  Card Media
+    element: cardMedia
+  - name:  Card Content
+    element: cardContent
+  - name:  Card Actions
+    element: cardActions
 children: []
 */
 {% set bpr %}
