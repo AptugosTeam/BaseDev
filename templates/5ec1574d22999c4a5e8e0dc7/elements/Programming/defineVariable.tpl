@@ -7,7 +7,7 @@ icon: ico-define-variable
 helpText: Allows you to define a variable that will be used later
 options:
   - name: variableName
-    display: Name
+    display: Variable Name
     type: text
     options: ''
     settings:
