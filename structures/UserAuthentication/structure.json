@@ -4,7 +4,7 @@
   "runable": true,
   "parameters": [
     {
-      "name": "User Table",
+      "name": "UserTable",
       "display": "Name of the Users Table",
       "type": "text",
       "helpText": "Type the name of the Users Table"
