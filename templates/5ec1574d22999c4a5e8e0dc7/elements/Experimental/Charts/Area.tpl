@@ -27,19 +27,10 @@ options:
     type: dropdown
     options: >-
       Green;Red;Blue;Black;Cyan
-  - name: offsetOne
-    display: offsetOne
+  - name: opacity
+    display: opacity
     type: dropdown
-    options: 25%;50%;75%;100%
-  - name: colorsTwo
-    display: AreaTwoColor Scheme
-    type: dropdown
-    options: >-
-      Green;Red;Blue;Black;Cyan
-  - name: offsetTwo
-    display: offsetTwo
-    type: dropdown
-    options: 25%;50%;75%;100%
+    options: 0.0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1
 settings:
   - name: Packages
     value: '"recharts": "^2.1.13",'
@@ -55,8 +46,7 @@ children: []
     {{ save_delayed('ph',ph) }}
     <defs>
     <linearGradient id="{{ element.values.id }}" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="{{ element.values.offsetOne }}" stopColor="{{ element.values.colors }}" stopOpacity={0.8}/>
-      <stop offset="{{ element.values.offsetTwo }}" stopColor="{{ element.values.colorsTwo }}" stopOpacity={0}/>
+      <stop offset="100%" stopColor="{{ element.values.colors }}" stopOpacity={ {{ element.values.opacity }} }/>
     </linearGradient>
     </defs>
     <Area type="monotone" legendType="{{ element.values.legendType|default('line') }}" dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" stroke="#8884d8" fillOpacity={1} fill="url(#{{ element.values.id }})" />

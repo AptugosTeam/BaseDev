@@ -16,6 +16,10 @@ options:
       propertyCondition: values
       condition: useVar
       active: true
+  - name: legendType
+    display: legendType
+    type: dropdown
+    options: line;plainline;square;rect;circle;cross;diamond;star;triangle;wye;none
   - name: colors
     display: LineOneColor Scheme
     type: dropdown
@@ -34,4 +38,5 @@ children: []
       {% set indexName = indexBy.column_name %}
     {% endset %}
     {{ save_delayed('ph',ph) }}
-    <Line type="monotone" dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" stroke="{{element.values.colors|default('Black')}}" />
+    <Line type="monotone" dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" legendType="{{element.values.legendType|default('line')}}" 
+    stroke="{{element.values.colors|default('Black')}}" />
