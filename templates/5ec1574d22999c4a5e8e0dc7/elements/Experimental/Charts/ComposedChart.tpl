@@ -52,7 +52,7 @@ import { Legend, Tooltip, Line, CartesianGrid, XAxis, YAxis, ComposedChart, Area
 <ComposedChart {% if element.values.width %}width={ {{element.values.width}} } {% endif %} 
 {% if element.values.height %}height={ {{element.values.height}} }{% endif %} 
 data={ {{ element.values.Variable }} }>
-  <XAxis dataKey="{% if indexBy.column_name %}{{ indexBy.column_name }}{% else %}{{ element.values.indexVariable }}{% endif %}" />
+  <XAxis dataKey="{% if indexBy.column_name %}{{ indexBy.column_name }}{% else %}{{ element.values.indexVariable }}{% endif %}" padding={ {left: 25, right: 25} } />
   <YAxis />
   <Tooltip />
   <Legend />

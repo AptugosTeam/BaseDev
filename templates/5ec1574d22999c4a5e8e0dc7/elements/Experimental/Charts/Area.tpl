@@ -15,9 +15,6 @@ options:
       propertyCondition: values
       condition: useVar
       active: true
-  - name: id
-    display: Color ID
-    type: text
   - name: legendType
     display: legendType
     type: dropdown
@@ -45,8 +42,8 @@ children: []
     {% endset %}
     {{ save_delayed('ph',ph) }}
     <defs>
-    <linearGradient id="{{ element.values.id }}" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="ayqje239" x1="0" y1="0" x2="0" y2="1">
       <stop offset="100%" stopColor="{{ element.values.colors }}" stopOpacity={ {{ element.values.opacity }} }/>
     </linearGradient>
     </defs>
-    <Area type="monotone" legendType="{{ element.values.legendType|default('line') }}" dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" stroke="#8884d8" fillOpacity={1} fill="url(#{{ element.values.id }})" />
+    <Area type="monotone" legendType="{{ element.values.legendType|default('line') }}" dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" stroke="#8884d8" fillOpacity={1} fill="url(#ayqje239)" />
