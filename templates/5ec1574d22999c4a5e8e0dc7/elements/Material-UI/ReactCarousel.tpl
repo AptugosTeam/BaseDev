@@ -5,7 +5,11 @@ unique_id: oKi37car
 icon: ico-carousel
 sourceType: javascript
 options:
-  - name: height
+  - name: ClassName
+    display: ClassName
+    type: styles
+    options: ''
+  - name: Height
     display: Height
     type: text
     options: ''
@@ -13,10 +17,14 @@ options:
     display: Autoplay
     type: checkbox
     options: ''
-  - name: arrowsOrDotsMethod
-    display: Use Arrows or Dots?
-    type: dropdown
-    options: none;arrows;dots
+  - name: navButtonsAlwaysVisible
+    display: Use Arrows?
+    type: checkbox
+    options: ''
+  - name: onChange
+    display: On Change
+    type: text
+    options: ''
   - name: showSlide
     display: Slide number to show
     type: text
@@ -30,6 +38,12 @@ settings:
 import Carousel from 'react-material-ui-carousel'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-<Carousel>   
+<Carousel 
+{% if element.values.ClassName %}className={ {{ element.values.ClassName }} } {% endif %}  
+{% if element.values.Height %}height="{{ element.values.Height }}" {% endif %} 
+{% if element.values.autoplay %}autoPlay={true}{% else %}autoPlay={false}{% endif %}
+{% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
+{% if element.values.navButtonsAlwaysVisible %}navButtonsAlwaysVisible={true}{% else %}navButtonsAlwaysVisible={false}{% endif %}
+>   
   {{ content | raw }}
 </Carousel>
