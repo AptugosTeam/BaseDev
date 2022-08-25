@@ -33,14 +33,12 @@ settings:
     value: '"recharts": "^2.1.13",'
 children: []
 */
-    {% set ph %}
-    {% set name = element.values.valuesVariable %}
-      {% set values = element.values.values|fieldData %}
-      {% set valuesName = values.column_name %}
-      {% set indexBy = element.values.Index|fieldData %}
-      {% set indexName = indexBy.column_name %}
-    {% endset %}
-    {{ save_delayed('ph',ph) }}
+{% set valuesName = element.values.valuesVariable %}
+{% set name = element.values.valuesVariable %}
+  {% if element.values.values != 'useVar' %}
+    {% set values = element.values.values|fieldData %}
+    {% set valuesName = values.column_name %}
+  {% endif %}
     <defs>
     <linearGradient id="ayqje239" x1="0" y1="0" x2="0" y2="1">
       <stop offset="100%" stopColor="{{ element.values.colors }}" stopOpacity={ {{ element.values.opacity }} }/>

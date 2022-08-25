@@ -30,13 +30,11 @@ settings:
     value: '"recharts": "^2.1.13",'
 children: []
 */
-    {% set ph %}
-    {% set name = element.values.valuesVariable %}
-      {% set values = element.values.values|fieldData %}
-      {% set valuesName = values.column_name %}
-      {% set indexBy = element.values.Index|fieldData %}
-      {% set indexName = indexBy.column_name %}
-    {% endset %}
-    {{ save_delayed('ph',ph) }}
-    <Line type="monotone" dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" legendType="{{element.values.legendType|default('line')}}" 
+{% set valuesName = element.values.valuesVariable %}
+{% set name = element.values.valuesVariable %}
+  {% if element.values.values != 'useVar' %}
+    {% set values = element.values.values|fieldData %}
+    {% set valuesName = values.column_name %}
+  {% endif %}
+    <Line type="monotone" dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" legendType="{{element.values.legendType|default('line')}}" 
     stroke="{{element.values.colors|default('Black')}}" />
