@@ -44,6 +44,9 @@ options:
   - name: blurmax
     display: Blur Max
     type: text
+  - name: Disabled
+    display: Disabled?
+    type: checkbox
 children: []
 */
 {% set bpr %}
@@ -70,7 +73,12 @@ import { Parallax, Background } from 'react-parallax'
     bgImageAlt='{{element.values.bgImageAlt}}'
     strength={ {{ element.values.strength|default("100")}} }
     style={ { height: "{{ element.values.height|default("100")}}vh" , width: "{{ element.values.width|default("100")}}vw" } }
-    {% if element.values.className %}className={ {{ element.values.className}} }{% endif %}
->
+    {% if element.values.className %}
+      className={ {{ element.values.className}} }
+    {% endif %}
+    {% if element.values.Disabled %}
+      disabled 
+    {% endif %}
+>   
     {{ content | raw }}
 </Parallax>
