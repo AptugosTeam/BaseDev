@@ -25,6 +25,9 @@ options:
   - name: async
     display: Async
     type: checkbox
+    advanced: true
+    settings:
+      default: false
 children: []
 */
 
