@@ -9,6 +9,10 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: sx
+    display: Width
+    type: styles
+    options: ''
   - name: Height
     display: Height
     type: text
@@ -23,7 +27,7 @@ options:
     options: ''
   - name: onChange
     display: On Change
-    type: text
+    type: code
     options: ''
   - name: showSlide
     display: Slide number to show
@@ -40,10 +44,11 @@ import Carousel from 'react-material-ui-carousel'
 {{ save_delayed('bpr', bpr) }}
 <Carousel 
 {% if element.values.ClassName %}className={ {{ element.values.ClassName }} } {% endif %}  
-{% if element.values.Height %}height="{{ element.values.Height }}" {% endif %} 
+{% if element.values.Height %}height= { {{ element.values.Height }} } {% endif %} 
 {% if element.values.autoplay %}autoPlay={true}{% else %}autoPlay={false}{% endif %}
 {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
 {% if element.values.navButtonsAlwaysVisible %}navButtonsAlwaysVisible={true}{% else %}navButtonsAlwaysVisible={false}{% endif %}
+{% if element.values.sx %}sx={ { width:{{element.values.sx}} } }{% endif %}
 >   
-  {{ content | raw }}
-</Carousel>
+{{ content | raw }}
+</Carousel>  
