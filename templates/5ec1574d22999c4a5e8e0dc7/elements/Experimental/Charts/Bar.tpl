@@ -23,20 +23,25 @@ options:
     display: barSize
     type: text
   - name: colors
-    display: LineOneColor Scheme
-    type: dropdown
-    options: >-
-      Green;Red;Blue;Black;Cyan
+    display: Color Fill
+    type: text
 settings:
   - name: Packages
     value: '"recharts": "^2.1.13",'
 children: []
 */
-   {% set valuesName = element.values.valuesVariable %}
-{% set name = element.values.valuesVariable %}
+   {% set ph %}
+    {% set valuesName = element.values.valuesVariable %}
+    {% set name = element.values.valuesVariable %}
   {% if element.values.values != 'useVar' %}
     {% set values = element.values.values|fieldData %}
     {% set valuesName = values.column_name %}
   {% endif %}
-    <Bar dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" legendType="{{element.values.legendType|default('line')}}" 
-    barSize={ {{element.values.barSize|default(20)}} } fill="{{element.values.colors|default('Black')}}" />
+  {% endset %}
+  {{ save_delayed('ph',ph) }}
+    <Bar 
+      dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" 
+      legendType="{{element.values.legendType|default('line')}}" 
+      barSize={ {{element.values.barSize|default(20)}} } 
+      fill="#{{element.values.colors|default('000')}}" 
+    />

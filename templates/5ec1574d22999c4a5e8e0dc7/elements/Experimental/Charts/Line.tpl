@@ -21,20 +21,21 @@ options:
     type: dropdown
     options: line;plainline;square;rect;circle;cross;diamond;star;triangle;wye;none
   - name: colors
-    display: LineOneColor Scheme
-    type: dropdown
-    options: >-
-      Green;Red;Blue;Black;Cyan
+    display: Color Line
+    type: text
 settings:
   - name: Packages
     value: '"recharts": "^2.1.13",'
 children: []
 */
-{% set valuesName = element.values.valuesVariable %}
-{% set name = element.values.valuesVariable %}
+  {% set ph %}
+    {% set valuesName = element.values.valuesVariable %}
+    {% set name = element.values.valuesVariable %}
   {% if element.values.values != 'useVar' %}
     {% set values = element.values.values|fieldData %}
     {% set valuesName = values.column_name %}
   {% endif %}
+  {% endset %}
+  {{ save_delayed('ph',ph) }}
     <Line type="monotone" dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" legendType="{{element.values.legendType|default('line')}}" 
-    stroke="{{element.values.colors|default('Black')}}" />
+    stroke="#{{element.values.colors|default('000')}}" />
