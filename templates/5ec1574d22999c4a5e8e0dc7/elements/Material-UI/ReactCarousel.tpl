@@ -9,12 +9,24 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: onChange
+    display: On Change
+    type: code
+    options: ''
   - name: sx
     display: Width
-    type: styles
+    type: text
     options: ''
   - name: Height
     display: Height
+    type: text
+    options: ''
+  - name: animation
+    display: Animation
+    type: dropdown
+    options: fade;slide
+  - name: duration
+    display: Duration
     type: text
     options: ''
   - name: autoplay
@@ -22,16 +34,16 @@ options:
     type: checkbox
     options: ''
   - name: navButtonsAlwaysVisible
-    display: Use Arrows?
+    display: Arrows Visible
     type: checkbox
     options: ''
-  - name: onChange
-    display: On Change
-    type: code
+  - name: navButtonsAlwaysInvisible
+    display: Remove arrows
+    type: checkbox
     options: ''
-  - name: showSlide
-    display: Slide number to show
-    type: text
+  - name: indicators
+    display: Remove indicators
+    type: checkbox
     options: ''
 children: []
 settings:
@@ -44,11 +56,15 @@ import Carousel from 'react-material-ui-carousel'
 {{ save_delayed('bpr', bpr) }}
 <Carousel 
 {% if element.values.ClassName %}className={ {{ element.values.ClassName }} } {% endif %}  
-{% if element.values.Height %}height= { {{ element.values.Height }} } {% endif %} 
+{% if element.values.Height %}height= { {{ element.values.Height }} }{% else %}height= { {{ 500 }} } {% endif %} 
+{% if element.values.navButtonsAlwaysVisible %}navButtonsAlwaysVisible={true}{% else %}navButtonsAlwaysVisible={false}{% endif %}
 {% if element.values.autoplay %}autoPlay={true}{% else %}autoPlay={false}{% endif %}
 {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
-{% if element.values.navButtonsAlwaysVisible %}navButtonsAlwaysVisible={true}{% else %}navButtonsAlwaysVisible={false}{% endif %}
-{% if element.values.sx %}sx={ { width:{{element.values.sx}} } }{% endif %}
+{% if element.values.sx %}sx={ { width:{{element.values.sx}} } }{% else %}sx={ { width:{{550}} } }{% endif %}
+{% if element.values.indicators %}indicators={false}{% else %}indicators={true}{% endif %}
+{% if element.values.navButtonsAlwaysInvisible %}navButtonsAlwaysInvisible={true}{% else %}navButtonsAlwaysInvisible={false}{% endif %}
+{% if element.values.duration %}duration= { {{ element.values.duration }} } {% endif %} 
+animation='{{ element.values.animation }}'
 >   
 {{ content | raw }}
 </Carousel>  
