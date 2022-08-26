@@ -30,10 +30,10 @@ options:
     display: ClassName
     type: styles
   - name: height
-    display: Height
+    display: Height (in vh)
     type: text
   - name: width
-    display: Width
+    display: Width (in vw)
     type: text
   - name: strength
     display: Strength
