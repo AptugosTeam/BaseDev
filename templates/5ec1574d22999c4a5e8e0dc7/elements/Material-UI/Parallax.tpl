@@ -54,8 +54,8 @@ import { Parallax, Background } from 'react-parallax'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set ph %}
-  let element = document.getElementById('app')
-    element.style.height = "auto";
+  const mainApp = document.getElementById('app')
+    mainApp.style.height = "auto";
 {% endset %}
 {{ save_delayed('ph',ph) }}
 {% set path = element.values.path %}
