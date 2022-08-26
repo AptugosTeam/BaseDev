@@ -11,9 +11,16 @@ options:
     options: ''
 */
 {% set bpr %}
-import { Marker } from '../components/LeafLet'
+  import { Marker } from '../components/LeafLet'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<Marker position={{ element.values.Position|textOrVariable|default('leafLetPosition') }}>
+<Marker 
+  {% if element.values.Position %}
+    position={ {{element.values.Position }} }
+  {% else %}
+    position={leafLetPosition}
+  {% endif %}
+>
+
 {{ content | raw }}
 </Marker>
