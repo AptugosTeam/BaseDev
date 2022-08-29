@@ -12,6 +12,7 @@ options:
   - name: onChange
     display: On Change
     type: code
+    advanced: true
     options: ''
   - name: sx
     display: Width
@@ -22,12 +23,14 @@ options:
     type: text
     options: ''
   - name: animation
-    display: Animation
+    display: Animation fade(default)
     type: dropdown
+    advanced: true
     options: fade;slide
   - name: duration
     display: Duration
     type: text
+    advanced: true
     options: ''
   - name: autoplay
     display: Autoplay
@@ -63,8 +66,8 @@ import Carousel from 'react-material-ui-carousel'
 {% if element.values.sx %}sx={ { width:{{element.values.sx}} } }{% else %}sx={ { width:{{550}} } }{% endif %}
 {% if element.values.indicators %}indicators={false}{% else %}indicators={true}{% endif %}
 {% if element.values.navButtonsAlwaysInvisible %}navButtonsAlwaysInvisible={true}{% else %}navButtonsAlwaysInvisible={false}{% endif %}
-{% if element.values.duration %}duration= { {{ element.values.duration }} } {% endif %} 
-animation='{{ element.values.animation }}'
+{% if element.values.duration %}duration= { {{ element.values.duration }} } {% endif %}
+{% if element.values.animation %}animation= '{{ element.values.animation }}' {% else %}animation=  "fade"  {% endif %} 
 >   
 {{ content | raw }}
 </Carousel>  
