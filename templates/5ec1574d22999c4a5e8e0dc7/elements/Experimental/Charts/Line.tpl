@@ -17,11 +17,11 @@ options:
       condition: useVar
       active: true
   - name: legendType
-    display: legendType
+    display: Legend Type
     type: dropdown
     options: line;plainline;square;rect;circle;cross;diamond;star;triangle;wye;none
   - name: colors
-    display: Color Line
+    display: Line Color
     type: text
 settings:
   - name: Packages

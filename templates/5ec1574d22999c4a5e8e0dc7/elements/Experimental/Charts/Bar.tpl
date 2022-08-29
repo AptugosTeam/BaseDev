@@ -16,14 +16,14 @@ options:
       condition: useVar
       active: true
   - name: legendType
-    display: legendType
+    display: Legend Type
     type: dropdown
     options: line;plainline;square;rect;circle;cross;diamond;star;triangle;wye;none
   - name: barSize
-    display: barSize
+    display: Bar Size
     type: text
   - name: colors
-    display: Color Fill
+    display: Fill Color
     type: text
 settings:
   - name: Packages

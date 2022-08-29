@@ -16,11 +16,11 @@ options:
       condition: useVar
       active: true
   - name: legendType
-    display: legendType
+    display: Legend Type
     type: dropdown
     options: line;plainline;square;rect;circle;cross;diamond;star;triangle;wye;none
   - name: colors
-    display: Color Fill
+    display: Fill Color
     type: text
   - name: opacity
     display: Opacity
