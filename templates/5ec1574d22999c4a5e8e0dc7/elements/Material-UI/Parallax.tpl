@@ -32,21 +32,22 @@ options:
   - name: height
     display: Height (in vh)
     type: text
+    advanced: true
   - name: width
     display: Width (in vw)
     type: text
+    advanced: true
   - name: strength
     display: Strength
     type: text
   - name: blurmin
     display: Blur min
     type: text
+    advanced: true
   - name: blurmax
     display: Blur Max
     type: text
-  - name: Disabled
-    display: Disabled?
-    type: checkbox
+    advanced: true
 children: []
 */
 {% set bpr %}
@@ -75,9 +76,6 @@ import { Parallax, Background } from 'react-parallax'
     style={ { height: "{{ element.values.height|default("100")}}vh" , width: "{{ element.values.width|default("100")}}vw" } }
     {% if element.values.className %}
       className={ {{ element.values.className}} }
-    {% endif %}
-    {% if element.values.Disabled %}
-      disabled 
     {% endif %}
 >   
     {{ content | raw }}
