@@ -13,9 +13,6 @@ options:
     display: On Change
     type: function
     options: ''
-  - name: Disabled
-    display: Disabled?
-    type: checkbox
   - name: valueLabelDisplay
     display: Label display
     type: dropdown
@@ -27,15 +24,23 @@ options:
   - name: step
     display: Steps
     type: text
+    advanced: true
   - name: min
     display: Min
     type: text
+    advanced: true
   - name: max
     display: Max
     type: text
+    advanced: true
   - name: marks
     display: Marks
     type: checkbox
+    advanced: true
+  - name: Disabled
+    display: Disabled?
+    type: checkbox
+    advanced: true
 sourceType: javascript
 children: []
 */
@@ -45,9 +50,6 @@ children: []
   {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Slider 
-  {% if element.values.Disabled %}
-    disabled 
-  {% endif %}
   defaultValue={ {{ element.values.defaultValue|default(0) }} }
   onChange={(e)=>{ {{element.values.onChange}} } }
   valueLabelDisplay='{{ element.values.valueLabelDisplay|default("auto") }}'
@@ -59,4 +61,7 @@ children: []
   {% endif %}
   min={ {{element.values.min|default(0)}} }
   max={ {{element.values.max|default(100)}} }
+  {% if element.values.Disabled %}
+    disabled 
+  {% endif %}
 />
