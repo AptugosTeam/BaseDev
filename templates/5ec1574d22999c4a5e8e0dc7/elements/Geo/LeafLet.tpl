@@ -14,6 +14,7 @@ options:
   - name: scroll
     display: Zoom with Mouse Wheel
     type: checkbox
+    advanced: true
     settings:
       default: true
 settings:
