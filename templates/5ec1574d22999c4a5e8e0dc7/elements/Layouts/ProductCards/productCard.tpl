@@ -1,11 +1,9 @@
 /*
-path: card.tpl
-completePath: elements/Material-UI/Cards/card.tpl
-unique_id: 6JQtnrW3
+path: productCard.tpl
+completePath: elements/Material-UI/Cards/productCard.tpl
+unique_id: 6cMXRUS3
 icon: ico-field
-helpText: >-
-  Insert simple text anywhere. Can hold variables, code, and anything of your
-  choice
+helpText: Card for products, allows you to fully customize
 sourceType: javascript
 options:
   - name: sx
@@ -17,14 +15,14 @@ options:
     type: styles
     options: ''
 childs:
-  - name:  Card Header
-    element: cardHeader
-  - name:  Card Media
-    element: cardMedia
-  - name:  Card Content
-    element: cardContent
-  - name:  Card Actions
-    element: cardActions
+  - name: Product Card Header
+    element: productCardHeader
+  - name: Product Card Media
+    element: productCardMedia
+  - name: Product Card Content
+    element: productCardContent
+  - name: Product Card Actions
+    element: productCardActions
 children: []
 */
 {% set bpr %}

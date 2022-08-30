@@ -1,7 +1,7 @@
 /*
-path: cardMedia.tpl
-completePath: elements/Material-UI/Cards/cardMedia.tpl
-unique_id: vcZKHGTu
+path: productCardMedia.tpl
+completePath: elements/Material-UI/Cards/productCardMedia.tpl
+unique_id: vcZRUSMX
 icon: ico-image
 helpText: Easily use images from Assets
 options:
@@ -54,6 +54,7 @@ import CardMedia from '@mui/material/CardMedia'
       {% if element.values.width %} width:'{{ element.values.width }}px' {%endif%}
       {% if element.values.width and element.values.height%}, {%endif%}
       {% if element.values.height %} height:'{{ element.values.height }}px' {%endif%}
+      ,padding: '0'
     } } 
     {% endif %}
 />

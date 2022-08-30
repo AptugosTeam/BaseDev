@@ -135,6 +135,7 @@ import axios from 'axios'
 {% else %}
 {% set functionName = 'sendEmail' %}
 {% endif %}
+{% set ph %}
 const {{ functionName }} = (to, extra:any = {}) => {
     const from = extra.from || '{{ element.values.from }}'
     const subject = extra.subject || {{ element.values.subject }}
@@ -158,5 +159,7 @@ const {{ functionName }} = (to, extra:any = {}) => {
     })
   }
 {% endset %}
+{% endset %}
+{{ save_delayed('ph',ph,1) }}
 {{ save_delayed('bpr',bpr) }}
 {{ content | raw }}
