@@ -1,14 +1,14 @@
 /*
-path: Zoom.tpl
+path: LightSpeed.tpl
 type: file
-unique_id: 5l4jkslb
+unique_id: 5lkjshgb
 icon: ico-chart-bar
 helpText: Generate HTML pages after build
 options:
   - name: direction
     display: direction
     type: dropdown
-    options: Left;Right;Top;Bottom
+    options: left;right;top;bottom
   - name: delay
     display: Delay
     type: dropdown
@@ -26,9 +26,9 @@ children: []
 */
 {% set bpr %}
 import Reveal from "react-awesome-reveal";
-import { Zoom } from "react-awesome-reveal";
+import { LightSpeed } from "react-awesome-reveal";
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<Zoom {% if element.values.direction %}direction="{{ element.values.direction }}"{% endif%} {% if element.values.delay %}delay={ {{element.values.delay|default('4000')}} } {% endif %} {% if element.values.duration %}duration={ {{element.values.duration|default('3000')}} }{% endif %}>
+<LightSpeed {% if element.values.direction %}direction="{{ element.values.direction }}"{% endif%} {% if element.values.delay %}delay={ {{element.values.delay|default('4000')}} } {% endif %} {% if element.values.duration %}duration={ {{element.values.duration|default('3000')}} }{% endif %}>
   {{ content | raw }}
-</Zoom>
+</LightSpeed>

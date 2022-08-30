@@ -23,7 +23,9 @@ unique_id: 0i8AxGw6
   },
   "reactSnap": {
     "inlineCss": true,
-    "puppeteerArgs": ["--disable-web-security"]
+    "puppeteerArgs": [
+      "--disable-web-security"
+    ]
   },
   "devDependencies": {
     "@babel/cli": "^7.13.10",

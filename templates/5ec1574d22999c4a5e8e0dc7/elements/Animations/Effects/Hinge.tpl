@@ -10,10 +10,6 @@ settings:
     value: '"react-awesome-reveal": "^4.0.0",'
   - name: Packages
     value: '"animate.css": "^4.1.1",'
-  - name: npmScripts
-    value: '"postbuild": "react-awesome-reveal",'
-  - name: npmScripts
-    value: '"postbuild": "animate.css",'
 children: []
 */
 {% set bpr %}

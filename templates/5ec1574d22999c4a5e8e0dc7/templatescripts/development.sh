@@ -2,7 +2,7 @@
 if [ "$USE_PNPM" == "false" ]
 then
   echo 'Starting NPM Install'
-  npm install
+  npm install --legacy-peer-deps
   echo 'Finished NPM Install'
 else
   export NODE_ENV=development
