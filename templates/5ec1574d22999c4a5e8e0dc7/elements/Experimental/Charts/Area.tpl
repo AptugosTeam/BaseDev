@@ -45,6 +45,6 @@ children: []
       legendType="{{ element.values.legendType|default('line') }}" 
       dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" 
       stroke="{{ element.values.colors }}" 
-      fillOpacity={ {{ element.values.opacity }} } 
+      fillOpacity={ {{ element.values.opacity|default(1) }} } 
       fill="#{{ element.values.colors }}" 
     />
