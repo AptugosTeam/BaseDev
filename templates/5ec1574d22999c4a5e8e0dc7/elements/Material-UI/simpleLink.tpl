@@ -14,7 +14,7 @@ options:
     options: NavLink;A
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: style
     display: Extra Styles
@@ -36,7 +36,7 @@ import { NavLink } from 'react-router-dom'
 <a
   {% if element.values.target %}target={{ element.values.target | textOrVariable }}{% endif %}
   {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
-  {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
+  {% if element.values.class %}className={ {{element.values.class}} }{% endif %}
   href={{ element.values.destination | textOrVariable }}>{{ content | raw }}</a>
 {% else %}
 <NavLink {% if element.values.style %}style={ {{element.values.style}} }{% endif %} {% if element.values.className %}className={ {{ element.values.className }} }{% endif %} to={{ element.values.destination | textOrVariable }}>

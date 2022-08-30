@@ -17,7 +17,7 @@ options:
       active: true
   - name: ClassName
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: Style
     display: Style

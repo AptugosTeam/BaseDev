@@ -31,7 +31,7 @@ options:
     options: ''
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
 children: []
 */

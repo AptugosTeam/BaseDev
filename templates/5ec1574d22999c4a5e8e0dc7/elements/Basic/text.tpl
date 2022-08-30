@@ -14,7 +14,7 @@ options:
     options: ''
   - name: ClassName
     display: ClassName
-    type: text
+    type: styles
     options: ''
 children: []
 */

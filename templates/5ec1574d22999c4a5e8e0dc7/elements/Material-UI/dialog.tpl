@@ -32,7 +32,7 @@ options:
     options: ''
   - name: classname
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: title
     display: Add - Title

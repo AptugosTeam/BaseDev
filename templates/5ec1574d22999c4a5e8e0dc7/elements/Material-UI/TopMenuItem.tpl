@@ -19,10 +19,7 @@ options:
     options: ''
   - name: className
     display: ClassName
-    type: chips
-    options: >-
-      return aptugo.assetUtils.grabCssSelectors(
-      aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
+    type: styles
 */
 {% if element.values.className is defined and element.values.className|length > 1 %}
 {% set bpr %}

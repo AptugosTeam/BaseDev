@@ -22,7 +22,7 @@ options:
     options: ''
   - name: classname
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: keyValue
     display: Key Value
