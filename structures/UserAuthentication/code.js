@@ -533,7 +533,7 @@ const RegisterPage = {
         "collapseStatus": "expand",
         "values": {
           "functionName": "handleRegister",
-          "functionBody": "const data = { ...Usersdata }"
+          "functionBody": "const data = { ...Usersdata, Role: 'User' }"
         },
         "children": [{
           "name": "saveToRedux",
