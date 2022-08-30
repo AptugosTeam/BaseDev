@@ -1,10 +1,10 @@
 Parameters.table_unique_id = aptugo.generateID()
-const friendlyName = aptugo.friendly(Parameters["UserTable"]).toLowerCase()
+const friendlyName = aptugo.friendly("Users").toLowerCase()
 const userTable = {
 	"unique_id": Parameters.table_unique_id,
 	"type": "table",
-	"name": Parameters["UserTable"],
-	"singleName": Parameters["UserTable"] + "record",
+	"name": "Users",
+	"singleName": "Users" + "record",
 	"subtype": "Aptugo",
 	"fields": [{
 		"column_name": "FirstName",

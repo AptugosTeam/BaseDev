@@ -967,10 +967,10 @@ const ForgotPage = {
 			"value": "email",
 			"collapseStatus": "collapse",
 			"values": {
-				"smpthost": Parameters.smpthost,
-				"smptport": Parameters.smtpport,
-				"smptuser": Parameters.smtpuser,
-				"smptpass": Parameters.smtppass,
+				"smpthost": "",
+				"smptport": "",
+				"smptuser": "",
+				"smptpass": "",
 				"subject": "'Recover Password'",
 				"functionName": "recoverPasswordFormat"
 			},
