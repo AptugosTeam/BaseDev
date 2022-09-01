@@ -12,7 +12,7 @@
       Allows you to create a graphical representation. It can be used to view balances or make comparisons of any kind. Comes with 3 new elements that can be used as childs (Area, Line, Bar).
 
   - Parallax:
-      Parallax allows a visual effect that simulate the displacement of images or textures that are in the background. The result is an illusion of depth, creating an effect similar to a 3d landscape.
+      Parallax allows a visual effect that simulates the displacement of images or textures that are in the background. The result is an illusion of depth, creating an effect similar to a 3d landscape.
 
   - React Carousel:
       Creates a sliding effect that allows to display different elements in the form of slides. With this effect we can easily display images and texts without scrolling the page.        
@@ -28,10 +28,10 @@
   - Card Media:
             • Images: It is possible to add an image by path or by choosing an asset
             • Width: now is possible to add a width in px.
-            • Heigth: now is possible to add a heigth in px.
+            • Height: now is possible to add a height in px.
 
   - User Authentication [Structure]:
-            • Now is not necessary to set any values when selecting the structure. 
+            • Now it is not necessary to set any values when selecting the structure. 
             • Default route after successful login is the main page '/'
             • Google, Facebook and Twitter login and register disabled.
             • The default role when register was set as 'User'
@@ -39,7 +39,7 @@
   - Leaflet: 
             • Position: It is possible to set the center position of the map using [lat,lng] format.
             • Zoom: It is possible to change the default zoom of the map.
-            • Zoom with Mouse Wheel: On 'Advanced Properties' is now possible to decide if the user can zoom in/out with the mouse wheel.
+            • Zoom with Mouse Wheel: On 'Advanced Properties' it is now possible to decide if the user can zoom in/out with the mouse scroll wheel.
 
   - Div: 
             • Tag: Now it is possible to change the tagname used by the div element.
@@ -50,7 +50,7 @@
       The display name was changed to 'Variable Name' for a better comprehension.
 
   - Card:
-      Minimal fixes to max width and heigth.
+      Minimal fixes to max width and height.
 
   - Email:
       Solved error where 'sendEmail' function appeared outside functional component.
