@@ -1,8 +1,9 @@
 /*
 path: dates.tpl
+completePath: elements/Programming/Snippets/dates.tpl
 type: file
 unique_id: dates1eNV
-icon: ico-paper
+icon: f:dates.svg
 sourceType: javascript
 helpText: Converts date strings into usable dates
 options:

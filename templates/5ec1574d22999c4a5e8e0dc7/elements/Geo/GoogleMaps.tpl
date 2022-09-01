@@ -2,7 +2,7 @@
 path: GoogleMaps.tpl
 type: file
 unique_id: egrlpGq3
-icon: ico-field
+icon: f:GoogleMaps.svg
 children: []
 settings:
   - name: Packages

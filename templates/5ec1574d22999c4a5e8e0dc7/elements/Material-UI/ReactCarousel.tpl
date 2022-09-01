@@ -2,7 +2,7 @@
 path: ReactCarousel.tpl
 type: file
 unique_id: oKi37car
-icon: ico-carousel
+icon: f:ReactCarousel.svg
 sourceType: javascript
 options:
   - name: ClassName

@@ -1,8 +1,8 @@
 /*
 path: productCardMedia.tpl
-completePath: elements/Material-UI/Cards/productCardMedia.tpl
+completePath: elements/Layouts/ProductCards/productCardMedia.tpl
 unique_id: vcZRUSMX
-icon: ico-image
+icon: f:productCardMedia.svg
 helpText: Easily use images from Assets
 options:
   - name: useAsset

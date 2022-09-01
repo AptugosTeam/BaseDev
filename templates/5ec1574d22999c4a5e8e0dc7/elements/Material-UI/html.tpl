@@ -2,7 +2,7 @@
 path: html.tpl
 type: file
 unique_id: 3ZM4gz8X
-icon: f:ico-html.svg
+icon: f:html.svg
 sourceType: javascript
 options:
   - name: html

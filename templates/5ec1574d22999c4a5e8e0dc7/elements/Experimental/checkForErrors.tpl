@@ -2,7 +2,7 @@
 path: checkForErrors.tpl
 type: file
 unique_id: MHrE5ycl
-icon: ico-field
+icon: f:checkForErrors.svg
 helpText: Shows a snackbar with the error message from the controller
 children: []
 options:

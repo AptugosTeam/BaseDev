@@ -2,7 +2,7 @@
 path: viewJson.tpl
 type: file
 unique_id: ctUV2ETz
-icon: ico-field
+icon: f:viewJson.svg
 children: []
 completePath: elements/Experimental/viewJson.tpl
 settings:

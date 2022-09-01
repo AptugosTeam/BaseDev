@@ -2,7 +2,7 @@
 path: Snap.tpl
 type: file
 unique_id: 4lcwhNvI
-icon: ico-field
+icon: f:Snap.svg
 helpText: Generate HTML pages after build
 settings:
   - name: Packages

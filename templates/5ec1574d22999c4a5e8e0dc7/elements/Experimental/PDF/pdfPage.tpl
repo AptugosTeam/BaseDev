@@ -1,8 +1,9 @@
 /*
 path: pdfPage.tpl
+completePath: elements/Experimental/PDF/pdfPage.tpl
 type: file
 unique_id: oKi39bpr
-icon: ico-field
+icon: f:pdfPage.svg
 sourceType: javascript
 options:
   - name: size

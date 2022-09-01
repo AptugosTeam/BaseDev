@@ -1,8 +1,9 @@
 /*
 path: downloadPdf.tpl
+completePath: elements/Experimental/PDF/downloadPdf.tpl
 type: file
 unique_id: oKi37bpr
-icon: ico-field
+icon: f:downloadPdf.svg
 sourceType: javascript
 options:
   - name: fileName

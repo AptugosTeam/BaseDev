@@ -2,7 +2,7 @@
 path: FingerPrint.tpl
 type: file
 unique_id: NdHfgi2F
-icon: ico-field
+icon: f:Fingerprint.svg
 helpText: >-
   Allows fingerprinting on the server side (req.fingerprint to hold the
   information)

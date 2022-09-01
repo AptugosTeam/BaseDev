@@ -1,5 +1,6 @@
 /*
 path: Area.tpl
+completePath: elements/Experimental/Charts/Area.tpl
 type: file
 unique_id: ajkld33b
 icon: ico-google-analytics

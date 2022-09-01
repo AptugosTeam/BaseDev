@@ -2,7 +2,7 @@
 path: Form.tpl
 type: file
 unique_id: 7CHs788C
-icon: ico-field
+icon: f:Form.svg
 children: []
 options: []
 */

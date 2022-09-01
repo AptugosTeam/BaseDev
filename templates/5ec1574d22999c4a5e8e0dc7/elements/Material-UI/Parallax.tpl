@@ -2,7 +2,7 @@
 path: Parallax.tpl
 completePath: elements/Material-UI/Parallax.tpl
 unique_id: x1zn859K
-icon: ico-image
+icon: f:Parallax.svg
 sourceType: javascript
 settings:
   - name: Packages

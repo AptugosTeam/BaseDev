@@ -1,8 +1,8 @@
 /*
 path: productCard.tpl
-completePath: elements/Material-UI/Cards/productCard.tpl
+completePath: elements/Layouts/ProductCards/productCard.tpl
 unique_id: 6cMXRUS3
-icon: ico-field
+icon: f:productCard.svg
 helpText: Card for products, allows you to fully customize
 sourceType: javascript
 options:

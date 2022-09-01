@@ -2,7 +2,7 @@
 path: import.tpl
 type: file
 unique_id: gkhS23C1
-icon: file.svg
+icon: f:import.svg
 helpText: Imports modules
 options:
   - name: moduleName

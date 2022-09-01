@@ -2,7 +2,7 @@
 path: MaterialIcon.tpl
 type: file
 unique_id: RhqkoHE4
-icon: ico-icon-button
+icon: f:MaterialIcon.svg
 helpText: Shows a material icon from the list
 children: []
 options:

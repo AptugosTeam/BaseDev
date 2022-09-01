@@ -1,8 +1,9 @@
 /*
 path: Bar.tpl
+completePath: elements/Experimental/Charts/Bar.tpl
 type: file
 unique_id: 5ahjlw3b
-icon: ico-google-analytics
+icon: ico-chart-bar
 options:
   - name: values
     display: Values YAxis

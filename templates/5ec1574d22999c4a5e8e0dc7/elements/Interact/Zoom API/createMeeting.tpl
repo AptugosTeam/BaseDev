@@ -1,8 +1,9 @@
 /*
 path: createMeeting.tpl
+completePath: elements/Interact/Zoom API/createMeeting.tpl
 type: file
 unique_id: zoomnewmeeting
-icon: ico-field
+icon: f:createMeeting.svg
 children: []
 options:
   - name: endpoint

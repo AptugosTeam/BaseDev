@@ -1,8 +1,9 @@
 /*
 path: MenuItem.tpl
+completePath: elements/Material-UI/Menu/MenuItem.tpl
 type: file
 unique_id: 9ck3oIfw
-icon: file.svg
+icon: f:MenuItem.svg
 helpText: Adds a menu item into a menu
 options:
   - name: onclick

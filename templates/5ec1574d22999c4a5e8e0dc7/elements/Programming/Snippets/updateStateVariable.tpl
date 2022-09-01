@@ -1,8 +1,9 @@
 /*
 path: updateStateVariable.tpl
+completePath: elements/Programming/Snippets/updateStateVariable.tpl
 type: file
 unique_id: updateStateVariable
-icon: ico-paper
+icon: f:updateStateVariable.svg
 sourceType: javascript
 helpText: Updates the value of a state variable
 options:

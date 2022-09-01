@@ -1,8 +1,9 @@
 /*
 path: ComposedChart.tpl
+completePath: elements/Experimental/Charts/ComposedChart.tpl
 type: file
 unique_id: 5l4alkmn
-icon: ico-chart-js
+icon: f:ComposedChart.svg
 options:
   - name: width
     display: width

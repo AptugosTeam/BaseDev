@@ -2,7 +2,7 @@
 path: TopMenu.tpl
 type: file
 unique_id: WHCOcwBU
-icon: browser-51.svg
+icon: f:TopMenu.svg
 helpText: Sets a Top Navigation Menu for a Webpage
 sourceType: javascript
 children: []

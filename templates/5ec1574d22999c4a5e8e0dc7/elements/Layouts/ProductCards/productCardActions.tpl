@@ -1,8 +1,8 @@
 /*
 path: productCardActions.tpl
-completePath: elements/Material-UI/Cards/productCardActions.tpl
+completePath: elements/Layouts/ProductCards/productCardActions.tpl
 unique_id: 7MX9RUSn
-icon: ico-field
+icon: f:productCardActions.svg
 options:
   - name: disableSpacing
     display: Disable Spacing

@@ -1,8 +1,8 @@
 /*
 path: productCardHeader.tpl
-completePath: elements/Material-UI/Cards/productCardHeader.tpl
+completePath: elements/Layouts/ProductCards/productCardHeader.tpl
 unique_id: aMXRUSTB
-icon: ico-text
+icon: f:productCardHeader.svg
 helpText: >-
   Insert simple text anywhere. Can hold variables, code, and anything of your
   choice

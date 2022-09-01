@@ -2,7 +2,7 @@
 path: Sortable.tpl
 type: file
 unique_id: QpQ4sVNw
-icon: ico-field
+icon: f:Sortable.svg
 helpText: Sortable list
 settings:
   - name: Packages

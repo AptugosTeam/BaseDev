@@ -2,7 +2,7 @@
 path: alertMessage.tpl
 type: file
 unique_id: QWGbhsNv
-icon: ico-field
+icon: f:alertMessage.svg
 helpText: >-
   An alert displays a short, important message in a way that attracts the user's
   attention without interrupting the user's task.
