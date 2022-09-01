@@ -98,18 +98,6 @@ body {
 
 .loginBody {
 
-  .right {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-content: flex-end;
-    justify-content: center;
-    align-items: flex-end;
-    flex-wrap: wrap;
-  }
-}
-.loginBody {
-
   .loginPage {
     height: 100%;
 
@@ -188,8 +176,8 @@ body {
           flex-direction: column;
           align-items: center;
         }
-        
-        & :global(.MuiFormControl-root){
+
+        & :global(.MuiFormControl-root) {
           width: 100%;
         }
 
@@ -250,6 +238,7 @@ body {
     }
   }
 }
+
 .registerBody {
 
   .loginPage {
@@ -385,6 +374,56 @@ body {
   }
 }
 
+.retrieveBody {
+
+  .loginPage {
+    height: 100%;
+
+    & .regulatedWidth {
+      width: 40%;
+      margin: 1rem auto;
+      color: rgb(33, 43, 54);
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      flex-wrap: wrap;
+
+      & :global(.MuiGrid-container) {
+        height: 100%;
+      }
+
+      & a {
+        color: green;
+      }
+
+      & :global(.MuiTypography-h3) {
+        margin: 0px 0px 8px;
+        font-weight: 400;
+        font-size: 3rem;
+        line-height: 1.5;
+      }
+
+      & :global(.MuiTypography-body1) {
+        color: rgb(99, 115, 129);
+        text-align: center;
+        width: 50%;
+      }
+
+      & :global(.MuiFormControl-root) {
+        width: 60%;
+      }
+
+      & button {
+        margin: 1rem;
+        padding: 0.5rem 3rem;
+      }
+    }
+  }
+}
+
+
 .menuProfileDetails {
   border-bottom: 1px solid rgba(224, 224, 224, 1);
   padding: 1rem 0.5rem;
@@ -392,10 +431,7 @@ body {
   color: rgba(128, 128, 128, 1);
 }
 
-.regulatedWidth {
-  max-width: 30rem;
-  margin: 0 auto;
-}
+
 
 .fileuploadprofile {
   margin: 0 auto;

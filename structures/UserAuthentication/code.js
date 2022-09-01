@@ -1142,7 +1142,7 @@ const ForgotPage = {
 						"value": "typography",
 						"collapseStatus": "expand",
 						"values": {
-							"tag": "h4"
+							"tag": "h3"
 						},
 					}, {
 						"children": [{
@@ -1260,7 +1260,7 @@ const ForgotPage = {
 							"Variant": "contained",
 							"Color": "primary",
 							"ButtonText": "Reset Password",
-							"fullWidth": true,
+							"fullWidth": false,
 							"Action": "sendNonce"
 						},
 						"children": [],
@@ -1337,7 +1337,7 @@ const ForgotPage = {
 						"value": "typography",
 						"collapseStatus": "expand",
 						"values": {
-							"tag": "h4"
+							"tag": "h3"
 						},
 					}, {
 						"children": [{
@@ -1387,7 +1387,7 @@ const ForgotPage = {
 						"values": {
 							"Variant": "contained",
 							"Color": "primary",
-							"fullWidth": true,
+							"fullWidth": false,
 							"ButtonText": "Reset Password!",
 							"Action": "saveNewPassword"
 						},
