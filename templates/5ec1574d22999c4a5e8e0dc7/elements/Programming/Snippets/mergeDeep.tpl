@@ -1,8 +1,9 @@
 /*
 path: mergeDeep.tpl
+completePath: elements/Programming/Snippets/mergeDeep.tpl
 type: file
 unique_id: mergeDeep
-icon: ico-paper
+icon: f:mergeDeep.svg
 sourceType: javascript
 helpText: Merges several objects with all their properties
 */
