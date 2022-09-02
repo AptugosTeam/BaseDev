@@ -601,3 +601,35 @@ $white: #FFFFFF;
     }
   }
 }
+
+.productCardContent {
+  .productCardContentDiscount {
+    color: white;
+    background-color: red;
+    font-weight:600;
+    float: right;
+    border-radius: 10px;
+    padding: 3px;
+    margin: 0px 5px;
+  }
+  .productCardContentPrice {
+    color: red;
+    font-weight: 600;
+    float: right;
+    padding: 3px;
+    margin: 0px 5px;
+  }
+  .productCardContentPriceCrossedOut {
+    color: gray;
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    font-weight: 600;
+    float: right;
+    padding: 3px;
+    margin: 0px 5px;
+  }
+  div {
+    color: gray;
+    font-weight: 400;
+  }
+}

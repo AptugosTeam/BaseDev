@@ -1,7 +1,7 @@
 /*
-path: cardActions.tpl
-completePath: elements/Material-UI/Cards/cardActions.tpl
-unique_id: 7k9qd8nA
+path: productCardActions.tpl
+completePath: elements/Material-UI/Cards/productCardActions.tpl
+unique_id: 7MX9RUSn
 icon: ico-field
 options:
   - name: disableSpacing
