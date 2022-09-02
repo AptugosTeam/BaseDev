@@ -2,7 +2,7 @@
 path: weekSelector.tpl
 type: file
 unique_id: weekselector
-icon: ico-carousel
+icon: f:weekSelector.svg
 sourceType: javascript
 options:
   - name: class

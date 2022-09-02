@@ -2,7 +2,7 @@
 path: Skeleton.tpl
 type: file
 unique_id: skeleton666
-icon: ico-field
+icon: f:Skeleton.svg
 helpText: Display a placeholder preview of your content before the data gets loaded to reduce load-time frustration.
 children: []
 options:
