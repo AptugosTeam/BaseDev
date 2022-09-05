@@ -2,6 +2,38 @@
   "_id": "5f1997f0c76f1f45054347d8",
   "type": "structure",
   "runable": true,
+  "parameters": [
+    {
+      "name": "User Table",
+      "display": "Name of the Users Table",
+      "type": "text",
+      "helpText": "Type the name of the Users Table"
+    },
+    {
+      "name": "smpthost",
+      "display": "SMTP Host",
+      "type": "text",
+      "helpText": "Type the name of the Users Table"
+    },
+    {
+      "name": "smtpport",
+      "display": "SMTP Port",
+      "type": "text",
+      "helpText": "Type the name of the Users Table"
+    },
+    {
+      "name": "smtpuser",
+      "display": "SMTP User",
+      "type": "text",
+      "helpText": "Type the name of the Users Table"
+    },
+    {
+      "name": "smtppass",
+      "display": "SMTP Password",
+      "type": "text",
+      "helpText": "Type the name of the Users Table"
+    }
+  ],
   "afterRun": "",
   "Created_date": {
     "$date": "2020-07-23T14:00:16.549Z"

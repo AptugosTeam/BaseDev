@@ -1,3 +1,4 @@
+console.error('creating asset', Parameters)
 
 let newAsset = {
   type: Parameters.type,

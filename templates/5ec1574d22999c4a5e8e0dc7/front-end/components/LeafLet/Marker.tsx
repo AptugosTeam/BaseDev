@@ -33,13 +33,10 @@ const Marker: FunctionComponent<leaftLetType> = (props) => {
   },[props.position])
   
   
-  return (
-  <Mrk position={state.position} icon={markerIcon}>
-    <Popup>
+  return (<Mrk position={state.position} icon={markerIcon}><Popup>
     {props.children}
-    </Popup>
-  </Mrk>
-)
+  </Popup>
+</Mrk>)
 }
 
 export default Marker

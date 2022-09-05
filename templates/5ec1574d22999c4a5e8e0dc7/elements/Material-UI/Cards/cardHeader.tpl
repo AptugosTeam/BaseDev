@@ -2,20 +2,6 @@
 path: cardHeader.tpl
 completePath: elements/Material-UI/Cards/cardHeader.tpl
 unique_id: aFBU2rTB
-icon: ico-text
-helpText: >-
-  Insert simple text anywhere. Can hold variables, code, and anything of your
-  choice
-sourceType: javascript
-options:
-  - name: title
-    display: Title
-    type: text
-    options: ''
-  - name: subheader
-    display: Sub Title
-    type: text
-    options: ''
 */
 {% set bpr %}
 import CardHeader from '@mui/material/CardHeader';

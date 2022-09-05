@@ -30,25 +30,17 @@ options:
     display: Extra Styles
     type: text
     options: ''
-  - name: tag
-    display: Use a different HTML element
-    type: text
-    options: ''
-    settings:
-      default: 'div'
-      active: true
 children: []
 helpText: Basic HTML Div element
 */
-{% set tag = element.values.tag|default('div') %}
-<{{tag}}
+<div
   title="{{ element.name }}"
   {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
   {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
-  {% if element.values.class %}className={ {{element.values.class|raw}} }{% endif %}
+  {% if element.values.class %}className={ {{element.values.class}} }{% endif %}
   {% if element.values.onclick %}onClickCapture={(e) => {{element.values.onclick}} }{% endif %}
   {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
   {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
 >
 {{ content | raw }}
-</{{tag}}>
+</div>

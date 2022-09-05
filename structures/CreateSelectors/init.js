@@ -23,7 +23,7 @@ const searchForValue = (tree, saveinBranch, page) => {
         if (leaf.children && leaf.children.length) searchForValue(leaf.children, saveinBranch, page)
       }
     } else {
-      // searchForValue(leaf.children, saveinBranch, leaf )
+      searchForValue(leaf.children, saveinBranch, leaf )
     }
   })
   return accumulator

@@ -3,22 +3,6 @@ path: grid.tpl
 completePath: elements/Material-UI/grid.tpl
 unique_id: 7BJs3nUt
 children: []
-calculatedName: >-
-  function (ele) { 
-    try {
-      if (ele.values.container && ele.values.item) {
-        return `${ele.name} item container`
-      }
-      if (ele.values.container) {
-        return `${ele.name} container`
-      }
-      if (ele.values.item) {
-        return `${ele.name} item`
-      }
-    } catch(e) {
-      return ele.name
-    }
-  }
 options:
   - name: className
     display: ClassName

@@ -73,6 +73,18 @@ const LoginPage = {
         "modulePath": "../services/auth.service"
       },
       "children": [],
+    }, {
+      "name": "React-Google-Login",
+      "prevent_delete": false,
+      "cascades": false,
+      "type": "element",
+      "value": "import",
+      "collapseStatus": "expand",
+      "values": {
+        "moduleName": "{ useGoogleLogin }",
+        "modulePath": "react-google-login"
+      },
+      "children": [],
     }],
     "name": "Before Page Render",
     "type": "element",
@@ -113,6 +125,43 @@ const LoginPage = {
         },
         "children": [],
       }, {
+        "name": "onGoogleSuccess",
+        "prevent_delete": false,
+        "cascades": false,
+        "type": "element",
+        "value": "function",
+        "collapseStatus": "expand",
+        "values": {
+          "functionName": "onGoogleSuccess",
+          "functionParameters": "res",
+          "functionBody": "console.log('Login Success: Current User: ', res.profileObj)"
+        },
+        "children": [],
+      }, {
+        "name": "onGoogleFailure",
+        "prevent_delete": false,
+        "cascades": false,
+        "type": "element",
+        "value": "function",
+        "collapseStatus": "expand",
+        "values": {
+          "functionName": "onGoogleFailure",
+          "functionParameters": "res",
+          "functionBody": "console.log('Login Failed: res: ', res)\n    if (res.error === 'popup_closed_by_user') {\n      setloginError('You must complete the login process in order to login.')\n    }"
+        },
+        "children": [],
+      }, {
+        "name": "googleSignIn",
+        "prevent_delete": false,
+        "cascades": false,
+        "type": "element",
+        "value": "code",
+        "collapseStatus": "expand",
+        "values": {
+          "code": "const { signIn: googleSignIn } = useGoogleLogin({\n    onSuccess: onGoogleSuccess,\n    onFailure: onGoogleFailure,\n    clientId: '185605994716-97itv5an2ligdaq8b4r3l4r8h95rlip6.apps.googleusercontent.com',\n    isSignedIn: false,\n    accessType: 'offline'\n  })"
+        },
+        "children": [],
+      }, {
         "name": "handleLogin",
         "prevent_delete": false,
         "cascades": false,
@@ -121,7 +170,7 @@ const LoginPage = {
         "collapseStatus": "expand",
         "values": {
           "functionName": "handleLogin",
-          "functionBody": "AuthService.login(loginData.Email, loginData.Password).then(\n      (res) => {\n        console.log(res)\n        props.history.push('/')\n      },\n      (error) => {\n        setloginError(error.response.data.message)\n      }\n    )"
+          "functionBody": "AuthService.login(loginData.Email, loginData.Password).then(\n      (res) => {\n        console.log(res)\n        props.history.push('/admin')\n      },\n      (error) => {\n        setloginError(error.response.data.message)\n      }\n    )"
         },
         "children": [],
       }]
@@ -136,6 +185,42 @@ const LoginPage = {
     "children": [{
       "children": [{
         "children": [{
+          "children": [{
+            "children": [{
+              "name": "text",
+              "prevent_delete": false,
+              "cascades": false,
+              "type": "element",
+              "value": "text",
+              "collapseStatus": "expand",
+              "values": {
+                "Content": "Welcome back"
+              },
+              "children": [],
+            }],
+            "name": "Paper",
+            "prevent_delete": false,
+            "cascades": false,
+            "type": "element",
+            "value": "Paper",
+            "collapseStatus": "expand",
+            "values": {
+              "elevation": "5",
+              "variant": "elevation",
+              "className": "theme.paperLeft"
+            },
+          }],
+          "name": "Left Welcome",
+          "prevent_delete": false,
+          "cascades": false,
+          "type": "element",
+          "value": "grid",
+          "collapseStatus": "collapse",
+          "values": {
+            "midcolumns": "3",
+            "align": "stretch"
+          },
+        }, {
           "children": [{
             "children": [{
               "name": "text",
@@ -193,7 +278,7 @@ const LoginPage = {
                   "value": "text",
                   "collapseStatus": "expand",
                   "values": {
-                    "Content": "Sign In"
+                    "Content": "Sign in to Aptugo"
                   },
                   "children": [],
                 }],
@@ -235,6 +320,117 @@ const LoginPage = {
               "type": "element",
               "value": "div",
               "collapseStatus": "collapse",
+            }, {
+              "children": [{
+                "children": [{
+                  "name": "MaterialIcon",
+                  "prevent_delete": false,
+                  "cascades": false,
+                  "type": "element",
+                  "value": "MaterialIcon",
+                  "collapseStatus": "expand",
+                  "values": {
+                    "icon": "Google",
+                    "color": "default"
+                  },
+                  "children": [],
+                }],
+                "name": "button",
+                "prevent_delete": false,
+                "cascades": false,
+                "type": "element",
+                "value": "button",
+                "collapseStatus": "expand",
+                "values": {
+                  "ButtonText": "",
+                  "Variant": "outlined",
+                  "className": "theme.google",
+                  "Action": "googleSignIn",
+                  "fullWidth": true
+                },
+              }, {
+                "children": [{
+                  "name": "MaterialIcon",
+                  "prevent_delete": false,
+                  "cascades": false,
+                  "type": "element",
+                  "value": "MaterialIcon",
+                  "collapseStatus": "expand",
+                  "values": {
+                    "icon": "Facebook"
+                  },
+                  "children": [],
+                }],
+                "name": "button",
+                "prevent_delete": false,
+                "cascades": false,
+                "type": "element",
+                "value": "button",
+                "collapseStatus": "expand",
+                "values": {
+                  "Action": "googleSignIn",
+                  "className": "theme.facebook",
+                  "Variant": "outlined",
+                  "fullWidth": true
+                },
+              }, {
+                "children": [{
+                  "name": "MaterialIcon",
+                  "prevent_delete": false,
+                  "cascades": false,
+                  "type": "element",
+                  "value": "MaterialIcon",
+                  "collapseStatus": "expand",
+                  "values": {
+                    "icon": "Twitter"
+                  },
+                  "children": [],
+                }],
+                "name": "button",
+                "prevent_delete": false,
+                "cascades": false,
+                "type": "element",
+                "value": "button",
+                "collapseStatus": "expand",
+                "values": {
+                  "Action": "googleSignIn",
+                  "ButtonText": "",
+                  "className": "theme.twitter",
+                  "fullWidth": true,
+                  "Variant": "outlined"
+                },
+              }],
+              "name": "div",
+              "prevent_delete": false,
+              "cascades": false,
+              "type": "element",
+              "value": "div",
+              "collapseStatus": "expand",
+              "values": {
+                "class": "theme.externalSignIn"
+              },
+            }, {
+              "children": [{
+                "name": "text",
+                "prevent_delete": false,
+                "cascades": false,
+                "type": "element",
+                "value": "text",
+                "collapseStatus": "expand",
+                "values": {
+                  "Content": "or"
+                },
+                "children": [],
+              }],
+              "name": "Separator Line",
+              "prevent_delete": false,
+              "cascades": false,
+              "type": "element",
+              "value": "div",
+              "collapseStatus": "expand",
+              "values": {
+                "class": "theme.separatorLine"
+              },
             }, {
               "children": [{
                 "children": [{
@@ -456,6 +652,18 @@ const RegisterPage = {
       },
       "children": [],
     }, {
+      "name": "React-Google-Login",
+      "prevent_delete": false,
+      "cascades": false,
+      "type": "element",
+      "value": "import",
+      "collapseStatus": "expand",
+      "values": {
+        "moduleName": "{ useGoogleLogin }",
+        "modulePath": "react-google-login"
+      },
+      "children": [],
+    }, {
       "name": "AuthService",
       "prevent_delete": false,
       "cascades": false,
@@ -525,6 +733,43 @@ const RegisterPage = {
         },
         "children": [],
       }, {
+        "name": "onGoogleSuccess",
+        "prevent_delete": false,
+        "cascades": false,
+        "type": "element",
+        "value": "function",
+        "collapseStatus": "expand",
+        "values": {
+          "functionName": "onGoogleSuccess",
+          "functionParameters": "res",
+          "functionBody": "console.log('Login Success: Current User: ', res.profileObj)"
+        },
+        "children": [],
+      }, {
+        "name": "onGoogleFailure",
+        "prevent_delete": false,
+        "cascades": false,
+        "type": "element",
+        "value": "function",
+        "collapseStatus": "expand",
+        "values": {
+          "functionName": "onGoogleFailure",
+          "functionParameters": "res",
+          "functionBody": "console.log('Login Failed: res: ', res)\n    if (res.error === 'popup_closed_by_user') {\n      setregisterError('You must complete the login process in order to login.')\n    }"
+        },
+        "children": [],
+      }, {
+        "name": "googleSignIn",
+        "prevent_delete": false,
+        "cascades": false,
+        "type": "element",
+        "value": "code",
+        "collapseStatus": "expand",
+        "values": {
+          "code": "const { signIn: googleSignIn } = useGoogleLogin({\n    onSuccess: onGoogleSuccess,\n    onFailure: onGoogleFailure,\n    clientId: '185605994716-97itv5an2ligdaq8b4r3l4r8h95rlip6.apps.googleusercontent.com',\n    isSignedIn: false,\n    accessType: 'offline'\n  })"
+        },
+        "children": [],
+      }, {
         "name": "handleRegister",
         "prevent_delete": false,
         "cascades": false,
@@ -533,7 +778,7 @@ const RegisterPage = {
         "collapseStatus": "expand",
         "values": {
           "functionName": "handleRegister",
-          "functionBody": "const data = { ...Usersdata, Role: 'User' }"
+          "functionBody": "const data = { ...Usersdata }"
         },
         "children": [{
           "name": "saveToRedux",
@@ -568,6 +813,42 @@ const RegisterPage = {
     "children": [{
       "children": [{
         "children": [{
+          "children": [{
+            "children": [{
+              "name": "text",
+              "prevent_delete": false,
+              "cascades": false,
+              "type": "element",
+              "value": "text",
+              "collapseStatus": "expand",
+              "values": {
+                "Content": "Welcome back"
+              },
+              "children": [],
+            }],
+            "name": "Paper",
+            "prevent_delete": false,
+            "cascades": false,
+            "type": "element",
+            "value": "Paper",
+            "collapseStatus": "expand",
+            "values": {
+              "elevation": "5",
+              "variant": "elevation",
+              "className": "theme.paperLeft"
+            },
+          }],
+          "name": "Left Welcome",
+          "prevent_delete": false,
+          "cascades": false,
+          "type": "element",
+          "value": "grid",
+          "collapseStatus": "collapse",
+          "values": {
+            "midcolumns": "3",
+            "align": "stretch"
+          },
+        }, {
           "children": [{
             "children": [{
               "name": "text",
@@ -625,7 +906,7 @@ const RegisterPage = {
                   "value": "text",
                   "collapseStatus": "expand",
                   "values": {
-                    "Content": "Register"
+                    "Content": "Register in to Aptugo"
                   },
                   "children": [],
                 }],
@@ -667,6 +948,117 @@ const RegisterPage = {
               "type": "element",
               "value": "div",
               "collapseStatus": "collapse",
+            }, {
+              "children": [{
+                "children": [{
+                  "name": "MaterialIcon",
+                  "prevent_delete": false,
+                  "cascades": false,
+                  "type": "element",
+                  "value": "MaterialIcon",
+                  "collapseStatus": "expand",
+                  "values": {
+                    "icon": "Google",
+                    "color": "default"
+                  },
+                  "children": [],
+                }],
+                "name": "button",
+                "prevent_delete": false,
+                "cascades": false,
+                "type": "element",
+                "value": "button",
+                "collapseStatus": "expand",
+                "values": {
+                  "ButtonText": "",
+                  "Variant": "outlined",
+                  "className": "theme.google",
+                  "Action": "googleSignIn",
+                  "fullWidth": true
+                },
+              }, {
+                "children": [{
+                  "name": "MaterialIcon",
+                  "prevent_delete": false,
+                  "cascades": false,
+                  "type": "element",
+                  "value": "MaterialIcon",
+                  "collapseStatus": "expand",
+                  "values": {
+                    "icon": "Facebook"
+                  },
+                  "children": [],
+                }],
+                "name": "button",
+                "prevent_delete": false,
+                "cascades": false,
+                "type": "element",
+                "value": "button",
+                "collapseStatus": "collapse",
+                "values": {
+                  "Action": "googleSignIn",
+                  "className": "theme.facebook",
+                  "Variant": "outlined",
+                  "fullWidth": true
+                },
+              }, {
+                "children": [{
+                  "name": "MaterialIcon",
+                  "prevent_delete": false,
+                  "cascades": false,
+                  "type": "element",
+                  "value": "MaterialIcon",
+                  "collapseStatus": "expand",
+                  "values": {
+                    "icon": "Twitter"
+                  },
+                  "children": [],
+                }],
+                "name": "button",
+                "prevent_delete": false,
+                "cascades": false,
+                "type": "element",
+                "value": "button",
+                "collapseStatus": "collapse",
+                "values": {
+                  "Action": "googleSignIn",
+                  "ButtonText": "",
+                  "className": "theme.twitter",
+                  "fullWidth": true,
+                  "Variant": "outlined"
+                },
+              }],
+              "name": "Social SignUp",
+              "prevent_delete": false,
+              "cascades": false,
+              "type": "element",
+              "value": "div",
+              "collapseStatus": "collapse",
+              "values": {
+                "class": "theme.externalSignIn"
+              },
+            }, {
+              "children": [{
+                "name": "text",
+                "prevent_delete": false,
+                "cascades": false,
+                "type": "element",
+                "value": "text",
+                "collapseStatus": "expand",
+                "values": {
+                  "Content": "or"
+                },
+                "children": [],
+              }],
+              "name": "Separator Line",
+              "prevent_delete": false,
+              "cascades": false,
+              "type": "element",
+              "value": "div",
+              "collapseStatus": "collapse",
+              "values": {
+                "class": "theme.separatorLine"
+              },
             }, {
               "children": [{
                 "children": [{
@@ -967,10 +1359,10 @@ const ForgotPage = {
 			"value": "email",
 			"collapseStatus": "collapse",
 			"values": {
-				"smpthost": "",
-				"smptport": "",
-				"smptuser": "",
-				"smptpass": "",
+				"smpthost": Parameters.smpthost,
+				"smptport": Parameters.smtpport,
+				"smptuser": Parameters.smtpuser,
+				"smptpass": Parameters.smtppass,
 				"subject": "'Recover Password'",
 				"functionName": "recoverPasswordFormat"
 			},
