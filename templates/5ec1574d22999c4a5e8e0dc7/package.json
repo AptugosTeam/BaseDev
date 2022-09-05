@@ -75,7 +75,6 @@ unique_id: 0i8AxGw6
   "dependencies": {
     "@mui/icons-material": "^5.0.0",
     "@mui/material": "^5.0.0",
-    "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "axios": "^0.21.1",
     "immer": "^8.0.1",
