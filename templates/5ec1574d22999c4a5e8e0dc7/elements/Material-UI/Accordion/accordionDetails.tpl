@@ -2,6 +2,7 @@
 path: accordionDetails.tpl
 completePath: elements/Material-UI/Accordion/accordionDetails.tpl
 unique_id: KBm2vQFr
+icon: f:accordionDetails.svg
 */
 {% set bpr %}
 import AccordionDetails from '@mui/material/AccordionDetails'

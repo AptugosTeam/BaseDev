@@ -1,8 +1,9 @@
 /*
 path: pdfText.tpl
+completePath: elements/Experimental/PDF/pdfText.tpl
 type: file
 unique_id: oKi42bpr
-icon: ico-field
+icon: f:pdfText.svg
 sourceType: javascript
 options:
   - name: wrap

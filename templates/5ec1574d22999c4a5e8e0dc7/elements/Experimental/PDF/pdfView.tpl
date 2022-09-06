@@ -1,8 +1,9 @@
 /*
 path: pdfView.tpl
+completePath: elements/Experimental/PDF/pdfView.tpl
 type: file
 unique_id: oKi40bpr
-icon: ico-field
+icon: f:pdfView.svg
 sourceType: javascript
 options:
   - name: wrap

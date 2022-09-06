@@ -2,8 +2,7 @@
 path: slider.tpl
 type: file
 unique_id: rMl7agO8
-icon: ico-field
-helpText: Crea tu deslizador de volumen.
+icon: f:slider.svg
 options:
   - name: defaultValue
     display: Default Value

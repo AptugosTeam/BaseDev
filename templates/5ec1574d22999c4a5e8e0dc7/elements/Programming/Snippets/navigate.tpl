@@ -1,8 +1,9 @@
 /*
 path: navigate.tpl
+completePath: elements/Programming/Snippets/navigate.tpl
 type: file
 unique_id: navigate
-icon: ico-autolinking
+icon: f:navigate.svg
 sourceType: javascript
 options:
   - name: to

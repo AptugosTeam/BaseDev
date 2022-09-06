@@ -3,7 +3,7 @@ path: SimplePagination.tpl
 completePath: elements/Experimental/SimplePagination.tpl
 type: file
 unique_id: Ip36BC3c
-icon: ico-pagination
+icon: f:SimplePagination.svg
 options:
   - name: itemsPerPage
     display: Items per Page

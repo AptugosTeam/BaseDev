@@ -1,8 +1,9 @@
 /*
 path: pdfDocument.tpl
+completePath: elements/Experimental/PDF/pdfDocument.tpl
 type: file
 unique_id: oKi38bpr
-icon: ico-field
+icon: f:pdfDocument.svg
 sourceType: javascript
 options:
   - name: title

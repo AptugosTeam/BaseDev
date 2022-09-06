@@ -1,8 +1,9 @@
 /*
 path: script.tpl
+completePath: elements/Programming/Snippets/script.tpl
 type: file
 unique_id: script
-icon: ico-autolinking
+icon: f:script.svg
 sourceType: javascript
 children: []
 */

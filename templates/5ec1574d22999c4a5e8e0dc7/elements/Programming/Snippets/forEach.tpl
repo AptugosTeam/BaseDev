@@ -1,8 +1,9 @@
 /*
 path: forEach.tpl
+completePath: elements/Programming/Snippets/forEach.tpl
 type: file
 unique_id: fore1eNV
-icon: ico-loop
+icon: f:forEach.svg
 sourceType: javascript
 helpText: Allows you to loop a variable and render child code
 options:

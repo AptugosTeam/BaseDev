@@ -1,9 +1,10 @@
 /*
 path: deleteRecord.tpl
+completePath: elements/Programming/Crud/deleteRecord.tpl
 display: Delete a Record
 type: file
 unique_id: OOQu8gg7
-icon: ico-save-to-redux
+icon: f:deleteRecord.svg
 sourceType: javascript
 options:
   - name: table

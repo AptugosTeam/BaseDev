@@ -4,7 +4,7 @@ completePath: elements/Experimental/Sockets/socketCapabilities.tpl
 type: file
 unique_id: socketCapabilities
 helpText: Enables Socket capabilities into your application, both in front and back-end
-icon: ico-field
+icon: f:socketCapabilities.svg
 children: []
 usesDelays: [theconstructor,onsendmessage,ongetmessages,onhandlemessage]
 options:

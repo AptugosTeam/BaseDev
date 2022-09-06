@@ -2,7 +2,7 @@
 path: gMailListMessages.tpl
 type: file
 unique_id: qgwpdQL5
-icon: ico-email
+icon: f:gMailListMessages.svg
 options:
   - name: filter
     display: Filter

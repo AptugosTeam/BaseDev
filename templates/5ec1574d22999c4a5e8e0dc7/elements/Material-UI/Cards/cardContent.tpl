@@ -2,7 +2,7 @@
 path: cardContent.tpl
 completePath: elements/Material-UI/Cards/cardContent.tpl
 unique_id: M6MWRbz3
-icon: ico-text
+icon: f:cardContent.svg
 helpText: Insert simple text anywhere. Can hold variables, code, and anything of your choice
 sourceType: javascript
 options:

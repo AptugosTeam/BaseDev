@@ -2,7 +2,7 @@
 path: loop.tpl
 type: file
 unique_id: IRpM1eNV
-icon: ico-loop
+icon: f:loop.svg
 sourceType: javascript
 helpText: Allows you to loop a variable and render child elements
 options:

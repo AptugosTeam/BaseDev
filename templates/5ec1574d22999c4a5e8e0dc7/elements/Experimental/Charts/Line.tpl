@@ -1,8 +1,9 @@
 /*
 path: Line.tpl
+completePath: elements/Experimental/Charts/Line.tpl
 type: file
 unique_id: 5l46533b
-icon: ico-google-analytics
+icon: f:line.svg
 helpText: Generate HTML pages after build
 options:
   - name: values

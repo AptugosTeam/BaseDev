@@ -2,7 +2,7 @@
 path: emailCalendarInvite.tpl
 type: file
 unique_id: AabTsZ3M
-icon: ico-email
+icon: f:emailCalendarInvite.svg
 completePath: elements/Interact/emailCalendarInvite.tpl
 options:
   - name: startDate

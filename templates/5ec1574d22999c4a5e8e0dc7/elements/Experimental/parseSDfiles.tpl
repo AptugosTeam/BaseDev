@@ -2,7 +2,7 @@
 path: parseSDfiles.tpl
 type: file
 unique_id: pbSAr4BO
-icon: ico-chart-choropleth
+icon: f:parseSDfiles.svg
 children: []
 settings:
   - name: BackendPackages

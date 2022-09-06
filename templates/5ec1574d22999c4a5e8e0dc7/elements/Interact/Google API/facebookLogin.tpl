@@ -1,8 +1,9 @@
 /*
 path: facebookLogin.tpl
+completePath: elements/Interact/Google API/facebookLogin.tpl
 type: file
 unique_id: reGorodw
-icon: ico-field
+icon: f:facebookLogin.svg
 children: []
 settings:
   - name: Packages
