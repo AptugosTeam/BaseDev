@@ -12,3 +12,5 @@ structures/.DS_Store
 applications copy/*
 build/*
 .DS_Store
+extendedStructures/*
+extendedTemplates/*
