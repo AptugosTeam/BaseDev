@@ -18,19 +18,12 @@ body {
 
     & .profilePicture {
       margin: 0 0 0 auto;
+
       & img {
         width: 2.5rem;
         border-radius: 1.75rem;
       }
     }
-  }
-
-  .greenText {
-    color: green;
-  }
-
-  .right {
-    float: right;
   }
 
   .mainarea {
@@ -103,381 +96,333 @@ body {
   }
 }
 
-.loginPage {
-  height: 100%;
+.loginBody {
 
-  & .externalSignIn {
-    display: flex;
-    margin: 1rem -0.5rem 0 -0.5rem;
-
-    & > button {
-      margin: 0.5rem;
-      padding: 1rem;
-
-      &.google {
-        color: #df3e30;
-      }
-
-      &.facebook {
-        color: #1877f2;
-      }
-
-      &.twitter {
-        color: #1c9cea;
-      }
-    }
-  }
-
-  & :global(.MuiGrid-container) {
+  .loginPage {
     height: 100%;
 
-    & .paperLeft {
-      height: 100%;
-      border-radius: 1rem;
-      align-items: center;
-      display: flex;
-      padding: 1rem;
-      box-sizing: border-box;
-      font-size: 2rem;
-      color: rgba(0, 0, 0, 0.87);
-      border: 1px solid #0000001f;
-      box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
-    }
-  }
+    & .mainAreaLogin {
+      width: 50%;
+      // & .externalSignIn {
+      //   display: flex;
+      //   margin: 1rem -0.5rem 0 -0.5rem;
 
-  & .loginBox {
-    width: 50%;
-    margin: 2rem auto;
-    color: rgb(33, 43, 54);
+      //   &>button {
+      //     margin: 0.5rem;
+      //     padding: 1rem;
 
-    & :global(.MuiTypography-h3) {
-      margin: 0px 0px 8px;
-      font-weight: 300;
-      font-size: 2rem;
-      line-height: 1.5;
-    }
+      //     &.google {
+      //       color: #df3e30;
+      //     }
 
-    & :global(.MuiTypography-body1) {
-      color: rgb(99, 115, 129);
-    }
+      //     &.facebook {
+      //       color: #1877f2;
+      //     }
 
-    & .separatorLine {
-      text-align: center;
-      padding: 1rem;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
+      //     &.twitter {
+      //       color: #1c9cea;
+      //     }
+      //   }
+      // }
 
-      &::before {
-        position: absolute;
-        content: ' ';
-        height: 50%;
-        width: 45%;
-        left: 0;
-        top: 0;
-        z-index: -1;
-        border-bottom: thin solid rgba(145, 158, 171, 0.24);
+      & :global(.MuiGrid-container) {
+        height: 100%;
+
+        // & .paperLeft {
+        //   height: 100%;
+        //   border-radius: 1rem;
+        //   align-items: center;
+        //   display: flex;
+        //   padding: 1rem;
+        //   box-sizing: border-box;
+        //   font-size: 2rem;
+        //   color: rgba(0, 0, 0, 0.87);
+        //   border: 1px solid #0000001f;
+        //   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
+        // }
       }
 
-      &::after {
-        position: absolute;
-        content: ' ';
-        height: 50%;
-        width: 45%;
-        left: auto;
-        right: 0;
-        top: 0;
-        z-index: -1;
-        border-bottom: thin solid rgba(145, 158, 171, 0.24);
+      & .right {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        align-content: flex-end;
+        justify-content: center;
+        align-items: flex-end;
+        flex-wrap: wrap;
+
+        & a {
+          color: green;
+        }
       }
-    }
 
-    & .flexLine {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 1rem 0;
-    }
-  }
-}
+      & .loginBox {
+        width: 40%;
+        margin: 1rem auto;
+        color: rgb(33, 43, 54);
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
 
-.menuProfileDetails {
-  border-bottom: 1px solid rgba(224, 224, 224, 1);
-  padding: 1rem 0.5rem;
-  font-size: 0.8rem;
-  color: rgba(128, 128, 128, 1);
-}
+        & a {
+          color: green;
+        }
 
-.regulatedWidth {
-  max-width: 30rem;
-  margin: 0 auto;
-}
+        & .headingLogin {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
 
-.fileuploadprofile {
-  margin: 0 auto;
-  & > div:first-child {
-    max-height: unset;
-    padding: 0.5rem;
-    border: 1px dotted rgba(0, 0, 0, 0.23);
-    border-radius: 50%;
-    & > img {
-      max-height: unset;
-      width: 8rem;
-      height: 8rem;
-      border-radius: 4rem;
-    }
-  }
+        & :global(.MuiFormControl-root) {
+          width: 100%;
+        }
 
-  & :global(.MuiFormLabel-root) {
-    display: none;
-  }
+        & :global(.MuiTypography-h3) {
+          margin: 0px 0px 8px;
+          font-weight: 400;
+          font-size: 3rem;
+          line-height: 1.5;
+        }
 
-  & :global(.MuiInputBase-root) {
-    &::before,
-    &::after {
-      content: none;
-    }
-  }
+        & :global(.MuiTypography-body1) {
+          color: rgb(99, 115, 129);
+        }
 
-  & :global(.MuiFormControl-fullWidth) {
-    width: 8rem;
-    height: 8rem;
-    margin-left: -9rem;
-  }
+        & .separatorLine {
+          text-align: center;
+          padding: 1rem;
+          margin: 0 auto;
+          position: relative;
+          z-index: 1;
 
-  & :global(.MuiInputBase-input) {
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-  }
+          &::before {
+            position: absolute;
+            content: ' ';
+            height: 50%;
+            width: 45%;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            border-bottom: thin solid rgba(145, 158, 171, 0.24);
+          }
 
-  & :global(.MuiIconButton-root) {
-    width: 8rem;
-    height: 8rem;
-    box-sizing: border-box;
-    top: -1rem;
-    left: 1px;
-    right: unset;
-    display: none;
-  }
+          &::after {
+            position: absolute;
+            content: ' ';
+            height: 50%;
+            width: 45%;
+            left: auto;
+            right: 0;
+            top: 0;
+            z-index: -1;
+            border-bottom: thin solid rgba(145, 158, 171, 0.24);
+          }
+        }
 
-  & :global(.MuiIconButton-label) {
-    height: 100%;
-  }
+        & .flexLine {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 1rem 0;
+        }
 
-  &:hover {
-    & img {
-      transition: all linear 300ms;
-      filter: blur(1px);
-    }
-
-    & :global(.MuiIconButton-root) {
-      display: block;
-    }
-  }
-}
-
-.fourhundred {
-  height: 400px;
-}
-
-body {
-  background-color: white !important;
-}
-
-.pages {
-  margin: 1rem 0;
-  flex-grow: 2;
-  background: white;
-  display: flex;
-
-  & :global(.MuiAppBar-root) {
-    backdrop-filter: blur(4px);
-
-    & .profilePicture {
-      margin: 0 0 0 auto;
-      & img {
-        width: 2.5rem;
-        border-radius: 1.75rem;
-      }
-    }
-  }
-
-  .greenText {
-    color: green;
-  }
-
-  .right {
-    float: right;
-  }
-
-  .mainarea {
-    flex-grow: 2;
-    margin-bottom: 4rem;
-
-    .tableHeading {
-      margin: 5rem auto 3rem;
-    }
-
-    & :global(.MuiPaper-elevation1) {
-      transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-      overflow: hidden;
-      box-shadow: rgba(145, 158, 171, 0.24) 0px 0px 2px 0px, rgba(145, 158, 171, 0.24) 0px 16px 32px -4px;
-      border-radius: 16px;
-    }
-
-    & :global(.MuiTableRow-head) {
-      background-color: rgb(244, 246, 248);
-    }
-
-    & :global(.tableCell) {
-      & img {
-        width: 3rem;
-        height: 3rem;
-        overflow: hidden;
-        border-radius: 1.5rem;
-      }
-    }
-
-    & :global(.MuiFab-root) {
-      position: absolute;
-      bottom: 2rem;
-      right: 2rem;
-    }
-
-    & .extensibleInput {
-      width: 15rem;
-      transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, width 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-
-      & :global(.Mui-focused) {
-        width: 20rem;
-        transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, width 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-        box-shadow: 0 8px 16px 0 rgba(145, 158, 171, 0.24);
-
-        & :global(.MuiOutlinedInput-notchedOutline) {
-          border-color: rgba(0, 0, 0, 0.23);
-          border-width: 1px;
+        & button {
+          margin: 1rem;
+          padding: 0.5rem 3rem;
         }
       }
     }
-
-    .tabletoolbar {
-      height: 6rem;
-      box-sizing: border-box;
-      padding-left: 1rem;
-      align-items: center;
-      display: flex;
-    }
-
-    & .marginatedForms {
-      margin: 1rem 2rem;
-      display: flex;
-      flex-direction: column;
-
-      & button {
-        margin: 0.5rem 0 1rem auto;
-      }
-    }
   }
 }
 
-.loginPage {
-  height: 100%;
+.registerBody {
 
-  & .externalSignIn {
-    display: flex;
-    margin: 1rem -0.5rem 0 -0.5rem;
-
-    & > button {
-      margin: 0.5rem;
-      padding: 1rem;
-
-      &.google {
-        color: #df3e30;
-      }
-
-      &.facebook {
-        color: #1877f2;
-      }
-
-      &.twitter {
-        color: #1c9cea;
-      }
-    }
-  }
-
-  & :global(.MuiGrid-container) {
+  .loginPage {
     height: 100%;
 
-    & .paperLeft {
-      height: 100%;
-      border-radius: 1rem;
-      align-items: center;
-      display: flex;
-      padding: 1rem;
-      box-sizing: border-box;
-      font-size: 2rem;
-      color: rgba(0, 0, 0, 0.87);
-      border: 1px solid #0000001f;
-      box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
-    }
-  }
+    & .mainAreaRegister {
+      width: 50%;
+      // & .externalSignIn {
+      //   display: flex;
+      //   margin: 1rem -0.5rem 0 -0.5rem;
 
-  & .loginBox {
-    width: 50%;
-    margin: 2rem auto;
-    color: rgb(33, 43, 54);
+      //   &>button {
+      //     margin: 0.5rem;
+      //     padding: 1rem;
 
-    & :global(.MuiTypography-h3) {
-      margin: 0px 0px 8px;
-      font-weight: 300;
-      font-size: 2rem;
-      line-height: 1.5;
-    }
+      //     &.google {
+      //       color: #df3e30;
+      //     }
 
-    & :global(.MuiTypography-body1) {
-      color: rgb(99, 115, 129);
-    }
+      //     &.facebook {
+      //       color: #1877f2;
+      //     }
 
-    & .separatorLine {
-      text-align: center;
-      padding: 1rem;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
+      //     &.twitter {
+      //       color: #1c9cea;
+      //     }
+      //   }
+      // }
 
-      &::before {
-        position: absolute;
-        content: ' ';
-        height: 50%;
-        width: 45%;
-        left: 0;
-        top: 0;
-        z-index: -1;
-        border-bottom: thin solid rgba(145, 158, 171, 0.24);
+      & :global(.MuiGrid-container) {
+        height: 100%;
+
+        // & .paperLeft {
+        //   height: 100%;
+        //   border-radius: 1rem;
+        //   align-items: center;
+        //   display: flex;
+        //   padding: 1rem;
+        //   box-sizing: border-box;
+        //   font-size: 2rem;
+        //   color: rgba(0, 0, 0, 0.87);
+        //   border: 1px solid #0000001f;
+        //   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
+        // }
       }
 
-      &::after {
-        position: absolute;
-        content: ' ';
-        height: 50%;
-        width: 45%;
-        left: auto;
-        right: 0;
-        top: 0;
-        z-index: -1;
-        border-bottom: thin solid rgba(145, 158, 171, 0.24);
-      }
-    }
+      & .right {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        align-content: flex-end;
+        justify-content: center;
+        align-items: flex-end;
+        flex-wrap: wrap;
 
-    & .flexLine {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 1rem 0;
+        & a {
+          color: green;
+        }
+      }
+
+      & .registerBox {
+        width: 40%;
+        margin: 1rem auto;
+        color: rgb(33, 43, 54);
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        & .headingRegister {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        & :global(.MuiTypography-h3) {
+          margin: 0px 0px 8px;
+          font-weight: 400;
+          font-size: 3rem;
+          line-height: 1.5;
+        }
+
+        & :global(.MuiTypography-body1) {
+          color: rgb(99, 115, 129);
+        }
+
+        & .separatorLine {
+          text-align: center;
+          padding: 1rem;
+          margin: 0 auto;
+          position: relative;
+          z-index: 1;
+
+          &::before {
+            position: absolute;
+            content: ' ';
+            height: 50%;
+            width: 45%;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            border-bottom: thin solid rgba(145, 158, 171, 0.24);
+          }
+
+          &::after {
+            position: absolute;
+            content: ' ';
+            height: 50%;
+            width: 45%;
+            left: auto;
+            right: 0;
+            top: 0;
+            z-index: -1;
+            border-bottom: thin solid rgba(145, 158, 171, 0.24);
+          }
+        }
+
+        & .flexLine {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 1rem 0;
+        }
+
+        & button {
+          margin: 1rem;
+          padding: 0.5rem 3rem;
+        }
+      }
     }
   }
 }
+
+.retrieveBody {
+
+  .loginPage {
+    height: 100%;
+
+    & .regulatedWidth {
+      width: 40%;
+      margin: 1rem auto;
+      color: rgb(33, 43, 54);
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      flex-wrap: wrap;
+
+      & :global(.MuiGrid-container) {
+        height: 100%;
+      }
+
+      & a {
+        color: green;
+      }
+
+      & :global(.MuiTypography-h3) {
+        margin: 0px 0px 8px;
+        font-weight: 400;
+        font-size: 3rem;
+        line-height: 1.5;
+      }
+
+      & :global(.MuiTypography-body1) {
+        color: rgb(99, 115, 129);
+        text-align: center;
+        width: 50%;
+      }
+
+      & :global(.MuiFormControl-root) {
+        width: 60%;
+      }
+
+      & button {
+        margin: 1rem;
+        padding: 0.5rem 3rem;
+      }
+    }
+  }
+}
+
 
 .menuProfileDetails {
   border-bottom: 1px solid rgba(224, 224, 224, 1);
@@ -486,19 +431,18 @@ body {
   color: rgba(128, 128, 128, 1);
 }
 
-.regulatedWidth {
-  max-width: 30rem;
-  margin: 0 auto;
-}
+
 
 .fileuploadprofile {
   margin: 0 auto;
-  & > div:first-child {
+
+  &>div:first-child {
     max-height: unset;
     padding: 0.5rem;
     border: 1px dotted rgba(0, 0, 0, 0.23);
     border-radius: 50%;
-    & > img {
+
+    &>img {
       max-height: unset;
       width: 8rem;
       height: 8rem;
@@ -511,6 +455,7 @@ body {
   }
 
   & :global(.MuiInputBase-root) {
+
     &::before,
     &::after {
       content: none;
@@ -606,12 +551,13 @@ $white: #FFFFFF;
   .productCardContentDiscount {
     color: white;
     background-color: red;
-    font-weight:600;
+    font-weight: 600;
     float: right;
     border-radius: 10px;
     padding: 3px;
     margin: 0px 5px;
   }
+
   .productCardContentPrice {
     color: red;
     font-weight: 600;
@@ -619,6 +565,7 @@ $white: #FFFFFF;
     padding: 3px;
     margin: 0px 5px;
   }
+
   .productCardContentPriceCrossedOut {
     color: gray;
     text-decoration: line-through;
@@ -628,6 +575,7 @@ $white: #FFFFFF;
     padding: 3px;
     margin: 0px 5px;
   }
+
   div {
     color: gray;
     font-weight: 400;
