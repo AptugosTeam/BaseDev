@@ -15,7 +15,7 @@ options:
   - name: effect
     display: Effect
     type: dropdown
-    options: flash;headShake;heartBeat;jello;pulse;rubberBand;shake;shakeX;shakeY;swing;tada;wobble
+    options: flash;headShake;heartBeat;jello;pulse;rubberBand;shakeX;shakeY;swing;tada;wobble
 settings:
   - name: Packages
     value: '"react-awesome-reveal": "^4.0.0",'
