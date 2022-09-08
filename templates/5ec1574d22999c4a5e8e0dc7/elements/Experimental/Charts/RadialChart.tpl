@@ -17,12 +17,18 @@ options:
     display: Cx
     type: text
     options: ''
-    advanced: true
   - name: cy
     display: Cy
     type: text
     options: ''
-    advanced: true
+  - name: startAngle
+    display: Start Angle
+    type: text
+    options: ''
+  - name: endAngle
+    display: End Angle
+    type: text
+    options: ''
   - name: innerRadius
     display: Inner Radius
     type: text
@@ -30,16 +36,6 @@ options:
     advanced: true
   - name: outerRadius
     display: Outer Radius
-    type: text
-    options: ''
-    advanced: true
-  - name: startAngle
-    display: Start Angle
-    type: text
-    options: ''
-    advanced: true
-  - name: endAngle
-    display: End Angle
     type: text
     options: ''
     advanced: true
@@ -63,31 +59,31 @@ options:
     type: dropdown
     advanced: true
     options:
-      top;middle;bottom
+      return [['top', 'Top'],['middle', 'Middle'],['bottom', 'Bottom']]
   - name: align
     display: Legend Align
     type: dropdown
     advanced: true
     options:
-      left;center;right
+      return [['left', 'Left'],['center', 'Center'],['right', 'Right']]
   - name: layout
     display: Legend Layout
     type: dropdown
     advanced: true
     options:
-      vertical;horizontal
+      return [['vertical', 'Vertical'],['horizontal', 'Horizontal']]
   - name: iconType
     display: Legend Icon Type
     type: dropdown
     advanced: true
     options: 
-      line;plainline;square;rect;circle;cross;diamond;star;triangle;wye;none
+      return [['line', 'Line'],['plainline', 'Plain Line'],['square', 'Square'],['rect', 'Rect'],['circle', 'Circle'],['cross', 'Cross'],['diamond', 'Diamond'],['star', 'Star'],['triangle', 'Triangle'],['wye', 'Wye'],['none', 'None']]
   - name: iconSize
     display: Legend Icon Size
     type: text
     options: ''
     advanced: true
-  - name: Variable
+  - name: variable
     display: Variable to Use
     type: text
     required: true
@@ -114,16 +110,16 @@ import {
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <RadialBarChart 
-  width={ {{element.values.width|default("500")}} } 
-  height={ {{element.values.height|default("300")}} }
-  cx={ {{element.values.cx|default("150") }} }
-  cy={ {{element.values.cy|default("150") }} }
-  innerRadius={ {{element.values.innerRadius|default("20")}} } 
-  outerRadius={ {{element.values.outerRadius|default("140")}} } 
-  startAngle={ {{element.values.startAngle|default("360")}} } 
-  endAngle={ {{element.values.endAngle|default("0")}} }
-  barSize={ {{element.values.barSize|default("10")}} } 
-  data={ {{ element.values.Variable }} }>
+  width={ {{ element.values.width|default("500") }} } 
+  height={ {{ element.values.height|default("300") }} }
+  cx={ "{{ element.values.cx|default("150") }}" }
+  cy={ "{{ element.values.cy|default("150") }}" }
+  startAngle={ {{ element.values.startAngle|default("360") }} } 
+  endAngle={ {{ element.values.endAngle|default("0") }} }
+  innerRadius={ "{{ element.values.innerRadius|default("20") }}" } 
+  outerRadius={ "{{ element.values.outerRadius|default("140") }}" } 
+  barSize={ "{{ element.values.barSize|default("10") }}" } 
+  data={ {{ element.values.variable }} }>
   <RadialBar
     isAnimationActive={false}
     label={ {position: "insideStart" , fill: "black"} }
