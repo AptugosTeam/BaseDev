@@ -38,24 +38,41 @@ options:
     type: text
     options: ''
   - name: barSize
-    display: barSize
+    display: Bar Size
+    type: text
+    options: ''
+  - name: legendWidth
+    display: Legend width
+    type: text
+    options: ''
+  - name: legendHeight
+    display: Legend height
     type: text
     options: ''
   - name: verticalAlign
-    display: Legend
+    display: Legend Vertical Align
     type: dropdown
     options:
       top;middle;bottom
+  - name: align
+    display: Legend Align
+    type: dropdown
+    options:
+      left;center;right
   - name: layout
-    display: Layout
+    display: Legend Layout
     type: dropdown
     options:
       vertical;horizontal
   - name: iconType
-    display: Icon Type
+    display: Legend Icon Type
     type: dropdown
     options: 
       line;plainline;square;rect;circle;cross;diamond;star;triangle;wye;none
+  - name: iconSize
+    display: Icon Size
+    type: text
+    options: ''
   - name: Variable
     display: Variable to Use
     type: text
@@ -74,6 +91,9 @@ options:
     display: dataKey
     type: text
     options: ''
+  - name: tooltip
+    display: Tooltip
+    type: checkbox
 settings:
   - name: Packages
     value: '"recharts": "^2.1.13",'
@@ -111,18 +131,19 @@ import {
     isAnimationActive={false}
     label={ {position: "insideStart" , fill: "black"} }
     background
-    clockWise
     dataKey={ "{{ element.values.dataKey }}" }
   />
   <Legend
-    iconSize={10}
-    width={120}
-    height={140}
-    layout="vertical"
-    verticalAlign="top"
-    iconType="star"
-    align="right"
+    iconSize={ {{ element.values.iconSize|default("10") }} }
+    width={ {{ element.values.legendWidth|default("120") }} }
+    height={ {{ element.values.legendHeight|default("140") }} }
+    layout={ "{{ element.values.layout|default("vertical") }}" }
+    verticalAlign={ "{{ element.values.verticalAlign|default("middle") }}" }
+    iconType={ "{{ element.values.iconType|default("line") }}" }
+    align={ "{{ element.values.align|default("right") }}" }
   />
-  <Tooltip />
+  {% if element.values.tooltip %}
+    <Tooltip />
+  {% endif %}
 {{ content | raw }}
 </RadialBarChart>
