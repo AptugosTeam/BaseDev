@@ -1,6 +1,6 @@
 /*
-path: RadialChart.tpl
-completePath: elements/Experimental/Charts/RadialChart.tpl
+path: RadialBarChart.tpl
+completePath: elements/Experimental/Charts/RadialBarChart.tpl
 type: file
 unique_id: 2s1fbMXv
 icon: ico-chart-js
