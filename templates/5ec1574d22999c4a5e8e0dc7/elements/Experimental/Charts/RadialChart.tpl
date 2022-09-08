@@ -6,91 +6,96 @@ unique_id: 2s1fbMXv
 icon: ico-chart-js
 options:
   - name: width
-    display: width
+    display: Width
     type: text
     options: ''
   - name: height
-    display: height
+    display: Height
     type: text
     options: ''
   - name: cx
-    display: cx
+    display: Cx
     type: text
     options: ''
+    advanced: true
   - name: cy
-    display: cy
+    display: Cy
     type: text
     options: ''
+    advanced: true
   - name: innerRadius
-    display: innerRadius
+    display: Inner Radius
     type: text
     options: ''
+    advanced: true
   - name: outerRadius
-    display: outerRadius
+    display: Outer Radius
     type: text
     options: ''
+    advanced: true
   - name: startAngle
-    display: startAngle
+    display: Start Angle
     type: text
     options: ''
+    advanced: true
   - name: endAngle
-    display: endAngle
+    display: End Angle
     type: text
     options: ''
+    advanced: true
   - name: barSize
     display: Bar Size
     type: text
     options: ''
+    advanced: true
   - name: legendWidth
     display: Legend width
     type: text
     options: ''
+    advanced: true
   - name: legendHeight
     display: Legend height
     type: text
     options: ''
+    advanced: true
   - name: verticalAlign
     display: Legend Vertical Align
     type: dropdown
+    advanced: true
     options:
       top;middle;bottom
   - name: align
     display: Legend Align
     type: dropdown
+    advanced: true
     options:
       left;center;right
   - name: layout
     display: Legend Layout
     type: dropdown
+    advanced: true
     options:
       vertical;horizontal
   - name: iconType
     display: Legend Icon Type
     type: dropdown
+    advanced: true
     options: 
       line;plainline;square;rect;circle;cross;diamond;star;triangle;wye;none
   - name: iconSize
-    display: Icon Size
+    display: Legend Icon Size
     type: text
     options: ''
+    advanced: true
   - name: Variable
     display: Variable to Use
     type: text
-  - name: Index
-    display: XAxis Variable
-    type: dropdown
-    options: return [['useVar','Use a Variable'], ...aptugo.tableUtils.getAllFields()]
-  - name: indexVariable
-    display: XAxis Variable
-    type: text
-    settings:
-      propertyCondition: Index
-      condition: useVar
-      active: true
+    required: true
   - name: dataKey
-    display: dataKey
+    display: Data Key
     type: text
     options: ''
+    required: true
   - name: tooltip
     display: Tooltip
     type: checkbox
@@ -108,14 +113,6 @@ import {
 } from "recharts";
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{% set name = element.values.indexVariable %}
-{% if element.values.Index != 'useVar' %}
-  {% set indexBy = element.values.Index|fieldData %}
-  {% set values = element.values.Values|fieldData %}
-  {% set indexName = indexBy.column_name %}
-  {% set valuesName = values.column_name %}
-  {% include includeTemplate('loadFromRedux.tpl') with { 'data': indexBy.table.unique_id } %}
-{% endif %}
 <RadialBarChart 
   width={ {{element.values.width|default("500")}} } 
   height={ {{element.values.height|default("300")}} }
