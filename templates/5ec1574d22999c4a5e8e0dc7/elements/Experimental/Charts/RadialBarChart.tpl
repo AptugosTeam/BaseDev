@@ -92,6 +92,16 @@ options:
     type: text
     options: ''
     required: true
+  - name: dataName
+    display: Data Name
+    type: text
+    options: ''
+    required: true
+  - name: dataColor
+    display: Data Color
+    type: text
+    options: ''
+    required: true
   - name: tooltip
     display: Tooltip
     type: checkbox
@@ -109,6 +119,17 @@ import {
 } from "recharts";
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
+{% set ph %}
+  const {{ element.values.variable }}B = {{ element.values.variable }}.map(valor=>{
+
+    return {
+      name: valor.{{ element.values.dataName }},
+      fill: valor.{{ element.values.dataColor }},
+      {{ element.values.dataKey }}: valor.{{ element.values.dataKey }},
+    }
+  })
+{% endset %}
+{{ save_delayed('ph',ph) }}
 <RadialBarChart 
   width={ {{ element.values.width|default("500") }} } 
   height={ {{ element.values.height|default("300") }} }
@@ -119,7 +140,7 @@ import {
   innerRadius={ "{{ element.values.innerRadius|default("20") }}" } 
   outerRadius={ "{{ element.values.outerRadius|default("140") }}" } 
   barSize={ "{{ element.values.barSize|default("10") }}" } 
-  data={ {{ element.values.variable }} }>
+  data={ {{ element.values.variable }}B }>
   <RadialBar
     isAnimationActive={false}
     label={ {position: "insideStart" , fill: "black"} }
