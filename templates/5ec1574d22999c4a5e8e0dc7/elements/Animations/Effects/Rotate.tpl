@@ -3,16 +3,33 @@ path: Rotate.tpl
 type: file
 unique_id: ahjl1f5b
 icon: ico-chart-bar
-helpText: Generate HTML pages after build
 options:
   - name: delay
     display: Delay
-    type: dropdown
-    options: 1000;2000;3000;4000;5000
+    type: text
+    options: ''
   - name: duration
     display: Duration
-    type: dropdown
-    options: 1000;2000;3000;4000;5000
+    type: text
+    options: ''
+  - name: className
+    display: ClassName
+    type: styles
+  - name: triggerOnce
+    display: Trigger Once
+    type: checkbox
+    settings:
+      default: false
+  - name: cascade
+    display: Cascade
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
+  - name: damping
+    display: Damping
+    type: text
+    advanced: true
 settings:
   - name: Packages
     value: '"react-awesome-reveal": "^4.0.0",'
@@ -27,6 +44,19 @@ import Reveal from "react-awesome-reveal";
 import { Rotate } from "react-awesome-reveal";
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<Rotate {% if element.values.delay %}delay={ {{element.values.delay|default('4000')}} } {% endif %} {% if element.values.duration %}duration={ {{element.values.duration|default('3000')}} }{% endif %}>
-  {{ content | raw }}
+<Rotate 
+  delay={ {{element.values.delay|default("0")}} } 
+  duration={ {{element.values.duration|default("1000")}} }
+  {% if element.values.className %}
+    className={ {{element.values.className}} }
+  {% endif %}
+  {% if element.values.triggerOnce %}
+    triggerOnce={true}
+  {% endif %}
+  {% if element.values.cascade %}
+    cascade={true}
+  {% endif %}
+  damping={ {{element.values.damping|default("0.5")}} }
+>
+{{ content | raw }}
 </Rotate>

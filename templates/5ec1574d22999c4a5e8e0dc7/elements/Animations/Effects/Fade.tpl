@@ -3,20 +3,40 @@ path: Fade.tpl
 type: file
 unique_id: 5l446pgh
 icon: ico-chart-bar
-helpText: Generate HTML pages after build
 options:
   - name: direction
-    display: direction
+    display: Direction
     type: dropdown
-    options: left;right;down;up
+    options: 
+      return [['none', 'None'],['left', 'Left'],['right', 'Right'],['down', 'Down'],['up', 'Up']]
+    settings:
+      default: none
   - name: delay
     display: Delay
-    type: dropdown
-    options: 1000;2000;3000;4000;5000
+    type: text
+    options: ''
   - name: duration
     display: Duration
-    type: dropdown
-    options: 1000;2000;3000;4000;5000
+    type: text
+    options: ''
+  - name: className
+    display: ClassName
+    type: styles
+  - name: triggerOnce
+    display: Trigger Once
+    type: checkbox
+    settings:
+      default: false
+  - name: cascade
+    display: Cascade
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
+  - name: damping
+    display: Damping
+    type: text
+    advanced: true
 settings:
   - name: Packages
     value: '"react-awesome-reveal": "^4.0.0",'
@@ -31,6 +51,22 @@ import Reveal from "react-awesome-reveal";
 import { Fade } from "react-awesome-reveal";
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<Fade {% if element.values.direction %}direction="{{ element.values.direction }}"{% endif%} {% if element.values.delay %}delay={ {{element.values.delay|default('4000')}} } {% endif %} {% if element.values.duration %}duration={ {{element.values.duration|default('3000')}} }{% endif %}>
+<Fade   
+  {% if element.values.direction != "none" %}
+    direction={ "{{ element.values.direction }}" }
+  {% endif %}
+  delay={ {{element.values.delay|default("0")}} } 
+  duration={ {{element.values.duration|default("1000")}} }
+  {% if element.values.className %}
+    className={ {{element.values.className}} }
+  {% endif %}
+  {% if element.values.triggerOnce %}
+    triggerOnce={true}
+  {% endif %}
+  {% if element.values.cascade %}
+    cascade={true}
+  {% endif %}
+  damping={ {{element.values.damping|default("0.5")}} }
+  >
   {{ content | raw }}
 </Fade>
