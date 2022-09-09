@@ -67,6 +67,6 @@ import { Zoom } from "react-awesome-reveal";
     cascade={true}
   {% endif %}
   damping={ {{element.values.damping|default("0.5")}} }
-  >
+>
   {{ content | raw }}
 </Zoom>
