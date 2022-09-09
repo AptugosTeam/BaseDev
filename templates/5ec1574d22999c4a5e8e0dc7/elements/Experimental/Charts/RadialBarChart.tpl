@@ -135,8 +135,8 @@ import {
   height={ {{ element.values.height|default("300") }} }
   cx={ "{{ element.values.cx|default("150") }}" }
   cy={ "{{ element.values.cy|default("150") }}" }
-  startAngle={ {{ element.values.startAngle|default("360") }} } 
-  endAngle={ {{ element.values.endAngle|default("0") }} }
+  startAngle={ {{ element.values.startAngle|default("180") }} } 
+  endAngle={ {{ element.values.endAngle|default("-180") }} }
   innerRadius={ "{{ element.values.innerRadius|default("20") }}" } 
   outerRadius={ "{{ element.values.outerRadius|default("140") }}" } 
   barSize={ "{{ element.values.barSize|default("10") }}" } 
