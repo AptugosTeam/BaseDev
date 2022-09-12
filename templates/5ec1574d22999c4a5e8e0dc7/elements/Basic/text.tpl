@@ -1,5 +1,6 @@
 /*
 path: text.tpl
+completePath: elements/Basic/text.tpl
 type: file
 unique_id: gBDZLTD1
 icon: ico-text
@@ -12,12 +13,17 @@ options:
     display: Content
     type: text
     options: ''
-  - name: ClassName
+  - name: className
     display: ClassName
     type: styles
     options: ''
 children: []
 */
-{% if element.values.ClassName %}<span className={ {{ element.values.ClassName }} }>{% endif %}
-{{ element.values.Content | raw }}{{ content | raw }}
-{% if element.values.ClassName %}</span>{% endif %}
+{% if element.values.className %}
+  <span className={ {{ element.values.className }} }>
+{% endif %}
+  {{ element.values.Content | raw }}
+  {{ content | raw }}
+{% if element.values.className %}
+  </span>
+{% endif %}
