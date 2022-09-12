@@ -101,278 +101,220 @@ body {
   .loginPage {
     height: 100%;
 
-    & .mainAreaLogin {
-      width: 50%;
-      // & .externalSignIn {
-      //   display: flex;
-      //   margin: 1rem -0.5rem 0 -0.5rem;
 
-      //   &>button {
-      //     margin: 0.5rem;
-      //     padding: 1rem;
+    & :global(.MuiGrid-container) {
+      height: 100%;
 
-      //     &.google {
-      //       color: #df3e30;
-      //     }
+    }
 
-      //     &.facebook {
-      //       color: #1877f2;
-      //     }
+    & .right {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      align-content: flex-end;
+      justify-content: center;
+      align-items: flex-end;
+      flex-wrap: wrap;
 
-      //     &.twitter {
-      //       color: #1c9cea;
-      //     }
-      //   }
-      // }
+      & a {
+        color: green;
+      }
+    }
 
-      & :global(.MuiGrid-container) {
-        height: 100%;
+    & .loginBox {
+      width: 40%;
+      margin: 1rem auto;
+      color: rgb(33, 43, 54);
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: wrap;
 
-        // & .paperLeft {
-        //   height: 100%;
-        //   border-radius: 1rem;
-        //   align-items: center;
-        //   display: flex;
-        //   padding: 1rem;
-        //   box-sizing: border-box;
-        //   font-size: 2rem;
-        //   color: rgba(0, 0, 0, 0.87);
-        //   border: 1px solid #0000001f;
-        //   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
-        // }
+      & a {
+        color: green;
       }
 
-      & .right {
-        width: 70%;
+      & .headingLogin {
         display: flex;
         flex-direction: column;
-        align-content: flex-end;
-        justify-content: center;
-        align-items: flex-end;
-        flex-wrap: wrap;
+        align-items: center;
+      }
 
-        & a {
-          color: green;
+      & :global(.MuiFormControl-root) {
+        width: 100%;
+      }
+
+      & :global(.MuiTypography-h3) {
+        margin: 0px 0px 8px;
+        font-weight: 400;
+        font-size: 3rem;
+        line-height: 1.5;
+      }
+
+      & :global(.MuiTypography-body1) {
+        color: rgb(99, 115, 129);
+      }
+
+      & .separatorLine {
+        text-align: center;
+        padding: 1rem;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+
+        &::before {
+          position: absolute;
+          content: ' ';
+          height: 50%;
+          width: 45%;
+          left: 0;
+          top: 0;
+          z-index: -1;
+          border-bottom: thin solid rgba(145, 158, 171, 0.24);
+        }
+
+        &::after {
+          position: absolute;
+          content: ' ';
+          height: 50%;
+          width: 45%;
+          left: auto;
+          right: 0;
+          top: 0;
+          z-index: -1;
+          border-bottom: thin solid rgba(145, 158, 171, 0.24);
         }
       }
 
-      & .loginBox {
-        width: 40%;
-        margin: 1rem auto;
-        color: rgb(33, 43, 54);
+      & .flexLine {
         display: flex;
-        align-content: center;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        flex-direction: row;
-        flex-wrap: wrap;
+        margin: 1rem 0;
+      }
 
-        & a {
-          color: green;
-        }
-
-        & .headingLogin {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        & :global(.MuiFormControl-root) {
-          width: 100%;
-        }
-
-        & :global(.MuiTypography-h3) {
-          margin: 0px 0px 8px;
-          font-weight: 400;
-          font-size: 3rem;
-          line-height: 1.5;
-        }
-
-        & :global(.MuiTypography-body1) {
-          color: rgb(99, 115, 129);
-        }
-
-        & .separatorLine {
-          text-align: center;
-          padding: 1rem;
-          margin: 0 auto;
-          position: relative;
-          z-index: 1;
-
-          &::before {
-            position: absolute;
-            content: ' ';
-            height: 50%;
-            width: 45%;
-            left: 0;
-            top: 0;
-            z-index: -1;
-            border-bottom: thin solid rgba(145, 158, 171, 0.24);
-          }
-
-          &::after {
-            position: absolute;
-            content: ' ';
-            height: 50%;
-            width: 45%;
-            left: auto;
-            right: 0;
-            top: 0;
-            z-index: -1;
-            border-bottom: thin solid rgba(145, 158, 171, 0.24);
-          }
-        }
-
-        & .flexLine {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin: 1rem 0;
-        }
-
-        & button {
-          margin: 1rem;
-          padding: 0.5rem 3rem;
-        }
+      & button {
+        margin: 1rem;
+        padding: 0.5rem 3rem;
       }
     }
   }
 }
+
 
 .registerBody {
 
   .loginPage {
     height: 100%;
 
-    & .mainAreaRegister {
-      width: 50%;
-      // & .externalSignIn {
+
+    & :global(.MuiGrid-container) {
+      height: 100%;
+
+      // & .paperLeft {
+      //   height: 100%;
+      //   border-radius: 1rem;
+      //   align-items: center;
       //   display: flex;
-      //   margin: 1rem -0.5rem 0 -0.5rem;
-
-      //   &>button {
-      //     margin: 0.5rem;
-      //     padding: 1rem;
-
-      //     &.google {
-      //       color: #df3e30;
-      //     }
-
-      //     &.facebook {
-      //       color: #1877f2;
-      //     }
-
-      //     &.twitter {
-      //       color: #1c9cea;
-      //     }
-      //   }
+      //   padding: 1rem;
+      //   box-sizing: border-box;
+      //   font-size: 2rem;
+      //   color: rgba(0, 0, 0, 0.87);
+      //   border: 1px solid #0000001f;
+      //   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
       // }
+    }
 
-      & :global(.MuiGrid-container) {
-        height: 100%;
+    & .right {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      align-content: flex-end;
+      justify-content: center;
+      align-items: flex-end;
+      flex-wrap: wrap;
 
-        // & .paperLeft {
-        //   height: 100%;
-        //   border-radius: 1rem;
-        //   align-items: center;
-        //   display: flex;
-        //   padding: 1rem;
-        //   box-sizing: border-box;
-        //   font-size: 2rem;
-        //   color: rgba(0, 0, 0, 0.87);
-        //   border: 1px solid #0000001f;
-        //   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
-        // }
+      & a {
+        color: green;
       }
+    }
 
-      & .right {
-        width: 70%;
+    & .registerBox {
+      width: 40%;
+      margin: 1rem auto;
+      color: rgb(33, 43, 54);
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      & .headingRegister {
         display: flex;
         flex-direction: column;
-        align-content: flex-end;
-        justify-content: center;
-        align-items: flex-end;
-        flex-wrap: wrap;
+        align-items: center;
+      }
 
-        & a {
-          color: green;
+      & :global(.MuiTypography-h3) {
+        margin: 0px 0px 8px;
+        font-weight: 400;
+        font-size: 3rem;
+        line-height: 1.5;
+      }
+
+      & :global(.MuiTypography-body1) {
+        color: rgb(99, 115, 129);
+      }
+
+      & .separatorLine {
+        text-align: center;
+        padding: 1rem;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+
+        &::before {
+          position: absolute;
+          content: ' ';
+          height: 50%;
+          width: 45%;
+          left: 0;
+          top: 0;
+          z-index: -1;
+          border-bottom: thin solid rgba(145, 158, 171, 0.24);
+        }
+
+        &::after {
+          position: absolute;
+          content: ' ';
+          height: 50%;
+          width: 45%;
+          left: auto;
+          right: 0;
+          top: 0;
+          z-index: -1;
+          border-bottom: thin solid rgba(145, 158, 171, 0.24);
         }
       }
 
-      & .registerBox {
-        width: 40%;
-        margin: 1rem auto;
-        color: rgb(33, 43, 54);
+      & .flexLine {
         display: flex;
-        align-content: center;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
-        flex-direction: row;
-        flex-wrap: wrap;
+        margin: 1rem 0;
+      }
 
-        & .headingRegister {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        & :global(.MuiTypography-h3) {
-          margin: 0px 0px 8px;
-          font-weight: 400;
-          font-size: 3rem;
-          line-height: 1.5;
-        }
-
-        & :global(.MuiTypography-body1) {
-          color: rgb(99, 115, 129);
-        }
-
-        & .separatorLine {
-          text-align: center;
-          padding: 1rem;
-          margin: 0 auto;
-          position: relative;
-          z-index: 1;
-
-          &::before {
-            position: absolute;
-            content: ' ';
-            height: 50%;
-            width: 45%;
-            left: 0;
-            top: 0;
-            z-index: -1;
-            border-bottom: thin solid rgba(145, 158, 171, 0.24);
-          }
-
-          &::after {
-            position: absolute;
-            content: ' ';
-            height: 50%;
-            width: 45%;
-            left: auto;
-            right: 0;
-            top: 0;
-            z-index: -1;
-            border-bottom: thin solid rgba(145, 158, 171, 0.24);
-          }
-        }
-
-        & .flexLine {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin: 1rem 0;
-        }
-
-        & button {
-          margin: 1rem;
-          padding: 0.5rem 3rem;
-        }
+      & button {
+        margin: 1rem;
+        padding: 0.5rem 3rem;
       }
     }
   }
 }
+
 
 .retrieveBody {
 
