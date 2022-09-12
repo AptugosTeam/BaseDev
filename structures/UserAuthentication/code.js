@@ -394,7 +394,7 @@ const LoginPage = {
     "collapseStatus": "expand",
     "values": {
       "className": ["theme.loginBody"],
-      "primaryColor": "green"
+      "primaryColor": "blue"
     },
   }, {
     "name": "Page Footer",
@@ -795,7 +795,7 @@ const RegisterPage = {
     "collapseStatus": "expand",
     "values": {
       "className": ["theme.registerBody"],
-      "primaryColor": "green"
+      "primaryColor": "blue"
     },
   }, {
     "name": "Page Footer",
@@ -1373,7 +1373,7 @@ const ForgotPage = {
 			"collapseStatus": "expand",
 			"values": {
 				"className": "theme.loginPage",
-				"maxWidth": "false"
+				"maxWidth": "md"
 			},
 		}],
 		"name": "Body",
@@ -1383,7 +1383,7 @@ const ForgotPage = {
 		"cascades": false,
 		"collapseStatus": "expand",
 		"values": {
-			"primaryColor": "green",
+			"primaryColor": "blue",
 			"className": ["theme.retrieveBody"]
 		},
 	}, {

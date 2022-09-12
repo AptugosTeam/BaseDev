@@ -101,7 +101,6 @@ body {
   .loginPage {
     height: 100%;
 
-
     & :global(.MuiGrid-container) {
       height: 100%;
 
@@ -117,7 +116,7 @@ body {
       flex-wrap: wrap;
 
       & a {
-        color: #069EFC;
+        color: #2196f3;
       }
     }
 
@@ -133,7 +132,7 @@ body {
       flex-wrap: wrap;
 
       & a {
-        color: #069EFC;
+        color: #2196f3;
       }
 
       & .headingLogin {
@@ -146,11 +145,16 @@ body {
         width: 100%;
       }
 
+      & :global(.MuiCheckbox-root.Mui-checked) {
+        color: #2196f3;
+      }
+
       & :global(.MuiTypography-h3) {
         margin: 0px 0px 8px;
         font-weight: 400;
         font-size: 3rem;
         line-height: 1.5;
+        text-align: center;
       }
 
       & :global(.MuiTypography-body1) {
@@ -198,7 +202,7 @@ body {
       & button {
         margin: 1rem;
         padding: 0.5rem 3rem;
-        background-color: #069EFC;
+        background-color: #2196f3;
         color: #FFFFFF;
       }
     }
@@ -239,7 +243,7 @@ body {
       flex-wrap: wrap;
 
       & a {
-        color: #069EFC;
+        color: #2196f3;
       }
     }
 
@@ -265,10 +269,15 @@ body {
         font-weight: 400;
         font-size: 3rem;
         line-height: 1.5;
+        text-align: center;
       }
 
       & :global(.MuiTypography-body1) {
         color: rgb(99, 115, 129);
+      }
+
+      & :global(.MuiSvgIcon-root) {
+        color: #2196f3;
       }
 
       & .separatorLine {
@@ -312,7 +321,7 @@ body {
       & button {
         margin: 1rem;
         padding: 0.5rem 3rem;
-        background-color: #069EFC;
+        background-color: #2196f3;
         color: #FFFFFF;
       }
     }
@@ -326,7 +335,7 @@ body {
     height: 100%;
 
     & .regulatedWidth {
-      width: 40%;
+      width: 70%;
       margin: 1rem auto;
       color: rgb(33, 43, 54);
       display: flex;
@@ -341,7 +350,7 @@ body {
       }
 
       & a {
-        color: #069EFC;
+        color: #2196f3;
       }
 
       & :global(.MuiTypography-h3) {
@@ -349,6 +358,7 @@ body {
         font-weight: 400;
         font-size: 3rem;
         line-height: 1.5;
+        text-align: center;
       }
 
       & :global(.MuiTypography-body1) {
@@ -364,7 +374,7 @@ body {
       & button {
         margin: 1rem;
         padding: 0.5rem 3rem;
-        background-color: #069EFC;
+        background-color: #2196f3;
         color: #FFFFFF;
       }
     }
