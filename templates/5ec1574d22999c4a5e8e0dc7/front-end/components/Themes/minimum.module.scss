@@ -117,7 +117,7 @@ body {
       flex-wrap: wrap;
 
       & a {
-        color: green;
+        color: #069EFC;
       }
     }
 
@@ -133,7 +133,7 @@ body {
       flex-wrap: wrap;
 
       & a {
-        color: green;
+        color: #069EFC;
       }
 
       & .headingLogin {
@@ -198,6 +198,8 @@ body {
       & button {
         margin: 1rem;
         padding: 0.5rem 3rem;
+        background-color: #069EFC;
+        color: #FFFFFF;
       }
     }
   }
@@ -237,7 +239,7 @@ body {
       flex-wrap: wrap;
 
       & a {
-        color: green;
+        color: #069EFC;
       }
     }
 
@@ -310,6 +312,8 @@ body {
       & button {
         margin: 1rem;
         padding: 0.5rem 3rem;
+        background-color: #069EFC;
+        color: #FFFFFF;
       }
     }
   }
@@ -337,7 +341,7 @@ body {
       }
 
       & a {
-        color: green;
+        color: #069EFC;
       }
 
       & :global(.MuiTypography-h3) {
@@ -360,6 +364,8 @@ body {
       & button {
         margin: 1rem;
         padding: 0.5rem 3rem;
+        background-color: #069EFC;
+        color: #FFFFFF;
       }
     }
   }
