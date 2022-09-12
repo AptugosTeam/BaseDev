@@ -43,8 +43,8 @@ helpText: Basic HTML Div element
 {% set tag = element.values.tag|default('div') %}
 <{{tag}}
   title="{{ element.name }}"
-  {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
-  {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
+  {% if element.values.useid %}id="{{ element.unique_id }}"
+  {% elseif element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
   {% if element.values.class %}className={ {{element.values.class|raw}} }{% endif %}
   {% if element.values.onclick %}onClickCapture={(e) => {{element.values.onclick}} }{% endif %}
   {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
