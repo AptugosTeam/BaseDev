@@ -1,1 +1,1 @@
-npm install --force
+npm install
