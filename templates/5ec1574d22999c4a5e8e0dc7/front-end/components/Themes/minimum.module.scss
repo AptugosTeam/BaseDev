@@ -114,6 +114,7 @@ body {
       justify-content: center;
       align-items: flex-end;
       flex-wrap: wrap;
+      margin-top: 1rem;
 
       & a {
         color: #2196f3;
@@ -122,7 +123,7 @@ body {
 
     & .loginBox {
       width: 40%;
-      margin: 1rem auto;
+      margin: 0rem auto;
       color: rgb(33, 43, 54);
       display: flex;
       align-content: center;
@@ -241,6 +242,7 @@ body {
       justify-content: center;
       align-items: flex-end;
       flex-wrap: wrap;
+      margin-top: 1rem;
 
       & a {
         color: #2196f3;
@@ -249,7 +251,7 @@ body {
 
     & .registerBox {
       width: 40%;
-      margin: 1rem auto;
+      margin: 0rem auto;
       color: rgb(33, 43, 54);
       display: flex;
       align-content: center;
