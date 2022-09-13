@@ -22,13 +22,6 @@ options:
     display: Extra Styles
     type: text
     options: ''
-  - name: tag
-    display: Use a different HTML element
-    type: text
-    options: ''
-    settings:
-      default: 'div'
-      active: true
   - name: ref
     display: Use Reference
     type: text
@@ -38,6 +31,14 @@ options:
     display: On Click
     type: function
     options: ''
+    advanced: true
+  - name: tag
+    display: Use a different HTML element
+    type: text
+    options: ''
+    settings:
+      default: 'div'
+      active: true
     advanced: true
 children: []
 helpText: Basic HTML Div element
