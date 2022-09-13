@@ -53,6 +53,7 @@ unique_id: 0i8AxGw6
     "image-webpack-loader": "^7.0.1",
     "jest": "^26.6.3",
     "sass": "latest",
+    "swiper": "^8.0.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
