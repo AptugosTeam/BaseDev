@@ -1,8 +1,9 @@
 /*
 path: Rotate.tpl
+completePath: elements/Animations/Rotate.tpl
 type: file
 unique_id: ahjl1f5b
-icon: ico-chart-bar
+icon: f:Rotate.svg
 options:
   - name: delay
     display: Delay

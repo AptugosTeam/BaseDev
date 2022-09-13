@@ -1,8 +1,9 @@
 /*
 path: Fade.tpl
+completePath: elements/Animations/Fade.tpl
 type: file
 unique_id: 5l446pgh
-icon: ico-chart-bar
+icon: f:Fade.svg
 options:
   - name: direction
     display: Direction

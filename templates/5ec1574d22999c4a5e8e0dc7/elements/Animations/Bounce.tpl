@@ -1,8 +1,9 @@
 /*
 path: Bounce.tpl
+completePath: elements/Animations/Bounce.tpl
 type: file
 unique_id: 5l431f5b
-icon: ico-chart-bar
+icon: f:Bounce.svg
 options:
   - name: direction
     display: Direction

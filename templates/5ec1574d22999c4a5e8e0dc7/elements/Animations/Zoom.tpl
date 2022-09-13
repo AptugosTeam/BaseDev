@@ -1,8 +1,9 @@
 /*
 path: Zoom.tpl
+completePath: elements/Animations/Zoom.tpl
 type: file
 unique_id: 5l4jkslb
-icon: ico-chart-bar
+icon: f:Zoom.svg
 options:
   - name: direction
     display: Direction

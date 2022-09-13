@@ -1,8 +1,9 @@
 /*
 path: Flip.tpl
+completePath: elements/Animations/Flip.tpl
 type: file
 unique_id: jkis1f5b
-icon: ico-chart-bar
+icon: f:Flip.svg
 options:
   - name: delay
     display: Delay

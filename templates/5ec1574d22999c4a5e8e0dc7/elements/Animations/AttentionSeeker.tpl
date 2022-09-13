@@ -1,5 +1,6 @@
 /*
 path: AttentionSeeker.tpl
+completePath: elements/Animations/AttentionSeeker.tpl
 type: file
 unique_id: 5l43321b
 icon: ico-chart-bar

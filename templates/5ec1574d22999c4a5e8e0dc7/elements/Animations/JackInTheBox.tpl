@@ -1,8 +1,9 @@
 /*
 path: JackInTheBox.tpl
+completePath: elements/Animations/JackInTheBox.tpl
 type: file
 unique_id: 5lkjshgb
-icon: ico-chart-bar
+icon: f:JackInTheBox.svg
 options:
   - name: delay
     display: Delay

@@ -1,8 +1,9 @@
 /*
 path: Hinge.tpl
+completePath: elements/Animations/Hinge.tpl
 type: file
 unique_id: 5laghkwl
-icon: ico-chart-bar
+icon: f:Hinge.svg
 options:
   - name: delay
     display: Delay
