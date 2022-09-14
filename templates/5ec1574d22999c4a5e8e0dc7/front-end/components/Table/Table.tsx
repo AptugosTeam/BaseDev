@@ -30,6 +30,18 @@ const TableHeader = (tableProps) => {
     onRequestSort(event, property)
   }
 
+  const renderHeader = (headCell) => {
+    if (!onRequestSort) return headCell
+
+    return <TableSortLabel
+      active={orderBy === headCell}
+      direction={orderBy === headCell ? order : 'asc'}
+      onClick={createSortHandler && createSortHandler(headCell)}
+    >
+      {headCell}
+    </TableSortLabel>
+  }
+
   return (
     <TableHead>
       <TableRow>
@@ -38,13 +50,7 @@ const TableHeader = (tableProps) => {
             key={key}
             sortDirection={orderBy === headCell ? order : false}
           >
-            <TableSortLabel
-              active={orderBy === headCell}
-              direction={orderBy === headCell ? order : 'asc'}
-              onClick={createSortHandler && createSortHandler(headCell)}
-            >
-              {headCell}
-            </TableSortLabel>
+            {renderHeader(headCell)}
           </TableCell>
         ))}
       </TableRow>
