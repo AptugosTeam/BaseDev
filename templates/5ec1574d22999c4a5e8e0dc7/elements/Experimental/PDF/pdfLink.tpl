@@ -1,36 +1,41 @@
 /*
-path: pdfView.tpl
-completePath: elements/Experimental/PDF/pdfView.tpl
+path: pdfLink.tpl
+completePath: elements/Experimental/PDF/pdfLink.tpl
 type: file
-unique_id: oKi40bpr
-icon: f:pdfView.svg
+unique_id: iJu39voe
+icon: f:pdfLink.svg
 sourceType: javascript
 options:
-  - name: style
-    display: Styles
+  - name: src
+    display: Destination
     type: text
   - name: wrap
     display: Enable page wrapping
     type: checkbox
     settings:
       default: 'true'
+  - name: style
+    display: Link Styles
+    type: text
   - name: fixed
     display: Fixed
     type: checkbox
-  - name: render
-    display: Dynamic Render function
-    type: function
-    advanced: true
   - name: debug
     display: Debug Mode
     type: checkbox
     advanced: true
+childs:
+  - name: Text
+    element: text
 */
 {% set bpr %}
-import { View } from '@react-pdf/renderer'
+  import { Link } from '@react-pdf/renderer'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-<View
+<Link
+  {% if element.values.src %}
+    src={{ element.values.src | textOrVariable }}
+  {% endif %}
   {% if element.values.wrap %}
     wrap={ {{ element.values.wrap }} }
   {% endif %}
@@ -43,9 +48,6 @@ import { View } from '@react-pdf/renderer'
   {% if element.values.fixed %}
     fixed={ {{ element.values.fixed }} }
   {% endif %}
-  {% if element.values.render %}
-    render={ {{ element.values.render |functionOrCall }} }
-  {% endif %}
 >
   {{ content | raw }}
-</View>
+</Link>
