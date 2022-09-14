@@ -8,9 +8,110 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Added
 
+- **Pdf Link:**
+  Allows you to display a hyperlink within the PDF document. It can be nested as a parent of either a Text element or an image.
+
+- **Pdf Stylesheet:**
+  Allows adding styles to any element of the PDF family. Defines a variable that receives a javascript object with the selectors and properties that you want to add to each element.
+
+- **Pdf Renderer:**
+  Provides an iframe to render generated PDF documents.
+
+- **Radial Bar Chart:**
+  Bar Chart plotted on a polar coordinate system, rather than on a Cartesian one.
+
+- **Animations (Category):**
+
+  - New category added including 8 brand new animation elements:
+
+    - _Attention Seeker_:
+      Gives the associated item a variety of effects.
+
+    - _Bounce_:
+      Allows the element associated with it to appear from the left of the screen to the default location, quickly and stopping when it arrives, like a race car.
+
+    - _Fade_:
+      It allows the element associated with it to appear scrolling from the four main directions (left, right, up and down).
+
+    - _Flip_:
+      Allows the element associated with it to traverse a circumferential path on the x-axis (horizontally).
+
+    - _Hinge_:
+      It allows the element associated with it to incorporate a falling effect, similar to what occurs when an object (such as a painting) detaches from the surface that supports it.
+
+    - _Jack In The Box_:
+      Displays the element associated with it with a movement from the back to the front, in an oblique direction, ending with the legendary movement of the Jack in the box toy or surprise box.
+
+    - _Rotate_:
+      Allows the associated element a transformation in which the element rotates around itself at a fixed point.
+
+    - _Zoom_:
+      Its effect on elements is to enlarge them from a similar dimension to their original size.
+
 ### Changed
 
+- Update Packages Requirements
+
+- **Composed Chart:**
+
+  - Now it is responsive
+  - It is possible to hide Axis, Cartesian Grids and Leyends
+
+- **User Authentication (Structure):**
+
+  - Default styles modified on Login, Register and Forgot Pages.
+
+- **Text:**
+
+  - Complete path added
+  - Code updated.
+
+- **Pdf Document:**
+
+  - Document Creator, Producer, PDF Version, Language and OnRender function as advance properties.
+  - New icon.
+
+- **Pdf Download:**
+
+  - Now it is possible to style the download button.
+  - New icon.
+  - Default child Document removed.
+
+- **Pdf Image:**
+
+  - Cache and Debug as advanced properties.
+  - Now it can receive inline styles or receive a variable.
+  - Debug as advanced properties.
+
+- **Pdf Page:**
+
+  - Default page size is 'A4'.
+  - Debug as advanced properties.
+  - Now it can receive inline styles or receive a variable.
+
+- **Pdf Text:**
+
+  - Dynamic Render Function, Hyphenation Callback and Debug as advanced properties.
+  - Now it can receive inline styles or receive a variable.
+  - Text Element as a default child.
+
+- **Pdf View:**
+
+  - Dynamic Render Function and Debug as advanced properties.
+  - Now it can receive inline styles or receive a variable.
+
+- **Div:**
+
+  - Use Reference, On Click and Different HTML Tag as advanced properties.
+
 ### Fixed
+
+- **Div**:
+  - Fixed bug when the unique_id option was selected and at the same time an ID was placed in the field (both were saved in code), causing an error.
+
+### Removed
+
+- **View Pdf** ( Replaced by Pdf Renderer )
 
 ## [TEMPLATES 1.4.12] - 2022-09-06
 
@@ -102,5 +203,3 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - **Simple Link:**
 
   - Modified to use 'class' instead of 'className'.
-
-- Initial release
