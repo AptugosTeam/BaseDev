@@ -26,7 +26,7 @@ options:
     type: checkbox
     options: ''
   - name: loopFillGroupWithBlank
-    display: loopFillGroupWithBlank
+    display: Blanks
     type: checkbox
     options: ''
   - name: navigation
@@ -46,23 +46,55 @@ import { Pagination, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
-{% if element.values.bundle %}//import "swiper/css/bundle{% else %}import "swiper/css/bundle{% endif %}";
+{% if element.values.bundle %}
+  //import "swiper/css/bundle
+{% else %}
+  import "swiper/css/bundle";
+{% endif %}
 {% endset %}
+
 {{ save_delayed('bpr', bpr) }}
   <Swiper
-    {% if element.values.ClassName %}className={ {{ element.values.ClassName }} } {% endif %}
-    {% if element.values.slidesPerView %}slidesPerView={ {{ element.values.slidesPerView }} } {% endif %}
-    {% if element.values.spaceBetween %}spaceBetween={ {{ element.values.spaceBetween }} } {% endif %}
-    {% if element.values.slidesPerGroup %}slidesPerGroup={ {{ element.values.slidesPerGroup }} } {% endif %}
-    {% if element.values.loop %}loop={true}{% else %}loop={false}{% endif %}
-    {% if element.values.navigation %}navigation={false}{% else %}navigation={true}{% endif %}
-    {% if element.values.loopFillGroupWithBlank %}loopFillGroupWithBlank={true}{% else %}loopFillGroupWithBlank={false}{% endif %}
+    {% if element.values.ClassName %}
+      className={ {{ element.values.ClassName }} } 
+    {% endif %}
+    {% if element.values.slidesPerView %}
+      slidesPerView={ {{ element.values.slidesPerView }} } 
+    {% endif %}
+    {% if element.values.spaceBetween %}
+      spaceBetween={ {{ element.values.spaceBetween }} } 
+    {% endif %}
+    {% if element.values.slidesPerGroup %}
+      slidesPerGroup={ {{ element.values.slidesPerGroup }} } 
+    {% endif %}
+    {% if element.values.loop %}
+      loop={false}
+    {% else %}
+      loop={true}
+    {% endif %}
+    {% if element.values.navigation %}
+      navigation={false}
+    {% else %}
+      navigation={true}
+    {% endif %}
+    {% if element.values.loopFillGroupWithBlank %}
+      loopFillGroupWithBlank={true}
+    {% else %}
+      loopFillGroupWithBlank={false}
+    {% endif %}
     pagination=  { {clickable: true} }
     modules={[Pagination, Navigation]}
-  >  
-    <SwiperSlide
-    
-    >
-      {{ content | raw }}
+  >
+  {% if {{ content | raw }} %}
+
+  {% dump( {{ content | raw }} ) %}
+    <SwiperSlide>
+      {{ element }}   
     </SwiperSlide>
-  </Swiper>
+
+
+  {% endif %}
+
+</Swiper>
+
+  
