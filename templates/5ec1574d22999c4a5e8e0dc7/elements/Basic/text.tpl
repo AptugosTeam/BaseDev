@@ -19,11 +19,11 @@ options:
     options: ''
 children: []
 */
-{% if element.values.className %}
-  <span className={ {{ element.values.className }} }>
+{% if element.values.className or element.values.ClassName %}
+  <span className={ {{ element.values.className|default(element.values.ClassName) }} }>
 {% endif %}
   {{ element.values.Content | raw }}
   {{ content | raw }}
-{% if element.values.className %}
+{% if element.values.className or element.values.ClassName %}
   </span>
 {% endif %}
