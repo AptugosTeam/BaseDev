@@ -1,5 +1,5 @@
 /*
-path: ProductCards.tpl
+path: Swiper.tpl
 type: file
 unique_id: oKJIl4pk
 icon: ico-carousel
@@ -19,6 +19,14 @@ options:
     options: ''
   - name: slidesPerGroup
     display: slidesPerGroup
+    type: text
+    options: ''
+  - name: width
+    display: Width
+    type: text
+    options: ''
+  - name: style
+    display: height
     type: text
     options: ''
   - name: loop
@@ -53,19 +61,19 @@ import "swiper/css/free-mode";
 {% endif %}
 {% endset %}
 
-{{ save_delayed('bpr', bpr) }}
+{{ save_delayed('bpr', bpr) }}    
   <Swiper
     {% if element.values.ClassName %}
       className={ {{ element.values.ClassName }} } 
     {% endif %}
     {% if element.values.slidesPerView %}
-      slidesPerView={ {{ element.values.slidesPerView }} } 
+      slidesPerView={ {{ element.values.slidesPerView }} }
     {% endif %}
     {% if element.values.spaceBetween %}
       spaceBetween={ {{ element.values.spaceBetween }} } 
     {% endif %}
     {% if element.values.slidesPerGroup %}
-      slidesPerGroup={ {{ element.values.slidesPerGroup }} } 
+      slidesPerGroup={ {{ element.values.slidesPerGroup }} }
     {% endif %}
     {% if element.values.loop %}
       loop={false}
@@ -82,18 +90,23 @@ import "swiper/css/free-mode";
     {% else %}
       loopFillGroupWithBlank={false}
     {% endif %}
+    {% if element.values.width %}
+      width={ {{ element.values.width }} }
+    {% endif %}
+    {% if element.values.style %}
+      style={ { height:{{element.values.style}} } }
+    {% endif %}
     pagination=  { {clickable: true} }
     modules={[Pagination, Navigation]}
+
+
   >
-  {% if {{ content | raw }} %}
 
-  {% dump( {{ content | raw }} ) %}
+  {% for unchild in element.children %}
     <SwiperSlide>
-      {{ element }}   
+      {{ unchild.rendered | raw }}
     </SwiperSlide>
-
-
-  {% endif %}
+  {% endfor %}
 
 </Swiper>
 
