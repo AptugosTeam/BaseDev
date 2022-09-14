@@ -63,51 +63,59 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - **Text:**
 
-  - Complete path added
+  - Complete path added.
   - Code updated.
 
 - **Pdf Document:**
 
-  - Document Creator, Producer, PDF Version, Language and OnRender function as advance properties.
+  - Document _Creator_, _Producer_, _PDF Version_, _Language_ and _OnRender function_ as advance properties.
   - New icon.
 
 - **Pdf Download:**
 
   - Now it is possible to style the download button.
   - New icon.
-  - Default child Document removed.
+  - Default child _Document_ removed.
 
 - **Pdf Image:**
 
-  - Cache and Debug as advanced properties.
+  - _Cache_ and _Debug_ as advanced properties.
   - Now it can receive inline styles or receive a variable.
-  - Debug as advanced properties.
 
 - **Pdf Page:**
 
   - Default page size is 'A4'.
-  - Debug as advanced properties.
+  - _Debug_ as advanced properties.
   - Now it can receive inline styles or receive a variable.
 
 - **Pdf Text:**
 
-  - Dynamic Render Function, Hyphenation Callback and Debug as advanced properties.
+  - _Dynamic Render Function_, _Hyphenation Callback_ and _Debug_ as advanced properties.
   - Now it can receive inline styles or receive a variable.
-  - Text Element as a default child.
+  - _Text_ Element as a default child.
 
 - **Pdf View:**
 
-  - Dynamic Render Function and Debug as advanced properties.
+  - _Dynamic Render Function_ and _Debug_ as advanced properties.
   - Now it can receive inline styles or receive a variable.
 
 - **Div:**
 
-  - Use Reference, On Click and Different HTML Tag as advanced properties.
+  - _Use Reference_, _On Click_ and _Different HTML Tag_ as advanced properties.
+
+- **New Application (Structure):**
+
+  - Setted default _Database Connect String_, _Api Url_ and _URL_ settings as the application name for better user experience.
+
+- **Autolinking:**
+
+  - _From Link_ property is setted as 'required'.
 
 ### Fixed
 
 - **Div**:
-  - Fixed bug when the unique_id option was selected and at the same time an ID was placed in the field (both were saved in code), causing an error.
+
+  - Fixed bug when the _unique_id_ option was selected and at the same time an _ID_ was placed in the field (both were saved in code), causing an error.
 
 ### Removed
 
@@ -118,7 +126,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Added
 
 - **Merge Deep:**
-  Advanced element that provides a function named mergeDeep() which, when called, can receive as arguments any amount of javascript objects and returns an object with all the objects joined.
+  Advanced element that provides a function named _mergeDeep()_ which, when called, can receive as arguments any amount of javascript objects and returns an object with all the objects joined.
 
 - **View Pdf:**
   Provides an iframe to render generated PDF documents.
@@ -186,7 +194,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - **Define Variable:**
 
-  - The display name was changed to 'Variable Name' for a better comprehension.
+  - The display name was changed to _Variable Name_ for a better comprehension.
 
 - **Card:**
 
@@ -194,11 +202,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - **Email:**
 
-  - Solved error where 'sendEmail' function appeared outside functional component.
+  - Solved error where _sendEmail_ function appeared outside functional component.
 
 - **Marker:**
 
-  - Syntax was changed to `[lat,lng]` and takes leafLetPosition by default value if no value is setted.
+  - Syntax was changed to `[lat,lng]` and takes _leafLetPosition_ by default value if no value is setted.
 
 - **Simple Link:**
 
