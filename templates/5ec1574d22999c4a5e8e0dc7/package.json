@@ -74,6 +74,7 @@ unique_id: 0i8AxGw6
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "axios": "^0.27.2",
+    "process": "^0.11.10",
     "immer": "^9.0.15",
     "react-ga": "^3.3.0",
     "react-google-login": "^5.2.2",
