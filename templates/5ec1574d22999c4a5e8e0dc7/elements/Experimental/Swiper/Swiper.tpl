@@ -1,24 +1,25 @@
 /*
 path: Swiper.tpl
+completePath: elements/Experimental/Swiper/Swiper.tpl
 type: file
 unique_id: oKJIl4pk
-icon: ico-carousel
+icon: f:Swiper.png
 sourceType: javascript
 options:
   - name: ClassName
     display: ClassName
-    type: styles
+    type: styles 
     options: ''
   - name: slidesPerView
-    display: slidesPerView
-    type: text
-    options: ''
-  - name: spaceBetween
-    display: spaceBetween
+    display: slides Per View
     type: text
     options: ''
   - name: slidesPerGroup
-    display: slidesPerGroup
+    display: Slides Per Group
+    type: text
+    options: ''
+  - name: spaceBetween
+    display: Space Between
     type: text
     options: ''
   - name: width
@@ -32,16 +33,14 @@ options:
   - name: loop
     display: loop
     type: checkbox
+    advanced: true
     options: ''
   - name: loopFillGroupWithBlank
     display: Blanks
     type: checkbox
+    advanced: true
     options: ''
   - name: navigation
-    display: navigation
-    type: checkbox
-    options: ''
-  - name: bundle
     display: Delete arrows
     type: checkbox
     options: ''
@@ -54,11 +53,7 @@ import { Pagination, Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
-{% if element.values.bundle %}
-  //import "swiper/css/bundle
-{% else %}
-  import "swiper/css/bundle";
-{% endif %}
+import "swiper/css/bundle";
 {% endset %}
 
 {{ save_delayed('bpr', bpr) }}    
@@ -98,8 +93,6 @@ import "swiper/css/free-mode";
     {% endif %}
     pagination=  { {clickable: true} }
     modules={[Pagination, Navigation]}
-
-
   >
 
   {% for unchild in element.children %}

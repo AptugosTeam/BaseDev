@@ -5,8 +5,8 @@ unique_id: SXP50OTX
 icon: ico-dummy-enclosure
 helpText: Organizational unit with no render value
 options:
-  - name: name
-    display: namee
+  - name: names
+    display: name comment
     type: text
     options: ''
   - name: titleAsComment
@@ -15,6 +15,9 @@ options:
     options: ''
 children: []
 */
-{% if element.values.useTitleAsComment %}// {{ element.name }}{% endif %}
+{% if element.values.titleAsComment %}
+  // {{ element.values.names }}
+{% endif %}
+
 {{ content | raw }}
 
