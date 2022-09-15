@@ -14,10 +14,10 @@ unique_id: 0i8AxGw6
     "build": "webpack --config=config/webpack.prod.js",
     "clean-dist": "rimraf build/*",
     "lint": "eslint './src/**/*.{js,ts,tsx}' --quiet",
-    "start": "concurrently \"pnpm run dev:api\" \"pnpm run dev:client\"",
+    "start": "concurrently \"npm run dev:api\" \"npm run dev:client\"",
     "dev:client": "webpack serve --config=config/webpack.dev.js",
     "dev:api": "nodemon --signal SIGTERM  --delay 5 --exec babel-node back-end/index.js",
-    "postinstall": "cd back-end && pnpm install"
+    "postinstall": "cd back-end && npm install"
 {% set npmScripts = insert_setting('npmScripts') %}
 {% if npmScripts %},{{ insert_setting('npmScripts') | raw }}{% endif %}
   },
@@ -42,7 +42,6 @@ unique_id: 0i8AxGw6
     "css-loader": "^6.7.1",
     "copy-webpack-plugin": "^11.0.0",
     "eslint": "^8.18.0",
-    "@mui/styles": "^5.0.1",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.22.0",

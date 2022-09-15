@@ -1,7 +1,10 @@
 #!/bin/bash
 export NODE_ENV=development
-echo 'Starting PNPM Install'
-pnpm install --prefer-offline
-echo 'Finished PNPM Install'
-
-
+if which npm
+then
+  echo 'Starting NPM Install'
+  npm install --loglevel timing 2>&1 
+  echo 'Finished NPM Install'
+else
+  echo 'NPM not found'
+fi

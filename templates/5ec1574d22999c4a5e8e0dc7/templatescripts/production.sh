@@ -1,17 +1,12 @@
 #!/bin/bash
-if [ "$USE_PNPM" == "false" ]
+export NODE_ENV=development
+if which npm
 then
   echo 'Starting NPM Install'
-  npm install --legacy-peer-deps
+  npm install --legacy-peer-deps --loglevel timing 2>&1 
   echo 'Finished NPM Install, starting Build'
   echo y | npm run build
   echo 'Finished Build'
 else
-  export NODE_ENV=development
-  echo 'Starting PNPM Install'
-  pnpm install
-  echo 'Finished PNPM Install, starting Build'
-  echo y | pnpm run build
-  echo 'Finished Build'
+  echo 'NPM not found'
 fi
-
