@@ -56,7 +56,6 @@ unique_id: 0i8AxGw6
     "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-hot-loader": "^4.13.0",
     "rimraf": "^3.0.2",
     "sass-loader": "^13.0.2",
     "style-loader": "^3.3.1",
@@ -97,9 +96,7 @@ unique_id: 0i8AxGw6
       "@babel/preset-react",
       "@babel/preset-typescript"
     ],
-    "plugins": [
-      "react-hot-loader/babel"
-    ],
+    "plugins": [],
     "env": {
       "production": {
         "presets": [
