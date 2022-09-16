@@ -40,11 +40,26 @@ import Accordion from '@mui/material/Accordion'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Accordion sx={ {
-  {% if element.values.width %}width:'{{ element.values.width|default('100%') }}',{% endif %} 
-  {% if element.values.padding %}padding:'{{ element.values.padding|default('0') }}',{% endif %}
-  {% if element.values.margin %}margin:'{{ element.values.margin|default('0') }}',{% endif %}
-  {% if element.values.backgroundColor %}backgroundColor:'{{ element.values.backgroundColor|default('transparent') }}',{% endif %}
-  {% if element.values.color %}color:'{{ element.values.color|default('transparent') }}'{% endif %} } }
+  {% if element.values.width %}
+    width:'{{ element.values.width|default('100%') }}',
+  {% endif %} 
+  
+  {% if element.values.padding %}
+    padding:'{{ element.values.padding|default('0') }}',
+  {% endif %}
+
+  {% if element.values.margin %}
+    margin:'{{ element.values.margin|default('0') }}',
+  {% endif %}
+  
+  {% if element.values.backgroundColor %}
+    backgroundColor:'{{ element.values.backgroundColor|default('transparent') }}',
+  {% endif %}
+  
+  {% if element.values.color %}
+    color:'{{ element.values.color|default('transparent') }}'
+  {% endif %} 
+} }
 {% if element.values.isDisabled == 'true' %}
     disabled
 {% endif %}

@@ -20,11 +20,22 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <AccordionSummary sx={ {
-  {% if element.values.backgroundColor %}backgroundColor:'{{ element.values.backgroundColor|default('transparent') }}',{% endif %}
-  {% if element.values.color %}color:'{{ element.values.color|default('transparent') }}'{% endif %} } }
-    {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
+  {% if element.values.backgroundColor %}
+    backgroundColor:'{{ element.values.backgroundColor|default('transparent') }}',
+  {% endif %}
+  
+  {% if element.values.color %}
+    color:'{{ element.values.color|default('transparent') }}'
+  {% endif %} 
+} }
+   
+  {% if element.values.className %}
+    className={ {{ element.values.className }} }
+  {% endif %}
     expandIcon={<ExpandMoreIcon sx={ {
-  {% if element.values.color %}color:'{{ element.values.color }}'{% endif %} } } />}
+  {% if element.values.color %}
+    color:'{{ element.values.color }}'
+  {% endif %} } } />}
 >
     {{ content | raw }}
 </AccordionSummary>

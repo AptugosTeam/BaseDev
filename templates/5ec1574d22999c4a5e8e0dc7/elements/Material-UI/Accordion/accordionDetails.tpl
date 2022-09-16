@@ -16,7 +16,13 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <AccordionDetails sx={ {
-  {% if element.values.backgroundColor %}backgroundColor:'{{ element.values.backgroundColor|default('transparent') }}',{% endif %}
-  {% if element.values.color %}color:'{{ element.values.color|default('transparent') }}'{% endif %} } }>
+  {% if element.values.backgroundColor %}
+    backgroundColor:'{{ element.values.backgroundColor|default('transparent') }}',
+  {% endif %}
+  
+  {% if element.values.color %}
+    color:'{{ element.values.color|default('transparent') }}'
+  {% endif %} 
+} }>
 {{ content | raw }}
 </AccordionDetails>
