@@ -10,7 +10,7 @@ icon: ico-field
 import { mergeClasses } from '../services/utils'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-  const localStyles = {{ element.values.localStyles | raw }}
+  const localStyles = { {{ element.values.localStyles | raw }} }
 {% endif %}
 const {{ page.name | friendly }}: FunctionComponent = (props: any) => {
   {% if element.values.localStyles %}
