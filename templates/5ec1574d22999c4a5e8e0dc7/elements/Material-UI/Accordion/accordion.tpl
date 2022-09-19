@@ -10,10 +10,6 @@ options:
   - name: className
     display: className
     type: styles
-  - name: elevation
-    display: Elevation
-    type: dropdown
-    options: 0;1;2;3;4;5
   - name: width
     display: Width
     type: text
@@ -66,6 +62,5 @@ import Accordion from '@mui/material/Accordion'
 {% if element.values.className %}
     className={ {{ element.values.className }} }
 {% endif %}
-    elevation={ {{ element.values.elevation|default(1) }} }
 >{{ content | raw }}
 </Accordion>
