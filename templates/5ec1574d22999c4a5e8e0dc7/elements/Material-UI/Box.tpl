@@ -31,18 +31,20 @@ import Box from '@mui/material/Box'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Box
-  {% if element.values.color %}color="{{ element.values.color }}"{% endif %}
+  {% if element.values.color %}
+    color="{{ element.values.color }}"
+  {% endif %}
   sx={ {
     display: {
       {% if element.values.xsdisplay and element.values.xsdisplay != 'unset' %}
-      xs: '{{ element.values.xsdisplay }}',
+       xs: '{{ element.values.xsdisplay }}',
       {% endif %}
       {% if element.values.mddisplay and element.values.mddisplay != 'unset' %}
-      md: '{{ element.values.mddisplay }}',
+        md: '{{ element.values.mddisplay }}',
       {% endif %}
     },
     {% if element.values.justifyContent and element.values.justifyContent != 'unset' %}
-    justifyContent: '{{ element.values.justifyContent }}'
+      justifyContent: '{{ element.values.justifyContent }}'
     {% endif %}
   } }
 >
