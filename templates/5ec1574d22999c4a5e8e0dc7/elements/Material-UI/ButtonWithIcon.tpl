@@ -1,8 +1,9 @@
 /*
 path: ButtonWithIcon.tpl
+completePath: elements/Material-UI/ButtonWithIcon.tpl
 type: file
 unique_id: DXZgugbc
-icon: ico-icon-button
+icon: f:ButtonWithIcon.svg
 helpText: Shows a button with an icon
 children: []
 options:

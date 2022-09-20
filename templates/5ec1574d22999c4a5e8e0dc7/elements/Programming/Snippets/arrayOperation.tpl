@@ -1,8 +1,9 @@
 /*
 path: arrayOperation.tpl
+completePath: elements/Programming/Snippets/arrayOperation.tpl
 type: file
 unique_id: arrayoperation
-icon: ico-paper
+icon: f:arrayOperation.svg
 sourceType: javascript
 helpText: Performs different operations in Arrays
 options:

@@ -2,7 +2,7 @@
 path: NumberFormat.tpl
 type: file
 unique_id: A7g9nkBV
-icon: ico-field
+icon: f:NumberFormat.svg
 children: []
 options:
   - name: Content

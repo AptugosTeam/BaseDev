@@ -6,7 +6,7 @@ icon: ico-field
 sourceType: javascript
 settings:
   - name: Packages
-    value: '"react-select": "^4.2.1",'
+    value: '"react-select": "^5.4.0",'
 children: []
 */
 {% set bpr %}

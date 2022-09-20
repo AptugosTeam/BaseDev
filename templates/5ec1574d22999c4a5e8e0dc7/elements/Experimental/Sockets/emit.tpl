@@ -4,7 +4,7 @@ completePath: elements/Experimental/Sockets/emit.tpl
 display: Send a message to the server
 type: file
 unique_id: emit
-icon: ico-field
+icon: f:emit.svg
 children: []
 options:
   - name: event

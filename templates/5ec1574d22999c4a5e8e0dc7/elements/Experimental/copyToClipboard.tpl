@@ -2,7 +2,7 @@
 path: copyToClipboard.tpl
 type: file
 unique_id: 11u8ATDo
-icon: ico-field
+icon: f:copyToClipboard.svg
 children: []
 options:
   - name: onCopy

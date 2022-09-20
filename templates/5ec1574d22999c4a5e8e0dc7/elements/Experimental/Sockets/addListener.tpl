@@ -3,7 +3,7 @@ path: addListener.tpl
 completePath: elements/Experimental/Sockets/addListener.tpl
 type: file
 unique_id: addListener
-icon: ico-field
+icon: f:addListener.svg
 children: []
 options:
   - name: listener

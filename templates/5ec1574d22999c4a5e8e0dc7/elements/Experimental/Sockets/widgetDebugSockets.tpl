@@ -4,7 +4,7 @@ display: Widget - Debug Sockets
 completePath: elements/Experimental/Sockets/widgetDebugSockets.tpl
 type: file
 unique_id: widgetDebugSockets
-icon: ico-field
+icon: f:widgetDebugSockets.svg
 children: []
 options:
   - name: autoconsole

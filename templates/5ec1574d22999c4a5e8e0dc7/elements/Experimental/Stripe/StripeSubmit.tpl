@@ -1,8 +1,9 @@
 /*
 path: StripeSubmit.tpl
+completePath: elements/Experimental/Stripe/StripeSubmit.tpl
 type: file
 unique_id: stripesubmit
-icon: ico-field
+icon: f:StripeSubmit.svg
 helpText: Redirect to stripe payment screen
 children: []
 options:

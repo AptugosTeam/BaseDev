@@ -2,7 +2,7 @@
 path: cardHeader.tpl
 completePath: elements/Material-UI/Cards/cardHeader.tpl
 unique_id: aFBU2rTB
-icon: ico-text
+icon: f:cardHeader.svg
 helpText: >-
   Insert simple text anywhere. Can hold variables, code, and anything of your
   choice

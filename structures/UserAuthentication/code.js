@@ -136,8 +136,6 @@ const LoginPage = {
     "children": [{
       "children": [{
         "children": [{
-          "children": [{
-            "children": [{
               "name": "text",
               "prevent_delete": false,
               "cascades": false,
@@ -170,7 +168,6 @@ const LoginPage = {
               "values": {
                 "tagToUse": "A",
                 "destination": "/Register",
-                "className": "theme.greenText"
               },
             }],
             "name": "Register Area",
@@ -235,6 +232,9 @@ const LoginPage = {
               "type": "element",
               "value": "div",
               "collapseStatus": "collapse",
+			  "values": {
+				"class": "theme.headingLogin"
+			  },
             }, {
               "children": [{
                 "children": [{
@@ -326,7 +326,6 @@ const LoginPage = {
                   "collapseStatus": "expand",
                   "values": {
                     "Content": "Forgot password?",
-                    "ClassName": "theme.greenText"
                   },
                   "children": [],
                 }],
@@ -361,7 +360,7 @@ const LoginPage = {
                 "ButtonText": "Login",
                 "Variant": "contained",
                 "Color": "primary",
-                "fullWidth": true,
+                "fullWidth": false,
                 "Action": "handleLogin"
               },
               "children": [],
@@ -375,27 +374,6 @@ const LoginPage = {
             "values": {
               "class": "theme.loginBox"
             },
-          }],
-          "name": "Main Area",
-          "prevent_delete": false,
-          "cascades": false,
-          "type": "element",
-          "value": "grid",
-          "collapseStatus": "expand",
-          "values": {
-            "midcolumns": "9"
-          },
-        }],
-        "name": "grid",
-        "prevent_delete": false,
-        "cascades": false,
-        "type": "element",
-        "value": "grid",
-        "collapseStatus": "expand",
-        "values": {
-          "container": true,
-          "align": "stretch"
-        },
       }],
       "name": "Container",
       "prevent_delete": false,
@@ -404,7 +382,7 @@ const LoginPage = {
       "value": "Container",
       "collapseStatus": "expand",
       "values": {
-        "maxWidth": "false",
+        "maxWidth": "md",
         "className": "theme.loginPage"
       },
     }],
@@ -415,8 +393,8 @@ const LoginPage = {
     "cascades": false,
     "collapseStatus": "expand",
     "values": {
-      "className": ["theme.pages"],
-      "primaryColor": "green"
+      "className": ["theme.loginBody"],
+      "primaryColor": "blue"
     },
   }, {
     "name": "Page Footer",
@@ -566,8 +544,6 @@ const RegisterPage = {
     "collapseStatus": "expand",
   }, {
     "children": [{
-      "children": [{
-        "children": [{
           "children": [{
             "children": [{
               "name": "text",
@@ -602,7 +578,6 @@ const RegisterPage = {
               "values": {
                 "tagToUse": "A",
                 "destination": "/Login",
-                "className": "theme.greenText"
               },
             }],
             "name": "Login Area",
@@ -612,7 +587,7 @@ const RegisterPage = {
             "value": "div",
             "collapseStatus": "collapse",
             "values": {
-              "class": "theme.right"
+              "class": "theme.right",
             },
           }, {
             "children": [{
@@ -667,6 +642,9 @@ const RegisterPage = {
               "type": "element",
               "value": "div",
               "collapseStatus": "collapse",
+			  "values": {
+				"class": "theme.headingRegister"
+			  },
             }, {
               "children": [{
                 "children": [{
@@ -783,7 +761,7 @@ const RegisterPage = {
                 "ButtonText": "Register",
                 "Variant": "contained",
                 "Color": "primary",
-                "fullWidth": true,
+                "fullWidth": false,
                 "Action": "handleRegister"
               },
               "children": [],
@@ -795,29 +773,8 @@ const RegisterPage = {
             "value": "div",
             "collapseStatus": "expand",
             "values": {
-              "class": "theme.loginBox"
+              "class": "theme.registerBox"
             },
-          }],
-          "name": "Main Area",
-          "prevent_delete": false,
-          "cascades": false,
-          "type": "element",
-          "value": "grid",
-          "collapseStatus": "expand",
-          "values": {
-            "midcolumns": "9"
-          },
-        }],
-        "name": "grid",
-        "prevent_delete": false,
-        "cascades": false,
-        "type": "element",
-        "value": "grid",
-        "collapseStatus": "expand",
-        "values": {
-          "container": true,
-          "align": "stretch"
-        },
       }],
       "name": "Container",
       "prevent_delete": false,
@@ -826,7 +783,7 @@ const RegisterPage = {
       "value": "Container",
       "collapseStatus": "expand",
       "values": {
-        "maxWidth": "false",
+        "maxWidth": "md",
         "className": "theme.loginPage"
       },
     }],
@@ -837,8 +794,8 @@ const RegisterPage = {
     "cascades": false,
     "collapseStatus": "expand",
     "values": {
-      "className": ["theme.pages"],
-      "primaryColor": "green"
+      "className": ["theme.registerBody"],
+      "primaryColor": "blue"
     },
   }, {
     "name": "Page Footer",
@@ -1137,7 +1094,7 @@ const ForgotPage = {
 						"value": "typography",
 						"collapseStatus": "expand",
 						"values": {
-							"tag": "h4"
+							"tag": "h3"
 						},
 					}, {
 						"children": [{
@@ -1255,7 +1212,7 @@ const ForgotPage = {
 							"Variant": "contained",
 							"Color": "primary",
 							"ButtonText": "Reset Password",
-							"fullWidth": true,
+							"fullWidth": false,
 							"Action": "sendNonce"
 						},
 						"children": [],
@@ -1332,7 +1289,7 @@ const ForgotPage = {
 						"value": "typography",
 						"collapseStatus": "expand",
 						"values": {
-							"tag": "h4"
+							"tag": "h3"
 						},
 					}, {
 						"children": [{
@@ -1382,7 +1339,7 @@ const ForgotPage = {
 						"values": {
 							"Variant": "contained",
 							"Color": "primary",
-							"fullWidth": true,
+							"fullWidth": false,
 							"ButtonText": "Reset Password!",
 							"Action": "saveNewPassword"
 						},
@@ -1416,7 +1373,7 @@ const ForgotPage = {
 			"collapseStatus": "expand",
 			"values": {
 				"className": "theme.loginPage",
-				"maxWidth": "false"
+				"maxWidth": "md"
 			},
 		}],
 		"name": "Body",
@@ -1426,8 +1383,8 @@ const ForgotPage = {
 		"cascades": false,
 		"collapseStatus": "expand",
 		"values": {
-			"primaryColor": "green",
-			"className": ["theme.pages"]
+			"primaryColor": "blue",
+			"className": ["theme.retrieveBody"]
 		},
 	}, {
 		"name": "Page Footer",

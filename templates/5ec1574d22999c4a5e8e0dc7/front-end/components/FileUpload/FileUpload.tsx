@@ -7,15 +7,16 @@ import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
 import FormControl from '@mui/material/FormControl'
 import IconButton from '@mui/material/IconButton'
 import Input from '@mui/material/Input'
+import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
-import { makeStyles } from '@mui/styles'
 import PublishIcon from '@mui/icons-material/Publish'
+
 import SearchIcon from '@mui/icons-material/Search'
 import PictureAsPdf from '@mui/icons-material/PictureAsPdf'
 import clsx from 'clsx'
 import React, { FunctionComponent } from 'react'
 
-const useStyles = makeStyles({
+const useStyles = {
   root: {
     display: 'flex',
     alignItems: 'center',
@@ -35,9 +36,10 @@ const useStyles = makeStyles({
     right: 0,
     top: '-8px',
   },
-})
+  altVisual: {}
+}
 
-const altStyles = makeStyles({
+const altStyles = {
   root: {
     display: 'flex',
     alignItems: 'center',
@@ -94,10 +96,10 @@ const altStyles = makeStyles({
     position: 'absolute',
     top: '-8px',
   },
-})
+}
 
 const AptugoImageUpload: FunctionComponent<any> = (props) => {
-  const classes = props.visual === 'standard' ? useStyles() : altStyles()
+  const classes = props.visual === 'standard' ? useStyles : altStyles
 
   const [state, setState] = React.useState({
     uploading: false,
@@ -142,21 +144,21 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
 
   const renderUploadedState = () => {
     if (!state.selectedFile && !state.fileName && !props.value) return null
-    if (state.file && state.file.type === 'application/pdf') return <PictureAsPdf className={classes.image} />
+    if (state.file && state.file.type === 'application/pdf') return <PictureAsPdf sx={classes.image} />
     var src = state.selectedFile || `/img/${state.fileName}`
     if (!state.selectedFile && !state.fileName) {
       src = `/img/${props.value}`
     }
     return (
-      <div className={classes.image} onClick={imageResetHandler}>
-        <img className={classes.media} src={src} />
-      </div>
+      <Box sx={classes.image} onClick={imageResetHandler}>
+        <img style={classes.media} src={src} />
+      </Box>
     )
   }
 
   const standardVisual = () => {
     return (
-      <div className={clsx(classes.root, props.className && props.className)}>
+      <Box className={props.className && props.className} sx={classes.root}>
         {renderUploadedState()}
         <FormControl margin="normal" fullWidth variant={props.variant}>
           <InputLabel htmlFor="component-upload">{props.label}</InputLabel>
@@ -166,30 +168,30 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
             placeholder={props.placeholder || null}
             endAdornment={
               <label>
-                <input accept={state.accept} className={classes.input} multiple type="file" onChange={handleUploadClick} />
-                <IconButton component="span" className={classes.button} aria-label="Search">
+                <input accept={state.accept} style={classes.input} multiple type="file" onChange={handleUploadClick} />
+                <IconButton component="span" sx={classes.button} aria-label="Search">
                   <SearchIcon />
                 </IconButton>
               </label>
             }
           />
         </FormControl>
-      </div>
+      </Box>
     )
   }
 
   const alternativeVisual = () => {
     return (
-      <FormControl margin="normal" fullWidth variant={props.variant} className={classes.root}>
+      <FormControl margin="normal" fullWidth variant={props.variant} sx={classes.root}>
         <Input
-          className={classes.altVisual}
+          sx={classes.altVisual}
           value={state.fileName || ''}
           id="component-upload"
           placeholder={props.placeholder || null}
           startAdornment={
             <label>
-              <input accept={state.accept} className={classes.input} multiple type="file" onChange={handleUploadClick} />
-              <IconButton component="span" className={classes.button} aria-label="Search">
+              <input accept={state.accept} style={classes.input} multiple type="file" onChange={handleUploadClick} />
+              <IconButton component="span" sx={classes.button} aria-label="Search">
                 <PublishIcon color="primary" />
               </IconButton>
               <p>{props.label}</p>

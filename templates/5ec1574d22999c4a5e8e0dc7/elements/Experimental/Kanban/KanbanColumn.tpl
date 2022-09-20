@@ -1,8 +1,9 @@
 /*
 path: KanbanColumn.tpl
+completePath: elements/Experimental/Kanban/KanbanColumn
 type: file
 unique_id: avUXMfs3
-icon: ico-kanban-board
+icon: f:KanbanColumn.svg
 children: []
 options:
   - name: ColumnTitle

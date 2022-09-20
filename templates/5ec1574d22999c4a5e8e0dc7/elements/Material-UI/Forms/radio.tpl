@@ -1,8 +1,9 @@
 /*
 path: radio.tpl
+completePath: elements/Material-UI/Forms/radio.tpl
 type: file
 unique_id: Qeq87CZJ
-icon: ico-radio
+icon: f:radio.svg
 children: []
 options:
   - name: checked

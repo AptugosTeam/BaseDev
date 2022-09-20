@@ -1,17 +1,32 @@
 /*
 path: ComposedChart.tpl
+completePath: elements/Experimental/Charts/ComposedChart.tpl
 type: file
 unique_id: 5l4alkmn
-icon: ico-chart-js
+icon: f:ComposedChart.svg
 options:
+  - name: responsive
+    display: Responsive?
+    type: checkbox
+    options: ''
   - name: width
-    display: width
+    display: Width (in pixels)
     type: text
     options: ''
+    settings:
+      propertyCondition: responsive
+      condition: true
+      conditionNegate: true
+      active: true
   - name: height
-    display: height
+    display: Height (in pixels)
     type: text
     options: ''
+    settings:
+      propertyCondition: responsive
+      condition: true
+      conditionNegate: true
+      active: true
   - name: verticalAlign
     display: Legend
     type: dropdown
@@ -31,13 +46,29 @@ options:
       propertyCondition: Index
       condition: useVar
       active: true
+  - name: hideX
+    display: Hide X Axis
+    type: checkbox
+    advanced: true
+  - name: hideY
+    display: Hide Y Axis
+    type: checkbox
+    advanced: true
+  - name: hideLeyend
+    display: Hide Leyend
+    type: checkbox
+    advanced: true
+  - name: hideGrid
+    display: Hide Cartesian Grid
+    type: checkbox
+    advanced: true
 settings:
   - name: Packages
     value: '"recharts": "^2.1.13",'
 children: []
 */
 {% set bpr %}
-import { Legend, Tooltip, Line, CartesianGrid, XAxis, YAxis, ComposedChart, Area, Bar } from 'recharts';
+import { Legend, Tooltip, Line, CartesianGrid, XAxis, YAxis, ComposedChart, Area, Bar, ResponsiveContainer } from 'recharts'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set name = element.values.indexVariable %}
@@ -48,13 +79,18 @@ import { Legend, Tooltip, Line, CartesianGrid, XAxis, YAxis, ComposedChart, Area
   {% set valuesName = values.column_name %}
   {% include includeTemplate('loadFromRedux.tpl') with { 'data': indexBy.table.unique_id } %}
 {% endif %}
-<ComposedChart {% if element.values.width %}width={ {{element.values.width}} } {% endif %} 
-{% if element.values.height %}height={ {{element.values.height}} }{% endif %} 
-data={ {{ element.values.Variable }} }>
-  <XAxis dataKey="{% if indexBy.column_name %}{{ indexBy.column_name }}{% else %}{{ element.values.indexVariable }}{% endif %}" />
-  <YAxis />
+{% if element.values.responsive %}<ResponsiveContainer>{% endif %}
+<ComposedChart
+  {% if not element.values.responsive %}
+    {% if element.values.width %}width={ {{element.values.width}} }{% endif %} 
+    {% if element.values.height %}height={ {{element.values.height}} }{% endif %}
+  {% endif %}
+  data={ {{ element.values.Variable }} }>
+  <XAxis dataKey="{% if indexBy.column_name %}{{ indexBy.column_name }}{% else %}{{ element.values.indexVariable }}{% endif %}" {% if element.values.hideX %}hide={true}{% endif %}/>
+  <YAxis {% if element.values.hideY %}hide={true}{% endif %} />
   <Tooltip />
-  <Legend />
-  <CartesianGrid stroke="#f5f5f5" />
+  {% if not element.values.hideLeyend %}<Legend />{% endif %}
+  {% if not element.values.hideGrid %}<CartesianGrid stroke="#f5f5f5" />{% endif %}
 {{ content | raw }}
 </ComposedChart>
+{% if element.values.responsive %}</ResponsiveContainer>{% endif %}

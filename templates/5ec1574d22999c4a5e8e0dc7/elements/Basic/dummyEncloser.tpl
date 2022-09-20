@@ -15,6 +15,7 @@ options:
     options: ''
 children: []
 */
+
 {% if element.values.titleAsComment %}
   // {{ element.values.names }}
 {% endif %}

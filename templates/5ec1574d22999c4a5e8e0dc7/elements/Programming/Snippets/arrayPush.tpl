@@ -1,8 +1,9 @@
 /*
 path: arrayPush.tpl
+completePath: elements/Programming/Snippets/arrayPush.tpl
 type: file
 unique_id: arraypush34
-icon: ico-paper
+icon: f:arrayPush.svg
 sourceType: javascript
 helpText: Inserts a value into an existing array
 options:

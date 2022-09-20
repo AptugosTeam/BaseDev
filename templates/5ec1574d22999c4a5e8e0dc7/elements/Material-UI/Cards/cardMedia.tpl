@@ -2,7 +2,7 @@
 path: cardMedia.tpl
 completePath: elements/Material-UI/Cards/cardMedia.tpl
 unique_id: vcZKHGTu
-icon: ico-image
+icon: f:cardMedia.svg
 helpText: Easily use images from Assets
 options:
   - name: useAsset

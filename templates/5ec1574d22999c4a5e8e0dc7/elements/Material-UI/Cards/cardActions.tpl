@@ -2,7 +2,7 @@
 path: cardActions.tpl
 completePath: elements/Material-UI/Cards/cardActions.tpl
 unique_id: 7k9qd8nA
-icon: ico-field
+icon: f:cardActions.svg
 options:
   - name: disableSpacing
     display: Disable Spacing

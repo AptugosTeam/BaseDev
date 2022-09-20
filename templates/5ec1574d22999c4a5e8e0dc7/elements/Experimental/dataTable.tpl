@@ -2,7 +2,7 @@
 path: dataTable.tpl
 type: file
 unique_id: dsfjsdfh
-icon: ico-api-call
+icon: f:dataTable.svg
 helpText: Data table
 sourceType: javascript
 children: []

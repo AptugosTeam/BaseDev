@@ -2,7 +2,7 @@
 path: webcam.tpl
 type: file
 unique_id: webcambpk
-icon: ico-carousel
+icon: f:webcam.svg
 sourceType: javascript
 settings:
   - name: Packages

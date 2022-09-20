@@ -63,28 +63,35 @@ String.prototype.csvToArray = function (o) {
   return a;
 }
 
-const readUploadedFileAsText = () => {
-  var reader = new FileReader()
-  return new Promise((resolve, reject) => {
-    reader.onload = function(e) {
-      var finalData = []
-      var lines = this.result.split('\n')
-      lines.shift()
-      lines.forEach(line => {
-        var linedata = line.csvToArray()[0]
-        var finalDataRow = {}
-        linedata.forEach((dataCell, index) => {
-          finalDataRow[Parameters.fields[index]] = dataCell
-        })
-        finalData.push(finalDataRow)
-      })
-      resolve(finalData)
-    }
-    reader.readAsText(Parameters.csv)
+var contents = aptugo.readFile(Parameters.csv)
+var finalData = []
+var lines = contents.split('\n')
+lines.shift()
+lines.forEach(line => {
+  var linedata = line.csvToArray()[0]
+  var finalDataRow = {}
+  linedata.forEach((dataCell, index) => {
+    finalDataRow[Parameters.fields[index]] = dataCell
   })
+  finalData.push(finalDataRow)
+})
+
+const connectionString = Application.settings.development.dbconnectstring
+const connection = await aptugo.db.connect(connectionString)
+
+async function addRows(data) {
+  let doContinue = false
+  let insertData = []
+  if (data.length > 10) {
+    insertData = data.splice(0,10)
+    doContinue = true
+  } else {
+    insertData = data
+  }
+  await aptugo.db.insertRows(connection, Parameters.Name, insertData)
+  if (doContinue) addRows(data)
 }
 
-const fileData = await readUploadedFileAsText()
-aptugo.app.addDBRow('development', Parameters.unique_id, fileData)
-
+await addRows(finalData)
+// aptugo.db.close()
 return Application

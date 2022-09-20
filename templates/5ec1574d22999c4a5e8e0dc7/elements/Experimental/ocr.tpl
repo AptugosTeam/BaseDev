@@ -2,7 +2,7 @@
 path: ocr.tpl
 type: file
 unique_id: ocr37bpk
-icon: ico-carousel
+icon: f:ocr.svg
 sourceType: javascript
 settings:
   - name: Packages

@@ -18,18 +18,20 @@ options:
     display: ID
     type: text
     options: ''
-  - name: onclick
-    display: On Click
-    type: function
+  - name: style
+    display: Extra Styles
+    type: text
     options: ''
   - name: ref
     display: Use Reference
     type: text
     options: ''
-  - name: style
-    display: Extra Styles
-    type: text
+    advanced: true
+  - name: onclick
+    display: On Click
+    type: function
     options: ''
+    advanced: true
   - name: tag
     display: Use a different HTML element
     type: text
@@ -37,18 +39,30 @@ options:
     settings:
       default: 'div'
       active: true
+    advanced: true
 children: []
 helpText: Basic HTML Div element
 */
 {% set tag = element.values.tag|default('div') %}
 <{{tag}}
   title="{{ element.name }}"
-  {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
-  {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
-  {% if element.values.class %}className={ {{element.values.class|raw}} }{% endif %}
-  {% if element.values.onclick %}onClickCapture={(e) => {{element.values.onclick}} }{% endif %}
-  {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
-  {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
+  {% if element.values.useid %}
+    id="{{ element.unique_id }}"
+  {% elseif element.values.id %}
+    id={{ element.values.id | textOrVariable }}
+  {% endif %}
+  {% if element.values.class %}
+    className={ {{element.values.class|raw}} }
+  {% endif %}
+  {% if element.values.style %}
+    style={ {{element.values.style}} }
+  {% endif %}
+  {% if element.values.ref %}
+    ref={ {{element.values.ref}} }
+  {% endif %}
+  {% if element.values.onclick %}
+    onClickCapture={(e) => {{element.values.onclick}} }
+  {% endif %}
 >
 {{ content | raw }}
 </{{tag}}>

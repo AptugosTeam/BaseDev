@@ -3,7 +3,7 @@ path: ReactMediaPlayer.tpl
 completePath: elements/Experimental/ReactMediaPlayer.tpl
 type: file
 unique_id: ReactMediaPlayer
-icon: ico-pagination
+icon: f:ReactMediaPlayer.svg
 options:
   - name: playVideo
     display: Video URL to play

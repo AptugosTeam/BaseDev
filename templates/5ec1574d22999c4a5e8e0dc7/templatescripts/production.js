@@ -1,2 +1,2 @@
-pnpm install --prefer-offline
-pnpm run build
+npm install
+npm run build

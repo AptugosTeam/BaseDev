@@ -1,8 +1,9 @@
 /*
 path: googleLogin.tpl
+completePath: elements/Interact/Google API/googleLogin.tpl
 type: file
 unique_id: reIaridw
-icon: ico-field
+icon: f:googleLogin.svg
 children: []
 options:
   - name: clientid

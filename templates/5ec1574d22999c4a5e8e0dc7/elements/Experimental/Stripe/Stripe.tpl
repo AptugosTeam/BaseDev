@@ -1,8 +1,9 @@
 /*
 path: Stripe.tpl
+completePath: elements/Experimental/Stripe/Stripe.tpl
 type: file
 unique_id: stripe
-icon: ico-field
+icon: f:Stripe.svg
 helpText: Use Stripe Payments
 children: []
 options:

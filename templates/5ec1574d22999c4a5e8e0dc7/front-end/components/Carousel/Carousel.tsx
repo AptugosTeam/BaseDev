@@ -8,13 +8,22 @@ children: []
 */
 
 import Slide from '@mui/material/Slide'
-import { makeStyles } from '@mui/styles'
+import { styled } from '@mui/material/styles'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import React, { FunctionComponent } from 'react'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const classes = {
+  root: 'carousel-root',
+  backArrow: 'carousel-backArrow',
+  forwardArrow: 'carousel-forwardArrow',
+  carouselDots: 'carousel-root',
+  carouselDot: 'carousel-carouselDot',
+  currentCarouselDot: 'carousel-currentCarouselDot',
+}
+
+const Root = styled('div')(({ theme}) => ({
+  [`&.${classes.root}`]: {
     display: 'flex',
     position: 'relative',
     alignItems: 'center',
@@ -27,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  backArrow: {
+  [`&.${classes.backArrow}`]: {
     position: 'absolute',
     zIndex: 10,
     fontSize: '48px',
@@ -37,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0,
     transition: 'opacity 300ms linear',
   },
-  forwardArrow: {
+  [`&.${classes.forwardArrow}`]: {
     position: 'absolute',
     zIndex: 10,
     fontSize: '48px',
@@ -47,13 +56,13 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0,
     transition: 'opacity 300ms linear',
   },
-  carouselDots: {
+  [`&.${classes.carouselDots}`]: {
     position: 'absolute',
     bottom: 0,
     left: '50%',
     display: 'flex',
   },
-  carouselDot: {
+  [`&.${classes.carouselDot}`]: {
     width: '10px',
     height: '10px',
     margin: '4px',
@@ -64,9 +73,9 @@ const useStyles = makeStyles((theme) => ({
       opacity: '1',
     },
   },
-  currentCarouselDot: {
+  [`&.${classes.currentCarouselDot}`]: {
     opacity: '1',
-  },
+  }
 }))
 
 interface carouselProps {
@@ -77,8 +86,6 @@ interface carouselProps {
 }
 
 const AptugoCarousel: FunctionComponent<carouselProps> = (props) => {
-  const classes = useStyles()
-
   const [currentSlide, setCurrentSlide] = React.useState<number>(props.showSlide || 0)
   const [isOver, setIsOver] = React.useState<boolean>(false)
   let timer

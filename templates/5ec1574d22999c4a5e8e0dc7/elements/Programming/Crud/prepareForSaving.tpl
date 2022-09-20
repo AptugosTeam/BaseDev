@@ -1,9 +1,10 @@
 /*
 path: prepareForSaving.tpl
+completePath: elements/Programming/Crud/prepareForSaving.tpl
 display: Prepare Data for Saving
 type: file
 unique_id: prepareforsaving
-icon: ico-save-to-redux
+icon: f:prepareForSaving.svg
 sourceType: javascript
 options:
   - name: table

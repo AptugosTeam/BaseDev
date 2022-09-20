@@ -8,16 +8,13 @@ icon: ico-field
 {% if element.values.localStyles %}
 {% set bpr %}
 import { mergeClasses } from '../services/utils'
-import { makeStyles } from '@mui/styles'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-    const localStyles = makeStyles({
-        {{ element.values.localStyles | raw }}
-    })
+  const localStyles = { {{ element.values.localStyles | raw }} }
 {% endif %}
 const {{ page.name | friendly }}: FunctionComponent = (props: any) => {
   {% if element.values.localStyles %}
-    const classes = mergeClasses( baseClasses, localStyles())
+    const classes = mergeClasses( baseClasses, localStyles )
   {% else %}
     const classes = baseClasses
   {% endif %}

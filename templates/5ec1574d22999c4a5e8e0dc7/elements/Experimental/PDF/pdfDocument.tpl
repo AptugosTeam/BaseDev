@@ -1,8 +1,9 @@
 /*
 path: pdfDocument.tpl
+completePath: elements/Experimental/PDF/pdfDocument.tpl
 type: file
 unique_id: oKi38bpr
-icon: ico-field
+icon: f:pdfDocument.svg
 sourceType: javascript
 options:
   - name: title
@@ -20,20 +21,25 @@ options:
   - name: creator
     display: Document Creator
     type: text
+    advanced: true
   - name: producer
     display: Document Producer
     type: text
+    advanced: true
   - name: pdfVersion
     display: PDF Version
     type: text
+    advanced: true
   - name: language
     display: Document's language
     type: text
+    advanced: true
   - name: onRender
     display: On Render
     type: function
+    advanced: true
 childs:
-  - name: Page
+  - name: pdfPage
     element: pdfPage
 */
 {% set bpr %}
@@ -41,15 +47,33 @@ import { Document } from '@react-pdf/renderer'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Document
-  {% if element.values.title %}title={{ element.values.title | textOrVariable }}{% endif %}
-  {% if element.values.author %}author={{ element.values.author | textOrVariable }}{% endif %}
-  {% if element.values.subject %}subject={{ element.values.subject | textOrVariable }}{% endif %}
-  {% if element.values.keywords %}keywords={{ element.values.keywords | textOrVariable }}{% endif %}
-  {% if element.values.creator %}creator={{ element.values.creator | textOrVariable | default("'Aptugo'") }}{% endif %}
-  {% if element.values.producer %}producer={{ element.values.producer | textOrVariable | default("'Aptugo'") }}{% endif %}
-  {% if element.values.pdfVersion %}pdfVersion={{ element.values.pdfVersion | textOrVariable }}{% endif %}
-  {% if element.values.language %}language={{ element.values.language | textOrVariable }}{% endif %}
-  {% if element.values.onRender %}onRender={ {{ element.values.onRender |functionOrCall }} }{% endif %}
+  {% if element.values.title %}
+    title={{ element.values.title | textOrVariable }}
+  {% endif %}
+  {% if element.values.author %}
+    author={{ element.values.author | textOrVariable }}
+  {% endif %}
+  {% if element.values.subject %}
+    subject={{ element.values.subject | textOrVariable }}
+  {% endif %}
+  {% if element.values.keywords %}
+    keywords={{ element.values.keywords | textOrVariable }}
+  {% endif %}
+  {% if element.values.creator %}
+    creator={{ element.values.creator | textOrVariable | default("'Aptugo'") }}
+  {% endif %}
+  {% if element.values.producer %}
+    producer={{ element.values.producer | textOrVariable | default("'Aptugo'") }}
+  {% endif %}
+  {% if element.values.pdfVersion %}
+    pdfVersion={{ element.values.pdfVersion | textOrVariable }}
+  {% endif %}
+  {% if element.values.language %}
+    language={{ element.values.language | textOrVariable }}
+  {% endif %}
+  {% if element.values.onRender %}
+    onRender={ {{ element.values.onRender |functionOrCall }} }
+  {% endif %}
 >
   {{ content | raw }}
 </Document>

@@ -9,6 +9,7 @@ options:
     display: From Link
     type: dropdown
     options: return aptugo.pageUtils.getAllPages()
+    required: true
 children: []
 */
 {% if element.values.fromLink %}

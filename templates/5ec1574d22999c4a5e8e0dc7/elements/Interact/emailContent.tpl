@@ -18,7 +18,9 @@ options:
 
 {% set bpr %}
 import _server from 'react-dom/server'
-
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
+{% set ph %}
 function {{ element.values.internalfunctionName|default('InlineLink') }}(emailParameters:any = {}) {
   var _server2 = _interopRequireDefault(_server)
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -31,4 +33,4 @@ function {{ element.values.internalfunctionName|default('InlineLink') }}(emailPa
   return emailParameters.content || renderEmail(<div>{{ content | raw }}</div>)
 }
 {% endset %}
-{{ save_delayed('bpr',bpr) }}
+{{ save_delayed('ph',ph) }}
