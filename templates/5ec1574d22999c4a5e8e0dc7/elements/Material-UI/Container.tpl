@@ -27,13 +27,19 @@ sourceType: javascript
 children: []
 */
 {% set bpr %}
-import Container from '@mui/material/Container'
+  import Container from '@mui/material/Container'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Container
-  {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-  {% if element.values.disableGutters %}disableGutters{% endif %}
-  {% if element.values.fixed %}fixed{% endif %}
+  {% if element.values.className %}
+    className={ {{ element.values.className }} }
+  {% endif %}
+  {% if element.values.disableGutters %}
+    disableGutters
+  {% endif %}
+  {% if element.values.fixed %}
+    fixed
+  {% endif %}
   {% if (element.values.maxWidth) %}
     {% if (element.values.maxWidth == 'false') %}
       maxWidth={false}
