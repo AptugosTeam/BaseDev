@@ -10,11 +10,11 @@ helpText: >-
 sourceType: javascript
 options:
   - name: component
-    display: HTML Tag
+    display: Use a different HTML element
     type: text
     options: ''
   - name: sx
-    display: Styles
+    display: Extra Styles
     type: text
     options: ''
 children: []
