@@ -81,15 +81,12 @@ import "swiper/css/bundle";
       navigation={true}
     {% endif %}
     {% if element.values.loopFillGroupWithBlank %}
-      loopFillGroupWithBlank={true}
-    {% else %}
       loopFillGroupWithBlank={false}
+    {% else %}
+      loopFillGroupWithBlank={true}
     {% endif %}
     {% if element.values.width %}
-      width={ {{ element.values.width }} }
-    {% endif %}
-    {% if element.values.style %}
-      style={ { height:{{element.values.style}} } }
+      style={ { height: {{element.values.style}} , width:{{element.values.width}} } }
     {% endif %}
     pagination=  { {clickable: true} }
     modules={[Pagination, Navigation]}
