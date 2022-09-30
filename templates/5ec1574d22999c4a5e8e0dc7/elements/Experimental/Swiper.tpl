@@ -1,6 +1,6 @@
 /*
 path: Swiper.tpl
-completePath: elements/Experimental/Swiper/Swiper.tpl
+completePath: elements/Experimental/Swiper.tpl
 type: file
 unique_id: oKJIl4pk
 icon: f:Swiper.svg
@@ -11,7 +11,7 @@ options:
     type: styles 
     options: ''
   - name: slidesPerView
-    display: slides Per View
+    display: Slides Per View
     type: text
     options: ''
   - name: slidesPerGroup
@@ -27,11 +27,11 @@ options:
     type: text
     options: ''
   - name: style
-    display: height
+    display: Height
     type: text
     options: ''
   - name: loop
-    display: loop
+    display: Loop
     type: checkbox
     advanced: true
     options: ''
@@ -41,7 +41,7 @@ options:
     advanced: true
     options: ''
   - name: navigation
-    display: Delete arrows
+    display: Delete Arrows
     type: checkbox
     options: ''
     value: '"swiper": "^8.0.0",'
