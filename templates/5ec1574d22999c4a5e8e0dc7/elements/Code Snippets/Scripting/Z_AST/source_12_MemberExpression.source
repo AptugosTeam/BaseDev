@@ -1,0 +1,12 @@
+/*
+path: source_12_MemberExpression.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/source_12_MemberExpression.source
+keyPath: elements/Code Snippets/Scripting/Z_AST/source_12_MemberExpression.source
+unique_id: 3U5p3q7p
+name: js_member_expression
+fullload: true
+*/
+console.log("The Block", Block);
+return "hola"

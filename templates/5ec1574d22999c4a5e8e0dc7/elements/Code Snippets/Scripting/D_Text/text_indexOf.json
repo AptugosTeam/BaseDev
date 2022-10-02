@@ -1,0 +1,47 @@
+/*
+path: text_indexOf.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/D_Text/text_indexOf.json
+keyPath: elements/Code Snippets/Scripting/D_Text/text_indexOf.json
+unique_id: klStvETX
+name: text_indexOf
+fullload: true
+*/
+{
+  "type": "text_indexOf",
+  "message0": "%{BKY_TEXT_INDEXOF_TITLE}",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "check": "String"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "END",
+      "options": [
+        [
+          "%{BKY_TEXT_INDEXOF_OPERATOR_FIRST}",
+          "FIRST"
+        ],
+        [
+          "%{BKY_TEXT_INDEXOF_OPERATOR_LAST}",
+          "LAST"
+        ]
+      ]
+    },
+    {
+      "type": "input_value",
+      "name": "FIND",
+      "check": "String"
+    }
+  ],
+  "output": "Number",
+  "style": "text_blocks",
+  "helpUrl": "%{BKY_TEXT_INDEXOF_HELPURL}",
+  "inputsInline": true,
+  "extensions": [
+    "text_indexOf_tooltip"
+  ]
+}

@@ -1,0 +1,13 @@
+/*
+path: callExpression.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Basic/callExpression.source
+keyPath: elements/Code Snippets/Basic/callExpression.source
+unique_id: eCyafFGf
+name: js_call_expression
+fullload: true
+*/
+const code = ''
+console.log(Block)
+return [code, Blockly.JavaScript.ORDER_NONE]

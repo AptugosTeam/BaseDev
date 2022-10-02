@@ -1,0 +1,30 @@
+/*
+path: literal.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Aptugo
+  Internal Use/Code Snippets/Basic/literal.json
+keyPath: elements/Aptugo Internal Use/Code Snippets/Basic/literal.json
+unique_id: Exknd7dD
+name: js_literal
+fullload: true
+*/
+{
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_image",
+      "src": "media/js.svg",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "type": "field_input",
+      "name": "NUMBER",
+      "check": "String"
+    }
+  ],
+  "output": "String",
+  "colour": 230,
+  "tooltip": "String.",
+  "inputsInline": false
+}

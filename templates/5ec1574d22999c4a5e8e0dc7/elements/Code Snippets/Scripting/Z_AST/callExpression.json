@@ -1,0 +1,46 @@
+/*
+path: callExpression.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Basic/callExpression.json
+keyPath: elements/Code Snippets/Basic/callExpression.json
+unique_id: T3DN95Z2
+name: js_call_expression
+fullload: true
+*/
+{
+  init: function() {
+    this.jsonInit({
+      "type": "js_call_expression",
+      "message0": "Call: %1 ( %2 ) %3",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "NAME"
+        },
+        {
+          "type": "input_value",
+          "name": "ARGUMENT0"
+        },
+        {
+          "type": "input_dummy",
+          "name": "END"
+        }
+      ],
+      "inputsInline": false,
+      "tooltip": "Call Expression",
+      "helpUrl": "",
+      "output": null,
+      "style": "loop_blocks",
+      "previousStatement": null,
+      "nextStatement": null
+    })
+
+    this.mutatorConfig = {
+      baseName: "ARGUMENT",
+      sourceBlock: "ARGUMENT0",
+      xmlAttrName: "arguments"
+    }
+    this.elementsCount = 2
+  }
+}

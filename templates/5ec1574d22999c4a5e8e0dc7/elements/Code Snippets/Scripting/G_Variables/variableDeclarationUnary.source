@@ -1,0 +1,18 @@
+/*
+path: variableDeclarationUnary.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Variables/variableDeclarationUnary.source
+keyPath: elements/Code Snippets/Variables/variableDeclarationUnary.source
+unique_id: Q3mMRAWA
+name: js_variable_declaration_unary
+fullload: true
+*/
+var theVar = Blockly.JavaScript.valueToCode(Block, 'VAR', Blockly.JavaScript.ORDER_NONE) || '0'
+var theValue = Blockly.JavaScript.valueToCode(Block, 'VALUE', Blockly.JavaScript.ORDER_NONE) || '0'
+console.log(theVar, theValue)
+if (theValue === 'undefined') {
+  return 'var ' + theVar + ';\n';
+} else {
+  return 'var ' + theVar + ' = ' + theValue + ';\n';
+}

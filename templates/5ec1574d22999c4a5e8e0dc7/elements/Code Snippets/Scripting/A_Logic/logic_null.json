@@ -1,0 +1,18 @@
+/*
+path: logic_null.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/A_Logic/logic_null.json
+keyPath: elements/Code Snippets/Scripting/A_Logic/logic_null.json
+unique_id: nVArhdm9
+name: logic_null
+fullload: true
+*/
+{
+  "type": "logic_null",
+  "message0": "%{BKY_LOGIC_NULL}",
+  "output": null,
+  "style": "logic_blocks",
+  "tooltip": "%{BKY_LOGIC_NULL_TOOLTIP}",
+  "helpUrl": "%{BKY_LOGIC_NULL_HELPURL}"
+}

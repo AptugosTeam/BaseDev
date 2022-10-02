@@ -1,0 +1,26 @@
+/*
+path: 02_jsonObject.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/02_jsonObject.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/02_jsonObject.json
+unique_id: 5oIFTGwC
+name: js_json_object
+fullload: true
+*/
+{
+  "type": "js_json_object",
+  "message0": "JSON Object",
+  "message1": "%1",
+  "args1": [
+    {
+      "type": "input_statement",
+      "name": "ELEMENTS",
+      "check": "js_json_element"
+    }
+  ],
+  "output": null,
+  "style": "variable_blocks",
+  "tooltip": "AST -> Object in JSON format.",
+  "helpUrl": ""
+}
