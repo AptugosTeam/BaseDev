@@ -560,7 +560,7 @@ const B = {
   ],
   "helpText": "Basic HTML Div element",
   "open": false,
-  "name": "Hero Image",
+  "name": "Layout: Hero Image",
   "prevent_delete": false,
   "cascades": false,
   "value": "div",
