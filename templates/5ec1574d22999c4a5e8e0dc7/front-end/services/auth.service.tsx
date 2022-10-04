@@ -5,7 +5,7 @@ unique_id: dDixye51
 */
 import axios from 'axios'
 
-const API_URL = '{{ settings.apiURL }}/api/users/'
+let API_URL = '{{ settings.apiURL }}/api/users/'
 
 class AuthService {
   login(email, password) {
@@ -65,6 +65,11 @@ class AuthService {
         return response.data.data._id
       })
   }
+
+  changeURL(url) {
+    API_URL = url
+  }
+
 }
 
 export default new AuthService()
