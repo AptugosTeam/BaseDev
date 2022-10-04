@@ -44,10 +44,18 @@ import {{element.values.icon}}{{ addenum }}Icon from '@mui/icons-material/{{elem
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <IconButton
-  {% if element.values.Color %}color='{{ element.values.Color }}'{% endif %}
-  {% if element.values.Action %}onClickCapture={ {{ element.values.Action | functionOrCall }} }{% endif %}
-  {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
+  {% if element.values.Color %}
+    color='{{ element.values.Color }}'
+  {% endif %}
+  {% if element.values.Action %}
+    onClickCapture={ {{ element.values.Action | functionOrCall }} }
+  {% endif %}
+  {% if element.values.className %}
+    className={ {{ element.values.className }} }
+  {% endif %}
 >
-  {% if element.values.icon %}<{{element.values.icon}}{{ addenum }}Icon />{% endif %}
+  {% if element.values.icon %}
+    <{{element.values.icon}}{{ addenum }}Icon />
+  {% endif %}
   {{ content | raw }}
 </IconButton>
