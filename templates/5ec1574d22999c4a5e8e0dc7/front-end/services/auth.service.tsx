@@ -8,11 +8,12 @@ import axios from 'axios'
 let API_URL = '{{ settings.apiURL }}/api/users/'
 
 class AuthService {
-  login(email, password) {
+  login(email, password, model) {
     return axios
       .post(API_URL + 'authenticate', {
         email,
         password,
+        model,
       })
       .then((response) => {
         if (response.data.accessToken) {
