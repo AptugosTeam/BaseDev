@@ -39,7 +39,6 @@ class AptugoGmail {
   }
 
   listMessages(q = '', page = null) {
-    console.log(q, page)
     return new Promise((solve, reject) => {
       gapi.client.gmail.users.messages.list({
         'userId': 'me',
@@ -123,6 +122,75 @@ class AptugoGmail {
       if (calKey === 'DTSTART') toReturn = { date: new Date(calValue), string: calValue }
     })
     return toReturn
+  }
+
+  findPart(parts, messageId) {
+    let found = false
+    let toReturn = ''
+    parts.forEach((part) => {
+      if (part.mimeType && part.mimeType === 'text/html') {
+        found = true
+        toReturn = this.decodeBase64(part.body.data)
+      } else if (part.mimeType && part.mimeType === 'text/plain') {
+        if (!found) toReturn = this.decodeBase64(part.body.data)
+      } else if (part.mimeType && (part.mimeType === 'multipart/alternative' || part.mimeType === 'multipart/related')) {
+        toReturn = this.findPart(part.parts, messageId)
+      } else if (part.mimeType && part.mimeType === 'application/ics') {
+        this.getAttachment(messageId, part.body.attachmentId).then((response) => {
+          console.log('response', this.parseIcal(response.data))
+        })
+        console.log('invite', part.body.attachmentId)
+      } else {
+        console.log('could not recognize part:', part)
+      }
+    })
+    return toReturn
+  }
+
+  analyzeMessage(message) {
+    let found = false
+    const output = {
+      type: {},
+      content: '',
+    }
+    if (message.payload.parts) {
+      output.content = this.findPart(message.payload.parts, message.id)
+      if (output.content.indexOf('class="gmail_signature"') > -1) {
+        output.content = output.content.substring(0, output.content.indexOf('<div dir="ltr" class="gmail_signature"'))
+      }
+    }
+    return output
+  }
+
+  analyzeEmail(email) {
+    let messageStr
+    if (email.payload.parts) {
+      const result = this.analyzeMessage(email)
+      messageStr = result.content
+    } else {
+      messageStr = this.decodeBase64(email.payload.body.data)
+    }
+
+    let headers = {}
+    email.payload.headers.forEach(header => headers[header.name] = header.value)
+
+    let output = { Type: 'Sent', Date: headers.Date, id: email.id, Subject: headers.Subject, Snippet: email.snippet, Contacts: [], Content: messageStr, Email: email }
+
+    const regex = /([\w\s\.\+\@]*)[<]*([-\w\.\@]*)[>]*/
+
+    let emailsTo = headers.To?.split(',') || []
+    emailsTo.forEach(emailTo => {
+      const sTo = [...emailTo.match(regex)]
+      if (sTo[1]) {
+        output.Contacts.push({ Name: sTo[1], Email: sTo[2] || sTo[1] })
+      }
+    })
+
+    const aFrom = [...headers.From.match(regex)]
+    if (aFrom[1]) output.Contacts.push({ Name: aFrom[1], Email: aFrom[2] || aFrom[1] })
+
+    if (headers['Delivered-To']) output.Type = 'Received'
+    return output
   }
 
   // Internal 
