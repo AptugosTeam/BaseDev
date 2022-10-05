@@ -4,21 +4,13 @@ All notable changes to the "aptugotemplating" extension will be documented in th
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased] [TEMPLATES 1.4.13]
+## [TEMPLATES 1.4.16]
 
 ### Added
 
-- **Pdf Link:**
-  Allows you to display a hyperlink within the PDF document. It can be nested as a parent of either a Text element or an image.
+- **Code Snippets:** [Experimental]
 
-- **Pdf Stylesheet:**
-  Allows adding styles to any element of the PDF family. Defines a variable that receives a javascript object with the selectors and properties that you want to add to each element.
-
-- **Pdf Renderer:**
-  Provides an iframe to render generated PDF documents.
-
-- **Radial Bar Chart:**
-  Bar Chart plotted on a polar coordinate system, rather than on a Cartesian one.
+  New experimental coding functionality with a function editor and code snippets giving a new interactive experience.
 
 - **Animations (Category):**
 
@@ -47,6 +39,85 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
     - _Zoom_:
       Its effect on elements is to enlarge them from a similar dimension to their original size.
+
+- **Swiper:**
+
+### Changed
+
+- **Accordion:**
+
+  - Elevation removed.
+  - It can be disabled.
+  - Now it is possible to style Width, Height, Padding, Color and Background Color.
+  - Accordion Details, Accordion Summary as default childs.
+
+- **Accordion Details:**
+
+  - Now it is possible to style Background Color and Color.
+
+- **Accordion Summary:**
+
+  - Now it is possible to style Background Color and Color.
+
+- **Box:**
+
+  - Now it is possible to change the html tagname used by the element.
+  - It is possible to add extra styles.
+  - Color, and devices displays removed.
+
+- **Container:**
+
+  - Disable Gutters and Fixed as advance properties.
+  - It is possible to add extra styles.
+
+- **Autocomplete (Field):**
+
+  - Now checks for duplicates.
+
+### Removed
+
+- **Button with Icon:** [Deprecated]
+
+## [TEMPLATES 1.4.15] - 2022-09-17
+
+### Fixed
+
+- **File Upload**:
+
+  - Remove makeStyles as default styling.
+
+## [TEMPLATES 1.4.14] - 2022-09-15
+
+### Changed
+
+- Variable tables are not sortable.
+
+### Fixed
+
+- **Text**:
+
+  - Backwards compability for text element.
+
+### Removed
+
+- MUI/Styles
+- React-Hot-Loader
+
+## [TEMPLATES 1.4.13] - 2022-09-14
+
+### Added
+
+- **Pdf Link:**
+  Allows you to display a hyperlink within the PDF document. It can be nested as a parent of either a Text element or an image.
+
+- **Pdf Stylesheet:**
+  Allows adding styles to any element of the PDF family. Defines a variable that receives a javascript object with the selectors and properties that you want to add to each element.
+
+- **Pdf Renderer:**
+  Provides an iframe to render generated PDF documents.
+
+- **Radial Bar Chart:**
+  Bar Chart plotted on a polar coordinate system, rather than on a Cartesian one.
 
 ### Changed
 
