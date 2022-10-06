@@ -1,8 +1,10 @@
 /*
 path: IconButton.tpl
 type: file
+completePath: elements/Material-UI/IconButton.tpl
 unique_id: JgKwuk06
 icon: ico-icon-button
+sourceType: javascript
 options:
   - name: Action
     display: Action
@@ -11,24 +13,32 @@ options:
   - name: Color
     display: Color
     type: dropdown
-    options: default;inherit;primary;secondary;error;info;success;warning
+    options:
+      return [['default', 'Default'], ['inherit', 'Inherit'], ['primary', 'Primary'], ['secondary', 'Secondary'], ['error', 'Error'], ['info', 'Info'], ['success', 'Success'], ['warning', 'Warning']]
     settings:
-      default: primary
+      default: default
+  - name: size
+    display: Size
+    type: dropdown
+    options:
+      return [['small', 'Small'], ['medium', 'Medium'], ['large', 'Large']]
+    settings:
+      default: medium
   - name: className
     display: ClassName
     type: styles
     options: ''
   - name: icon
     display: Icon
+    required: true
     type: dropdown
     options: >-
-      None;AcUnit;Add;AddShoppingCart;CallMade;ChevronLeft;ChevronRight;HelpOutline;Home;Link;MoreVert;Search;Send;ShoppingBasket;ShoppingCart;SportsBasketball;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
+      AcUnit;Add;AddShoppingCart;CallMade;ChevronLeft;ChevronRight;HelpOutline;Home;Link;MoreVert;Search;Send;ShoppingBasket;ShoppingCart;SportsBasketball;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
   - name: iconstyle
     display: Icon Style
     type: dropdown
     options: >-
       Filled;Outlined;Rounded;TwoTone;Sharp
-sourceType: javascript
 children: []
 */
 {% set addenum = '' %}
@@ -47,6 +57,7 @@ import {{element.values.icon}}{{ addenum }}Icon from '@mui/icons-material/{{elem
   {% if element.values.Color %}
     color='{{ element.values.Color }}'
   {% endif %}
+  size='{{ element.values.size }}'
   {% if element.values.Action %}
     onClickCapture={ {{ element.values.Action | functionOrCall }} }
   {% endif %}
