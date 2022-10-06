@@ -40,8 +40,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
     - _Zoom_:
       Its effect on elements is to enlarge them from a similar dimension to their original size.
 
-- **Swiper:**
-
 ### Changed
 
 - **Accordion:**
