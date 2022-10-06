@@ -51,7 +51,7 @@ import { AttentionSeeker } from "react-awesome-reveal";
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <AttentionSeeker 
-  effect={ "{{ element.values.effect|default(bounce) }}" }
+  effect={ "{{ element.values.effect|default("bounce") }}" }
   delay={ {{element.values.delay|default("0")}} } 
   duration={ {{element.values.duration|default("1000")}} }
   {% if element.values.className %}
