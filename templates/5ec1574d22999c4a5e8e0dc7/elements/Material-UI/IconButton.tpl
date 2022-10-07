@@ -7,7 +7,7 @@ icon: ico-icon-button
 sourceType: javascript
 options:
   - name: Action
-    display: onClick
+    display: On Click
     type: text
     options: ''
   - name: Color
