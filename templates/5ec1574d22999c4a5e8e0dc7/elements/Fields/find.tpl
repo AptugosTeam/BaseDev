@@ -22,13 +22,13 @@ unique_id: SBHiymdS
     {% if subpopulationField.reference %}
         {% set subrelData = subpopulationField.reference | fieldData %}
         {% if (table.unique_id != subrelData.table.unique_id) %}
-            {% set subpopulation = subpopulation|merge(["{ model: '" ~ subrelData.table.name | friendly ~ "', path: '" ~ subpopulationField.column_name | friendly ~ "' }"]) %}
+            {% set subpopulation = subpopulation|merge(["{ model: '" ~ subrelData.table.name | friendly ~ "', path: '" ~ subpopulationField.column_name | friendly ~ "', strictPopulate: false  }"]) %}
         {% endif %}
     {% else %}
         {% for relatedField in builder.plainFields %}
             {% if relatedField.reference and subpopulationField.unique_id == relatedField.reference %}
                 {% set subrelData = relatedField | fieldData %}
-                {% set subpopulation = subpopulation|merge(["{ model: '" ~ subrelData.table.name | friendly ~ "', path: '" ~ subrelData.table.name | friendly ~ "' }"]) %}
+                {% set subpopulation = subpopulation|merge(["{ model: '" ~ subrelData.table.name | friendly ~ "', path: '" ~ subrelData.table.name | friendly ~ "', strictPopulate: false  }"]) %}
             {% endif %}
         {% endfor %}
     {% endif %}
