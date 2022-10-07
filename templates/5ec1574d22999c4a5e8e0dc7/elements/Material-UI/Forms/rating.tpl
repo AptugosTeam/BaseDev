@@ -67,6 +67,6 @@ import Rating from '@mui/material/Rating'
     readOnly={true}
   {% endif %}
   {% if element.values.name %}
-    name={ '{{ element.values.name }}' }
+    name={{ element.values.name | textOrVariable }}
   {% endif %}
 />
