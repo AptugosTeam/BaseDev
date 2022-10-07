@@ -33,7 +33,7 @@ options:
     required: true
     type: dropdown
     options: >-
-      AcUnit;Add;AddShoppingCart;AllInbox;AlternateEmail;ChevronLeft;ChevronRight;Clear;CallMade;DeleteOutline;Facebook;Favorite;Google;HelpOutline;Home;Instagram;Link;Menu;MoreVert;Person;Pinterest;Publish;Search;Send;ShoppingBasket;ShoppingCart;SportsBasketball;Star;Twitter;ThumbUp;Visibility;WhatsApp;YouTube
+      AcUnit;Add;AddShoppingCart;AllInbox;AlternateEmail;ArrowBack;AttachFile;ChevronLeft;ChevronRight;Clear;CallMade;Delete;DeleteOutline;Download;Facebook;Favorite;Google;HelpOutline;Home;Instagram;Link;ManageAccounts;Menu;MoreVert;Person;Pinterest;Publish;Refresh;Search;Send;Settings;ShoppingBasket;ShoppingCart;SportsBasketball;Star;Twitter;ThumbUp;Visibility;WhatsApp;YouTube
   - name: iconstyle
     display: Icon Style
     type: dropdown
