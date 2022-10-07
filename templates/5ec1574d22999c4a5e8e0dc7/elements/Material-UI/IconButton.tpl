@@ -7,7 +7,7 @@ icon: ico-icon-button
 sourceType: javascript
 options:
   - name: Action
-    display: Action
+    display: onClick
     type: text
     options: ''
   - name: Color
@@ -59,7 +59,7 @@ import {{element.values.icon}}{{ addenum }}Icon from '@mui/icons-material/{{elem
   {% endif %}
   size='{{ element.values.size }}'
   {% if element.values.Action %}
-    onClickCapture={ {{ element.values.Action | functionOrCall }} }
+    onClick={ {{ element.values.Action | functionOrCall }} }
   {% endif %}
   {% if element.values.className %}
     className={ {{ element.values.className }} }
