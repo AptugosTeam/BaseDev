@@ -13,9 +13,20 @@ options:
     display: On Close
     type: text
     options: ''
+  - name: positionVertical
+    display: Position Vertical
+    type: dropdown
+    advanced: true
+    options:
+      return [['top', 'Top'],['bottom', 'Bottom']]
+  - name: positionHorizontal
+    display: Position Horizontal
+    type: dropdown
+    advanced: true
+    options: 
+      return [['left', 'Left'],['center', 'Center'],['right', 'Right']]
 helpText: Menus display a list of choices on temporary surfaces.
 */
-
 {% set bpr %}
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
@@ -38,8 +49,8 @@ import MenuItem from '@mui/material/MenuItem'
 <Menu
   anchorEl={ {{ anchorElement }} }
   anchorOrigin={ {
-    vertical: 'bottom',
-    horizontal: 'center',
+    vertical: '{{element.values.positionVertical|default("top")}}',
+    horizontal: '{{element.values.positionHorizontal|default("center")}}',
   } }
   transformOrigin={ {
     vertical: 'top',
