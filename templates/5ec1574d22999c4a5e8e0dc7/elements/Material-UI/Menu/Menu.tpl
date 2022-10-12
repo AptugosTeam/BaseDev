@@ -25,6 +25,9 @@ options:
     advanced: true
     options: 
       return [['left', 'Left'],['center', 'Center'],['right', 'Right']]
+childs:
+  - name: MenuList
+    element: MenuList
 helpText: Menus display a list of choices on temporary surfaces.
 */
 {% set bpr %}

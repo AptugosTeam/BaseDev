@@ -8,6 +8,9 @@ options:
   - name: width
     display: Width (in px)
     type: text
+childs:
+  - name: MenuItem
+    element: MenuItem
 helpText: Menus display a list of choices on temporary surfaces.
 */
 
