@@ -46,7 +46,7 @@ unique_id: zd6mrTlU
     const {{ reference.table.name | friendly }} = require('../controllers/{{ reference.table.name | friendly | lower }}.controller.js')
     let Received{{ field.column_name | friendly }} =  (typeof data.{{ field.column_name | friendly }} === 'string') ? JSON.parse(data.{{ field.column_name | friendly }}) : data.{{ field.column_name | friendly }} 
     {{ field.column_name | friendly }}Raw = Array.isArray(Received{{ field.column_name | friendly }}) ? Received{{ field.column_name | friendly }} : [Received{{ field.column_name | friendly }}]
-    {{ field.column_name | friendly }}Raw.forEach({{ field.column_name | friendly }}info => {
+    for await (const {{ field.column_name | friendly }}info of {{ field.column_name | friendly }}Raw) {
       const {{ field.column_name | friendly }}Files = {}
       {% if reference.data_type == 'Image' %}
       if ({{ field.column_name | friendly }}info && {{ field.column_name | friendly }}info.data) {
@@ -56,7 +56,7 @@ unique_id: zd6mrTlU
       {% endif %}
 
       if (!{{ field.column_name | friendly }}info._id) {
-        const {{ field.column_name | friendly }}ID = require('mongoose').Types.ObjectId()
+        let {{ field.column_name | friendly }}ID = require('mongoose').Types.ObjectId()
 
         Object.keys({{ field.column_name | friendly }}info).forEach(info => {
           if ({{ field.column_name | friendly }}info[info] && typeof {{ field.column_name | friendly }}info[info] === 'object' && (typeof {{ field.column_name | friendly }}info[info].{{ reference.column_name }} === 'string' || typeof {{ field.column_name | friendly }}info.{{ reference.column_name }} === 'string')) {
@@ -67,12 +67,20 @@ unique_id: zd6mrTlU
         let req = options.req
         req.body = { ...{{ field.column_name | friendly }}info, _id: {{ field.column_name | friendly }}ID }
         req.files = { ...{{ field.column_name | friendly }}Files }
-        {{ reference.table.name | friendly }}.createAsPromise({ req, res: options.res })
+        try {
+          const result = await {{ reference.table.name | friendly }}.createAsPromise({ req, res: options.res })
+        } catch(e) {
+          if (e.code === 422) {
+            const duplicateError = await {{ reference.table.name | friendly }}.find({ query: { searchField: e.field, searchString: {{ field.column_name | friendly }}info[e.field] }})
+            ContactsID = duplicateError.docs[0]._id
+          }
+        }
+        
         updatedData['{{ field.column_name | friendly }}'].push({{ field.column_name | friendly }}ID)
       } else {
         updatedData['{{ field.column_name | friendly }}'].push({{ field.column_name | friendly }}info._id)
       }
-    })
+    }
   } catch(e) {
       updatedData['{{ field.column_name | friendly }}'] = data.{{ field.column_name | friendly }}
   }

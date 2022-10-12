@@ -61,7 +61,7 @@ helpText: Basic HTML Div element
     ref={ {{element.values.ref}} }
   {% endif %}
   {% if element.values.onclick %}
-    onClickCapture={(e) => {{element.values.onclick}} }
+    onClick={(e) => {{element.values.onclick}} }
   {% endif %}
 >
 {{ content | raw }}

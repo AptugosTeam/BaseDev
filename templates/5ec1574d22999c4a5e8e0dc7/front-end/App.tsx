@@ -46,10 +46,12 @@ const App: React.FunctionComponent = (props: any) => {
   return (
     <React.Fragment>
       <React.Suspense fallback={<span>Loading</span>}>
+        {{ insert_setting('SiteWideWrapStart') | raw }}
         <React.Fragment>
           {switchRoutes}
           {{ insert_setting('SiteWideAddenum') | raw }}
         </React.Fragment>
+        {{ insert_setting('SiteWideWrapEnd') | raw }}
       </React.Suspense>
     </React.Fragment>
   )
