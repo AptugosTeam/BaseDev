@@ -22,21 +22,13 @@ options:
     display: Space Between
     type: text
     options: ''
-  - name: width
-    display: Width
-    type: text
-    options: ''
-  - name: style
-    display: Height
-    type: text
-    options: ''
   - name: loop
-    display: Loop
+    display: Cancel loop
     type: checkbox
     advanced: true
     options: ''
   - name: loopFillGroupWithBlank
-    display: Blanks
+    display:  Cancel blanks
     type: checkbox
     advanced: true
     options: ''
@@ -71,22 +63,16 @@ import "swiper/css/bundle";
       slidesPerGroup={ {{ element.values.slidesPerGroup }} }
     {% endif %}
     {% if element.values.loop %}
-      loop={false}
     {% else %}
       loop={true}
     {% endif %}
     {% if element.values.navigation %}
-      navigation={false}
     {% else %}
       navigation={true}
     {% endif %}
     {% if element.values.loopFillGroupWithBlank %}
-      loopFillGroupWithBlank={false}
     {% else %}
       loopFillGroupWithBlank={true}
-    {% endif %}
-    {% if element.values.width %}
-      style={ { height: {{element.values.style}} , width:{{element.values.width}} } }
     {% endif %}
     pagination=  { {clickable: true} }
     modules={[Pagination, Navigation]}
