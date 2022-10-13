@@ -26,13 +26,10 @@ options:
     display: label
     type: text
     options: ''
-<<<<<<< HEAD
-=======
   - name: sx
     display: Extra Styles
     type: text
     options: ''
->>>>>>> parent of ca773bb ([FIX] Organizacion)
 */
 
 {% set bpr %}
@@ -50,18 +47,13 @@ options:
 {% endif %}
 <Radio
     {% if element.values.checked %}
-<<<<<<< HEAD
       checked={{ element.values.checked | textOrVariable }}
-    {% endif %}
-    {% if element.values.onchange %}
-      onChange={{ element.values.onchange | textOrVariable }}
     {% endif %}
     {% if element.values.value %}
       value={{ element.values.value | textOrVariable }}
     {% endif %}
     {% if element.values.name %}
       name={{ element.values.name | textOrVariable }}
-=======
       checked={{ element.values.checked |textOrVariable }}
     {% endif %}
     {% if element.values.onchange %}
@@ -75,7 +67,6 @@ options:
     {% endif %}
     {% if element.values.sx %}
      sx={ { {{ element.values.sx }} } }
->>>>>>> parent of ca773bb ([FIX] Organizacion)
     {% endif %}
 />
 {% if element.values.label %}
