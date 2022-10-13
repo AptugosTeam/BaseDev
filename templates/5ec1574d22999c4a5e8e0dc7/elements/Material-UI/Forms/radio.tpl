@@ -26,10 +26,6 @@ options:
     display: label
     type: text
     options: ''
-  - name: sx
-    display: Extra Styles
-    type: text
-    options: ''
 */
 
 {% set bpr %}
@@ -43,23 +39,20 @@ options:
   {{ save_delayed('bpr',bpr) }}
 {% endif %}
 {% if element.values.label %}
-  <FormControlLabel value={{ element.values.value |textOrVariable }} label={{ element.values.label |textOrVariable }} control={
+  <FormControlLabel value={{ element.values.value | textOrVariable }} label={{ element.values.label | textOrVariable }} control={
 {% endif %}
 <Radio
     {% if element.values.checked %}
-      checked={{ element.values.checked |textOrVariable }}
+      checked={{ element.values.checked | textOrVariable }}
     {% endif %}
     {% if element.values.onchange %}
-      onChange={{ element.values.onchange |textOrVariable }}
+      onChange={{ element.values.onchange | textOrVariable }}
     {% endif %}
     {% if element.values.value %}
-      value={{ element.values.value |textOrVariable }}
+      value={{ element.values.value | textOrVariable }}
     {% endif %}
     {% if element.values.name %}
-      name={{ element.values.name |textOrVariable }}
-    {% endif %}
-    {% if element.values.sx %}
-     sx={ { {{ element.values.sx }} } }
+      name={{ element.values.name | textOrVariable }}
     {% endif %}
 />
 {% if element.values.label %}
