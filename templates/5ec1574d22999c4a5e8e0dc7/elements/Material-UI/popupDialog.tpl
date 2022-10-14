@@ -16,6 +16,9 @@ options:
     display: Max Width
     type: dropdown
     options: false;'xs';'sm';'md';'lg';'xl'
+  - name: className
+    display: className
+    type: styles
 sourceType: javascript
 childs:
   - name: Title
@@ -34,6 +37,9 @@ import Dialog from '@mui/material/Dialog'
   open={ {{ element.values.open }} }
   {% if element.values.onclose %}onClose={ {{ element.values.onclose | functionOrCall }} }{% endif %}
   maxWidth={ {{ element.values.maxWidth }} }
+  {% if element.values.className %}
+    className={ {{element.values.className}} }
+  {% endif %}
 >
 {{ content | raw }}
 </Dialog>
