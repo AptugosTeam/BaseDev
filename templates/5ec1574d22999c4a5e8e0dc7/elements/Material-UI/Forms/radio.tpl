@@ -14,10 +14,7 @@ options:
     display: Value
     type: text
     options: ''
-  - name: name
-    display: Name
-    type: text
-    options: ''
+
   - name: label
     display: label
     type: text
@@ -34,6 +31,11 @@ options:
       return [['small', 'Small'], ['medium', 'Medium'], ['large', 'Large']]
     settings:
       default: medium
+    advanced: true
+  - name: name
+    display: Name attribute of the input element
+    type: text
+    options: ''
     advanced: true
   - name: sx
     display: Extra Styles
@@ -62,13 +64,13 @@ options:
     {% if element.values.value %}
       value={{ element.values.value |textOrVariable }}
     {% endif %}
-    {% if element.values.name %}
-      name={{ element.values.name |textOrVariable }}
-    {% endif %}
     {% if element.values.onchange %}
       onChange={{ element.values.onchange |textOrVariable }}
     {% endif %}
     size='{{ element.values.size }}'
+    {% if element.values.name %}
+      name={{ element.values.name |textOrVariable }}
+    {% endif %}
     {% if element.values.sx %}
      sx={ { {{ element.values.sx }} } }
     {% endif %}
