@@ -39,6 +39,11 @@ options:
     type: text
     options: ''
     advanced: true
+  - name: getLabelText
+    display: Get Label Text
+    type: function
+    options: ''
+    advanced: true
 */
 
 {% set bpr %}
@@ -68,5 +73,8 @@ import Rating from '@mui/material/Rating'
   {% endif %}
   {% if element.values.name %}
     name={{ element.values.name | textOrVariable }}
+  {% endif %}
+  {% if element.values.getLabelText %}
+    getLabelText={ {{ element.values.getLabelText }} }
   {% endif %}
 />
