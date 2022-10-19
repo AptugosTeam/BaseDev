@@ -33,7 +33,7 @@ options:
     required: true
     type: dropdown
     options: >-
-      AcUnit;Add;AddShoppingCart;AllInbox;AlternateEmail;ArrowBack;AttachFile;ChevronLeft;ChevronRight;Clear;CallMade;Delete;DeleteOutline;Download;Facebook;Favorite;Google;HelpOutline;Home;Instagram;Link;ManageAccounts;Menu;MoreVert;Person;Pinterest;Publish;Refresh;Search;Send;Settings;ShoppingBasket;ShoppingCart;SportsBasketball;Star;Twitter;ThumbUp;Visibility;WhatsApp;YouTube
+      return [['AcUnit', 'Ac Unit'], ['Add', 'Add'], ['AddShoppingCart', 'Add Shopping Cart'], ['AllInbox', 'All In Box'],['AlternateEmail', 'Alternate Email'],['ArrowBack', 'Arrow Back'],['AttachFile', 'Attach File'],['ChevronLeft', 'Chevron Left'],['ChevronRight', 'Chevron Right'],['Clear', 'Clear'],['CallMade', 'Call Made'],['Delete', 'Delete'],['DeleteOutline', 'Delete Outline'],['Download', 'Download'],['Facebook', 'Facebook'],['Favorite', 'Favorite'],['Google', 'Google'],['HelpOutline', 'Help Outline'],['Home', 'Home'],['Instagram', 'Instagram'],['Link', 'Link'],['ManageAccounts', 'Manage Accounts'],['Menu', 'Menu'],['MoreVert', 'More Vert'],['Person', 'Person'],['Pinterest', 'Pinterest'],['Publish', 'Publish'],['Refresh', 'Refresh'],['Search', 'Search'],['Send', 'Send'],['Settings', 'Settings'],['ShoppingBasket', 'Shopping Basket'],['ShoppingCart', 'Shopping Cart'],['SportsBasketball', 'Sports Basketball'],['Star', 'Star'],['Twitter', 'Twitter'],['ThumbUp', 'Thumb Up'],['Visibility', 'Visibility'],['WhatsApp', 'WhatsApp'],['YouTube', 'YouTube']]
   - name: iconstyle
     display: Icon Style
     type: dropdown
