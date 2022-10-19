@@ -38,7 +38,7 @@ options:
     display: Icon Style
     type: dropdown
     options: >-
-      Filled;Outlined;Rounded;TwoTone;Sharp
+      return [['Filled', 'Filled'], ['Outlined', 'Outlined'], ['Rounded', 'Rounded'], ['TwoTone', 'Two Tone'], ['Sharp', 'Sharp']]
 children: []
 */
 {% set addenum = '' %}
