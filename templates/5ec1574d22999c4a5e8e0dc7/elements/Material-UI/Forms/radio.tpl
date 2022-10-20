@@ -6,10 +6,6 @@ unique_id: Qeq87CZJ
 icon: f:radio.svg
 children: []
 options:
-  - name: checked
-    display: Checked
-    type: text
-    options: ''
   - name: value
     display: Value
     type: text
@@ -18,6 +14,16 @@ options:
     display: label
     type: text
     options: ''
+  - name: checked
+    display: Checked
+    type: function
+    options: ''
+    advanced: true
+  - name: sx
+    display: Extra Styles
+    type: text
+    options: ''
+    advanced: true
   - name: onchange
     display: On Change
     type: function
@@ -33,11 +39,6 @@ options:
     advanced: true
   - name: name
     display: Name attribute of the input element
-    type: text
-    options: ''
-    advanced: true
-  - name: sx
-    display: Extra Styles
     type: text
     options: ''
     advanced: true
@@ -57,11 +58,14 @@ options:
   <FormControlLabel value={{ element.values.value |textOrVariable }} label={{ element.values.label |textOrVariable }} control={
 {% endif %}
 <Radio
+    {% if element.values.value %}
+      value={{ element.values.value |textOrVariable }}
+    {% endif %}
     {% if element.values.checked %}
       checked={ {{ element.values.checked}} }
     {% endif %}
-    {% if element.values.value %}
-      value={{ element.values.value |textOrVariable }}
+    {% if element.values.sx %}
+     sx={ { {{ element.values.sx }} } }
     {% endif %}
     {% if element.values.onChange %}
       onChange={ {{ element.values.onChange | functionOrCall }} }
@@ -69,9 +73,6 @@ options:
     size='{{ element.values.size }}'
     {% if element.values.name %}
       name={{ element.values.name |textOrVariable }}
-    {% endif %}
-    {% if element.values.sx %}
-     sx={ { {{ element.values.sx }} } }
     {% endif %}
 />
 {% if element.values.label %}
