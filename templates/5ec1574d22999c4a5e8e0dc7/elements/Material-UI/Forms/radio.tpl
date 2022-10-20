@@ -14,14 +14,13 @@ options:
     display: Value
     type: text
     options: ''
-
   - name: label
     display: label
     type: text
     options: ''
   - name: onchange
     display: On Change
-    type: text
+    type: function
     options: ''
     advanced: true
   - name: size
@@ -59,13 +58,13 @@ options:
 {% endif %}
 <Radio
     {% if element.values.checked %}
-      checked={{ element.values.checked |textOrVariable }}
+      checked={ {{ element.values.checked}} }
     {% endif %}
     {% if element.values.value %}
       value={{ element.values.value |textOrVariable }}
     {% endif %}
-    {% if element.values.onchange %}
-      onChange={{ element.values.onchange |textOrVariable }}
+    {% if element.values.onChange %}
+      onChange={ {{ element.values.onChange | functionOrCall }} }
     {% endif %}
     size='{{ element.values.size }}'
     {% if element.values.name %}
