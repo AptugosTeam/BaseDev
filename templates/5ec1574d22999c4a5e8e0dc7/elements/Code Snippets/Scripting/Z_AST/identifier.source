@@ -9,7 +9,7 @@ name: js_identifier
 fullload: true
 */
 if (Block.outputConnection) {
-  return Block.getFieldValue('NAME')
+  return [Block.getFieldValue('NAME'), Blockly.JavaScript.ORDER_ATOMIC];
 } else {
-  return Block.getFieldValue('NAME') + 'www\n'
+  return Block.getFieldValue('NAME')
 }

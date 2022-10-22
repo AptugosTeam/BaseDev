@@ -16,6 +16,8 @@ fullload: true
       "name": "NAME"
     }
   ],
+  "previousStatement": null,
+  "nextStatement": null,
   "output": true,
   "colour": 120,
   "tooltip": "Basic -> Identifier"

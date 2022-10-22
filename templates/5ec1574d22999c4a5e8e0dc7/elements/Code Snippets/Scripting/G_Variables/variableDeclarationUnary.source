@@ -10,9 +10,15 @@ fullload: true
 */
 var theVar = Blockly.JavaScript.valueToCode(Block, 'VAR', Blockly.JavaScript.ORDER_NONE) || '0'
 var theValue = Blockly.JavaScript.valueToCode(Block, 'VALUE', Blockly.JavaScript.ORDER_NONE) || '0'
-console.log(theVar, theValue)
+var code
 if (theValue === 'undefined') {
-  return 'var ' + theVar + ';\n';
+  code = 'var ' + theVar
 } else {
-  return 'var ' + theVar + ' = ' + theValue + ';\n';
+  code = 'var ' + theVar + ' = ' + theValue
+}
+
+if (Block.outputConnection) {
+  return [code + '\n', Blockly.JavaScript.ORDER_ATOMIC];
+} else {
+  return code + '\n'
 }

@@ -23,6 +23,8 @@ fullload: true
       "helpUrl": "https://github.com/google/blockly/wiki/IfElse",
       "mutator": "clone",
       "output": null,
+      "previousStatement": null,
+      "nextStatement": null,
       "inputsInline": true,
       "tooltip": "AST -> Member expression.",
       "mutatorConfig": {
