@@ -48,24 +48,30 @@ children: []
 {% endif %}
 {{ save_delayed('bpr',bpr) }}
 {% if element.values.label %}
-{% set bpr %}
-import FormControl from '@mui/material/FormControl'
-import FormControlLabel from '@mui/material/FormControlLabel'
-{% endset %}
-{{ save_delayed('bpr',bpr) }}
-<FormControl margin='{{ element.values.margin|default("dense") }}'>
-<FormControlLabel control={
+  {% set bpr %}
+    import FormControl from '@mui/material/FormControl'
+    import FormControlLabel from '@mui/material/FormControlLabel'
+  {% endset %}
+  {{ save_delayed('bpr',bpr) }}
+  <FormControl margin='{{ element.values.margin|default("dense") }}'>
+  <FormControlLabel control={
 {% endif %}
-<{{ compo }}
-    checked={ {{ element.values.Checked }} }
-    {% if element.values.OnClick %}
-      {% if compo == 'Checkbox' %}onClickCapture={{ element.values.OnClick }}{% endif %}
-      {% if compo == 'ThreeCheckbox' or compo == 'Switch' %}onChange={{ element.values.OnClick }}{% endif %}
+  <{{ compo }}
+    {% if element.values.Checked %}
+      checked={ {{ element.values.Checked }} }
     {% endif %}
-/>
+    {% if element.values.OnClick %}
+      {% if compo == 'Checkbox' %
+        onClick={{ element.values.OnClick }}
+      {% endif %}
+      {% if compo == 'ThreeCheckbox' or compo == 'Switch' %}
+        onChange={{ element.values.OnClick }}
+      {% endif %}
+    {% endif %}
+  />
 {% if element.values.label %}
-  }
-  label={{ element.values.label|textOrVariable }}
-/>
-</FormControl>
+    }
+    label={{ element.values.label|textOrVariable }}
+  />
+  </FormControl>
 {% endif %}
