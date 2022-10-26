@@ -42,6 +42,18 @@ options:
     type: text
     options: ''
     advanced: true
+  - name: required
+    display: Required
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
+  - name: Color
+    display: Color
+    type: dropdown
+    options: default;primary;secondary;error;info;success;warning
+    settings:
+      default: primary
 */
 
 {% set bpr %}
@@ -55,7 +67,13 @@ options:
   {{ save_delayed('bpr',bpr) }}
 {% endif %}
 {% if element.values.label %}
-  <FormControlLabel value={{ element.values.value |textOrVariable }} label={{ element.values.label |textOrVariable }} control={
+  <FormControlLabel 
+  
+  {% if element.values.value %}
+    value={{ element.values.value |textOrVariable }} 
+    {% else %}
+    {% endif %}
+  label={{ element.values.label |textOrVariable }} control={
 {% endif %}
 <Radio
     {% if element.values.value %}
@@ -73,6 +91,13 @@ options:
     size='{{ element.values.size }}'
     {% if element.values.name %}
       name={{ element.values.name |textOrVariable }}
+    {% endif %}
+    {% if element.values.required %}
+      required={true} 
+    {% else %}
+    {% endif %}
+    {% if element.values.Color %}
+      color='{{ element.values.Color }}'
     {% endif %}
 />
 {% if element.values.label %}
