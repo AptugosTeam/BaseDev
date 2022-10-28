@@ -21,7 +21,7 @@ options:
         const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;
         const varsToAdd = {
           [aptugo.friendly(element.name) + 'loadoptions']: {
-            page: 1,
+            page: 2,
             populate: true,
             limit: 25,
             sort: {},
