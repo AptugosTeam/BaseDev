@@ -29,6 +29,13 @@ options:
     type: function
     options: ''
     advanced: true
+  - name: Color
+    display: Color
+    type: dropdown
+    advanced: true
+    options: default;primary;secondary;error;info;success;warning
+    settings:
+      default: primary
   - name: size
     display: Size
     type: dropdown
@@ -48,12 +55,6 @@ options:
     advanced: true
     settings:
       default: false
-  - name: Color
-    display: Color
-    type: dropdown
-    options: default;primary;secondary;error;info;success;warning
-    settings:
-      default: primary
 */
 
 {% set bpr %}
@@ -88,6 +89,9 @@ options:
     {% if element.values.onChange %}
       onChange={ {{ element.values.onChange | functionOrCall }} }
     {% endif %}
+    {% if element.values.Color %}
+      color='{{ element.values.Color }}'
+    {% endif %}
     size='{{ element.values.size }}'
     {% if element.values.name %}
       name={{ element.values.name |textOrVariable }}
@@ -95,9 +99,6 @@ options:
     {% if element.values.required %}
       required={true} 
     {% else %}
-    {% endif %}
-    {% if element.values.Color %}
-      color='{{ element.values.Color }}'
     {% endif %}
 />
 {% if element.values.label %}
