@@ -13,12 +13,13 @@ options:
   - name: color
     display: Color
     type: dropdown
-    options: default;primary;secondary;action;disabled
+    options: 
+      return [['default', 'Default'],['primary', 'Primary'],['secondary', 'Secondary'],['error', 'Error'],['warning', 'Warning'],['info', 'Info'],['success', 'Success'],['action', 'Action'],['disabled', 'Disabled']]
   - name: className
     display: className
     type: styles
   - name: fontSize
-    display: Size
+    display: Size (rem, em, px)
     type: text
 */
 {% set bpr %}
