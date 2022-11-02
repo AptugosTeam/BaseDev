@@ -50,6 +50,6 @@ require('./app/routes/{{ table.name | friendly | lower }}.routes.js')(app)
 
 {{ insert_setting('ServerRoute') | raw }}
 
-app.use('/images', express.static({{ insert_setting('imagesFolder')|default("__dirname + '/../dist/img'") }}))
+app.use('/images', express.static({% if imagesfolder %}"{{ imagesfolder }}"{% else %}__dirname + '/../dist/img'{% endif %}))
 
 module.exports = app
