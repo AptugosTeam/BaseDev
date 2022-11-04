@@ -63,7 +63,7 @@ String.prototype.csvToArray = function (o) {
   return a;
 }
 
-var contents = aptugo.readFile(Parameters.csv)
+var contents = Parameters.csv.toString()
 var finalData = []
 var lines = contents.split('\n')
 lines.shift()
