@@ -28,6 +28,13 @@ options:
   - name: gridLabelOffset
     display: Grid Label Offset
     type: text
+  - name: gridShape
+    display: Grid Shape
+    type: dropdown
+    options: 
+      return [['circular', 'Circular'],['linear', 'Linear']]
+    settings:
+      default: circular
 */
 {% set bpr %}
 import { ResponsiveRadar } from '@nivo/radar'
@@ -44,7 +51,7 @@ import { ResponsiveRadar } from '@nivo/radar'
   borderWidth={2}
   borderColor={ { from: 'color' } }
   gridLevels={5}
-  gridShape="circular"
+  gridShape='{{ element.values.gridShape | default("circular") }}'
   gridLabelOffset={ {{ element.values.gridLabelOffset | default('36')}} }
   enableDots={false}
   dotSize={10}
