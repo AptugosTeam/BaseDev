@@ -5,7 +5,7 @@ unique_id: dDixye51
 */
 import axios from 'axios'
 
-const API_URL = '{{ settings.apiURL }}/api/users/'
+const API_URL = 'https://licensing2.aptugo.com:3456/api/licenses'
 
 class AuthService {
   login(email, password) {

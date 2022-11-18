@@ -6,7 +6,7 @@ unique_id: QcDotLgm
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = "{{ settings.apiURL }}/api/users/";
+const API_URL = "https://licensing2.aptugo.com:3456/api/licenses";
 
 class UserService {
   getPublicContent() {
