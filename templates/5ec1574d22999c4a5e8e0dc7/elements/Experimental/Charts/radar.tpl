@@ -25,6 +25,9 @@ options:
   - name: indexBy
     display: Index By
     type: text
+  - name: gridLabelOffset
+    display: Grid Label Offset
+    type: text
 */
 {% set bpr %}
 import { ResponsiveRadar } from '@nivo/radar'
@@ -36,13 +39,13 @@ import { ResponsiveRadar } from '@nivo/radar'
   indexBy={{ element.values.indexBy | textOrVariable }}
   colors={ { scheme: '{{ element.values.Scheme }}' } }
   maxValue="auto"
-  margin={ { top: 70, right: 80, bottom: 40, left: 80 } }
+  margin={ { top: 80, right: 80, bottom: 30, left: 90 } }
   curve="linearClosed"
   borderWidth={2}
   borderColor={ { from: 'color' } }
   gridLevels={5}
   gridShape="circular"
-  gridLabelOffset={36}
+  gridLabelOffset={ {{ element.values.gridLabelOffset | default('36')}} }
   enableDots={false}
   dotSize={10}
   dotColor={ { theme: 'background' } }
@@ -61,9 +64,10 @@ import { ResponsiveRadar } from '@nivo/radar'
       anchor: 'top-left',
       direction: 'column',
       translateX: -50,
-      translateY: -40,
+      translateY: -70,
       itemWidth: 80,
       itemHeight: 20,
+      itemsSpacing: 5,
       itemTextColor: '#999',
       symbolSize: 12,
       symbolShape: 'circle',
