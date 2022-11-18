@@ -5,12 +5,12 @@ unique_id: dDixye51
 */
 import axios from 'axios'
 
-const API_URL = 'https://licensing2.aptugo.com:3456/api/licenses'
+const API_URL = 'https://licensing2.aptugo.com:3456/v2/accounts'
 
 class AuthService {
   login(email, password) {
     return axios
-      .post(API_URL + 'authenticate', {
+      .post(API_URL, {
         email,
         password,
       })
