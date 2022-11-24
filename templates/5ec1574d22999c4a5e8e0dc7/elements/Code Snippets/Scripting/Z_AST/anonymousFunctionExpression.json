@@ -10,17 +10,12 @@ fullload: true
 */
 {
   "type": "js_anonimous_function_expression",
-  "message0": "function %1 ( %2 ) %3 %4",
+  "message0": "function ( %1 ) %2",
+  "mutator": "clone",
   "args0": [
-    {
-      "type": "input_dummy"
-    },
     {
       "type": "input_value",
       "name": "PARAM0"
-    },
-    {
-      "type": "input_dummy"
     },
     {
       "type": "input_statement",
@@ -30,5 +25,11 @@ fullload: true
   "inputsInline": true,
   "output": null,
   "previousStatement": null,
-  "nextStatement": null
+  "nextStatement": null,
+  "mutatorConfig": {
+    "baseName": "PARAM",
+    "sourceBlock": "PARAM0",
+    "xmlAttrName": "parameters"
+  },
+  "elementsCount": 1
 }

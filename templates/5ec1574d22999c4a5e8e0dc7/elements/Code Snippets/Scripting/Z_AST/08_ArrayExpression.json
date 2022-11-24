@@ -16,24 +16,29 @@ fullload: true
       "args0": [
         {
           "type": "input_value",
-          "name": "ELEMENT0"
+          "name": "ARGUMENT0"
         }
       ],
+      "mutator": "clone",
       "inputsInline": false,
       "tooltip": "AST -> Array Expression",
       "helpUrl": "",
       "output": null,
       "style": "loop_blocks",
       "previousStatement": null,
-      "nextStatement": null
+      "nextStatement": null,
+      "mutatorConfig": {
+        "baseName": "ARGUMENT",
+        "sourceBlock": "ARGUMENT0",
+        "xmlAttrName": "arguments"
+      }
     })
     this.mutatorConfig = {
-      baseName: "ELEMENT",
-      sourceBlock: "ELEMENT0",
+      baseName: "ARGUMENT",
+      sourceBlock: "ARGUMENT0",
       xmlAttrName: "arguments",
       mutatorContainer: "js_array_expression_container",
       mutatorArgument: "js_array_expression_element",
     }
-    this.elementsCount = 1
   }
 }

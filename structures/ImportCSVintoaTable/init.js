@@ -5,7 +5,8 @@ Parameters.Name = aptugo.friendly(Parameters.Name).toLowerCase()
 const untitledTables = Application.tables.filter(table => table.name.substr(0,8) === 'Untitled').length
 const singleName = `${Parameters.Name}record`
 
-var contents = aptugo.readFile(Parameters.csv)
+var contents = Parameters.csv.toString()
+
 var finalFields = []
 var lines = contents.split('\n')
 var headers = lines.shift()

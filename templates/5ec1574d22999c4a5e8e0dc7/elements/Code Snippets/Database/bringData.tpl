@@ -14,7 +14,7 @@ fullload: true
   "args0": [
     {
       "type": "input_dummy",
-      "name": "SELECTEDTABLE"
+      "name": "MODEL"
     },
     {
       "type": "field_image",

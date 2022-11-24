@@ -45,8 +45,9 @@ options:
               errStatus: 'String',
               errMessage: 'String'
             }
-          };
-          aptugo.variables.setPageVariable(page, element.unique_id, finalVarsToAdd);
+          }
+          aptugo.variables.setElementVariable( element.unique_id, finalVarsToAdd)
+          aptugo.variables.setPageVariable(page, element.unique_id, finalVarsToAdd)
           if (element.values.variableName) {
             aptugo.variables.setPageVariable(page, element.unique_id + '_2', { [element.values.variableName]: { ...varsToAdd } });
           }
@@ -170,7 +171,7 @@ React.useEffect(() => {
 },[{{ innervarname }}loadoptions{% if element.values.searchString %}, {{ element.values.searchString }}{% endif %}])
 {% endset %}
 {{ save_delayed('ph',ph)}}
-{% if element.values.onload %}
+{% if element.values.onload or element.children %}
 {% if element.values.searchString %}
   {% set functionCall = 'searchingStatus' %}
 {% else %}
@@ -179,6 +180,7 @@ React.useEffect(() => {
 React.useEffect(() => {
   if ({{ table.name | friendly | lower }}Data.{{ functionCall }} === 'loaded') {
     {{ element.values.onload }}
+    {% if element.children %}{{ content | raw }}{% endif %}
   }
 }, [{{ table.name | friendly | lower }}Data.{{ functionCall }}])
 {% endif %}

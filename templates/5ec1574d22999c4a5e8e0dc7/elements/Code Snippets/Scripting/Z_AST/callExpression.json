@@ -12,7 +12,7 @@ fullload: true
   init: function() {
     this.jsonInit({
       "type": "js_call_expression",
-      "message0": "Call: %1 ( %2 ) %3",
+      "message0": "Call: %1 ( %2 )",
       "args0": [
         {
           "type": "input_value",
@@ -21,10 +21,6 @@ fullload: true
         {
           "type": "input_value",
           "name": "ARGUMENT0"
-        },
-        {
-          "type": "input_dummy",
-          "name": "END"
         }
       ],
       "inputsInline": false,
@@ -41,6 +37,6 @@ fullload: true
       sourceBlock: "ARGUMENT0",
       xmlAttrName: "arguments"
     }
-    this.elementsCount = 2
+    this.elementsCount = 1
   }
 }

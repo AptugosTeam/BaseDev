@@ -33,6 +33,8 @@ fullload: true
           "name": "STACK"
         }
       ],
+      "previousStatement": null,
+      "nextStatement": null,
       "inputsInline": true,
       "tooltip": "Function Expression",
       "helpUrl": "",

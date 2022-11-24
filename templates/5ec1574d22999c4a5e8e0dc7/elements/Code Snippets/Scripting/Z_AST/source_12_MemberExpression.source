@@ -8,5 +8,15 @@ unique_id: 3U5p3q7p
 name: js_member_expression
 fullload: true
 */
-console.log("The Block", Block);
-return "hola"
+const args = []
+for (var i = 0; i < Block.argumentsCount; i++) {
+  args.push( Blockly.JavaScript.valueToCode(Block, 'MEMBER' + i, Blockly.JavaScript.ORDER_ATOMIC) )
+}
+const joinedArgs = args.join('.')
+code = joinedArgs
+
+if (Block.outputConnection.targetConnection) {
+  return [code, Blockly.JavaScript.ORDER_MEMBER]
+} else {
+  return code
+}

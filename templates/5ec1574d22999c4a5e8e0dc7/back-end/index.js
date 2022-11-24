@@ -14,7 +14,8 @@ const fileupload = require('express-fileupload')
 const https = require('https')
 {% endif %}
 const app = express()
-app.set('filesFolder', {{ insert_setting('imagesFolder')|default("__dirname + '/../dist/img'") }} )
+{% set imagesfolder = insert_setting('imagesFolder') %}
+{% if imagesfolder %}app.set('filesFolder', "{{ imagesfolder }}" ){% else %}app.set('filesFolder',__dirname + '/../dist/img'){% endif %}
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
@@ -72,7 +73,7 @@ require('./app/routes/{{ table.name | friendly | lower }}.routes.js')(app)
 
 {{ insert_setting('ServerRoute') | raw }}
 
-app.use('/images', express.static({{ insert_setting('imagesFolder')|default("__dirname + '/../dist/img'") }}))
+app.use('/images', express.static({% if imagesfolder %}"{{ imagesfolder }}"{% else %}__dirname + '/../dist/img'{% endif %}))
 
 let tries = 0
 

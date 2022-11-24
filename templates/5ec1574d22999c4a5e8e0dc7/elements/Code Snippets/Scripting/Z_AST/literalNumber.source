@@ -8,4 +8,8 @@ unique_id: EOfLlB3G
 name: js_literal_number
 fullload: true
 */
-return [Block.getFieldValue('NUMBER'), Blockly.JavaScript.ORDER_NONE]
+if (Block.outputConnection) {
+  return [Block.getFieldValue('NUMBER'), Blockly.JavaScript.ORDER_ATOMIC]
+} else {
+  return Block.getFieldValue('NUMBER')
+}
