@@ -21,6 +21,7 @@ settings:
 {% set bpr %}
   import Badge from '@mui/material/Badge';
   import TextField from '@mui/material/TextField';
+  import dayjs from 'dayjs';
   import { DatePicker } from '@mui/x-date-pickers/DatePicker';
   import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
   import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
