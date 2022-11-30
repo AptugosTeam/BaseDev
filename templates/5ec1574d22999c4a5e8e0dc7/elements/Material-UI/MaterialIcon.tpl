@@ -31,7 +31,7 @@ import { {{ element.values.icon|default('HelpOutline') }} } from '@mui/icons-mat
       color="{{ element.values.color }}"
     {% endif %} 
     {% if element.values.className %}
-      className={{ element.values.className|textOrVariable }}
+      className={ {{ element.values.className }} }
     {% endif %}
       sx={ {
         {% if element.values.fontSize %}
