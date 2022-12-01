@@ -26,16 +26,16 @@ options:
 import { {{ element.values.icon|default('HelpOutline') }} } from '@mui/icons-material';
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<{{ element.values.icon|default('HelpOutline') }} 
-    {% if element.values.color %}
-      color="{{ element.values.color }}"
-    {% endif %} 
-    {% if element.values.className %}
-      className={ {{ element.values.className }} }
+<{{ element.values.icon|default('HelpOutline') }}
+  {% if element.values.color %}
+    color="{{ element.values.color }}"
+  {% endif %}
+  {% if element.values.className %}
+    className={ {{ element.values.className }} }
+  {% endif %}
+  sx={ {
+    {% if element.values.fontSize %}
+      fontSize: {{ element.values.fontSize }}
     {% endif %}
-      sx={ {
-        {% if element.values.fontSize %}
-          fontSize: {{ element.values.fontSize }}
-        {% endif %}
-        } }
-  />
+  } }
+/>
