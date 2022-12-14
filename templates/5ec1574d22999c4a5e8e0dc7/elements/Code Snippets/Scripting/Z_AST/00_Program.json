@@ -12,7 +12,6 @@ fullload: true
   "type": "Program",
   "message0": "Start!",
   "nextStatement": null,
-  "style": "variable_blocks",
-  "tooltip": "AST -> Program",
-  "helpUrl": ""
+  "style": "start_block",
+  "tooltip": "AST -> Program"
 }

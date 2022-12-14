@@ -25,5 +25,6 @@ fullload: true
   "previousStatement": "js_json_element",
   "nextStatement": "js_json_element",
   "inputsInline": true,
+  "style": "variable_blocks",
   "tooltip": "AST -> Element of an object in JSON format."
 }
