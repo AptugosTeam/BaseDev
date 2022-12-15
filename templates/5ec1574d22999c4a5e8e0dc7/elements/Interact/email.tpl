@@ -16,7 +16,7 @@ options:
     options: ''
     advanced: true
     settings:
-      default: "'InlineLink'"
+      default: "InlineLink"
   - name: service
     display: Email Sending service
     type: dropdown
