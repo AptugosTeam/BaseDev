@@ -10,11 +10,19 @@ options:
     display: Icon
     type: text
     options: Access
+    required: true
   - name: color
     display: Color
     type: dropdown
     options: 
-      return [['default', 'Default'],['primary', 'Primary'],['secondary', 'Secondary'],['error', 'Error'],['warning', 'Warning'],['info', 'Info'],['success', 'Success'],['action', 'Action'],['disabled', 'Disabled']]
+      return [['primary', 'Primary'],['secondary', 'Secondary'],['error', 'Error'],['warning', 'Warning'],['info', 'Info'],['success', 'Success'],['action', 'Action'],['disabled', 'Disabled'],['custom', 'Custom']]
+  - name: custom
+    display: Custom Color
+    type: text
+    settings:
+      propertyCondition: color
+      condition: custom
+      active: true
   - name: className
     display: className
     type: styles
@@ -27,15 +35,14 @@ import { {{ element.values.icon|default('HelpOutline') }} } from '@mui/icons-mat
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <{{ element.values.icon|default('HelpOutline') }}
-  {% if element.values.color %}
-    color="{{ element.values.color }}"
+  {% if element.values.color != 'custom' %}
+    color="{{ element.values.color|default('inherit') }}"
   {% endif %}
   {% if element.values.className %}
     className={ {{ element.values.className }} }
   {% endif %}
   sx={ {
-    {% if element.values.fontSize %}
-      fontSize: {{ element.values.fontSize }}
-    {% endif %}
+    {% if element.values.fontSize %}fontSize: '{{ element.values.fontSize }}',{% endif %}
+    {% if element.values.color == 'custom' %}color: "{{ element.values.custom }}"{% endif %}
   } }
 />
