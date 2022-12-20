@@ -42,7 +42,7 @@ import { {{ element.values.icon|default('HelpOutline') }} } from '@mui/icons-mat
     className={ {{ element.values.className }} }
   {% endif %}
   sx={ {
-    {% if element.values.fontSize %}fontSize: '{{ element.values.fontSize }}',{% endif %}
+    {% if element.values.fontSize %}fontSize: {{ element.values.fontSize }},{% endif %}
     {% if element.values.color == 'custom' %}color: "{{ element.values.custom }}"{% endif %}
   } }
 />
