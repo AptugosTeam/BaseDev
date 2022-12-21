@@ -11,7 +11,7 @@ options:
     type: text
     options: ''
   - name: disabled
-    display: disabled?
+    display: Disabled?
     type: checkbox
     advanced: true
     settings:

@@ -6,12 +6,12 @@ icon: ico-menu
 children: []
 options:
   - name: anchorElement
-    display: Anchor Element
+    display: Open Variable
     type: text
     options: ''
   - name: onClose
     display: On Close
-    type: text
+    type: function
     options: ''
   - name: positionVertical
     display: Position Vertical
@@ -41,26 +41,29 @@ import MenuItem from '@mui/material/MenuItem'
   {% endset %}
   {{ save_delayed('ph',ph) }}
   {% set anchorElement = 'anchorEl' %}
+  {% set onClose = '() => setAnchorEl(null)' %}
 {% else %}
   {% set anchorElement = element.values.anchorElement %}
 {% endif %}
-{% if not element.values.onClose %}
-  {% set onClose = '() => setAnchorEl(null)' %}
-{% else %}
-  {% set onClose = element.values.onClose %}
-{% endif %}
 <Menu
-  anchorEl={ {{ anchorElement }} }
-  anchorOrigin={ {
-    vertical: '{{element.values.positionVertical|default("top")}}',
-    horizontal: '{{element.values.positionHorizontal|default("center")}}',
+    anchorEl={ {{ anchorElement }} }
+    anchorOrigin={ {
+      vertical: '{{element.values.positionVertical|default("top")}}',
+      horizontal: '{{element.values.positionHorizontal|default("center")}}',
+    } }
+    transformOrigin={ {
+      vertical: 'top',
+      horizontal: 'center',
+    } }
+    open={ Boolean({{ anchorElement }}) }
+  {% if not element.values.onClose and element.values.anchorElement %}
+    onClose={ () => {set{{ element.values.anchorElement }}(null)
   } }
-  transformOrigin={ {
-    vertical: 'top',
-    horizontal: 'center',
-  } }
-  open={ Boolean({{ anchorElement }}) }
-  onClose={ {{ onClose }} }
+  {% elseif element.values.onClose %}
+    onClose={ {{ element.values.onClose | functionOrCall }} }
+  {% else %}
+    onClose={ {{ onClose }} }
+  {% endif %}
 >
 {{ content | raw }}
 </Menu>
