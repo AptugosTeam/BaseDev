@@ -25,6 +25,8 @@ options:
     type: dropdown
     options: >-
       return [['Filled', 'Filled'], ['Outlined', 'Outlined'], ['Rounded', 'Rounded'], ['TwoTone', 'Two Tone'], ['Sharp', 'Sharp']]
+    settings:
+      default: Filled
   - name: Color
     display: Color
     type: dropdown
@@ -42,6 +44,8 @@ options:
   - name: fontSize
     display: Size
     type: text
+    settings:
+      default: 16
   - name: fontUnit
     display: Unit
     type: dropdown
@@ -56,7 +60,7 @@ options:
 children: []
 */
 {% set addenum = '' %}
-{% if element.values.iconstyle and element.values.iconstyle != 'Filled' %}
+{% if element.values.iconstyle and element.values.iconstyle != 'Filled' and element.values.icon != 'Google' and element.values.icon != 'Twitter' and element.values.icon != 'Instagram' and element.values.icon != 'Pinterest' %}
   {% set addenum = element.values.iconstyle %}
 {% endif %}
 {% set bpr %}
