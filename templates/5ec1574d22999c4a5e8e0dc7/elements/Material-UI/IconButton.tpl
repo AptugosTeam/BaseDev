@@ -10,20 +10,6 @@ options:
     display: On Click
     type: text
     options: ''
-  - name: Color
-    display: Color
-    type: dropdown
-    options:
-      return [['default', 'Default'], ['inherit', 'Inherit'], ['primary', 'Primary'], ['secondary', 'Secondary'], ['error', 'Error'], ['info', 'Info'], ['success', 'Success'], ['warning', 'Warning']]
-    settings:
-      default: default
-  - name: size
-    display: Size
-    type: dropdown
-    options:
-      return [['small', 'Small'], ['medium', 'Medium'], ['large', 'Large']]
-    settings:
-      default: medium
   - name: className
     display: ClassName
     type: styles
@@ -39,6 +25,34 @@ options:
     type: dropdown
     options: >-
       return [['Filled', 'Filled'], ['Outlined', 'Outlined'], ['Rounded', 'Rounded'], ['TwoTone', 'Two Tone'], ['Sharp', 'Sharp']]
+  - name: Color
+    display: Color
+    type: dropdown
+    options: 
+      return [['custom', 'Custom'], ['default', 'Default'], ['inherit', 'Inherit'], ['primary', 'Primary'], ['secondary', 'Secondary'], ['error', 'Error'], ['info', 'Info'], ['success', 'Success'], ['warning', 'Warning']]
+    settings:
+      default: default
+  - name: custom
+    display: Custom Color
+    type: text
+    settings:
+      propertyCondition: Color
+      condition: custom
+      active: true
+  - name: fontSize
+    display: Size
+    type: text
+  - name: fontUnit
+    display: Unit
+    type: dropdown
+    options: >-
+      return [['px', 'Px'], ['em', 'Em'], ['rem', 'Rem']]
+    settings:
+      default: px
+  - name: sx
+    display: Sx Properties
+    type: text
+    advanced: true
 children: []
 */
 {% set addenum = '' %}
@@ -54,10 +68,9 @@ import {{element.values.icon}}{{ addenum }}Icon from '@mui/icons-material/{{elem
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <IconButton
-  {% if element.values.Color %}
-    color='{{ element.values.Color }}'
+  {% if element.values.Color != 'custom' %}
+    color="{{ element.values.Color }}"
   {% endif %}
-  size='{{ element.values.size }}'
   {% if element.values.Action %}
     onClick={ {{ element.values.Action | functionOrCall }} }
   {% endif %}
@@ -66,7 +79,19 @@ import {{element.values.icon}}{{ addenum }}Icon from '@mui/icons-material/{{elem
   {% endif %}
 >
   {% if element.values.icon %}
-    <{{element.values.icon}}{{ addenum }}Icon />
+    <{{element.values.icon}}{{ addenum }}Icon
+      {% if element.values.sx or element.values.fontSize %}
+        sx={ {
+          {% if element.values.fontSize %}
+            fontSize: "{{ element.values.fontSize }}{{ element.values.fontUnit|default('px') }}",
+          {% endif %}
+          {% if element.values.Color == 'custom' %}
+            color: "{{ element.values.custom }}",
+          {% endif %}
+          {{element.values.sx}}
+        } }
+      {% endif %}
+    />
   {% endif %}
   {{ content | raw }}
 </IconButton>
