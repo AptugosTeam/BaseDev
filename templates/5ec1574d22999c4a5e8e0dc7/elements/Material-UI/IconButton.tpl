@@ -60,7 +60,7 @@ options:
 children: []
 */
 {% set addenum = '' %}
-{% if element.values.iconstyle and element.values.iconstyle != 'Filled' and element.values.icon != 'Google' and element.values.icon != 'Twitter' and element.values.icon != 'Instagram' and element.values.icon != 'Pinterest' %}
+{% if element.values.iconstyle and element.values.iconstyle != 'Filled' and element.values.icon != 'Google' and element.values.icon != 'Twitter' and element.values.icon != 'Instagram' and element.values.icon != 'Pinterest' and element.values.icon != 'WhatsApp' and element.values.icon != 'YouTube' %}
   {% set addenum = element.values.iconstyle %}
 {% endif %}
 {% set bpr %}
