@@ -15,7 +15,7 @@ options:
     options: ''
   - name: onClick
     display: On Click
-    type: text
+    type: function
     options: ''
   - name: className
     display: ClassName
@@ -26,13 +26,22 @@ options:
 import clsx from 'clsx'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-  {% set class = 'clsx(' ~ element.values.className|join(',') ~ ')' %}
+  {% set class = 'clsx(' ~ element.values.className|join('') ~ ')' %}
 {% else %}
   {% set class = element.values.className %}
 {% endif %}
 <TopMenuItem
-  {% if element.values.className %}className={ {{ class }} }{% endif %}
-  {% if element.values.text %}text={{ element.values.text | textOrVariable}}{% endif %}
-  {% if element.values.link %}link={{ element.values.link | textOrVariable }}{% endif %}
-  {% if element.values.onClick %}onClickCapture={ {{ element.values.onClick | functionOrCall }} }{% endif %}
->{{ content|raw }}</TopMenuItem>
+  {% if element.values.className %}
+    className={ {{ class }} }
+  {% endif %}
+  {% if element.values.text %}
+    text={{ element.values.text | textOrVariable}}
+  {% endif %}
+  {% if element.values.link %}
+    link={{ element.values.link | textOrVariable }}
+  {% endif %}
+  {% if element.values.onClick %}
+    onClickCapture={ {{ element.values.onClick | functionOrCall }} }
+  {% endif %}
+  >{{ content|raw }}
+</TopMenuItem>
