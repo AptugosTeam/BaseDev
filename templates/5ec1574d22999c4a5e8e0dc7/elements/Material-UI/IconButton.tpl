@@ -45,7 +45,7 @@ options:
     display: Size
     type: text
     settings:
-      default: 16
+      default: 24
   - name: fontUnit
     display: Unit
     type: dropdown
