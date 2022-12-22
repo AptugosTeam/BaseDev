@@ -11,7 +11,7 @@ options:
     type: text
     options: ''
   - name: label
-    display: label
+    display: Label
     type: text
     options: ''
   - name: checked
@@ -33,7 +33,7 @@ options:
     display: Color
     type: dropdown
     advanced: true
-    options: default;primary;secondary;error;info;success;warning
+    options: [['default', 'Default'], ['primary', 'Primary'], ['secondary', 'Secondary'], ['error', 'Error'],['info', 'Info'],['success', 'Success'],['warning', 'Warning']] 
     settings:
       default: primary
   - name: size
