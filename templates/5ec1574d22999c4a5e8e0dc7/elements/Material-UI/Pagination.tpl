@@ -41,6 +41,13 @@ options:
     type: variable
     options: ''
     advanced: true
+  - name: shape
+    display: shape
+    type: dropdown
+    options: circular;rounded
+    settings:
+      active: true
+      default: 'circular'
 */
 {% set bpr %}
 import Pagination from '@mui/material/Pagination'
@@ -53,4 +60,5 @@ import Pagination from '@mui/material/Pagination'
   {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
   {% if element.values.disabled %}disabled={ {{element.values.disabled}} }{% endif %}
   {% if element.values.defaultPage %}defaultPage={ {{element.values.defaultPage}} }{% endif %}
+  {% if element.values.shape %}shape={ '{{element.values.shape}}' }{% endif %}
 />
