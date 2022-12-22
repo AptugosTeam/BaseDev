@@ -30,6 +30,12 @@ options:
     display: On Change
     type: function
     options: ''
+  - name: disabled
+    display: Disabled
+    type: variable
+    options: ''
+    settings:
+      active: true
 */
 {% set bpr %}
 import Pagination from '@mui/material/Pagination'
@@ -39,5 +45,6 @@ import Pagination from '@mui/material/Pagination'
   count={ {{ element.values.count|default(10) }}}
   {% if element.values.color %}color={ {{ element.values.color }} }{% endif %}
   {% if element.values.boundaryCount %}boundaryCount={ {{ element.values.boundaryCount }} }{% endif %}
+  {% if element.values.disabled %}disabled={ {{element.values.disabled}} }{% endif %}
   {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
 />
