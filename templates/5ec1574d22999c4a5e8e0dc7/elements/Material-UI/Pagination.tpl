@@ -56,6 +56,13 @@ options:
     display: Hide Previous Button
     type: variable
     advanced: true
+  - name: size
+    display: size
+    type: dropdown
+    options: small;medium;large
+    settings:
+      active: true
+      default: 'medium'
 */
 {% set bpr %}
 import Pagination from '@mui/material/Pagination'
@@ -71,4 +78,5 @@ import Pagination from '@mui/material/Pagination'
   {% if element.values.shape %}shape={ '{{element.values.shape}}' }{% endif %}
   {% if element.values.hideNextButton %}hideNextButton={ {{element.values.hideNextButton}} }{% endif %}
   {% if element.values.hidePrevButton %}hidePrevButton={ {{element.values.hidePrevButton}} }{% endif %}
+  {% if element.values.size %}size={ '{{element.values.size}}' }{% endif %}
 />
