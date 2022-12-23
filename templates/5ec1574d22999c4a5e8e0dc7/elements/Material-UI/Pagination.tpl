@@ -63,6 +63,10 @@ options:
     settings:
       active: true
       default: 'medium'
+  - name: style
+    display: Extra Styles
+    type: text
+    options: ''
 */
 {% set bpr %}
 import Pagination from '@mui/material/Pagination'
@@ -79,4 +83,5 @@ import Pagination from '@mui/material/Pagination'
   {% if element.values.hideNextButton %}hideNextButton={ {{element.values.hideNextButton}} }{% endif %}
   {% if element.values.hidePrevButton %}hidePrevButton={ {{element.values.hidePrevButton}} }{% endif %}
   {% if element.values.size %}size={ '{{element.values.size}}' }{% endif %}
+  {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
 />
