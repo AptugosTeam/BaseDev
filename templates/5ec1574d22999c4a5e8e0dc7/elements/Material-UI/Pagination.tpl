@@ -48,6 +48,14 @@ options:
     settings:
       active: true
       default: 'circular'
+  - name: hideNextButton
+    display: Hide Next Button
+    type: variable
+    advanced: true
+  - name: hidePrevButton
+    display: Hide Previous Button
+    type: variable
+    advanced: true
 */
 {% set bpr %}
 import Pagination from '@mui/material/Pagination'
@@ -61,4 +69,6 @@ import Pagination from '@mui/material/Pagination'
   {% if element.values.disabled %}disabled={ {{element.values.disabled}} }{% endif %}
   {% if element.values.defaultPage %}defaultPage={ {{element.values.defaultPage}} }{% endif %}
   {% if element.values.shape %}shape={ '{{element.values.shape}}' }{% endif %}
+  {% if element.values.hideNextButton %}hideNextButton={ {{element.values.hideNextButton}} }{% endif %}
+  {% if element.values.hidePrevButton %}hidePrevButton={ {{element.values.hidePrevButton}} }{% endif %}
 />
