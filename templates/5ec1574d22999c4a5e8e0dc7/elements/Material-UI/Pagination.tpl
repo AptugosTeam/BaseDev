@@ -10,7 +10,6 @@ options:
     display: Pages Count
     type: text
     options: ''
-    required: true
     settings:
       active: true
       default: '10'
