@@ -10,6 +10,7 @@ options:
     display: Pages Count
     type: text
     options: ''
+    required: true
     settings:
       active: true
       default: '10'
@@ -34,6 +35,7 @@ options:
     display: Disabled
     type: variable
     options: ''
+    advanced: true
     settings:
       active: true
   - name: defaultPage
