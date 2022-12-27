@@ -8,7 +8,7 @@ sourceType: javascript
 options:
   - name: Action
     display: On Click
-    type: text
+    type: function
     options: ''
   - name: className
     display: ClassName
