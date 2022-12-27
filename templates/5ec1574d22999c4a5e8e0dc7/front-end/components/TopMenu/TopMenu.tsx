@@ -10,8 +10,9 @@ import { NavLink } from 'react-router-dom'
 import classes from './topmenu.module.scss'
 
 interface menuItemProps {
-  text: string
+  text?: string
   link?: string
+  target?: string
   isSubMenu?: boolean
   onClickCapture?: Function
 }
@@ -22,13 +23,13 @@ interface topMenuProps {
 
 export const AptugoMenuItem: FunctionComponent<menuItemProps> = (props) => {
   const [isOpen, setOpen] = React.useState(false)
-  const { text, link, isSubMenu } = props
+  const { text, link, isSubMenu, target } = props
 
   let buttonComponent = <Button {...props}>{text}</Button>
   let component = <div>{buttonComponent}</div>
   if (props.link) {
     if (props.link.substr(0, 4).toLowerCase() === 'http') {
-      component = <a href={props.link}>{buttonComponent}</a>
+      component = <a href={props.link} target={props.target}>{buttonComponent}</a>
     } else {
       component = <NavLink to={props.link}>{buttonComponent}</NavLink>
     }
