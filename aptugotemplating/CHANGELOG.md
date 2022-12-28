@@ -37,6 +37,15 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
   - Icon field required.
   - Now it is possible to add a custom color.
 
+- **Icon Button:**
+
+  - New icons added.
+  - Icons in alphabet order.
+  - Action display renamed to On Click.
+  - Now it is possible to add a Custom Color.
+  - It is possible to change the size of the icons and the unit to do it.
+  - It is possible to add Extra Styles.
+
 ### Removed
 
 - **Link:** [Deprecated]
