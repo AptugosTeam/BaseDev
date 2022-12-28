@@ -54,7 +54,7 @@ options:
     settings:
       default: px
   - name: sx
-    display: Sx Properties
+    display: Extra Styles
     type: text
     advanced: true
 children: []
