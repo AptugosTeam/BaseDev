@@ -4,7 +4,58 @@ All notable changes to the "aptugotemplating" extension will be documented in th
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [TEMPLATES 1.4.16]
+## [TEMPLATES 1.5.1]
+
+### Changed
+
+- Index.js solving strictQuery DeprecationWarning from Mongoose.
+
+- Dependencies for React and React Native Updated
+
+- **Data Table:**
+
+  - Reverting dataTable mistaken update.
+
+- **Radar:**
+
+  - It is possible to set the Grid Label Offset.
+  - It is possible to set the Grid Shape.
+
+### Removed
+
+- **Link:** [Deprecated]
+
+## [TEMPLATES 1.5.0] - 2022-11-07
+
+### Added
+
+- **Rating:**
+
+### Changed
+
+- Add strictPopulate false for 2nd level relationships.
+
+- Updates to Code Snippets.
+
+- Update import csv structure for Aptugo 1.7
+
+- **Popup Dialog:**
+
+  - Supports ClassName.
+
+- **Checkbox:**
+
+  - Checked variable is optional.
+
+- **Table:**
+
+  - Now it is possible to add a default page.
+
+- **Load from Database:**
+
+  - Now it is possible to add a default page.
+
+## [TEMPLATES 1.4.16] - 2022-10-06
 
 ### Added
 
