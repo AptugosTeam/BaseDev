@@ -62,7 +62,7 @@ children: []
   {% endif %}
   {% if element.values.OnClick %}
     {% if compo == 'Checkbox' %}
-      onClick={{ element.values.OnClick }}
+      onClick={ ()=> { {{ element.values.OnClick }} } }
     {% endif %}
     {% if compo == 'ThreeCheckbox' or compo == 'Switch' %}
       onChange={{ element.values.OnClick }}
