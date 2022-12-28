@@ -4,6 +4,7 @@ type: file
 unique_id: a0bW4rmi
 completePath: elements/Material-UI/Link.tpl
 icon: ico-link
+internalUse: true
 helpText: Simple Link that uses React Router
 options:
   - name: innerText
