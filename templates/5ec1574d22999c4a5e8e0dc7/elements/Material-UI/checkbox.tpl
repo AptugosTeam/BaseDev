@@ -80,7 +80,7 @@ children: []
         disabled={ {{element.values.disabled}} } 
       {% endif %}
       {% if element.values.effect == false %}
-        disableRipple= { {{element.values.effect}} }
+        disableRipple= { true }
       {% endif %}
     {% endif %}
     {% if compo == 'Switch' %}
