@@ -23,8 +23,15 @@ options:
     display: Disabled
     type: variable
     options: ''
+    advanced: true
     settings:
       active: true
+  - name: effect
+    display: Display ripple animation
+    type: checkbox
+    advanced: true
+    settings:
+      default: true
   - name: threeway
     display: Use a 3 states checkbox
     type: checkbox
@@ -69,11 +76,18 @@ children: []
   {% if element.values.OnClick %}
     {% if compo == 'Checkbox' %}
       onClick={ ()=> { {{ element.values.OnClick }} } }
-      {% if element.values.disabled%} disabled={ {{element.values.disabled}} } {% endif %}
+      {% if element.values.disabled%} 
+        disabled={ {{element.values.disabled}} } 
+      {% endif %}
+      {% if element.values.effect == false %}
+        disableRipple= { {{element.values.effect}} }
+      {% endif %}
     {% endif %}
     {% if compo == 'Switch' %}
       onChange={ ()=> { {{ element.values.OnClick }} } }
-      {% if element.values.disabled%} disabled={ {{element.values.disabled}} } {% endif %}
+      {% if element.values.disabled%} 
+        disabled={ {{element.values.disabled}} } 
+      {% endif %}
     {% endif %}
     {% if compo == 'ThreeCheckbox' %}
       onChange={ ()=> { {{ element.values.OnClick }} } }
