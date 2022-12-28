@@ -30,6 +30,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
   - User, Password, Email Params and From fields are required.
   - Adding default values.
 
+- **Material Icon:**
+
+  - Now it is possible to change the Size of the icon.
+  - ClassName properly working.
+  - Icon field required.
+  - Now it is possible to add a custom color.
+
 ### Removed
 
 - **Link:** [Deprecated]
