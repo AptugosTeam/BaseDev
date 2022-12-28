@@ -71,9 +71,12 @@ children: []
       onClick={ ()=> { {{ element.values.OnClick }} } }
       {% if element.values.disabled%} disabled={ {{element.values.disabled}} } {% endif %}
     {% endif %}
-    {% if compo == 'ThreeCheckbox' or compo == 'Switch' %}
+    {% if compo == 'Switch' %}
       onChange={ ()=> { {{ element.values.OnClick }} } }
       {% if element.values.disabled%} disabled={ {{element.values.disabled}} } {% endif %}
+    {% endif %}
+    {% if compo == 'ThreeCheckbox' %}
+      onChange={ ()=> { {{ element.values.OnClick }} } }
     {% endif %}
   {% endif %}
   />
