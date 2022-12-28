@@ -19,6 +19,12 @@ options:
     display: margin
     type: dropdown
     options: dense;normal;none
+  - name: disabled
+    display: Disabled
+    type: variable
+    options: ''
+    settings:
+      active: true
   - name: threeway
     display: Use a 3 states checkbox
     type: checkbox
@@ -63,6 +69,7 @@ children: []
   {% if element.values.OnClick %}
     {% if compo == 'Checkbox' %}
       onClick={ ()=> { {{ element.values.OnClick }} } }
+      {% if element.values.disabled%} disabled={ {{element.values.disabled}} } {% endif %}
     {% endif %}
     {% if compo == 'ThreeCheckbox' or compo == 'Switch' %}
       onChange={{ element.values.OnClick }}
