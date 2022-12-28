@@ -16,10 +16,19 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
   - Reverting dataTable mistaken update.
 
+- **Pdf Document:**
+
+  - Auto install the react-pdf library when using the element.
+
 - **Radar:**
 
   - It is possible to set the Grid Label Offset.
   - It is possible to set the Grid Shape.
+
+- **Email**
+
+  - User, Password, Email Params and From fields are required.
+  - Adding default values.
 
 ### Removed
 
