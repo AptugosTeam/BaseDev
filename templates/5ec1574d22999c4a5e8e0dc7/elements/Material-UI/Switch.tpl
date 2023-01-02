@@ -1,7 +1,7 @@
 /*
-path: CheckboxV2.tpl
+path: Switch.tpl
 type: file
-unique_id: rCl7agO4
+unique_id: rCl7agO5
 icon: ico-check-box
 options:
   - name: Checked
@@ -26,7 +26,7 @@ options:
   - name: size
     display: Size
     type: dropdown
-    options: small;medium;large
+    options: small;medium
     settings:
       default: medium
   - name: disabled
@@ -42,15 +42,11 @@ options:
     advanced: true
     settings:
       default: true
-  - name: indeterminated
-    display: Indeterminated
-    type: variable
-    advanced: true
 sourceType: javascript
 children: []
 */
 {% set bpr %}
-  import Checkbox from '@mui/material/Checkbox'
+    import Switch from '@mui/material/Switch'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% if element.values.label %}
@@ -62,12 +58,12 @@ children: []
   <FormControl margin='{{ element.values.margin|default("dense") }}'>
   <FormControlLabel control={
 {% endif %}
-  <Checkbox
+  <Switch
   {% if element.values.Checked %}
-      checked={ {{ element.values.Checked }} }
+    checked={ {{ element.values.Checked }} }
   {% endif %}
   {% if element.values.OnClick %}
-      onClick={ ()=> { {{ element.values.OnClick }} } }
+      onChange={ ()=> { {{ element.values.OnClick }} } }
   {% endif %}
   {% if element.values.style %}
     style={ {{element.values.style}} }
@@ -80,9 +76,6 @@ children: []
   {% endif %}
   {% if element.values.effect == false %}
     disableRipple= { true }
-  {% endif %}
-  {% if element.values.indeterminated %}
-    indeterminate= { {{element.values.indeterminated}} }
   {% endif %}
   />
 {% if element.values.label %}
