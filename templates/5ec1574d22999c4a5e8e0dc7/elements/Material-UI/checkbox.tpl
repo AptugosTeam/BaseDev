@@ -3,6 +3,7 @@ path: checkbox.tpl
 type: file
 unique_id: rCl7agO3
 icon: ico-check-box
+internalUse: true
 options:
   - name: Checked
     display: Checked Variable
