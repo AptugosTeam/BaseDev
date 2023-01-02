@@ -42,8 +42,8 @@ options:
     advanced: true
     settings:
       default: true
-  - name: indeterminated
-    display: Indeterminated
+  - name: indeterminate
+    display: Indeterminate
     type: variable
     advanced: true
 sourceType: javascript
@@ -81,8 +81,8 @@ children: []
   {% if element.values.effect == false %}
     disableRipple= { true }
   {% endif %}
-  {% if element.values.indeterminated %}
-    indeterminate= { {{element.values.indeterminated}} }
+  {% if element.values.indeterminate %}
+    indeterminate= { {{element.values.indeterminate}} }
   {% endif %}
   />
 {% if element.values.label %}
