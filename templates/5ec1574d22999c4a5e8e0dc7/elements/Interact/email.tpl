@@ -16,7 +16,7 @@ options:
     options: ''
     advanced: true
     settings:
-      default: "'InlineLink'"
+      default: "InlineLink"
   - name: service
     display: Email Sending service
     type: dropdown
@@ -41,10 +41,12 @@ options:
     display: User (smtp)
     type: text
     options: ''
+    required: true
   - name: smptpass
     display: Password (smtp)
     type: text
     options: ''
+    required: true
   - name: subject
     display: Email Subject
     type: text
@@ -53,10 +55,12 @@ options:
     display: Email Parameters
     type: text
     options: ''
+    required: true
   - name: from
     display: From (name <emailaddress>)
     type: text
     options: ''
+    required: true
 settings:
   - name: BackendPackages
     value: '"nodemailer": "^6.4.11",'
@@ -67,8 +71,8 @@ settings:
       const nodemailer = require("nodemailer");
       {% if element.values.service != 'MailGun' %}
         var transport = {
-          host: "{{ element.values.smpthost }}",
-          port: "{{ element.values.smptport }}",
+          host: "{{ element.values.smpthost|default("smtp.gmail.com") }}",
+          port: "{{ element.values.smptport|default("465") }}",
           auth: {
             user: "{{ element.values.smptuser }}",
             pass: "{{ element.values.smptpass }}",
@@ -138,7 +142,7 @@ import axios from 'axios'
 {% set ph %}
 const {{ functionName }} = (to, extra:any = {}) => {
     const from = extra.from || '{{ element.values.from }}'
-    const subject = extra.subject || {{ element.values.subject }}
+    const subject = extra.subject || {{ element.values.subject|default(" ") }}
     const messageHtml = {{ element.values.internalfunctionName|default('InlineLink') }}({{ element.values.parameters }})
     axios({
       method: "POST", 
