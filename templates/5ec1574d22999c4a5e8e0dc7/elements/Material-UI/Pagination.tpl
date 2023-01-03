@@ -75,14 +75,34 @@ import Pagination from '@mui/material/Pagination'
 {{ save_delayed('bpr', bpr) }}
 <Pagination
   count={ {{ element.values.count|default(10) }}}
-  {% if element.values.color %}color={ {{ element.values.color }} }{% endif %}
-  {% if element.values.boundaryCount %}boundaryCount={ {{ element.values.boundaryCount }} }{% endif %}
-  {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
-  {% if element.values.disabled %}disabled={ {{element.values.disabled}} }{% endif %}
-  {% if element.values.defaultPage %}defaultPage={ {{element.values.defaultPage}} }{% endif %}
-  {% if element.values.shape %}shape={ '{{element.values.shape}}' }{% endif %}
-  {% if element.values.hideNextButton %}hideNextButton={ {{element.values.hideNextButton}} }{% endif %}
-  {% if element.values.hidePrevButton %}hidePrevButton={ {{element.values.hidePrevButton}} }{% endif %}
-  {% if element.values.size %}size={ '{{element.values.size}}' }{% endif %}
-  {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
+  {% if element.values.color %}
+    color={ {{ element.values.color }} }
+  {% endif %}
+  {% if element.values.boundaryCount %}
+    boundaryCount={ {{ element.values.boundaryCount }} }
+  {% endif %}
+  {% if element.values.onChange %}
+    onChange={ {{ element.values.onChange | functionOrCall }} }
+  {% endif %}
+  {% if element.values.disabled %}
+    disabled={ {{element.values.disabled}} }
+  {% endif %}
+  {% if element.values.defaultPage %}
+    defaultPage={ {{element.values.defaultPage}} }
+  {% endif %}
+  {% if element.values.shape %}
+    shape={ '{{element.values.shape}}' }
+  {% endif %}
+  {% if element.values.hideNextButton %}
+    hideNextButton={ {{element.values.hideNextButton}} }
+  {% endif %}
+  {% if element.values.hidePrevButton %}
+    hidePrevButton={ {{element.values.hidePrevButton}} }
+  {% endif %}
+  {% if element.values.size %}
+    size={ '{{element.values.size}}' }
+  {% endif %}
+  {% if element.values.style %}
+    style={ {{element.values.style}} }
+  {% endif %}
 />
