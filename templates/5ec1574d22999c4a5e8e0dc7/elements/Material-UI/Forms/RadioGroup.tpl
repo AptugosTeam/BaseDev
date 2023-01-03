@@ -6,13 +6,9 @@ unique_id: Fmr87CZF
 icon: f:radio.svg
 children: []
 options:
-  - name: checked
-    display: Checked
-    type: text
-    options: ''
   - name: onchange
     display: On Change
-    type: text
+    type: function
     options: ''
   - name: value
     display: Value
@@ -22,10 +18,9 @@ options:
     display: Name
     type: text
     options: ''
-  - name: label
-    display: label
-    type: text
-    options: ''
+childs:
+  - name: Radio
+    element: radio
 */
 
 {% set bpr %}
@@ -36,32 +31,21 @@ options:
   import FormLabel from '@mui/material/FormLabel';
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{% if element.values.label %}
-    {% set bpr %}
-      import FormControlLabel from '@mui/material/FormControlLabel'
-    {% endset %}
-  {{ save_delayed('bpr',bpr) }}
-{% endif %}
-  <FormControlLabel>
-    {% if element.values.value %}
-      value={{ element.values.value |textOrVariable }} 
-    {% else %}
-    {% endif %}
-    label={{ element.values.label |textOrVariable }} control={
-    {% endif %}   
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="female"
-            {% if element.values.checked %}
-              checked={ {{ element.values.checked}} }
-            {% endif %}
-            {% if element.values.value %}
-              value={{ element.values.value |textOrVariable }}
-            {% endif %}
-            {% if element.values.name %}
-              name={{ element.values.name | textOrVariable }}
-            {% endif %}
-        >
 
+  <FormControl>
+        <RadioGroup
+          {% if element.values.onchange %}
+            onChange={ {{ element.values.onchange | functionOrCall }} }
+          {% else %}
+          {% endif %}
+          {% if element.values.value %}
+            value={{ element.values.value |textOrVariable }}
+          {% else %}
+          {% endif %}
+          {% if element.values.name %}
+            name={{ element.values.name | textOrVariable }}
+          {% endif %}
+        >
+        {{ content | raw }}
         </RadioGroup>
-   </FormControlLabel>
+      </FormControl>
