@@ -56,6 +56,7 @@ const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
 // Connecting to the database
+mongoose.set('strictQuery', false);
 mongoose.connect(dbConfig.url, {
   useNewUrlParser: true,
   useUnifiedTopology: true
