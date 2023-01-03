@@ -2,7 +2,7 @@
 path: RadioGroup.tpl
 completePath: elements/Material-UI/Forms/RadioGroup.tpl
 type: file
-unique_id: Qeq87CZJ
+unique_id: Fmr87CZF
 icon: f:radio.svg
 children: []
 options:
@@ -36,19 +36,32 @@ options:
   import FormLabel from '@mui/material/FormLabel';
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-  <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+{% if element.values.label %}
+    {% set bpr %}
+      import FormControlLabel from '@mui/material/FormControlLabel'
+    {% endset %}
+  {{ save_delayed('bpr',bpr) }}
+{% endif %}
+  <FormControlLabel>
+    {% if element.values.value %}
+      value={{ element.values.value |textOrVariable }} 
+    {% else %}
+    {% endif %}
+    label={{ element.values.label |textOrVariable }} control={
+    {% endif %}   
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
           defaultValue="female"
-            {% if element.values.name %}name={{ element.values.name | textOrVariable }}{% endif %}
+            {% if element.values.checked %}
+              checked={ {{ element.values.checked}} }
+            {% endif %}
+            {% if element.values.value %}
+              value={{ element.values.value |textOrVariable }}
+            {% endif %}
+            {% if element.values.name %}
+              name={{ element.values.name | textOrVariable }}
+            {% endif %}
         >
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="other" control={<Radio />} label="Other" />
+
         </RadioGroup>
-      </FormControl>
-
-
-
-
+   </FormControlLabel>
