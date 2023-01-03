@@ -12,7 +12,7 @@ const bodyParser = require('body-parser')
 const fileupload = require('express-fileupload')
 
 const app = express()
-{% set imagesfolder = insert_setting('imagesFolder') %}
+{% set imagesfolder = insert_setting('filesFolder') %}
 {% if imagesfolder %}app.set('filesFolder', "{{ imagesfolder }}" ){% else %}app.set('filesFolder',__dirname + '/../dist/img'){% endif %}
 
 
