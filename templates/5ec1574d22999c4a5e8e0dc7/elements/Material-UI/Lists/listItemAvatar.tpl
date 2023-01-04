@@ -18,7 +18,11 @@ import Avatar from '@mui/material/Avatar'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <ListItemAvatar>
+{% if element.values.path %}
   <Avatar
     src={{ element.values.path|textOrVariable }}
-  />
+  /> 
+{% else %}
+  <Avatar>{{ content | raw }}</Avatar> 
+{% endif %}
 </ListItemAvatar>
