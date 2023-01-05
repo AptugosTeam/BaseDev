@@ -15,14 +15,16 @@ options:
     display: On Click
     type: text
     options: ''
-  - name: selected
-    display: Selected
-    type: text
-    options: ''
   - name: className
     display: ClassName
     type: styles
     options: ''
+  - name: separator
+    display: Optionals Properties
+    type: separator
+  - name: selected
+    display: Selected
+    type: checkbox
   - name: disableGutters
     display: Disable Gutters
     type: checkbox
@@ -31,6 +33,10 @@ options:
     display: Dense
     type: checkbox
     options: ''
+  - name: separator
+    display: Advanced
+    type: separator
+    advanced: true
   - name: secondaryAction
     display: Checkbox Type
     type: checkbox
@@ -82,8 +88,12 @@ import ListItem from '@mui/material/ListItem'
   {% if element.values.secondaryAction %}
     secondaryAction={
       <Checkbox
-        {% if element.values.onChange %}onChange={ {{element.values.onChange}} } {% endif %}
-        {% if element.values.checked %}checked={ {{element.values.checked}} } {% endif %}
+        {% if element.values.onChange %}
+          onChange={ {{element.values.onChange | functionOrCall}} } 
+        {% endif %}
+        {% if element.values.checked %}
+          checked={ {{element.values.checked}} } 
+        {% endif %}
       />
     }
   {% endif %}

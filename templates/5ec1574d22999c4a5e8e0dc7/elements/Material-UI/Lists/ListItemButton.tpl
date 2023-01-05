@@ -7,8 +7,11 @@ icon: f:list.svg
 sourceType: javascript
 children: []
 options:
+  - name: href
+    display: Link URL
+    type: text
   - name: alignItems
-    display: Aligh Items
+    display: Align Items
     type: dropdown
     options:
       return [['center', 'Center'],['flex-start', 'Flex-Start']]
@@ -16,8 +19,24 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: separator
+    display: Optionals Properties
+    type: separator
+  - name: dense
+    display: dense
+    type: checkbox
+  - name: disabled
+    display: disabled
+    type: checkbox
+  - name: disableGutters
+    display: Disable Padding
+    type: checkbox
+    options: ''
+  - name: separator
+    display: Accordion Type (Adv. Properties)
+    type: separator
   - name: collapse
-    display: Is Type Acordion?
+    display: Active Accordion Type
     type: checkbox
     advanced: true
   - name: onClick
@@ -36,23 +55,6 @@ options:
       condition: true
       active: true
     advanced: true
-  - name: autofocus
-    display: autofocus
-    type: checkbox
-    default: false
-  - name: dense
-    display: dense
-    type: checkbox
-  - name: disabled
-    display: disabled
-    type: checkbox
-  - name: selected
-    display: selected
-    type: checkbox
-  - name: disableGutters
-    display: Disable Padding
-    type: checkbox
-    options: ''
 */
 {% set bpr %}
 import ListItemButton from '@mui/material/ListItemButton'
@@ -75,11 +77,11 @@ import ListItemButton from '@mui/material/ListItemButton'
 {% endif %}
 
 <ListItemButton 
+  {% if element.values.href %}
+    href={{element.values.href | textOrVariable}} component="a" 
+  {% endif %}
   {% if element.values.alignItems %}
     alignItems='{{ element.values.alignItems }}'
-  {% endif %}
-  {% if element.values.autofocus %}
-    autofocus={true}
   {% endif %}
   {% if element.values.className %}
     classes={ {{ element.values.className }} }
@@ -90,20 +92,19 @@ import ListItemButton from '@mui/material/ListItemButton'
   {% if element.values.disabled %}
     disabled={true}
   {% endif %}
-  {% if element.values.selected %}
-    selected={true}
-  {% endif %}
   {% if element.values.disablePadding %}
     disablePadding={true}
   {% endif %}
   {% if element.values.collapse %}
-    onClick={ {{element.values.onClick}} }
-  {% else %}
-    onClick={handleClick}
+    onClick={ {{element.values.onClick|default('handleClick') | functionOrCall}} }
   {%endif%}
 >
 {% if element.values.collapse %}
-  { {{element.values.useState}} ? <ExpandLess /> : <ExpandMore /> }
+  { {% if element.values.useState %}
+      {{element.values.useState}}
+    {% else %}
+      open
+    {% endif %} ? <ExpandLess /> : <ExpandMore /> }
 {% endif %}
   {{ content | raw }}
 </ListItemButton>

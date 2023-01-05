@@ -9,6 +9,7 @@ options:
   - name: text
     display: Text
     type: text
+    required: true
     options: ''
   - name: className
     display: ClassName
@@ -39,7 +40,9 @@ import ListItemText from '@mui/material/ListItemText'
   {% if element.values.secondaryText %}
     secondary={{ element.values.secondaryText | textOrVariable }}
   {% else %}
-    secondary={ <React.Fragment>{{ content | raw }}</React.Fragment> }
+    {% if element.children %}
+      secondary={ <React.Fragment>{{ content | raw }}</React.Fragment> }
+    {% endif %}
   {% endif %}
 
 
