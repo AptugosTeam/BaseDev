@@ -28,7 +28,6 @@ options:
     display: On Change
     type: function
     options: ''
-    advanced: true
   - name: Color
     display: Color
     type: dropdown
@@ -86,8 +85,9 @@ options:
     {% if element.values.sx %}
      sx={ { {{ element.values.sx }} } }
     {% endif %}
-    {% if element.values.onChange %}
-      onChange={ {{ element.values.onChange | functionOrCall }} }
+    {% if element.values.onchange %}
+            onChange={ {{ element.values.onchange | functionOrCall }} }
+    {% else %}
     {% endif %}
     {% if element.values.Color %}
       color='{{ element.values.Color }}'
