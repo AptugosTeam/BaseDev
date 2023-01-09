@@ -3,7 +3,7 @@ path: listItemButton.tpl
 completePath: elements/Material-UI/Lists/listItemButton.tpl
 type: file
 unique_id: oajk9f4g
-icon: f:list.svg
+icon: f:icoListItemButton.svg
 sourceType: javascript
 children: []
 options:
@@ -48,7 +48,7 @@ options:
       active: true
     advanced: true
   - name: useState
-    display: Use an Variable
+    display: Variable of useState
     type: text
     settings:
       propertyCondition: collapse

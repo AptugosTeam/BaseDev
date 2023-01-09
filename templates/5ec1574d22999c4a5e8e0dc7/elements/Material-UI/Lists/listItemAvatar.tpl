@@ -3,7 +3,7 @@ path: listItemAvatar.tpl
 completePath: elements/Material-UI/Lists/listAvatar.tpl
 type: file
 unique_id: UiCt6mqz
-icon: f:listItemAvatar.svg
+icon: f:icoListItemAvatar.svg
 sourceType: javascript
 children: []
 options:

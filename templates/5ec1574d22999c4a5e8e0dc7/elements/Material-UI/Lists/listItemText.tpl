@@ -3,7 +3,7 @@ path: listItemText.tpl
 completePath: elements/Material-UI/Lists/listItemText.tpl
 type: file
 unique_id: mUbB5LnI
-icon: f:listItemText.svg
+icon: f:icoListItemText.svg
 sourceType: javascript
 options:
   - name: text

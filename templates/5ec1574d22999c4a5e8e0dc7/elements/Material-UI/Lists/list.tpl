@@ -3,7 +3,7 @@ path: list.tpl
 completePath: elements/Material-UI/Lists/list.tpl
 type: file
 unique_id: oSig9f4g
-icon: f:list.svg
+icon: f:icoList.svg
 sourceType: javascript
 children: []
 options:

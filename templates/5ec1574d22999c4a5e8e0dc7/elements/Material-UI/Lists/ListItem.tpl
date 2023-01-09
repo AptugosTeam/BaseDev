@@ -3,7 +3,7 @@ path: ListItem.tpl
 completePath: elements/Material-UI/Lists/listItem.tpl
 type: file
 unique_id: b1KMWrIH
-icon: f:ListItem.svg
+icon: f:icoListItem.svg
 sourceType: javascript
 options:
   - name: flexDirection

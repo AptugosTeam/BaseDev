@@ -3,7 +3,7 @@ path: ListItemIcon.tpl
 completePath: elements/Material-UI/Lists/ListItemIcon.tpl
 type: file
 unique_id: oalksf4g
-icon: f:list.svg
+icon: f:icoListItemIcon.svg
 sourceType: javascript
 children: []
 options:
