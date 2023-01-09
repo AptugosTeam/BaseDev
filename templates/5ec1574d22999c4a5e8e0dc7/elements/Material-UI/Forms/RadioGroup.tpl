@@ -3,7 +3,7 @@ path: RadioGroup.tpl
 completePath: elements/Material-UI/Forms/RadioGroup.tpl
 type: file
 unique_id: Fmr87CZF
-icon: f:radio.svg
+icon: f:RadioGroup.svg
 children: []
 options:
   - name: onchange
@@ -15,7 +15,7 @@ options:
     type: text
     options: ''
   - name: name
-    display: Name
+    display: Name attribute of the input element
     type: text
     options: ''
 childs:
