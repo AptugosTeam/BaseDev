@@ -105,6 +105,11 @@ options:
   - name: tooltip
     display: Tooltip
     type: checkbox
+  - name: background
+    display: Background
+    type: checkbox
+    settings:
+      default: true
 settings:
   - name: Packages
     value: '"recharts": "^2.1.13",'
@@ -144,7 +149,7 @@ import {
   <RadialBar
     isAnimationActive={false}
     label={ {position: "insideStart" , fill: "black"} }
-    background
+    background={ {{ element.values.background|default("true") }} }
     dataKey={ "{{ element.values.dataKey }}" }
   />
   <Legend

@@ -24,7 +24,7 @@ children: []
     "jsonwebtoken": "^8.5.1",
     "mongoose": "latest",
     "process": "^0.11.10",
-    "dotenv": "latest",
+    "dotenv": "^16.0.3",
     "express-fileupload": "latest",
     "axios": "latest",
     "node_hash": "latest",

@@ -1,4 +1,3 @@
-
 let newAsset = {
   type: Parameters.type,
   id: aptugo.generateID(),
@@ -6,11 +5,13 @@ let newAsset = {
 }
 
 let file = '// Asset created by Aptugo'
-if (!Parameters.empty) {
+if (!Parameters.empty && Parameters.path) {
   file = aptugo.readFile(Parameters.path)
+} else if (Parameters.file) {
+  file = Parameters.file
 }
-aptugo.run({ _: ['assets', 'setfile'], binary: true, app: Application._id, filename: newAsset.name, id: newAsset.id }, { file: file })
 
+aptugo.run({ _: ['assets', 'setfile'], binary: true, app: Application._id, filename: newAsset.name, id: newAsset.id }, { file: file })
 Application.assets.push(newAsset)
 
 // Store [Object: null prototype] {

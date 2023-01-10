@@ -1,5 +1,9 @@
+const structID = aptugo.generateID()
 
 const PH = {
+	"structure": structID,
+	"structureId": "layoutAboutUs",
+	"structureName": "About Us",
 	"path": "dummyEncloser.tpl",
 	"completePath": "elements/Basic/dummyEncloser.tpl",
 	"children": [{
@@ -208,6 +212,9 @@ const PH = {
 }
   
   const B = {
+	"structure": structID,
+	"structureId": "layoutAboutUs",
+	"structureName": "About Us",
 	"path": "Container.tpl",
 	"completePath": "elements/Material-UI/Container.tpl",
 	"type": "element",
@@ -654,7 +661,7 @@ const PH = {
 		"prevent_delete": false
 	}],
 	"open": false,
-	"name": "Container",
+	"name": "Layout: About Us",
 	"cascades": false,
 	"value": "Container",
 	"values": {

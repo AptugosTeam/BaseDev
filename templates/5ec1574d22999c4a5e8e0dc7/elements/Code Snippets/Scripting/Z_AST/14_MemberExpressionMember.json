@@ -1,0 +1,21 @@
+/*
+path: 14_MemberExpressionMember.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/14_MemberExpressionMember.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/14_MemberExpressionMember.json
+unique_id: tC5cIB4b
+name: js_member_expression_member
+fullload: true
+*/
+{
+  init: function() {
+    this.setColour(240);
+    this.appendDummyInput()
+        .appendField("member");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip("Add a member to a member expression.");
+    this.contextMenu = false;
+  }
+}

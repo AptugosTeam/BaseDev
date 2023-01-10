@@ -19,6 +19,10 @@ options:
       return [['No','None'],['Internal','Popup
       Dialog'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) =>
       [unique_id, name])]
+  - name: separador
+    display: Soy un separador
+    type: separator
+    options: ''
   - name: hideButton
     display: Hide Add Button
     type: checkbox

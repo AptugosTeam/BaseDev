@@ -45,8 +45,9 @@ options:
               errStatus: 'String',
               errMessage: 'String'
             }
-          };
-          aptugo.variables.setPageVariable(page, element.unique_id, finalVarsToAdd);
+          }
+          aptugo.variables.setElementVariable( element.unique_id, finalVarsToAdd)
+          aptugo.variables.setPageVariable(page, element.unique_id, finalVarsToAdd)
           if (element.values.variableName) {
             aptugo.variables.setPageVariable(page, element.unique_id + '_2', { [element.values.variableName]: { ...varsToAdd } });
           }
@@ -91,6 +92,13 @@ options:
     display: Do NOT populate related tables
     type: checkbox
     options: ''
+  - name: defaultPage
+    display: Default page
+    type: text
+    options: ''
+    advanced: true
+    settings:
+      default: '1'
 children: []
 */
 {% if data %}
@@ -140,7 +148,7 @@ const {{ varName }} = useSelector((state: IState){% if element.values.singleResu
 {{ save_delayed('ph', ph, 1 ) }}
 {% set ph %}
 const [{{ innervarname }}loadoptions, set{{ innervarname }}loadoptions] = React.useState<any>({ 
-  page: 1,
+  page: {{ element.values.defaultPage | default(1) }},
   populate: {% if element.values.donotpopulate %}false{% else %}true{% endif %},
   limit: {{ element.values.elementsLimit|default(25) }},
   sort: { field: {{ element.values.sortColumn | default('null') }}, method: '{{ element.values.sortMethod | default('DESC') }}' },
@@ -170,7 +178,7 @@ React.useEffect(() => {
 },[{{ innervarname }}loadoptions{% if element.values.searchString %}, {{ element.values.searchString }}{% endif %}])
 {% endset %}
 {{ save_delayed('ph',ph)}}
-{% if element.values.onload %}
+{% if element.values.onload or element.children %}
 {% if element.values.searchString %}
   {% set functionCall = 'searchingStatus' %}
 {% else %}
@@ -179,6 +187,7 @@ React.useEffect(() => {
 React.useEffect(() => {
   if ({{ table.name | friendly | lower }}Data.{{ functionCall }} === 'loaded') {
     {{ element.values.onload }}
+    {% if element.children %}{{ content | raw }}{% endif %}
   }
 }, [{{ table.name | friendly | lower }}Data.{{ functionCall }}])
 {% endif %}

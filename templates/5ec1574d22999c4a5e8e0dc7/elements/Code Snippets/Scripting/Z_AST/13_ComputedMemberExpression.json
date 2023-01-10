@@ -1,0 +1,29 @@
+/*
+path: 13_ComputedMemberExpression.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/13_ComputedMemberExpression.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/13_ComputedMemberExpression.json
+unique_id: bVyisCLq
+name: js_computed_member_expression
+fullload: true
+*/
+{
+  init: function() {
+    this.jsonInit({
+      "id": "js_computed_member_expression",
+      "message0": "[%1]",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "MEMBER",
+          "align": "RIGHT"
+        }
+      ],
+      "colour": 160,
+      "output": true,
+      "inputsInline": true,
+      "tooltip": "Computed member of member expression."
+    });
+  }
+}

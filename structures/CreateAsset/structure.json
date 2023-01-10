@@ -7,12 +7,6 @@
       "display": "Asset Type",
       "type": "text",
       "helpText": "Asset Type (stylesheet, image, etc)"
-    },
-    {
-      "name": "path",
-      "display": "Asset Path",
-      "type": "text",
-      "helpText": "Path to the source asset file"
     }
   ],
   "afterRun": "",

@@ -1,0 +1,19 @@
+/*
+path: source_aggregateModel.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Database/source_aggregateModel.source
+keyPath: elements/Code Snippets/Database/source_aggregateModel.source
+name: aggregateModel
+unique_id: sdLi7978
+fullload: true
+*/
+var model = Block.getFieldValue('MODEL')
+
+var args = [];
+for (var i = 0; i < Block.argumentsCount; i++) {
+  args[i] = Blockly.JavaScript.valueToCode(Block, 'MEMBER' + i, Blockly.JavaScript.ORDER_NONE);
+}
+
+const code = `${model}Model.aggregate([{\n${ args.join(',')}\n}]).then()`
+return code

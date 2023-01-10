@@ -94,6 +94,9 @@ options:
   - name: fixedSearchString
     display: Search this string always
     type: text
+  - name: defaultPage
+    display: Default Page
+    type: text
 children: []
 */
 {% set editProc = element.values.editProcedure|default('No') %}
@@ -121,7 +124,9 @@ children: []
   {% set setEditDataFunctionName = 'set' ~ tableName ~ 'Data' %}
   {% set fields = table.fields %}
   {% set innervarname = element.name | friendly %}
-  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
+  {% set eleWithoutChilds = element %}
+  {% set eleWithoutChilds = eleWithoutChilds|merge({'children': null}) %}
+  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage } %}
   {% if element.children %}
       {% for field in element.children %}
         {% if field.values.Field == 'useVar' %}

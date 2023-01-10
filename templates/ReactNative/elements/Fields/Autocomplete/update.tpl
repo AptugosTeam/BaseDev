@@ -50,6 +50,7 @@ unique_id: zd6mrTlU
       const {{ field.column_name | friendly }}Files = {}
       {% if reference.data_type == 'Image' %}
       if ({{ field.column_name | friendly }}info && {{ field.column_name | friendly }}info.data) {
+        if (!fs.existsSync(`${options.req.app.get('filesFolder')}`)) fs.mkdirSync(`${options.req.app.get('filesFolder')}`, { recursive: true })
         fs.writeFileSync(`${options.req.app.get('filesFolder')}/${ {{ field.column_name | friendly }}info.name}`, {{ field.column_name | friendly }}info.data)
         {{ field.column_name | friendly }}info.{{ reference.column_name | friendly }} = {{ field.column_name | friendly }}info.name
       }

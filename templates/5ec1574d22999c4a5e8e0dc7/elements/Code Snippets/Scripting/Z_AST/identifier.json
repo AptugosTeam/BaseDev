@@ -1,0 +1,22 @@
+/*
+path: identifier.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Basic/identifier.json
+keyPath: elements/Code Snippets/Basic/identifier.json
+unique_id: AsVlegSd
+name: js_identifier
+fullload: true
+*/
+{
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "NAME"
+    }
+  ],
+  "style": "basic_blocks",
+  "output": true,
+  "tooltip": "Basic -> Identifier"
+}

@@ -13,9 +13,11 @@ options:
     type: text
     options: ''
 sourceType: javascript
+settings:
+  - name: Packages
+    value: '"react-ga": "^3.3.0",'
 children: []
 */
-
 {% set bpr %}
 import ReactGA from 'react-ga'
 {% endset %}
