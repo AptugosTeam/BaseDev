@@ -11,6 +11,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - **Swiper:**
   It is a special type of carousel. It allows you to display different types of items in an infinite loop where each item scrolls horizontally, similar to a set of slides.
 
+### Changed
+
+- **Password:**
+
+  - Added a required validation to password fields.
+
 ## [TEMPLATES 1.5.1] - 2023-01-03
 
 ### Changed
