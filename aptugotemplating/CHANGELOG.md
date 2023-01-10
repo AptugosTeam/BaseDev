@@ -4,7 +4,14 @@ All notable changes to the "aptugotemplating" extension will be documented in th
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [TEMPLATES 1.5.1]
+## [TEMPLATES 1.5.2] -
+
+### Added
+
+- **Swiper:**
+  It is a special type of carousel. It allows you to display different types of items in an infinite loop where each item scrolls horizontally, similar to a set of slides.
+
+## [TEMPLATES 1.5.1] - 2023-01-03
 
 ### Changed
 
