@@ -17,6 +17,8 @@ children: []
 settings:
   - name: Packages
     value: '"@mui/x-date-pickers": "^5.0.8",'
+  - name: Packages
+    value: '"dayjs": "^1.11.7",'
 */
 {% set bpr %}
   import Badge from '@mui/material/Badge';
