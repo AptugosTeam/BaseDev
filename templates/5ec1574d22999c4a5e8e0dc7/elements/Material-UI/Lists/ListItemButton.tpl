@@ -32,49 +32,11 @@ options:
     display: Disable Padding
     type: checkbox
     options: ''
-  - name: separator
-    display: Accordion Type (Adv. Properties)
-    type: separator
-  - name: collapse
-    display: Active Accordion Type
-    type: checkbox
-    advanced: true
-  - name: onClick
-    display: onClick
-    type: function
-    settings:
-      propertyCondition: collapse
-      condition: true
-      active: true
-    advanced: true
-  - name: useState
-    display: Variable of useState
-    type: text
-    settings:
-      propertyCondition: collapse
-      condition: true
-      active: true
-    advanced: true
 */
 {% set bpr %}
 import ListItemButton from '@mui/material/ListItemButton'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-{% if element.values.collapse == true %}
-  {% set bpr %}
-  import ExpandLess from '@mui/icons-material/ExpandLess';
-  import ExpandMore from '@mui/icons-material/ExpandMore';
-  {% endset %}
-  {{ save_delayed('bpr', bpr ) }}
-  {% set ph %}
-  const [open, setOpen] = React.useState(false);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-  {% endset %}
-  {{ save_delayed('ph', ph ) }}
-{% endif %}
 
 <ListItemButton 
   {% if element.values.href %}
@@ -95,16 +57,7 @@ import ListItemButton from '@mui/material/ListItemButton'
   {% if element.values.disablePadding %}
     disablePadding={true}
   {% endif %}
-  {% if element.values.collapse %}
-    onClick={ {{element.values.onClick|default('handleClick') | functionOrCall}} }
-  {%endif%}
+  
 >
-{% if element.values.collapse %}
-  { {% if element.values.useState %}
-      {{element.values.useState}}
-    {% else %}
-      open
-    {% endif %} ? <ExpandLess /> : <ExpandMore /> }
-{% endif %}
   {{ content | raw }}
 </ListItemButton>

@@ -15,9 +15,10 @@ options:
     display: Extra Styles
     type: text
   - name: color
-    display: color
+    display: Color
     type: dropdown
-    options: primary;secondary;custom
+    options: 
+      return [['primary', 'Primary'],['secondary', 'Secondary'], ['custom', 'Custom']]
   - name: propertyCustom
     display: Custom
     type: text
