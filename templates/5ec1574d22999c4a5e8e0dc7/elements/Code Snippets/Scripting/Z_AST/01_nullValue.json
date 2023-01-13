@@ -19,6 +19,5 @@ fullload: true
   ],
   "output": null,
   "style": "variable_blocks",
-  "tooltip": "AST -> Null value.",
-  "helpUrl": ""
+  "tooltip": "AST -> Null value"
 }

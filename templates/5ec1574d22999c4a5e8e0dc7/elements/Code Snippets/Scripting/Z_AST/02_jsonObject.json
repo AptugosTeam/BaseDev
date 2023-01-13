@@ -21,6 +21,5 @@ fullload: true
   ],
   "output": null,
   "style": "variable_blocks",
-  "tooltip": "AST -> Object in JSON format.",
-  "helpUrl": ""
+  "tooltip": "AST -> Object in JSON format."
 }

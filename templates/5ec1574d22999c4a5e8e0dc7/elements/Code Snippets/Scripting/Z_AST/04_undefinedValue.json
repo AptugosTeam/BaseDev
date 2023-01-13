@@ -10,7 +10,7 @@ fullload: true
 */
 {
   init: function() {
-    this.setColour(230);
+    this.setStyle("variable_blocks")
     this.appendDummyInput().appendField('undefined');
     this.setOutput(true);
     this.setTooltip("AST -> Undefined value.");

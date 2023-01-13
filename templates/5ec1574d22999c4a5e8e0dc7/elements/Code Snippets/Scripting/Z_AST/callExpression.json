@@ -23,8 +23,8 @@ fullload: true
           "name": "ARGUMENT0"
         }
       ],
-      "inputsInline": false,
-      "tooltip": "Call Expression",
+      "inputsInline": true,
+      "tooltip": "AST -> Call Expression",
       "helpUrl": "",
       "output": null,
       "style": "loop_blocks",
