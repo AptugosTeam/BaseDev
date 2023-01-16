@@ -32,7 +32,8 @@ options:
     display: Color
     type: dropdown
     advanced: true
-    options: [['default', 'Default'], ['primary', 'Primary'], ['secondary', 'Secondary'], ['error', 'Error'],['info', 'Info'],['success', 'Success'],['warning', 'Warning']] 
+    options:
+      return [['default', 'Default'], ['primary', 'Primary'], ['secondary', 'Secondary'], ['error', 'Error'],['info', 'Info'],['success', 'Success'],['warning', 'Warning']] 
     settings:
       default: primary
   - name: size
