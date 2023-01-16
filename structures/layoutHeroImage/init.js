@@ -1,5 +1,9 @@
+const structID = aptugo.generateID()
 
 const PH = {
+    "structure": structID,
+	"structureId": "layoutHeroImage",
+	"structureName": "Hero Image",
   "path": "dummyEncloser.tpl",
   "completePath": "elements/Basic/dummyEncloser.tpl",
   "children": [
@@ -162,6 +166,9 @@ const PH = {
 }
 
 const B = {
+    "structure": structID,
+	"structureId": "layoutHeroImage",
+	"structureName": "Hero Image",
   "path": "div.tpl",
   "completePath": "elements/Basic/div.tpl",
   "type": "element",
