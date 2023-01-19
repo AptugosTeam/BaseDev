@@ -6,18 +6,32 @@ unique_id: Fmr87CZF
 icon: f:RadioGroup.svg
 children: []
 options:
-  - name: onchange
-    display: On Change
-    type: function
-    options: ''
   - name: value
     display: Value
     type: text
+    options: ''
+  - name: onchange
+    display: On Change
+    type: function
     options: ''
   - name: name
     display: Name attribute of the input element
     type: text
     options: ''
+  - name: separator
+    display: Advanced Properties
+    type: separator
+    advanced: true
+  - name: label
+    display: Label
+    type: text
+    options: ''
+    advanced: true
+  - name: labelid
+    display: Label ID
+    type: text
+    options: ''
+    advanced: true
 childs:
   - name: Radio
     element: radio
@@ -32,20 +46,26 @@ childs:
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 
-  <FormControl>
-        <RadioGroup
-          {% if element.values.onchange %}
-            onChange={ {{ element.values.onchange | functionOrCall }} }
-          {% else %}
-          {% endif %}
-          {% if element.values.value %}
-            value={{ element.values.value |textOrVariable }}
-          {% else %}
-          {% endif %}
-          {% if element.values.name %}
-            name={{ element.values.name | textOrVariable }}
-          {% endif %}
-        >
-        {{ content | raw }}
-        </RadioGroup>
-      </FormControl>
+<FormControl>
+  {% if element.values.label %}
+    <FormLabel id={{ element.values.labelid |textOrVariable }}>
+      {{ element.values.label }}
+    </FormLabel>
+  {% endif %}
+  <RadioGroup
+    {% if element.values.label %}
+      aria-labelledby={{ element.values.labelid |textOrVariable }}
+    {% endif %}
+    {% if element.values.onchange %}
+      onChange={ {{ element.values.onchange | functionOrCall }} }
+    {% endif %}
+    {% if element.values.value %}
+      value={ {{ element.values.value }} }
+    {% endif %}
+    {% if element.values.name %}
+      name={{ element.values.name | textOrVariable }}
+    {% endif %}
+  >
+    {{ content | raw }}
+  </RadioGroup>
+</FormControl>
