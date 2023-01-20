@@ -23,6 +23,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
   - It is possible to add extra styles.
   - It is possible to add colors to the inputs.
   - It is possible to change the size of the inputs.
+  - Advanced Properties separator added
+  - Conditional rendering size property
+  - If it is inside a FormControl display the value to it instead of the Radio.
 
 ## [TEMPLATES 1.5.1] - 2023-01-03
 
