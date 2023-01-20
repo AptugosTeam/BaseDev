@@ -17,6 +17,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
   - Added a required validation to password fields.
 
+- **Radio:**
+
+  - Checked moved to advanced properties.
+  - It is possible to add extra styles.
+  - It is possible to add colors to the inputs.
+  - It is possible to change the size of the inputs.
+
 ## [TEMPLATES 1.5.1] - 2023-01-03
 
 ### Changed
