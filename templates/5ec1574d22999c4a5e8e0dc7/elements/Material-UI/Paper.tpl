@@ -24,24 +24,25 @@ options:
       propertyCondition: variant
       condition: elevation
       active: true
+      default: 1
 */
 {% set bpr %}
 import Paper from '@mui/material/Paper'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Paper
-{% if not element.values.square %}
-  square
-{% endif %}
-{% if element.values.variant %}
-  variant='{{ element.values.variant }}'
-{% endif %}
-{% if element.values.variant != 'outlined' %}
-  elevation={ {{ element.values.elevation }} }
-{% endif %}
-{% if element.values.className %}
-  classes={ { root: {{ element.values.className }} } }
-{% endif %}
+  {% if not element.values.square %}
+    square
+  {% endif %}
+  {% if element.values.variant %}
+    variant='{{ element.values.variant }}'
+  {% endif %}
+  {% if element.values.variant != 'outlined' %}
+    elevation={ {{ element.values.elevation }} }
+  {% endif %}
+  {% if element.values.className %}
+    classes={ { root: {{ element.values.className }} } }
+  {% endif %}
 >
 {{ content | raw }}
 </Paper>
