@@ -93,12 +93,8 @@ options:
       {% if element.values.onchange %}
         onChange={ {{ element.values.onchange | functionOrCall }} }
       {% endif %}
-      {% if element.values.Color %}
-        color='{{ element.values.Color }}'
-      {% endif %}
-      {% if element.values.size %}
-        size='{{ element.values.size }}'
-      {% endif %}
+        color='{{ element.values.Color | default('primary') }}'
+        size='{{ element.values.size | default('medium') }}'
       {% if element.values.name %}
         name={{ element.values.name |textOrVariable }}
       {% endif %}
