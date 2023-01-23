@@ -33,7 +33,7 @@ options:
     options: ''
     advanced: true
 childs:
-  - name: Radio
+  - name: radio
     element: radio
 */
 
