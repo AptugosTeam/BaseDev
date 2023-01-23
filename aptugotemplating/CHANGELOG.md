@@ -1,4 +1,4 @@
-# Change Log
+# ChangeLog
 
 All notable changes to the "aptugotemplating" extension will be documented in this file.
 
@@ -14,11 +14,17 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - **Radio Group:**
   It allows grouping radio elements to be able to select within the set of options.
 
+- **Rating:**
+
 ### Changed
 
 - **Password:**
 
   - Added a required validation to password fields.
+
+- **Paper:**
+
+  - Elevation options on a dropdown with a default value.
 
 - **Radio:**
 
@@ -26,8 +32,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
   - It is possible to add extra styles.
   - It is possible to add colors to the inputs.
   - It is possible to change the size of the inputs.
-  - Advanced Properties separator added
-  - Conditional rendering size property
+  - Advanced Properties separator added.
+  - Conditional rendering size property.
   - If it is inside a FormControl display the value to it instead of the Radio.
 
 ## [TEMPLATES 1.5.1] - 2023-01-03
@@ -36,7 +42,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Index.js solving strictQuery DeprecationWarning from Mongoose.
 
-- Dependencies for React and React Native Updated
+- Dependencies for React and React Native Updated.
 
 - **Data Table:**
 
@@ -77,10 +83,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - **Link:** [Deprecated]
 
 ## [TEMPLATES 1.5.0] - 2022-11-07
-
-### Added
-
-- **Rating:**
 
 ### Changed
 
