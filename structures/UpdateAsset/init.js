@@ -28,7 +28,6 @@ if (existing) {
     assetId = newAsset.id
 }
 
-console.log(Parameters)
 if (Parameters.asset.fileContents) {
     aptugo.run({ _: ['assets', 'setfile'], binary: false, app: Application._id, id: assetId, details: newAsset }, { file: JSON.stringify(Parameters.asset.fileContents) })
     // if ( window.sendAptugoCommand ) {
