@@ -18,6 +18,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Changed
 
+- **Email:**
+
+  - Added default visual for smpthost
+  - Added default visual for smptport
+  - Remove react-html-email - Not in use
+
 - **Password:**
 
   - Added a required validation to password fields.
