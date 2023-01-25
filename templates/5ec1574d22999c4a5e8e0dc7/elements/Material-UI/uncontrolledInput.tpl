@@ -66,7 +66,7 @@ import TextField from '@mui/material/TextField'
     {% if element.values.placeholder %}placeholder={{ element.values.placeholder | textOrVariable }}{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
-    {% if element.values.helperText %}helperText=" {{ element.values.helperText }} "{% endif %}
+    {% if element.values.helperText %}helperText={ {{ element.values.helperText }} }{% endif %}
     {% if element.values.margin %}margin="{{ element.values.margin }}"{% endif %}
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
