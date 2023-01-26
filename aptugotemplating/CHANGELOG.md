@@ -4,369 +4,400 @@ All notable changes to the "aptugotemplating" extension will be documented in th
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [TEMPLATES 1.5.2] -
-  ### Added
+## [TEMPLATES 1.5.2] - 2023-01-27
 
-  - **Swiper:**
-    It is a special type of carousel. It allows you to display different types of items in an infinite loop where each item scrolls horizontally, similar to a set of slides.
+### Added
 
-  - **Radio Group:**
-    It allows grouping radio elements to be able to select within the set of options.
+- **Swiper:**
+  It is a special type of carousel. It allows you to display different types of items in an infinite loop where each item scrolls horizontally, similar to a set of slides.
 
-  - **Rating:**
-  ### Changed
+- **Radio Group:**
+  It allows grouping radio elements to be able to select within the set of options.
 
-  - **Email:**
+- **Rating:**
 
-    - Added default visual for smpthost.
-    - Added default visual for smptport.
-    - Remove react-html-email - Not in use.
+### Changed
 
-  - **Password:**
+- **Email:**
 
-    - Added a required validation to password fields.
+  - Added default visual for smpthost.
+  - Added default visual for smptport.
+  - Remove react-html-email - Not in use.
 
-  - **Paper:**
+- **Password:**
 
-    - Elevation options on a dropdown with a default value.
+  - Added a required validation to password fields.
 
-  - **Radio:**
+- **Paper:**
 
-    - Checked moved to advanced properties.
-    - It is possible to add extra styles.
-    - It is possible to add colors to the inputs.
-    - It is possible to change the size of the inputs.
-    - Advanced Properties separator added.
-    - Conditional rendering size property.
-    - If it is inside a FormControl display the value to it instead of the Radio.
+  - Elevation options on a dropdown with a default value.
 
+- **Radio:**
+
+  - Checked moved to advanced properties.
+  - It is possible to add extra styles.
+  - It is possible to add colors to the inputs.
+  - It is possible to change the size of the inputs.
+  - Advanced Properties separator added.
+  - Conditional rendering size property.
+  - If it is inside a FormControl display the value to it instead of the Radio.
+
+- **Pagination:**
+
+  - Now it is possible to disable the element.
+  - It is possible to set a default page.
+  - Now it is possible to set a shape to the pagination icons.
+  - Now it is possible to set a variant to the icons.
+  - It is possible to hide the prev and next button.
+  - Now it is possible to set the size of the icons.
+  - It is possible to add extra styles.
+  - Added a default value to onChange prop.
 
 ## [TEMPLATES 1.5.1] - 2023-01-03
-  ### Changed
 
-  - Index.js solving strictQuery DeprecationWarning from Mongoose.
+### Changed
 
-  - Dependencies for React and React Native Updated.
+- Index.js solving strictQuery DeprecationWarning from Mongoose.
 
-  - **Data Table:**
+- Dependencies for React and React Native Updated.
 
-    - Reverting dataTable mistaken update.
+- **Data Table:**
 
-  - **Pdf Document:**
+  - Reverting dataTable mistaken update.
 
-    - Auto install the react-pdf library when using the element.
+- **Pdf Document:**
 
-  - **Radar:**
+  - Auto install the react-pdf library when using the element.
 
-    - It is possible to set the Grid Label Offset.
-    - It is possible to set the Grid Shape.
+- **Radar:**
 
-  - **Email**
+  - It is possible to set the Grid Label Offset.
+  - It is possible to set the Grid Shape.
 
-    - User, Password, Email Params and From fields are required.
-    - Adding default values.
+- **Email**
 
-  - **Material Icon:**
+  - User, Password, Email Params and From fields are required.
+  - Adding default values.
 
-    - Now it is possible to change the Size of the icon.
-    - ClassName properly working.
-    - Icon field required.
-    - Now it is possible to add a custom color.
+- **Material Icon:**
 
-  - **Icon Button:**
+  - Now it is possible to change the Size of the icon.
+  - ClassName properly working.
+  - Icon field required.
+  - Now it is possible to add a custom color.
 
-    - New icons added.
-    - Icons in alphabet order.
-    - Action display renamed to On Click.
-    - Now it is possible to add a Custom Color.
-    - It is possible to change the size of the icons and the unit to do it.
-    - It is possible to add Extra Styles.
-  ### Removed
+- **Icon Button:**
 
-  - **Link:** [Deprecated]
+  - New icons added.
+  - Icons in alphabet order.
+  - Action display renamed to On Click.
+  - Now it is possible to add a Custom Color.
+  - It is possible to change the size of the icons and the unit to do it.
+  - It is possible to add Extra Styles.
+
+### Removed
+
+- **Link:** [Deprecated]
 
 ## [TEMPLATES 1.5.0] - 2022-11-07
-  ### Changed
 
-  - Add strictPopulate false for 2nd level relationships.
+### Changed
 
-  - Updates to Code Snippets.
+- Add strictPopulate false for 2nd level relationships.
 
-  - Update import csv structure for Aptugo 1.7
+- Updates to Code Snippets.
 
-  - **Popup Dialog:**
+- Update import csv structure for Aptugo 1.7
 
-    - Supports ClassName.
+- **Popup Dialog:**
 
-  - **Checkbox:**
+  - Supports ClassName.
 
-    - Checked variable is optional.
+- **Checkbox:**
 
-  - **Table:**
+  - Checked variable is optional.
 
-    - Now it is possible to add a default page.
+- **Table:**
 
-  - **Load from Database:**
+  - Now it is possible to add a default page.
 
-    - Now it is possible to add a default page.
+- **Load from Database:**
+
+  - Now it is possible to add a default page.
 
 ## [TEMPLATES 1.4.16] - 2022-10-06
-  ### Added
 
-  - **Code Snippets:** [Experimental]
+### Added
 
-    New experimental coding functionality with a function editor and code snippets giving a new interactive experience.
+- **Code Snippets:** [Experimental]
 
-  - **Animations (Category):**
+  New experimental coding functionality with a function editor and code snippets giving a new interactive experience.
 
-    - New category added including 8 brand new animation elements:
+- **Animations (Category):**
 
-      - _Attention Seeker_:
-        Gives the associated item a variety of effects.
+  - New category added including 8 brand new animation elements:
 
-      - _Bounce_:
-        Allows the element associated with it to appear from the left of the screen to the default location, quickly and stopping when it arrives, like a race car.
+    - _Attention Seeker_:
+      Gives the associated item a variety of effects.
 
-      - _Fade_:
-        It allows the element associated with it to appear scrolling from the four main directions (left, right, up and down).
+    - _Bounce_:
+      Allows the element associated with it to appear from the left of the screen to the default location, quickly and stopping when it arrives, like a race car.
 
-      - _Flip_:
-        Allows the element associated with it to traverse a circumferential path on the x-axis (horizontally).
+    - _Fade_:
+      It allows the element associated with it to appear scrolling from the four main directions (left, right, up and down).
 
-      - _Hinge_:
-        It allows the element associated with it to incorporate a falling effect, similar to what occurs when an object (such as a painting) detaches from the surface that supports it.
+    - _Flip_:
+      Allows the element associated with it to traverse a circumferential path on the x-axis (horizontally).
 
-      - _Jack In The Box_:
-        Displays the element associated with it with a movement from the back to the front, in an oblique direction, ending with the legendary movement of the Jack in the box toy or surprise box.
+    - _Hinge_:
+      It allows the element associated with it to incorporate a falling effect, similar to what occurs when an object (such as a painting) detaches from the surface that supports it.
 
-      - _Rotate_:
-        Allows the associated element a transformation in which the element rotates around itself at a fixed point.
+    - _Jack In The Box_:
+      Displays the element associated with it with a movement from the back to the front, in an oblique direction, ending with the legendary movement of the Jack in the box toy or surprise box.
 
-      - _Zoom_:
-        Its effect on elements is to enlarge them from a similar dimension to their original size.
-  ### Changed
+    - _Rotate_:
+      Allows the associated element a transformation in which the element rotates around itself at a fixed point.
 
-  - **Accordion:**
+    - _Zoom_:
+      Its effect on elements is to enlarge them from a similar dimension to their original size.
 
-    - Elevation removed.
-    - It can be disabled.
-    - Now it is possible to style Width, Height, Padding, Color and Background Color.
-    - Accordion Details, Accordion Summary as default childs.
+### Changed
 
-  - **Accordion Details:**
+- **Accordion:**
 
-    - Now it is possible to style Background Color and Color.
+  - Elevation removed.
+  - It can be disabled.
+  - Now it is possible to style Width, Height, Padding, Color and Background Color.
+  - Accordion Details, Accordion Summary as default childs.
 
-  - **Accordion Summary:**
+- **Accordion Details:**
 
-    - Now it is possible to style Background Color and Color.
+  - Now it is possible to style Background Color and Color.
 
-  - **Box:**
+- **Accordion Summary:**
 
-    - Now it is possible to change the html tagname used by the element.
-    - It is possible to add extra styles.
-    - Color, and devices displays removed.
+  - Now it is possible to style Background Color and Color.
 
-  - **Container:**
+- **Box:**
 
-    - Disable Gutters and Fixed as advance properties.
-    - It is possible to add extra styles.
+  - Now it is possible to change the html tagname used by the element.
+  - It is possible to add extra styles.
+  - Color, and devices displays removed.
 
-  - **Autocomplete (Field):**
+- **Container:**
 
-    - Now checks for duplicates.
-  ### Removed
+  - Disable Gutters and Fixed as advance properties.
+  - It is possible to add extra styles.
 
-  - **Button with Icon:** [Deprecated]
+- **Autocomplete (Field):**
+
+  - Now checks for duplicates.
+
+### Removed
+
+- **Button with Icon:** [Deprecated]
 
 ## [TEMPLATES 1.4.15] - 2022-09-17
-  ### Fixed
 
-  - **File Upload**:
+### Fixed
 
-    - Remove makeStyles as default styling.
+- **File Upload**:
+
+  - Remove makeStyles as default styling.
 
 ## [TEMPLATES 1.4.14] - 2022-09-15
-  ### Changed
 
-  - Variable tables are not sortable.
-  ### Fixed
+### Changed
 
-  - **Text**:
+- Variable tables are not sortable.
 
-    - Backwards compability for text element.
-  ### Removed
+### Fixed
 
-  - MUI/Styles
-  - React-Hot-Loader
+- **Text**:
+
+  - Backwards compability for text element.
+
+### Removed
+
+- MUI/Styles
+- React-Hot-Loader
 
 ## [TEMPLATES 1.4.13] - 2022-09-14
-  ### Added
 
-  - **Pdf Link:**
-    Allows you to display a hyperlink within the PDF document. It can be nested as a parent of either a Text element or an image.
+### Added
 
-  - **Pdf Stylesheet:**
-    Allows adding styles to any element of the PDF family. Defines a variable that receives a javascript object with the selectors and properties that you want to add to each element.
+- **Pdf Link:**
+  Allows you to display a hyperlink within the PDF document. It can be nested as a parent of either a Text element or an image.
 
-  - **Pdf Renderer:**
-    Provides an iframe to render generated PDF documents.
+- **Pdf Stylesheet:**
+  Allows adding styles to any element of the PDF family. Defines a variable that receives a javascript object with the selectors and properties that you want to add to each element.
 
-  - **Radial Bar Chart:**
-    Bar Chart plotted on a polar coordinate system, rather than on a Cartesian one.
-  ### Changed
+- **Pdf Renderer:**
+  Provides an iframe to render generated PDF documents.
 
-  - Update Packages Requirements
+- **Radial Bar Chart:**
+  Bar Chart plotted on a polar coordinate system, rather than on a Cartesian one.
 
-  - **Composed Chart:**
+### Changed
 
-    - Now it is responsive
-    - It is possible to hide Axis, Cartesian Grids and Leyends
+- Update Packages Requirements
 
-  - **User Authentication (Structure):**
+- **Composed Chart:**
 
-    - Default styles modified on Login, Register and Forgot Pages.
+  - Now it is responsive
+  - It is possible to hide Axis, Cartesian Grids and Leyends
 
-  - **Text:**
+- **User Authentication (Structure):**
 
-    - Complete path added.
-    - Code updated.
+  - Default styles modified on Login, Register and Forgot Pages.
 
-  - **Pdf Document:**
+- **Text:**
 
-    - Document _Creator_, _Producer_, _PDF Version_, _Language_ and _OnRender function_ as advance properties.
-    - New icon.
+  - Complete path added.
+  - Code updated.
 
-  - **Pdf Download:**
+- **Pdf Document:**
 
-    - Now it is possible to style the download button.
-    - New icon.
-    - Default child _Document_ removed.
+  - Document _Creator_, _Producer_, _PDF Version_, _Language_ and _OnRender function_ as advance properties.
+  - New icon.
 
-  - **Pdf Image:**
+- **Pdf Download:**
 
-    - _Cache_ and _Debug_ as advanced properties.
-    - Now it can receive inline styles or receive a variable.
+  - Now it is possible to style the download button.
+  - New icon.
+  - Default child _Document_ removed.
 
-  - **Pdf Page:**
+- **Pdf Image:**
 
-    - Default page size is 'A4'.
-    - _Debug_ as advanced properties.
-    - Now it can receive inline styles or receive a variable.
+  - _Cache_ and _Debug_ as advanced properties.
+  - Now it can receive inline styles or receive a variable.
 
-  - **Pdf Text:**
+- **Pdf Page:**
 
-    - _Dynamic Render Function_, _Hyphenation Callback_ and _Debug_ as advanced properties.
-    - Now it can receive inline styles or receive a variable.
-    - _Text_ Element as a default child.
+  - Default page size is 'A4'.
+  - _Debug_ as advanced properties.
+  - Now it can receive inline styles or receive a variable.
 
-  - **Pdf View:**
+- **Pdf Text:**
 
-    - _Dynamic Render Function_ and _Debug_ as advanced properties.
-    - Now it can receive inline styles or receive a variable.
+  - _Dynamic Render Function_, _Hyphenation Callback_ and _Debug_ as advanced properties.
+  - Now it can receive inline styles or receive a variable.
+  - _Text_ Element as a default child.
 
-  - **Div:**
+- **Pdf View:**
 
-    - _Use Reference_, _On Click_ and _Different HTML Tag_ as advanced properties.
+  - _Dynamic Render Function_ and _Debug_ as advanced properties.
+  - Now it can receive inline styles or receive a variable.
 
-  - **New Application (Structure):**
+- **Div:**
 
-    - Setted default _Database Connect String_, _Api Url_ and _URL_ settings as the application name for better user experience.
+  - _Use Reference_, _On Click_ and _Different HTML Tag_ as advanced properties.
 
-  - **Autolinking:**
+- **New Application (Structure):**
 
-    - _From Link_ property is setted as 'required'.
-  ### Fixed
+  - Setted default _Database Connect String_, _Api Url_ and _URL_ settings as the application name for better user experience.
 
-  - **Div**:
+- **Autolinking:**
 
-    - Fixed bug when the _unique_id_ option was selected and at the same time an _ID_ was placed in the field (both were saved in code), causing an error.
-  ### Removed
+  - _From Link_ property is setted as 'required'.
 
-  - **View Pdf** ( Replaced by Pdf Renderer )
+### Fixed
+
+- **Div**:
+
+  - Fixed bug when the _unique_id_ option was selected and at the same time an _ID_ was placed in the field (both were saved in code), causing an error.
+
+### Removed
+
+- **View Pdf** ( Replaced by Pdf Renderer )
 
 ## [TEMPLATES 1.4.12] - 2022-09-06
-  ### Added
 
-  - **Merge Deep:**
-    Advanced element that provides a function named _mergeDeep()_ which, when called, can receive as arguments any amount of javascript objects and returns an object with all the objects joined.
+### Added
 
-  - **View Pdf:**
-    Provides an iframe to render generated PDF documents.
-  ### Changed
+- **Merge Deep:**
+  Advanced element that provides a function named _mergeDeep()_ which, when called, can receive as arguments any amount of javascript objects and returns an object with all the objects joined.
 
-  - Unique icons for elements.
+- **View Pdf:**
+  Provides an iframe to render generated PDF documents.
 
-  - Import CSV Structure update.
+### Changed
 
-  - User Authentication Structure styles update.
+- Unique icons for elements.
+
+- Import CSV Structure update.
+
+- User Authentication Structure styles update.
 
 ## [TEMPLATES 1.4.11] - 2022-09-01
-  ### Added
 
-  - **Slider:**
-    Allow users to make selections from a range of values. Reflects a range of values along a bar, from which users may select a single value. They are ideal for adjusting settings such as volume, brightness, or applying image filters.
+### Added
 
-  - **Product Card (Layouts):**
-    A special type of Card designed exclusively for products. The element contains other elements that complement its functionality. Inside these elements you can place texts, images and various buttons. Comes with 4 new elements that can be used as childs (Actions, Content, Header and Media).
+- **Slider:**
+  Allow users to make selections from a range of values. Reflects a range of values along a bar, from which users may select a single value. They are ideal for adjusting settings such as volume, brightness, or applying image filters.
 
-  - **Composed Chart:**
-    Allows you to create a graphical representation. It can be used to view balances or make comparisons of any kind. Comes with 3 new elements that can be used as childs (Area, Line, Bar).
+- **Product Card (Layouts):**
+  A special type of Card designed exclusively for products. The element contains other elements that complement its functionality. Inside these elements you can place texts, images and various buttons. Comes with 4 new elements that can be used as childs (Actions, Content, Header and Media).
 
-  - **Parallax:**
-    Parallax allows a visual effect that simulates the displacement of images or textures that are in the background. The result is an illusion of depth, creating an effect similar to a 3d landscape.
+- **Composed Chart:**
+  Allows you to create a graphical representation. It can be used to view balances or make comparisons of any kind. Comes with 3 new elements that can be used as childs (Area, Line, Bar).
 
-  - **React Carousel:**
-    Creates a sliding effect that allows to display different elements in the form of slides. With this effect we can easily display images and texts without scrolling the page.
-  ### Changed
+- **Parallax:**
+  Parallax allows a visual effect that simulates the displacement of images or textures that are in the background. The result is an illusion of depth, creating an effect similar to a 3d landscape.
 
-  - **Function:**
+- **React Carousel:**
+  Creates a sliding effect that allows to display different elements in the form of slides. With this effect we can easily display images and texts without scrolling the page.
 
-    - _Async:_ On 'Advanced Properties' is now possible to build an asynchronous function.
+### Changed
 
-  - **Card Actions:**
+- **Function:**
 
-    - _Disable Spacing:_ If the option is enabled, elements placed inside Card Actions have no extra margin.
+  - _Async:_ On 'Advanced Properties' is now possible to build an asynchronous function.
 
-  - **Card Media:**
+- **Card Actions:**
 
-    - _Images:_ It is possible to add an image by path or by choosing an asset
-    - _Width:_ now is possible to add a width in px.
-    - _Height:_ now is possible to add a height in px.
+  - _Disable Spacing:_ If the option is enabled, elements placed inside Card Actions have no extra margin.
 
-  - **User Authentication (Structure):**
+- **Card Media:**
 
-    - Now it is not necessary to set any values when selecting the structure.
-    - Default route after successful login is the main page '/'
-      Google, Facebook and Twitter login and register disabled.
-    - The default role when register was set as 'User'
+  - _Images:_ It is possible to add an image by path or by choosing an asset
+  - _Width:_ now is possible to add a width in px.
+  - _Height:_ now is possible to add a height in px.
 
-  - **Leaflet:**
+- **User Authentication (Structure):**
 
-    - _Position:_ It is possible to set the center position of the map using `[lat,lng]` format.
-    - _Zoom:_ It is possible to change the default zoom of the map.
-    - _Zoom with Mouse Wheel:_ On 'Advanced Properties' it is now possible to decide if the user can zoom in/out with the mouse scroll wheel.
+  - Now it is not necessary to set any values when selecting the structure.
+  - Default route after successful login is the main page '/'
+    Google, Facebook and Twitter login and register disabled.
+  - The default role when register was set as 'User'
 
-  - **Div:**
-    - _Tag:_ Now it is possible to change the tagname used by the div element.
-  ### Fixed
+- **Leaflet:**
 
-  - **Define Variable:**
+  - _Position:_ It is possible to set the center position of the map using `[lat,lng]` format.
+  - _Zoom:_ It is possible to change the default zoom of the map.
+  - _Zoom with Mouse Wheel:_ On 'Advanced Properties' it is now possible to decide if the user can zoom in/out with the mouse scroll wheel.
 
-    - The display name was changed to _Variable Name_ for a better comprehension.
+- **Div:**
+  - _Tag:_ Now it is possible to change the tagname used by the div element.
 
-  - **Card:**
+### Fixed
 
-    - Minimal fixes to max width and height.
+- **Define Variable:**
 
-  - **Email:**
+  - The display name was changed to _Variable Name_ for a better comprehension.
 
-    - Solved error where _sendEmail_ function appeared outside functional component.
+- **Card:**
 
-  - **Marker:**
+  - Minimal fixes to max width and height.
 
-    - Syntax was changed to `[lat,lng]` and takes _leafLetPosition_ by default value if no value is setted.
+- **Email:**
 
-  - **Simple Link:**
+  - Solved error where _sendEmail_ function appeared outside functional component.
 
-    - Modified to use 'class' instead of 'className'.
+- **Marker:**
+
+  - Syntax was changed to `[lat,lng]` and takes _leafLetPosition_ by default value if no value is setted.
+
+- **Simple Link:**
+
+  - Modified to use 'class' instead of 'className'.
