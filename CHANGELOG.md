@@ -1,9 +1,5 @@
 # ChangeLog
 
-All notable changes to the "aptugotemplating" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
 ## [TEMPLATES 1.5.2] - 2023-01-27
 
 ### Added
@@ -15,6 +11,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
   It allows grouping radio elements to be able to select within the set of options.
 
 - **Rating:**
+
+- **Countdown:**
 
 ### Changed
 
