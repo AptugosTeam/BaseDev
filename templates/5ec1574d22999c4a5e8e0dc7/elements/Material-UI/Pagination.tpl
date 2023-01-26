@@ -7,67 +7,73 @@ unique_id: efevXTy7
 children: []
 options:
   - name: count
-    display: Pages Count
+    display: Number of Pages
     type: text
-    options: ''
     settings:
-      active: true
       default: '10'
-  - name: boundaryCount
-    display: Boundary Count
-    type: text
-    settings:
-      active: true
-      default: '1'
-  - color: color
-    display: Color
-    type: dropdown
-    options: primary;secondary;standard
-    settings:
-      active: true
-      default: 'standard'
   - name: onChange
     display: On Change
     type: function
-    options: ''
-  - name: disabled
-    display: Disabled
-    type: variable
-    options: ''
-    advanced: true
     settings:
-      active: true
+      default: (e, page) => { console.log(page) }
+  - name: color
+    display: Color
+    type: dropdown
+    options: return [['primary','Primary'], ['secondary','Secondary'], ['standard', 'Standard']]
+    settings:
+      default: 'standard'
+  - name: variant
+    display: Variant
+    type: dropdown
+    options: return [['text', 'Text'], ['outlined', 'Outlined']]
+    settings:
+      default: 'text'
+  - name: shape
+    display: Icons Shape
+    type: dropdown
+    options: return [['circular', 'Circular'], ['rounded', 'Rounded']]
+    settings:
+      default: 'circular'
+  - name: size
+    display: Size
+    type: dropdown
+    options: return [['small', 'Small'], ['medium', 'Medium'], ['large', 'Large']]
+    settings:
+      default: 'medium'
+  - name: separator
+    display: Advanced Properties
+    type: separator
+    advanced: true
   - name: defaultPage
     display: Default Page
     type: variable
-    options: ''
     advanced: true
-  - name: shape
-    display: shape
-    type: dropdown
-    options: circular;rounded
-    settings:
-      active: true
-      default: 'circular'
-  - name: hideNextButton
-    display: Hide Next Button
-    type: variable
+  - name: boundaryCount
+    display: Boundary Count
+    type: text
     advanced: true
-  - name: hidePrevButton
-    display: Hide Previous Button
-    type: variable
-    advanced: true
-  - name: size
-    display: size
-    type: dropdown
-    options: small;medium;large
-    settings:
-      active: true
-      default: 'medium'
   - name: style
     display: Extra Styles
     type: text
-    options: ''
+    advanced: true
+  - name: hideNextButton
+    display: Hide Next Button
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
+  - name: hidePrevButton
+    display: Hide Previous Button
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
+  - name: disabled
+    display: Disabled
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
 */
 {% set bpr %}
 import Pagination from '@mui/material/Pagination'
@@ -76,7 +82,10 @@ import Pagination from '@mui/material/Pagination'
 <Pagination
   count={ {{ element.values.count|default(10) }}}
   {% if element.values.color %}
-    color={ {{ element.values.color }} }
+    color={ '{{ element.values.color }}' }
+  {% endif %}
+  {% if element.values.variant %}
+    variant={ '{{ element.values.variant }}' }
   {% endif %}
   {% if element.values.boundaryCount %}
     boundaryCount={ {{ element.values.boundaryCount }} }
@@ -103,6 +112,6 @@ import Pagination from '@mui/material/Pagination'
     size={ '{{element.values.size}}' }
   {% endif %}
   {% if element.values.style %}
-    style={ {{element.values.style}} }
+    sx={ { {{element.values.style}} } }
   {% endif %}
 />
