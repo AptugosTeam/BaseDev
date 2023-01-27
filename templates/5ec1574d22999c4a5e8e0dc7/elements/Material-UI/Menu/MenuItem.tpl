@@ -8,8 +8,12 @@ helpText: Adds a menu item into a menu
 options:
   - name: onclick
     display: On Click
-    type: text
+    type: function
     options: ''
+  - name: separator
+    display: Advanced Properties
+    type: separator
+    advanced: true
   - name: disabled
     display: Disabled?
     type: checkbox
