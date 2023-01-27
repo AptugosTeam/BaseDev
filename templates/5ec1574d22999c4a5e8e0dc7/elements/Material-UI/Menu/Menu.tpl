@@ -13,18 +13,42 @@ options:
     display: On Close
     type: function
     options: ''
+  - name: separator
+    display: Advanced Properties
+    type: separator
+    advanced: true
   - name: positionVertical
     display: Position Vertical
     type: dropdown
     advanced: true
+    settings:
+      default: top
     options:
-      return [['top', 'Top'],['bottom', 'Bottom']]
+      return [['top', 'Top'],['center', 'Center'],['bottom', 'Bottom'],['number', 'Set number in px']]
+  - name: verticalNumber
+    display: Set vertical position in px
+    type: text
+    advanced: true
+    settings:
+      propertyCondition: positionVertical
+      condition: number
+      active: true
   - name: positionHorizontal
     display: Position Horizontal
     type: dropdown
     advanced: true
+    settings:
+      default: center
     options: 
-      return [['left', 'Left'],['center', 'Center'],['right', 'Right']]
+      return [['left', 'Left'],['center', 'Center'],['right', 'Right'],['number', 'Set number in px']]
+  - name: horizontalNumber
+    display: Set horizontal position in px
+    type: text
+    advanced: true
+    settings:
+      propertyCondition: positionHorizontal
+      condition: number
+      active: true
 childs:
   - name: MenuList
     element: MenuList
@@ -48,8 +72,8 @@ import MenuItem from '@mui/material/MenuItem'
 <Menu
     anchorEl={ {{ anchorElement }} }
     anchorOrigin={ {
-      vertical: '{{element.values.positionVertical|default("top")}}',
-      horizontal: '{{element.values.positionHorizontal|default("center")}}',
+      {% if element.values.positionVertical == 'number' %} vertical: {{element.values.verticalNumber}}, {% else %} vertical: '{{element.values.positionVertical|default("top")}}', {% endif %}
+      {% if element.values.positionHorizontal == 'number' %} horizontal: {{element.values.horizontalNumber}}, {% else %} horizontal: '{{element.values.positionHorizontal|default("center")}}', {% endif %}
     } }
     transformOrigin={ {
       vertical: 'top',
