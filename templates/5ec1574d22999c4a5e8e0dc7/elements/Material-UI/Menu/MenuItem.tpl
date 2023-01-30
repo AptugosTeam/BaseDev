@@ -20,13 +20,13 @@ options:
     advanced: true
   - name: disabled
     display: Disabled?
-    type: checkbox
+    type: text
     advanced: true
     settings:
       default: false
   - name: selected
     display: Is Selected?
-    type: checkbox
+    type: text
     advanced: true
     settings:
       default: false
@@ -42,10 +42,10 @@ childs:
     onClick={ {{ element.values.onclick }} }
   {% endif %}
   {% if element.values.disabled %}
-    disabled 
+    disabled={ {{ element.values.disabled }} }
   {% endif %}
   {% if element.values.selected %}
-    selected={true}
+    selected={ {{ element.values.selected }} }
   {% endif %}
   >
   {{ content | raw }}
