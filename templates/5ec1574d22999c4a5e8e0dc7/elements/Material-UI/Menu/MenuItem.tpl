@@ -6,6 +6,10 @@ unique_id: 9ck3oIfw
 icon: f:MenuItem.svg
 helpText: Adds a menu item into a menu
 options:
+  - name: className
+    display: ClassName
+    type: styles
+    options: ''
   - name: onclick
     display: On Click
     type: function
@@ -31,15 +35,18 @@ childs:
     element: text
 */
 <MenuItem
-    {% if element.values.onclick %}
-      onClick={ {{ element.values.onclick }} }
-    {% endif %}
-    {% if element.values.disabled %}
-      disabled 
-    {% endif %}
-    {% if element.values.selected %}
-      selected={true}
-      {% endif %}
+  {% if element.values.className %}
+    className={ {{element.values.className}} }
+  {% endif %}
+  {% if element.values.onclick %}
+    onClick={ {{ element.values.onclick }} }
+  {% endif %}
+  {% if element.values.disabled %}
+    disabled 
+  {% endif %}
+  {% if element.values.selected %}
+    selected={true}
+  {% endif %}
   >
   {{ content | raw }}
 </MenuItem>

@@ -13,6 +13,10 @@ options:
     display: On Close
     type: function
     options: ''
+  - name: className
+    display: ClassName
+    type: styles
+    options: ''
   - name: separator
     display: Advanced Properties
     type: separator
@@ -70,16 +74,19 @@ import MenuItem from '@mui/material/MenuItem'
   {% set anchorElement = element.values.anchorElement %}
 {% endif %}
 <Menu
-    anchorEl={ {{ anchorElement }} }
-    anchorOrigin={ {
-      {% if element.values.positionVertical == 'number' %} vertical: {{element.values.verticalNumber}}, {% else %} vertical: '{{element.values.positionVertical|default("top")}}', {% endif %}
-      {% if element.values.positionHorizontal == 'number' %} horizontal: {{element.values.horizontalNumber}}, {% else %} horizontal: '{{element.values.positionHorizontal|default("center")}}', {% endif %}
-    } }
-    transformOrigin={ {
-      vertical: 'top',
-      horizontal: 'center',
-    } }
-    open={ Boolean({{ anchorElement }}) }
+  {% if element.values.className %}
+    className={ {{element.values.className}} }
+  {% endif %}
+  anchorEl={ {{ anchorElement }} }
+  anchorOrigin={ {
+    {% if element.values.positionVertical == 'number' %} vertical: {{element.values.verticalNumber}}, {% else %} vertical: '{{element.values.positionVertical|default("top")}}', {% endif %}
+    {% if element.values.positionHorizontal == 'number' %} horizontal: {{element.values.horizontalNumber}}, {% else %} horizontal: '{{element.values.positionHorizontal|default("center")}}', {% endif %}
+  } }
+  transformOrigin={ {
+    vertical: 'top',
+    horizontal: 'center',
+  } }
+  open={ Boolean({{ anchorElement }}) }
   {% if not element.values.onClose and element.values.anchorElement %}
     onClose={ () => {set{{ element.values.anchorElement }}(null)
   } }
