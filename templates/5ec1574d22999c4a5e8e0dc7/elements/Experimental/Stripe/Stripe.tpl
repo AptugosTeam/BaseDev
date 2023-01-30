@@ -41,9 +41,10 @@ settings:
   - name: ServerRoute
     value: |
       const stripe = require('stripe')('{{ type == 'Development' ? element.values.devApiKey : element.values.apikey }}');
-
       app.post('/create-checkout-session/:qty?/:productid?/:mode?', async (req, res) => {
-        const session = await stripe.checkout.sessions.create({
+        const successURL = req.body.successURL || `{{ element.values.successURL }}`
+        const cancelURL = req.body.cancelURL || `{{ element.values.cancelURL }}`
+        stripe.checkout.sessions.create({
           line_items: [
             {
               price: req.params.productid || '{{ type == 'Development' ? element.values.devPriceItem : element.values.priceItem }}',
@@ -52,11 +53,14 @@ settings:
           ],
           mode: req.params.mode || 'payment',
           client_reference_id: req.body.client_reference_id || null,
-          success_url: `{{ element.values.successURL }}`,
-          cancel_url: `{{ element.values.cancelURL }}`,
-        });
-        res.redirect(303, session.url);
-      });
+          success_url: successURL,
+          cancel_url: cancelURL,
+        }).then(session => {
+          res.redirect(303, session.url);
+        }).catch(err => {
+          res.send(err)
+        })
+      })
 */
 {% if not element.values.skipFrontEnd %}
 {% set bpr %}

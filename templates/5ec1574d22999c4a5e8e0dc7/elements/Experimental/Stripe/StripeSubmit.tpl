@@ -15,6 +15,9 @@ options:
     display: ID for the client making the transaction
     type: text
     options: ''
+  - name: successURL
+    display: Use a specific success URL
+    type: text
 */
 let form = document.createElement('form')
 {% if element.values.clientReferenceID %}
@@ -22,6 +25,12 @@ let form = document.createElement('form')
   criField.name = 'client_reference_id'
   criField.value = {{ element.values.clientReferenceID }}
   form.appendChild(criField)
+{% endif %}
+{% if element.values.successURL %}
+  let suField = document.createElement('input')
+  suField.name = 'successURL'
+  suField.value = {{ element.values.successURL | textOrVariable }}
+  form.appendChild(suField)
 {% endif %}
 form.method = 'POST'
 
