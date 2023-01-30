@@ -36,6 +36,8 @@ options:
     display: Delete Arrows
     type: checkbox
     options: ''
+settings:
+  - name: Packages
     value: '"swiper": "^8.0.0",'
 children: []
 */
