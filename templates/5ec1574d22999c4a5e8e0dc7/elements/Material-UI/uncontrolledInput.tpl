@@ -37,7 +37,7 @@ options:
     display: fieldname
     type: text
     options: ''
-  - name: fullwidth
+  - name: fullWidth
     display: Use full width?
     type: checkbox
   - name: type
@@ -53,9 +53,8 @@ options:
     type: text
 children: []
 */
-
-
-
+{% if element.values.fullwidth %}{% set fullWidth = element.values.fullwidth %}{% endif %}
+{% if elements.values.fullWidth %}{% set fullWidth = element.values.fullWidth %}{% endif %}
 {% set bpr %}
 import TextField from '@mui/material/TextField'
 {% endset %}
@@ -78,8 +77,7 @@ import TextField from '@mui/material/TextField'
     {% if element.values.type != 'textarea' %}
       type="{{ element.values.type|default('text') }}"
     {% endif %}
-    {% if element.values.fullWidth %}fullWidth{% endif %}
+    {% if fullWidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
-    
 />
