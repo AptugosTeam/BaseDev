@@ -6524,7 +6524,17 @@
       "label": "Password",
       "value": "Password",
       "dataType": "String",
-      "initialValue": ""
+      "initialValue": "",
+      "options": {
+        "validations": [
+          {
+            "display": "Requires a value",
+            "value": "required",
+            "type": "checkbox"
+          }
+        ]
+      }
+
     },
     {
       "label": "Rating",
