@@ -1,6 +1,6 @@
 # ChangeLog
 
-## [TEMPLATES 1.5.2] - 2023-01-27
+## [TEMPLATES 1.5.2] - 2023-01-30
 
 ### Added
 
@@ -10,9 +10,8 @@
 - **Radio Group:**
   It allows grouping radio elements to be able to select within the set of options.
 
-- **Rating:**
-
-- **Countdown:**
+- **Menu List:**
+  It allows to organize buttons that later will act as a drop-down menu.
 
 ### Changed
 
@@ -50,6 +49,22 @@
   - Now it is possible to set the size of the icons.
   - It is possible to add extra styles.
   - Added a default value to onChange prop.
+
+- **Menu:**
+
+  - Now it is possible to set the vertical position.
+  - Now it is possible to set the horizontal position.
+  - MenuList element as a default child.
+  - Advanced Properties separator added..
+  - It is possible to set a className.
+
+- **Menu Item:**
+
+  - Now it is possible to disable the element.
+  - It is possible to apply selected property to the element.
+  - Text element as a default child.
+  - Advanced Properties separator added.
+  - It is possible to set a className.
 
 ## [TEMPLATES 1.5.1] - 2023-01-03
 
