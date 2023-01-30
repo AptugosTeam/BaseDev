@@ -1,5 +1,9 @@
 # ChangeLog
 
+## [TEMPLATES 1.5.3] - 2023-01-30
+
+###  An improved version of 1.5.2
+
 ## [TEMPLATES 1.5.2] - 2023-01-30
 
 ### Added
