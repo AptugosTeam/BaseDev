@@ -22,7 +22,7 @@ options:
     type: separator
     advanced: true
   - name: positionVertical
-    display: Position Vertical
+    display: Vertical Position
     type: dropdown
     advanced: true
     settings:
@@ -38,7 +38,7 @@ options:
       condition: number
       active: true
   - name: positionHorizontal
-    display: Position Horizontal
+    display: Horizontal Position
     type: dropdown
     advanced: true
     settings:
