@@ -8,6 +8,7 @@
   "desc": "Start with an empty application ",
   "icon": "icon.png",
   "type": "template",
+  "liteReady": false,
   "parameters": [
     {
       "name": "Name",
