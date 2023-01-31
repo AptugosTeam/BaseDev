@@ -35,10 +35,10 @@ import Paper from '@mui/material/Paper'
     square
   {% endif %}
   {% if element.values.variant %}
-    variant='{{ element.values.variant }}'
+    variant='{{ element.values.variant|default("outlined") }}'
   {% endif %}
-  {% if element.values.variant != 'outlined' %}
-    elevation={ {{ element.values.elevation }} }
+  {% if element.values.variant != 'outlined' and element.values.variant %}
+    elevation={ {{ element.values.elevation|default(1) }} }
   {% endif %}
   {% if element.values.className %}
     classes={ { root: {{ element.values.className }} } }
