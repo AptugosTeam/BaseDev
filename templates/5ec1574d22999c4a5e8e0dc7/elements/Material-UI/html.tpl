@@ -11,11 +11,11 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-html-parser": "^3.0.8",'
+    value: '"html-react-parser": "^3.0.8",'
 children: []
 */
 {% set bpr %}
-import ReactHtmlParser from 'react-html-parser'
+import parse from 'html-react-parser'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{ ReactHtmlParser ({{ element.values.html | raw }}{{ content | raw }}) }
+{ parse(String( {{ element.values.html | raw }}{{ content | raw }} )) }
