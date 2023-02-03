@@ -1,5 +1,23 @@
 # ChangeLog
 
+## [TEMPLATES 1.5.4] -
+
+### Added
+
+- **Countdown:**
+  It allows to create a countdown timer from the current date and time to the selected date.
+
+### Changed
+
+- **Paper:**
+
+  - Default value to variant property.
+  - Default value to elevation property.
+
+- **Html:**
+
+  - Different library to handle html strings.
+
 ## [TEMPLATES 1.5.3] - 2023-01-30
 
 ###  An improved version of 1.5.2
