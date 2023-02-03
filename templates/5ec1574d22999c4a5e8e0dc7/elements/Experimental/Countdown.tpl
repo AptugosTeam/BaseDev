@@ -1,5 +1,6 @@
 /*
 path: Countdown.tpl
+completePath: elements/Experimental/Countdown.tpl
 type: file
 unique_id: pLo48nql
 icon: ico-field
