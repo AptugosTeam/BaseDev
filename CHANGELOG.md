@@ -18,6 +18,14 @@
 
   - Different library to handle html strings.
 
+- **Rating:**
+
+  - Display of the value property changed.
+  - Advanced Properties separator added.
+  - New onHover property.
+  - Now it is possible to set a className.
+  - Property getLabelText removed.
+
 ## [TEMPLATES 1.5.3] - 2023-01-30
 
 ###  An improved version of 1.5.2
