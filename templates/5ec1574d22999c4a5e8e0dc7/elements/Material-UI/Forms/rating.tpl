@@ -7,7 +7,7 @@ icon: f:rating.svg
 children: []
 options:
   - name: value
-    display: Initial Value
+    display: Value
     type: text
     options: ''
   - name: max
@@ -22,9 +22,28 @@ options:
     display: Icon Size
     type: dropdown
     options: return [['small','Small'], ['medium','Medium'], ['large','Large']]
+  - name: separator
+    display: Advanced Properties
+    type: separator
+    advanced: true
   - name: precision
     display: Increment Value
     type: text
+    options: ''
+    advanced: true
+  - name: name
+    display: Field Name
+    type: text
+    options: ''
+    advanced: true
+  - name: onHover
+    display: On Hover
+    type: function
+    options: ''
+    advanced: true
+  - name: classname
+    display: ClassName
+    type: styles
     options: ''
     advanced: true
   - name: readOnly
@@ -33,16 +52,6 @@ options:
     options: ''
     settings:
       default: false
-    advanced: true
-  - name: name
-    display: Field Name
-    type: text
-    options: ''
-    advanced: true
-  - name: getLabelText
-    display: Get Label Text
-    type: function
-    options: ''
     advanced: true
 */
 
@@ -62,6 +71,9 @@ import Rating from '@mui/material/Rating'
   {% if element.values.onChange %}
     onChange={ {{ element.values.onChange }} }
   {% endif %}
+  {% if element.values.onHover %}
+    onChangeActive={ {{ element.values.onHover }} }
+  {% endif %}
   {% if element.values.size %}
     size={ '{{ element.values.size }}' }
   {% endif %}
@@ -74,7 +86,7 @@ import Rating from '@mui/material/Rating'
   {% if element.values.name %}
     name={{ element.values.name | textOrVariable }}
   {% endif %}
-  {% if element.values.getLabelText %}
-    getLabelText={ {{ element.values.getLabelText }} }
+  {% if element.values.classname %}
+    className={ {{ element.values.classname | raw }} }
   {% endif %}
 />
