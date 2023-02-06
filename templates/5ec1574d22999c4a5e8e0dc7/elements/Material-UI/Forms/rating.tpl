@@ -18,19 +18,37 @@ options:
     display: On Change
     type: function
     options: ''
-  - name: size
-    display: Icon Size
+  - name: icon
+    display: Icon
     type: dropdown
-    options: return [['small','Small'], ['medium','Medium'], ['large','Large']]
+    options: >-
+      return [['Star', 'Star'],['Favorite', 'Favorite']]
+    settings:
+      default: Star
+  - name: fontSize
+    display: Icon size
+    type: text
+    settings:
+      default: 24
+  - name: fontUnit
+    display: Size unit
+    type: dropdown
+    options: >-
+      return [['px', 'Px'], ['em', 'Em'], ['rem', 'Rem']]
+    settings:
+      default: px
   - name: separator
     display: Advanced Properties
     type: separator
     advanced: true
   - name: precision
     display: Increment Value
-    type: text
-    options: ''
+    type: dropdown
     advanced: true
+    options: 
+      return [['1', '1'],['0.5', '0.5'],['0.25', '0.25'],['0.2', '0.2'],['0.1', '0.1'],['0.05', '0.05'],['0.04', '0.04'],['0.02', '0.02'],['0.01', '0.01']]
+    settings:
+      default: 1
   - name: name
     display: Field Name
     type: text
@@ -54,13 +72,12 @@ options:
       default: false
     advanced: true
 */
-
 {% set bpr %}
 import Rating from '@mui/material/Rating'
+import {{element.values.icon}}Icon from '@mui/icons-material/{{element.values.icon}}'
+import {{element.values.icon}}Border from '@mui/icons-material/{{element.values.icon}}Border'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-
-
 <Rating
   {% if element.values.value %}
     value={ {{ element.values.value }} } 
@@ -71,20 +88,22 @@ import Rating from '@mui/material/Rating'
   {% if element.values.onChange %}
     onChange={ {{ element.values.onChange }} }
   {% endif %}
-  {% if element.values.onHover %}
-    onChangeActive={ {{ element.values.onHover }} }
+  {% if element.values.icon %}
+      icon={ <{{element.values.icon}}Icon fontSize= 'inherit'/> }
+      emptyIcon={ <{{element.values.icon}}Border fontSize= 'inherit'/> }
   {% endif %}
-  {% if element.values.size %}
-    size={ '{{ element.values.size }}' }
-  {% endif %}
+  sx={ { {% if element.values.fontSize %} fontSize: "{{ element.values.fontSize }}{{ element.values.fontUnit|default('px') }}", {% endif %} } }
   {% if element.values.precision %}
-    precision={ {{ element.values.precision }} }
+    precision={ {{ element.values.precision|default('1') }} }
+  {% endif %}
+  {% if element.values.name %}
+    name={{ element.values.name | textOrVariable }}
   {% endif %}
   {% if element.values.readOnly %}
     readOnly={true}
   {% endif %}
-  {% if element.values.name %}
-    name={{ element.values.name | textOrVariable }}
+  {% if element.values.onHover %}
+    onChangeActive={ {{ element.values.onHover }} }
   {% endif %}
   {% if element.values.classname %}
     className={ {{ element.values.classname | raw }} }
