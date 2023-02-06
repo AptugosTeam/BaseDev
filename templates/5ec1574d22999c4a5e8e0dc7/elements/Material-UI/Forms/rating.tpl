@@ -18,7 +18,6 @@ options:
     display: Field Name
     type: text
     options: ''
-    advanced: true
   - name: icon
     display: Icon
     type: dropdown
