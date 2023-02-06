@@ -6,10 +6,6 @@ unique_id: Wrw98VXK
 icon: f:rating.svg
 children: []
 options:
-  - name: value
-    display: Value
-    type: text
-    options: ''
   - name: max
     display: Max Value
     type: text
@@ -41,6 +37,11 @@ options:
   - name: separator
     display: Advanced Properties
     type: separator
+    advanced: true
+  - name: value
+    display: Value
+    type: text
+    options: ''
     advanced: true
   - name: precision
     display: Increment Value
