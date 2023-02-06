@@ -18,6 +18,11 @@ options:
     display: On Change
     type: function
     options: ''
+  - name: name
+    display: Field Name
+    type: text
+    options: ''
+    advanced: true
   - name: icon
     display: Icon
     type: dropdown
@@ -28,15 +33,11 @@ options:
   - name: fontSize
     display: Icon size
     type: text
-    settings:
-      default: 24
   - name: fontUnit
     display: Size unit
     type: dropdown
     options: >-
       return [['px', 'Px'], ['em', 'Em'], ['rem', 'Rem']]
-    settings:
-      default: px
   - name: separator
     display: Advanced Properties
     type: separator
@@ -46,14 +47,9 @@ options:
     type: dropdown
     advanced: true
     options: 
-      return [['1', '1'],['0.5', '0.5'],['0.25', '0.25'],['0.2', '0.2'],['0.1', '0.1'],['0.05', '0.05'],['0.04', '0.04'],['0.02', '0.02'],['0.01', '0.01']]
+      return [['1', '1'],['0.5', '0.5'],['0.25', '0.25'],['0.1', '0.1'],['0.05', '0.05'],['0.01', '0.01']]
     settings:
       default: 1
-  - name: name
-    display: Field Name
-    type: text
-    options: ''
-    advanced: true
   - name: onHover
     display: On Hover
     type: function
@@ -88,12 +84,14 @@ import {{element.values.icon}}Border from '@mui/icons-material/{{element.values.
   {% if element.values.onChange %}
     onChange={ {{ element.values.onChange }} }
   {% endif %}
-  {% if element.values.icon %}
+  {% if element.values.icon != 'Star' %}
       icon={ <{{element.values.icon}}Icon fontSize= 'inherit'/> }
       emptyIcon={ <{{element.values.icon}}Border fontSize= 'inherit'/> }
   {% endif %}
-  sx={ { {% if element.values.fontSize %} fontSize: "{{ element.values.fontSize }}{{ element.values.fontUnit|default('px') }}", {% endif %} } }
-  {% if element.values.precision %}
+  {% if element.values.fontSize %}
+    sx={ { fontSize: "{{ element.values.fontSize }}{{ element.values.fontUnit|default('px') }}", } }
+  {% endif %}
+  {% if element.values.precision != '1' %}
     precision={ {{ element.values.precision|default('1') }} }
   {% endif %}
   {% if element.values.name %}
