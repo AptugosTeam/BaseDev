@@ -25,7 +25,7 @@ import { TouchableOpacity } from "react-native"
 {{ save_delayed('bpr', bpr ) }}
 <TouchableOpacity
   key='{{ element.unique_id }}'
-  onPress={() => navigation.push( `{{ element.values.destination }}`{% if element.values.parameters %}, { {{ element.values.parameters }} }{%endif%} )}  
+  onPress={() => navigation.push( `{{ element.values.destination|textOrVariable }}`{% if element.values.parameters %}, { {{ element.values.parameters }} }{%endif%} )}  
 >
 {% if element.values.innerText %}title={{ element.values.innerText|textOrVariable }}{% endif %}
 {{ content | raw }}

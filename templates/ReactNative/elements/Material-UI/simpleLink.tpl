@@ -8,6 +8,10 @@ options:
     display: Destination
     type: text
     options: ''
+  - name: parameters
+    display: Parameters
+    type: text
+    options: ''
   - name: tagToUse
     display: Use Tag
     type: dropdown
@@ -32,8 +36,8 @@ import { TouchableOpacity } from "react-native"
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <TouchableOpacity
+  onPress={() => navigation.push( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
   key='{{ element.unique_id }}'
-  onPress={() => navigation.push( {{ element.values.destination|textOrVariable }} )}
 >
   {{ content | raw }}
 </TouchableOpacity>
