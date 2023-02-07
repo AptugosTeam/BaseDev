@@ -12,7 +12,7 @@ options:
     helpText: Displays all messages received from the socket connection at the console
     type: checkbox
 */
-socketRef.current?.prependAny((event, ...args) => {
+socket.prependAny((event, ...args) => {
   {% if element.values.autoconsole %}
     console.info('🚨 Socket Debug:', event, args)
   {% endif %}

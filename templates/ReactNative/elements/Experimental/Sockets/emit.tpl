@@ -14,4 +14,4 @@ options:
     display: Data
     type: text
 */
-socketRef.current?.emit('{{ element.values.event }}'{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %})
+socket.emit('{{ element.values.event }}'{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %})

@@ -14,4 +14,4 @@ options:
     display: Action
     type: text
 */
-socketRef.current?.on('{{ element.values.event }}', {{ element.values.Action | functionOrCall }})
+socket.on('{{ element.values.event }}', {{ element.values.Action | functionOrCall }})

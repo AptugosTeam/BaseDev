@@ -38,10 +38,15 @@ import io from 'socket.io-client'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% set ph %}
-const socketRef = React.useRef(io('{{ element.values.serverurl }}'))
-const socket = socketRef.current
+const [socket, setSocket] = React.useState<any>(null)
 React.useEffect(() => {
-  return () => socketRef.current.disconnect()
+  const skt = io('{{ element.values.serverurl }}')
+  setSocket(skt)
+  return () => {
+    if (socket) {
+      socket.disconnect()
+    }
+  }
 }, [])
 {% endset %}
 {{ save_delayed('ph',ph)}}
