@@ -106,9 +106,127 @@ settings:
   - name: Packages
     value: '"react-dom": "^18.2.0",'
 */
-
-{% set bpr %}
+{% set editProc = element.values.editProcedure|default('No') %}
+{% set allowEdit = element.values.allowEdit|default(true) %}
+{% set allowDeletion = element.values.allowDeletion|default(true) %}
+{% set tableFields = [] %}
+{% if element.values.table == 'var' %}
+  {% set table = element.values.editionTable | tableData %}
+  {% set tableName = table.name | friendly %}
+  {% set tableSingleName = table.singleName | friendly | capitalize %}
+  {% set setEditDataFunctionName = 'set' ~ tableName ~ 'Data' %}
+  {% for field in element.children %}
+    {% if field.values.Field == 'useVar' %}
+      {% set tableFields = tableFields|merge([field.values.columnName]) %}
+    {% else %}
+      {% set currentField = field.values.Field | fieldData  %}
+      {% set tableFields = tableFields|merge([currentField.column_name]) %}
+    {% endif %}
+  {% endfor %}
+  {% set tableData = element.values.variableToUse %}
+{% else %}
+  {% set table = element.values.table | tableData %}
+  {% set tableName = table.name | friendly %}
+  {% set tableSingleName = table.singleName | friendly | capitalize %}
+  {% set setEditDataFunctionName = 'set' ~ tableName ~ 'Data' %}
+  {% set fields = table.fields %}
+  {% set innervarname = element.name | friendly %}
+  {% set eleWithoutChilds = element %}
+  {% set eleWithoutChilds = eleWithoutChilds|merge({'children': null}) %}
+  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage } %}
+  {% if element.children %}
+      {% for field in element.children %}
+        {% if field.values.Field == 'useVar' %}
+          {% set tableFields = tableFields|merge([field.values.columnName]) %}
+        {% else %}
+          {% set currentField = field.values.Field | fieldData  %}
+          {% set tableFields = tableFields|merge([currentField.displaylabel|default(currentField.column_name)]) %}
+        {% endif %}
+      {% endfor %}
+  {% else %}
+      {% set fields = table.fields %}
+      {% for field in fields %}
+          {% set tableFields = tableFields|merge([field.displaylabel|default(field.column_name)]) %}
+      {% endfor %}
+  {% endif %}
+  {% set tableData = '(' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ '.length ? ' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ ' : ' ~ table.name|friendly|lower ~ 'Data.' ~ table.name|friendly|lower ~ ' as any)' %}
+  {% set bpr %}
+  import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
   import Tanstack from '../components/TanstackTable/Tanstack'
-{% endset %}
-{{ save_delayed('bpr', bpr ) }}
-<Tanstack><div>Hola</div></Tanstack>
+  import style from '../components/TanstackTable/index.module.scss'
+  import EditIcon from '@mui/icons-material/Edit'
+  import DeleteIcon from '@mui/icons-material/Delete'
+  import IconButton from '@mui/material/IconButton'
+  import MoreIcon from '@mui/icons-material/More'
+  {% endset %}
+  {{ save_delayed('bpr', bpr ) }}
+{% endif %}
+<Tanstack
+    tableHead={
+      {% if element.values.headerVariable %}
+        {{element.values.headerVariable}}
+      {% else %}
+        [{% for field in tableFields %}"{{ field }}",{% endfor %}{% if editProc != 'No' or allowEdit or allowDeletion %}"Actions"{% endif %}]
+      {% endif %}
+    }
+    tableData={ {{ tableData }} }
+    {% if element.values.table != 'var' %}
+      orderBy={ {{ innervarname }}loadoptions.sort.field }
+      order={ {{ innervarname }}loadoptions.sort.method }
+      onRequestSort={(event, property) => {
+        set{{ innervarname }}loadoptions({
+          ...{{ innervarname }}loadoptions,
+          sort: {
+            field: property,
+            method: {{ innervarname }}loadoptions.sort.field === property ? ({{ innervarname }}loadoptions.sort.method === 'asc' ? 'desc' : 'asc') : 'ASC',
+          }
+        })
+      }}
+    {% endif %}
+    >
+{% if editProc != 'No' %}
+<div className={style.actionsArea}>
+    {% if element.values.detailsURL and element.values.detailsURL != 'No' %}
+    <IconButton
+      aria-label="edit"
+      color="primary"
+      onClickCapture={(e: any) => { 
+        const url = '{{ (element.values.detailsURL | elementData ).path }}'.replace(':id', e.element._id)
+        props.history.push(url)
+      }}
+    >
+      <MoreIcon fontSize="small" />
+    </IconButton>
+    {% endif %}
+    {% if allowEdit %}
+    <IconButton
+      aria-label="edit"
+      color="primary"
+      onClickCapture={(e: any) => { 
+        {% if editProc == 'Internal' %}
+          {{ setEditDataFunctionName }}(e.element)
+          setdialog{{ tableName | capitalize }}Action('edit')
+        {% else %}
+          const url = '{{ (editProc | elementData ).path }}'.replace(':id', e.element._id)
+          props.history.push(url)
+        {% endif %}
+      }}
+    >
+      <EditIcon fontSize="small" />
+    </IconButton>
+    {% endif %}
+    {% if allowDeletion %}
+    <IconButton aria-label="delete" color="primary" onClickCapture={(e: any) => {
+      {% if element.values.confirmDeletes %}
+        {{ setEditDataFunctionName }}(e.element)
+        setdialog{{ tableName | capitalize }}Action('delete')
+      {% else %}
+        dispatch(remove{{ tableSingleName }} (e.element))
+      {% endif %}
+    }}>
+      <DeleteIcon fontSize="small" />
+    </IconButton>
+    {% endif %}
+</div>
+{% endif %}
+</Tanstack>
