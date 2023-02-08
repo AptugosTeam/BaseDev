@@ -39,6 +39,14 @@ unique_id: i1kD8rN4
       "config": "metro.config.js",
       "sourceExts": ["js", "jsx", "scss", "sass"]
     },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ],
     "extra": {
       "react": {
         "transformer": "react-native-sass-transformer"
