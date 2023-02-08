@@ -23,25 +23,27 @@ options:
     display: className
     type: text
     options: ''
-  - name: scrollable
-    display: Is Scrollable
+  - name: avoidKeyboard
+    display: Avoid Keyboard
     type: checkbox
 sourceType: javascript
 children: []
 */
 {% set bpr %}
+import { element } from 'prop-types'
 import { View } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-{% if element.values.scrollable %}
+{% set tag = 'View' %}
+{% if element.values.avoidKeyboard %}
+{% set tag = 'KeyboardAvoidingView' %}
 {% set bpr %}
-import { Animated } from 'react-native'
+import { KeyboardAvoidingView } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% endif %}
-{% set tag = 'View' %}
-{% if element.values.scrollable %}{% set tag = 'Animated.ScrollView' %}{% endif %}
-<{{ tag }}
+<{{ tag }} {{ extra }}
+  {% if element.values.avoidKeyboard %}behavior={Platform.OS === 'ios' ? 'padding' : 'height'}{% endif %}
   {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
   {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
   {% if element.values.className %}style={ {{element.values.className }} }{% endif %}
