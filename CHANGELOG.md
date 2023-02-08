@@ -1,16 +1,108 @@
-# Change Log
+# ChangeLog
 
-All notable changes to the "aptugotemplating" extension will be documented in this file.
+## [TEMPLATES 1.5.4] -
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+### Added
 
-## [TEMPLATES 1.5.1]
+- **Countdown:**
+  It allows to create a countdown timer from the current date and time to the selected date.
+
+### Changed
+
+- **Paper:**
+
+  - Default value to variant property.
+  - Default value to elevation property.
+
+- **Html:**
+
+  - Different library to handle html strings.
+
+- **Rating:**
+
+  - Display of the value property changed.
+  - Advanced Properties separator added.
+  - New onHover property.
+  - Now it is possible to set a className.
+  - Property getLabelText removed.
+
+## [TEMPLATES 1.5.3] - 2023-01-30
+
+###  An improved version of 1.5.2
+
+## [TEMPLATES 1.5.2] - 2023-01-30
+
+### Added
+
+- **Swiper:**
+  It is a special type of carousel. It allows you to display different types of items in an infinite loop where each item scrolls horizontally, similar to a set of slides.
+
+- **Radio Group:**
+  It allows grouping radio elements to be able to select within the set of options.
+
+- **Menu List:**
+  It allows to organize buttons that later will act as a drop-down menu.
+
+### Changed
+
+- **Email:**
+
+  - Added default visual for smpthost.
+  - Added default visual for smptport.
+  - Remove react-html-email - Not in use.
+
+- **Password:**
+
+  - Added a required validation to password fields.
+
+- **Paper:**
+
+  - Elevation options on a dropdown with a default value.
+
+- **Radio:**
+
+  - Checked moved to advanced properties.
+  - It is possible to add extra styles.
+  - It is possible to add colors to the inputs.
+  - It is possible to change the size of the inputs.
+  - Advanced Properties separator added.
+  - Conditional rendering size property.
+  - If it is inside a FormControl display the value to it instead of the Radio.
+
+- **Pagination:**
+
+  - Now it is possible to disable the element.
+  - It is possible to set a default page.
+  - Now it is possible to set a shape to the pagination icons.
+  - Now it is possible to set a variant to the icons.
+  - It is possible to hide the prev and next button.
+  - Now it is possible to set the size of the icons.
+  - It is possible to add extra styles.
+  - Added a default value to onChange prop.
+
+- **Menu:**
+
+  - Now it is possible to set the vertical position.
+  - Now it is possible to set the horizontal position.
+  - MenuList element as a default child.
+  - Advanced Properties separator added..
+  - It is possible to set a className.
+
+- **Menu Item:**
+
+  - Now it is possible to disable the element.
+  - It is possible to apply selected property to the element.
+  - Text element as a default child.
+  - Advanced Properties separator added.
+  - It is possible to set a className.
+
+## [TEMPLATES 1.5.1] - 2023-01-03
 
 ### Changed
 
 - Index.js solving strictQuery DeprecationWarning from Mongoose.
 
-- Dependencies for React and React Native Updated
+- Dependencies for React and React Native Updated.
 
 - **Data Table:**
 
@@ -51,10 +143,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - **Link:** [Deprecated]
 
 ## [TEMPLATES 1.5.0] - 2022-11-07
-
-### Added
-
-- **Rating:**
 
 ### Changed
 

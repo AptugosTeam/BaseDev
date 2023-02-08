@@ -4,6 +4,7 @@
   "desc": "Create a simple task management software",
   "icon": "icon.png",
   "type": "template",
+  "liteReady": false,
   "parameters": [
     {
       "name": "Name",

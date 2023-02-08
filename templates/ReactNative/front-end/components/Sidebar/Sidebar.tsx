@@ -26,15 +26,7 @@ const Sidebar: FunctionComponent<sidebarProps> = (props) => {
   }
 
   return (
-    <Drawer
-      variant="permanent"
-      className={clsx(classes.drawer, localClasses)}
-      classes={ {
-        paper: clsx(localClasses),
-      } }
-    >
-      {props.children}
-    </Drawer>
+    <></>
   )
 }
 

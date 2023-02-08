@@ -13,12 +13,20 @@ options:
     display: Do Not Use Fragment
     type: checkbox
     options: ''
+  - name: useInCode
+    display: This condition is part of code
+    type: checkbox
 helpText: Make a decision based on a value
 children: []
 */
-
-{ {{ element.values.condition }} &&
-{% if not element.values.usefragment %}<React.Fragment>{% endif %}
-{{ content | raw }}
-{% if not element.values.usefragment %}</React.Fragment>{% endif %}
-}
+{% if element.values.useInCode %}
+  if ({{ element.values.condition }}) {
+    {{ content | raw }}
+  }
+{% else %}
+  { {{ element.values.condition }} &&
+  {% if not element.values.usefragment %}<React.Fragment>{% endif %}
+  {{ content | raw }}
+  {% if not element.values.usefragment %}</React.Fragment>{% endif %}
+  }
+{% endif %}

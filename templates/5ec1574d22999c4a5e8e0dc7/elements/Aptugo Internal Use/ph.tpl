@@ -13,6 +13,7 @@ import { mergeClasses } from '../services/utils'
   const localStyles = { {{ element.values.localStyles | raw }} }
 {% endif %}
 const {{ page.name | friendly }}: FunctionComponent = (props: any) => {
+  const { params } = props.match
   {% if element.values.localStyles %}
     const classes = mergeClasses( baseClasses, localStyles )
   {% else %}

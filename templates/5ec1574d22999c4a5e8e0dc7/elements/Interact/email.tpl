@@ -29,6 +29,7 @@ options:
       propertyCondition: service
       condition: SMTP
       active: true
+      default: 'smtp.gmail.com'
   - name: smptport
     display: Port (smtp)
     type: text
@@ -37,6 +38,7 @@ options:
       propertyCondition: service
       condition: SMTP
       active: true
+      default: '465'
   - name: smptuser
     display: User (smtp)
     type: text
@@ -64,8 +66,6 @@ options:
 settings:
   - name: BackendPackages
     value: '"nodemailer": "^6.4.11",'
-  - name: Packages
-    value: '"react-html-email": "^3.0.0",'
   - name: ServerRoute
     value: |
       const nodemailer = require("nodemailer");

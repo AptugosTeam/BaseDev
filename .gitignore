@@ -1,16 +1,15 @@
 applications/*
 Builds/*
-.DS_Store
-structures/.DS_Store
 applications copy
 olddrops
 Archive.zip
 applications/
 dump/*
 node_modules/.pnpm-debug.log
-structures/.DS_Store
 applications copy/*
 build/*
 .DS_Store
+**/.DS_Store
 extendedStructures/*
 extendedTemplates/*
+

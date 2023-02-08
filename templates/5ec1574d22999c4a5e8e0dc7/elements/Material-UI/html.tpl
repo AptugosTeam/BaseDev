@@ -11,7 +11,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-html-parser": "^2.0.2",'
+    value: '"react-html-parser": "^3.0.8",'
 children: []
 */
 {% set bpr %}

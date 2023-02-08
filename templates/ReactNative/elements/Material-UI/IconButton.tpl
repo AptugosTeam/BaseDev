@@ -41,7 +41,7 @@ import { IconButton, Colors } from 'react-native-paper'
 {% if theIcon == 'thumbup' %}{% set theIcon = 'thumb-up' %}{% endif %}
 <IconButton
   {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
-  icon={ props => <MaterialIcons {% if element.values.className %}style={ {{ element.values.className ~ 'icon' }} }{% endif %} name={{ theIcon | textOrVariable }} size={32} />}
+  icon={ props => <MaterialIcons {% if element.values.className %}style={ {{ element.values.className ~ 'icon' }} }{% endif %} {% if theIcon %}name={{ theIcon | textOrVariable }} {% endif %}size={32} />}
   {% if element.values.Action %}onPress={ {{ element.values.Action | functionOrCall }} }{% endif %}
 >
   {{ content | raw }}

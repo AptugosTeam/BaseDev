@@ -37,18 +37,24 @@ options:
     display: fieldname
     type: text
     options: ''
-  - name: fullwidth
+  - name: fullWidth
     display: Use full width?
     type: checkbox
   - name: type
     display: Type
     type: dropdown
     options: text;password;date;number;textarea
+  - name: error
+    display: Error
+    type: variable
+    options: ''
+  - name: helperText
+    display: Helper Text
+    type: text
 children: []
 */
-
-
-
+{% if element.values.fullwidth %}{% set fullWidth = element.values.fullwidth %}{% endif %}
+{% if elements.values.fullWidth %}{% set fullWidth = element.values.fullWidth %}{% endif %}
 {% set bpr %}
 import TextField from '@mui/material/TextField'
 {% endset %}
@@ -58,6 +64,8 @@ import TextField from '@mui/material/TextField'
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.placeholder %}placeholder={{ element.values.placeholder | textOrVariable }}{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
+    {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
+    {% if element.values.helperText %}helperText={ {{ element.values.helperText }} }{% endif %}
     {% if element.values.margin %}margin="{{ element.values.margin }}"{% endif %}
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
@@ -69,7 +77,7 @@ import TextField from '@mui/material/TextField'
     {% if element.values.type != 'textarea' %}
       type="{{ element.values.type|default('text') }}"
     {% endif %}
-    {% if element.values.fullWidth %}fullWidth{% endif %}
+    {% if fullWidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
 />
