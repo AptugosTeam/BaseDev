@@ -4,14 +4,15 @@ completePath: front-end/package.json
 unique_id: GFoENpEW
 */
 {
-  "name": "{{ application.settings.name | lower }}",
+  "name": "{{ application.settings.name | lower | friendly }}",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios'"
     {% set npmScripts = insert_setting('npmScripts') %}
     {% if npmScripts %},{{ insert_setting('npmScripts') | raw }}{% endif %}
   },

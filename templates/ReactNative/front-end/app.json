@@ -5,8 +5,8 @@ unique_id: i1kD8rN4
 */
 {
   "expo": {
-    "name": "tsproject",
-    "slug": "tsproject",
+    "name": "{{ application.settings.name }}",
+    "slug": "{{ application.settings.name | lower | friendly }}",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,13 +22,15 @@ unique_id: i1kD8rN4
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.aptugo.{{ application.settings.name | lower | friendly }}"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.aptugo.{{ application.settings.name | lower | friendly }}"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,6 +38,11 @@ unique_id: i1kD8rN4
     "packagerOpts": {
       "config": "metro.config.js",
       "sourceExts": ["js", "jsx", "scss", "sass"]
+    },
+    "extra": {
+      "react": {
+        "transformer": "react-native-sass-transformer"
+      }
     }
   }
 }
