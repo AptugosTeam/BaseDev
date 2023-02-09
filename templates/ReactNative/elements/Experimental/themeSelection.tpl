@@ -50,7 +50,7 @@ children: []
   {% set asset = element.values.useAsset|assetData %}
   {% set theme = asset.name|friendly %}
   {% set bpr %}
-    import {{ asset.name|friendly }} from '../../dist/css/{{ asset.name }}'
+    import {{ asset.name|friendly }} from '../assets/css/{{ asset.name }}'
   {% endset %}
 {% else %}
   {% set theme = element.values.theme %}
