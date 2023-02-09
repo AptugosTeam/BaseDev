@@ -30,9 +30,9 @@ export default function ImagePickerExample(props) {
   }
 
   return (
-    <View style={{ flex: 0, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={ { flex: 0, alignItems: 'center', justifyContent: 'center' }}>
       <Button title="Pick an image from camera roll" onPress={pickImage} />
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+      {image && <Image source={ { uri: image }} style={ { width: 200, height: 200 }} />}
     </View>
   );
 }
