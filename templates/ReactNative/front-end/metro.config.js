@@ -11,11 +11,6 @@ const config = getDefaultConfig(__dirname);
 
 config.resolver.sourceExts.push('scss')
 config.resolver.sourceExts.push('sass')
-config.resolver.extraNodeModules = {
-  dist: path.resolve(__dirname, '../dist')
-}
-
-config.watchFolders = [path.resolve(__dirname), path.resolve(__dirname, '../dist')]
 config.transformer = {
   babelTransformerPath: require.resolve("react-native-sass-transformer")
 }
