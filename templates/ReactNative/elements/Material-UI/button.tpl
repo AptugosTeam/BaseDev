@@ -28,4 +28,4 @@ import { Button } from 'react-native-paper'
 <Button
   {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
   {% if element.values.Action %}onPress={ {{ element.values.Action | functionOrCall }} }{% endif %}
->{{ element.values.ButtonText | default('Button Title') }}</Button>
+>{% if element.values.ButtonText %}{{ element.values.ButtonText }}{% endif %}{{ content | raw }}</Button>
