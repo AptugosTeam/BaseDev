@@ -72,7 +72,7 @@ import { Image } from 'react-native'
   {% endif %}
 <Image
   
-  source={require('./..{{ path }}')}
+  source={require('../assets{{ path }}')}
   {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
 />
 {% else %}
