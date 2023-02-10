@@ -27,5 +27,7 @@ children: []
 import Icon from 'react-native-vector-icons/FontAwesome';
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<Icon name={ '{{element.values.name|default("square-o")}}' } size={ {{element.values.size|default(20)}} } color={ '{{element.values.color|default("#F96D4E")}}' } />
+<Icon name={ '{{element.values.name|default("square-o")}}' } size={ {{element.values.size|default(20)}} } color={ '{{element.values.color|default("#F96D4E")}}' } 
+{% if element.values.Action %}onPress={ {{ element.values.Action | functionOrCall }} }{% endif %}
+/>
   {{ content | raw }}
