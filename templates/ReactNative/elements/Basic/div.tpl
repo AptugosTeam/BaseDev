@@ -43,11 +43,12 @@ import { View } from 'react-native'
 {% if element.values.scrollable %}
 {% set bpr %}
 import { Animated } from 'react-native'
+import { ScrollView} from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% endif %}
 {% set tag = 'View' %}
-{% if element.values.scrollable %}{% set tag = 'Animated.ScrollView' %}{% endif %}
+{% if element.values.scrollable %}<ScrollView>{% endif %}
 <{{ tag }}
   {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
   {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
@@ -58,3 +59,6 @@ import { Animated } from 'react-native'
 >
 {{ content | raw }}
 </{{ tag }}>
+{% if element.values.scrollable %}
+</ScrollView>
+{% endif %}
