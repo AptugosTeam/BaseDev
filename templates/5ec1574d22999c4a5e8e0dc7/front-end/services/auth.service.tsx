@@ -36,8 +36,9 @@ class AuthService {
     })
   }
 
-  getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'))
+  async getCurrentUser() {
+    const user = localStorage.getItem('user')
+    return user ? JSON.parse(user) : {}
   }
 
   recoverPassword({ email, subject, message, name }) {
