@@ -57,6 +57,33 @@ options:
     display: Extra Styles
     type: text
     advanced: true
+  - name: useFontAwesome
+    display: Use FontAwesome
+    type: checkbox
+  - name: FontAwesomeIcon
+    display: Font Awesome Icon
+    type: text
+    options: ''
+    settings:
+      propertyCondition: useFontAwesome
+      condition: true
+      active: true
+  - name: FontAwesomeSize
+    display: Size Awesome Icon
+    type: text
+    options: ''
+    settings:
+      propertyCondition: useFontAwesome
+      condition: true
+      active: true
+  - name: FontAwesomeColor
+    display: Color Awesome Icon (in Hexadecimal)
+    type: text
+    options: ''
+    settings:
+      propertyCondition: useFontAwesome
+      condition: true
+      active: true
 children: []
 */
 {% set addenum = '' %}

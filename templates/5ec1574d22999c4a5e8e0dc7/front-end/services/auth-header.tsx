@@ -5,7 +5,7 @@ unique_id: kvycd8W9
 */
 import axios from "axios"
 
-const authHeaders = () => {
+const authHeaders = async () => {
   const token = localStorage.getItem('user') && localStorage.getItem('token')
   if (token) {
       axios.defaults.headers.common['Authorization'] = token
@@ -20,3 +20,4 @@ const authHeaders = () => {
 }
 
 export default authHeaders
+
