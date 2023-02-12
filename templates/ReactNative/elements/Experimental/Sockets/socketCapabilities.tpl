@@ -6,7 +6,7 @@ unique_id: socketCapabilities
 helpText: Enables Socket capabilities into your application, both in front and back-end
 icon: f:socketCapabilities.svg
 children: []
-usesDelays: [theconstructor,onsendmessage,ongetmessages,onhandlemessage]
+usesDelays: [theconstructor,onsendmessage,ongetmessages,onhandlemessage,beforeClassDefinition]
 options:
   - name: serverurl
     display: Server URL

@@ -14,6 +14,12 @@ const defaultUser = {
   name: 'Anonymous',
 }
 
+{% for delay in delayed %}
+  {% for specificDelay in delay.beforeClassDefinition %}
+    {{ specificDelay }}
+  {% endfor %}
+{% endfor %}
+
 class Connection {
   constructor(io, socket) {
     this.socket = socket
