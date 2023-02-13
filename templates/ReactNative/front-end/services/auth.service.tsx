@@ -29,12 +29,10 @@ class AuthService {
     AsyncStorage.removeItem('token')
   }
 
-  register(username, email, password) {
-    return axios.post(API_URL + 'signup', {
-      username,
-      email,
-      password,
-    })
+  register(data) {
+    return axios.post(API_URL, data).then(_result => {
+      return this.login(data.Email, data.Password).then(afterLogin => { return afterLogin})
+    }).catch(e => { throw e })
   }
 
   async getCurrentUser() {
