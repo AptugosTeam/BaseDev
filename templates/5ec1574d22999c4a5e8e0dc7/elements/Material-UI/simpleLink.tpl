@@ -8,6 +8,10 @@ options:
     display: Destination
     type: text
     options: ''
+  - name: parameters
+    display: Parameters
+    type: text
+    options: ''
   - name: tagToUse
     display: Use Tag
     type: dropdown

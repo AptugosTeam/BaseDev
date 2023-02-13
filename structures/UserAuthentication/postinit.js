@@ -9,6 +9,20 @@ const secureZonePH = {
       "type": "element",
       "children": [],
       "cascades": true,
+      "name": "Profile Menu Anchor",
+      "prevent_delete": false,
+      "value": "useState",
+      "values": {
+        "defaultValue": "null",
+        "variableName": "profileMenuAnchor"
+      }
+    },
+    {
+      "path": "useState.tpl",
+      "keyPath": "elements/Programming/useState.tpl",
+      "type": "element",
+      "children": [],
+      "cascades": true,
       "name": "Current User",
       "prevent_delete": false,
       "value": "useState",

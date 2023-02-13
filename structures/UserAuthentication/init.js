@@ -13,11 +13,13 @@ const userTable = {
 		"data_type": "String",
 		"displaylabel": "First Name",
 		"prompt": "First Name",
+		"validators.required": true,
 	}, {
 		"column_name": "LastName",
 		"data_type": "String",
 		"displaylabel": "Last Name",
 		"prompt": "Last Name",
+		"validators.required": true,
 	}, {
 		"column_name": "Email",
 		"data_type": "String",
@@ -28,6 +30,7 @@ const userTable = {
 	}, {
 		"column_name": "Password",
 		"data_type": "Password",
+		"validators.required": true
 	}, {
 		"column_name": "ProfilePic",
 		"data_type": "Image",
