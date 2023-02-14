@@ -7,6 +7,6 @@ options: []
 sourceType: javascript
 children: []
 */
-<div>
+<div className={theme.theGradient}>
   {{ content | raw }}
 </div>
