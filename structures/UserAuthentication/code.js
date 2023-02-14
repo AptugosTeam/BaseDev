@@ -794,7 +794,7 @@ const RegisterPage = {
 const ForgotPage = {
 	"name": "Retrieve Password",
 	"type": "page",
-	"path": "/forgot",
+	"path": "/forgot/:nonce?/:email?",
 	"filename": "forgot.tsx",
 	"collapseStatus": "collapse",
 	"priority": 5,
