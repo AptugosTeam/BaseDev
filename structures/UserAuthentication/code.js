@@ -794,7 +794,7 @@ const RegisterPage = {
 const ForgotPage = {
 	"name": "Retrieve Password",
 	"type": "page",
-	"path": "/forgot/:nonce?/:email?",
+	"path": "/forgot",
 	"filename": "forgot.tsx",
 	"collapseStatus": "collapse",
 	"priority": 5,
@@ -916,6 +916,18 @@ const ForgotPage = {
 	}, {
 		"children": [{
 			"children": [{
+				"name": "emailSender",
+				"prevent_delete": false,
+				"cascades": false,
+				"type": "element",
+				"value": "useState",
+				"collapseStatus": "expand",
+				"values": {
+					"variableName": "emailSender",
+					"defaultValue": "''"
+				},
+				"children": [],
+			}, {
 				"name": "userEmail",
 				"prevent_delete": false,
 				"cascades": false,
@@ -960,7 +972,7 @@ const ForgotPage = {
 				"collapseStatus": "expand",
 				"values": {
 					"functionName": "sendNonce",
-					"functionBody": "setrecoverSuccess(null)\n    setrecoverError(null)\n    AuthService.recoverPassword({ email: userEmail, subject: 'Password recovery', message: InlineLink(), name: 'pedro corica' }).then(\n      (res) => {\n        setrecoverSuccess(`Email sent to ${userEmail}`)\n      },\n      (error) => {\n        setrecoverError(error.response.data.message)\n      }\n    )"
+					"functionBody": "setrecoverSuccess(null)\n    setrecoverError(null)\n    AuthService.recoverPassword({ email: userEmail, subject: 'Password recovery', message: InlineLink(), name: emailSender }).then(\n      (res) => {\n        setrecoverSuccess(`Email sent to ${userEmail}`)\n      },\n      (error) => {\n        setrecoverError(error.response.data.message)\n      }\n    )"
 				},
 				"children": [],
 			}],
@@ -1015,7 +1027,7 @@ const ForgotPage = {
 					"value": "code",
 					"collapseStatus": "expand",
 					"values": {
-						"code": "if (props.match.params.nonce) {\n      AuthService.checkNonce(props.match.params.nonce, props.match.params.email).then(\n        (res) => {\n          authHeaders()\n          setuserData({ ...userData, _id: res })\n        },\n        (error) => {\n          console.error(error)\n        }\n      )\n    }"
+						"code": "if (params.nonce) {\n      AuthService.checkNonce(params.nonce, params.email).then(\n        (res) => {\n          authHeaders()\n          setuserData({ ...userData, _id: res })\n        },\n        (error) => {\n          console.error(error)\n        }\n      )\n    }"
 					},
 					"children": [],
 				}],
@@ -1026,7 +1038,7 @@ const ForgotPage = {
 				"value": "watchVariable",
 				"collapseStatus": "expand",
 				"values": {
-					"watchVariable": "props.match.params.nonce"
+					"watchVariable": "params.nonce"
 				},
 			}],
 			"name": "From Link (with nonce)",
@@ -1193,17 +1205,6 @@ const ForgotPage = {
 						"children": [],
 					}, {
 						"children": [{
-							"name": "text",
-							"prevent_delete": false,
-							"cascades": false,
-							"type": "element",
-							"value": "text",
-							"values": {
-								"Content": "Go back to&nbsp;"
-							},
-							"collapseStatus": "expand",
-							"children": [],
-						}, {
 							"name": "Link",
 							"prevent_delete": false,
 							"cascades": false,
@@ -1211,10 +1212,22 @@ const ForgotPage = {
 							"value": "Link",
 							"values": {
 								"innerText": " Login",
-								"destination": "/Login"
+								"destination": "/login"
 							},
 							"collapseStatus": "expand",
-							"children": [],
+							"children": [{
+									"name": "text",
+									"prevent_delete": false,
+									"cascades": false,
+									"type": "element",
+									"value": "text",
+									"values": {
+										"Content": "Go back to&nbsp;"
+									},
+									"collapseStatus": "expand",
+									"children": [],
+								}
+							],
 						}],
 						"name": "div",
 						"prevent_delete": false,
@@ -1240,7 +1253,7 @@ const ForgotPage = {
 				"value": "condition",
 				"collapseStatus": "expand",
 				"values": {
-					"condition": "!props.match.params.nonce"
+					"condition": "!params.nonce"
 				},
 			}, {
 				"children": [{
@@ -1337,7 +1350,7 @@ const ForgotPage = {
 				"value": "condition",
 				"collapseStatus": "expand",
 				"values": {
-					"condition": "props.match.params.nonce"
+					"condition": "params.nonce"
 				},
 			}],
 			"name": "Container",
