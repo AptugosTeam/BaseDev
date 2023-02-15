@@ -4,6 +4,11 @@ type: file
 unique_id: JgKwuk06
 icon: ico-icon-button
 options:
+  - name: useFontAwesome
+    display: Use FontAwesome
+    type: checkbox
+    settings:
+      default: false
   - name: Action
     display: Action
     type: text
@@ -30,9 +35,6 @@ options:
       propertyCondition: useFontAwesome
       negatecondition: true
       active: true
-  - name: useFontAwesome
-    display: Use FontAwesome
-    type: checkbox
   - name: FontAwesomeIcon
     display: Font Awesome Icon
     type: text
@@ -64,7 +66,7 @@ children: []
 import Icon from 'react-native-vector-icons/FontAwesome';
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<Icon name={ '{{element.values.name|default("square-o")}}' } size={ {{element.values.size|default(20)}} } color={ '{{element.values.color|default("#F96D4E")}}' } 
+<Icon name={ '{{element.values.FontAwesomeIcon|default("square-o")|dashCase}}' } size={ {{element.values.FontAwesomeSize|default(20)}} } color={ '{{element.values.FontAwesomeColor|default("#F96D4E")}}' } 
 {% if element.values.Action %}onPress={ {{ element.values.Action | functionOrCall }} }{% endif %}
 >
   {{ content | raw }}

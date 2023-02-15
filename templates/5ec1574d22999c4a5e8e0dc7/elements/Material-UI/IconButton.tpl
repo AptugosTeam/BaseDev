@@ -6,60 +6,37 @@ unique_id: JgKwuk06
 icon: ico-icon-button
 sourceType: javascript
 options:
+  - name: useFontAwesome
+    display: Use FontAwesome
+    type: checkbox
+    settings:
+      default: false
   - name: Action
-    display: On Click
-    type: function
+    display: Action
+    type: text
     options: ''
   - name: className
     display: ClassName
-    type: styles
+    type: text
     options: ''
   - name: icon
     display: Icon
-    required: true
     type: dropdown
     options: >-
-      return [['AcUnit', 'Ac Unit'], ['Add', 'Add'], ['AddShoppingCart', 'Add Shopping Cart'], ['AllInbox', 'All In Box'],['AlternateEmail', 'Alternate Email'],['ArrowBack', 'Arrow Back'],['AttachFile', 'Attach File'],['ChevronLeft', 'Chevron Left'],['ChevronRight', 'Chevron Right'],['Clear', 'Clear'],['CallMade', 'Call Made'],['Delete', 'Delete'],['DeleteOutline', 'Delete Outline'],['Download', 'Download'],['Facebook', 'Facebook'],['Favorite', 'Favorite'],['Google', 'Google'],['HelpOutline', 'Help Outline'],['Home', 'Home'],['Instagram', 'Instagram'],['Link', 'Link'],['ManageAccounts', 'Manage Accounts'],['Menu', 'Menu'],['MoreVert', 'More Vert'],['Person', 'Person'],['Pinterest', 'Pinterest'],['Publish', 'Publish'],['Refresh', 'Refresh'],['Search', 'Search'],['Send', 'Send'],['Settings', 'Settings'],['ShoppingBasket', 'Shopping Basket'],['ShoppingCart', 'Shopping Cart'],['SportsBasketball', 'Sports Basketball'],['Star', 'Star'],['Twitter', 'Twitter'],['ThumbUp', 'Thumb Up'],['Visibility', 'Visibility'],['WhatsApp', 'WhatsApp'],['YouTube', 'YouTube']]
+      None;Add;AddShoppingCart;CallMade;chevron-left;chevron-right;HelpOutline;Home;Link;MoreVert;Search;Send;ShoppingBasket;ShoppingCart;SportsBasketball;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
+    settings:
+      propertyCondition: useFontAwesome
+      negatecondition: true
+      active: true
   - name: iconstyle
     display: Icon Style
     type: dropdown
     options: >-
-      return [['Filled', 'Filled'], ['Outlined', 'Outlined'], ['Rounded', 'Rounded'], ['TwoTone', 'Two Tone'], ['Sharp', 'Sharp']]
+      Filled;Outlined;Rounded;TwoTone;Sharp
     settings:
-      default: Filled
-  - name: Color
-    display: Color
-    type: dropdown
-    options: 
-      return [['custom', 'Custom'], ['default', 'Default'], ['inherit', 'Inherit'], ['primary', 'Primary'], ['secondary', 'Secondary'], ['error', 'Error'], ['info', 'Info'], ['success', 'Success'], ['warning', 'Warning']]
-    settings:
-      default: default
-  - name: custom
-    display: Custom Color
-    type: text
-    settings:
-      propertyCondition: Color
-      condition: custom
+      propertyCondition: useFontAwesome
+      negatecondition: true
       active: true
-  - name: fontSize
-    display: Size
-    type: text
-    settings:
-      default: 24
-  - name: fontUnit
-    display: Unit
-    type: dropdown
-    options: >-
-      return [['px', 'Px'], ['em', 'Em'], ['rem', 'Rem']]
-    settings:
-      default: px
-  - name: sx
-    display: Extra Styles
-    type: text
-    advanced: true
-  - name: useFontAwesome
-    display: Use FontAwesome
-    type: checkbox
   - name: FontAwesomeIcon
     display: Font Awesome Icon
     type: text
@@ -84,6 +61,9 @@ options:
       propertyCondition: useFontAwesome
       condition: true
       active: true
+settings:
+  - name: Packages
+    value: '"@fortawesome/fontawesome-svg-core": "6.3.0","@fortawesome/free-solid-svg-icons": "6.3.0","@fortawesome/react-fontawesome": "0.2.0",'
 children: []
 */
 {% set addenum = '' %}
@@ -91,13 +71,24 @@ children: []
   {% set addenum = element.values.iconstyle %}
 {% endif %}
 {% set bpr %}
+{% if element.values.useFontAwesome %}
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+{% else %}
 import IconButton from '@mui/material/IconButton'
+{% endif %}
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
+{% if element.values.useFontAwesome %}
+import { fa{{ element.values.FontAwesomeIcon }} } from '@fortawesome/free-solid-svg-icons'
+{% else %}
 import {{element.values.icon}}{{ addenum }}Icon from '@mui/icons-material/{{element.values.icon}}{{ addenum }}'
+{% endif %}
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
+{% if element.values.useFontAwesome %}
+  <FontAwesomeIcon icon={ fa{{ element.values.FontAwesomeIcon }} } {% if element.values.FontAwesomeColor %} color={'{{ element.values.FontAwesomeColor }}'}{% endif %}>{{ content | raw }}</FontAwesomeIcon>
+{% else %}
 <IconButton
   {% if element.values.Color != 'custom' %}
     color="{{ element.values.Color }}"
@@ -126,3 +117,4 @@ import {{element.values.icon}}{{ addenum }}Icon from '@mui/icons-material/{{elem
   {% endif %}
   {{ content | raw }}
 </IconButton>
+{% endif %}
