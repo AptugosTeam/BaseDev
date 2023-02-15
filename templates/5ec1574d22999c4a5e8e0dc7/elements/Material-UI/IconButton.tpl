@@ -87,7 +87,9 @@ import {{element.values.icon}}{{ addenum }}Icon from '@mui/icons-material/{{elem
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% if element.values.useFontAwesome %}
-  <FontAwesomeIcon icon={ fa{{ element.values.FontAwesomeIcon }} } {% if element.values.FontAwesomeColor %} color={'{{ element.values.FontAwesomeColor }}'}{% endif %}>{{ content | raw }}</FontAwesomeIcon>
+  <FontAwesomeIcon   {% if element.values.Action %}
+    onClick={ {{ element.values.Action | functionOrCall }} }
+  {% endif %} icon={ fa{{ element.values.FontAwesomeIcon }} } {% if element.values.FontAwesomeColor %} color={'{{ element.values.FontAwesomeColor }}'}{% endif %}>{{ content | raw }}</FontAwesomeIcon>
 {% else %}
 <IconButton
   {% if element.values.Color != 'custom' %}
