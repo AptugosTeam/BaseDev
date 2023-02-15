@@ -22,7 +22,7 @@ options:
     options: 'get;post;put;delete'
   - name: dataVariable
     display: Data Variable
-    helpText: This varaible will be sent with the request
+    helpText: This variable will be sent with the request
     type: text
     options: ''
   - name: extraOptions
