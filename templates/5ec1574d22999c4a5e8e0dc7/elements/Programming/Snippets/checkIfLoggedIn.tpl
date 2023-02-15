@@ -33,15 +33,14 @@ options:
       active: true
 children: []
 */
-{% if element.values.loginScreenNot != 'none' %}
+{% if element.values.loginScreenNot != 'none' and element.values.loginScreenNot is defined %}
   {% if element.values.loginScreenNot == 'useVar' %}
     {% set destNot = element.values.fieldVariableNot %}
   {% else %}
     {% set destNot = (element.values.loginScreenNot | elementData).path %}
   {% endif %}
 {% endif %}
-
-{% if element.values.loginScreen != 'none' %}
+{% if element.values.loginScreen != 'none' and element.values.loginScreen is defined %}
   {% if element.values.loginScreen == 'useVar' %}
     {% set dest = element.values.fieldVariable %}
   {% else %}
@@ -53,12 +52,12 @@ import authHeaders from '../services/auth-header'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 authHeaders().then(result => {
-    {% if element.values.loginScreenNot != 'none' %}
+    {% if element.values.loginScreenNot != 'none' and element.values.loginScreenNot is defined %}
       if (!result) {
         navigation.push( {{ destNot | textOrVariable }} )
       }
     {% endif %}
-    {% if element.values.loginScreen != 'none' %}
+    {% if element.values.loginScreen != 'none' and element.values.loginScreen is defined %}
       if (result) {
         navigation.push( {{ dest | textOrVariable }} )
       }
