@@ -16,7 +16,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <LinearGradient
-        colors={['#424361', '#30314D']}
+        colors={['#000000', '#343c46']}
         locations={[0, 0.9]}
       >
       {{ content | raw }}

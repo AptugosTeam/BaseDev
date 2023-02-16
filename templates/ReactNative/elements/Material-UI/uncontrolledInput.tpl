@@ -57,6 +57,7 @@ import { TextInput } from 'react-native-paper'
     {% if element.values.theme %}theme={ {{ element.values.theme }} }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
     {% if element.values.type == 'number' %}keyboardType='numeric'{% endif %}
+    {% if element.values.type == 'password' %}secureTextEntry={true}{% endif %}
     {% if element.values.type == 'textarea' %}
       multiline
     {% endif %}
