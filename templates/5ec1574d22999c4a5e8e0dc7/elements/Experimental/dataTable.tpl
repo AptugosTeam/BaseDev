@@ -1,121 +1,72 @@
 /*
+name: Data Table
 path: dataTable.tpl
-type: file
-unique_id: dsfjsdfh
+unique_id: DJAy2q4b
 icon: f:dataTable.svg
 helpText: Data table
 sourceType: javascript
-children: []
 extraFiles:
-  - source: 'elements/Experimental/DataTable/index.js'
-    destination: 'front-end/components/DataTable/index.js'
+  - source: 'elements/Experimental/DataTable/dataTable.tsx'
+    destination: 'front-end/components/DataTable/dataTable.tsx'
+  - source: 'elements/Experimental/DataTable/table.module.scss'
+    destination: 'front-end/components/DataTable/table.module.scss'
+  - source: 'elements/Experimental/DataTable/thHeader.tsx'
+    destination: 'front-end/components/DataTable/thHeader.tsx'
+settings:
+  - name: Packages
+    value: '"@tanstack/react-table": "8.7.9",'
 options:
   - name: table
     display: Table
     type: dropdown
     options: >-
       return [...aptugo.store.getState().application.tables.map(({ unique_id, name }) => [unique_id, name])]
-    settings:
-      aptugoOnLoad: |-
-        const element = arguments[0]
-        const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;
-        const varsToAdd = {
-          [aptugo.friendly(element.name) + 'loadoptions']: {
-            page: 1,
-            populate: true,
-            limit: 25,
-            sort: {},
-            totalItems: 0,
-            searchString: null,
-            searchField: null
-          }
-        }
-        aptugo.variables.setPageVariable(page, element.unique_id,varsToAdd);
-        aptugo.variables.setPageFunction(page, 'f' + element.unique_id, `set${aptugo.friendly(element.name)}loadoptions` );
-  - name: allowEdit
-    display: Allow Edition
-    type: checkbox
-    settings:
-      default: true
-      condition: ''
-  - name: allowDeletion
-    display: Allow Deletion
-    type: checkbox
-    settings:
-      default: true
-      condition: ''
-settings:
-  - name: Packages
-    value: '"react-data-table-component": "latest","styled-components": "latest",'
+  - name: editProcedure
+    display: Edit Procedure
+    type: dropdown
+    options: >-
+      return [['No','None'],['Internal','Popup Dialog'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) => [unique_id, name])]
 */
-{% set innervarname = element.name | friendly %}
-{% set table = element.values.table | tableData %}
+{% set editProc = element.values.editProcedure|default('No') %}
+{% set table = element.values.table | tableData %}
+{% set innervarname = 'table' %}
+{% set tableName = table.name | friendly %}
+{% set tableSingleName = table.singleName | friendly | capitalize %}
+{% set setEditDataFunctionName = 'set' ~ tableName ~ 'Data' %}
 {% set fields = table.fields %}
-{% set allowEdit = element.values.allowEdit|default(true) %}
-{% set allowDeletion = element.values.allowDeletion|default(true) %}
-
-{% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
+{% set tableData = '(' ~ tableName|lower ~ 'Data.found' ~ tableName|lower ~ '.length ? ' ~ tableName|lower ~ 'Data.found' ~ tableName|lower ~ ' : ' ~ tableName|lower ~ 'Data.' ~ tableName|lower ~ ' as any)' %}
 
 {% set bpr %}
-import DataTables from '../components/DataTable'
+import DataTable from '../components/DataTable/dataTable'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-
-<DataTables
-  tableData={bugsData.foundbugs.length ? bugsData.foundbugs : (bugsData.bugs as any)}
-  columns={[
-    {% if element.children %}{{ content | raw }}{% else %}
-      {% for field in fields %}
-        {% set innerParams = { 'element': { values: { 'Field': field.unique_id } } } %}
-        {% include includeTemplate('dtfield.tpl') with innerParams %}
-      {% endfor %}
-    {% endif %}
-    {% if allowEdit %}
-      {% set bpr %}
-        import IconButton from '@mui/material/IconButton'
-      {% endset %}
-      {{ save_delayed('bpr', bpr ) }}
-      {% set bpr %}
-        import EditIcon from '@mui/icons-material/Edit'
-      {% endset %}
-      {{ save_delayed('bpr', bpr ) }}
-    ,{
-      name: 'Edit',
-      button: true,
-      cell: (fieldData) => <IconButton aria-label="edit" color="primary" onClickCapture={(e: any) => {
-        setBugsData(fieldData)
-        setdialogBugsAction('edit')
-      }} >
-        <EditIcon fontSize="small" />
-      </IconButton>
-    }
-    {% endif %}
-    {% if allowDeletion %}
-      {% set bpr %}
-        import IconButton from '@mui/material/IconButton'
-      {% endset %}
-      {{ save_delayed('bpr', bpr ) }}
-      {% set bpr %}
-        import DeleteIcon from '@mui/icons-material/Delete'
-      {% endset %}
-      {{ save_delayed('bpr', bpr ) }}
-    ,{
-      name: 'Delete',
-      button: true,
-      cell: (fieldData) => <IconButton
-        aria-label="delete"
-        color="primary"
-        onClickCapture={(e: any) => {
-          dispatch(removeBug(fieldData))
-        }}
-      >
-        <DeleteIcon fontSize="small" />
-      </IconButton>
-    }
-    {% endif %}
+<DataTable
+  tableData={ {{ tableData }} }
+  columnInfo={[
+    {% for field in fields %}
+      {% set innerParams = { 'element': { values: { 'Field': field.unique_id } } } %}
+      {% include includeTemplate('dtfield.tpl') with innerParams %}
+    {% endfor %}
   ]}
-  handlePageChange={(newpage) => { set{{ innervarname }}loadoptions({ ...{{ innervarname }}loadoptions, page: newpage })}}
-  handleRowsPerPageChange={(perPage,page) => { set{{ innervarname }}loadoptions({ ...{{ innervarname }}loadoptions, page: page, limit: perPage })}}
-  handleSortChange={(column,direction) => { set{{ innervarname }}loadoptions({ ...{{ innervarname }}loadoptions, sort: { field: column.selector, method: direction } })}}
-  totalDocs={ {{ table.name | friendly | lower ~ 'Data' }}.totalDocs}
+  onRequestEdit={row => {
+    {% if editProc == 'Internal' %}
+      {{ setEditDataFunctionName }}(row)
+      setdialog{{ tableName|capitalize }}Action('edit')
+    {% else %}
+      const url = '{{ (editProc | elementData ).path }}'.replace(':id', e.element._id)
+      props.history.push(url)
+    {% endif %}
+  }}
+  onRequestRemove={row => {
+    dispatch(remove{{ tableSingleName }}(row))
+  }}
+  onRequestSort={property => {
+    set{{ innervarname }}loadoptions({
+      ...{{ innervarname }}loadoptions,
+      sort: {
+        field: property,
+        method: {{ innervarname }}loadoptions.sort.field === property ? ({{ innervarname }}loadoptions.sort.method === 'asc' ? 'desc' : 'asc') : 'asc',
+      }
+    })
+  }}
 />
