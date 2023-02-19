@@ -15,4 +15,4 @@ children: []
     {% set referencedString = referencedString ~ '.' ~ (referencedField.column_name | friendly) %}
   {% endif %}
 {% endif %}
-{ id: '{{ referencedString }}', type: 'string', size: 300 },
+{ id: '{{ referencedString }}', header: '{{ field.column_name }}', type: 'string', size: 300 },
