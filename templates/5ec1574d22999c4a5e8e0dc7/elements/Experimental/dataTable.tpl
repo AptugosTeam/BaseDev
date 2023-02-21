@@ -50,6 +50,9 @@ import DataTable from '../components/DataTable/dataTable'
       {% set innerParams = { 'element': { values: { 'Field': field.unique_id } } } %}
       {% include includeTemplate('dtfield.tpl') with innerParams %}
     {% endfor %}
+    {% for child in element.children %}
+      { id: '{{ child.name }}', type: 'string', size: 300, renderValue: (cell) => {{ child.rendered }}},
+    {% endfor %}
   ]}
   onRequestPaginate={(options) => {
     set{{ innervarname }}loadoptions({ ...{{ innervarname }}loadoptions, ...options })

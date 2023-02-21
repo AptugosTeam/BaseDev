@@ -51,7 +51,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
   const [{ pageIndex, pageSize }, _setPagination] =
     React.useState<PaginationState>({
       pageIndex: 0,
-      pageSize: 10,
+      pageSize: 25,
     })
 
   const pagination = React.useMemo(
@@ -94,7 +94,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
           {table.getRowModel().rows.map((row, rowIndex) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell, cellIndex) => {
-                const toRender = row.getValue(cell.column.id) ? flexRender(cell.column.columnDef.cell, cell.getContext()) : '---'
+                const toRender = flexRender(cell.column.columnDef.cell, cell.getContext())
                 return (
                   <td key={cell.id} style={ { width: cell.column.getSize() }}>
                     {toRender}

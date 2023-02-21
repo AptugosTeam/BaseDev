@@ -51,7 +51,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
   const [{ pageIndex, pageSize }, _setPagination] =
     React.useState<PaginationState>({
       pageIndex: 0,
-      pageSize: 10,
+      pageSize: 25,
     })
 
   const pagination = React.useMemo(
