@@ -67,7 +67,7 @@ children: []
       checked={ {{ element.values.Checked }} }
   {% endif %}
   {% if element.values.OnClick %}
-      onClick={ ()=> { {{ element.values.OnClick }} } }
+      onClick={ (e)=> { {{ element.values.OnClick }} } }
   {% endif %}
   {% if element.values.style %}
     style={ {{element.values.style}} }
