@@ -12,7 +12,7 @@ options:
     display: Content
     type: text
     options: ''
-  - name: ClassName
+  - name: className
     display: ClassName
     type: text
     options: ''
@@ -22,4 +22,4 @@ children: []
 import { Text } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-<Text {% if element.values.ClassName %}style={ {{ element.values.ClassName }} }{% endif %}>{{ element.values.Content | raw }}{{ content | raw }}</Text>
+<Text {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}>{{ element.values.Content | raw }}{{ content | raw }}</Text>

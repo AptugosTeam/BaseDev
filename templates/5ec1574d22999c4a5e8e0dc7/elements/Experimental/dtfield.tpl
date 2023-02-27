@@ -67,10 +67,4 @@ options:
     type: checkbox
 children: []
 */
-{% set theField = element.values.Field | fieldData %}
-{
-  name: '{{ theField.column_name }}',
-  selector: '{{ theField.column_name }}',
-  sortable: true,
-  cell: (fieldData) => <Field value={fieldData.{{ theField.column_name }} } />
-},
+{% include includeTemplate(['Fields' ~ field.data_type ~'datatable.tpl', 'Fieldsdatatable.tpl']) %}

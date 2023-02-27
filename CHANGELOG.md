@@ -1,11 +1,89 @@
 # ChangeLog
 
-## [TEMPLATES 1.5.4] -
+## [TEMPLATES 1.6.0] -
 
 ### Added
 
 - **Countdown:**
   It allows to create a countdown timer from the current date and time to the selected date.
+
+- **Add On Connection:**
+  It allows to create a countdown timer from the current date and time to the selected date.
+
+- **999_sockets [React-Native]:**
+  Preguntar a Gaston o terminar de chusmear la mc
+
+- **Add Listener [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Emit [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Listen [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Socket Capabilities [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Widget Debug Sockets [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Stripe [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Stripe Order Details [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Check If Logged In:**
+  Preguntar a Gaston o terminar la mc
+
+- **Get Current User:**
+  Preguntar a Gaston o terminar la mc
+
+- **Logout:**
+  Preguntar a Gaston o terminar la mc
+
+- **Update State Variable [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Loop [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Closure Fix:**
+  Preguntar a Gaston o terminar la mc
+
+- **Stripe Submit [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Linear Gradient [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Push Token:**
+  Preguntar a Gas o terminar la mc
+
+- **Send Push Notification:**
+  Preguntar a Gas o terminar la mc
+
+- **Login:**
+  Preguntar a Gas o terminar la mc
+
+- **Register:**
+  Preguntar a Gas o terminar la mc
+
+- **Server Emit:**
+  Preguntar a Gas o terminar la mc
+
+- **Delete Record [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Prepare Data for Saving [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Data Table [React-Native]:**
+  Preguntar a Gaston o terminar la mc
+
+- **Data Field [React-Native]:**
+  Preguntar a Gaston o terminar la mc
 
 ### Changed
 
@@ -25,6 +103,39 @@
   - New onHover property.
   - Now it is possible to set a className.
   - Property getLabelText removed.
+
+- **Simple Link [React-Native]:**
+
+  - Now it is possible to add parameters to the destination link.
+
+- **Condition [React-Native]:**
+
+  - Now it is possible to set if the condition is part of code.
+
+- **Save to Database [React-Native]:**
+
+  - Now it is possible to define which variable to save.
+
+- **Perform Api Call [React-Native]:**
+
+  - On the url field it is possible to select and use intern variables.
+  - It is possible to add extra options on the request.
+
+- **Icon Button:**
+
+  - Now it is possible to use icons from FontAwesome.
+  - Also, Gaston lo hizo pelotas xD
+
+- **Data Table:**
+
+  - Reworked with a new library.
+
+- **Uncontrolled Input:**
+
+  - Now it is possible to define a size.
+
+- **Google Login:**
+  - Reworked with a new library.
 
 ## [TEMPLATES 1.5.3] - 2023-01-30
 

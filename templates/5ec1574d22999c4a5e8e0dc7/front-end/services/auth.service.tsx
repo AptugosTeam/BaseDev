@@ -29,16 +29,15 @@ class AuthService {
     localStorage.removeItem('token')
   }
 
-  register(username, email, password) {
-    return axios.post(API_URL + 'signup', {
-      username,
-      email,
-      password,
-    })
+  register(data) {
+    return axios.post(API_URL, data).then(_result => {
+      return this.login(data.Email, data.Password).then(afterLogin => { return afterLogin})
+    }).catch(e => { throw e })
   }
 
-  getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'))
+  async getCurrentUser() {
+    const user = localStorage.getItem('user')
+    return user ? JSON.parse(user) : {}
   }
 
   recoverPassword({ email, subject, message, name }) {

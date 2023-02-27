@@ -53,6 +53,388 @@ const dmz = {
 	}]
 }
 
+const LoginPagePH = {
+	"path": "ph.tpl",
+	"keyPath": "elements/Aptugo Internal Use/ph.tpl",
+	"prevent_delete": true,
+	"children": [
+	  {
+		"children": [
+		  {
+			"cascades": false,
+			"name": "Login Data",
+			"path": "useState.tpl",
+			"prevent_delete": false,
+			"type": "element",
+			"value": "useState",
+			"values": {
+			  "variableName": "loginData",
+			  "defaultValue": "{\n  Email: '',\n  Password: '',\n  RememberMe: false\n}"
+			}
+		  },
+		  {
+			"cascades": false,
+			"name": "Login Error",
+			"path": "useState.tpl",
+			"prevent_delete": false,
+			"type": "element",
+			"value": "useState",
+			"values": {
+			  "variableName": "loginError",
+			  "defaultValue": "null"
+			}
+		  },
+		  {
+			"children": [
+			  {
+				"cascades": false,
+				"name": "login",
+				"path": "login.tpl",
+				"prevent_delete": false,
+				"type": "element",
+				"value": "login",
+				"values": {
+				  "Email": "loginData.Email",
+				  "Password": "loginData.Password",
+				  "OnSuccess": Parameters.mainPageID
+				}
+			  }
+			],
+			"cascades": false,
+			"name": "handleLogin",
+			"path": "function.tpl",
+			"prevent_delete": false,
+			"type": "element",
+			"value": "function",
+			"values": {
+			  "functionName": "handleLogin",
+			  "functionBody": ""
+			}
+		  }
+		],
+		"cascades": false,
+		"name": "Login Functionality",
+		"path": "dummyEncloser.tpl",
+		"prevent_delete": false,
+		"type": "element",
+		"value": "dummyEncloser"
+	  }
+	],
+	"cascades": false,
+	"name": "Page Header",
+	"type": "element",
+	"value": "ph"
+}
+
+const LoginPageB = {
+  "path": "b.tpl",
+  "keyPath": "elements/Aptugo Internal Use/b.tpl",
+  "type": "element",
+  "internalUse": true,
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "cascades": false,
+              "name": "text",
+              "path": "text.tpl",
+              "prevent_delete": false,
+              "type": "element",
+              "value": "text",
+              "values": {
+                "Content": "Don't have an account? ",
+                "ClassName": "theme.right"
+              }
+            },
+            {
+              "children": [
+                {
+                  "cascades": false,
+                  "name": "text",
+                  "path": "text.tpl",
+                  "prevent_delete": false,
+                  "type": "element",
+                  "value": "text",
+                  "values": {
+                    "Content": " Register!",
+                    "ClassName": "theme.textRegister"
+                  }
+                }
+              ],
+              "cascades": false,
+              "name": "simpleLink",
+              "path": "simpleLink.tpl",
+              "prevent_delete": false,
+              "type": "element",
+              "value": "simpleLink",
+              "values": {
+                "tagToUse": "NavLink",
+                "destination": "/register",
+                "fromLink": "L0sgrASh"
+              }
+            }
+          ],
+          "cascades": false,
+          "name": "Register Area",
+          "path": "div.tpl",
+          "prevent_delete": false,
+          "type": "element",
+          "value": "div",
+          "values": {
+            "class": "theme.containerLogin"
+          }
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "cascades": false,
+                      "name": "text",
+                      "path": "text.tpl",
+                      "prevent_delete": false,
+                      "type": "element",
+                      "value": "text",
+                      "values": {
+                        "Content": "Sign In",
+                        "ClassName": "theme.textSignIn"
+                      }
+                    }
+                  ],
+                  "cascades": false,
+                  "name": "div",
+                  "path": "div.tpl",
+                  "prevent_delete": false,
+                  "type": "element",
+                  "value": "div",
+                  "values": {}
+                },
+                {
+                  "children": [
+                    {
+                      "cascades": false,
+                      "name": "text",
+                      "path": "text.tpl",
+                      "prevent_delete": false,
+                      "type": "element",
+                      "value": "text",
+                      "values": {
+                        "Content": "Enter your details below.",
+                        "ClassName": "theme.textEnterBelow"
+                      }
+                    }
+                  ],
+                  "cascades": false,
+                  "name": "div",
+                  "path": "div.tpl",
+                  "prevent_delete": false,
+                  "type": "element",
+                  "value": "div",
+                  "values": {}
+                }
+              ],
+              "cascades": false,
+              "name": "Heading",
+              "path": "div.tpl",
+              "prevent_delete": false,
+              "type": "element",
+              "value": "div",
+              "values": {
+                "class": "theme.headingLogin"
+              }
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "cascades": false,
+                      "name": "text",
+                      "path": "text.tpl",
+                      "prevent_delete": false,
+                      "type": "element",
+                      "value": "text",
+                      "values": {
+                        "Content": "{loginError}"
+                      }
+                    }
+                  ],
+                  "cascades": false,
+                  "name": "alertMessage",
+                  "path": "alertMessage.tpl",
+                  "prevent_delete": false,
+                  "type": "element",
+                  "value": "alertMessage",
+                  "values": {
+                    "severity": "error",
+                    "variant": "standard",
+                    "title": ""
+                  }
+                }
+              ],
+              "cascades": false,
+              "name": "loginError Message",
+              "path": "condition.tpl",
+              "prevent_delete": false,
+              "type": "element",
+              "value": "condition",
+              "values": {
+                "condition": "loginError"
+              }
+            },
+            {
+              "cascades": false,
+              "name": "uncontrolledInput",
+              "path": "uncontrolledInput.tpl",
+              "prevent_delete": false,
+              "type": "element",
+              "value": "uncontrolledInput",
+              "values": {
+                "variant": "outlined",
+                "label": "Email",
+                "placeholder": "Email Address",
+                "margin": "normal",
+                "onChange": "(e) => { setloginData({ ...loginData, Email: e.target.value }) }",
+                "value": "{loginData.Email}"
+              }
+            },
+            {
+              "cascades": false,
+              "name": "uncontrolledInput",
+              "path": "uncontrolledInput.tpl",
+              "prevent_delete": false,
+              "type": "element",
+              "value": "uncontrolledInput",
+              "values": {
+                "variant": "outlined",
+                "label": "Password",
+                "margin": "normal",
+                "onChange": "(e) => { setloginData({ ...loginData, Password: e.target.value }) }",
+                "value": "{loginData.Password}",
+                "type": "password"
+              }
+            },
+            {
+              "children": [
+                {
+                  "cascades": false,
+                  "name": "checkbox",
+                  "path": "checkbox.tpl",
+                  "prevent_delete": false,
+                  "type": "element",
+                  "value": "checkbox",
+                  "values": {
+                    "Checked": "loginData.RememberMe",
+                    "label": "Remember me",
+                    "OnClick": "{() => { setloginData({ ...loginData, RememberMe: !loginData.RememberMe }) }}"
+                  }
+                },
+                {
+                  "children": [
+                    {
+                      "cascades": false,
+                      "name": "text",
+                      "path": "text.tpl",
+                      "prevent_delete": false,
+                      "type": "element",
+                      "value": "text",
+                      "values": {
+                        "Content": "Forgot password?"
+                      }
+                    }
+                  ],
+                  "cascades": false,
+                  "name": "simpleLink",
+                  "path": "simpleLink.tpl",
+                  "prevent_delete": false,
+                  "type": "element",
+                  "value": "simpleLink",
+                  "values": {
+                    "tagToUse": "NavLink",
+                    "destination": "/forgot"
+                  }
+                }
+              ],
+              "cascades": false,
+              "name": "div",
+              "path": "div.tpl",
+              "prevent_delete": false,
+              "type": "element",
+              "value": "div",
+              "values": {
+                "class": "theme.flexLine"
+              }
+            },
+            {
+              "children": [
+                {
+                  "cascades": false,
+                  "name": "text",
+                  "path": "text.tpl",
+                  "prevent_delete": false,
+                  "type": "element",
+                  "value": "text",
+                  "values": {
+                    "ClassName": "theme.textButtonLogin",
+                    "Content": "Login"
+                  }
+                }
+              ],
+              "cascades": false,
+              "name": "Submit",
+              "path": "button.tpl",
+              "prevent_delete": false,
+              "type": "element",
+              "value": "button",
+              "values": {
+                "ButtonText": "",
+                "Variant": "contained",
+                "Color": "primary",
+                "fullWidth": false,
+                "Action": "handleLogin",
+                "className": "theme.buttonLogin"
+              }
+            }
+          ],
+          "cascades": false,
+          "name": "Login Box",
+          "path": "div.tpl",
+          "prevent_delete": false,
+          "type": "element",
+          "value": "div",
+          "values": {
+            "class": "theme.loginBox"
+          }
+        }
+      ],
+      "cascades": false,
+      "name": "Container",
+      "path": "Container.tpl",
+      "prevent_delete": false,
+      "type": "element",
+      "value": "Container",
+      "values": {
+        "maxWidth": "md",
+        "className": "theme.loginPage"
+      }
+    }
+  ],
+  "cascades": false,
+  "name": "Body",
+  "prevent_delete": true,
+  "value": "b",
+  "values": {
+    "className": [
+      "theme.loginBody"
+    ],
+    "primaryColor": "blue"
+  }
+}
+
 const LoginPage = {
   "name": "Login Page",
   "type": "page",
@@ -61,342 +443,14 @@ const LoginPage = {
   "filename": "login.tsx",
   "priority": 5,
   "children": [{
-    "children": [{
-      "name": "AuthService",
-      "prevent_delete": false,
-      "cascades": false,
-      "type": "element",
-      "value": "import",
-      "collapseStatus": "expand",
-      "values": {
-        "moduleName": "AuthService",
-        "modulePath": "../services/auth.service"
-      },
-      "children": [],
-    }],
+    "children": [],
     "name": "Before Page Render",
     "type": "element",
     "value": "bpr",
     "prevent_delete": true,
     "cascades": false,
     "collapseStatus": "expand",
-  }, {
-    "children": [{
-			"name": "Login Functionality",
-      "prevent_delete": false,
-      "cascades": false,
-      "type": "element",
-      "value": "dummyEncloser",
-      "collapseStatus": "expand",
-      "children": [{
-        "name": "Login Data",
-        "prevent_delete": false,
-        "cascades": false,
-        "type": "element",
-        "value": "useState",
-        "collapseStatus": "expand",
-        "values": {
-          "variableName": "loginData",
-          "defaultValue": "{\n  Email: '',\n  Password: '',\n  RememberMe: false\n}"
-        },
-        "children": [],
-      }, {
-        "name": "Login Error",
-        "prevent_delete": false,
-        "cascades": false,
-        "type": "element",
-        "value": "useState",
-        "collapseStatus": "expand",
-        "values": {
-          "variableName": "loginError",
-          "defaultValue": "null"
-        },
-        "children": [],
-      }, {
-        "name": "handleLogin",
-        "prevent_delete": false,
-        "cascades": false,
-        "type": "element",
-        "value": "function",
-        "collapseStatus": "expand",
-        "values": {
-          "functionName": "handleLogin",
-          "functionBody": "AuthService.login(loginData.Email, loginData.Password).then(\n      (res) => {\n        console.log(res)\n        props.history.push('/')\n      },\n      (error) => {\n        setloginError(error.response.data.message)\n      }\n    )"
-        },
-        "children": [],
-      }]
-    }],
-    "name": "Page Header",
-    "type": "element",
-    "value": "ph",
-    "prevent_delete": true,
-    "cascades": false,
-    "collapseStatus": "expand",
-  }, {
-    "children": [{
-      "children": [{
-        "children": [{
-              "name": "text",
-              "prevent_delete": false,
-              "cascades": false,
-              "type": "element",
-              "value": "text",
-              "collapseStatus": "expand",
-              "values": {
-                "Content": "Don't have an account? "
-              },
-              "children": [],
-            }, {
-              "children": [{
-                "name": "text",
-                "prevent_delete": false,
-                "cascades": false,
-                "type": "element",
-                "value": "text",
-                "collapseStatus": "expand",
-                "values": {
-                  "Content": " Register!"
-                },
-                "children": [],
-              }],
-              "name": "simpleLink",
-              "prevent_delete": false,
-              "cascades": false,
-              "type": "element",
-              "value": "simpleLink",
-              "collapseStatus": "expand",
-              "values": {
-                "tagToUse": "A",
-                "destination": "/Register",
-              },
-            }],
-            "name": "Register Area",
-            "prevent_delete": false,
-            "cascades": false,
-            "type": "element",
-            "value": "div",
-            "collapseStatus": "collapse",
-            "values": {
-              "class": "theme.right"
-            },
-          }, {
-            "children": [{
-              "children": [{
-                "children": [{
-                  "name": "text",
-                  "prevent_delete": false,
-                  "cascades": false,
-                  "type": "element",
-                  "value": "text",
-                  "collapseStatus": "expand",
-                  "values": {
-                    "Content": "Sign In"
-                  },
-                  "children": [],
-                }],
-                "name": "typography",
-                "prevent_delete": false,
-                "cascades": false,
-                "type": "element",
-                "value": "typography",
-                "collapseStatus": "expand",
-                "values": {
-                  "tag": "h3"
-                },
-              }, {
-                "children": [{
-                  "name": "text",
-                  "prevent_delete": false,
-                  "cascades": false,
-                  "type": "element",
-                  "value": "text",
-                  "collapseStatus": "expand",
-                  "values": {
-                    "Content": "Enter your details below."
-                  },
-                  "children": [],
-                }],
-                "name": "typography",
-                "prevent_delete": false,
-                "cascades": false,
-                "type": "element",
-                "value": "typography",
-                "collapseStatus": "expand",
-                "values": {
-                  "tag": "body1"
-                },
-              }],
-              "name": "Heading",
-              "prevent_delete": false,
-              "cascades": false,
-              "type": "element",
-              "value": "div",
-              "collapseStatus": "collapse",
-			  "values": {
-				"class": "theme.headingLogin"
-			  },
-            }, {
-              "children": [{
-                "children": [{
-                  "name": "text",
-                  "prevent_delete": false,
-                  "cascades": false,
-                  "type": "element",
-                  "value": "text",
-                  "collapseStatus": "expand",
-                  "values": {
-                    "Content": "{loginError}"
-                  },
-                  "children": [],
-                }],
-                "name": "alertMessage",
-                "prevent_delete": false,
-                "cascades": false,
-                "type": "element",
-                "value": "alertMessage",
-                "collapseStatus": "expand",
-                "values": {
-                  "severity": "error",
-                  "variant": "standard",
-                  "title": ""
-                },
-              }],
-              "name": "loginError Message",
-              "prevent_delete": false,
-              "cascades": false,
-              "type": "element",
-              "value": "condition",
-              "collapseStatus": "expand",
-              "values": {
-                "condition": "loginError"
-              },
-            }, {
-              "name": "uncontrolledInput",
-              "prevent_delete": false,
-              "cascades": false,
-              "type": "element",
-              "value": "uncontrolledInput",
-              "collapseStatus": "expand",
-              "values": {
-                "variant": "outlined",
-                "label": "Email",
-                "placeholder": "Email Address",
-                "margin": "normal",
-                "onChange": "(e) => { setloginData({ ...loginData, Email: e.target.value }) }",
-                "value": "{loginData.Email}"
-              },
-              "children": [],
-            }, {
-              "name": "uncontrolledInput",
-              "prevent_delete": false,
-              "cascades": false,
-              "type": "element",
-              "value": "uncontrolledInput",
-              "collapseStatus": "expand",
-              "values": {
-                "variant": "outlined",
-                "label": "Password",
-                "margin": "normal",
-                "onChange": "(e) => { setloginData({ ...loginData, Password: e.target.value }) }",
-                "value": "{loginData.Password}",
-                "type": "password"
-              },
-              "children": [],
-            }, {
-              "children": [{
-                "name": "checkbox",
-                "prevent_delete": false,
-                "cascades": false,
-                "type": "element",
-                "value": "checkbox",
-                "collapseStatus": "expand",
-                "values": {
-                  "Checked": "loginData.RememberMe",
-                  "label": "Remember me",
-                  "OnClick": "{() => { setloginData({ ...loginData, RememberMe: !loginData.RememberMe }) }}"
-                },
-                "children": [],
-              }, {
-                "children": [{
-                  "name": "text",
-                  "prevent_delete": false,
-                  "cascades": false,
-                  "type": "element",
-                  "value": "text",
-                  "collapseStatus": "expand",
-                  "values": {
-                    "Content": "Forgot password?",
-                  },
-                  "children": [],
-                }],
-                "name": "simpleLink",
-                "prevent_delete": false,
-                "cascades": false,
-                "type": "element",
-                "value": "simpleLink",
-                "collapseStatus": "expand",
-                "values": {
-                  "tagToUse": "NavLink",
-                  "destination": "/forgot"
-                },
-              }],
-              "name": "div",
-              "prevent_delete": false,
-              "cascades": false,
-              "type": "element",
-              "value": "div",
-              "collapseStatus": "expand",
-              "values": {
-                "class": "theme.flexLine"
-              },
-            }, {
-              "name": "Submit",
-              "prevent_delete": false,
-              "cascades": false,
-              "type": "element",
-              "value": "button",
-              "collapseStatus": "expand",
-              "values": {
-                "ButtonText": "Login",
-                "Variant": "contained",
-                "Color": "primary",
-                "fullWidth": false,
-                "Action": "handleLogin"
-              },
-              "children": [],
-            }],
-            "name": "Login Box",
-            "prevent_delete": false,
-            "cascades": false,
-            "type": "element",
-            "value": "div",
-            "collapseStatus": "expand",
-            "values": {
-              "class": "theme.loginBox"
-            },
-      }],
-      "name": "Container",
-      "prevent_delete": false,
-      "cascades": false,
-      "type": "element",
-      "value": "Container",
-      "collapseStatus": "expand",
-      "values": {
-        "maxWidth": "md",
-        "className": "theme.loginPage"
-      },
-    }],
-    "name": "Body",
-    "type": "element",
-    "value": "b",
-    "prevent_delete": true,
-    "cascades": false,
-    "collapseStatus": "expand",
-    "values": {
-      "className": ["theme.loginBody"],
-      "primaryColor": "blue"
-    },
-  }, {
+  }, LoginPagePH, LoginPageB, {
     "name": "Page Footer",
     "type": "element",
     "value": "pf",
@@ -415,6 +469,295 @@ const LoginPage = {
   }]
 }
 
+const RegisterPagePH = {
+  "path": "ph.tpl",
+  "keyPath": "elements/Aptugo Internal Use/ph.tpl",
+  "prevent_delete": true,
+  "children": [
+    {
+      "children": [
+        {
+          "path": "useState.tpl",
+          "keyPath": "elements/Programming/useState.tpl",
+          "type": "element",
+          "children": [],
+          "name": "usersData",
+          "prevent_delete": false,
+          "cascades": false,
+          "value": "useState",
+          "values": {
+            "variableName": "usersData",
+            "defaultValue": "{\nerrField: null,\nerrMessage: null\n}"
+          }
+        },
+        {
+          "cascades": false,
+          "name": "Register Error",
+          "path": "useState.tpl",
+          "prevent_delete": false,
+          "type": "element",
+          "value": "useState",
+          "values": {
+            "variableName": "registerError",
+            "defaultValue": "null"
+          },
+          "children": []
+        },
+        {
+          "children": [
+            {
+              "path": "register.tpl",
+              "keyPath": "elements/Programming/Snippets/register.tpl",
+              "type": "element",
+              "children": [],
+              "name": "register",
+              "prevent_delete": false,
+              "cascades": false,
+              "value": "register",
+              "values": {
+                "OnSuccess": Parameters.mainPageID,
+                "Data": "data"
+              }
+            }
+          ],
+          "cascades": false,
+          "name": "handleRegister",
+          "path": "function.tpl",
+          "prevent_delete": false,
+          "type": "element",
+          "value": "function",
+          "values": {
+            "functionName": "handleRegister",
+            "functionBody": "const data = { ...Usersdata, Role: 'User' }"
+          }
+        }
+      ],
+      "cascades": false,
+      "name": "Register Functionality",
+      "path": "dummyEncloser.tpl",
+      "prevent_delete": false,
+      "type": "element",
+      "value": "dummyEncloser"
+    }
+  ],
+  "cascades": false,
+  "name": "Page Header",
+  "type": "element",
+  "value": "ph"
+}
+
+const RegisterPageB = {
+  "path": "b.tpl",
+  "keyPath": "elements/Aptugo Internal Use/b.tpl",
+  "type": "element",
+  "internalUse": true,
+  "children": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "cascades": false,
+              "name": "text",
+              "path": "text.tpl",
+              "prevent_delete": false,
+              "type": "element",
+              "value": "text",
+              "values": {
+                "Content": "Have an account? ",
+                "ClassName": "theme.right"
+              }
+            },
+            {
+              "children": [
+                {
+                  "cascades": false,
+                  "name": "text",
+                  "path": "text.tpl",
+                  "prevent_delete": false,
+                  "type": "element",
+                  "value": "text",
+                  "values": {
+                    "Content": " Login!",
+                    "ClassName": "theme.textRegister"
+                  }
+                }
+              ],
+              "cascades": false,
+              "name": "simpleLink",
+              "path": "simpleLink.tpl",
+              "prevent_delete": false,
+              "type": "element",
+              "value": "simpleLink",
+              "values": {
+                "tagToUse": "A",
+                "destination": "/login",
+                "fromLink": "T0EszUz8"
+              }
+            }
+          ],
+          "cascades": false,
+          "name": "Login Area",
+          "path": "div.tpl",
+          "prevent_delete": false,
+          "type": "element",
+          "value": "div",
+          "values": {
+            "class": "theme.containerLogin"
+          }
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "cascades": false,
+                      "name": "text",
+                      "path": "text.tpl",
+                      "prevent_delete": false,
+                      "type": "element",
+                      "value": "text",
+                      "values": {
+                        "Content": "Register",
+                        "ClassName": "theme.textSignIn"
+                      }
+                    }
+                  ],
+                  "cascades": false,
+                  "name": "div",
+                  "path": "div.tpl",
+                  "prevent_delete": false,
+                  "type": "element",
+                  "value": "div",
+                  "values": {}
+                },
+                {
+                  "children": [
+                    {
+                      "cascades": false,
+                      "name": "text",
+                      "path": "text.tpl",
+                      "prevent_delete": false,
+                      "type": "element",
+                      "value": "text",
+                      "values": {
+                        "Content": "Enter your details below.",
+                        "ClassName": "theme.textEnterBelow"
+                      }
+                    }
+                  ],
+                  "cascades": false,
+                  "name": "div",
+                  "path": "div.tpl",
+                  "prevent_delete": false,
+                  "type": "element",
+                  "value": "div",
+                  "values": {}
+                }
+              ],
+              "cascades": false,
+              "name": "Heading",
+              "path": "div.tpl",
+              "prevent_delete": false,
+              "type": "element",
+              "value": "div",
+              "values": {
+                "class": "theme.headingLogin"
+              }
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "cascades": false,
+                      "name": "text",
+                      "path": "text.tpl",
+                      "prevent_delete": false,
+                      "type": "element",
+                      "value": "text",
+                      "values": {
+                        "Content": "{registerError}"
+                      }
+                    }
+                  ],
+                  "cascades": false,
+                  "name": "alertMessage",
+                  "path": "alertMessage.tpl",
+                  "prevent_delete": false,
+                  "type": "element",
+                  "value": "alertMessage",
+                  "values": {
+                    "severity": "error",
+                    "variant": "standard",
+                    "title": ""
+                  }
+                }
+              ],
+              "cascades": false,
+              "name": "registerError Message",
+              "path": "condition.tpl",
+              "prevent_delete": false,
+              "type": "element",
+              "value": "condition",
+              "values": {
+                "condition": "registerError"
+              }
+            },...userTable.fields.filter(field => field.column_name !== 'Role').map(field => { return { type: 'element', cascades: false, name: field.column_name, children: [], value: 'field', values: { Field: field.unique_id, Type: 'edit', margin: 'normal', variant: 'outlined' }} }),
+            {
+              "cascades": false,
+              "name": "Submit",
+              "path": "button.tpl",
+              "prevent_delete": false,
+              "type": "element",
+              "value": "button",
+              "values": {
+                "ButtonText": "Register",
+                "Variant": "contained",
+                "Color": "primary",
+                "fullWidth": false,
+                "Action": "handleRegister",
+                "className": "theme.buttonLogin"
+              }
+            }
+          ],
+          "cascades": false,
+          "name": "Register Box",
+          "path": "div.tpl",
+          "prevent_delete": false,
+          "type": "element",
+          "value": "div",
+          "values": {
+            "class": "theme.loginBox"
+          }
+        }
+      ],
+      "cascades": false,
+      "name": "Container",
+      "path": "Container.tpl",
+      "prevent_delete": false,
+      "type": "element",
+      "value": "Container",
+      "values": {
+        "maxWidth": "md",
+        "className": "theme.loginPage"
+      }
+    }
+  ],
+  "cascades": false,
+  "name": "Body",
+  "prevent_delete": true,
+  "value": "b",
+  "values": {
+    "className": [
+      "theme.registerBody"
+    ],
+    "primaryColor": "blue"
+  }
+}
+
 const RegisterPage = {
   "name": "Register",
   "type": "page",
@@ -422,382 +765,14 @@ const RegisterPage = {
   "filename": "register.tsx",
   "collapseStatus": "collapse",
   "children": [{
-    "children": [{
-      "name": "code",
-      "prevent_delete": false,
-      "cascades": false,
-      "type": "element",
-      "value": "code",
-      "collapseStatus": "expand",
-      "values": {
-        "code": "import { addUsers } from '../store/actions/usersActions'"
-      },
-      "children": [],
-    }, {
-      "name": "AuthService",
-      "prevent_delete": false,
-      "cascades": false,
-      "type": "element",
-      "value": "import",
-      "collapseStatus": "expand",
-      "values": {
-        "moduleName": "AuthService",
-        "modulePath": "../services/auth.service"
-      },
-      "children": [],
-    }, {
-      "name": "IState",
-      "prevent_delete": false,
-      "cascades": false,
-      "type": "element",
-      "value": "import",
-      "collapseStatus": "expand",
-      "values": {
-        "moduleName": "{ IState }",
-        "modulePath": "../store/reducers/index"
-      },
-      "children": [],
-    }, {
-      "name": "UseSelector",
-      "prevent_delete": false,
-      "cascades": false,
-      "type": "element",
-      "value": "import",
-      "collapseStatus": "expand",
-      "values": {
-        "moduleName": "{ useSelector }",
-        "modulePath": "react-redux"
-      },
-      "children": [],
-    }],
+    "children": [],
     "name": "Before Page Render",
     "type": "element",
     "value": "bpr",
     "prevent_delete": true,
     "cascades": false,
     "collapseStatus": "expand",
-  }, {
-    "children": [{
-      "children": [{
-        "name": "Define usersData",
-        "prevent_delete": false,
-        "cascades": false,
-        "type": "element",
-        "value": "defineVariable",
-        "collapseStatus": "expand",
-        "values": {
-          "variableName": "usersData",
-          "variableValue": "useSelector((state: IState) => state.users)"
-        },
-        "children": [],
-      },{
-        "name": "Register Error",
-        "prevent_delete": false,
-        "cascades": false,
-        "type": "element",
-        "value": "useState",
-        "collapseStatus": "expand",
-        "values": {
-          "variableName": "registerError",
-          "defaultValue": "null"
-        },
-        "children": [],
-      }, {
-        "name": "handleRegister",
-        "prevent_delete": false,
-        "cascades": false,
-        "type": "element",
-        "value": "function",
-        "collapseStatus": "expand",
-        "values": {
-          "functionName": "handleRegister",
-          "functionBody": "const data = { ...Usersdata, Role: 'User' }"
-        },
-        "children": [{
-          "name": "saveToRedux",
-          "prevent_delete": false,
-          "cascades": false,
-          "children": [],
-          "type": "element",
-          "value": "saveToRedux",
-          "collapseStatus": "expand",
-          "values": {
-            "data": Parameters.table_unique_id
-          },
-        }],
-      }],
-      "name": "Register Functionality",
-      "prevent_delete": false,
-      "cascades": false,
-      "type": "element",
-      "value": "dummyEncloser",
-      "collapseStatus": "expand",
-    }],
-    "name": "Page Header",
-    "type": "element",
-    "value": "ph",
-    "prevent_delete": true,
-    "cascades": false,
-    "values": {
-      "localStyles": "mainPanel: {     [\"@media (min-width:960px)\"]: {       backgroundColor: \"#56baec\",       width: \"100%\",       flexGrow: 1,     },   },   loginHolder: { margin: \"5rem auto 0\", width: \"30vw\", textAlign: \"center\" },   loginArea: {     position: \"relative\",     background: \"white\",     padding: \"4rem 3rem 2rem\",     borderRadius: \"0.5rem\",     marginBottom: \"1rem\",     boxSizing: \"border-box\",     boxShadow: \"0px 3px 20px 5px #00000030\",   },   loginTitle: {     textTransform: \"uppercase\",     fontSize: \"1.2rem\",     letterSpacing: \"0.1rem\",     color: \"#3084af\",   },   image: {     width: \"5rem\",     position: \"absolute\",     top: \"-2.5rem\",     left: \"calc(15vw - (2.5rem + 2.5px))\",     border: \"5px solid white\",     borderRadius: \"5rem\",   },"
-    },
-    "collapseStatus": "expand",
-  }, {
-    "children": [{
-          "children": [{
-            "children": [{
-              "name": "text",
-              "prevent_delete": false,
-              "cascades": false,
-              "type": "element",
-              "value": "text",
-              "collapseStatus": "expand",
-              "values": {
-                "Content": "Have an account? "
-              },
-              "children": [],
-            }, {
-              "children": [{
-                "name": "text",
-                "prevent_delete": false,
-                "cascades": false,
-                "type": "element",
-                "value": "text",
-                "collapseStatus": "expand",
-                "values": {
-                  "Content": " Login!"
-                },
-                "children": [],
-              }],
-              "name": "simpleLink",
-              "prevent_delete": false,
-              "cascades": false,
-              "type": "element",
-              "value": "simpleLink",
-              "collapseStatus": "expand",
-              "values": {
-                "tagToUse": "A",
-                "destination": "/Login",
-              },
-            }],
-            "name": "Login Area",
-            "prevent_delete": false,
-            "cascades": false,
-            "type": "element",
-            "value": "div",
-            "collapseStatus": "collapse",
-            "values": {
-              "class": "theme.right",
-            },
-          }, {
-            "children": [{
-              "children": [{
-                "children": [{
-                  "name": "text",
-                  "prevent_delete": false,
-                  "cascades": false,
-                  "type": "element",
-                  "value": "text",
-                  "collapseStatus": "expand",
-                  "values": {
-                    "Content": "Register"
-                  },
-                  "children": [],
-                }],
-                "name": "typography",
-                "prevent_delete": false,
-                "cascades": false,
-                "type": "element",
-                "value": "typography",
-                "collapseStatus": "collapse",
-                "values": {
-                  "tag": "h3"
-                },
-              }, {
-                "children": [{
-                  "name": "text",
-                  "prevent_delete": false,
-                  "cascades": false,
-                  "type": "element",
-                  "value": "text",
-                  "collapseStatus": "expand",
-                  "values": {
-                    "Content": "Enter your details below."
-                  },
-                  "children": [],
-                }],
-                "name": "typography",
-                "prevent_delete": false,
-                "cascades": false,
-                "type": "element",
-                "value": "typography",
-                "collapseStatus": "collapse",
-                "values": {
-                  "tag": "body1"
-                },
-              }],
-              "name": "Heading",
-              "prevent_delete": false,
-              "cascades": false,
-              "type": "element",
-              "value": "div",
-              "collapseStatus": "collapse",
-			  "values": {
-				"class": "theme.headingRegister"
-			  },
-            }, {
-              "children": [{
-                "children": [{
-                  "name": "text",
-                  "prevent_delete": false,
-                  "cascades": false,
-                  "type": "element",
-                  "value": "text",
-                  "collapseStatus": "expand",
-                  "values": {
-                    "Content": "{registerError}"
-                  },
-                  "children": [],
-                }],
-                "name": "alertMessage",
-                "prevent_delete": false,
-                "cascades": false,
-                "type": "element",
-                "value": "alertMessage",
-                "collapseStatus": "expand",
-                "values": {
-                  "severity": "error",
-                  "variant": "standard",
-                  "title": ""
-                },
-              }],
-              "name": "registerError Message",
-              "prevent_delete": false,
-              "cascades": false,
-              "type": "element",
-              "value": "condition",
-              "collapseStatus": "collapse",
-              "values": {
-                "condition": "registerError"
-              },
-            }, {
-              "name": "Profile Picture",
-              "prevent_delete": false,
-              "cascades": false,
-              "children": [],
-              "type": "element",
-              "value": "field",
-              "collapseStatus": "expand",
-              "values": {
-                "Field": userTable.fields[4].unique_id,
-                "Type": "edit",
-                "margin": "normal",
-                "variant": "outlined"
-              },
-            }, {
-              "name": "FirstName",
-              "prevent_delete": false,
-              "cascades": false,
-              "children": [],
-              "type": "element",
-              "value": "field",
-              "collapseStatus": "expand",
-              "values": {
-                "margin": "normal",
-                "Field": userTable.fields[0].unique_id,
-                "Type": "edit",
-                "variant": "outlined"
-              },
-            }, {
-              "name": "LastName",
-              "prevent_delete": false,
-              "cascades": false,
-              "children": [],
-              "type": "element",
-              "value": "field",
-              "collapseStatus": "expand",
-              "values": {
-                "margin": "normal",
-                "Field": userTable.fields[1].unique_id,
-                "Type": "edit",
-                "variant": "outlined"
-              },
-            }, {
-              "name": "Email",
-              "prevent_delete": false,
-              "cascades": false,
-              "children": [],
-              "type": "element",
-              "value": "field",
-              "collapseStatus": "expand",
-              "values": {
-                "Field": userTable.fields[2].unique_id,
-                "Type": "edit",
-                "margin": "normal",
-                "variant": "outlined"
-              },
-            }, {
-              "name": "Password",
-              "prevent_delete": false,
-              "cascades": false,
-              "children": [],
-              "type": "element",
-              "value": "field",
-              "collapseStatus": "expand",
-              "values": {
-                "variant": "outlined",
-                "margin": "normal",
-                "Field": userTable.fields[3].unique_id,
-                "Type": "edit"
-              },
-            }, {
-              "name": "Submit",
-              "prevent_delete": false,
-              "cascades": false,
-              "type": "element",
-              "value": "button",
-              "collapseStatus": "expand",
-              "values": {
-                "ButtonText": "Register",
-                "Variant": "contained",
-                "Color": "primary",
-                "fullWidth": false,
-                "Action": "handleRegister"
-              },
-              "children": [],
-            }],
-            "name": "Register Box",
-            "prevent_delete": false,
-            "cascades": false,
-            "type": "element",
-            "value": "div",
-            "collapseStatus": "expand",
-            "values": {
-              "class": "theme.registerBox"
-            },
-      }],
-      "name": "Container",
-      "prevent_delete": false,
-      "cascades": false,
-      "type": "element",
-      "value": "Container",
-      "collapseStatus": "expand",
-      "values": {
-        "maxWidth": "md",
-        "className": "theme.loginPage"
-      },
-    }],
-    "name": "Body",
-    "type": "element",
-    "value": "b",
-    "prevent_delete": true,
-    "cascades": false,
-    "collapseStatus": "expand",
-    "values": {
-      "className": ["theme.registerBody"],
-      "primaryColor": "blue"
-    },
-  }, {
+  }, RegisterPagePH, RegisterPageB, {
     "name": "Page Footer",
     "type": "element",
     "value": "pf",
@@ -941,6 +916,18 @@ const ForgotPage = {
 	}, {
 		"children": [{
 			"children": [{
+				"name": "emailSender",
+				"prevent_delete": false,
+				"cascades": false,
+				"type": "element",
+				"value": "useState",
+				"collapseStatus": "expand",
+				"values": {
+					"variableName": "emailSender",
+					"defaultValue": "''"
+				},
+				"children": [],
+			}, {
 				"name": "userEmail",
 				"prevent_delete": false,
 				"cascades": false,
@@ -985,7 +972,7 @@ const ForgotPage = {
 				"collapseStatus": "expand",
 				"values": {
 					"functionName": "sendNonce",
-					"functionBody": "setrecoverSuccess(null)\n    setrecoverError(null)\n    AuthService.recoverPassword({ email: userEmail, subject: 'Password recovery', message: InlineLink(), name: 'pedro corica' }).then(\n      (res) => {\n        setrecoverSuccess(`Email sent to ${userEmail}`)\n      },\n      (error) => {\n        setrecoverError(error.response.data.message)\n      }\n    )"
+					"functionBody": "setrecoverSuccess(null)\n    setrecoverError(null)\n    AuthService.recoverPassword({ email: userEmail, subject: 'Password recovery', message: InlineLink(), name: emailSender }).then(\n      (res) => {\n        setrecoverSuccess(`Email sent to ${userEmail}`)\n      },\n      (error) => {\n        setrecoverError(error.response.data.message)\n      }\n    )"
 				},
 				"children": [],
 			}],
@@ -1040,7 +1027,7 @@ const ForgotPage = {
 					"value": "code",
 					"collapseStatus": "expand",
 					"values": {
-						"code": "if (props.match.params.nonce) {\n      AuthService.checkNonce(props.match.params.nonce, props.match.params.email).then(\n        (res) => {\n          authHeaders()\n          setuserData({ ...userData, _id: res })\n        },\n        (error) => {\n          console.error(error)\n        }\n      )\n    }"
+						"code": "if (params.nonce) {\n      AuthService.checkNonce(params.nonce, params.email).then(\n        (res) => {\n          authHeaders()\n          setuserData({ ...userData, _id: res })\n        },\n        (error) => {\n          console.error(error)\n        }\n      )\n    }"
 					},
 					"children": [],
 				}],
@@ -1051,7 +1038,7 @@ const ForgotPage = {
 				"value": "watchVariable",
 				"collapseStatus": "expand",
 				"values": {
-					"watchVariable": "props.match.params.nonce"
+					"watchVariable": "params.nonce"
 				},
 			}],
 			"name": "From Link (with nonce)",
@@ -1218,17 +1205,6 @@ const ForgotPage = {
 						"children": [],
 					}, {
 						"children": [{
-							"name": "text",
-							"prevent_delete": false,
-							"cascades": false,
-							"type": "element",
-							"value": "text",
-							"values": {
-								"Content": "Go back to&nbsp;"
-							},
-							"collapseStatus": "expand",
-							"children": [],
-						}, {
 							"name": "Link",
 							"prevent_delete": false,
 							"cascades": false,
@@ -1236,10 +1212,22 @@ const ForgotPage = {
 							"value": "Link",
 							"values": {
 								"innerText": " Login",
-								"destination": "/Login"
+								"destination": "/login"
 							},
 							"collapseStatus": "expand",
-							"children": [],
+							"children": [{
+									"name": "text",
+									"prevent_delete": false,
+									"cascades": false,
+									"type": "element",
+									"value": "text",
+									"values": {
+										"Content": "Go back to&nbsp;"
+									},
+									"collapseStatus": "expand",
+									"children": [],
+								}
+							],
 						}],
 						"name": "div",
 						"prevent_delete": false,
@@ -1265,7 +1253,7 @@ const ForgotPage = {
 				"value": "condition",
 				"collapseStatus": "expand",
 				"values": {
-					"condition": "!props.match.params.nonce"
+					"condition": "!params.nonce"
 				},
 			}, {
 				"children": [{
@@ -1362,7 +1350,7 @@ const ForgotPage = {
 				"value": "condition",
 				"collapseStatus": "expand",
 				"values": {
-					"condition": "props.match.params.nonce"
+					"condition": "params.nonce"
 				},
 			}],
 			"name": "Container",
@@ -1405,242 +1393,15 @@ const ForgotPage = {
 	}]
 }
 
-dmz.children.push(LoginPage, RegisterPage, ForgotPage)
+const allPages = Application.pages[0].children.filter(child => child.type === 'page').map(page => {
+  return {...page, parent: dmz.unique_id }
+})
+dmz.children.push(LoginPage, RegisterPage, ForgotPage, ...allPages)
 
-const secureZone = {
-  "name": "Restricted Zone",
-	"type": "page",
-	"path": "",
-	"filename": "",
-	"parent": false,
-	"collapseStatus": "expand",
-	"children": [{
-		"children": [{
-			"name": "authHeaders",
-			"prevent_delete": false,
-			"cascades": true,
-			"children": [],
-			"type": "element",
-			"value": "import",
-			"collapseStatus": "expand",
-			"values": {
-				"moduleName": "authHeaders",
-				"modulePath": "../services/auth-header"
-			}
-		}, {
-			"name": "AuthService",
-			"prevent_delete": false,
-			"cascades": true,
-			"children": [],
-			"type": "element",
-			"value": "import",
-			"collapseStatus": "expand",
-			"values": {
-				"moduleName": "AuthService",
-				"modulePath": "../services/auth.service"
-			}
-		}],
-		"name": "Before Page Render",
-		"type": "element",
-		"value": "bpr",
-		"prevent_delete": true,
-		"cascades": false,
-		"collapseStatus": "expand"
-	}, {
-		"children": [{
-			"name": "useState",
-			"prevent_delete": false,
-			"cascades": true,
-			"type": "element",
-			"value": "useState",
-			"collapseStatus": "expand",
-			"values": {
-				"variableName": "profileMenuAnchor",
-				"defaultValue": "null"
-			},
-			"children": [],
-		}, {
-			"name": "code",
-			"prevent_delete": false,
-			"cascades": true,
-			"type": "element",
-			"value": "code",
-			"values": {
-				"code": "if (!authHeaders()) { \n  props.history.push(\"/Login\")\n}"
-			},
-			"collapseStatus": "expand",
-			"children": []
-		}, {
-			"name": "useState",
-			"prevent_delete": false,
-			"cascades": true,
-			"type": "element",
-			"value": "useState",
-			"collapseStatus": "expand",
-			"values": {
-				"defaultValue": "AuthService.getCurrentUser()",
-				"variableName": "currentUser"
-			},
-			"children": []
-		}],
-		"name": "Page Header",
-		"type": "element",
-		"value": "ph",
-		"prevent_delete": true,
-		"cascades": false,
-		"collapseStatus": "expand"
-	}, {
-		"name": "Body",
-		"type": "element",
-		"value": "b",
-		"prevent_delete": true,
-		"cascades": false,
-		"collapseStatus": "expand",
-		"children": [{
-			"children": [{
-				"children": [{
-					"children": [{
-						"name": "image",
-						"prevent_delete": false,
-						"cascades": false,
-						"type": "element",
-						"value": "image",
-						"collapseStatus": "expand",
-						"values": {
-							"path": "/img/${currentUser.ProfilePic}",
-							"ClassName": []
-						},
-						"children": [],
-					}],
-					"name": "IconButton",
-					"prevent_delete": false,
-					"cascades": false,
-					"type": "element",
-					"value": "IconButton",
-					"collapseStatus": "expand",
-					"values": {
-						"className": "theme.profilePicture",
-						"Action": "(event) => { setprofileMenuAnchor(event.currentTarget) }"
-					},
-				}, {
-					"children": [{
-						"children": [{
-							"name": "text",
-							"prevent_delete": false,
-							"cascades": false,
-							"type": "element",
-							"value": "text",
-							"collapseStatus": "expand",
-							"values": {
-								"Content": "{currentUser.FirstName} {currentUser.LastName}"
-							},
-							"children": [],
-						}],
-						"name": "div",
-						"prevent_delete": false,
-						"cascades": false,
-						"type": "element",
-						"value": "div",
-						"collapseStatus": "expand",
-						"values": {
-							"class": "theme.menuProfileDetails"
-						},
-					}, {
-						"children": [{
-							"name": "text",
-							"prevent_delete": false,
-							"cascades": false,
-							"type": "element",
-							"value": "text",
-							"collapseStatus": "expand",
-							"values": {
-								"Content": "Profile"
-							},
-							"children": [],
-						}],
-						"name": "MenuItem",
-						"prevent_delete": false,
-						"cascades": false,
-						"type": "element",
-						"value": "MenuItem",
-						"collapseStatus": "expand",
-					}, {
-						"children": [{
-							"name": "text",
-							"prevent_delete": false,
-							"cascades": false,
-							"type": "element",
-							"value": "text",
-							"collapseStatus": "expand",
-							"values": {
-								"Content": "Logout"
-							},
-							"children": [],
-						}],
-						"name": "MenuItem",
-						"prevent_delete": false,
-						"cascades": false,
-						"type": "element",
-						"value": "MenuItem",
-						"collapseStatus": "expand",
-						"values": {
-							"onclick": "(params) => { AuthService.logout(); props.history.push('/') }"
-						},
-					}],
-					"name": "Menu",
-					"prevent_delete": false,
-					"cascades": false,
-					"type": "element",
-					"value": "Menu",
-					"collapseStatus": "expand",
-					"values": {
-						"anchorElement": "profileMenuAnchor",
-						"onClose": "(params) => { setprofileMenuAnchor(null)}"
-					},
-				}],
-				"name": "navbar",
-				"prevent_delete": false,
-				"cascades": true,
-				"type": "element",
-				"value": "navbar",
-				"collapseStatus": "expand",
-				"values": {
-					"Title": "",
-					"Color": "transparent",
-					"Position": "absolute",
-					"Elevation": "3"
-				},
-			}],
-			"name": "condition",
-			"prevent_delete": false,
-			"cascades": true,
-			"type": "element",
-			"value": "condition",
-			"collapseStatus": "expand",
-			"values": {
-				"condition": "currentUser"
-			},
-		}]
-	}, {
-		"name": "Page Footer",
-		"type": "element",
-		"value": "pf",
-		"prevent_delete": true,
-		"cascades": false,
-		"collapseStatus": "expand",
-		"children": []
-	}, {
-		"name": "After Page Render",
-		"type": "element",
-		"value": "apr",
-		"prevent_delete": true,
-		"cascades": false,
-		"collapseStatus": "collapse",
-		"children": []
-	}]
-}
 
-Application.pages[0].children.push(dmz)
-Application.pages[0].children.push(secureZone)
+
+
+Application.pages[0].children = [...Application.pages[0].children.slice(0,5), dmz]
+console.log(Application.pages)
 
 return Application

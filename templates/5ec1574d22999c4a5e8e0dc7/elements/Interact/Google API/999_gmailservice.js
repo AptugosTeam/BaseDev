@@ -4,104 +4,98 @@ type: file
 unique_id: PNnWiHgb
 icon: ico-field
 */
+import axios from 'axios'
+
 class AptugoGmail {
-  listLabels() {
-    return new Promise((solve, reject) => {
-      gapi.client.gmail.users.labels
-        .list({
-          userId: 'me',
-        })
-        .then(function (response) {
-          solve(response.result)
-        })
-    })
+  constructor() {
+    this.accessToken = null
   }
 
-  listThreads() {
-    return new Promise((solve, reject) => {
-      gapi.client.gmail.users.threads
-        .list({
-          userId: 'me',
-        })
-        .then(function (response) {
-          solve(response.result)
-        })
-    })
+  getUserInfo(credentials) {
+    const userInfo = this.decodeJwt(credentials)
+    return userInfo.payload
   }
 
-  getThread(id) {
-    return new Promise((solve, reject) => {
-      gapi.client.gmail.users.threads
-        .get({
-          userId: 'me',
-          id: id,
-          format: 'full',
-        })
-        .then(function (response) {
-          solve(response.result)
-        })
-    })
+  decodeJwt(token) {
+    var segments = token.split('.')
+    if (segments.length !== 3) throw new Error('Not enough or too many segments')
+
+    var headerSeg = segments[0]
+    var payloadSeg = segments[1]
+    var signatureSeg = segments[2]
+
+    var header = JSON.parse(this.base64urlDecode(headerSeg))
+    var payload = JSON.parse(this.base64urlDecode(payloadSeg))
+
+    return {
+      header: header,
+      payload: payload,
+      signature: signatureSeg,
+    }
   }
 
-  listMessages(q = '', page = null) {
-    return new Promise((solve, reject) => {
-      gapi.client.gmail.users.messages
-        .list({
-          userId: 'me',
-          q: q,
-          pageToken: page,
-        })
-        .then(function (response) {
-          solve(response.result)
-        })
-    })
+  base64urlDecode(str) {
+    return Buffer.from(this.base64urlUnescape(str), 'base64').toString()
+  }
+
+  base64urlUnescape(str) {
+    str += Array(5 - (str.length % 4)).join('=')
+    return str.replace(/\-/g, '+').replace(/_/g, '/')
+  }
+
+  getMyMessages() {
+    return axios
+      .get('https://gmail.googleapis.com/gmail/v1/users/me/messages', {
+        headers: { Authorization: `Bearer ${this.accessToken}` },
+        params: {
+          maxResults: 200,
+          pageToken: this.nextPage || localStorage.getItem('nextPage') || null,
+        },
+      })
+      .then((response) => response.data)
+      .then((response) => {
+        localStorage.setItem('nextPage', response.nextPageToken)
+        this.nextPage = response.nextPageToken
+        return response.messages
+      })
   }
 
   getMessage(id) {
-    return new Promise((solve, reject) => {
-      gapi.client.gmail.users.messages
-        .get({
-          userId: 'me',
-          id: id,
-          format: 'full',
-        })
-        .then(function (response) {
-          solve(response.result)
-        })
-    })
+    return axios
+      .get('https://gmail.googleapis.com/gmail/v1/users/me/messages/' + id, {
+        headers: { Authorization: `Bearer ${this.accessToken}` },
+      })
+      .then((response) => response.data)
+      .then((response) => {
+        return response
+      })
   }
 
-  getAttachment(messageId, attachmentId) {
-    return new Promise((solve, reject) => {
-      gapi.client.gmail.users.messages.attachments
-        .get({
-          userId: 'me',
-          messageId: messageId,
-          id: attachmentId,
-        })
-        .then(function (response) {
-          solve(response.result)
-        })
+  _findPart(parts, messageId) {
+    let found = false
+    let toReturn = ''
+    parts.forEach((part) => {
+      if (part.mimeType && part.mimeType === 'text/html') {
+        found = true
+        toReturn = this._decodeBase64(part.body.data)
+      } else if (part.mimeType && part.mimeType === 'text/plain') {
+        if (!found) toReturn = this._decodeBase64(part.body.data)
+      } else if (part.mimeType && (part.mimeType === 'multipart/alternative' || part.mimeType === 'multipart/related')) {
+        toReturn = this._findPart(part.parts, messageId)
+      } else if (part.mimeType && part.mimeType === 'application/ics') {
+        // this.getAttachment(messageId, part.body.attachmentId).then((response) => {
+        //   console.log('response', this.parseIcal(response.data))
+        // })
+        console.log('invite', part.body.attachmentId)
+      } else {
+        console.log('could not recognize part:', part)
+      }
     })
+    return toReturn
   }
 
-  modifyMessage(id, newBody) {
-    return new Promise((solve, reject) => {
-      gapi.client.gmail.users.messages
-        .modify(
-          {
-            userId: 'me',
-            id: id,
-          },
-          newBody
-        )
-        .then(function (response) {
-          solve(response)
-        })
-    })
-  }
-
-  decodeBase64(data) {
+  _decodeBase64(data) {
+    if (!data) return 'error, no data'
     var b64u = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_' // base64url dictionary
     var b64pad = '='
     function base64_charIndex(c) {
@@ -128,47 +122,13 @@ class AptugoGmail {
     return dst
   }
 
-  parseIcal(input) {
-    let toReturn
-    const iCalArray = this.decodeBase64(input).split('\r\n')
-    iCalArray.forEach((calLine) => {
-      const [calKey, calValue] = calLine.split(':')
-      if (calKey === 'DTSTART') toReturn = { date: new Date(calValue), string: calValue }
-    })
-    return toReturn
-  }
-
-  findPart(parts, messageId) {
-    let found = false
-    let toReturn = ''
-    parts.forEach((part) => {
-      if (part.mimeType && part.mimeType === 'text/html') {
-        found = true
-        toReturn = this.decodeBase64(part.body.data)
-      } else if (part.mimeType && part.mimeType === 'text/plain') {
-        if (!found) toReturn = this.decodeBase64(part.body.data)
-      } else if (part.mimeType && (part.mimeType === 'multipart/alternative' || part.mimeType === 'multipart/related')) {
-        toReturn = this.findPart(part.parts, messageId)
-      } else if (part.mimeType && part.mimeType === 'application/ics') {
-        this.getAttachment(messageId, part.body.attachmentId).then((response) => {
-          console.log('response', this.parseIcal(response.data))
-        })
-        console.log('invite', part.body.attachmentId)
-      } else {
-        console.log('could not recognize part:', part)
-      }
-    })
-    return toReturn
-  }
-
-  analyzeMessage(message) {
-    let found = false
+  _analyzeMessage(message) {
     const output = {
       type: {},
       content: '',
     }
     if (message.payload.parts) {
-      output.content = this.findPart(message.payload.parts, message.id)
+      output.content = this._findPart(message.payload.parts, message.id)
       if (output.content.indexOf('class="gmail_signature"') > -1) {
         output.content = output.content.substring(0, output.content.indexOf('<div dir="ltr" class="gmail_signature"'))
       }
@@ -176,13 +136,33 @@ class AptugoGmail {
     return output
   }
 
-  analyzeEmail(email) {
+  _parseEmail(email) {
+    const regex = /"?([^<]*)"?[<]*([-\w\.\@]*)[>]*/
+    const aFrom = [...email.match(regex)]
+    console.log('aFrom', email, aFrom)
+    if (aFrom[1]) return { Name: aFrom[1].trim(), Email: aFrom[2] || aFrom[1] }
+    else return email
+  }
+
+  _getAllPeopleInvolved(headers) {
+    const participants = new Set()
+    for (let j = 0; j < headers.length; j++) {
+      if (['From', 'To', 'Cc', 'Bcc'].includes(headers[j].name)) {
+        headers[j].value.split(',').forEach((email) => {
+          participants.add(this._parseEmail(email.trim()))
+        })
+      }
+    }
+    return participants
+  }
+
+  analyzeMessage(email) {
     let messageStr
     if (email.payload.parts) {
-      const result = this.analyzeMessage(email)
+      const result = this._analyzeMessage(email)
       messageStr = result.content
     } else {
-      messageStr = this.decodeBase64(email.payload.body.data)
+      messageStr = this._decodeBase64(email.payload.body.data)
     }
 
     let headers = {}
@@ -198,73 +178,11 @@ class AptugoGmail {
       Content: messageStr,
       Email: email,
     }
-
-    const regex = /([A-Za-zÀ-ÖØ-öø-ÿ\s\.\+\@]*)[<]*([-\w\.\@]*)[>]*/
-
-    let emailsTo = headers.To?.split(',') || []
-    emailsTo.forEach((emailTo) => {
-      emailTo = emailTo.replaceAll('\"','')
-      const sTo = [...emailTo.match(regex)]
-      if (sTo[1]) {
-        output.Contacts.push({ Name: sTo[1], Email: sTo[2] || sTo[1] })
-      }
-    })
-
-    const aFrom = [...headers.From.match(regex)]
-    if (aFrom[1]) output.Contacts.push({ Name: aFrom[1], Email: aFrom[2] || aFrom[1] })
+    const peopleInvolved = this._getAllPeopleInvolved(email.payload.headers)
+    output.Contacts.push(...peopleInvolved)
 
     if (headers['Delivered-To']) output.Type = 'Received'
     return output
-  }
-
-  // Internal
-  loadGoogleScript() {
-    const id = 'google-js'
-    const src = 'https://apis.google.com/js/platform.js'
-
-    const firstJs = document.getElementsByTagName('script')[0]
-    if (document.getElementById(id)) {
-      return
-    }
-    const js = document.createElement('script')
-    js.id = id
-    js.src = src
-    js.onload = this.handleClientLoad.bind(this)
-    firstJs.parentNode.insertBefore(js, firstJs)
-  }
-
-  initClient() {
-    const that = this
-    gapi.client
-      .init({
-        clientId: '185605994716-utet8l1cj4inlpe30iso2j6nug3b4m4h.apps.googleusercontent.com',
-        apiKey: 'stWlxJHTVWFmv4AEB4cTDzet',
-        scope: 'https://mail.google.com/ https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.readonly',
-        discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'],
-      })
-      .then(
-        function () {
-          gapi.auth2.getAuthInstance().isSignedIn.listen(that.updateSigninStatus)
-          that.updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get())
-        },
-        function (error) {
-          console.error(error)
-        }
-      )
-  }
-
-  handleClientLoad() {
-    gapi.load('client:auth2', this.initClient.bind(this))
-  }
-
-  updateSigninStatus(isSignedIn) {
-    this.isSignedIn = isSignedIn
-  }
-
-  constructor() {
-    this.isSignedIn = false
-    this.self = this
-    this.loadGoogleScript()
   }
 }
 

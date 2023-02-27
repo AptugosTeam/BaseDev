@@ -191,5 +191,9 @@ const newPage = {
 	"filename": `() => aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").name + '.tsx'`
 }
 
-Application.pages[0].children.push(newPage)
+if (Parameters.parent) {
+	Parameters.parent.children.push(newPage)
+} else {
+	Application.pages[0].children.push(newPage)
+}
 return Application

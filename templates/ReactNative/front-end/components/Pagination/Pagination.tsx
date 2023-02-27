@@ -6,7 +6,7 @@ icon: ico-field
 children: []
 */
 import React, { FunctionComponent, ReactChild } from 'react'
-import Button from '@mui/material/Button'
+import { Button } from 'react-native-paper'
 
 import classes from './pagination.module.scss'
 
@@ -22,7 +22,7 @@ const Pagination: FunctionComponent<paginationProps> = (props) => {
     <div className={classes.prevnext}>
       {props.currentPage > 1 && (
         <Button
-          onClickCapture={(params) => {
+          onPress={() => {
             props.setPage(props.currentPage - 1)
           }}
         >Previous
@@ -30,7 +30,7 @@ const Pagination: FunctionComponent<paginationProps> = (props) => {
       )}
       {props.totalItems > props.currentPage * props.itemsPerPage && (
         <Button
-          onClickCapture={(params) => {
+          onPress={() => {
             props.setPage(props.currentPage + 1)
           }}
         >Next

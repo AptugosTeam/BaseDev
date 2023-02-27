@@ -19,13 +19,7 @@ options:
     type: text
 settings:
   - name: Packages
-    value: '"@react-oauth/google": "^0.2.8",'
-  - name: SiteWideBeforePageRenderAddenum
-    value: 'import { GoogleOAuthProvider } from "@react-oauth/google"'
-  - name: SiteWideWrapStart
-    value: '<GoogleOAuthProvider clientId="{{ element.values.clientId }}">'
-  - name: SiteWideWrapEnd
-    value: '</GoogleOAuthProvider>'
+    value: '"@react-oauth/google": "0.7.1",'
 extraFiles:
   - source: 'elements/Interact/Google API/999_gmailservice.js'
     destination: 'front-end/services/gmail.service.js'

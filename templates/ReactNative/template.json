@@ -1,5 +1,6 @@
 {
   "_id": "ReactNative",
   "name": "Front-end: React Native / Back-end: NodeJS",
-  "renderingFolder": "/front-end/Pages"
+  "renderingFolder": "/front-end/Pages",
+  "assetsFolder": "/front-end/assets"
 }
