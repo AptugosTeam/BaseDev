@@ -6,7 +6,7 @@ icon: ico-field
 sourceType: javascript
 settings:
   - name: Packages
-    value: '"react-quill": "^1.3.5",'
+    value: '"react-quill": "2.0.0",'
 children: []
 */
 
