@@ -8,7 +8,7 @@
   It allows to create a countdown timer from the current date and time to the selected date.
 
 - **Add On Connection:**
-  It allows to create a countdown timer from the current date and time to the selected date.
+  Preguntar a Gaston o terminar la mc
 
 - **999_sockets [React-Native]:**
   Preguntar a Gaston o terminar de chusmear la mc
@@ -35,10 +35,10 @@
   Preguntar a Gaston o terminar la mc
 
 - **Check If Logged In:**
-  Preguntar a Gaston o terminar la mc
+  Checks if an user is logged in on the app.
 
 - **Get Current User:**
-  Preguntar a Gaston o terminar la mc
+  Checks if an user data currently exist on the app.
 
 - **Logout:**
   Preguntar a Gaston o terminar la mc
