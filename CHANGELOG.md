@@ -1,6 +1,6 @@
 # ChangeLog
 
-## [TEMPLATES 1.6.0] -
+## [TEMPLATES 1.5.5] -
 
 ### Added
 
@@ -41,13 +41,13 @@
   Checks if an user data currently exist on the app.
 
 - **Logout:**
-  Preguntar a Gaston o terminar la mc
+  Handles logout functionality.
 
 - **Update State Variable [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+  Applies the setState function on a state variable and updates its value.
 
 - **Loop [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+  Loops over an array or list and builds the elements that you need as many times as the length of the array received.
 
 - **Closure Fix:**
   Preguntar a Gaston o terminar la mc
@@ -55,8 +55,8 @@
 - **Stripe Submit [React-Native]:**
   Preguntar a Gaston o terminar la mc
 
-- **Linear Gradient [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+- **Linear Gradient [React-Native] [Experimental]:**
+  Sets a gradient background.
 
 - **Push Token:**
   Preguntar a Gas o terminar la mc
@@ -65,10 +65,10 @@
   Preguntar a Gas o terminar la mc
 
 - **Login:**
-  Preguntar a Gas o terminar la mc
+  Handles login functionality.
 
 - **Register:**
-  Preguntar a Gas o terminar la mc
+  Handles register functionality.
 
 - **Server Emit:**
   Preguntar a Gas o terminar la mc
@@ -77,7 +77,7 @@
   Preguntar a Gaston o terminar la mc
 
 - **Prepare Data for Saving [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+  It allows to set a property of the data variable to be stored later.
 
 - **Data Table [React-Native]:**
   Preguntar a Gaston o terminar la mc
@@ -120,11 +120,11 @@
 
   - On the url field it is possible to select and use intern variables.
   - It is possible to add extra options on the request.
+  - The new globe icon allows to use the settings.url when active.
 
 - **Icon Button:**
 
   - Now it is possible to use icons from FontAwesome.
-  - Also, Gaston lo hizo pelotas xD
 
 - **Data Table:**
 
