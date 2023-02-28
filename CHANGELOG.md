@@ -8,22 +8,22 @@
   It allows to create a countdown timer from the current date and time to the selected date.
 
 - **Add On Connection:**
-  Preguntar a Gaston o terminar la mc
-
-- **999_sockets [React-Native]:**
-  Preguntar a Gaston o terminar de chusmear la mc
+  Creates a socket connection.
 
 - **Add Listener [React-Native]:**
   Preguntar a Gaston o terminar la mc
 
 - **Emit [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+  Send a message to the server.
+
+- **Server Emit:**
+  Send a message to the client.
 
 - **Listen [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+  Listen to an event received from a socket and performs an action.
 
 - **Socket Capabilities [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+  Enables connection capabilities between sockets both in front and back-end.
 
 - **Widget Debug Sockets [React-Native]:**
   Preguntar a Gaston o terminar la mc
