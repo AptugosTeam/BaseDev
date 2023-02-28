@@ -11,7 +11,7 @@
   Creates a socket connection.
 
 - **Add Listener [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+  Listen to an event received from a server socket and captures the parameters received.
 
 - **Emit [React-Native]:**
   Send a message to the server.
@@ -26,13 +26,7 @@
   Enables connection capabilities between sockets both in front and back-end.
 
 - **Widget Debug Sockets [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Stripe [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Stripe Order Details [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+  Display socket messages on the console.
 
 - **Check If Logged In:**
   Checks if an user is logged in on the app.
@@ -50,19 +44,16 @@
   Loops over an array or list and builds the elements that you need as many times as the length of the array received.
 
 - **Closure Fix:**
-  Preguntar a Gaston o terminar la mc
-
-- **Stripe Submit [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+  Unifies socket channels to preserve scope.
 
 - **Linear Gradient [React-Native] [Experimental]:**
   Sets a gradient background.
 
 - **Push Token:**
-  Preguntar a Gas o terminar la mc
+  Sets a token used to send notifications
 
 - **Send Push Notification:**
-  Preguntar a Gas o terminar la mc
+  Send push notifications to mobile devices.
 
 - **Login:**
   Handles login functionality.
@@ -70,20 +61,11 @@
 - **Register:**
   Handles register functionality.
 
-- **Server Emit:**
-  Preguntar a Gas o terminar la mc
-
 - **Delete Record [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+  Delete a record from database.
 
 - **Prepare Data for Saving [React-Native]:**
   It allows to set a property of the data variable to be stored later.
-
-- **Data Table [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Data Field [React-Native]:**
-  Preguntar a Gaston o terminar la mc
 
 ### Changed
 
