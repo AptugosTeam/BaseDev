@@ -1,0 +1,20 @@
+/*
+path: UUID.json
+keyPath: Fields/UUID.json
+unique_id: pJvC9Jc7
+*/
+{
+  "label": "UUID",
+  "value": "UUID",
+  "dataType": "String",
+  "initialValue": "",
+  "options": {
+    "validations": [
+      {
+        "display": "Require a unique value",
+        "value": "unique",
+        "type": "checkbox"
+      }
+    ]
+  }
+}
