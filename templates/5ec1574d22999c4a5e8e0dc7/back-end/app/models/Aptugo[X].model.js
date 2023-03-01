@@ -12,19 +12,35 @@ children: []
 {% set schema = '' %}
 {% set extraImports = '' %}
 {% set extraPlugins = '' %}
-  
-const mongoose = require('mongoose')
-const mongoosePaginate = require('mongoose-paginate-v2')
-{{ extraImports }}
+{% set modelDefinition %}
 const {{ friendlyTableName }}Schema = mongoose.Schema({
   {% for field in table.fields %}
-    {% set fieldInfo = field | fieldData %}
-    {% include includeTemplate(['Fields' ~ field.data_type ~ 'model.tpl', 'Fieldsmodel.tpl']) with { fieldInfo: fieldInfo} %}
+    {% set fieldInfo = field | fieldData %}
+    {% set output = {
+      rawString: '',
+      fieldInfo: fieldInfo,
+      extraImports: extraImports,
+      extraPlugins: extraPlugins
+    }%}
+    {% set data %}
+      {% include includeTemplate(['Fields' ~ field.data_type ~ 'model.tpl', 'Fieldsmodel.tpl']) %}
+    {% endset %}
+    {% set output = (data|json_decode) ?? data %}
+    {% if output.extraImports %}{% set extraImports = extraImports ~ output.extraImports %}{% endif %}
+    {% if output.extraPlugins %}{% set extraPlugins = extraPlugins ~ output.extraPlugins %}{% endif %}
+    {{ output.rawString ?? data }}
   {% endfor %}
 }, {
     timestamps: true,
     toJSON: { virtuals: true }
 })
+{% endset %}
+
+  
+const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
+{{ extraImports }}
+{{ modelDefinition }}
 
 {% for relatedField in builder.plainFields %}
   {% if relatedField.reference %}
