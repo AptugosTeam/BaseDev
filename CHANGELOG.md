@@ -1,6 +1,6 @@
 # ChangeLog
 
-## [TEMPLATES 1.6.0] -
+## [TEMPLATES 1.5.5] -
 
 ### Added
 
@@ -8,82 +8,64 @@
   It allows to create a countdown timer from the current date and time to the selected date.
 
 - **Add On Connection:**
-  It allows to create a countdown timer from the current date and time to the selected date.
-
-- **999_sockets [React-Native]:**
-  Preguntar a Gaston o terminar de chusmear la mc
+  Creates a socket connection.
 
 - **Add Listener [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+  Listen to an event received from a server socket and captures the parameters received.
 
 - **Emit [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Listen [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Socket Capabilities [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Widget Debug Sockets [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Stripe [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Stripe Order Details [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Check If Logged In:**
-  Preguntar a Gaston o terminar la mc
-
-- **Get Current User:**
-  Preguntar a Gaston o terminar la mc
-
-- **Logout:**
-  Preguntar a Gaston o terminar la mc
-
-- **Update State Variable [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Loop [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Closure Fix:**
-  Preguntar a Gaston o terminar la mc
-
-- **Stripe Submit [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Linear Gradient [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Push Token:**
-  Preguntar a Gas o terminar la mc
-
-- **Send Push Notification:**
-  Preguntar a Gas o terminar la mc
-
-- **Login:**
-  Preguntar a Gas o terminar la mc
-
-- **Register:**
-  Preguntar a Gas o terminar la mc
+  Send a message to the server.
 
 - **Server Emit:**
-  Preguntar a Gas o terminar la mc
+  Send a message to the client.
+
+- **Listen [React-Native]:**
+  Listen to an event received from a socket and performs an action.
+
+- **Socket Capabilities [React-Native]:**
+  Enables connection capabilities between sockets both in front and back-end.
+
+- **Widget Debug Sockets [React-Native]:**
+  Display socket messages on the console.
+
+- **Check If Logged In:**
+  Checks if an user is logged in on the app.
+
+- **Get Current User:**
+  Checks if an user data currently exist on the app.
+
+- **Logout:**
+  Handles logout functionality.
+
+- **Update State Variable [React-Native]:**
+  Applies the setState function on a state variable and updates its value.
+
+- **Loop [React-Native]:**
+  Loops over an array or list and builds the elements that you need as many times as the length of the array received.
+
+- **Closure Fix:**
+  Unifies socket channels to preserve scope.
+
+- **Linear Gradient [React-Native] [Experimental]:**
+  Sets a gradient background.
+
+- **Push Token:**
+  Sets a token used to send notifications
+
+- **Send Push Notification:**
+  Send push notifications to mobile devices.
+
+- **Login:**
+  Handles login functionality.
+
+- **Register:**
+  Handles register functionality.
 
 - **Delete Record [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+  Delete a record from database.
 
 - **Prepare Data for Saving [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Data Table [React-Native]:**
-  Preguntar a Gaston o terminar la mc
-
-- **Data Field [React-Native]:**
-  Preguntar a Gaston o terminar la mc
+  It allows to set a property of the data variable to be stored later.
 
 ### Changed
 
@@ -120,11 +102,11 @@
 
   - On the url field it is possible to select and use intern variables.
   - It is possible to add extra options on the request.
+  - The new globe icon allows to use the settings.url when active.
 
 - **Icon Button:**
 
   - Now it is possible to use icons from FontAwesome.
-  - Also, Gaston lo hizo pelotas xD
 
 - **Data Table:**
 

@@ -2,7 +2,7 @@
 path: html.tpl
 type: file
 unique_id: 3ZM4gz8X
-icon: ico-field
+icon: f:html.svg
 sourceType: javascript
 options:
   - name: html
@@ -11,11 +11,11 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-html-parser": "2.0.2",'
+    value: '"html-react-parser": "3.0.9",'
 children: []
 */
 {% set bpr %}
-import ReactHtmlParser from 'react-html-parser'
+import parser from 'html-react-parser'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{ ReactHtmlParser ({{ element.values.html | raw }}{{ content | raw }}) }
+{ parser ({{ element.values.html | raw }}{{ content | raw }}) }
