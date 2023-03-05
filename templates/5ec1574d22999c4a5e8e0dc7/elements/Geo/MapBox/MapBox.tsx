@@ -74,10 +74,23 @@ const MapBox: FunctionComponent<any> = (props) => {
       zoom: props.zoom || 0
     }
 
-    console.log('mapOptions', mapOptions)
-
     map.current = new mapboxgl.Map(mapOptions)
-    map.current.addControl(new mapboxgl.NavigationControl(), "top-right");
+    if (props.navigationControl) {
+      map.current.addControl(new mapboxgl.NavigationControl(), props.navigationControl)
+    }
+    if (props.fullScreenControl) {
+      map.current.addControl(new mapboxgl.FullscreenControl(), props.fullScreenControl)
+    }
+
+    if (props.geoLocateControl) {
+      map.current.addControl(new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true,
+        showUserHeading: true
+      }))
+    }
   },[])
 
   useEffect(() => {

@@ -9,7 +9,17 @@ options:
   - name: className
     display: ClassName
     type: styles
-    options: ''
+  - name: navigationControl
+    display: Show Navigation Control
+    type: dropdown
+    options: return [['no','no'],['top-right','Top Right'],['bottom-right','Bottom Right'],['bottom-left','Bottom Left'],['top-left','Top Left']]
+  - name: fullScreenControl
+    display: Show Full Screen Control
+    type: dropdown
+    options: return [['no','no'],['top-right','Top Right'],['bottom-right','Bottom Right'],['bottom-left','Bottom Left'],['top-left','Top Left']]
+  - name: geoLocateControl
+    display: Show Geo Locate Control
+    type: checkbox
   - name: antialias
     display: antialias
     type: checkbox
@@ -248,6 +258,9 @@ import MapBox from '../components/MapBox'
 <MapBox
   accessToken='{{ element.values.accessToken }}'
   className={ {{ element.values.className}} }
+  {% if element.values.navigationControl %}navigationControl={ {{ element.values.navigationControl|textOrVariable }} }{% endif %}
+  {% if element.values.fullScreenControl %}fullScreenControl={ {{ element.values.fullScreenControl|textOrVariable }} }{% endif %}
+  {% if element.values.geoLocateControl %}geoLocateControl{% endif %}
   {% if element.values.antialias %}antialias={ {{ element.values.antialias }} }{% endif %}
   {% if element.values.attributionControl %}attributionControl={ {{ element.values.attributionControl }} }{% endif %}
   {% if element.values.bearing %}bearing={{ element.values.bearing | textOrVariable }}{% endif %}
