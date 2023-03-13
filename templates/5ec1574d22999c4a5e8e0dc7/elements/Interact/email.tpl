@@ -54,7 +54,7 @@ options:
     type: text
     options: ''
   - name: parameters
-    display: Email Parameters
+    display: Email Content Parameters
     type: text
     options: ''
   - name: from
