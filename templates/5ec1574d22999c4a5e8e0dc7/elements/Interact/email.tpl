@@ -57,7 +57,6 @@ options:
     display: Email Parameters
     type: text
     options: ''
-    required: true
   - name: from
     display: From (name <emailaddress>)
     type: text
