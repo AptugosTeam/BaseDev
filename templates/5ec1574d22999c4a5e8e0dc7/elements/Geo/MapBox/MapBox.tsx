@@ -5,8 +5,8 @@ completePath: >-
 keyPath: elements/Geo/MapBox/MapBox.tsx
 unique_id: sLXEEizE
 */
-import React, { FunctionComponent, useRef, useState, useEffect } from 'react'
 import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
+import React, { FunctionComponent, useEffect, useRef, useState, cloneElement, Children } from 'react'
 import './mapbox.css'
 
 const MapBox: FunctionComponent<any> = (props) => {
@@ -17,10 +17,25 @@ const MapBox: FunctionComponent<any> = (props) => {
   const [lat, setLat] = useState(42.35)
   const [zoom, setZoom] = useState(9)
 
+  const addPropToChildren = (children:any) => {
+    return Children.map(children, child => {
+      if (!React.isValidElement(child)) return child
+      
+      const childProps:any = { map: map.current }
+      if ((child.props as any).children) {
+        childProps.children = addPropToChildren((child.props as any).children)
+      }
+      return cloneElement(child, childProps);
+    })
+  }
+
+  const childrenWithProps = addPropToChildren(props.children)
+
+
   useEffect(() => {
     if (map.current) return
 
-    const mapOptions:any = {
+    const mapOptions: any = {
       antialias: props.antialias || false,
       attributionControl: props.attributionControl || true,
       bearing: props.bearing,
@@ -71,7 +86,7 @@ const MapBox: FunctionComponent<any> = (props) => {
       transformRequest: props.transformRequest || null,
       useWebGL2: props.useWebGL2 || false,
       worldview: props.worldview || null,
-      zoom: props.zoom || 0
+      zoom: props.zoom || 0,
     }
 
     map.current = new mapboxgl.Map(mapOptions)
@@ -83,28 +98,41 @@ const MapBox: FunctionComponent<any> = (props) => {
     }
 
     if (props.geoLocateControl) {
-      map.current.addControl(new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true
-        },
-        trackUserLocation: true,
-        showUserHeading: true
-      }))
+      map.current.addControl(
+        new mapboxgl.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: true,
+          },
+          trackUserLocation: true,
+          showUserHeading: true,
+        })
+      )
     }
-  },[])
+
+    if (props.markers) {
+      props.markers.map(marker => {
+        const mapMarker = new mapboxgl.Marker({
+          color: "#FFFFFF",
+          draggable: true
+          }).setLngLat([30.5, 50.5])
+        mapMarker.addTo(map.current)
+      })
+    }
+  }, [])
 
   useEffect(() => {
-    if (!map.current) return; // wait for map to initialize
+    if (!map.current) return // wait for map to initialize
     map.current.on('move', () => {
-      setLng(map.current.getCenter().lng.toFixed(4));
-      setLat(map.current.getCenter().lat.toFixed(4));
-      setZoom(map.current.getZoom().toFixed(2));
+      setLng(map.current.getCenter().lng.toFixed(4))
+      setLat(map.current.getCenter().lat.toFixed(4))
+      setZoom(map.current.getZoom().toFixed(2))
     })
   })
 
   return (
     <div>
       <div ref={mapContainer} className={props.className} />
+      {childrenWithProps}
     </div>
   )
 }
