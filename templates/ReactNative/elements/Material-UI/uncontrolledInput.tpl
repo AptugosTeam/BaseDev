@@ -57,15 +57,12 @@ import { TextInput } from 'react-native-paper'
     {% if element.values.theme %}theme={ {{ element.values.theme }} }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
     {% if element.values.type == 'number' %}keyboardType='numeric'{% endif %}
+    {% if element.values.type == 'password' %}secureTextEntry={true}{% endif %}
     {% if element.values.type == 'textarea' %}
       multiline
-      type="text"
-    {% endif %}
-    {% if element.values.type != 'textarea' %}
-      type="{{ element.values.type|default('text') }}"
     {% endif %}
     outlineColor='transparent'
     activeOutlineColor='#3A528A'
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
-    {% if element.values.onChange %}onChangeText={ {{ element.values.onChange }} }{% endif %}
+    {% if element.values.onChange %}onChangeText={ {{ element.values.onChange | replace({ '.target.value': '' }) | functionOrCall }} }{% endif %}
 />

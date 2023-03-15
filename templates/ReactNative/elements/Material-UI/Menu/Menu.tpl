@@ -17,8 +17,7 @@ helpText: Menus display a list of choices on temporary surfaces.
 */
 
 {% set bpr %}
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
+import { Menu } from 'react-native-paper'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% if not element.values.anchorElement %}

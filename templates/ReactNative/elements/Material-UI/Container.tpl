@@ -23,8 +23,33 @@ options:
     display: className
     type: text
     options: ''
+  - name: avoidKeyboard
+    display: Avoid Keyboard
+    type: checkbox
 sourceType: javascript
 children: []
 */
-{/* Container */}
+{% set bpr %}
+import { element } from 'prop-types'
+import { View } from 'react-native'
+{% endset %}
+{{ save_delayed('bpr',bpr)}}
+{% set tag = 'View' %}
+{% if element.values.avoidKeyboard %}
+{% set tag = 'KeyboardAvoidingView' %}
+{% set bpr %}
+import { KeyboardAvoidingView } from 'react-native'
+{% endset %}
+{{ save_delayed('bpr',bpr)}}
+{% endif %}
+<{{ tag }} {{ extra }}
+  {% if element.values.avoidKeyboard %}behavior={Platform.OS === 'ios' ? 'padding' : 'height'}{% endif %}
+  {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
+  {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
+  {% if element.values.className %}style={ {{element.values.className }} }{% endif %}
+  {% if element.values.onclick %}onTouchStart={(e) => {{element.values.onclick}} }{% endif %}
+  {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
+  {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
+>
 {{ content | raw }}
+</{{ tag }}>

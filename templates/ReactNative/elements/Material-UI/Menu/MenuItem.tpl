@@ -10,6 +10,4 @@ options:
     type: text
     options: ''
 */
-<MenuItem
-    {% if element.values.onclick %}onClick={ {{ element.values.onclick }} }{% endif %}
->{{ content | raw }}</MenuItem>
+<Menu.Item {% if element.values.onClick %}onPress={ {{ element.values.onclick }} }{% endif %} title="{{ content | raw }}" />

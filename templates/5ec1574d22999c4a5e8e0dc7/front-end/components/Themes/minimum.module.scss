@@ -96,14 +96,12 @@ body {
   }
 }
 
-.loginBody {
-
+.registerBody, .loginBody, .retrieveBody {
   .loginPage {
     height: 100%;
 
     & :global(.MuiGrid-container) {
       height: 100%;
-
     }
 
     & .right {
@@ -121,7 +119,19 @@ body {
       }
     }
 
-    & .loginBox {
+    & .containerLogin {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 40%;
+      margin: 1rem auto;
+
+      & .right {
+        margin-top: unset;
+      }
+    }
+
+    & .loginBox, & .registerBox {
       width: 40%;
       margin: 0rem auto;
       color: rgb(33, 43, 54);
@@ -131,12 +141,16 @@ body {
       align-items: center;
       flex-direction: row;
       flex-wrap: wrap;
+      padding: 2rem;
+      border: 1px solid #b9b9b9;
+      border-radius: 1rem;
+      box-shadow: 0 0 11px 2px rgba(145, 158, 171, 0.24);
 
       & a {
         color: #2196f3;
       }
 
-      & .headingLogin {
+      & .headingLogin, &.headingRegister {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -204,135 +218,13 @@ body {
         margin: 1rem;
         padding: 0.5rem 3rem;
         background-color: #2196f3;
-        color: #FFFFFF;
+        color: #ffffff;
       }
     }
   }
 }
-
-
-.registerBody {
-
-  .loginPage {
-    height: 100%;
-
-
-    & :global(.MuiGrid-container) {
-      height: 100%;
-
-      // & .paperLeft {
-      //   height: 100%;
-      //   border-radius: 1rem;
-      //   align-items: center;
-      //   display: flex;
-      //   padding: 1rem;
-      //   box-sizing: border-box;
-      //   font-size: 2rem;
-      //   color: rgba(0, 0, 0, 0.87);
-      //   border: 1px solid #0000001f;
-      //   box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.05);
-      // }
-    }
-
-    & .right {
-      width: 70%;
-      display: flex;
-      flex-direction: column;
-      align-content: flex-end;
-      justify-content: center;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-
-      & a {
-        color: #2196f3;
-      }
-    }
-
-    & .registerBox {
-      width: 40%;
-      margin: 0rem auto;
-      color: rgb(33, 43, 54);
-      display: flex;
-      align-content: center;
-      justify-content: center;
-      align-items: center;
-      flex-direction: row;
-      flex-wrap: wrap;
-
-      & .headingRegister {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      & :global(.MuiTypography-h3) {
-        margin: 0px 0px 8px;
-        font-weight: 400;
-        font-size: 3rem;
-        line-height: 1.5;
-        text-align: center;
-      }
-
-      & :global(.MuiTypography-body1) {
-        color: rgb(99, 115, 129);
-      }
-
-      & :global(.MuiSvgIcon-root) {
-        color: #2196f3;
-      }
-
-      & .separatorLine {
-        text-align: center;
-        padding: 1rem;
-        margin: 0 auto;
-        position: relative;
-        z-index: 1;
-
-        &::before {
-          position: absolute;
-          content: ' ';
-          height: 50%;
-          width: 45%;
-          left: 0;
-          top: 0;
-          z-index: -1;
-          border-bottom: thin solid rgba(145, 158, 171, 0.24);
-        }
-
-        &::after {
-          position: absolute;
-          content: ' ';
-          height: 50%;
-          width: 45%;
-          left: auto;
-          right: 0;
-          top: 0;
-          z-index: -1;
-          border-bottom: thin solid rgba(145, 158, 171, 0.24);
-        }
-      }
-
-      & .flexLine {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 1rem 0;
-      }
-
-      & button {
-        margin: 1rem;
-        padding: 0.5rem 3rem;
-        background-color: #2196f3;
-        color: #FFFFFF;
-      }
-    }
-  }
-}
-
 
 .retrieveBody {
-
   .loginPage {
     height: 100%;
 
@@ -377,12 +269,11 @@ body {
         margin: 1rem;
         padding: 0.5rem 3rem;
         background-color: #2196f3;
-        color: #FFFFFF;
+        color: #ffffff;
       }
     }
   }
 }
-
 
 .menuProfileDetails {
   border-bottom: 1px solid rgba(224, 224, 224, 1);
@@ -391,18 +282,16 @@ body {
   color: rgba(128, 128, 128, 1);
 }
 
-
-
 .fileuploadprofile {
   margin: 0 auto;
 
-  &>div:first-child {
+  & > div:first-child {
     max-height: unset;
     padding: 0.5rem;
     border: 1px dotted rgba(0, 0, 0, 0.23);
     border-radius: 50%;
 
-    &>img {
+    & > img {
       max-height: unset;
       width: 8rem;
       height: 8rem;
@@ -415,7 +304,6 @@ body {
   }
 
   & :global(.MuiInputBase-root) {
-
     &::before,
     &::after {
       content: none;
@@ -472,7 +360,7 @@ body {
 
 $darkColor: #0d1d2a;
 $clearColor: #e1ad62;
-$white: #FFFFFF;
+$white: #ffffff;
 
 .heroImage {
   width: 100%;
@@ -540,4 +428,8 @@ $white: #FFFFFF;
     color: gray;
     font-weight: 400;
   }
+}
+
+.mapBox {
+  height: 50vh;
 }

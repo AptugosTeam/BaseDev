@@ -6,7 +6,6 @@ icon: ico-field
 sourceType: javascript
 children: []
 */
-
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import { TextInput } from 'react-native-paper'
@@ -38,8 +37,3 @@ import { TextInput } from 'react-native-paper'
         },
     } }
 />
-
-                
-                
-                
-                

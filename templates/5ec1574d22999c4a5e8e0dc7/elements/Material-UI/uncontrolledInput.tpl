@@ -25,6 +25,10 @@ options:
     display: Variant
     type: dropdown
     options: standard;filled;outlined
+  - name: size
+    display: Size
+    type: dropdown
+    options: normal;small
   - name: margin
     display: Margin
     type: dropdown
@@ -67,6 +71,7 @@ import TextField from '@mui/material/TextField'
     {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
     {% if element.values.helperText %}helperText={ {{ element.values.helperText }} }{% endif %}
     {% if element.values.margin %}margin="{{ element.values.margin }}"{% endif %}
+    {% if element.values.size %}size="{{ element.values.size }}"{% endif %}
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}

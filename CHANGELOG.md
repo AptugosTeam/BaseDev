@@ -1,5 +1,124 @@
 # ChangeLog
 
+## [TEMPLATES 1.5.6] -
+
+### Added
+
+- **Countdown:**
+  It allows to create a countdown timer from the current date and time to the selected date.
+
+- **Add On Connection:**
+  Creates a socket connection.
+
+- **Add Listener [React-Native]:**
+  Listen to an event received from a server socket and captures the parameters received.
+
+- **Emit [React-Native]:**
+  Send a message to the server.
+
+- **Server Emit:**
+  Send a message to the client.
+
+- **Listen [React-Native]:**
+  Listen to an event received from a socket and performs an action.
+
+- **Socket Capabilities [React-Native]:**
+  Enables connection capabilities between sockets both in front and back-end.
+
+- **Widget Debug Sockets [React-Native]:**
+  Display socket messages on the console.
+
+- **Check If Logged In:**
+  Checks if an user is logged in on the app.
+
+- **Get Current User:**
+  Checks if an user data currently exist on the app.
+
+- **Logout:**
+  Handles logout functionality.
+
+- **Update State Variable [React-Native]:**
+  Applies the setState function on a state variable and updates its value.
+
+- **Loop [React-Native]:**
+  Loops over an array or list and builds the elements that you need as many times as the length of the array received.
+
+- **Closure Fix:**
+  Unifies socket channels to preserve scope.
+
+- **Linear Gradient [React-Native] [Experimental]:**
+  Sets a gradient background.
+
+- **Push Token:**
+  Sets a token used to send notifications
+
+- **Send Push Notification:**
+  Send push notifications to mobile devices.
+
+- **Login:**
+  Handles login functionality.
+
+- **Register:**
+  Handles register functionality.
+
+- **Delete Record [React-Native]:**
+  Delete a record from database.
+
+- **Prepare Data for Saving [React-Native]:**
+  It allows to set a property of the data variable to be stored later.
+
+### Changed
+
+- **Paper:**
+
+  - Default value to variant property.
+  - Default value to elevation property.
+
+- **Html:**
+
+  - Different library to handle html strings.
+
+- **Rating:**
+
+  - Display of the value property changed.
+  - Advanced Properties separator added.
+  - New onHover property.
+  - Now it is possible to set a className.
+  - Property getLabelText removed.
+
+- **Simple Link [React-Native]:**
+
+  - Now it is possible to add parameters to the destination link.
+
+- **Condition [React-Native]:**
+
+  - Now it is possible to set if the condition is part of code.
+
+- **Save to Database [React-Native]:**
+
+  - Now it is possible to define which variable to save.
+
+- **Perform Api Call [React-Native]:**
+
+  - On the url field it is possible to select and use intern variables.
+  - It is possible to add extra options on the request.
+  - The new globe icon allows to use the settings.url when active.
+
+- **Icon Button:**
+
+  - Now it is possible to use icons from FontAwesome.
+
+- **Data Table:**
+
+  - Reworked with a new library.
+
+- **Uncontrolled Input:**
+
+  - Now it is possible to define a size.
+
+- **Google Login:**
+  - Reworked with a new library.
+
 ## [TEMPLATES 1.5.3] - 2023-01-30
 
 ###  An improved version of 1.5.2

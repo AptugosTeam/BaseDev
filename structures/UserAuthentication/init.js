@@ -1,4 +1,6 @@
 Parameters.table_unique_id = aptugo.generateID()
+Parameters.currentUserVar_unique_id = aptugo.generateID()
+Parameters.mainPageID = Application.pages[0].children[5]?.unique_id
 const friendlyName = aptugo.friendly("Users").toLowerCase()
 const userTable = {
 	"unique_id": Parameters.table_unique_id,
@@ -11,19 +13,24 @@ const userTable = {
 		"data_type": "String",
 		"displaylabel": "First Name",
 		"prompt": "First Name",
+		"validators.required": true,
 	}, {
 		"column_name": "LastName",
 		"data_type": "String",
 		"displaylabel": "Last Name",
 		"prompt": "Last Name",
+		"validators.required": true,
 	}, {
 		"column_name": "Email",
 		"data_type": "String",
 		"displaylabel": "Email",
 		"prompt": "Email",
+		"validators.unique": true,
+		"validators.validEmail": true
 	}, {
 		"column_name": "Password",
 		"data_type": "Password",
+		"validators.required": true
 	}, {
 		"column_name": "ProfilePic",
 		"data_type": "Image",

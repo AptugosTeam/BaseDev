@@ -21,7 +21,7 @@ options:
       return aptugo.assetUtils.grabCssSelectors(
       aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
   - name: className
-    display: ClassName
+    display: className
     type: styles
   - name: alt
     display: Alt Text
@@ -71,13 +71,14 @@ import { Image } from 'react-native'
     {% endfor %}
   {% endif %}
 <Image
-  
-  source={require('./..{{ path }}')}
-  {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
+  {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
+  source={require('../assets{{ path }}')}
+  {% if element.values.style %}style={ { {{element.values.style}} } }{% endif %}
 />
 {% else %}
 <Image
+  {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
   source={ { uri: `{{ path }}` } }
-  {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
+  {% if element.values.style %}style={ { {{element.values.style}} } }{% endif %}
 />
 {% endif %}
