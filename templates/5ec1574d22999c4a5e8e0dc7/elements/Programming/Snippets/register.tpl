@@ -10,7 +10,7 @@ options:
     type: text
     required: true
   - name: OnSuccess
-    display: On Successful login
+    display: On Successful Register
     type: dropdown
     options: return aptugo.pageUtils.getAllPages()
     required: true

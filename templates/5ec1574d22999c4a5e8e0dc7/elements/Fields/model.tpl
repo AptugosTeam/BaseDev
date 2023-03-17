@@ -20,7 +20,5 @@ icon: ico-field
 {% set rawString = friendlyColumnName ~ ': ' ~  datatype  ~ ',' %}
 {% set output = output.merge({
   rawString: rawString,
-  extraPlugins: extraPlugins,
-  extraImports: extraImports
 }) %}
 {{output|json_encode()}}
