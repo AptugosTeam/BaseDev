@@ -71,6 +71,7 @@ children: []
 import { Legend, Tooltip, Line, CartesianGrid, XAxis, YAxis, ComposedChart, Area, Bar, ResponsiveContainer } from 'recharts'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
+{% set ph %}
 {% set name = element.values.indexVariable %}
 {% if element.values.Index != 'useVar' %}
   {% set indexBy = element.values.Index|fieldData %}
@@ -79,6 +80,8 @@ import { Legend, Tooltip, Line, CartesianGrid, XAxis, YAxis, ComposedChart, Area
   {% set valuesName = values.column_name %}
   {% include includeTemplate('loadFromRedux.tpl') with { 'data': indexBy.table.unique_id } %}
 {% endif %}
+{% endset %}
+{{ save_delayed('ph',ph)}}
 {% if element.values.responsive %}<ResponsiveContainer>{% endif %}
 <ComposedChart
   {% if not element.values.responsive %}

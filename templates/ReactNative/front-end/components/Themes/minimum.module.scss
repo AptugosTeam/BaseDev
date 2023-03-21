@@ -1,7 +1,9 @@
 /*
 path: minimum.module.scss
-completePath: front-end/components/Themes/minimum.module.scss
-unique_id: 5BZJoVhT
+completePath: >-
+  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/ReactNative/front-end/components/Themes/minimum.module.scss
+keyPath: front-end/components/Themes/minimum.module.scss
+unique_id: T57dKzJT
 */
 body {
   background-color: white !important;
@@ -31,74 +33,76 @@ body {
 
   .right {
     float: right;
+  }  
+}
+
+.mainarea {
+  flex-grow: 2;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+
+  .tableHeading {
+    margin: 5rem auto 3rem;
   }
 
-  .mainarea {
-    flex-grow: 2;
-    margin-bottom: 4rem;
+  & :global(.MuiPaper-elevation1) {
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    overflow: hidden;
+    box-shadow: rgba(145, 158, 171, 0.24) 0px 0px 2px 0px, rgba(145, 158, 171, 0.24) 0px 16px 32px -4px;
+    border-radius: 16px;
+  }
 
-    .tableHeading {
-      margin: 5rem auto 3rem;
-    }
+  & :global(.MuiTableRow-head) {
+    background-color: rgb(244, 246, 248);
+  }
 
-    & :global(.MuiPaper-elevation1) {
-      transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  & :global(.tableCell) {
+    & img {
+      width: 3rem;
+      height: 3rem;
       overflow: hidden;
-      box-shadow: rgba(145, 158, 171, 0.24) 0px 0px 2px 0px, rgba(145, 158, 171, 0.24) 0px 16px 32px -4px;
-      border-radius: 16px;
+      border-radius: 1.5rem;
     }
+  }
 
-    & :global(.MuiTableRow-head) {
-      background-color: rgb(244, 246, 248);
-    }
+  & :global(.MuiFab-root) {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+  }
 
-    & :global(.tableCell) {
-      & img {
-        width: 3rem;
-        height: 3rem;
-        overflow: hidden;
-        border-radius: 1.5rem;
-      }
-    }
+  & .extensibleInput {
+    width: 15rem;
+    transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, width 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
-    & :global(.MuiFab-root) {
-      position: absolute;
-      bottom: 2rem;
-      right: 2rem;
-    }
-
-    & .extensibleInput {
-      width: 15rem;
+    & :global(.Mui-focused) {
+      width: 20rem;
       transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, width 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+      box-shadow: 0 8px 16px 0 rgba(145, 158, 171, 0.24);
 
-      & :global(.Mui-focused) {
-        width: 20rem;
-        transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, width 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-        box-shadow: 0 8px 16px 0 rgba(145, 158, 171, 0.24);
-
-        & :global(.MuiOutlinedInput-notchedOutline) {
-          border-color: rgba(0, 0, 0, 0.23);
-          border-width: 1px;
-        }
+      & :global(.MuiOutlinedInput-notchedOutline) {
+        border-color: rgba(0, 0, 0, 0.23);
+        border-width: 1px;
       }
     }
+  }
 
-    .tabletoolbar {
-      height: 6rem;
-      box-sizing: border-box;
-      padding-left: 1rem;
-      align-items: center;
-      display: flex;
-    }
+  .tabletoolbar {
+    height: 6rem;
+    box-sizing: border-box;
+    padding-left: 1rem;
+    align-items: center;
+    display: flex;
+  }
 
-    & .marginatedForms {
-      margin: 1rem 2rem;
-      display: flex;
-      flex-direction: column;
+  & .marginatedForms {
+    margin: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
 
-      & button {
-        margin: 0.5rem 0 1rem auto;
-      }
+    & button {
+      margin: 0.5rem 0 1rem auto;
     }
   }
 }
@@ -310,77 +314,7 @@ body {
   .right {
     float: right;
   }
-
-  .mainarea {
-    flex-grow: 2;
-    margin-bottom: 4rem;
-
-    .tableHeading {
-      margin: 5rem auto 3rem;
-    }
-
-    & :global(.MuiPaper-elevation1) {
-      transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-      overflow: hidden;
-      box-shadow: rgba(145, 158, 171, 0.24) 0px 0px 2px 0px, rgba(145, 158, 171, 0.24) 0px 16px 32px -4px;
-      border-radius: 16px;
-    }
-
-    & :global(.MuiTableRow-head) {
-      background-color: rgb(244, 246, 248);
-    }
-
-    & :global(.tableCell) {
-      & img {
-        width: 3rem;
-        height: 3rem;
-        overflow: hidden;
-        border-radius: 1.5rem;
-      }
-    }
-
-    & :global(.MuiFab-root) {
-      position: absolute;
-      bottom: 2rem;
-      right: 2rem;
-    }
-
-    & .extensibleInput {
-      width: 15rem;
-      transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, width 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-
-      & :global(.Mui-focused) {
-        width: 20rem;
-        transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, width 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-        box-shadow: 0 8px 16px 0 rgba(145, 158, 171, 0.24);
-
-        & :global(.MuiOutlinedInput-notchedOutline) {
-          border-color: rgba(0, 0, 0, 0.23);
-          border-width: 1px;
-        }
-      }
-    }
-
-    .tabletoolbar {
-      height: 6rem;
-      box-sizing: border-box;
-      padding-left: 1rem;
-      align-items: center;
-      display: flex;
-    }
-
-    & .marginatedForms {
-      margin: 1rem 2rem;
-      display: flex;
-      flex-direction: column;
-
-      & button {
-        margin: 0.5rem 0 1rem auto;
-      }
-    }
-  }
 }
-
 .loginPage {
   height: 100%;
 
@@ -561,4 +495,8 @@ body {
 
 .padded {
   padding: 1rem;
+}
+
+.mapBox {
+  flex: 1;
 }

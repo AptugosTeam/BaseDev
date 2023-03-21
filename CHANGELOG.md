@@ -1,6 +1,6 @@
 # ChangeLog
 
-## [TEMPLATES 1.5.5] -
+## [TEMPLATES 1.5.6] -
 
 ### Added
 
