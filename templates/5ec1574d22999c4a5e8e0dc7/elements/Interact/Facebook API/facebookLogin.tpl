@@ -25,6 +25,10 @@ options:
     settings:
       default: 'Login with Facebook'
       active: true
+  - name: autoLoad
+    display: autoLoad Login with FB
+    type: checkbox
+    options: ''
   - name: manualRender
     display: Create custom render for FBLogin
     type: checkbox
@@ -46,7 +50,9 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
   callback={ {{ element.values.functionName | default("'responseFacebook'")}} }
   fields="name,email,picture"
   scope="email, public_profile,user_friends,user_actions.books"
-  autoLoad={true}
+  {% if element.values.autoLoad %}
+    autoLoad={{ element.values.autoLoad }}
+  {% endif %}
   render={ (renderProps) => (
     {% if element.values.manualRender %}
       {{ content | raw }}
