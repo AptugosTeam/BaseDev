@@ -43,6 +43,11 @@ options:
     type: dropdown
     options: >-
       None;Add;Home;Link;Send;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
+  - name: extraCode
+    display: Extra Code
+    type: function
+    options: ''
+    advanced: true
 sourceType: javascript
 children: []
 */
@@ -63,7 +68,8 @@ import Button from '@mui/material/Button'
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   {% if element.values.fullWidth %}fullWidth{% endif %}
   {% if element.values.icon and element.values.icon != 'None' %}startIcon={<{{ element.values.icon }}Icon />}{% endif %}
-  {% if element.values.disabled %}disabled={ {{element.values.disabled}} }{% endif %} 
+  {% if element.values.disabled %}disabled={ {{element.values.disabled}} }{% endif %}
+  {% if element.values.extraCode %} {{element.values.extraCode}} {% endif %}
 >
   {{ element.values.ButtonText }}{{ content | raw }}
 </Button>
