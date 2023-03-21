@@ -84,7 +84,7 @@ import {{element.values.icon}}Border from '@mui/icons-material/{{element.values.
   {% if element.values.onChange %}
     onChange={ {{ element.values.onChange }} }
   {% endif %}
-  {% if element.values.icon != 'Star' %}
+  {% if element.values.icon %}
       icon={ <{{element.values.icon}}Icon fontSize= 'inherit'/> }
       emptyIcon={ <{{element.values.icon}}Border fontSize= 'inherit'/> }
   {% endif %}
