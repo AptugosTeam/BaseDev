@@ -3,6 +3,7 @@ path: mapBox.tpl
 keyPath: elements/Geo/mapBox.tpl
 unique_id: z2fTET0T
 icon: ico-leaflet
+internalUse: true
 options:
   - name: accessToken
     display: Access Token
