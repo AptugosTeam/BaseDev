@@ -42,7 +42,7 @@ const userTable = {
 		"options": "User;Admin",
 	}],
 	"beforeCreate": "",
-	"beforeUpdate": "const response = userService.jwtVerify(req.headers.authorization)\nif (response.error) res.status(401).json(response)\n",
+	"beforeUpdate": "const response = userService.jwtVerify(req.headers.authorization)\nif (response.error) { res.status(401).json(response); return }\n",
 	"extraRoutes": "// Authenticate User\n  app.post('/api/users/authenticate', function (req, res) {\n    userService\n      .authenticate(req.body)\n      .then((user) => {\n        res.json(user)\n      })\n      .catch((next) => {\n        res.statusCode = 401\n        res.json(next)\n        \n      })\n  })",
 	"extraModules": "const userService = require('../services/users.service')",
 	"definedRoutes": [{

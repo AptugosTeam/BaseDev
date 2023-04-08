@@ -8,6 +8,7 @@ helpText: >-
   Insert simple text anywhere. Can hold variables, code, and anything of your
   choice
 sourceType: javascript
+render: (elem) => { return elem.values.Content }
 options:
   - name: Content
     display: Content
