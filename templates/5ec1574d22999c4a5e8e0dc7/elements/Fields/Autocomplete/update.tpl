@@ -13,7 +13,8 @@ unique_id: zd6mrTlU
     {{ field.column_name | friendly }}info = Array.isArray(Received{{ field.column_name | friendly }}) ? Received{{ field.column_name | friendly }}[0] : Received{{ field.column_name | friendly }}
     
     if (!{{ field.column_name | friendly }}info._id) {
-      const {{ field.column_name | friendly }}ID = new require('mongoose').Types.ObjectId()
+      const mongoose = require('mongoose')
+      const {{ field.column_name | friendly }}ID = new mongoose.Types.ObjectId()
       const {{ reference.table.singleName | friendly }} = new {{ reference.table.name | friendly }}({ ...{{ field.column_name | friendly }}info, _id: {{ field.column_name | friendly }}ID })          
       {{ reference.table.singleName | friendly }}.save()
       updatedData['{{ field.column_name | friendly }}'] = {{ field.column_name | friendly }}ID
@@ -30,7 +31,8 @@ unique_id: zd6mrTlU
     let Received{{ field.column_name | friendly }} =  (typeof data.{{ field.column_name | friendly }} === 'string') ? JSON.parse(data.{{ field.column_name | friendly }}) : data.{{ field.column_name | friendly }} 
     {{ field.column_name | friendly }}info = Array.isArray(Received{{ field.column_name | friendly }}) ? Received{{ field.column_name | friendly }}[0] : Received{{ field.column_name | friendly }}
     if (!{{ field.column_name | friendly }}info._id) {
-      const {{ field.column_name | friendly }}ID = require('mongoose').Types.ObjectId()
+      const mongoose = require('mongoose')
+      const {{ field.column_name | friendly }}ID = new mongoose.Types.ObjectId()
       const {{ reference.table.singleName | friendly }} = new {{ reference.table.name | friendly }}({ ...{{ field.column_name | friendly }}info, _id: {{ field.column_name | friendly }}ID })
       {{ reference.table.singleName | friendly }}.save()
       updatedData['{{ field.column_name | friendly }}'] = {{ field.column_name | friendly }}ID
@@ -57,7 +59,8 @@ unique_id: zd6mrTlU
       {% endif %}
 
       if (!{{ field.column_name | friendly }}info._id) {
-        let {{ field.column_name | friendly }}ID = require('mongoose').Types.ObjectId()
+        const mongoose = require('mongoose')
+        let {{ field.column_name | friendly }}ID = new mongoose.Types.ObjectId()
 
         Object.keys({{ field.column_name | friendly }}info).forEach(info => {
           if ({{ field.column_name | friendly }}info[info] && typeof {{ field.column_name | friendly }}info[info] === 'object' && (typeof {{ field.column_name | friendly }}info[info].{{ reference.column_name }} === 'string' || typeof {{ field.column_name | friendly }}info.{{ reference.column_name }} === 'string')) {
