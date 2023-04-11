@@ -13,7 +13,7 @@ unique_id: zd6mrTlU
     {{ field.column_name | friendly }}info = Array.isArray(Received{{ field.column_name | friendly }}) ? Received{{ field.column_name | friendly }}[0] : Received{{ field.column_name | friendly }}
     
     if (!{{ field.column_name | friendly }}info._id) {
-      const {{ field.column_name | friendly }}ID = require('mongoose').Types.ObjectId()
+      const {{ field.column_name | friendly }}ID = new require('mongoose').Types.ObjectId()
       const {{ reference.table.singleName | friendly }} = new {{ reference.table.name | friendly }}({ ...{{ field.column_name | friendly }}info, _id: {{ field.column_name | friendly }}ID })          
       {{ reference.table.singleName | friendly }}.save()
       updatedData['{{ field.column_name | friendly }}'] = {{ field.column_name | friendly }}ID
