@@ -22,6 +22,20 @@ class AuthService {
         return response.data
       })
   }
+  socialLogin(data){
+    console.log("Authservice",data)
+    return axios
+      .post(API_URL + 'socialauthenticate', {
+        data
+      })
+      .then((response) => {
+        if (response.data.accessToken) {
+          localStorage.setItem('token', response.data.accessToken)
+          localStorage.setItem('user', JSON.stringify(response.data.data))
+        }
+        return response.data
+      })
+  }
 
   logout() {
     localStorage.removeItem('user')
