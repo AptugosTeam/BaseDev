@@ -5,6 +5,7 @@ unique_id: aOViR3kP
 */
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const errors = require('../services/errors.service')
 
 module.exports = {
   authenticate,
