@@ -1,7 +1,5 @@
 /*
 path: mapBoxShapeSource.tpl
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/ReactNative/elements/Geo/mapBoxShapeSource.tpl
 keyPath: elements/Geo/mapBoxShapeSource.tpl
 unique_id: TDNt7sPp
 */

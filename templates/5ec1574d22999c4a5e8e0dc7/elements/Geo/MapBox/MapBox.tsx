@@ -38,7 +38,7 @@ const MapBox: FunctionComponent<any> = (props) => {
     const mapOptions: any = {
       antialias: props.antialias || false,
       attributionControl: props.attributionControl || true,
-      bearing: props.bearing,
+      bearing: props.bearing || 0,
       bearingSnap: props.bearingSnap,
       bounds: props.bounds || null,
       boxZoom: props.boxZoom || true,
