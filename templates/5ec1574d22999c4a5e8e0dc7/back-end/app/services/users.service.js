@@ -12,7 +12,7 @@ module.exports = {
   jwtVerify,
   recoverPassword,
   checkNonce,
-  socialAuthenticate
+  socialAuthenticate,
 }
 
 async function recoverPassword(req) {
@@ -112,34 +112,28 @@ async function authenticate({ email, password, model, passwordField }) {
 }
 
 async function socialAuthenticate({Name, ProfilePic, Email, Role}) {
-  console.log("Este es el service", Name, ProfilePic, Email, Role)
-    const Users = require('../models/users.model.js')
+  const Users = require('../models/users.model.js')
   return new Promise(function (resolve, reject) {
     const query = Users.findOne({ Email: new RegExp('^' + Email.toLowerCase(), 'i') })
     const promise = query.exec()
     promise.then((user) => {
-      console.log("Y esteeeeee",user) 
       if (!user) {
         const data = {
           Email,
           Password: 123,
           Role
         }
-        user = new Users(data)
-
-        user.save()
-      .then((result) => {{
-          resolve(result)
-        }
-      })
-      .catch((err) => {
-        reject(errors.prepareError(err))
-      })
+        const User = new Users(data)
+        User.save()
+          .then((result) => {
+            resolve(result)
+          })
+          .catch((err) => {
+            reject(errors.prepareError(err))
+          })
       }
       const { Password, ...userWithoutPassword } = user._doc
-      console.log("Without pass",userWithoutPassword)
       const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
-      console.log("token",token)
       if(token){
         resolve({ accessToken: token, data: userWithoutPassword })}
       else {
