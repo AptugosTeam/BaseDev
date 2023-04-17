@@ -5,6 +5,7 @@ unique_id: aOViR3kP
 */
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const errors = require('../services/errors.service')
 
 module.exports = {
   authenticate,
@@ -12,6 +13,7 @@ module.exports = {
   jwtVerify,
   recoverPassword,
   checkNonce,
+  socialAuthenticate,
 }
 
 async function recoverPassword(req) {
@@ -105,6 +107,41 @@ async function authenticate({ email, password, model, passwordField }) {
             reject({ message: 'Password incorrect' })
           }
         })
+      }
+    })
+  })
+}
+
+async function socialAuthenticate({Name, ProfilePic, Email, Role}) {
+  const Users = require('../models/users.model.js')
+  return new Promise(function (resolve, reject) {
+    if (!Email){
+      reject({ message: 'There was an error' })    
+    }
+    const query = Users.findOne({ Email: new RegExp('^' + Email.toLowerCase(), 'i') })
+    const promise = query.exec()
+    promise.then((user) => {
+      if (!user) {
+        const data = {
+          Email,
+          Password: 123,
+          Role
+        }
+        const User = new Users(data)
+        User.save()
+          .then((result) => {
+            resolve(result)
+          })
+          .catch((err) => {
+            reject(errors.prepareError(err))
+          })
+      }
+      const { Password, ...userWithoutPassword } = user._doc
+      const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+      if(token){
+        resolve({ accessToken: token, data: userWithoutPassword })}
+      else {
+        reject({ message: 'Error, no se pudo generar el token' })
       }
     })
   })

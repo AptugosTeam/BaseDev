@@ -135,7 +135,8 @@ import AddDialog from '../components/Dialog/Dialog'
       if ({{ dialogVariable }} === 'delete') {
         dispatch(remove{{ friendlySingleName }}(data))
       } else {
-        {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(data)) : dispatch(edit{{ table.name | friendly | capitalize }}(data))
+        const cleanData = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== null && v !== '' && (v.length !== 0 || v.length === undefined)));
+        {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(cleanData)) : dispatch(edit{{ table.name | friendly | capitalize }}(cleanData))
       }      
     {% endif %}
   } }

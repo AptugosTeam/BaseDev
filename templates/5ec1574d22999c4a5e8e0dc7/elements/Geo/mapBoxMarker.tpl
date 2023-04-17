@@ -3,7 +3,7 @@ path: mapBoxMarker.tpl
 keyPath: elements/Geo/mapBoxMarker.tpl
 unique_id: z2fTET0M
 icon: ico-leaflet
-internalUse: true
+internalUse: false
 extraFiles:
   - source: 'elements/Geo/MapBox/Marker.tsx'
     destination: 'front-end/components/MapBox/Marker.tsx'

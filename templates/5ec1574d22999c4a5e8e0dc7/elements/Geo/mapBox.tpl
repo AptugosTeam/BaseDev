@@ -3,7 +3,7 @@ path: mapBox.tpl
 keyPath: elements/Geo/mapBox.tpl
 unique_id: z2fTET0T
 icon: ico-leaflet
-internalUse: true
+internalUse: false
 options:
   - name: accessToken
     display: Access Token
@@ -14,11 +14,11 @@ options:
   - name: navigationControl
     display: Show Navigation Control
     type: dropdown
-    options: return [['no','no'],['top-right','Top Right'],['bottom-right','Bottom Right'],['bottom-left','Bottom Left'],['top-left','Top Left']]
+    options: return [['top-right','Top Right'],['bottom-right','Bottom Right'],['bottom-left','Bottom Left'],['top-left','Top Left']]
   - name: fullScreenControl
     display: Show Full Screen Control
     type: dropdown
-    options: return [['no','no'],['top-right','Top Right'],['bottom-right','Bottom Right'],['bottom-left','Bottom Left'],['top-left','Top Left']]
+    options: return [['top-right','Top Right'],['bottom-right','Bottom Right'],['bottom-left','Bottom Left'],['top-left','Top Left']]
   - name: geoLocateControl
     display: Show Geo Locate Control
     type: checkbox
@@ -52,7 +52,7 @@ options:
     display: Center
     type: text
     settings:
-      default: [0,0]
+      default: [[0,0]]
   - name: clickTolerance
     display: Click Tolerance
     type: text
@@ -269,7 +269,7 @@ import MapBox from '../components/MapBox'
   {% if element.values.bearingSnap %}bearingSnap={{ element.values.bearingSnap | textOrVariable }}{% endif %}
   {% if element.values.bounds %}bounds={ {{ element.values.bounds }} }{% endif %}
   {% if element.values.boxZoom %}boxZoom={{ element.values.boxZoom | textOrVariable }}{% endif %}
-  {% if element.values.center %}center={{ element.values.center | textOrVariable }}{% endif %}
+  {% if element.values.center %}center={ {{ element.values.center }} }{% endif %}
   {% if element.values.clickTolerance %}clickTolerance={{ element.values.clickTolerance | textOrVariable }}{% endif %}
   {% if element.values.collectResourceTiming %}collectResourceTiming={{ element.values.collectResourceTiming | textOrVariable }}{% endif %}
   {% if element.values.cooperativeGestures %}cooperativeGestures={{ element.values.cooperativeGestures | textOrVariable }}{% endif %}
@@ -287,7 +287,6 @@ import MapBox from '../components/MapBox'
   {% if element.values.locale %}locale={{ element.values.locale | textOrVariable }}{% endif %}
   {% if element.values.localFontFamily %}localFontFamily={{ element.values.localFontFamily | textOrVariable }}{% endif %}
   {% if element.values.localIdeographFontFamily %}localIdeographFontFamily={{ element.values.localIdeographFontFamily | textOrVariable }}{% endif %}
-  {% if element.values.locale %}locale={{ element.values.locale | textOrVariable }}{% endif %}
   {% if element.values.maxBounds %}maxBounds={{ element.values.maxBounds | textOrVariable }}{% endif %}
   {% if element.values.maxPitch %}maxPitch={{ element.values.maxPitch | textOrVariable }}{% endif %}
   {% if element.values.maxTileCacheSize %}maxTileCacheSize={{ element.values.maxTileCacheSize | textOrVariable }}{% endif %}
