@@ -115,6 +115,9 @@ async function authenticate({ email, password, model, passwordField }) {
 async function socialAuthenticate({Name, ProfilePic, Email, Role}) {
   const Users = require('../models/users.model.js')
   return new Promise(function (resolve, reject) {
+    if (!Email){
+      reject({ message: 'There was an error' })    
+    }
     const query = Users.findOne({ Email: new RegExp('^' + Email.toLowerCase(), 'i') })
     const promise = query.exec()
     promise.then((user) => {
