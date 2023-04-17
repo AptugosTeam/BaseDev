@@ -1,0 +1,11 @@
+/*
+path: Chips.json
+completePath: Fields/Chips.json
+unique_id: uXchipsc
+*/
+{
+  "label": "Chips",
+  "value": "Chips",
+  "dataType": "String",
+  "options": ""
+}

@@ -1,0 +1,13 @@
+/*
+path: source_importModel.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Database/source_importModel.source
+keyPath: elements/Code Snippets/Database/source_importModel.source
+unique_id: dD9UURyi
+name: importModel
+fullload: true
+*/
+var model = Block.getFieldValue('MODEL')
+const code = `const ${model}Model = require('../models/${model.toLowerCase()}.model')`
+return code + "\n"

@@ -1,0 +1,19 @@
+/*
+path: text_create_join_item.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/D_Text/text_create_join_item.json
+keyPath: elements/Code Snippets/Scripting/D_Text/text_create_join_item.json
+unique_id: bZ4a9yzk
+name: text_create_join_item
+fullload: true
+*/
+{
+  "type": "text_create_join_item",
+  "message0": "%{BKY_TEXT_CREATE_JOIN_ITEM_TITLE_ITEM}",
+  "previousStatement": null,
+  "nextStatement": null,
+  "style": "text_blocks",
+  "tooltip": "%{BKY_TEXT_CREATE_JOIN_ITEM_TOOLTIP}",
+  "enableContextMenu": false
+}

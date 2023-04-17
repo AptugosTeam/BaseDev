@@ -1,0 +1,90 @@
+/*
+path: globals.module.scss
+completePath: >-
+  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Bootstrap/front-end/src/app/globals.module.scss
+keyPath: front-end/src/app/globals.module.scss
+unique_id: Q8nutbyQ
+*/
+$body-color: #7f88a0;
+$body-bg: #242b3c;
+$primary: #2196f3;
+$enable-shadows: true;
+$border-color: #303850;
+$color-900: #272e40;
+$color-800: #8a93a9;
+$color-700: #c8cddc;
+@import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@700&display=swap');
+
+a {
+  text-decoration: none;
+}
+
+.navBar {
+  background-color: $primary;
+  padding: 0 1rem 0 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4.3rem;
+  z-index: 100;
+}
+
+.sideBar {
+  width: 15rem;
+  background: $color-900;
+  bottom: 0;
+  padding: 1rem 0;
+  position: fixed;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  top: 4.3rem;
+  border-right: 1px solid $border-color;
+
+  & > a {
+    color: $color-800;
+    display: block;
+    padding: 0.75rem 1.5rem;
+    position: relative;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+    font-size: 1rem;
+
+    &:hover {
+      color: $color-700;
+    }
+  }
+}
+
+.mainarea,
+.mainArea {
+  margin-left: 15rem;
+  overflow: hidden;
+  padding: 0 1rem 4rem 1rem;
+  min-height: 80vh;
+  margin-top: 4.3rem;
+
+  & .tableHeading {
+    padding: 1.2rem;
+    margin: 0;
+
+    & h4 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      font-family: 'Karla', sans-serif;
+    }
+  }
+
+  & .tableResponsive {
+    margin: 1.2rem;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    background-color: $color-900;
+    background-clip: border-box;
+    border: 1px solid $border-color;
+    border-radius: 0.25rem;
+  }
+}

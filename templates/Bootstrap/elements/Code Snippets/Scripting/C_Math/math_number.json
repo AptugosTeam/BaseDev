@@ -1,0 +1,24 @@
+/*
+path: math_number.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/C_Math/math_number.json
+keyPath: elements/Code Snippets/Scripting/C_Math/math_number.json
+unique_id: MgCrJqo4
+name: math_number
+fullload: true
+*/
+{
+  "type": "math_number",
+  "message0": "%1",
+  "args0": [{
+    "type": "field_number",
+    "name": "NUM",
+    "value": 0
+  }],
+  "output": "Number",
+  "helpUrl": "%{BKY_MATH_NUMBER_HELPURL}",
+  "style": "math_blocks",
+  "tooltip": "%{BKY_MATH_NUMBER_TOOLTIP}",
+  "extensions": ["parent_tooltip_when_inline"]
+}

@@ -1,0 +1,22 @@
+/*
+path: 07_Identifier.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/07_Identifier.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/07_Identifier.json
+unique_id: vklKHwAQ
+name: Identifier
+fullload: true
+*/
+{
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "name"
+    }
+  ],
+  "output": true,
+  "colour": 120,
+  "tooltip": "AST -> Identifier"
+}

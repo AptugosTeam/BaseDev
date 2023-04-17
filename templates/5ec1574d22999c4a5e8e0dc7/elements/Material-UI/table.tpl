@@ -4,6 +4,7 @@ type: file
 unique_id: IUyfyTiR
 icon: ico-table
 sourceType: javascript
+renderTag: 'table'
 calculatedName: >-
   function (ele) { 
     try {
