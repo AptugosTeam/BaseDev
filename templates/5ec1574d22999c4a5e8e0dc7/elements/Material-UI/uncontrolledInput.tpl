@@ -55,9 +55,6 @@ options:
   - name: helperText
     display: Helper Text
     type: text
-  - name: disabled
-    display: Disable input
-    type: checkbox
 children: []
 */
 {% if element.values.fullwidth %}{% set fullWidth = element.values.fullwidth %}{% endif %}
@@ -70,9 +67,7 @@ import TextField from '@mui/material/TextField'
     variant="{{ element.values.variant|default('standard') }}"
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.placeholder %}placeholder={{ element.values.placeholder | textOrVariable }}{% endif %}
-    {% if element.values.disabled %}
-      disabled
-    {% endif %}
+    {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
     {% if element.values.helperText %}helperText={ {{ element.values.helperText }} }{% endif %}
     {% if element.values.margin %}margin="{{ element.values.margin }}"{% endif %}
