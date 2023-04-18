@@ -55,6 +55,9 @@ options:
   - name: helperText
     display: Helper Text
     type: text
+  - name: DisableVariable
+    display: Variable to disable input
+    type: text
 children: []
 */
 {% if element.values.fullwidth %}{% set fullWidth = element.values.fullwidth %}{% endif %}
