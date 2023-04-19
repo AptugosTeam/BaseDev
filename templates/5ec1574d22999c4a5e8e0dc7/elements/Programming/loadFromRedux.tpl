@@ -132,10 +132,12 @@ import { useDispatch } from 'react-redux'
 const dispatch = useDispatch()
 {% endset %}
 {{ save_delayed('ph', ph ) }}
+{% if not element.values.singleResult %}
 {% set ph %}
 const {{ table.name | friendly | lower ~ 'Data' }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }})
 {% endset %}
 {{ save_delayed('ph', ph, 1 ) }}
+{% endif %}
 {% if element.values.singleResult %}
 {% set bpr %}
 import { I{{ table.name | friendly }}Item } from '../store/models'

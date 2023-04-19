@@ -33,49 +33,14 @@ options:
     type: dropdown
     options: >-
       return [['default','Use default name'], ...aptugo.variables.variables.filter(v => v.type === 'Function').map(v => [v.name, v.name])]
+extraFiles:
+  - source: 'elements/Interact/999_searchField.tsx'
+    destination: 'front-end/components/SearchField/index.tsx'
+  - source: 'elements/Interact/999_searchField.module.scss'
+    destination: 'front-end/components/SearchField/searchField.module.scss'
 */
-{% set updateFunctionName = element.values.updateFunctionName|default('settableloadoptions') %}
-{% if updateFunctionName == 'default' %}{% set updateFunctionName = 'settableloadoptions' %}{% endif %}
-{% set updateVarName = element.values.updateVarName|default('tableloadoptions') %}
-{% if updateVarName == 'default' %}{% set updateVarName = 'tableloadoptions' %}{% endif %}
-{% set table = element.values.table | tableData %}
 {% set bpr %}
-  import { useDispatch } from 'react-redux'
+import Search from '@/components/SearchField'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-{% set ph %}
-const dispatch = useDispatch()
-{% endset %}
-{{ save_delayed('ph', ph ) }}
-{% set bpr %}
-import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
-{% endset %}
-{{ save_delayed('bpr', bpr ) }}
-{% set ph %}
-let searchTimeout = null
-const searchFor{{ table.name | friendly }} = (event, field = null) => {
-    if (searchTimeout) clearTimeout(searchTimeout)
-    searchTimeout = setTimeout(() => {
-      {{updateFunctionName}}({
-        ...{{updateVarName}},
-        searchString: event.target.value,
-        searchField: field
-      })
-    },500)
-}
-{% endset %}
-{{ save_delayed('ph',ph)}}
-{% if not element.values.avoidLoad %}
-  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
-{% endif %}
-{% if element.values.searchField %}
-  {% set searchFieldParams = {
-    element: {
-      values: { 
-        onChange: '(e) => { searchFor' ~ table.name|friendly  ~ '(e, "' ~ (element.values.searchField | fieldData).column_name ~ '") }', placeholder: element.values.placeholderText | default('Search ' ~ table.singleName|friendly ~ '...'), variant: 'outlined', margin: 'normal', className: 'theme.extensibleInput' } } } %}
-{% else %}
-  {% set searchFieldParams = { element: { values: { onChange: 'searchFor' ~ table.name|friendly, placeholder: element.values.placeholderText | default('Search ' ~ table.singleName|friendly ~ '...'), variant: 'outlined', size: 'small', margin: 'dense', className: 'theme.extensibleInput' } } } %}
-{% endif %}
-{% include includeTemplate('uncontrolledInput.tpl') with searchFieldParams %}
-
-
+<Search />

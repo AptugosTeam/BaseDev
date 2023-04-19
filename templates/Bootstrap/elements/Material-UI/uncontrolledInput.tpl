@@ -57,32 +57,8 @@ options:
     type: text
 children: []
 */
-{% if element.values.fullwidth %}{% set fullWidth = element.values.fullwidth %}{% endif %}
-{% if elements.values.fullWidth %}{% set fullWidth = element.values.fullWidth %}{% endif %}
-{% set bpr %}
-import TextField from '@mui/material/TextField'
-{% endset %}
-{{ save_delayed('bpr', bpr) }}
-<TextField
-    variant="{{ element.values.variant|default('standard') }}"
-    {% if element.values.Autofocus %}autoFocus{% endif %}
-    {% if element.values.placeholder %}placeholder={{ element.values.placeholder | textOrVariable }}{% endif %}
-    {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
-    {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
-    {% if element.values.helperText %}helperText={ {{ element.values.helperText }} }{% endif %}
-    {% if element.values.margin %}margin="{{ element.values.margin }}"{% endif %}
-    {% if element.values.size %}size="{{ element.values.size }}"{% endif %}
-    {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
-    {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-    {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
-    {% if element.values.type == 'textarea' %}
-      multiline
-      type="text"
-    {% endif %}
-    {% if element.values.type != 'textarea' %}
-      type="{{ element.values.type|default('text') }}"
-    {% endif %}
-    {% if fullWidth %}fullWidth{% endif %}
-    {% if element.values.value %}value={{ element.values.value }}{% endif %}
-    {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
+{% set type = element.values.type | default('text') %}
+<input
+    type="{{ type }}" className={theme['form-control']}
+    {% if field.placeholder %}placeholder={{ element.values.placeholder | textOrVariable }}{% endif %}
 />

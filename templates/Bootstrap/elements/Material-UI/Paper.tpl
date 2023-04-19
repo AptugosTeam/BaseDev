@@ -26,11 +26,7 @@ options:
       active: true
       default: 1
 */
-{% set bpr %}
-import Paper from '@mui/material/Paper'
-{% endset %}
-{{ save_delayed('bpr', bpr) }}
-<Paper
+<div
   {% if not element.values.square %}
     square
   {% endif %}
@@ -45,4 +41,4 @@ import Paper from '@mui/material/Paper'
   {% endif %}
 >
 {{ content | raw }}
-</Paper>
+</div>

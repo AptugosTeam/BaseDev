@@ -13,8 +13,16 @@ $border-color: #303850;
 $color-900: #272e40;
 $color-800: #8a93a9;
 $color-700: #c8cddc;
+$color-400: #343d56;
+$input-border-color: $color-400;
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@700&display=swap');
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
 
 a {
   text-decoration: none;
@@ -86,5 +94,11 @@ a {
     background-clip: border-box;
     border: 1px solid $border-color;
     border-radius: 0.25rem;
+
+    & .tabletoolbar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
   }
 }
