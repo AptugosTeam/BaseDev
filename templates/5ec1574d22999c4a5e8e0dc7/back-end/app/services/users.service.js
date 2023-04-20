@@ -112,11 +112,11 @@ async function authenticate({ email, password, model, passwordField }) {
   })
 }
 
-async function socialAuthenticate({Name, ProfilePic, Email, Role}) {
+async function socialAuthenticate({ Name, ProfilePic, Email, Role }) {
   const Users = require('../models/users.model.js')
   return new Promise(function (resolve, reject) {
-    if (!Email){
-      reject({ message: 'There was an error' })    
+    if (!Email) {
+      reject({ message: 'There was an error' })
     }
     const query = Users.findOne({ Email: new RegExp('^' + Email.toLowerCase(), 'i') })
     const promise = query.exec()
@@ -125,24 +125,33 @@ async function socialAuthenticate({Name, ProfilePic, Email, Role}) {
         const data = {
           Email,
           Password: 123,
-          Role
+          Role,
         }
         const User = new Users(data)
         User.save()
           .then((result) => {
-            resolve(result)
+            const { Email, Role, _id } = result._doc
+            const cleanUser = { Email, Role, _id }
+            const token = jwt.sign(cleanUser, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+            if (token) {
+              resolve({ accessToken: token, data: cleanUser })
+            } else {
+              reject({ message: 'Error, no se pudo generar el token' })
+            }
           })
           .catch((err) => {
             reject(errors.prepareError(err))
           })
-      }
-      const { Password, ...userWithoutPassword } = user._doc
-      const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
-      if(token){
-        resolve({ accessToken: token, data: userWithoutPassword })}
-      else {
-        reject({ message: 'Error, no se pudo generar el token' })
-      }
+      } else {
+        const { Email, Role, _id } = user._doc
+        const cleanUser = { Email, Role, _id }
+        const token = jwt.sign(cleanUser, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+        if (token) {
+          resolve({ accessToken: token, data: cleanUser })
+        } else {
+          reject({ message: 'Error, no se pudo generar el token' })
+        }
+      } 
     })
   })
 }
