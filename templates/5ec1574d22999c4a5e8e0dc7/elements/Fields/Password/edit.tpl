@@ -19,6 +19,9 @@ import TextField from '@mui/material/TextField'
     label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     type="password"
     fullWidth
+    {% if element.values.autocomplete %}
+        autoComplete='{{ element.values.autocomplete }}'
+    {% endif %}
     variant="{{ element.values.variant|default('standard') }}"
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}

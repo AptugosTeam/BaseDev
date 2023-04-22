@@ -20,6 +20,7 @@ export interface AutocompleteProps {
   variant?: "outlined" | "standard" | "filled"
   margin?: 'dense' | 'none' | 'normal'
   fullWidth?: boolean
+  disabled?: any
 }
 
 const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) => {
@@ -82,11 +83,13 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
           classNamePrefix="aptugo"
           value={props.value || null}
           isMulti={props.chips}
+          isDisabled={props.disabled}
           onChange={(newValue) => {
             if (!Array.isArray(newValue)) newValue = [newValue]
             newValue = newValue.map((vals) => (vals.value === 'new' ? { value: null, label: localValue } : vals))
             props.onChange(newValue)
           }}
+          
           onInputChange={handleInputChange}
           cacheOptions={false}
           defaultOptions

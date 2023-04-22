@@ -60,6 +60,7 @@ React.useEffect(() => {
 <Autocomplete
   {% if field.displaytype == 'chips' %}chips{% endif %}
   value={ {{ columnName }}Value }
+  {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
   onType={ typeInSearch{{ field.column_name | friendly }}{{ referencedTable }} }
   onChange={(newValue) => handle{{ tableName }}Change('{{ columnName }}')(newValue?.length ? newValue.map(item => ({ _id: item.value !== 'new' ? item.value : null, {{ referencedField.column_name | friendly }}: item.label })) : [])}
   loading={ {{ referencedTable | lower }}AutocompleteData.loadingStatus === 'loading' }

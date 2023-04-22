@@ -65,6 +65,9 @@ options:
   - name: autosave
     display: Autosave on Change
     type: checkbox
+  - name: autocomplete
+    display: Autofilling Input
+    type: text
 children: []
 */
 {% set bpr %}
