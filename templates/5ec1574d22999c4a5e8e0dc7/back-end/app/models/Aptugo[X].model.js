@@ -73,10 +73,5 @@ const mongoosePaginate = require('mongoose-paginate-v2')
   }
 );
 
-{{ friendlyTableName }}Schema.methods.toJSON = function () {
-  const { __v, Password, ...data } = this.toObject();
-  return data
-}
-
 const myModel = module.exports = mongoose.model('{{ table.name | friendly }}', {{ table.name | friendly }}Schema, '{{ table.name | friendly | lower }}')
 myModel.schema = {{ table.name | friendly }}Schema
