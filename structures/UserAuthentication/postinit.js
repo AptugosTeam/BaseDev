@@ -51,7 +51,7 @@ const secureZonePH = {
       "type": "element",
       "value": "checkIfLoggedIn",
       "values": {
-        "loginScreen": Parameters.mainPageID
+        "loginScreenNot": Parameters.mainPageID
       }
     }
   ],
