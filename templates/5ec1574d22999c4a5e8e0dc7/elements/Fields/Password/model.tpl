@@ -7,8 +7,9 @@ icon: ico-field
 {% set isRequired = attribute(fieldInfo, 'validators.required') %}
 {% set datatype = fieldInfo.dataType %}
 {% set friendlyColumnName = field.column_name | friendly  %}
+{% set friendlyTableName = table.name | friendly  %}
 {% set extraPlugins %}
-UsersSchema.methods.toJSON = function () {
+{{ friendlyTableName }}Schema.methods.toJSON = function () {
   const { __v, {{ friendlyColumnName }}, ...data } = this.toObject()
   return data
 }
