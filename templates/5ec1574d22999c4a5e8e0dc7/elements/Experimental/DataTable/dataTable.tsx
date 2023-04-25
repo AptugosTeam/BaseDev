@@ -9,8 +9,8 @@ import {
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
-  SortingState,
   PaginationState,
+  SortingState,
   useReactTable,
 } from '@tanstack/react-table'
 import React, { FunctionComponent } from 'react'
@@ -25,6 +25,7 @@ interface tableProps {
   onRequestRemove: Function
   onRequestSort: Function
   onRequestPaginate: Function
+  className?: any
 }
 
 const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
@@ -48,11 +49,10 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
     _setPagination(result)
   }
 
-  const [{ pageIndex, pageSize }, _setPagination] =
-    React.useState<PaginationState>({
-      pageIndex: 0,
-      pageSize: 25,
-    })
+  const [{ pageIndex, pageSize }, _setPagination] = React.useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 25,
+  })
 
   const pagination = React.useMemo(
     () => ({
@@ -78,12 +78,13 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
     getSortedRowModel: getSortedRowModel(),
   })
 
+
   return (
-    <div className={styles.tableHolder}>
-      <table className={styles.table}>
-        <thead className={styles.tableHead}>
+    <div className={props.className ? props.className : styles.tableHolder}>
+      <table className='table'>
+        <thead className='tableHead'>
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id} className={styles.tableHeadTR}>
+            <tr key={headerGroup.id} className='tableHeadTR'>
               {headerGroup.headers.map((header) => (
                 <AptugoDataTableTH key={`__${header.id}`} header={header} {...props} />
               ))}
@@ -101,9 +102,9 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
                   </td>
                 )
               })}
-              <td className={styles.actionContainer}>
+              <td className='actionContainer'>
                 <div
-                  className={styles.button}
+                  className='button'
                   onClick={() => {
                     props.onRequestEdit(props.tableData[rowIndex])
                   }}
@@ -122,7 +123,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
                   </svg>
                 </div>
                 <div
-                  className={styles.button}
+                  className='button'
                   onClick={() => {
                     props.onRequestRemove(props.tableData[rowIndex])
                   }}
@@ -144,23 +145,66 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
           {table.getFooterGroups().map((footerGroup) => {
             return (
               <tr key={footerGroup.id}>
-                <td colSpan={footerGroup.headers.length} className={styles.paginationContainer}>
-                  <div className={styles.leftContainer}>
-                    <div className={styles.numberOfElements}>
+                <td colSpan={footerGroup.headers.length} className='paginationContainer'>
+                  <div className='leftContainer'>
+                    <div className='numberOfElements'>
                       Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
                     </div>
-                    <div className={styles.actionContainer}>
-                      <div className={`${styles.button} ${!table.getCanPreviousPage() ? styles.disabled : null }`} onClick={() => table.getCanPreviousPage() && table.previousPage()}><svg width="1em" height="1em" viewBox="0 0 7 14" fill="currentColor" aria-hidden="true" focusable="false" className="rs-icon" aria-label="page previous" data-category="legacy"><path d="M2.333 7l3.5-4-.583-.667L1.167 7l4.083 4.667.583-.667z"></path></svg></div>
-                      {[...Array(props.pages).keys()].map(page => {
-                      return (<div key={`${page}_page`} className={`${styles.button} ${pagination.pageIndex === page ? styles.currentPage : null}`} onClick={() => table.setPageIndex(page)}>{page + 1}</div>)})}
-                      <div className={`${styles.button} ${!table.getCanNextPage() ? styles.disabled : null }`} onClick={() => table.getCanNextPage() && table.nextPage()}><svg width="1em" height="1em" viewBox="0 0 7 14" fill="currentColor" aria-hidden="true" focusable="false" className="rs-icon" aria-label="page next" data-category="legacy"><path d="M4.667 7l-3.5 4 .583.667L5.833 7 1.75 2.333 1.167 3z"></path></svg></div>
+                    <div className='actionContainer'>
+                      <div
+                        className={`button ${!table.getCanPreviousPage() ? 'disabled' : null}`}
+                        onClick={() => table.getCanPreviousPage() && table.previousPage()}
+                      >
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 7 14"
+                          fill="currentColor"
+                          aria-hidden="true"
+                          focusable="false"
+                          className="rs-icon"
+                          aria-label="page previous"
+                          data-category="legacy"
+                        >
+                          <path d="M2.333 7l3.5-4-.583-.667L1.167 7l4.083 4.667.583-.667z"></path>
+                        </svg>
+                      </div>
+                      {[...Array(props.pages).keys()].map((page) => {
+                        return (
+                          <div
+                            key={`${page}_page`}
+                            className={`button ${pagination.pageIndex === page ? 'currentPage' : null}`}
+                            onClick={() => table.setPageIndex(page)}
+                          >
+                            {page + 1}
+                          </div>
+                        )
+                      })}
+                      <div
+                        className={`button ${!table.getCanNextPage() ? 'disabled' : null}`}
+                        onClick={() => table.getCanNextPage() && table.nextPage()}
+                      >
+                        <svg
+                          width="1em"
+                          height="1em"
+                          viewBox="0 0 7 14"
+                          fill="currentColor"
+                          aria-hidden="true"
+                          focusable="false"
+                          className="rs-icon"
+                          aria-label="page next"
+                          data-category="legacy"
+                        >
+                          <path d="M4.667 7l-3.5 4 .583.667L5.833 7 1.75 2.333 1.167 3z"></path>
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                  <div className={styles.rightContainer}>Showing 25 per page</div>
+                  <div className='rightContainer'>Showing 25 per page</div>
                 </td>
               </tr>
             )
-          } )}
+          })}
         </tfoot>
       </table>
     </div>
@@ -168,4 +212,3 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
 }
 
 export default AptugoDataTable
-

@@ -26,6 +26,10 @@ options:
     type: dropdown
     options: >-
       return [['No','None'],['Internal','Popup Dialog'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) => [unique_id, name])]
+  - name: className
+    display: ClassName
+    type: styles
+    options: ''
 */
 {% set editProc = element.values.editProcedure|default('No') %}
 {% set table = element.values.table | tableData %}
@@ -43,6 +47,9 @@ import DataTable from '../components/DataTable/dataTable'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <DataTable
+  {% if element.values.className %}
+    className={ {{element.values.className}} }
+  {% endif %}
   tableData={ {{ tableData }} }
   pages={Math.ceil({{ tableName|lower }}Data.totalDocs / {{ innervarname }}loadoptions.limit)}
   columnInfo={[
@@ -62,7 +69,7 @@ import DataTable from '../components/DataTable/dataTable'
       {{ setEditDataFunctionName }}(row)
       setdialog{{ tableName|capitalize }}Action('edit')
     {% else %}
-      const url = '{{ (editProc | elementData ).path }}'.replace(':id', e.element._id)
+      const url = '{{ (editProc | elementData ).path }}'.replace(':id', row._id)
       props.history.push(url)
     {% endif %}
   }}

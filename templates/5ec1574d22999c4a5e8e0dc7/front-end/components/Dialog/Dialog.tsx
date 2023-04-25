@@ -13,7 +13,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import Fab from '@mui/material/Fab'
 import Switch from '@mui/material/Switch'
 import Tooltip from '@mui/material/Tooltip'
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, ReactElement, useState } from 'react'
 
 interface subOptions {
   title: string
@@ -37,6 +37,7 @@ interface addDialogProps {
   setData: Function
   allowMultipleSubmit: boolean
   hideButton?: boolean
+  children?: ReactElement<any, any>[]
 }
 
 const AddDialog: FunctionComponent<addDialogProps> = (props) => {
