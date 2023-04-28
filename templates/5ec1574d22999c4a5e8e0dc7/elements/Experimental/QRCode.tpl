@@ -38,8 +38,9 @@ import QRCode from "react-qr-code";
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
     <QRCode
-    {% if element.values.size %}size={ {{element.values.size}} }{% endif %}
-    style={ { height: "auto", maxWidth: "100%", width: "100%" } }
+    {% if element.values.size %}width={ {{element.values.size|default(256)}} }{% endif %}
+    {% if element.values.size %}height={ {{element.values.size|default(256)}} }{% endif %}
+    style={ { {% if element.values.size %}height: "{{element.values.size}}px",{% endif %} maxWidth: "100%", width: "100%" } }
     {% if element.values.id %}id='{{element.values.id}}'{% endif %}
     level='{{element.values.level|default('L')}}'
     {% if element.values.value %}value={ {{element.values.value}} }{% endif %}
