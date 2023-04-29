@@ -48,6 +48,20 @@ options:
     display: Type
     type: dropdown
     options: text;password;date;number;textarea
+  - name: minRows
+    display: MinRows
+    type: text
+    settings:
+      propertyCondition: type
+      condition: textarea
+      active: true
+  - name: maxRows
+    display: MaxRows
+    type: text
+    settings:
+      propertyCondition: type
+      condition: textarea
+      active: true
   - name: error
     display: Error
     type: variable
@@ -81,6 +95,8 @@ import TextField from '@mui/material/TextField'
     {% if element.values.type == 'textarea' %}
       multiline
       type="text"
+      {% if element.values.minRows %}minRows={{ element.values.minRows | textOrVariable}} {% endif %}
+      {% if element.values.maxRows %}maxRows={{ element.values.maxRows | textOrVariable}} {% endif %}
     {% endif %}
     {% if element.values.type != 'textarea' %}
       type="{{ element.values.type|default('text') }}"
