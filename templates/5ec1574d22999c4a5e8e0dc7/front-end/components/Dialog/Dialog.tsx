@@ -38,6 +38,7 @@ interface addDialogProps {
   allowMultipleSubmit: boolean
   hideButton?: boolean
   children?: ReactElement<any, any>[]
+  className?: any
 }
 
 const AddDialog: FunctionComponent<addDialogProps> = (props) => {

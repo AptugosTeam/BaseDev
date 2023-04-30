@@ -45,15 +45,22 @@ options:
     display: Extra Styles
     type: text
     options: ''
+  - name: background
+    display: Use as Background
+    type: checkbox
+    options: ''
 */
+{% set tag = 'Image' %}
+{% if element.values.background %}{%set tag = 'ImageBackground' %}{% endif %}
 {% set bpr %}
-import { Image } from 'react-native'
+import { {{tag}} } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% set path = element.values.path %}
 {% set webppath = element.values.webppath %}
 {% set width = element.values.width|default(null) %}
 {% set height = element.values.height|default(null) %}
+
 {% if element.values.useAsset %}
   {% set asset = element.values.useAsset|assetData %}
   {% if width == null %}
@@ -70,13 +77,13 @@ import { Image } from 'react-native'
       {% endif %}
     {% endfor %}
   {% endif %}
-<Image
+<{{tag}}
   {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
   source={require('../assets{{ path }}')}
   {% if element.values.style %}style={ { {{element.values.style}} } }{% endif %}
 />
 {% else %}
-<Image
+<{{tag}}
   {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
   source={ { uri: `{{ path }}` } }
   {% if element.values.style %}style={ { {{element.values.style}} } }{% endif %}

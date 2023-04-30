@@ -3,7 +3,7 @@ path: Sidebar.tsx
 completePath: front-end/components/Sidebar/Sidebar.tsx
 unique_id: eagUHEvx
 */
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, ReactElement } from 'react'
 import clsx from 'clsx'
 import Drawer from '@mui/material/Drawer'
 import Hidden from '@mui/material/Hidden'
@@ -16,6 +16,7 @@ interface sidebarProps {
   handleDrawerToggle?: VoidFunction
   open: boolean
   color: string
+  children?: ReactElement<any>[]
 }
 
 const Sidebar: FunctionComponent<sidebarProps> = (props) => {

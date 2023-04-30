@@ -36,6 +36,7 @@ import { TouchableOpacity } from "react-native"
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <TouchableOpacity
+  {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
   onPress={() => navigation.push( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
   key='{{ element.unique_id }}'
 >

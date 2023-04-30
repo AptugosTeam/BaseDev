@@ -1,0 +1,22 @@
+{
+  "name": "firebasedb",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "aptugo": "./bin/index.js"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "pkg . --without-intl --out-path build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "firebase": "^9.21.0",
+    "firebase-admin": "^11.7.0",
+    "minimist": "^1.2.8",
+    "splitargs": "^0.0.7"
+  }
+}

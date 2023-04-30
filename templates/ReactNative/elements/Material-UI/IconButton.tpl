@@ -9,6 +9,16 @@ options:
     type: checkbox
     settings:
       default: false
+  - name: useCommunity
+    display: Use Community Icon
+    type: checkbox
+    settings:
+      default: false
+  - name: useMaterial
+    display: Use Material Icon
+    type: checkbox
+    settings:
+      default: false
   - name: Action
     display: Action
     type: text
@@ -83,15 +93,33 @@ options:
       propertyCondition: useFontAwesome
       condition: true
       active: true
+  - name: FontAwesomeStyle
+    display: Font Awesome Style
+    type: dropdown
+    options: solid;light
+    settings:
+      propertyCondition: useFontAwesome
+      condition: true
+      active: true
 sourceType: javascript
 children: []
 */
+{% set tag = 'Icon' %}
 {% set bpr %}
-import Icon from 'react-native-vector-icons/FontAwesome';
+{% if element.values.useCommunity %}
+import IconCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
+{% set tag = 'IconCommunity' %}
+{% elseif element.values.useMaterial %}
+import IconMaterial from 'react-native-vector-icons/MaterialIcons';
+{% set tag = 'IconMaterial' %}
+{% else %}
+import Icon from 'react-native-vector-icons/FontAwesome5';
+{% endif %}
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<Icon name={ '{{element.values.FontAwesomeIcon|default("square-o")|dashCase}}' } size={ {{element.values.FontAwesomeSize|default(20)}} } color={ '{{element.values.FontAwesomeColor|default("#F96D4E")}}' } 
+<{{ tag }} name={ '{{element.values.FontAwesomeIcon|default("square-o")|dashCase}}' } size={ {{element.values.FontAwesomeSize|default(20)}} } {% if element.values.FontAwesomeColor %}color={ '{{element.values.FontAwesomeColor}}' }{% endif %} 
 {% if element.values.Action %}onPress={ {{ element.values.Action | functionOrCall }} }{% endif %}
+{% if element.values.FontAwesomeStyle %}{{ element.values.FontAwesomeStyle }}{% endif %}
 >
   {{ content | raw }}
-</Icon>
+</{{ tag }}>
