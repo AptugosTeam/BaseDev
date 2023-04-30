@@ -75,7 +75,7 @@ options:
     type: checkbox
     options: ''
     settings:
-      default: true
+      default: false
   - name: elementsLimit
     display: Elements Per Page
     type: text
