@@ -33,6 +33,44 @@
         
       ]
     },
-    { "key": "Firebase", "name": "Firebase DB" }
+    {
+      "key": "Firebase",
+      "name": "Firebase DB",
+      "extraProperties": [
+        {
+          "key": "projectId",
+          "label": "Project ID",
+          "helperText": "Copy the value for project_id at serviceAccount.json"
+        },
+        {
+          "key": "clientEmail",
+          "label": "Client Email",
+          "helperText": "Copy the value for client_email at serviceAccount.json"
+        },
+        {
+          "key": "privateKey",
+          "label": "Private Key",
+          "multiline": true,
+          "helperText": "Copy the value for private_key at serviceAccount.json"
+        }  
+      ],
+      "extraActions": [
+        {
+          "key": "collections",
+          "text": "Select Collection",
+          "type": "select",
+          "title": "Select collection to Import",
+          "propertyToUpdate": "collection",
+          "selectAction": "fields"
+        },
+        {
+          "key": "fields",
+          "text": "Select Fields",
+          "type": "allToFields",
+          "title": "Select fields to Import",
+          "propertyToUpdate": "fields"
+        }
+      ]
+    }
   ]
 }

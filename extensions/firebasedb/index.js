@@ -3,27 +3,29 @@ const splitargs = require('splitargs')
 
 const firebaseSidecar = {
   db: null,
-  connect: () => {
+  connect: (arguments) => {
     const { initializeApp, cert } = require('firebase-admin/app')
     const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore')
-  
-    const serviceAccount = require('./rtadmin-789e3-firebase-adminsdk-3yhbc-725810a243.json')
-  
+
     initializeApp({
-      credential: cert(serviceAccount)
+      credential: cert({
+        project_id: arguments.projectId,
+        client_email: arguments.clientEmail,
+        private_key: arguments.privateKey
+      })
     })
     
     firebaseSidecar.db = getFirestore()
     return 'ok'
   },
-  listCollections: () => {
-    if (!firebaseSidecar.db) firebaseSidecar.connect()
+  listCollections: (arguments) => {
+    if (!firebaseSidecar.db) firebaseSidecar.connect(arguments)
     return firebaseSidecar.db.listCollections().then(collections => {
       return collections.map(coll => coll.path)
     })
   },
   getFieldsFromCollection: (arguments) => {
-    if (!firebaseSidecar.db) firebaseSidecar.connect()
+    if (!firebaseSidecar.db) firebaseSidecar.connect(arguments)
     const collectionName = arguments.collection
     const collectionRef = firebaseSidecar.db.collection(collectionName)
     return collectionRef.get().then((querySnapshot) => {
@@ -51,10 +53,10 @@ const firebaseSidecar = {
 
     switch (cmd) {
       case 'connect':
-        output = firebaseSidecar.connect()
+        output = firebaseSidecar.connect(subcmd)
         break
       case 'collections':
-        output = firebaseSidecar.listCollections()
+        output = firebaseSidecar.listCollections(subcmd)
         break
       case 'fields':
         output = firebaseSidecar.getFieldsFromCollection(subcmd)
