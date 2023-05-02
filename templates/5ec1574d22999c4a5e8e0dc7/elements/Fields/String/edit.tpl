@@ -27,6 +27,7 @@ import TextField from '@mui/material/TextField'
     variant="{{ element.values.variant|default('standard') }}"
     value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
+    {% if element.values.onBlur %}onBlur={ {{ element.values.onBlur | functionOrCall }} }{% endif %}
     error={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}'}
     helperText={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}' && {{ tableName | lower }}Data.errMessage}
 />

@@ -68,6 +68,11 @@ options:
   - name: autocomplete
     display: Autofilling Input
     type: text
+  - name: onBlur
+    display: On Focus Lost
+    type: function
+    options: ''
+    advanced: true
 children: []
 */
 {% set bpr %}
