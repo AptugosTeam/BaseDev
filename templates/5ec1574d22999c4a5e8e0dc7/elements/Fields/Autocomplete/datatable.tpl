@@ -15,4 +15,6 @@ children: []
     {% set referencedString = referencedString ~ '.' ~ (referencedField.column_name | friendly) %}
   {% endif %}
 {% endif %}
-{ id: '{{ referencedString }}', header: '{{ field.column_name }}', type: 'string', size: 300, renderValue: (cell) => { return cell.getValue() || '---'} },
+{ id: '{{ referencedString }}', header: '{{ field.displaylabel|default(field.column_name) }}', type: 'string', size: 300, renderValue: (cell) => { const value = cell.getValue()
+                            if (typeof value === 'object') return value.{{ referencedField.column_name | friendly }}
+                            else return value || '---'} },

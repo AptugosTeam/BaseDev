@@ -72,7 +72,7 @@ const searchFor{{ table.name | friendly }} = (event, field = null) => {
   {% set searchFieldParams = {
     element: {
       values: { 
-        onChange: '(e) => { searchFor' ~ table.name|friendly  ~ '(e, "' ~ (element.values.searchField | fieldData).column_name ~ '") }', placeholder: element.values.placeholderText | default('Search ' ~ table.singleName|friendly ~ '...'), variant: 'outlined', margin: 'normal', className: 'theme.extensibleInput' } } } %}
+        onChange: '(e) => { searchFor' ~ table.name|friendly  ~ '(e, "' ~ (element.values.searchField | fieldData).column_name ~ '") }', placeholder: element.values.placeholderText | default('Search ' ~ table.singleName|friendly ~ '...'), variant: 'outlined', size: 'small', margin: 'dense', className: 'theme.extensibleInput' } } } %}
 {% else %}
   {% set searchFieldParams = { element: { values: { onChange: 'searchFor' ~ table.name|friendly, placeholder: element.values.placeholderText | default('Search ' ~ table.singleName|friendly ~ '...'), variant: 'outlined', size: 'small', margin: 'dense', className: 'theme.extensibleInput' } } } %}
 {% endif %}

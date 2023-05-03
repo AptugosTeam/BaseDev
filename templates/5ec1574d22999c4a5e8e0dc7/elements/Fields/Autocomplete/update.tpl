@@ -4,6 +4,10 @@ completePath: elements/Fields/Autocomplete/update.tpl
 unique_id: zd6mrTlU
 */
 {% set reference = field.reference | fieldData %}
+{% set fieldInfo = field | fieldData %}
+{% if fieldInfo.table.subtype == 'Firebase' %}
+  {% include includeTemplate('updateFirebase.tpl') %}
+{% else %}
 {% if field.relationshipType == 'm:1' %}
   if (data.{{ field.column_name | friendly }} === 'null') data.{{ field.column_name | friendly }} = null
   updatedData['{{ field.column_name | friendly }}'] = {}
@@ -89,4 +93,4 @@ unique_id: zd6mrTlU
       updatedData['{{ field.column_name | friendly }}'] = data.{{ field.column_name | friendly }}
   }
 {% endif %}
-
+{% endif %}

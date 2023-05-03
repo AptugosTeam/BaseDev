@@ -67,4 +67,7 @@ options:
     type: checkbox
 children: []
 */
+{% if not field %}
+{% set field = element.values.Field | fieldData %}
+{% endif %}
 {% include includeTemplate(['Fields' ~ field.data_type ~'datatable.tpl', 'Fieldsdatatable.tpl']) %}

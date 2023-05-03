@@ -53,12 +53,14 @@ import DataTable from '../components/DataTable/dataTable'
   tableData={ {{ tableData }} }
   pages={Math.ceil({{ tableName|lower }}Data.totalDocs / {{ innervarname }}loadoptions.limit)}
   columnInfo={[
-    {% for field in fields %}
-      {% set innerParams = { 'element': { values: { 'Field': field.unique_id } } } %}
-      {% include includeTemplate('dtfield.tpl') with innerParams %}
-    {% endfor %}
+    {% if not element.children %}
+      {% for field in fields %}
+        {% set innerParams = { 'element': { values: { 'Field': field.unique_id } } } %}
+        {% include includeTemplate('dtfield.tpl') with innerParams %}
+      {% endfor %}
+    {% endif %}
     {% for child in element.children %}
-      { id: '{{ child.name }}', type: 'string', size: 300, renderValue: (cell) => {{ child.rendered }}},
+      {{ child.rendered }}
     {% endfor %}
   ]}
   onRequestPaginate={(options) => {

@@ -9,13 +9,6 @@ icon: ico-field
   {% set fieldInfo = fieldInfo|merge({'dataType': '[' ~ fieldInfo.dataType ~ ']'}) %}
 {% endif %}
 {% set datatype = fieldInfo.dataType %}
-{% if output.fieldInfo.relationshipType == 'm:1' %}
-  {{ add_setting('BackendPackages', '"mongoose-autopopulate" : "latest",') }}
-  {% set extraPlugins = friendlyTableName ~ "Schema.plugin(mongooseAutoPopulate)" %}
-  {% set extraImports = "const mongooseAutoPopulate = require('mongoose-autopopulate')\n" %}
-  {% set relatedFieldInfo = fieldInfo.reference | fieldData %}
-  {% set datatype = '{\ntype:' ~ fieldInfo.dataType ~ ',\nref: ' ~ '"' ~ relatedFieldInfo.table.name | friendly ~ '"' ~ ',\nautopopulate: true\n' ~ '}\n' %}
-{% endif %}
 {% set friendlyColumnName = field.column_name | friendly  %}
 {% set rawString = friendlyColumnName ~ ': ' ~  datatype  ~ ',' %}
 {% set output = output.merge({
