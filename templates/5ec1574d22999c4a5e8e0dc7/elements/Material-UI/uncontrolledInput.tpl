@@ -48,6 +48,9 @@ options:
     display: Type
     type: dropdown
     options: text;password;date;number;textarea
+    settings:
+      default: text
+      active: true
   - name: minRows
     display: MinRows
     type: text
