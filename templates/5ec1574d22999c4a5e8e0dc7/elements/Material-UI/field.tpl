@@ -73,6 +73,16 @@ options:
     type: function
     options: ''
     advanced: true
+  - name: limit
+    display: Limit of Elements
+    type: text
+    options: ''
+    advanced: true
+  - name: sortMethod
+    display: Sort Method
+    type: dropdown
+    options: desc;asc
+    advanced: true
 children: []
 */
 {% set bpr %}
