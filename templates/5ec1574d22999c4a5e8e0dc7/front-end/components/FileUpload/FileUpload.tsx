@@ -147,6 +147,7 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
     if (state.file && state.file.type === 'application/pdf') return <PictureAsPdf sx={classes.image} />
     var src = state.selectedFile || `/img/${state.fileName}`
     if (!state.selectedFile && !state.fileName) {
+      if (Object.keys(props.value).length === 0) return
       src = `/img/${props.value}`
     }
     return (
