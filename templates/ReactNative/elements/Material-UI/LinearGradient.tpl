@@ -1,23 +1,29 @@
 /*
 path: LinearGradient.tpl
-type: file
-unique_id: hdalkyeA
-icon: ico-button
-options: []
-sourceType: javascript
-children: []
-settings: 
-  - name: Packages
-    value: '"expo-linear-gradient": "^12.0.1",'
+completePath: >-
+  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/ReactNative/elements/Material-UI/LinearGradient.tpl
+keyPath: elements/Material-UI/LinearGradient.tpl
+unique_id: WSocKGyO
+options:
+  - name: from
+    display: From Color
+    type: text
+  - name: to
+    display: To Color
+    type: text
+  - name: class
+    display: ClassName
+    type: text
+    options: ''
 */
-
 {% set bpr %}
 import { LinearGradient } from 'expo-linear-gradient';
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <LinearGradient
-        colors={['#000000', '#343c46']}
-        locations={[0, 0.9]}
-      >
-      {{ content | raw }}
-      </LinearGradient>
+  {% if element.values.class %}style={ {{element.values.class}} }{% endif %}
+  colors={['{{ element.values.from|default('#000000')}}', '{{ element.values.to|default('#343c46')}}']}
+  locations={[0, 0.9]}
+>
+  {{ content | raw }}
+</LinearGradient>

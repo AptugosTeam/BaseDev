@@ -16,10 +16,16 @@ options:
     display: ClassName
     type: text
     options: ''
+  - name: lines
+    display: Display lines
+    type: text
 children: []
 */
 {% set bpr %}
 import { Text } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-<Text {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}>{{ element.values.Content | raw }}{{ content | raw }}</Text>
+<Text
+  {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
+  {% if element.values.lines %}numberOfLines={ {{ element.values.lines }} }{% endif %}
+>{{ element.values.Content | raw }}{{ content | raw }}</Text>

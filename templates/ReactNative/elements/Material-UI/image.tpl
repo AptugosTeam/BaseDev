@@ -49,6 +49,12 @@ options:
     display: Use as Background
     type: checkbox
     options: ''
+  - name: imageStyles
+    display: Extra Styles for the image property
+    type: text
+    settings:
+      propertyCondition: background
+      condition: true
 */
 {% set tag = 'Image' %}
 {% if element.values.background %}{%set tag = 'ImageBackground' %}{% endif %}
@@ -85,7 +91,8 @@ import { {{tag}} } from 'react-native'
 {% else %}
 <{{tag}}
   {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
-  source={ { uri: `{{ path }}` } }
+  source={ { uri: {{ path | textOrVariable }} } }
   {% if element.values.style %}style={ { {{element.values.style}} } }{% endif %}
-/>
+  {% if element.values.imageStyles %}imageStyle={ { {{element.values.imageStyles}} } }{% endif %}
+>{{ content | raw }}</{{tag}}>
 {% endif %}
