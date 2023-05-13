@@ -65,6 +65,30 @@ options:
   - name: autosave
     display: Autosave on Change
     type: checkbox
+  - name: autocomplete
+    display: Autofilling Input
+    type: text
+  - name: onBlur
+    display: On Focus Lost
+    type: function
+    options: ''
+    advanced: true
+  - name: limit
+    display: Limit of Elements
+    type: text
+    options: ''
+    advanced: true
+  - name: sortMethod
+    display: Sort Method
+    type: dropdown
+    options: desc;asc
+    advanced: true
+  - name: sortLanguage
+    display: Sort Language
+    type: dropdown
+    options: 
+      return [['en', 'English'],['es', 'Spanish']]
+    advanced: true
 children: []
 */
 {% set bpr %}

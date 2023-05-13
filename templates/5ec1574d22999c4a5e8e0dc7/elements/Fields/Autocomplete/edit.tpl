@@ -42,10 +42,11 @@ const typeInSearch{{ field.column_name | friendly }}{{ referencedTable }} = (typ
     searchString: typedIn, 
     searchField: '{{ referencedField.column_name | friendly }}', 
     page: 1, 
-    limit: {{element.values.limit|default(25)}},
+    limit: {{ element.values.limit|default(25) }},
     {% if element.values.sortMethod %}
     sort: { field: '{{ referencedField.column_name | friendly }}', method: '{{ element.values.sortMethod | default('desc') }}' },
     {% endif %}
+    sortLanguage: '{{ element.values.sortLanguage|default('en') }}',
   }
   axios.get('{{ settings.apiURL }}/api/{{ referencedTable | lower }}/search/', { params: searchOptions }).then(result => { 
     set{{ columnName }}Options(result.data.docs.map({{ referencedField.table.singleName | friendly | lower }} => { return { label: {{ referencedField.table.singleName | friendly | lower }}.{{ referencedField.column_name | friendly }}, value: {{ referencedField.table.singleName | friendly | lower }}.{{ referencekey }} }}))

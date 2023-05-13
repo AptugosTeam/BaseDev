@@ -102,6 +102,7 @@ exports.findAll = (options) => {
 
   {{ table.name | friendly }}.find()
   .sort( query.sort && { [query.sort.field]: query.sort.method === 'desc' ? 1 : -1 })
+  .collation({ locale: query.sortLanguage, strength: 1 })
    {% for field in table.fields %}
     {% set fieldWithData = field | fieldData %}
     {% include includeTemplate(['Fields' ~ field.data_type ~'find.tpl', 'Fieldsfind.tpl']) %}
@@ -144,6 +145,7 @@ exports.find = (options) => {
 
     {{ table.name | friendly }}.find(findString)
     .sort( query.sort && { [query.sort.field]: query.sort.method === 'DESC' ? 1 : -1 })
+    .collation({ locale: query.sortLanguage, strength: 1 })
     {% for field in table.fields %}
       {% set fieldWithData = field | fieldData %}
       {% include includeTemplate(['Fields' ~ field.data_type ~'find.tpl', 'Fieldsfind.tpl']) %}

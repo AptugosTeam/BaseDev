@@ -84,6 +84,11 @@ options:
     display: Sort Method
     type: dropdown
     options: desc;asc
+  - name: sortLanguage
+    display: Sort Language
+    type: dropdown
+    options: 
+      return [['en', 'English'],['es', 'Spanish']]
   - name: elementsLimit
     display: Limit of Elements
     type: text
@@ -154,8 +159,11 @@ const [{{ innervarname }}loadoptions, set{{ innervarname }}loadoptions] = React.
   populate: {% if element.values.donotpopulate %}false{% else %}true{% endif %},
   limit: {{ element.values.elementsLimit|default(25) }},
   sort: { field: {{ element.values.sortColumn | default('null') }}, method: '{{ element.values.sortMethod | default('DESC') }}' },
-  {% if element.values.fieldToSearch %}searchField: {{ element.values.fieldToSearch | textOrVariable }},{% endif %}
-  totalItems: 0
+  {% if element.values.fieldToSearch %}
+    searchField: {{ element.values.fieldToSearch | textOrVariable }},
+  {% endif %}
+  totalItems: 0,
+  sortLanguage: '{{ element.values.sortLanguage|default('en') }}',
 })
 const perform{{ innervarname }}load = (options) => {
   {% if element.values.searchString %}

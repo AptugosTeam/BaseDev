@@ -83,6 +83,12 @@ options:
     type: dropdown
     options: desc;asc
     advanced: true
+  - name: sortLanguage
+    display: Sort Language
+    type: dropdown
+    options: 
+      return [['en', 'English'],['es', 'Spanish']]
+    advanced: true
 children: []
 */
 {% set bpr %}
