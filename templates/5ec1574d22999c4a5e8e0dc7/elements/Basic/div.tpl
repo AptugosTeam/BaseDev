@@ -40,12 +40,22 @@ options:
       default: 'div'
       active: true
     advanced: true
+  - name: title
+    display: Use Name as Title Property
+    type: checkbox
+    settings:
+      default: false    
+    advanced: true
 children: []
 helpText: Basic HTML Div element
 */
 {% set tag = element.values.tag|default('div') %}
 <{{tag}}
-  title="{{ element.name }}"
+  {% if element.values.title %}
+    title="{{ element.name }}"
+  {% else %}
+    data-title="{{ element.name }}"
+  {% endif %}
   {% if element.values.useid %}
     id="{{ element.unique_id }}"
   {% elseif element.values.id %}
