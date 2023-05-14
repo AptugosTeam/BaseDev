@@ -41,6 +41,32 @@ options:
     display: On Failure
     type: text
     options: ''
+  - name: shape
+    display: Shape
+    type: dropdown
+    options: 
+      return [ [ 'default', 'Default' ], [ 'circle', 'Circle' ], [ 'rectangular', 'Rectangular' ], [ 'pill', 'Pill' ], [ 'square', 'Square' ] ]
+    settings:
+      default: 'default'
+  - name: size
+    display: Size
+    type: dropdown
+    options: 
+      return [ [ 'default', 'Default' ], [ 'small', 'Small' ], [ 'medium', 'Medium' ], [ 'large', 'Large' ] ]
+    settings:
+      default: 'default'
+  - name: icon
+    display: Icon
+    type: checkbox
+    settings:
+      default: false
+  - name: language
+    display: Language
+    type: dropdown
+    options: 
+      return [ [ 'default', "Browser's Default Language" ], [ 'en_US', 'English' ], [ 'es_AR', 'Spanish' ] ]
+    settings:
+      default: 'default'
 extraFiles:
   - source: 'elements/Interact/Google API/999_gmailservice.js'
     destination: 'front-end/services/gmail.service.js'
@@ -58,5 +84,19 @@ import { GoogleLogin } from '@react-oauth/google'
     const userInfo = AptugoGmail.getUserInfo(responseGoogle.credential)
     {{ content | raw }}
   }}
-  {% if element.values.onFailure %}onError={ {{ element.values.onFailure | functionOrCall }} }{% endif %}
+  {% if element.values.onFailure %}
+    onError={ {{ element.values.onFailure | functionOrCall }} }
+  {% endif %}
+  {% if element.values.shape and element.values.shape != "default" %}
+    shape='{{ element.values.shape }}'
+  {% endif %}
+  {% if element.values.size and element.values.size != "default" %}
+    size='{{ element.values.size }}'
+  {% endif %}
+  {% if element.values.language and element.values.language != "default" %}
+    locale='{{ element.values.language }}'
+  {% endif %}
+  {% if element.values.icon %}
+    type="icon"
+  {% endif %}
 />
