@@ -99,7 +99,7 @@ exports.findAll = (options) => {
   if (typeof query.populate === 'undefined') query.populate = 'true'
   const data = options.req ? options.req.body : options.data
   if (typeof query.sort === 'string') query.sort = JSON.parse(query.sort)
-
+  if (!query.sortLanguage) query.sortLanguage = 'en';
   {{ table.name | friendly }}.find()
   .sort( query.sort && { [query.sort.field]: query.sort.method === 'desc' ? 1 : -1 })
   .collation({ locale: query.sortLanguage, strength: 1 })
@@ -142,7 +142,7 @@ exports.find = (options) => {
       })
     }
     if (typeof query.sort === 'string') query.sort = JSON.parse(query.sort)
-
+    if (!query.sortLanguage) query.sortLanguage = 'en';
     {{ table.name | friendly }}.find(findString)
     .sort( query.sort && { [query.sort.field]: query.sort.method === 'DESC' ? 1 : -1 })
     .collation({ locale: query.sortLanguage, strength: 1 })

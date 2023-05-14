@@ -99,7 +99,7 @@ exports.findAll = (options) => {
   if (typeof query.populate === 'undefined') query.populate = 'true'
   const data = options.req ? options.req.body : options.data
   if (typeof query.sort === 'string') query.sort = JSON.parse(query.sort)
-
+  if (!query.sortLanguage) query.sortLanguage = 'en';
   const findString = {}
   if (query.fixedSearch) {
     query.fixedSearch = JSON.parse(query.fixedSearch)
@@ -149,7 +149,7 @@ exports.find = (options) => {
       })
     }
     if (typeof query.sort === 'string') query.sort = JSON.parse(query.sort)
-
+    if (!query.sortLanguage) query.sortLanguage = 'en';
     if (query.fixedSearch) {
       query.fixedSearch = JSON.parse(query.fixedSearch)
       findString[query.fixedSearch.field] = { $regex: new RegExp(query.fixedSearch.value, 'i') }
