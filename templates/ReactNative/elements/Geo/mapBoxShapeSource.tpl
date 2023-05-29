@@ -2,34 +2,24 @@
 path: mapBoxShapeSource.tpl
 keyPath: elements/Geo/mapBoxShapeSource.tpl
 unique_id: TDNt7sPp
+icon: ico-leaflet
+options:
+  - name: onPress
+    display: On Press
+    type: function
 */
 {% set bpr %}
-import { ShapeSource } from '@rnmapbox/maps'
+import { ShapeSource, CircleLayer, SymbolLayer } from '@rnmapbox/maps'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
+{% set ph %}
+const shapeSource = React.useRef<ShapeSource>(null)
+{% endset %}
+{{ save_delayed('ph',ph)}}
 <ShapeSource
-  id="earthquakes"
+  id="{{ element.unique_id }}"
   onPress={async (pressedShape) => {
-    if (shapeSource.current) {
-      try {
-        const [cluster] = pressedShape.features;
-
-        const collection = await shapeSource.current.getClusterLeaves(
-          cluster,
-          999,
-          0,
-        );
-
-        setSelectedCluster(collection);
-      } catch {
-        if (!pressedShape.features[0].properties?.cluster) {
-          setSelectedCluster({
-            type: 'FeatureCollection',
-            features: [pressedShape.features[0]],
-          });
-        }
-      }
-    }
+    {{ element.values.onPress | raw }}
   }}
   ref={shapeSource}
   cluster
@@ -56,6 +46,12 @@ import { ShapeSource } from '@rnmapbox/maps'
       ['+', ['accumulated'], ['get', 'mag5']],
       ['case', mag5, 1, 0],
     ],
-  }}
-  shape={earthQuakesJSON as unknown as any}
->{{ content | raw }}</ShapeSource>
+  } }
+  shape={theData as unknown as any}
+>
+  <SymbolLayer id="pointCount" style={layerStyles.clusterCount} />
+
+  <CircleLayer id="clusteredPoints" belowLayerID="pointCount" filter={['has', 'point_count']} style={layerStyles.clusteredPoints} />
+
+  <CircleLayer id="singlePoint" filter={['!', ['has', 'point_count']]} style={layerStyles.singlePoint} />
+</ShapeSource>

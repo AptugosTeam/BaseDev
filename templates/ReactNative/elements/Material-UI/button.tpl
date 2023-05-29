@@ -18,6 +18,10 @@ options:
     display: ClassName
     type: text
     options: ''
+  - name: labelStyle
+    display: ClassName for Label
+    type: text
+    options: ''
 sourceType: javascript
 children: []
 */
@@ -27,5 +31,6 @@ import { Button } from 'react-native-paper'
 {{ save_delayed('bpr', bpr ) }}
 <Button
   {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
+  {% if element.values.labelStyle %}labelStyle={ {{ element.values.labelStyle }} }{% endif %}
   {% if element.values.Action %}onPress={ {{ element.values.Action | functionOrCall }} }{% endif %}
 >{% if element.values.ButtonText %}{{ element.values.ButtonText }}{% endif %}{{ content | raw }}</Button>

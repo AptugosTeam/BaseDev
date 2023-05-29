@@ -11,7 +11,7 @@ subtype: Any
 {% set tableNameLow = table.name | friendly | lower %}
 {% set tableNameUp = table.name | friendly | upper %}
 
-import produce from 'immer'
+import {produce} from 'immer'
 import { ApiStatus, Ipaginated{{ tableNameCap }}, I{{ tableNameCap }}Item } from '../models'
 import { {{ tableNameCap }}Action, {{ tableNameCap }}ActionTypes } from '../actions/{{ tableNameLow }}Actions'
 

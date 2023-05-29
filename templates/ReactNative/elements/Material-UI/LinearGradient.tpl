@@ -15,6 +15,9 @@ options:
     display: ClassName
     type: text
     options: ''
+settings:
+  - name: Packages
+    value: '"expo-linear-gradient": "~12.1.2",'
 */
 {% set bpr %}
 import { LinearGradient } from 'expo-linear-gradient';

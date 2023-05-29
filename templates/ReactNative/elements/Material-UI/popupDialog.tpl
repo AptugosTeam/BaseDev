@@ -3,39 +3,42 @@ path: popupDialog.tpl
 type: file
 unique_id: Rm5aRBZI
 icon: ico-pop-up-dialog
+sourceType: javascript
 options:
-  - name: open
-    display: Open Variable
+  - name: visible
+    display: Visible (boolean)
     type: text
-    options: ''
   - name: onclose
     display: On Close
+    type: function
+  - name: dimClass
+    display: Dimm Styles
     type: text
-    options: ''
-  - name: maxWidth
-    display: Max Width
-    type: dropdown
-    options: false;'xs';'sm';'md';'lg';'xl'
-sourceType: javascript
-childs:
-  - name: Title
-    element: dialogTitle
-  - name: Content
-    element: dialogContent
-  - name: Actions
-    element: dialogActions
+  - name: viewClass
+    display: Popup Styles
+    type: text
 children: []
 */
-
-
 {% set bpr %}
-import Dialog from '@mui/material/Dialog'
+import {  Portal } from 'react-native-paper'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<Dialog
-  open={ {{ element.values.open }} }
-  onClose={ {{ element.values.onclose }}}
-  maxWidth={ {{ element.values.maxWidth }} }
->
-{{ content | raw }}
-</Dialog>
+{% set bpr %}
+import { TouchableOpacity, Modal } from 'react-native'
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
+<Portal>
+  <Modal
+    animationType="fade"
+    transparent={true}
+    visible={ {{ element.values.visible }}}
+    onDismiss={ {{ element.values.onclose |functionOrCall }} }
+    onRequestClose={ {{ element.values.onclose |functionOrCall }} }
+  >
+    <TouchableOpacity {% if element.values.dimClass %}style={ {{ element.values.dimClass }}}{% endif %} onPress={ {{ element.values.onclose |functionOrCall }} }>
+      <TouchableOpacity {% if element.values.viewClass %}style={ {{ element.values.viewClass }}}{% endif %} activeOpacity={1} >
+        {{ content | raw }}
+      </TouchableOpacity>
+    </TouchableOpacity>
+  </Modal>
+</Portal>

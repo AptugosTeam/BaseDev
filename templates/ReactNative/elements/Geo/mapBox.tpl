@@ -36,22 +36,34 @@ options:
   - name: scaleBarPosition
     display: ScaleBar Position
     type: text
+  - name: ref
+    display: Use Reference
+    type: text
+    options: ''
+  - name: onMapIdle
+    display: On Map Idle
+    type: function
 settings:
   - name: Packages
-    value: '"@rnmapbox/maps": "github:rnmapbox/maps#main",'
+    value: '"expo-dev-client": "~2.2.1","@rnmapbox/maps": "github:rnmapbox/maps#main",'
 */
 {% set bpr %}
-import { MapView } from '@rnmapbox/maps'
+import { MapView, setAccessToken } from '@rnmapbox/maps'
+setAccessToken('{{ element.values.accessToken }}')
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 <MapView
+  {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
   logoEnabled={ {{element.values.logoEnabled|default(true)}}}
   compassEnabled={ {{element.values.compassEnabled|default(false)}}}
   rotateEnabled={ {{element.values.rotateEnabled|default(true)}}}
   attributionEnabled={ {{element.values.attributionEnabled|default(true)}}}
   scaleBarEnabled={ {{element.values.scaleBarEnabled|default(true)}}}
   {% if element.values.scaleBarEnabled %}scaleBarPosition={ {{element.values.scaleBarPosition|default('{ bottom: 8, left: 8}')}} }{% endif %}
-  style={ {{ element.values.className}} }
+  {% if element.values.className %}style={ {{ element.values.className}} }{% endif %}
+  {% if element.values.onMapIdle %}
+    onMapIdle={ {{ element.values.onMapIdle |functionOrCall }} }
+  {% endif %}
 >{{ content | raw }}</MapView>
 
 
