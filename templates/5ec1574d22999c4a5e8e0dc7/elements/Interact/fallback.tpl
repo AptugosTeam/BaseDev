@@ -8,6 +8,6 @@ children: []
 */
 {% set IBA %}
 {{ content | raw }}
-{% enset %}
+{% endset %}
 {{ add_setting('FallBack', IBA) }}
 
