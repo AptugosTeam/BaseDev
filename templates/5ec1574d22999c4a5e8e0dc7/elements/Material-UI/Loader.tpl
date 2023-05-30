@@ -14,6 +14,12 @@ options:
     display: Extra Styles
     type: text
     options: ''
+  - name: Color
+    display: Color
+    type: dropdown
+    options: default;inherit;primary;secundary;error;info;succes;warning
+    settings:
+      default: primary
 children: []
 */
 {% set bpr %}
@@ -27,4 +33,5 @@ import CircularProgress from '@mui/material/CircularProgress';
   {% if element.values.sx %}
     sx={ { {{ element.values.sx }} } }
   {% endif %}
+  {% if element.values.Color %}color='{% if element.values.Color == 'default' %}inherit{% else %}{{ element.values.Color }}{% endif %}'{% endif %}
 />
