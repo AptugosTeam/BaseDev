@@ -12,6 +12,9 @@ options:
   - name: onUpdate
     display: On Update
     type: function
+settings:
+  - name: Packages
+    value: '"expo-location": "~15.1.1",'
 */
 {% set bpr %}
 import * as Location from 'expo-location'

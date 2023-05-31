@@ -91,7 +91,7 @@ import { {{tag}} } from 'react-native'
 {% else %}
 <{{tag}}
   {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
-  source={ { uri: {{ path | textOrVariable }} } }
+  source={ { uri: {{ path | textOrVariableInCode }} } }
   {% if element.values.style %}style={ { {{element.values.style}} } }{% endif %}
   {% if element.values.imageStyles %}imageStyle={ { {{element.values.imageStyles}} } }{% endif %}
 >{{ content | raw }}</{{tag}}>
