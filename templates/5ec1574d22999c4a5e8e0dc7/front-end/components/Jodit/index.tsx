@@ -19,6 +19,7 @@ export default function JoditSetup(props) {
   } = props;
 
   let config = {
+    plugins: ['paste'],
     enableDragAndDropFileToEditor: false,
     readonly: readOnly,
     iframe: false,
@@ -51,14 +52,14 @@ export default function JoditSetup(props) {
   }
 
   function onPaste(e) {
+    let pastedItems = (e.clipboardData || e.originalEvent.clipboardData).items;
     const clipboardData = e.clipboardData || e.originalEvent.clipboardData;
-    let pastedItems = clipboardData.items;
     const pastedText = clipboardData.getData('text/plain');
+    updateState(pastedText);
     for (let index in pastedItems) {
       if (pastedItems[index].kind === 'file' && pastedItems.length < 4)
         new FileReader().readAsDataURL(pastedItems[index].getAsFile());
     }
-    updateState(pastedText);
   }
 
   function onDrop(e) {
