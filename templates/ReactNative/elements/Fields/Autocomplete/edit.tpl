@@ -9,6 +9,7 @@ settings:
     value: '"react-select": "^5.4.0",'
 children: []
 */
+{{ add_setting('OnDialogClose', '// agregue esto') }}
 {% set bpr %}
 import { useSelector } from 'react-redux'
 {% endset %}

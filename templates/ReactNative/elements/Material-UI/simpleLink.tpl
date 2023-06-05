@@ -32,12 +32,16 @@ sourceType: javascript
 children: []
 */
 {% set bpr %}
-import { TouchableOpacity } from "react-native"
+import { TouchableOpacity, Linking } from "react-native"
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <TouchableOpacity
   {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
+  {% if element.values.tagToUse == "A" %}
+  onPress={() => Linking.openURL( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
+  {% else %}
   onPress={() => navigation.push( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
+  {% endif %}
   key='{{ element.unique_id }}'
 >
   {{ content | raw }}
