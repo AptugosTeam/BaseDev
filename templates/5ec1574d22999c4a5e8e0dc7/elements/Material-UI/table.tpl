@@ -98,6 +98,14 @@ options:
   - name: defaultPage
     display: Default Page
     type: text
+  - name: sortColumn
+    display: Sort Column
+    type: text
+    options: ''
+  - name: sortMethod
+    display: Sort Method
+    type: dropdown
+    options: desc;asc
 children: []
 */
 {% set editProc = element.values.editProcedure|default('No') %}
@@ -127,7 +135,7 @@ children: []
   {% set innervarname = element.name | friendly %}
   {% set eleWithoutChilds = element %}
   {% set eleWithoutChilds = eleWithoutChilds|merge({'children': null}) %}
-  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage } %}
+  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage, 'sortColumn':element.values.sortColumn, sortMethod: element.values.sortMethod, 'fixedSearchField': element.values.fixedSearchField, 'fixedSearchString': element.values.fixedSearchString } %}
   {% if element.children %}
       {% for field in element.children %}
         {% if field.values.Field == 'useVar' %}
