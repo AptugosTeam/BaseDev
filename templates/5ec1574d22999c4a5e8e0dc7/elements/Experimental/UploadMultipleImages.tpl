@@ -83,6 +83,7 @@ import MultipleFileUpload from '../components/MultipleFileUpload'
     }
   }{% endif %}
   {% if element.values.useAsset %}src={{ path | textOrVariable }}{% endif %}
-
-
+  {% if width %}width={{ width | textOrVariable }}{% endif %}
+  {% if height %}height={{ height | textOrVariable }}{% endif %}
+  {% if element.values.alt %}alt={{ element.values.alt | textOrVariable }}{% endif %}
 />
