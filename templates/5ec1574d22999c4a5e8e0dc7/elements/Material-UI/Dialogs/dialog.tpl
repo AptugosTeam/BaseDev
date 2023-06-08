@@ -138,7 +138,6 @@ import AddDialog from '../components/Dialog/Dialog'
         const cleanData:any = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== null && v !== '' && (v.length !== 0 || v.length === undefined)));
         {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(cleanData)) : dispatch(edit{{ table.name | friendly | capitalize }}(cleanData))
       }
-      {{ insert_setting('OnDialogClose') | raw }}
     {% endif %}
   } }
   color='{{ element.values.color }}'
