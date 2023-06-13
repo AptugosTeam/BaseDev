@@ -41,6 +41,19 @@ options:
     display: Type
     type: dropdown
     options: text;password;date;number;textarea
+  - name: leftIcon
+    display: Icon (left size)
+    type: dropdown
+    options: email-outline;eye
+  - name: underlineColor
+    display: Underline Color
+    type: text
+  - name: activeUnderlineColor
+    display: Underline Color (Active)
+    type: text
+  - name: placeholderTextColor
+    display: PlaceHolder Text Color
+    type: text
 children: []
 */
 {% set bpr %}
@@ -65,4 +78,8 @@ import { TextInput } from 'react-native-paper'
     activeOutlineColor='#3A528A'
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChangeText={ {{ element.values.onChange | replace({ '.target.value': '' }) | functionOrCall }} }{% endif %}
+    {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
+    {% if element.values.activeUnderlineColor %}activeUnderlineColor={ {{ element.values.activeUnderlineColor | textOrVariable }}}{% endif %}
+    {% if element.values.placeholderTextColor %}placeholderTextColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif %}
+    {% if element.values.leftIcon %}left={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} icon='{{element.values.leftIcon}}' />}{% endif %}
 />

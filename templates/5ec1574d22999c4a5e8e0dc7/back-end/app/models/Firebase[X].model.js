@@ -25,7 +25,7 @@ try {
 } catch(e) {}
 
 const db = getFirestore()
-const {{ friendlyTableName }}Collection = db.collection('{{ table.collection }}')
+const usersCollection = db.collection('{{ table.collection }}')
 
 const {{ friendlyTableName }}Schema = {
   {% for field in table.fields %}
@@ -47,12 +47,9 @@ const {{ friendlyTableName }}Schema = {
 }
 
 const {{ friendlyTableName }}Model = {
-  returnModel: () => {
-    return {{ friendlyTableName }}Collection
-  },
   create: async function(userData, returnRef = false) {
     try {
-      const docRef = await {{ friendlyTableName }}Collection.add(userData)
+      const docRef = await usersCollection.add(userData)
       return returnRef ? docRef : docRef.id
     } catch (error) {
       console.error(error)
@@ -62,7 +59,7 @@ const {{ friendlyTableName }}Model = {
 
   getById: async function(id) {
     try {
-      const doc = await {{ friendlyTableName }}Collection.doc(id).get()
+      const doc = await usersCollection.doc(id).get()
       if (!doc.exists) {
         return null
       }
@@ -75,7 +72,7 @@ const {{ friendlyTableName }}Model = {
 
   updateById: async function(id, userData) {
     try {
-      await {{ friendlyTableName }}Collection.doc(id).update(userData)
+      await usersCollection.doc(id).update(userData)
       return true
     } catch (error) {
       console.error(error)
@@ -85,7 +82,7 @@ const {{ friendlyTableName }}Model = {
 
   deleteById: async function(id) {
     try {
-      await {{ friendlyTableName }}Collection.doc(id).delete()
+      await usersCollection.doc(id).delete()
       return true
     } catch (error) {
       console.error(error)
@@ -95,10 +92,10 @@ const {{ friendlyTableName }}Model = {
 
   find: async function(options = {}) {
     try {
-      const totalDocs = await (await {{ friendlyTableName }}Collection.count().get()).data().count
+      const totalDocs = await (await usersCollection.count().get()).data().count
       const limit = Number(options.limit) || 10
       const page = Number(options.page) || 1
-      let query = {{ friendlyTableName }}Collection
+      let query = usersCollection
       query = query.offset((page - 1) * limit).limit(limit)
       const snapshot = await query.get()
       return await {{ friendlyTableName }}Model.paginateAndFill(snapshot, { ...options, totalDocs: totalDocs })
@@ -109,7 +106,7 @@ const {{ friendlyTableName }}Model = {
   },
 
   search: async function (searchField, searchTerm, options = {}) {
-    let query = {{ friendlyTableName }}Collection
+    let query = usersCollection
     query = query.where(searchField, '>=', searchTerm).where(searchField, '<=', searchTerm + '\uf8ff')
     const snapshot = await query.get()
     return await {{ friendlyTableName }}Model.paginateAndFill(snapshot, options)

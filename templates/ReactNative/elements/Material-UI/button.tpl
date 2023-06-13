@@ -22,6 +22,10 @@ options:
     display: ClassName for Label
     type: text
     options: ''
+  - name: type
+    display: Type
+    type: dropdown
+    options: text;outlined;contained;elevated;contained-tonal
 sourceType: javascript
 children: []
 */
@@ -31,6 +35,7 @@ import { Button } from 'react-native-paper'
 {{ save_delayed('bpr', bpr ) }}
 <Button
   {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
+  {% if element.values.type %}mode={'{{ element.values.type }}'}{% endif %}
   {% if element.values.labelStyle %}labelStyle={ {{ element.values.labelStyle }} }{% endif %}
   {% if element.values.Action %}onPress={ {{ element.values.Action | functionOrCall }} }{% endif %}
 >{% if element.values.ButtonText %}{{ element.values.ButtonText }}{% endif %}{{ content | raw }}</Button>

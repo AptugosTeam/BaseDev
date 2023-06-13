@@ -21,7 +21,6 @@ export interface AutocompleteProps {
   margin?: 'dense' | 'none' | 'normal'
   fullWidth?: boolean
   disabled?: any
-  add?: boolean
 }
 
 const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) => {
@@ -52,7 +51,7 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
     let options = []
 
     options.push(...props.options)
-    if (localValue.length > 2 && props.add) {
+    if (localValue.length > 2) {
       options.push({ label: `Add ${localValue}...`, value: 'new' })
     }
     setDropdownOptions(options)

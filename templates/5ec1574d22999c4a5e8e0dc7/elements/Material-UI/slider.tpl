@@ -52,6 +52,7 @@ children: []
   defaultValue={ {{ element.values.defaultValue|default(0) }} }
   onChange={(e, newValue)=>{ {{element.values.onChange}} } }
   valueLabelDisplay='{{ element.values.valueLabelDisplay|default("auto") }}'
+  aria-label="Disabled slider"
   color= "{{ element.values.color|default(primary) }}"
   step={ {{element.values.step|default(1)}} }
   {% if element.values.marks %}

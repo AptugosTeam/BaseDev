@@ -19,10 +19,6 @@ import { useSelector } from 'react-redux'
 
 {% set referencedTable = referencedField.table.name | friendly | capitalize %}
 {% set columnName = field.column_name | friendly %}
-{% set odc %}
-set{{ columnName }}Value(null)
-{% endset %}
-{{ add_setting('OnDialogClose', odc) }}
 {% set bpr %}
 import { search{{ referencedTable }} } from '../store/actions/{{ referencedTable | lower }}Actions'
 {% endset %}
@@ -83,5 +79,4 @@ React.useEffect(() => {
   fullWidth
   variant="{{ element.values.variant|default('standard') }}"
   margin='{{ element.values.margin|default("dense") }}'
-  add={ {{ field.add|default('true') }} }
 />

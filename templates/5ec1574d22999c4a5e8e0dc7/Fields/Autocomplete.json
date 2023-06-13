@@ -44,21 +44,6 @@ unique_id: 6IVx7DRZ
             "value": "chips"
           }
         ]
-      },
-      {
-        "display": "Allow Add",
-        "value": "add",
-        "type": "select",
-        "options": [
-          {
-            "label": "True",
-            "value": "true"
-          },
-          {
-            "label": "False",
-            "value": "false"
-          }
-        ]
       }
     ]
   }

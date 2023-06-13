@@ -5,6 +5,10 @@ completePath: >-
 keyPath: elements/Programming/Snippets/geoCalculateDistance.tpl
 unique_id: WZaSxFAm
 */
+{% set bpr %}
+import * as Location from 'expo-location'
+{% endset %}
+{{ save_delayed('bpr',bpr)}}
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
   const toRadians = (degrees) => degrees * (Math.PI / 180)
   const earthRadius = 6371

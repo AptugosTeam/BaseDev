@@ -13,19 +13,6 @@ options:
     display: Module Path
     type: text
     options: ''
-  - name: importOnRoot
-    display: Import on Root
-    type: checkbox
-    options: ''
-    advanced: true
-    settings:
-      default: false
 children: []
 */
-{% if element.values.importOnRoot %}
-  {% set IBA %}
-    import {{ element.values.moduleName }} from '{{ element.values.modulePath }}'
-  {% endset %}
-  {{ add_setting('SiteWideBeforePageRenderAddenum', IBA) }}
-{% endif %}
 import {{ element.values.moduleName }} from '{{ element.values.modulePath }}'

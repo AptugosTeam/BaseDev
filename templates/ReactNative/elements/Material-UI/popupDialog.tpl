@@ -3,40 +3,51 @@ path: popupDialog.tpl
 type: file
 unique_id: Rm5aRBZI
 icon: ico-pop-up-dialog
-sourceType: javascript
 options:
   - name: visible
-    display: Visible (boolean)
+    display: Visible Variable
     type: text
+    options: ''
   - name: onclose
     display: On Close
-    type: function
+    type: text
+    options: ''
   - name: dimClass
-    display: Dimm Styles
+    display: ClassName (dimmed area)
     type: text
+    options: ''
   - name: viewClass
-    display: Popup Styles
+    display: ClassName (view area)
     type: text
+    options: ''
+sourceType: javascript
+childs:
+  - name: Title
+    element: dialogTitle
+  - name: Content
+    element: dialogContent
+  - name: Actions
+    element: dialogActions
 children: []
 */
 {% set bpr %}
-import {  Portal } from 'react-native-paper'
-{% endset %}
-{{ save_delayed('bpr',bpr) }}
-{% set bpr %}
-import { TouchableOpacity, Modal } from 'react-native'
+import { Modal } from 'react-native'
+import { Portal } from 'react-native-paper'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Portal>
   <Modal
     animationType="fade"
     transparent={true}
-    visible={ {{ element.values.visible }}}
-    onDismiss={ {{ element.values.onclose |functionOrCall }} }
-    onRequestClose={ {{ element.values.onclose |functionOrCall }} }
+    visible={ {{ element.values.visible }} }
+    onDismiss={ {{ element.values.onclose | functionOrCall }} }
+    onRequestClose={ {{ element.values.onclose | functionOrCall }} }
   >
-    <TouchableOpacity {% if element.values.dimClass %}style={ {{ element.values.dimClass }}}{% endif %} onPress={ {{ element.values.onclose |functionOrCall }} }>
-      <TouchableOpacity {% if element.values.viewClass %}style={ {{ element.values.viewClass }}}{% endif %} activeOpacity={1} >
+    <TouchableOpacity
+      style={ {{ element.values.dimClass }}}
+      onPress={ {{ element.values.onclose | functionOrCall }} }
+    >
+      <TouchableOpacity style={ {{ element.values.viewClass }}} activeOpacity={1}>
         {{ content | raw }}
       </TouchableOpacity>
     </TouchableOpacity>

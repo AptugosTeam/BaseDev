@@ -21,6 +21,8 @@ class AuthService {
           AsyncStorage.setItem('user', JSON.stringify(response.data.data))
         }
         return response.data
+      }).catch((error) => {
+        throw error.response.data
       })
   }
 

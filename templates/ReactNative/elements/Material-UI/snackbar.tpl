@@ -33,7 +33,7 @@ import { Snackbar } from 'react-native-paper'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set ph %}
-const [{{ element.values.varName }}, set{{ element.values.varName }}] = React.useState(false)
+const [{{ element.values.varName }}, set{{ element.values.varName }}] = React.useState<any>(false)
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% set splited = element.values.position|split('-') %}

@@ -35,6 +35,7 @@ options:
   - name: passVariable
     display: Pass Variable
     type: text
+    repeatPerChild: true
     options: ''
 settings:
   - name: Packages
