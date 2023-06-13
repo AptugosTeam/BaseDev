@@ -35,6 +35,11 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: shrink
+    display: Shrink Label?
+    type: checkbox
+    settings:
+      default: true   
 children: []
 */
 
@@ -44,9 +49,13 @@ import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
+
 <TextField
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
+    {% if not element.values.shrink %}
+      InputLabelProps={ { shrink: false, } }
+    {% endif %}
     margin='{{ element.values.margin|default("dense") }}'
     {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}

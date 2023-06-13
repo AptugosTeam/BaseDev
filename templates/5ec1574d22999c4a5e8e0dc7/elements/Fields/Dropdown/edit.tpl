@@ -26,6 +26,7 @@ import MenuItem from '@mui/material/MenuItem'
     label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     type="text"
     fullWidth
+    className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
     variant="{{ element.values.variant|default('standard') }}"
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
