@@ -39,6 +39,10 @@ options:
     display: Input Value
     type: text
     advanced: true
+  - name: DisableVariable
+    display: Variable to disable input
+    type: text
+    advanced: true
   - name: onInputChange
     display: On Input Change
     type: function
@@ -80,6 +84,9 @@ import {Autocomplete as MUIAutocomplete}  from "@mui/material";
 <MUIAutocomplete
   {% if element.values.className %}
     className={ {{element.values.className|raw}} }
+  {% endif %}
+  {% if element.values.DisableVariable %}
+    disabled={ {{ element.values.DisableVariable }} }
   {% endif %}
   {% if element.values.options %} 
     options={ {{ element.values.options | raw  }} }
