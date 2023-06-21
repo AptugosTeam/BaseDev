@@ -77,7 +77,7 @@ options:
 {% if element.values.label %}
   <FormControlLabel
     {% if element.values.DisableVariable %}
-      disabled={ {{ element.values.DisableVariable |textOrVariable }} }
+      disabled={ {{ element.values.DisableVariable }} }
     {% endif %}
     {% if element.values.value %}
       value={{ element.values.value |textOrVariable }}
