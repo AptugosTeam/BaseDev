@@ -59,6 +59,9 @@ options:
     advanced: true
     settings:
       default: false
+  - name: DisableVariable
+    display: Variable to disable input
+    type: text
 */
 
 {% set bpr %}
@@ -72,7 +75,10 @@ options:
   {{ save_delayed('bpr',bpr) }}
 {% endif %}
 {% if element.values.label %}
-  <FormControlLabel 
+  <FormControlLabel
+    {% if element.values.DisableVariable %}
+      disabled={ {{ element.values.DisableVariable |textOrVariable }} }
+    {% endif %}
     {% if element.values.value %}
       value={{ element.values.value |textOrVariable }}
     {% endif %}
