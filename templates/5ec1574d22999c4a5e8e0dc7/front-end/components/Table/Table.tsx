@@ -100,7 +100,7 @@ const AptugoTable: FunctionComponent<tableProps> = (props) => {
             return (
               <TableRow key={key} className={styles.tableBodyRow}>
                 {Array.isArray(props.children)
-                  ? RenderCells(row)
+                  ? RenderCells({...row, key})
                   : fields.map((field, subkey) => (
                       <TableCell className={styles.tableCell} key={subkey}>
                         {field}
