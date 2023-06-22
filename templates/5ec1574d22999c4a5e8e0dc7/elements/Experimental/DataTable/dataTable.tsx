@@ -78,13 +78,32 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
     getSortedRowModel: getSortedRowModel(),
   })
 
+  const desdePagina = pageIndex - 2 < 0 ? 0 : pageIndex - 2
+  const hastaPagina = pageIndex + 2 < props.pages ? desdePagina + 5 : props.pages
+  const cuantasPaginas = hastaPagina - desdePagina
+  const paginasAmostrar:any = Array.from({length: cuantasPaginas}, (_, i) => i + desdePagina + 1)
+  if (desdePagina > 1) {
+    paginasAmostrar.unshift('...')
+  }
+  if (desdePagina > 0) {
+    paginasAmostrar.unshift('1')
+  }
 
+  if (hastaPagina < props.pages - 1) {
+    paginasAmostrar.push('...')
+  }
+  if (hastaPagina < props.pages) {
+    paginasAmostrar.push(props.pages)
+  }
+
+  console.log(props.className)
+  
   return (
     <div className={props.className ? props.className : styles.tableHolder}>
-      <table className='table'>
-        <thead className='tableHead'>
+      <table className="table">
+        <thead className="tableHead">
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id} className='tableHeadTR'>
+            <tr key={headerGroup.id} className="tableHeadTR">
               {headerGroup.headers.map((header) => (
                 <AptugoDataTableTH key={`__${header.id}`} header={header} {...props} />
               ))}
@@ -102,9 +121,9 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
                   </td>
                 )
               })}
-              <td className='actionContainer'>
+              <td className="actionContainer">
                 <div
-                  className='button'
+                  className="button"
                   onClick={() => {
                     props.onRequestEdit(props.tableData[rowIndex])
                   }}
@@ -123,7 +142,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
                   </svg>
                 </div>
                 <div
-                  className='button'
+                  className="button"
                   onClick={() => {
                     props.onRequestRemove(props.tableData[rowIndex])
                   }}
@@ -145,12 +164,12 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
           {table.getFooterGroups().map((footerGroup) => {
             return (
               <tr key={footerGroup.id}>
-                <td colSpan={footerGroup.headers.length} className='paginationContainer'>
-                  <div className='leftContainer'>
-                    <div className='numberOfElements'>
+                <td colSpan={footerGroup.headers.length} className="paginationContainer">
+                  <div className="leftContainer">
+                    <div className="numberOfElements">
                       Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
                     </div>
-                    <div className='actionContainer'>
+                    <div className="actionContainer">
                       <div
                         className={`button ${!table.getCanPreviousPage() ? 'disabled' : null}`}
                         onClick={() => table.getCanPreviousPage() && table.previousPage()}
@@ -169,14 +188,15 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
                           <path d="M2.333 7l3.5-4-.583-.667L1.167 7l4.083 4.667.583-.667z"></path>
                         </svg>
                       </div>
-                      {[...Array(props.pages).keys()].map((page) => {
+                      {paginasAmostrar.map((page) => {
                         return (
                           <div
                             key={`${page}_page`}
-                            className={`button ${pagination.pageIndex === page ? 'currentPage' : null}`}
-                            onClick={() => table.setPageIndex(page)}
+                            className={`button ${styles.button} ${pagination.pageIndex + 1 === page ? 'currentPage' : null}`}
+                            
+                            onClick={() => table.setPageIndex(page - 1)}
                           >
-                            {page + 1}
+                            {page}
                           </div>
                         )
                       })}
@@ -200,7 +220,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
                       </div>
                     </div>
                   </div>
-                  <div className='rightContainer'>Showing 25 per page</div>
+                  <div className="rightContainer">Showing 25 per page</div>
                 </td>
               </tr>
             )
