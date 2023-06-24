@@ -22,10 +22,12 @@ unique_id: i1kD8rN4
       "**/*"
     ],
     "ios": {
+      {{ insert_setting('AppJsonIos') | raw }}
       "supportsTablet": true,
       "bundleIdentifier": "com.aptugo.{{ application.settings.name | lower | friendly }}"
     },
     "android": {
+      {{ insert_setting('AppJsonAndroid') | raw }}
       "adaptiveIcon": {
         "foregroundImage": "./assets/img/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -40,6 +42,7 @@ unique_id: i1kD8rN4
       "sourceExts": ["js", "jsx", "scss", "sass"]
     },
     "plugins": [
+      {{ insert_setting('AppJsonPlugins') | raw }}
       [
         "expo-image-picker",
         {

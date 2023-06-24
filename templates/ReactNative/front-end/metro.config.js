@@ -9,6 +9,7 @@ const path = require('path')
 
 const config = getDefaultConfig(__dirname);
 
+{{ insert_setting('MetroConfigAddenum') | raw }}
 config.resolver.sourceExts.push('scss')
 config.resolver.sourceExts.push('sass')
 config.transformer = {

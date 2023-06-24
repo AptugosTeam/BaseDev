@@ -36,7 +36,6 @@ unique_id: GFoENpEW
     "immer": "^10.0.2",
     "react-native-screens": "~3.20.0",
     "react-native-safe-area-context": "4.5.0",
-    "expo-location": "~15.1.1",
     {{ insert_setting('Packages') | raw }}
     "typescript": "^4.6.3"
   },
