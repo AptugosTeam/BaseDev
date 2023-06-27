@@ -44,10 +44,10 @@ options:
 children: []
 settings:
   - name: Packages
-    value: '"react-media-player": "^0.7.9",'
+    value: '"react-player": "2.12.0",'
 */
 {% set bpr %}
-import { controls, Media, Player } from 'react-media-player'
+import ReactPlayer from 'react-player'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}
@@ -66,7 +66,7 @@ const {
 <Media>
   <div className="media">
     <div className="media-player">
-      <Player src={{element.values.playVideo}} />
+      <ReactPlayer url={{element.values.playVideo}} />
     </div>
     <div className="media-controls">
       {% if element.values.showPlayPause %}<PlayPause />{% endif %}

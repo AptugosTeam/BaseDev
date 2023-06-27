@@ -178,7 +178,7 @@ React.useEffect(() => {
 },[{{ innervarname }}loadoptions{% if element.values.searchString %}, {{ element.values.searchString }}{% endif %}])
 {% endset %}
 {{ save_delayed('ph',ph)}}
-{% if element.values.onload %}
+{% if element.values.onload or element.children %}
 {% if element.values.searchString %}
   {% set functionCall = 'searchingStatus' %}
 {% else %}
@@ -187,6 +187,7 @@ React.useEffect(() => {
 React.useEffect(() => {
   if ({{ table.name | friendly | lower }}Data.{{ functionCall }} === 'loaded') {
     {{ element.values.onload }}
+    {% if element.children %}{{ content | raw }}{% endif %}
   }
 }, [{{ table.name | friendly | lower }}Data.{{ functionCall }}])
 {% endif %}
