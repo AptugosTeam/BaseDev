@@ -51,6 +51,10 @@ options:
     display: On Close
     type: function
     advanced: true
+  - name: isOptionEqualToValue
+    display: Is Option Equal to Value?
+    type: function
+    advanced: true
   - name: noOptionsText
     display: Display Text when No Options
     type: text
@@ -130,6 +134,9 @@ import {Autocomplete as MUIAutocomplete}  from "@mui/material";
       {{ element.values.onClose }} 
       }  
     }
+  {% endif %} 
+  {% if element.values.isOptionEqualToValue %}
+    isOptionEqualToValue={ (option, value) => {{ element.values.isOptionEqualToValue }} }
   {% endif %} 
   renderInput={(params) => (
     <TextField {...params} label="{{ element.values.label|default('') }}" />
