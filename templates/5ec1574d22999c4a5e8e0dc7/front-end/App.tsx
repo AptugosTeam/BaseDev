@@ -45,7 +45,7 @@ const App: React.FunctionComponent = (props: any) => {
 
   return (
     <React.Fragment>
-      <React.Suspense fallback={<span>Loading</span>}>
+      <React.Suspense fallback={ {{ insert_setting('FallBack')|default('<span>Loading</span>') }} }>
         {{ insert_setting('SiteWideWrapStart') | raw }}
         <React.Fragment>
           {switchRoutes}
