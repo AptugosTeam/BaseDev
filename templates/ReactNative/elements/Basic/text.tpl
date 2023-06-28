@@ -21,7 +21,10 @@ options:
     type: text
   - name: expandable
     display: Expandable
-    type: checkbox  
+    type: checkbox
+  - name: adjustsFontSizeToFit
+    display: Adjust Font Size to Fit
+    type: checkbox
 children: []
 */
 {% set bpr %}
@@ -61,4 +64,5 @@ export function MoreLessText({ children, numberOfLines }) {
 <{{ tag }}
   {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
   {% if element.values.lines %}numberOfLines={ {{ element.values.lines }} }{% endif %}
+  {% if element.values.adjustsFontSizeToFit %}adjustsFontSizeToFit{% endif %}
 >{{ element.values.Content | raw }}{{ content | raw }}</{{ tag }}>
