@@ -4,6 +4,9 @@ type: file
 unique_id: drg161tuk
 icon: f:draggableIcon.svg
 sourceType: javascript
+settings:
+  - name: Packages
+    value: '"react-draggable": "4.4.5",'
 options:
   - name: defaultPosition
     display: default Position
