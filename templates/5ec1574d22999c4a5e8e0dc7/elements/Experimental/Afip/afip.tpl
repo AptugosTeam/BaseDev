@@ -8,18 +8,25 @@ options:
   - name: cuit
     display: CUIT
     type: text
-    options: ''
+    required: true
   - name: cert
     display: Certificate
     type: text
-    options: ''
+    required: true
   - name: key
     display: Key
     type: text
-    options: ''
+    required: true
+  - name: production
+    display: Production Mode
+    type: checkbox
 extraFiles:
   - source: 'elements/Experimental/Afip/999_afip.js'
     destination: 'back-end/app/services/afip.service.js'
+  - source: 'elements/Experimental/Afip/cert.crt'
+    destination: 'back-end/app/services/cert.crt'
+  - source: 'elements/Experimental/Afip/key.key'
+    destination: 'back-end/app/services/key.key'
   - source: 'elements/Experimental/Afip/999_afip.routes.js'
     destination: 'back-end/app/routes/afip.routes.js'
 settings:
@@ -31,8 +38,23 @@ settings:
 */
 
 
-{% set CUIT %}
-const cuit = {{ element.values.cuit }};
-{% endset %}
+{% if element.values.cuit %}
+  {% set CUIT %}{{ element.values.cuit }}{% endset %}
+  {{ add_setting('ClientCuit', CUIT) }}
+{% endif %}
 
-{{ add_setting('ClientCuit', CUIT) }}
+{% if element.values.cert %}
+  {% set CERT %}{{ element.values.cert }}{% endset %}
+  {{ add_setting('Certificate', CERT) }}
+{% endif %}
+
+{% if element.values.key %}
+  {% set KEY %}{{ element.values.key }}{% endset %}
+  {{ add_setting('Key', KEY) }}
+{% endif %}
+
+{% if element.values.production %}
+  {% set PROD %}{{ element.values.production }}{% endset %}
+  {{ add_setting('Production', PROD) }}
+{% endif %}
+

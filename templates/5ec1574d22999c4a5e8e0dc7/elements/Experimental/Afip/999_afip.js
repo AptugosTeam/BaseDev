@@ -7,8 +7,22 @@ unique_id: w2mTGPez
 */
 const Afip = require('@afipsdk/afip.js');
 
-{{ insert_setting('ClientCuit') }}
-const afip = new Afip({ cuit });
+const production = {{ insert_setting('Production') | default(false) }}
+
+const options = {
+  CUIT: {{ insert_setting('ClientCuit') | default(11111111) }},
+  cert: './cert.crt',
+  key: './key.key',
+  ta_folder: './',
+  res_folder: './',
+
+}
+
+if (production) options.production = true
+
+
+const afip = new Afip(options);
+
 
 const getServerStatus = async (options) => {
   return 'How you doin?'
