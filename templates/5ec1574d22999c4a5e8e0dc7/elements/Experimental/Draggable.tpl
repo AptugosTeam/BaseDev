@@ -9,7 +9,7 @@ settings:
     value: '"react-draggable": "4.4.5",'
 options:
   - name: defaultPosition
-    display: default Position
+    display: Default Position
     type: text
     options: ''
   - name: bounds
@@ -19,13 +19,16 @@ options:
   - name: axis
     display: Axis
     type: dropdown
-    options: both;x;y;none
+    options: >-
+      return [['both', 'Both'], ['x', 'X'], ['y', 'Y'], ['none', 'None']]
+    settings:
+      default: 'both'
   - name: onDrag
-    display: On drag
+    display: On Drag
     type: text
     options: ''
   - name: onStop
-    display: On stop
+    display: On Stop
     type: text
     options: ''
   - name: scale
@@ -40,12 +43,24 @@ import Draggable from "react-draggable";
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Draggable
-    {% if element.values.defaultPosition %}defaultPosition={ {{ element.values.defaultPosition }} }{% endif %}
-    {% if element.values.bounds %}bounds={ {{ element.values.bounds }} }{% endif %}
-    {% if element.values.axis %}axis={ '{{ element.values.axis }}' }{% endif %}
-    {% if element.values.onDrag %}onDrag={ {{ element.values.onDrag }} }{% endif %}
-    {% if element.values.onStop %}onStop={ {{ element.values.onStop }} }{% endif %}
-    {% if element.values.scale %}scale={ {{ element.values.scale }} }{% endif %}
+    {% if element.values.defaultPosition %}
+      defaultPosition={ {{ element.values.defaultPosition }} }
+    {% endif %}
+    {% if element.values.bounds %}
+      bounds={ {{ element.values.bounds }} }
+    {% endif %}
+    {% if element.values.axis != both %} 
+      axis={ '{{ element.values.axis | default('both') }}' }
+    {% endif %}
+    {% if element.values.onDrag %}
+      onDrag={ {{ element.values.onDrag }} }
+    {% endif %}
+    {% if element.values.onStop %}
+      onStop={ {{ element.values.onStop }} }
+    {% endif %}
+    {% if element.values.scale %}
+      scale={ {{ element.values.scale }} }
+    {% endif %}
 >   
     {{ content | raw }}
 </Draggable>
