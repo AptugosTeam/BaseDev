@@ -9,11 +9,11 @@ module.exports = (app) => {
   const afipServices = require('../services/afip.service.js')
 
   app.get('/api/afip/estado-server', async (req, res) => {
-    const result = await afipServices.getServerStatus({req, res})
+    const result = await afipServices.getServerStatus())
     res.send(result)
   })
   app.get('/api/afip/puntos-venta', async (req, res) => {
-    const result = await afipServices.getSalesPoints({req, res})
+    const result = await afipServices.getSalesPoints()
     res.send(result)
   })
   app.post('/api/afip/crear-factura', async (req, res) => {
