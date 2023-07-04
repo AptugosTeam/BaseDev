@@ -92,6 +92,8 @@ import "swiper/css/bundle";
       {{ unchild.rendered | raw }}
     </SwiperSlide>
   {% endfor %}
+{% else %}
+  {{ content | raw }}
 {% endif %}
 </Swiper>
 
