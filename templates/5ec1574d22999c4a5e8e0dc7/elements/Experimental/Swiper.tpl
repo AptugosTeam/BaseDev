@@ -36,6 +36,10 @@ options:
     display: Delete Arrows
     type: checkbox
     options: ''
+  - name: pagination
+    display: Delete Pagination
+    type: checkbox
+    options: ''
   - name: useSwiperSlide
     display: Use SwiperSlide?
     type: checkbox
@@ -79,11 +83,15 @@ import "swiper/css/bundle";
     {% else %}
       navigation={true}
     {% endif %}
+    {% if element.values.pagination %}
+    {% else %}
+      pagination={true}
+      pagination= { {clickable: true} }
+    {% endif %}
     {% if element.values.loopFillGroupWithBlank %}
     {% else %}
       loopFillGroupWithBlank={true}
     {% endif %}
-    pagination=  { {clickable: true} }
     modules={[Pagination, Navigation]}
   >
 {% if element.values.useSwiperSlide %}
