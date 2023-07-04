@@ -8,6 +8,11 @@ options:
     display: Default Value
     type: text
     options: ''
+  - name: value
+    display: Value
+    type: text
+    options: ''
+    advanced: true
   - name: onChange
     display: On Change
     type: function
@@ -50,6 +55,9 @@ children: []
 {{ save_delayed('bpr',bpr) }}
 <Slider 
   defaultValue={ {{ element.values.defaultValue|default(0) }} }
+  {% if element.values.value %}
+    value={ {{ element.values.value }} }
+  {% endif %}
   onChange={(e, newValue)=>{ {{element.values.onChange}} } }
   valueLabelDisplay='{{ element.values.valueLabelDisplay|default("auto") }}'
   color= "{{ element.values.color|default(primary) }}"
