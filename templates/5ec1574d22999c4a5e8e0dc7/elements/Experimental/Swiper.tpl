@@ -36,6 +36,13 @@ options:
     display: Delete Arrows
     type: checkbox
     options: ''
+  - name: useSwiperSlide
+    display: Use SwiperSlide?
+    type: checkbox
+    advanced: true
+    settings:
+      default: true
+    options: ''
 settings:
   - name: Packages
     value: '"swiper": "^8.0.0",'
@@ -79,13 +86,13 @@ import "swiper/css/bundle";
     pagination=  { {clickable: true} }
     modules={[Pagination, Navigation]}
   >
-
+{% if element.values.useSwiperSlide %}
   {% for unchild in element.children %}
     <SwiperSlide>
       {{ unchild.rendered | raw }}
     </SwiperSlide>
   {% endfor %}
-
+{% endif %}
 </Swiper>
 
   
