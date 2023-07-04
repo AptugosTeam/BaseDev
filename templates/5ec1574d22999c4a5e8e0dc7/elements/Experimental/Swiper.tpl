@@ -85,7 +85,6 @@ import "swiper/css/bundle";
     {% endif %}
     {% if element.values.pagination %}
     {% else %}
-      pagination={true}
       pagination= { {clickable: true} }
     {% endif %}
     {% if element.values.loopFillGroupWithBlank %}
