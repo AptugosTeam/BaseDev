@@ -16,7 +16,6 @@ const options = {
   key: './key.key',
   ta_folder: './',
   res_folder: './',
-
 }
 
 if (production) options.production = true
@@ -25,15 +24,18 @@ if (production) options.production = true
 const afip = new Afip(options);
 
 
-const getServerStatus = async () => {
-  return new Promise((resolve, reject) => {
+const getServerStatus = () => {
+  return new Promise(async(resolve, reject) => {
     const serverStatus = await afip.ElectronicBilling.getServerStatus();
     resolve(serverStatus)
   })
 }
 
-const getSalesPoints = async () => {
-  return new Promise((resolve, reject) => {
+/*
+  * No esta funcionando.. se abrio issue en github
+  */
+const getSalesPoints = () => {
+  return new Promise(async(resolve, reject) => {
       const salesPoints = await afip.ElectronicBilling.getSalesPoints();
       resolve(salesPoints)
   })
@@ -71,8 +73,8 @@ const getSalesPoints = async () => {
     8 = 5%
     9 = 2.5%
   */
-const createVoucher = async (options) => {
-  return new Promise((resolve, reject) => {
+const createVoucher = (options) => {
+  return new Promise(async(resolve, reject) => {
     const data = options.req ? options.req.body : options.data
     const {
       sellingPoint = 1,
@@ -128,20 +130,20 @@ const createVoucher = async (options) => {
         /**
          * Fecha de inicio de servicio en formato aaaammdd
          **/
-        data.FchServDesde = serviceDateFrom;
+        billData.FchServDesde = serviceDateFrom;
 
         /**
          * Fecha de fin de servicio en formato aaaammdd
          **/
-        data.FchServHasta = serviceDateTo;
+        billData.FchServHasta = serviceDateTo;
         /**
          * Fecha de vencimiento del pago en formato aaaammdd  ESTO NO VA EN FACTURA DE CREDITO ELECTRONICA
          **/
-        data.FchVtoPago = paymentDueDate;
+        billData.FchVtoPago = paymentDueDate;
       }
 
       if (billType !== 11 && billType !== 211) {
-        data.Iva = [
+        billData.Iva = [
           // Alícuotas asociadas a la factura
           {
             Id: 5, //Id del tipo de IVA (5 para 21%)(ver tipos disponibles)
@@ -151,18 +153,14 @@ const createVoucher = async (options) => {
         ];
       }
 
-      console.log('la data a enviar', billData);
+      const voucher = await afip.ElectronicBilling.createVoucher(billData, true);
 
-      const voucher = await afip.ElectronicBilling.createVoucher(data, true);
+      if (voucher) const bill = await getBillInfo({ billNumber, sellingPoint, billType });
 
-      console.log('el voucher', voucher)
-
-      // resolve(voucher)
-
-      getBillInfo({billNumber, sellingPoint, billType})
+      resolve(bill)
 
     } catch (error) {
-      reject(errors.prepareError(err))
+      reject(new Error(error))
     }
   })
 }
@@ -175,14 +173,9 @@ const getBillInfo = async (options) => {
       sellingPoint,
       billType
     );
-
-    if (!billInfo) {
-      console.log('La factura no existe');
-    } else {
-      console.log('esta seria la factura', billInfo);
-    }
+    return billInfo;
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 
