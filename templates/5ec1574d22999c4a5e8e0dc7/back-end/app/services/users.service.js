@@ -56,8 +56,8 @@ async function recoverPassword (req) {
   }
 
   return new Promise(function (resolve, reject) {
-    if (!email) reject({ message: errorMessages[lang].wrong })
-    const query = model.findOne({ Email: email })
+    if (!DNI) reject({ message: 'Wrong parameters sent' })
+    const query = model.findOne({ DNI: DNI })
     const promise = query.exec()
 
     promise.then(async (user) => {
@@ -118,8 +118,7 @@ async function checkNonce (req) {
   })
 }
 
-async function authenticate ({ email, password, model, passwordField, populate, options = {} }) {
-  const { fullUser = true, fieldsToRetrieve = [], lang = 'en', validate = false } = options
+async function authenticate({ DNI, password, model, passwordField }) {
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -132,14 +131,13 @@ async function authenticate ({ email, password, model, passwordField, populate, 
     passwordField = 'Password'
   }
   return new Promise(function (resolve, reject) {
-    if (!email || !password) reject({ message: errorMessages[lang].wrong })
-    const query = model.findOne({ Email: new RegExp('^' + email.toLowerCase(), 'i') })
-    if (populate) query.populate(populate)
+    if (!DNI || !password) reject({ message: 'DNI no encontrado' })
+    const query = model.findOne({ DNI: DNI })
     const promise = query.exec()
 
     promise.then((user) => {
       if (!user) {
-        return reject({ message: errorMessages[lang].email })
+        return reject({ message: 'Dni not found' })
       }
 
       if (!user[passwordField]) reject({ message: errorMessages[lang].notPassword, user: user })
@@ -159,7 +157,7 @@ async function authenticate ({ email, password, model, passwordField, populate, 
             const token = jwt.sign(fullUser ? userWithoutPassword : userID, secretKey, { expiresIn: '7d' })
             resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
           } else {
-            reject({ message: errorMessages[lang].wrongPassword })
+            reject({ message: 'Password incorrecta' })
           }
 
         })
