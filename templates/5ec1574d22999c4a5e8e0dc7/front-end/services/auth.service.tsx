@@ -32,20 +32,9 @@ interface RecoverOptions {
 }
 
 class AuthService {
-  private apiUrl: string;
-
-  constructor(endpoint: string = 'users') {
-    this.apiUrl = API_URL + endpoint + '/';
-  }
-
-  public setEndpoint(endpoint: string) {
-    this.apiUrl = API_URL + endpoint + '/';
-  }
-
-  login(DNI, password, options: LoginOptions = {}) {
-    const { remember = true} = options
+  login(DNI, password) {
     return axios
-      .post(this.apiUrl + 'authenticate', {
+      .post(API_URL + 'authenticate', {
         DNI,
         password,
         options,
@@ -103,71 +92,20 @@ class AuthService {
       })
   }
 
-  logout() {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('user');
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('userSession');
-    sessionStorage.removeItem('tokenSession');
+  async logout() {
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
   }
 
-  register(data, options: LoginOptions = {}, url = this.apiUrl) {
-    const { validate = false, lang = 'en' } = options;
-    const messages = {
-      en: {
-        success: 'Successful registration, check your DNI to validate your account',
-        invalidDNISettings: 'Invalid settings for validation DNI',
-      },
-      es: {
-        success: 'Registro exitoso, revisa tu correo electrónico para validar tu cuenta',
-        invalidDNISettings: 'Configuración inválida para la verificación por DNI',
-      },
-    };
-    const config = {
-      headers: { 'content-type': 'multipart/form-data' },
-    }
-
-    return axios
-      .post(url, data, config)
-      .then((_result) => {
-        if (validate) {
-          if (
-            !options.validationDNI ||
-            Object.keys(options.validationDNI).length === 0
-          )
-            throw messages[lang].invalidDNISettings;
-          return this.recoverPassword(options.validationDNI)
-            .then((_result) => {
-              return {
-                message: messages[lang].success,
-              };
-            })
-            .catch((e) => { throw e });
-        } else {
-          return this.login(data.DNI, data.Password, options).then(
-            (afterLogin) => {
-              return afterLogin;
-            }
-          );
-        }
-      })
-      .catch((e) => { throw e });
-  }
-
-  registerWithSession(data) {
-    const { fullUser = true , fieldsToRetrieve = [] } = data
-    return axios.post(this.apiUrl, data).then((_result) => {
-        return this.loginWithSession(data.DNI, data.Password, fullUser, fieldsToRetrieve).then((afterLogin) => { return afterLogin})
-      }).catch(e => { throw e })
+  register(data) {
+    return axios.post(API_URL, data).then(_result => {
+      return this.login(data.DNI, data.Password).then(afterLogin => { return afterLogin})
+    }).catch(e => { throw e })
   }
 
   async getCurrentUser() {
-    const user =
-      localStorage.getItem('user') ||
-      sessionStorage.getItem('userSession') ||
-      sessionStorage.getItem('user');
-    return user ? JSON.parse(user) : {}
+    const user = JSON.parse(localStorage.getItem('user'))
+    return user
   }
 
   recoverPassword({ DNI, subject, message, name, model = '', lang = 'en', username = '' }) {
