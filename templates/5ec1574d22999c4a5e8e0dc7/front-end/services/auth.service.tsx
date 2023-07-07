@@ -8,10 +8,10 @@ import axios from 'axios'
 const API_URL = '{{ settings.apiURL }}/api/users/'
 
 class AuthService {
-  login(email, password) {
+  login(DNI, password) {
     return axios
       .post(API_URL + 'authenticate', {
-        email,
+        DNI,
         password,
       })
       .then((response) => {
@@ -37,20 +37,20 @@ class AuthService {
       })
   }
 
-  logout() {
+  async logout() {
     localStorage.removeItem('user')
     localStorage.removeItem('token')
   }
 
   register(data) {
     return axios.post(API_URL, data).then(_result => {
-      return this.login(data.Email, data.Password).then(afterLogin => { return afterLogin})
+      return this.login(data.DNI, data.Password).then(afterLogin => { return afterLogin})
     }).catch(e => { throw e })
   }
 
   async getCurrentUser() {
-    const user = localStorage.getItem('user')
-    return user ? JSON.parse(user) : {}
+    const user = JSON.parse(localStorage.getItem('user'))
+    return user
   }
 
   recoverPassword({ email, subject, message, name }) {

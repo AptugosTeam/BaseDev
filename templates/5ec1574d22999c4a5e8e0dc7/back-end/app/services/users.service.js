@@ -27,8 +27,8 @@ async function recoverPassword(req) {
   }
 
   return new Promise(function (resolve, reject) {
-    if (!email) reject({ message: 'Wrong parameters sent' })
-    const query = model.findOne({ Email: email })
+    if (!DNI) reject({ message: 'Wrong parameters sent' })
+    const query = model.findOne({ DNI: DNI })
     const promise = query.exec()
 
     promise.then((user) => {
@@ -74,7 +74,7 @@ async function checkNonce(req) {
   })
 }
 
-async function authenticate({ email, password, model, passwordField }) {
+async function authenticate({ DNI, password, model, passwordField }) {
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -87,13 +87,13 @@ async function authenticate({ email, password, model, passwordField }) {
     passwordField = 'Password'
   }
   return new Promise(function (resolve, reject) {
-    if (!email || !password) reject({ message: 'Wrong parameters sent' })
-    const query = model.findOne({ Email: new RegExp('^' + email.toLowerCase(), 'i') })
+    if (!DNI || !password) reject({ message: 'DNI no encontrado' })
+    const query = model.findOne({ DNI: DNI })
     const promise = query.exec()
 
     promise.then((user) => {
       if (!user) {
-        return reject({ message: 'Email not found' })
+        return reject({ message: 'Dni not found' })
       }
 
       if (!user[passwordField]) reject({ message: 'User does not have a password', user: user })
@@ -104,7 +104,7 @@ async function authenticate({ email, password, model, passwordField }) {
             const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
             resolve({ accessToken: token, data: userWithoutPassword })
           } else {
-            reject({ message: 'Password incorrect' })
+            reject({ message: 'Password incorrecta' })
           }
         })
       }
