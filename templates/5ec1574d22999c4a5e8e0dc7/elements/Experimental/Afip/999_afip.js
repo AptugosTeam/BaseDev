@@ -155,8 +155,9 @@ const createVoucher = (options) => {
 
       const voucher = await afip.ElectronicBilling.createVoucher(billData, true);
 
-      if (voucher) const bill = await getBillInfo({ billNumber, sellingPoint, billType });
-
+      if (voucher) {
+        const bill = await getBillInfo({ billNumber, sellingPoint, billType });
+      }
       resolve(bill)
 
     } catch (error) {
