@@ -21,14 +21,15 @@ import * as AppleAuthentication from 'expo-apple-authentication'
 {% set AuthServiceModification %}
 async appleLogin() {
   const credential = await AppleAuthentication.signInAsync({
-    requestedScopes: [
-      AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
-      AppleAuthentication.AppleAuthenticationScope.EMAIL,
-    ],
+    requestedScopes: [AppleAuthentication.AppleAuthenticationScope.FULL_NAME, AppleAuthentication.AppleAuthenticationScope.EMAIL],
   })
-  AsyncStorage.setItem('token', JSON.stringify(credential))
-  AsyncStorage.setItem('user', JSON.stringify(credential))
-  return credential
+
+  const { identityToken } = credential;
+  const appleCredential = auth.AppleAuthProvider.credential(identityToken);
+  const res = await auth().signInWithCredential(appleCredential)
+  AsyncStorage.setItem('token', JSON.stringify(identityToken))
+  AsyncStorage.setItem('user', JSON.stringify(res.user))
+  return res
 }
 {% endset %}
 {{ add_setting('AuthServiceAddenum', AuthServiceModification) }}

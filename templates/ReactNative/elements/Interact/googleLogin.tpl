@@ -42,8 +42,8 @@ async googleLogin() {
   const { idToken } = await GoogleSignin.signIn()
   const googleCredential = auth.GoogleAuthProvider.credential(idToken)
   const res = await auth().signInWithCredential(googleCredential)
-  AsyncStorage.setItem('token', JSON.stringify(res))
-  AsyncStorage.setItem('user', JSON.stringify(res))
+  AsyncStorage.setItem('token', JSON.stringify(idToken))
+  AsyncStorage.setItem('user', JSON.stringify(res.user))
   return res
 }
 {% endset %}
