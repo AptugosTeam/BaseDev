@@ -47,6 +47,12 @@ options:
     settings:
       default: true
     options: ''
+  - name: onSwiper
+    display: When Loaded
+    type: text
+  - name: onChange
+    display: When Active Index Changes
+    type: text
 settings:
   - name: Packages
     value: '"swiper": "^8.0.0",'
@@ -55,7 +61,6 @@ children: []
 {% set bpr %}
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
-import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "swiper/css/bundle";
@@ -90,6 +95,12 @@ import "swiper/css/bundle";
     {% if element.values.loopFillGroupWithBlank %}
     {% else %}
       loopFillGroupWithBlank={true}
+    {% endif %}
+    {% if element.values.onSwiper %}
+      onSwiper={ {{ element.values.onSwiper }} } 
+    {% endif %}
+    {% if element.values.onChange %}
+      onActiveIndexChange={ {{ element.values.onChange }} } 
     {% endif %}
     modules={[Pagination, Navigation]}
   >
