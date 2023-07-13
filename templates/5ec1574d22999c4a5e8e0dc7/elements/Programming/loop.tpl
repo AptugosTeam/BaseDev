@@ -42,5 +42,5 @@ children: []
 {% endif %}
 { {{ element.values.variable }}{{ addExtra }}.map(({{ element.values.variablename | default('item') }},index) => {
 {% if element.values.code %}{{ element.values.code }}{% endif %}
-    return <React.Fragment key={index}>{{ content | raw }}</React.Fragment>
+    return <React.Fragment key={ '{{ element.unique_id }}_' + index}>{{ content | raw }}</React.Fragment>
 })}
