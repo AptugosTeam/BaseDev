@@ -37,6 +37,16 @@ options:
         const page = arguments[2];
         if ( element.values.variableName ) aptugo.variables.setPageVariable(page, element.unique_id, { [element.values.variableName]: value });
       active: true
+  - name: renderInPlace
+    display: Render In Place
+    type: checkbox
 children: []
 */
+{% set ph %}
 const [{{ element.values.variableName }}, set{{ element.values.variableName }}] = React.useState<any>({{ element.values.defaultValue }})
+{% endset %}
+{% if element.values.renderInPlace %}
+  {{ ph }}
+{% else %}
+  {{ save_delayed('ph',ph,1) }}
+{% endif %}

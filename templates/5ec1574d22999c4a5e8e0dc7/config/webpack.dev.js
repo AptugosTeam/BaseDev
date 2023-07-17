@@ -19,7 +19,7 @@ module.exports = merge(commonConfig, {
   },
   devServer: {
     open: true,
-    hot: true,
+    hot: false,
     liveReload: true,
     historyApiFallback: true,
     static: {
@@ -29,12 +29,26 @@ module.exports = merge(commonConfig, {
         usePolling: false,
       },
     },
-    watchFiles: {
-      paths: [path.resolve(__dirname, '..', 'src')]
-    },
     client: {
       overlay: false,
       progress: true,
+    },
+  },
+  optimization: {
+    emitOnErrors: true,
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+        default: {
+          name: 'main',
+          chunks: 'all',
+        },
+      },
     },
   },
   devtool: 'cheap-module-source-map',
@@ -42,4 +56,3 @@ module.exports = merge(commonConfig, {
     new webpack.HotModuleReplacementPlugin(), // enable HMR globally
   ],
 })
-
