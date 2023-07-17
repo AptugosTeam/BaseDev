@@ -15,7 +15,7 @@ options:
     options: ''
   - name: onChange
     display: On Change
-    type: text
+    type: function
     options: ''
   - name: options
     display: Options
@@ -39,7 +39,10 @@ options:
     display: Shrink Label?
     type: checkbox
     settings:
-      default: true   
+      default: true
+  - name: DisableVariable
+    display: Variable to disable input
+    type: text
 children: []
 */
 
