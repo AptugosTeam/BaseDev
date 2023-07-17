@@ -7,7 +7,7 @@ unique_id: n119zEq4
 const { merge } = require('webpack-merge')
 const webpack = require('webpack')
 const commonConfig = require('./webpack.common')
-
+const path = require('path')
 module.exports = merge(commonConfig, {
   mode: 'development',
   entry: [
@@ -19,15 +19,27 @@ module.exports = merge(commonConfig, {
   },
   devServer: {
     open: true,
-    hot: true, // enable HMR on the server
+    hot: true,
+    liveReload: true,
     historyApiFallback: true,
-    static: './dist',
+    static: {
+      directory: path.resolve(__dirname, '..', 'dist'),
+      watch: {
+        ignored: path.resolve(__dirname, '..', 'dist', 'img'),
+        usePolling: false,
+      },
+    },
+    watchFiles: {
+      paths: [path.resolve(__dirname, '..', 'src')]
+    },
     client: {
-      overlay: false
-    }
+      overlay: false,
+      progress: true,
+    },
   },
   devtool: 'cheap-module-source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // enable HMR globally
   ],
 })
+

@@ -165,7 +165,7 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
           <InputLabel htmlFor="component-upload">{props.label}</InputLabel>
           <Input
             value={state.fileName || ''}
-            id="component-upload"
+            id="component-upload-standard"
             placeholder={props.placeholder || null}
             endAdornment={
               <label>
@@ -187,7 +187,7 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
         <Input
           sx={classes.altVisual}
           value={state.fileName || ''}
-          id="component-upload"
+          id="component-upload-alternate"
           placeholder={props.placeholder || null}
           startAdornment={
             <label>
