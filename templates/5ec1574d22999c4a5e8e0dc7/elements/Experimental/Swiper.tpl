@@ -106,7 +106,7 @@ import "swiper/css/bundle";
   >
 {% if element.values.useSwiperSlide %}
   {% for unchild in element.children %}
-    <SwiperSlide key={ {{ unchild.unique_id }}}>
+    <SwiperSlide key={ "{{ unchild.unique_id }}" }>
       {{ unchild.rendered | raw }}
     </SwiperSlide>
   {% endfor %}
