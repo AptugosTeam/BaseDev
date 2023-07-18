@@ -22,6 +22,7 @@ import TextField from '@mui/material/TextField'
     {% if element.values.autocomplete %}
         autoComplete='{{ element.values.autocomplete }}'
     {% endif %}
+    {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
     variant="{{ element.values.variant|default('standard') }}"
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
