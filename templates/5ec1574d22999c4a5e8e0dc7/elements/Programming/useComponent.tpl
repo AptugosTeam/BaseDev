@@ -10,6 +10,9 @@ options:
   - name: props
     display: Props 
     type: text
+  - name: keyprops
+    display: Prop Keys (optional) 
+    type: text
 */
 {% set bpr %}
 import {{ element.values.name | friendly }} from '../components/{{ element.values.name | friendly }}'

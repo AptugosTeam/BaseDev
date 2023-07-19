@@ -11,6 +11,9 @@ options:
   - name: props
     display: Props 
     type: text
+  - name: keyprops
+    display: Prop Keys (optional) 
+    type: text
 extraFiles:
   - source: 'elements/Programming/baseComponent.tsx'
     destination: 'front-end/components/{{ element.values.name | friendly }}/index.tsx'

@@ -12,7 +12,7 @@ import React, { FunctionComponent } from 'react'
 {% endfor %}
 
 const AptugoComponent: FunctionComponent<any> = (props) => {
-  {% if element.values.props %}const { {{ element.values.props }} } = props.properties{% endif %}
+  {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props.properties{% endif %}
   {% for child in element.children %}
     {% if child.value == 'componentHeader' %} 
       {{ child.rendered }}
