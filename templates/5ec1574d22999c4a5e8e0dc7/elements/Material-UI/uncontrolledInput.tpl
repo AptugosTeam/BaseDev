@@ -47,7 +47,7 @@ options:
   - name: type
     display: Type
     type: dropdown
-    options: text;password;date;number;textarea
+    options: text;password;date;number;textarea;numeric
     settings:
       default: text
       active: true
@@ -64,6 +64,20 @@ options:
     settings:
       propertyCondition: type
       condition: number
+      active: true
+  - name: minLength
+    display: Min chars
+    type: text
+    settings:
+      propertyCondition: type
+      condition: numeric
+      active: true
+  - name: maxLength
+    display: Max chars
+    type: text
+    settings:
+      propertyCondition: type
+      condition: numeric
       active: true
   - name: minRows
     display: MinRows
@@ -121,13 +135,25 @@ import TextField from '@mui/material/TextField'
           } }
       {% endif %}
     {% endif %}
+    {% if element.values.type == 'numeric' %}
+        inputProps={ {
+            inputMode: 'numeric',
+            pattern: '[0-9]*',
+            {% if element.values.minLength %}
+              minLength: {{ element.values.minLength }},
+            {% endif %}
+            {% if element.values.maxLength %}
+              maxLength: {{ element.values.maxLength }}
+            {% endif %}
+          } }
+    {% endif %}
     {% if element.values.type == 'textarea' %}
       multiline
       type="text"
       {% if element.values.minRows %}minRows={{ element.values.minRows | textOrVariable}} {% endif %}
       {% if element.values.maxRows %}maxRows={{ element.values.maxRows | textOrVariable}} {% endif %}
     {% endif %}
-    {% if element.values.type != 'textarea' %}
+    {% if element.values.type != 'textarea' and element.values.type != 'numeric' %}
       type="{{ element.values.type|default('text') }}"
     {% endif %}
     {% if fullWidth %}fullWidth{% endif %}

@@ -68,6 +68,10 @@ options:
   - name: autocomplete
     display: Autofilling Input
     type: text
+  - name: fieldname
+    display: fieldname
+    type: text
+    options: ''
   - name: onBlur
     display: On Focus Lost
     type: function
