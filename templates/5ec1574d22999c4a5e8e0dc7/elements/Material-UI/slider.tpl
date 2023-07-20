@@ -17,6 +17,10 @@ options:
     display: On Change
     type: function
     options: ''
+  - name: onChangeCommitted
+    display: On Change Committed
+    type: function
+    options: ''
   - name: valueLabelDisplay
     display: Label display
     type: dropdown
@@ -59,6 +63,7 @@ children: []
     value={ {{ element.values.value }} }
   {% endif %}
   onChange={(e, newValue)=>{ {{element.values.onChange}} } }
+  {% if element.values.onChangeCommitted %}onChangeCommitted={(e, newValue)=>{ {{element.values.onChangeCommitted}} } }{% endif %}
   valueLabelDisplay='{{ element.values.valueLabelDisplay|default("auto") }}'
   color= "{{ element.values.color|default(primary) }}"
   step={ {{element.values.step|default(1)}} }
