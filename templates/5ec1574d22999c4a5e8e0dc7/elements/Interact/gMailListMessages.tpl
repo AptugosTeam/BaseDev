@@ -25,7 +25,7 @@ extraFiles:
     destination: 'front-end/services/gmail.service.js'
 */
 {% set bpr %}
-import AptugoGmail from '../services/gmail.service'
+import AptugoGmail from '@services/gmail.service'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% if element.values.filter %}if (!filter) filter = {{ element.values.filter | textOrVariable }}{% endif %}

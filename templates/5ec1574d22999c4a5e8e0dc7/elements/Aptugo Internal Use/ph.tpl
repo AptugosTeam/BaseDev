@@ -7,7 +7,7 @@ icon: ico-field
 */
 {% if element.values.localStyles %}
 {% set bpr %}
-import { mergeClasses } from '../services/utils'
+import { mergeClasses } from '@services/utils'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
   const localStyles = { {{ element.values.localStyles | raw }} }

@@ -63,7 +63,7 @@ children: []
 {% endif %}
 {{ save_delayed('bpr',bpr) }}
 {% set bpr %}
-import { mergeClasses } from '../services/utils'
+import { mergeClasses } from '@services/utils'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}
