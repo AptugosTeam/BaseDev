@@ -14,7 +14,8 @@ module.exports = {
       dist: resolve(__dirname, '../', 'dist'),
       process: 'process/browser',
       stream: "stream-browserify",
-      zlib: "browserify-zlib"
+      zlib: "browserify-zlib",
+      "@components": resolve(__dirname, '../', "front-end/components"),
     },
   },
   context: resolve(__dirname, '../'),
