@@ -46,6 +46,14 @@ options:
     display: Indeterminate
     type: variable
     advanced: true
+  - name: edge
+    display: edge
+    type: text
+    advanced: true
+  - name: inputProps
+    display: Extra Input Props
+    type: text
+    advanced: true
 sourceType: javascript
 children: []
 */
@@ -81,8 +89,14 @@ children: []
   {% if element.values.effect == false %}
     disableRipple= { true }
   {% endif %}
+  {% if element.values.edge %}
+    edge={{ element.values.edge | textOrVariable }}
+  {% endif %}
   {% if element.values.indeterminate %}
     indeterminate= { {{element.values.indeterminate}} }
+  {% endif %}
+  {% if element.values.inputProps %}
+    inputProps= { {{ element.values.inputProps }} }
   {% endif %}
   />
 {% if element.values.label %}

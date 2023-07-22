@@ -30,14 +30,20 @@ children: []
 */
 {% set bpr %}
 import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <ListItem
   {% if element.values.dense %}dense{% endif %}
   {% if element.values.disableGutters %}disableGutters={true}{% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-  {% if element.values.onClick %}disableRipple button onClickCapture={ {{ element.values.onClick }} } {% endif %}
   {% if element.values.selected %}selected={{ element.values.selected | textOrVariable }}{% endif %}
 >
-{{ content | raw }}
+{% if element.values.onClick %}
+  <ListItemButton role={undefined} onClick={ {{ element.values.onClick }}  } dense>
+{% endif %}
+  {{ content | raw }}
+{% if element.values.onClick %}
+  </ListItemButton>
+{% endif %}
 </ListItem>

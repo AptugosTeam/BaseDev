@@ -22,6 +22,11 @@ options:
     display: On Click
     type: text
     options: ''
+  - name: id
+    display: ID
+    type: text
+    options: ''
+    advanced: true
 children: []
 */
 {% set bpr %}
@@ -29,6 +34,7 @@ import ListItemText from '@mui/material/ListItemText'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <ListItemText
+  {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
   primary={{ element.values.text | textOrVariable }}
   {% if element.values.onClick %}onClickCapture={ {{ element.values.onClick }} }{% endif %}
   {% if element.values.className %}classes={ { root: {{ element.values.className }} } }{% endif %}
