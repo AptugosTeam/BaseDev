@@ -28,7 +28,7 @@ import { search{{ referencedTable }} } from '../store/actions/{{ referencedTable
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set bpr %}
-import Autocomplete from '../components/Autocomplete'
+import Autocomplete from '@components/Autocomplete'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set bpr %}
