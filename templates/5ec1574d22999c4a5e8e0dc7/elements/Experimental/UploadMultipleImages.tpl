@@ -57,7 +57,7 @@ settings:
 children: []
 */
 {% set bpr %}
-import MultipleFileUpload from '../components/MultipleFileUpload'
+import MultipleFileUpload from '@components/MultipleFileUpload'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set path = element.values.path %}
