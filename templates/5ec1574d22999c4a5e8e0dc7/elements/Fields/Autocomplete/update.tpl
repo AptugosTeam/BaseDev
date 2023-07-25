@@ -41,6 +41,8 @@ unique_id: zd6mrTlU
       {{ reference.table.singleName | friendly }}.save()
       updatedData['{{ field.column_name | friendly }}'] = {{ field.column_name | friendly }}ID
     } else {
+      const {{ reference.table.name | friendly }}Controller = require('./{{ reference.table.name | friendly | lower }}.controller.js')
+      {{ reference.table.name | friendly }}Controller.update({ ID: {{ field.column_name | friendly }}info._id, data: {{ field.column_name | friendly }}info})
       updatedData['{{ field.column_name | friendly }}'] = {{ field.column_name | friendly }}info._id
     }
   } catch (e) {
@@ -72,7 +74,7 @@ unique_id: zd6mrTlU
           }
         })
 
-        let req = options.req
+        let req = options.req || {}
         req.body = { ...{{ field.column_name | friendly }}info, _id: {{ field.column_name | friendly }}ID }
         req.files = { ...{{ field.column_name | friendly }}Files }
         try {

@@ -10,6 +10,9 @@ icon: ico-field
   {% set datatype = 'String' %}
   {% set rawString = friendlyColumnName ~ ': ' ~  datatype  ~ ',' %}
 {% else %}
+  {% if fieldInfo.relationshipType == '1:1' %}
+    {% set fieldInfo = fieldInfo|merge({'dataType': fieldInfo.dataType}) %}
+  {% endif %}
   {% if fieldInfo.relationshipType == '1:m' %}
     {% set fieldInfo = fieldInfo|merge({'dataType': '[' ~ fieldInfo.dataType ~ ']'}) %}
   {% endif %}
