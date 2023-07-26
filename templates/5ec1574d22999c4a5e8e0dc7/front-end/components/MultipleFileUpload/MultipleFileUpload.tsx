@@ -42,7 +42,6 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
   ));
 
   React.useEffect(() => {
-    files.forEach(file => URL.revokeObjectURL(file.preview))
     if (props.onChange) props.onChange(files)
   }, [files])
 
