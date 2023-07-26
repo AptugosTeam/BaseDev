@@ -88,6 +88,7 @@ unique_id: zd6mrTlU
         
         updatedData['{{ field.column_name | friendly }}'].push({{ field.column_name | friendly }}ID)
       } else {
+        {{ reference.table.name | friendly }}.update({ ID: {{ field.column_name | friendly }}info._id, data: {{ field.column_name | friendly }}info })
         updatedData['{{ field.column_name | friendly }}'].push({{ field.column_name | friendly }}info._id)
       }
     }
