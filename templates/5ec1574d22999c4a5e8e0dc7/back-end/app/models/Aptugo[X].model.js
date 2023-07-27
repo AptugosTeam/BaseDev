@@ -32,7 +32,8 @@ const {{ friendlyTableName }}Schema = mongoose.Schema({
   {% endfor %}
 }, {
     timestamps: true,
-    toJSON: { virtuals: true }
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 })
 {% endset %}
 
