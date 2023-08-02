@@ -55,6 +55,12 @@ options:
   - name: activeUnderlineColor
     display: Underline Color (Active)
     type: text
+  - name: outlineColor
+    display: Outline Color
+    type: text
+  - name: activeOutlineColor
+    display: Outline Color (Active)
+    type: text
   - name: placeholderTextColor
     display: PlaceHolder Text Color
     type: text
@@ -97,8 +103,8 @@ children: []
       {% if element.values.type == 'textarea' %}
         multiline
       {% endif %}
-      outlineColor='transparent'
-      activeOutlineColor='#3A528A'
+      outlineColor={ {{ element.values.outlineColor|default('transparent') | textOrVariable }}}
+      activeOutlineColor={ {{ element.values.activeOutlineColor|default('#3A528A') | textOrVariable }}}
       {% if element.values.value %}value={{ element.values.value }}{% endif %}
       {% if element.values.onChange %}onChangeText={ {{ element.values.onChange | replace({ '.target.value': '' }) | functionOrCall }} }{% endif %}
       {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
