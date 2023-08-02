@@ -35,7 +35,9 @@ import MenuItem from '@mui/material/MenuItem'
 <MenuItem value="" disabled>{{ field.placeholder }}</MenuItem>
 {% endif %}
 {% for item in field.options|split(';') %}
-        <MenuItem key="{{ item }}" value="{{ item }}">{{ item }}</MenuItem>
+    {% set key = item|split('|')[0]|default(item) %}
+    {% set value = item|split('|')[1]|default(item) %}
+    <MenuItem key="{{ key }}_{{ value|friendly }}" value="{{ key }}">{{ value }}</MenuItem>
 {% endfor %}
 </TextField>
 {% endif %}
