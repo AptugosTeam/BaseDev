@@ -10,6 +10,10 @@ options:
     display: style
     type: text
 */
+{% set bpr %}
+import { LineLayer } from '@rnmapbox/maps'
+{% endset %}
+{{ save_delayed('bpr',bpr)}}
 <LineLayer
   id="{{ element.unique_id }}"
   {% if element.values.filter %}filter={ {{ element.values.filter}} }{% endif %}

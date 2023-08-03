@@ -10,9 +10,12 @@ options:
     display: style
     type: text
 */
+{% set bpr %}
+import { SymbolLayer } from '@rnmapbox/maps'
+{% endset %}
+{{ save_delayed('bpr',bpr)}}
 <SymbolLayer
   id="{{ element.unique_id }}"
-  style={layerStyles.clusterCount}
   {% if element.values.filter %}filter={ {{ element.values.filter}} }{% endif %}
   {% if element.values.style %}style={ {{ element.values.style }} }{% endif %}
 />
