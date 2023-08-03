@@ -4,6 +4,9 @@ keyPath: elements/Geo/mapBoxShapeSource.tpl
 unique_id: TDNt7sPp
 icon: ico-leaflet
 options:
+  - name: clusterProperties
+    display: Cluster Properties
+    type: text
   - name: onPress
     display: On Press
     type: function
@@ -25,33 +28,8 @@ const shapeSource = React.useRef<ShapeSource>(null)
   cluster
   clusterRadius={50}
   clusterMaxZoomLevel={14}
-  clusterProperties={ {
-    mag1: [
-      ['+', ['accumulated'], ['get', 'mag1']],
-      ['case', mag1, 1, 0],
-    ],
-    mag2: [
-      ['+', ['accumulated'], ['get', 'mag2']],
-      ['case', mag2, 1, 0],
-    ],
-    mag3: [
-      ['+', ['accumulated'], ['get', 'mag3']],
-      ['case', mag3, 1, 0],
-    ],
-    mag4: [
-      ['+', ['accumulated'], ['get', 'mag4']],
-      ['case', mag4, 1, 0],
-    ],
-    mag5: [
-      ['+', ['accumulated'], ['get', 'mag5']],
-      ['case', mag5, 1, 0],
-    ],
-  } }
+  clusterProperties={ {{ element.values.clusterProperties }} }
   shape={theData as unknown as any}
 >
-  <SymbolLayer id="pointCount" style={layerStyles.clusterCount} />
-
-  <CircleLayer id="clusteredPoints" belowLayerID="pointCount" filter={['has', 'point_count']} style={layerStyles.clusteredPoints} />
-
-  <CircleLayer id="singlePoint" filter={['!', ['has', 'point_count']]} style={layerStyles.singlePoint} />
+  {{ content | raw }}
 </ShapeSource>

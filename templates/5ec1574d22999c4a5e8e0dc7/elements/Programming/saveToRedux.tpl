@@ -18,7 +18,7 @@ options:
     type: text
   - name: variablename
     display: Variable name to save
-    type: text
+    type: variable
     settings:
       default: 'data'
 children: []
