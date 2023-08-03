@@ -34,7 +34,7 @@ const initialData{{ tableInfo.table.name | friendly }} = {
   {{ field.column_name | friendly }}: {{ fieldValue }},
 {% endfor %}
 }
-const [{{ tableInfo.table.name | friendly }}data, set{{ tableInfo.table.name | friendly }}Data] = React.useState<any>(initialData{{ tableInfo.table.name | friendly }})
+const [{{ tableInfo.table.name | friendly }}data, set{{ tableInfo.table.name | friendly }}data] = React.useState<any>(initialData{{ tableInfo.table.name | friendly }})
 const handle{{ tableInfo.table.name | friendly }}Change = (name: string) => (event: any) => {
     const value = event?.target ? (event.target.files ? event.target.files[0] : event.currentTarget?.value || event.target.value) : event
     if (value !== {{ tableInfo.table.name | friendly }}data[name]) {

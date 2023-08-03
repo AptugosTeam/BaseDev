@@ -4,6 +4,9 @@ keyPath: elements/Geo/mapBoxShapeSource.tpl
 unique_id: TDNt7sPp
 icon: ico-leaflet
 options:
+  - name: shape
+    display: Shape
+    type: text
   - name: clusterProperties
     display: Cluster Properties
     type: text
@@ -29,7 +32,7 @@ const shapeSource = React.useRef<ShapeSource>(null)
   clusterRadius={50}
   clusterMaxZoomLevel={14}
   clusterProperties={ {{ element.values.clusterProperties }} }
-  shape={theData as unknown as any}
+  shape={ {{ element.values.shape }} }
 >
   {{ content | raw }}
 </ShapeSource>
