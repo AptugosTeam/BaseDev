@@ -15,10 +15,12 @@ options:
         const value = arguments[0];
         const element = arguments[1];
         const page = arguments[2];
-        const tableName = aptugoUtils.helpers.friendly(aptugoUtils.findContainerTable(value).name);
-        aptugo.variables.setPageVariable(page, 'id' + element.unique_id, { [`initialData${tableName}`]: null });
-        aptugo.variables.setPageVariable(page, element.unique_id, { [`${tableName}data`]: null });
-        aptugo.variables.setPageFunction(page, 'f' + element.unique_id, `set${tableName}data` );
+        if (value !== 'useVar') {
+          const tableName = aptugoUtils.helpers.friendly(aptugoUtils.findContainerTable(value).name);
+          aptugo.variables.setPageVariable(page, 'id' + element.unique_id, { [`initialData${tableName}`]: null });
+          aptugo.variables.setPageVariable(page, element.unique_id, { [`${tableName}data`]: null });
+          aptugo.variables.setPageFunction(page, 'f' + element.unique_id, `set${tableName}data` );
+        }
       active: true
   - name: fieldVariable
     display: Variable
