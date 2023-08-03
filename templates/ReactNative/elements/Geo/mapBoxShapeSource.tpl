@@ -31,7 +31,7 @@ const shapeSource = React.useRef<ShapeSource>(null)
   cluster
   clusterRadius={50}
   clusterMaxZoomLevel={14}
-  clusterProperties={ {{ element.values.clusterProperties }} }
+  {% if element.values.clusterProperties %}clusterProperties={ {{ element.values.clusterProperties }} }{% endif %}
   shape={ {{ element.values.shape }} }
 >
   {{ content | raw }}

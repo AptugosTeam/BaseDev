@@ -38,7 +38,7 @@ const [{{ tableInfo.table.name | friendly }}data, set{{ tableInfo.table.name | f
 const handle{{ tableInfo.table.name | friendly }}Change = (name: string) => (event: any) => {
     const value = event?.target ? (event.target.files ? event.target.files[0] : event.currentTarget?.value || event.target.value) : event
     if (value !== {{ tableInfo.table.name | friendly }}data[name]) {
-      set{{ tableInfo.table.name | friendly }}Data({
+      set{{ tableInfo.table.name | friendly }}data({
         ...{{ tableInfo.table.name | friendly }}data,
         [name]: value
       })
