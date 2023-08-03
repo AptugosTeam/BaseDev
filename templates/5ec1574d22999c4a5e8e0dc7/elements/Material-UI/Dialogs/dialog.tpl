@@ -139,7 +139,7 @@ import AddDialog from '../components/Dialog/Dialog'
   color='{{ element.values.color }}'
   data={ {{ table.name | friendly }}data}
   initialData={initialData{{ table.name | friendly }}}
-  setData={set{{ table.name | friendly }}Data}
+  setData={set{{ table.name | friendly }}data}
   allowMultipleSubmit={ {{ dialogVariable }} === 'add'}
 >
 {% for field in fields %}
