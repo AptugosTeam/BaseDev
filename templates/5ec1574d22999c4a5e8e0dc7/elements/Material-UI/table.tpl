@@ -116,7 +116,7 @@ children: []
   {% set table = element.values.editionTable | tableData %}
   {% set tableName = table.name | friendly %}
   {% set tableSingleName = table.singleName | friendly | capitalize %}
-  {% set setEditDataFunctionName = 'set' ~ tableName ~ 'Data' %}
+  {% set setEditDataFunctionName = 'set' ~ tableName ~ 'data' %}
   {% for field in element.children %}
     {% if field.values.Field == 'useVar' %}
       {% set tableFields = tableFields|merge([field.values.columnName]) %}
@@ -130,7 +130,7 @@ children: []
   {% set table = element.values.table | tableData %}
   {% set tableName = table.name | friendly %}
   {% set tableSingleName = table.singleName | friendly | capitalize %}
-  {% set setEditDataFunctionName = 'set' ~ tableName ~ 'Data' %}
+  {% set setEditDataFunctionName = 'set' ~ tableName ~ 'data' %}
   {% set fields = table.fields %}
   {% set innervarname = element.name | friendly %}
   {% set eleWithoutChilds = element %}

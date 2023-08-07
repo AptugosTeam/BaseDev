@@ -36,7 +36,7 @@ options:
 {% set innervarname = 'table' %}
 {% set tableName = table.name | friendly %}
 {% set tableSingleName = table.singleName | friendly | capitalize %}
-{% set setEditDataFunctionName = 'set' ~ tableName ~ 'Data' %}
+{% set setEditDataFunctionName = 'set' ~ tableName ~ 'data' %}
 {% set fields = table.fields %}
 {% set tableData = '(' ~ tableName|lower ~ 'Data.found' ~ tableName|lower ~ '.length ? ' ~ tableName|lower ~ 'Data.found' ~ tableName|lower ~ ' : ' ~ tableName|lower ~ 'Data.' ~ tableName|lower ~ ' as any)' %}
 {% set eleWithoutChilds = element %}
