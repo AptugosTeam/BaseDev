@@ -2,7 +2,7 @@
 path: QRCode.tpl
 type: file
 unique_id: BG98dEr8
-icon: f:simpleLink.svg
+icon: f:QR_icon.svg
 options:
   - name: size
     display: Size
