@@ -15,13 +15,6 @@ options:
         if (element.values.name) {
           aptugo.variables.setComponent(element.values.name, `Defined in ${aptugo.plain[page].name}`)
         }
-      aptugoOnChange: >-
-        const value = arguments[0];
-        const element = arguments[1];
-        const page = arguments[2];
-        if (element.values.name) {
-          aptugo.variables.setComponent(element.values.name, `Defined in ${aptugo.plain[page].name}`)
-        }
       active: true
   - name: props
     display: Props 
