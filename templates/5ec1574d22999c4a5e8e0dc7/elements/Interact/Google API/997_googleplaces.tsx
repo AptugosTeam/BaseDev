@@ -15,17 +15,17 @@ declare global {
 }
 
 window.mapsApi = []
-const AutoComplete = (props:any) => {
+const AutoComplete = (props: any) => {
   const { placesKey, inputId } = props
   const ref = React.useRef(null)
-  const [input, setInput] = React.useState(props.initialValue || '')
+  const [input, setInput] = React.useState(props.initialValue || '')
 
   const renderGoogle = () => {
-    if ( !document.getElementById(inputId) ) {
-      setTimeout(renderGoogle,100)
+    if (!document.getElementById(inputId)) {
+      setTimeout(renderGoogle, 100)
     } else {
       // @ts-ignore
-      window.mapsApi[inputId] = new window.google.maps.places.Autocomplete( ref.current,{} )
+      window.mapsApi[inputId] = new window.google.maps.places.Autocomplete(ref.current, {})
       const handlePlaceSelect = () => {
         const output = {
           formattedAddress: '',
@@ -38,14 +38,14 @@ const AutoComplete = (props:any) => {
           street: null,
           city: null,
           country: null,
-          zip: null
+          zip: null,
         }
 
         const place = window.mapsApi[inputId].getPlace()
         output.formattedAddress = place.formatted_address
         output.latitude = place.geometry.location.lat()
         output.longitude = place.geometry.location.lng()
-        
+
         for (const component of place.address_components) {
           const type = component.types[0]
           switch (type) {
@@ -76,44 +76,44 @@ const AutoComplete = (props:any) => {
           }
         }
 
-        props.onChange && props.onChange(output)
         setInput(output.formattedAddress)
+        callBack(output)
       }
-      
+
       //listen for place change in input field
-      window.mapsApi[inputId].addListener("place_changed", handlePlaceSelect)
+      window.mapsApi[inputId].addListener('place_changed', handlePlaceSelect)
     }
   }
 
-  React.useEffect(() => {
-    if (ref.current) {
-      let found = document.getElementById('placesScript') ? true : false
-      if (!found) {
-        console.log('not found')
-        const script = document.createElement("script")
-        script.id = 'placesScript'
-        script.src = "https://maps.googleapis.com/maps/api/js?key=" + placesKey + "&libraries=places"
-        script.async = true
-        script.onload = () => renderGoogle()
-        document.body.appendChild(script)
-      }
-  
-      if (found) {
-        console.log('found')
-        document.getElementById('placesScript').addEventListener('load', renderGoogle)
-      }
-    }
-  },[ref])
+  const callBack = (output) => {
+    props.onChange && props.onChange(output)
+  }
 
-  return (<input
-    ref={ref}
-    id={inputId}
-    type="text"
-    className={props.className}
-    value={input}
-    onChange={(e) => setInput(e.target.value)}
-    placeholder={props.placeholder || 'Enter a Location'}
-  />)
+  let found = document.getElementById('placesScript') ? true : false
+  if (!found) {
+    const script = document.createElement('script')
+    script.id = 'placesScript'
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=' + placesKey + '&libraries=places'
+    script.async = true
+    script.onload = () => renderGoogle()
+    document.body.appendChild(script)
+  }
+
+  if (found) {
+    document.getElementById('placesScript').addEventListener('load', renderGoogle)
+  }
+
+  return (
+    <input
+      ref={ref}
+      id={inputId}
+      type="text"
+      className={props.className}
+      value={props.initialValue}
+      onChange={(e) => setInput(e.target.value)}
+      placeholder={props.placeholder || 'Enter a Location'}
+    />
+  )
 }
 
 export default AutoComplete
