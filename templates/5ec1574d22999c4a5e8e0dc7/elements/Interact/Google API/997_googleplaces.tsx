@@ -18,7 +18,7 @@ window.mapsApi = []
 const AutoComplete = (props:any) => {
   const { placesKey, inputId } = props
   const ref = React.useRef(null)
-  const [input, setInput] = React.useState('')
+  const [input, setInput] = React.useState(props.initialValue || '')
 
   const renderGoogle = () => {
     if ( !document.getElementById(inputId) ) {

@@ -15,6 +15,12 @@ options:
   - name: onchange
     display: On Change
     type: function
+  - name: initialValue
+    display: Initial Value
+    type: text
+  - name: placeholder
+    display: Placeholder Text
+    type: text
 extraFiles:
   - source: 'elements/Interact/Google API/997_googleplaces.tsx'
     destination: 'front-end/Components/PlacesAutoComplete/index.tsx'
@@ -28,4 +34,6 @@ import PlacesAutoComplete from '@components/PlacesAutocomplete'
   inputId={{ element.values.inputID|default(element.unique_id) | textOrVariable }}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   onChange={ {{ element.values.onchange | functionOrCall }} }
+  {% if element.values.initialValue %}initialValue={{ element.values.initialValue | textOrVariable }}{% endif %}
+  {% if element.values.placeholder %}placeholder={{ element.values.placeholder | textOrVariable }}{% endif %}
 />
