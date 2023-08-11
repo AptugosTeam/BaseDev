@@ -5,6 +5,12 @@ unique_id: S1WChdeR
 */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Montserrat:wght@400;700&family=Playfair+Display:ital,wght@0,900;1,700&family=Roboto:wght@100;300;400;500;700&display=swap');
 
+
+// Google Places in MUI Popups
+:global(.pac-container) {
+  z-index: 10002 !important;
+}
+
 :root {
   --ck-z-default: 10000;
 }
