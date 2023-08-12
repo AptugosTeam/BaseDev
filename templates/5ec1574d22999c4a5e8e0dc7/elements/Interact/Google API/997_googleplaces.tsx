@@ -20,6 +20,13 @@ const AutoComplete = (props: any) => {
   const ref = React.useRef(null)
   const [input, setInput] = React.useState(props.initialValue || '')
 
+  React.useEffect(() => {
+    if (ref.current) {
+      ref.current.value = props.initialValue || ''
+      setInput(props.initialValue || '')
+    }
+  },[props.initialValue])
+  
   const renderGoogle = () => {
     if (!document.getElementById(inputId)) {
       setTimeout(renderGoogle, 100)
