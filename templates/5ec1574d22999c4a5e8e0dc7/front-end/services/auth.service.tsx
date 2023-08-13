@@ -15,9 +15,9 @@ class AuthService {
         password,
       })
       .then((response) => {
-        if (response.data.accessToken) {
-          localStorage.setItem('token', response.data.accessToken)
-          localStorage.setItem('user', JSON.stringify(response.data.data))
+        if (response.data.accessToken || response.data.stsTokenManager) {
+          localStorage.setItem('token', response.data.accessToken || response.data.stsTokenManager)
+          localStorage.setItem('user', JSON.stringify(response.data.data || response.data))
         }
         return response.data
       })
