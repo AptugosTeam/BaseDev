@@ -69,12 +69,13 @@ options:
     {% endfor %}
   {% endif %}
 {% endif %}
-<picture>
+<picture
+  {% if element.values.className %}className={ {{element.values.className}} }{% endif %}
+>
   {% if webppath %}
   <source type="image/webp" srcSet="{{ webppath }}" />
   {% endif %}
   <img
-    {% if element.values.className %}className={ {{element.values.className}} }{% endif %}
     src={{ path|textOrVariable }}
     alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
     {% if width %}width={{ width|textOrVariable }}{% endif %}
@@ -82,4 +83,3 @@ options:
     {% if element.values.onError %}onError={ {{element.values.onError}} }{% endif %}
   />
 </picture>
-

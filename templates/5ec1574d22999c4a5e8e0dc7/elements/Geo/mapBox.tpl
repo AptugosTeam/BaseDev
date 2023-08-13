@@ -245,6 +245,8 @@ options:
 extraFiles:
   - source: 'elements/Geo/MapBox/MapBox.tsx'
     destination: 'front-end/components/MapBox/MapBox.tsx'
+  - source: 'elements/Geo/MapBox/Marker.tsx'
+    destination: 'front-end/components/MapBox/Marker.tsx'
   - source: 'elements/Geo/MapBox/index.tsx'
     destination: 'front-end/components/MapBox/index.tsx'
   - source: 'elements/Geo/MapBox/mapbox.css'
@@ -281,8 +283,8 @@ import MapBox from '../components/MapBox'
   {% if element.values.fadeDuration %}fadeDuration={{ element.values.fadeDuration | textOrVariable }}{% endif %}
   {% if element.values.failIfMajorPerformanceCaveat %}failIfMajorPerformanceCaveat={{ element.values.failIfMajorPerformanceCaveat | textOrVariable }}{% endif %}
   {% if element.values.fitBoundsOptions %}fitBoundsOptions={{ element.values.fitBoundsOptions | textOrVariable }}{% endif %}
-  interactive={{ element.values.interactive | textOrVariable }}
-  keyboard={{ element.values.keyboard | textOrVariable }}
+  {% if element.values.interactive %}interactive={{ element.values.interactive | textOrVariable }}{% endif %}
+  {% if element.values.keyboard %}keyboard={{ element.values.keyboard | textOrVariable }}{% endif %}
   {% if element.values.language %}language={{ element.values.language | textOrVariable }}{% endif %}
   {% if element.values.locale %}locale={{ element.values.locale | textOrVariable }}{% endif %}
   {% if element.values.localFontFamily %}localFontFamily={{ element.values.localFontFamily | textOrVariable }}{% endif %}

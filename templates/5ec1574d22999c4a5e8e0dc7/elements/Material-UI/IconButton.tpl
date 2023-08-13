@@ -94,9 +94,15 @@ import IconButton from '@mui/material/IconButton'
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
 {% if element.values.useFontAwesome %}
-import { fa{{ element.values.FontAwesomeIcon }} } from '@fortawesome/free-solid-svg-icons'
+  {% set fai = element.values.FontAwesomeIcon|capitalize %}
+  {% if fai == 'Menu' %}{% set fai = 'Bars' %}{% endif %}
+  {% if fai == 'Alt-route' %}{% set fai = 'Route' %}{% endif %}
+  {% if fai == 'Map-marker-alt' %}{% set fai = 'LocationDot' %}{% endif %}
+  {% if fai == 'Chevron-left' %}{% set fai = 'ChevronLeft' %}{% endif %}
+  {% if fai == 'Magnify' %}{% set fai = 'MagnifyingGlass' %}{% endif %}
+  import { fa{{ fai }} } from '@fortawesome/free-solid-svg-icons'
 {% else %}
-import {{element.values.icon}}{{ addenum }}Icon from '@mui/icons-material/{{element.values.icon}}{{ addenum }}'
+  import {{element.values.icon}}{{ addenum }}Icon from '@mui/icons-material/{{element.values.icon}}{{ addenum }}'
 {% endif %}
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
@@ -105,7 +111,7 @@ import {{element.values.icon}}{{ addenum }}Icon from '@mui/icons-material/{{elem
   {% if element.values.Action %}
     onClick={ {{ element.values.Action | functionOrCall }} }
   {% endif %} 
-    icon={ fa{{ element.values.FontAwesomeIcon }} }
+    icon={ fa{{ fai }} }
   {% if element.values.fontSize %} 
     style={ { fontSize: "{{ element.values.fontSize }}{{ element.values.fontUnit|default('px') }}" } }
   {% endif %}

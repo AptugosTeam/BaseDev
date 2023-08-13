@@ -41,7 +41,11 @@ module.exports = {
         }}, { loader: 'sass-loader', options: { sourceMap: true } }]
       },
       {
-        test: /\.(jpe?g|png|gif|svg|woff)$/i,
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        use: 'file-loader'
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
         use: [
           'file-loader?hash=sha512&digest=hex&name=img/[contenthash].[ext]',
           'image-webpack-loader?bypassOnDebug&optipng.optimizationLevel=7&gifsicle.interlaced=false',

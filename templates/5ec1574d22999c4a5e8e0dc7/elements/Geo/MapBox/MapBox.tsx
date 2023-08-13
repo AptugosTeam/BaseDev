@@ -1,7 +1,5 @@
 /*
 path: MapBox.tsx
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/elements/Geo/MapBox/MapBox.tsx
 keyPath: elements/Geo/MapBox/MapBox.tsx
 unique_id: sLXEEizE
 */

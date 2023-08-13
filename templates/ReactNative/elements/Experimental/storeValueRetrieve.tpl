@@ -12,15 +12,34 @@ options:
     display: Name
     type: text
     options: ''
+  - name: valueToVar
+    display: Store Directly In Variable (async)
+    type: text
   - name: onLoad
-    display: Store In Variable
+    display: Store In State
     type: text
     options: ''
+  - name: makeItBoolean
+    display: Boolean?
+    type: checkbox
+    options: ''
+  - name: Parse
+    display: Parse as JSON?
+    type: checkbox
 children: []
 */
 {% set bpr %}
 import AsyncStorage from '@react-native-async-storage/async-storage'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-let {{ element.values.onLoad }}
-AsyncStorage.getItem('{{ element.values.variableName }}').then(res => { {{ element.values.onLoad }} = res })
+{% if element.values.valueToVar %}
+  const {{ element.values.valueToVar }} ={% if element.values.Parse %}JSON.parse({% endif %}await AsyncStorage.getItem('{{ element.values.variableName }}'){% if element.values.Parse %}){% endif %}
+{% else %}
+  AsyncStorage.getItem('{{ element.values.variableName }}').then(res => {
+    {{ element.values.onLoad }}(
+      {% if element.values.makeItBoolean %}Boolean({% endif %}
+      {% if element.values.Parse %}JSON.parse({% endif %}res{% if element.values.Parse %}){% endif %}
+      {% if element.values.makeItBoolean %}){% endif %}
+    )
+  })
+{% endif %}

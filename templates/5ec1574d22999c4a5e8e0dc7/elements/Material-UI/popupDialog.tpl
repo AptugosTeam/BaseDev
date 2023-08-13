@@ -34,9 +34,9 @@ import Dialog from '@mui/material/Dialog'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Dialog
-  open={ {{ element.values.open }} }
+  open={ {{ element.values.open|default(element.values.visible) }} }
   {% if element.values.onclose %}onClose={ {{ element.values.onclose | functionOrCall }} }{% endif %}
-  maxWidth={ {{ element.values.maxWidth }} }
+  {% if element.values.maxWidth %}maxWidth={ {{ element.values.maxWidth }} }{% endif %}
   {% if element.values.className %}
     className={ {{element.values.className}} }
   {% endif %}

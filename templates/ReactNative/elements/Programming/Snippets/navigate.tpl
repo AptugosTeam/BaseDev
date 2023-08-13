@@ -13,4 +13,4 @@ options:
 children: []
 */
 {% set pageFrom = element.values.to | elementData %}
-navigation.push('{{ pageFrom.path }}')
+navigation.navigate('{{ pageFrom.path }}')
