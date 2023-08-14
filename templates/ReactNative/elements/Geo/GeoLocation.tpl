@@ -9,15 +9,15 @@ options:
     display: State Function to Update
     type: text
 */
+;(async () => {
+  const { status } = await Location.requestForegroundPermissionsAsync()
 
-Location.requestForegroundPermissionsAsync().then(status => {
-  if (status !== 'granted') {
-    console.error('Permission to access location was denied')
-    return
-  } else {
-    Location.getCurrentPosition().then(currentLocation => {
+      if (status !== 'granted') {
+        console.error('Permission to access location was denied')
+        return
+      }
+
+      const position = await Location.getCurrentPositionAsync({})
       {{ element.values.statevar }}(position.coords)
       {{ content | raw }}
-    })
-  }
-})
+    })()

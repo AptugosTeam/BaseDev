@@ -47,7 +47,13 @@ options:
     display: On Error
     type: text
     advanced: true
+  - name: background
+    display: Use as Background
+    type: checkbox
+    options: ''
 */
+{% set tag = 'picture' %}
+{% if element.values.background %}{%set tag = 'div' %}{% endif %}
 {% set path = element.values.path %}
 {% set webppath = element.values.webppath %}
 {% set width = element.values.width|default(null) %}
@@ -69,7 +75,7 @@ options:
     {% endfor %}
   {% endif %}
 {% endif %}
-<picture
+<{{ tag }}
   {% if element.values.className %}className={ {{element.values.className}} }{% endif %}
 >
   {% if webppath %}
@@ -82,4 +88,4 @@ options:
     {% if height %}height={{ height|textOrVariable }}{% endif %}
     {% if element.values.onError %}onError={ {{element.values.onError}} }{% endif %}
   />
-</picture>
+</{{ tag }}>

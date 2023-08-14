@@ -69,7 +69,7 @@ const TAB{{ child.unique_id}}Route = ({% if element.values.passVariable %}{ {{ e
 const [tabIndex, setTabIndex] = React.useState(0);
 const [tabRoutes] = React.useState([
   {% for child in element.children %}
-  { key: '{{ child.unique_id}}', title: '{{ child.name }}' },
+  { key: '{{ child.unique_id}}', title: `{{ child.name }}` },
   {% endfor %}
 ])
 const renderScene = ({ route }) => {

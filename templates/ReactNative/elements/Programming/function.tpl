@@ -22,19 +22,25 @@ options:
     display: Priiority
     type: dropdown
     options: Normal;High;Low
+  - name: async
+    display: Async
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
 children: []
 */
 
 {% if element.values.priority %}
 {% set ph %}
-const {{ element.values.functionName }} = ({{ element.values.functionParameters }}) => {
+const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
   {{ element.values.functionBody | raw }}
   {{ content | raw }}  
 }
 {% endset %}
 {{ save_delayed('ph',ph,1) }}
 {% else %}
-const {{ element.values.functionName }} = ({{ element.values.functionParameters }}) => {
+const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
   {{ element.values.functionBody | raw }}
   {{ content | raw }}  
 }
