@@ -92,7 +92,7 @@ children: []
   <TextInput
       mode="{{ element.values.variant|default('flat') }}"
       {% if element.values.Autofocus %}autoFocus{% endif %}
-      {% if element.values.placeholder %}placeholder="{{ element.values.placeholder }}"{% endif %}
+      {% if element.values.placeholder %}placeholder={{ element.values.placeholder|textOrVariable }}{% endif %}
       {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
       {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
       {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
