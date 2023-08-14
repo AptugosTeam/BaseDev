@@ -14,10 +14,6 @@ options:
     display: On Press
     type: function
 */
-{% set bpr %}
-import { ShapeSource, CircleLayer, SymbolLayer } from '@rnmapbox/maps'
-{% endset %}
-{{ save_delayed('bpr',bpr)}}
 {% set ph %}
 const shapeSource = React.useRef<ShapeSource>(null)
 {% endset %}

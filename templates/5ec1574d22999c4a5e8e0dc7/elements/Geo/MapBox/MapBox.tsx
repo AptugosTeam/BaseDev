@@ -128,8 +128,8 @@ const MapBox: FunctionComponent<any> = (props) => {
   })
 
   return (
-    <div>
-      <div ref={mapContainer} className={props.className} />
+    <div className={props.className}>
+      <div ref={mapContainer} />
       {childrenWithProps}
     </div>
   )

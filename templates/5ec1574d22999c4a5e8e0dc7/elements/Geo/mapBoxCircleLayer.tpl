@@ -10,10 +10,6 @@ options:
     display: style
     type: text
 */
-{% set bpr %}
-import { CircleLayer } from '@rnmapbox/maps'
-{% endset %}
-{{ save_delayed('bpr',bpr)}}
 <CircleLayer
   id="{{ element.unique_id }}"
   {% if element.values.filter %}filter={ {{ element.values.filter}} }{% endif %}

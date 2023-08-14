@@ -314,4 +314,4 @@ import MapBox from '../components/MapBox'
   {% if element.values.useWebGL2 %}useWebGL2={{ element.values.useWebGL2 | textOrVariable }}{% endif %}
   {% if element.values.worldview %}worldview={{ element.values.worldview | textOrVariable }}{% endif %}
   {% if element.values.zoom %}zoom={{ element.values.zoom | textOrVariable }}{% endif %}
-/>
+>{{ content | raw }}</MapBox>

@@ -30,10 +30,6 @@ options:
     settings:
       default: 12
 */
-{% set bpr %}
-import { Camera } from '@rnmapbox/maps'
-{% endset %}
-{{ save_delayed('bpr',bpr) }}
 <Camera
   maxZoomLevel={ {{ element.values.maxZoomLevel|default(16) }} }
   minZoomLevel={ {{ element.values.minZoomLevel|default(1) }} }

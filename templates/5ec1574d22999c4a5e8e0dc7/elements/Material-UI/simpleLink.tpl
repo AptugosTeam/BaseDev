@@ -36,14 +36,14 @@ options:
 sourceType: javascript
 children: []
 */
-
 {% set bpr %}
 import { NavLink } from 'react-router-dom'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set dest = element.values.destination %}
 {% if element.values.parameters %}
-  {% set dest = element.values.destination ~ element.values.parameters %}
+  {% set params = element.values.parameters|parseParameters %}
+  {% set dest = element.values.destination ~ '/$' ~ params|join('$') %}
 {% endif %}
 {% if element.values.tagToUse == 'A' %}
 <a

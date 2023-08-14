@@ -11,10 +11,12 @@ options:
     display: ClassName
     type: text
     options: ''
+settings:
+  - name: Packages
+    value: '"react-youtube": "^10.1.0",'
 */
-{% set uri = "https://www.youtube.com/embed/" ~ element.values.videoID ~ "?rel=0&autoplay=0&showinfo=0&controls=0" %}
-<iframe
-  {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
-  source={uri}
-  javaScriptEnabled={true}
-/>
+{% set bpr %}
+import YouTube from 'react-youtube'
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
+<YouTube videoId={{ element.values.videoID | textOrVariable }}/>
