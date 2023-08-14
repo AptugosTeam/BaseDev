@@ -88,4 +88,5 @@ options:
     {% if height %}height={{ height|textOrVariable }}{% endif %}
     {% if element.values.onError %}onError={ {{element.values.onError}} }{% endif %}
   />
+  {{ content | raw }}
 </{{ tag }}>
