@@ -23,6 +23,10 @@ options:
     display: Boolean?
     type: checkbox
     options: ''
+  - name: default
+    display: Default Value
+    type: text
+    options: ''
   - name: Parse
     display: Parse as JSON?
     type: checkbox
@@ -38,7 +42,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
   AsyncStorage.getItem('{{ element.values.variableName }}').then(res => {
     {{ element.values.onLoad }}(
       {% if element.values.makeItBoolean %}Boolean({% endif %}
-      {% if element.values.Parse %}JSON.parse({% endif %}res{% if element.values.Parse %}){% endif %}
+      {% if element.values.Parse %}JSON.parse({% endif %}res {% if element.values.default %}|| '{{ element.values.default }}'{% endif %}{% if element.values.Parse %}){% endif %}
       {% if element.values.makeItBoolean %}){% endif %}
     )
   })
