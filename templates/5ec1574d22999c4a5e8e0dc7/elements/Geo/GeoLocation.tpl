@@ -11,4 +11,5 @@ options:
 */
 navigator.geolocation.getCurrentPosition((position) => {
     {{ element.values.statevar }}(position.coords)
+    {{ content | raw }}
 })

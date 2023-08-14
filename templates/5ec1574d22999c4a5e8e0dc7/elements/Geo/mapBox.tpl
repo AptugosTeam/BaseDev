@@ -243,75 +243,97 @@ options:
     settings:
       default: 0
 extraFiles:
-  - source: 'elements/Geo/MapBox/MapBox.tsx'
-    destination: 'front-end/components/MapBox/MapBox.tsx'
+  - source: 'elements/Geo/MapBox/mapbox.css'
+    destination: 'front-end/components/MapBox/mapbox.css'
   - source: 'elements/Geo/MapBox/Marker.tsx'
     destination: 'front-end/components/MapBox/Marker.tsx'
   - source: 'elements/Geo/MapBox/index.tsx'
     destination: 'front-end/components/MapBox/index.tsx'
-  - source: 'elements/Geo/MapBox/mapbox.css'
-    destination: 'front-end/components/MapBox/mapbox.css'
 settings:
   - name: Packages
-    value: '"mapbox-gl": "2.13.0",'
+    value: '"mapbox-gl": "2.13.0","react-map-gl": "^7.1.3",'
 */
 {% set bpr %}
-import MapBox from '../components/MapBox'
+  import '@components/MapBox/mapbox.css'
+  import Map, { Layer, Source, NavigationControl, ScaleControl, MapRef} from 'react-map-gl'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-<MapBox
-  accessToken='{{ element.values.accessToken }}'
-  className={ {{ element.values.className}} }
-  {% if element.values.navigationControl %}navigationControl={ {{ element.values.navigationControl|textOrVariable }} }{% endif %}
-  {% if element.values.fullScreenControl %}fullScreenControl={ {{ element.values.fullScreenControl|textOrVariable }} }{% endif %}
-  {% if element.values.geoLocateControl %}geoLocateControl{% endif %}
-  {% if element.values.antialias %}antialias={ {{ element.values.antialias }} }{% endif %}
-  {% if element.values.attributionControl %}attributionControl={ {{ element.values.attributionControl }} }{% endif %}
-  {% if element.values.bearing %}bearing={{ element.values.bearing | textOrVariable }}{% endif %}
-  {% if element.values.bearingSnap %}bearingSnap={{ element.values.bearingSnap | textOrVariable }}{% endif %}
-  {% if element.values.bounds %}bounds={ {{ element.values.bounds }} }{% endif %}
-  {% if element.values.boxZoom %}boxZoom={{ element.values.boxZoom | textOrVariable }}{% endif %}
-  {% if element.values.center %}center={ {{ element.values.center }} }{% endif %}
-  {% if element.values.clickTolerance %}clickTolerance={{ element.values.clickTolerance | textOrVariable }}{% endif %}
-  {% if element.values.collectResourceTiming %}collectResourceTiming={{ element.values.collectResourceTiming | textOrVariable }}{% endif %}
-  {% if element.values.cooperativeGestures %}cooperativeGestures={{ element.values.cooperativeGestures | textOrVariable }}{% endif %}
-  {% if element.values.crossSourceCollisions %}crossSourceCollisions={{ element.values.crossSourceCollisions | textOrVariable }}{% endif %}
-  {% if element.values.customAttribution %}customAttribution={{ element.values.customAttribution | textOrVariable }}{% endif %}
-  {% if element.values.doubleClickZoom %}doubleClickZoom={{ element.values.doubleClickZoom | textOrVariable }}{% endif %}
-  {% if element.values.dragPan %}dragPan={{ element.values.dragPan | textOrVariable }}{% endif %}
-  {% if element.values.dragRotate %}dragRotate={{ element.values.dragRotate | textOrVariable }}{% endif %}
-  {% if element.values.fadeDuration %}fadeDuration={{ element.values.fadeDuration | textOrVariable }}{% endif %}
-  {% if element.values.failIfMajorPerformanceCaveat %}failIfMajorPerformanceCaveat={{ element.values.failIfMajorPerformanceCaveat | textOrVariable }}{% endif %}
-  {% if element.values.fitBoundsOptions %}fitBoundsOptions={{ element.values.fitBoundsOptions | textOrVariable }}{% endif %}
-  {% if element.values.interactive %}interactive={{ element.values.interactive | textOrVariable }}{% endif %}
-  {% if element.values.keyboard %}keyboard={{ element.values.keyboard | textOrVariable }}{% endif %}
-  {% if element.values.language %}language={{ element.values.language | textOrVariable }}{% endif %}
-  {% if element.values.locale %}locale={{ element.values.locale | textOrVariable }}{% endif %}
-  {% if element.values.localFontFamily %}localFontFamily={{ element.values.localFontFamily | textOrVariable }}{% endif %}
-  {% if element.values.localIdeographFontFamily %}localIdeographFontFamily={{ element.values.localIdeographFontFamily | textOrVariable }}{% endif %}
-  {% if element.values.maxBounds %}maxBounds={{ element.values.maxBounds | textOrVariable }}{% endif %}
-  {% if element.values.maxPitch %}maxPitch={{ element.values.maxPitch | textOrVariable }}{% endif %}
-  {% if element.values.maxTileCacheSize %}maxTileCacheSize={{ element.values.maxTileCacheSize | textOrVariable }}{% endif %}
-  {% if element.values.maxZoom %}maxZoom={{ element.values.maxZoom | textOrVariable }}{% endif %}
-  {% if element.values.minPitch %}minPitch={{ element.values.minPitch | textOrVariable }}{% endif %}
-  {% if element.values.minTileCacheSize %}minTileCacheSize={{ element.values.minTileCacheSize | textOrVariable }}{% endif %}
-  {% if element.values.minZoom %}minZoom={{ element.values.minZoom | textOrVariable }}{% endif %}
-  {% if element.values.optimizeForTerrain is defined %}optimizeForTerrain={{ element.values.optimizeForTerrain | textOrVariable }}{% endif %}
-  {% if element.values.performanceMetricsCollection %}performanceMetricsCollection={{ element.values.performanceMetricsCollection | textOrVariable }}{% endif %}
-  {% if element.values.pitch %}pitch={{ element.values.pitch | textOrVariable }}{% endif %}
-  {% if element.values.pitchWithRotate %}pitchWithRotate={{ element.values.pitchWithRotate | textOrVariable }}{% endif %}
-  {% if element.values.preserveDrawingBuffer %}preserveDrawingBuffer={{ element.values.preserveDrawingBuffer | textOrVariable }}{% endif %}
-  {% if element.values.projection %}projection={{ element.values.projection | textOrVariable }}{% endif %}
-  {% if element.values.refreshExpiredTiles %}refreshExpiredTiles={{ element.values.refreshExpiredTiles | textOrVariable }}{% endif %}
-  {% if element.values.renderWorldCopies %}renderWorldCopies={{ element.values.renderWorldCopies | textOrVariable }}{% endif %}
-  {% if element.values.scrollZoom %}scrollZoom={{ element.values.scrollZoom | textOrVariable }}{% endif %}
-  {% if element.values.style %}style={{ element.values.style | textOrVariable }}{% endif %}
-  {% if element.values.testMode %}testMode={{ element.values.testMode | textOrVariable }}{% endif %}
-  {% if element.values.touchPitch %}touchPitch={{ element.values.touchPitch | textOrVariable }}{% endif %}
-  {% if element.values.touchZoomRotate %}touchZoomRotate={{ element.values.touchZoomRotate | textOrVariable }}{% endif %}
-  {% if element.values.trackResize %}trackResize={{ element.values.trackResize | textOrVariable }}{% endif %}
-  {% if element.values.transformRequest %}transformRequest={{ element.values.transformRequest | textOrVariable }}{% endif %}
-  {% if element.values.useWebGL2 %}useWebGL2={{ element.values.useWebGL2 | textOrVariable }}{% endif %}
-  {% if element.values.worldview %}worldview={{ element.values.worldview | textOrVariable }}{% endif %}
-  {% if element.values.zoom %}zoom={{ element.values.zoom | textOrVariable }}{% endif %}
->{{ content | raw }}</MapBox>
+{% if element.values.navigationControl %}
+{% set bpr %}
+  import { NavigationControl } from 'react-map-gl'
+{% endset %}
+{{ save_delayed('bpr',bpr)}}
+{% endif %}
+{% set bpr %}
+  import type {LayerProps} from 'react-map-gl';
+
+export const clusterLayer: LayerProps = {
+  id: 'clusters',
+  type: 'circle',
+  source: 'earthquakes',
+  filter: ['has', 'point_count'],
+  paint: {
+    'circle-color': ['step', ['get', 'point_count'], 'rgba(206, 13, 45, 0.75)', 10, 'rgba(206, 13, 45, 0.5)', 750, '#f28cb1'],
+    'circle-radius': ['step', ['get', 'point_count'], 16, 10, 32, 750, 64]
+  }
+};
+
+export const clusterCountLayer: LayerProps = {
+  id: 'cluster-count',
+  type: 'symbol',
+  source: 'earthquakes',
+  filter: ['has', 'point_count'],
+  layout: {
+    'text-field': '{point_count_abbreviated}',
+    'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+    'text-size': 10
+  }
+};
+
+export const unclusteredPointLayer: LayerProps = {
+  id: 'unclustered-point',
+  type: 'circle',
+  source: 'earthquakes',
+  filter: ['!', ['has', 'point_count']],
+  paint: {
+    'circle-color': 'rgb(206, 13, 45)',
+    'circle-opacity': 0.84,
+    'circle-radius': 8,
+    'circle-stroke-width': 2,
+    'circle-stroke-color': '#fff'
+  }
+};
+{% endset %}
+{{ save_delayed('bpr',bpr)}}
+<div className={ {{ element.values.className}} }>
+  <Map
+    initialViewState={ {
+      latitude: locat.latitude,
+      longitude: locat.longitude,
+      zoom: zoom,
+      bearing: 0,
+      pitch: 0
+    } }
+    ref={mapRef}
+    mapStyle={{ element.values.style |default('mapbox://styles/mapbox/light-v9') | textOrVariable }}
+    mapboxAccessToken='{{ element.values.accessToken }}'
+    onIdle={onMapIdle}
+  >
+    {% if element.values.navigationControl %}<NavigationControl position={{ element.values.navigationControl|textOrVariable }} />{% endif %}
+    <ScaleControl />
+                
+                
+    <Source
+      id="earthquakes"
+      type="geojson"
+      data={theData}
+      cluster={true}
+      clusterMaxZoom={14}
+      clusterRadius={50}
+    >
+      <Layer {...clusterLayer} />
+      <Layer {...clusterCountLayer} />
+      <Layer {...unclusteredPointLayer} />
+    </Source>
+  </Map>
+</div>

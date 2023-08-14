@@ -30,10 +30,3 @@ options:
     settings:
       default: 12
 */
-<Camera
-  maxZoomLevel={ {{ element.values.maxZoomLevel|default(16) }} }
-  minZoomLevel={ {{ element.values.minZoomLevel|default(1) }} }
-  centerCoordinate={ {{ element.values.centerCoordinate|default('[50, 0]') }}}
-  zoomLevel={ {{ element.values.zoomLevel|default(6) }} }
-  followZoomLevel={ {{ element.values.followZoomLevel|default(12) }} }
-/>
