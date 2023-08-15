@@ -59,11 +59,14 @@ settings:
 children: []
 */
 {% set bpr %}
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper";
-import "swiper/css/pagination";
-import "swiper/css/free-mode";
-import "swiper/css/bundle";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import 'swiper/css/free-mode';
+import 'swiper/css/bundle';
 {% endset %}
 
 {{ save_delayed('bpr', bpr) }}    
