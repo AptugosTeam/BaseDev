@@ -44,9 +44,9 @@ blockquote,pre {
   overflow: hidden
 }
 
-.menu__link:hover,a {
+/* .menu__link:hover,a {
   transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default)
-}
+} */
 
 .navbar--dark,:root {
   --ifm-navbar-link-hover-color: var(--ifm-color-primary)
@@ -977,7 +977,7 @@ strong {
   font-weight: var(--ifm-font-weight-bold)
 }
 
-a {
+/* a {
   color: var(--ifm-link-color);
   text-decoration: var(--ifm-link-decoration)
 }
@@ -985,7 +985,7 @@ a {
 a:hover {
   color: var(--ifm-link-hover-color);
   text-decoration: var(--ifm-link-hover-decoration)
-}
+} */
 
 .button:hover,.text--no-decoration,.text--no-decoration:hover,a:not([href]) {
   text-decoration: none
