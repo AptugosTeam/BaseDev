@@ -60,7 +60,7 @@ children: []
 */
 {% set bpr %}
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper";
+import { Pagination as SwiperPagination, Navigation } from "swiper";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "swiper/css/bundle";
@@ -102,7 +102,7 @@ import "swiper/css/bundle";
     {% if element.values.onChange %}
       onActiveIndexChange={ {{ element.values.onChange }} } 
     {% endif %}
-    modules={[Pagination, Navigation]}
+    modules={[SwiperPagination, Navigation]}
   >
 {% if element.values.useSwiperSlide %}
   {% for unchild in element.children %}
@@ -114,5 +114,3 @@ import "swiper/css/bundle";
   {{ content | raw }}
 {% endif %}
 </Swiper>
-
-  
