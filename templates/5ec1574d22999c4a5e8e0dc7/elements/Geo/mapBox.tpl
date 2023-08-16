@@ -321,19 +321,6 @@ export const unclusteredPointLayer: LayerProps = {
   >
     {% if element.values.navigationControl %}<NavigationControl position={{ element.values.navigationControl|textOrVariable }} />{% endif %}
     <ScaleControl />
-                
-                
-    <Source
-      id="earthquakes"
-      type="geojson"
-      data={theData}
-      cluster={true}
-      clusterMaxZoom={14}
-      clusterRadius={50}
-    >
-      <Layer {...clusterLayer} />
-      <Layer {...clusterCountLayer} />
-      <Layer {...unclusteredPointLayer} />
-    </Source>
+    {{ content | raw }}
   </Map>
 </div>

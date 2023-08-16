@@ -13,10 +13,10 @@ options:
     options: ''
 */
 {% set bpr %}
-import { Images } from '@rnmapbox/maps'
+import Map, { ImageSource } from 'react-map-gl'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-<Images
+<ImageSource
   images={ {{ element.values.variableToUse }}}
   onImageMissing={(url) => {
     {{ element.values.functionToUse }}({
