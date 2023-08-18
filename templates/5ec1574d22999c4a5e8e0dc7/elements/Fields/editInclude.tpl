@@ -36,11 +36,14 @@ const initialData{{ tableInfo.table.name | friendly }} = {
 }
 const [{{ tableInfo.table.name | friendly }}data, set{{ tableInfo.table.name | friendly }}data] = React.useState<any>(initialData{{ tableInfo.table.name | friendly }})
 const handle{{ tableInfo.table.name | friendly }}Change = (name: string) => (event: any) => {
+  return new Promise((resolve,reject) => {
     const value = event?.target ? (event.target.files ? event.target.files[0] : event.currentTarget?.value || event.target.value) : event
     if (value !== {{ tableInfo.table.name | friendly }}data[name]) {
-      set{{ tableInfo.table.name | friendly }}data({
-        ...{{ tableInfo.table.name | friendly }}data,
-        [name]: value
+      set{{ tableInfo.table.name | friendly }}data((oldValues) => {
+        return {
+          ...oldValues,
+          [name]: value
+        }
       })
       {% if element.values.autosave %}
       if ({{ tableInfo.table.name | friendly }}data._id) {
@@ -51,6 +54,8 @@ const handle{{ tableInfo.table.name | friendly }}Change = (name: string) => (eve
       }
       {% endif %}
     }
+    resolve()
+  })
   }
 {% endset %}
 {{ save_delayed('ph', ph, 1 ) }}
