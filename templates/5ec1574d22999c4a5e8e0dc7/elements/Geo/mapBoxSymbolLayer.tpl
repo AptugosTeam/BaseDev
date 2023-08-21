@@ -9,9 +9,35 @@ options:
   - name: style
     display: style
     type: text
+  - name: textField
+    display: Text
+    type: text
+  - name: textPitchAlignment
+    display: Text Pitch Alignment
+    type: dropdown
+    options: 
+      return [['map', 'Map'],['viewport', 'Viewport']]
+  - name: textSize
+    display: Text Size
+    type: text
+  - name: textColor
+    display: Text Color
+    type: text
 */
-<SymbolLayer
+{% set bpr %}
+import { Layer } from 'react-map-gl'
+{% endset %}
+{{ save_delayed('bpr',bpr)}}
+<Layer
   id="{{ element.unique_id }}"
+  type="symbol"
   {% if element.values.filter %}filter={ {{ element.values.filter}} }{% endif %}
-  {% if element.values.style %}style={ {{ element.values.style }} }{% endif %}
+  layout={ {
+    {% if element.values.textField %}"text-field": {{ element.values.textField | textOrVariableInCode }},{% endif %}
+    {% if element.values.textSize %}"text-size": {{ element.values.textSize | textOrVariableInCode }},{% endif %}
+    {% if element.values.textPitchAlignment %}"text-pitch-alignment": "{{ element.values.textPitchAlignment }}",{% endif %}
+  } }
+  paint={ {
+    {% if element.values.textColor %}"text-color": "{{ element.values.textColor }}",{% endif %}
+  } }
 />

@@ -10,6 +10,6 @@ options:
     type: text
 */
 navigator.geolocation.getCurrentPosition((position) => {
-    {{ element.values.statevar }}(position.coords)
+    {{ element.values.statevar }}({ longitude: Number(position.coords.longitude), latitude: Number(position.coords.latitude) })
     {{ content | raw }}
 })

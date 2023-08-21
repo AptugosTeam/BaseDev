@@ -26,11 +26,6 @@ const shapeSource = React.useRef<ShapeSource>(null)
   clusterMaxZoom={14}
   clusterRadius={50}
   {% if element.values.clusterProperties %}clusterProperties={ {{ element.values.clusterProperties }} }{% endif %}
-  onPress={async (pressedShape) => {
-    {{ element.values.onPress | raw }}
-  }}
 >
-  <Layer {...clusterLayer} />
-  <Layer {...clusterCountLayer} />
-  <Layer {...unclusteredPointLayer} />
+  {{ content | raw }}
 </Source>

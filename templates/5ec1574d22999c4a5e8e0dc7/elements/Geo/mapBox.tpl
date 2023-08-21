@@ -11,6 +11,12 @@ options:
   - name: className
     display: ClassName
     type: styles
+  - name: onMapIdle
+    display: On Map Idle
+    type: function
+  - name: onClick
+    display: On Click
+    type: function
   - name: navigationControl
     display: Show Navigation Control
     type: dropdown
@@ -305,8 +311,29 @@ export const unclusteredPointLayer: LayerProps = {
 };
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
+{% set interactiveLayerIds = [] %}
+{% set onPressArraySource = [] %}
+{% for child in element.children %}
+  {% if child.values.onPress %}
+    {% set onPressArraySource = onPressArraySource|merge([child.values.onPress]) %}
+    {% set interactiveLayerIds = interactiveLayerIds|merge([child.unique_id]) %}
+    {% if child.children %}
+      {% for subchild in child.children %}
+        {% set interactiveLayerIds = interactiveLayerIds|merge([subchild.unique_id]) %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+{% set onPressArray = [] %}
+{% for onclick in onPressArraySource %}
+    {% if onclick not in onPressArray %}
+    {% set onPressArray = onPressArray|merge([onclick]) %}
+    {% endif %}
+{% endfor %}
+
 <div className={ {{ element.values.className}} }>
   <Map
+    interactiveLayerIds={ {{ interactiveLayerIds|json_encode }} }
     initialViewState={ {
       latitude: locat.latitude,
       longitude: locat.longitude,
@@ -318,6 +345,10 @@ export const unclusteredPointLayer: LayerProps = {
     mapStyle={{ element.values.style |default('mapbox://styles/mapbox/light-v9') | textOrVariable }}
     mapboxAccessToken='{{ element.values.accessToken }}'
     onIdle={onMapIdle}
+    {% if onPressArray %}
+      onClick={(pressedShape) => { {{ onPressArray | join | raw }} }}
+    {% endif %}
+{% if element.values.onClick %}onClick={ {{ element.values.onClick | functionOrCall }} }{% endif %}
   >
     {% if element.values.navigationControl %}<NavigationControl position={{ element.values.navigationControl|textOrVariable }} />{% endif %}
     <ScaleControl />

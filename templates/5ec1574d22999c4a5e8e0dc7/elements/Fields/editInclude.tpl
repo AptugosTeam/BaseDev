@@ -40,7 +40,7 @@ const handle{{ tableInfo.table.name | friendly }}Change = (name: string) => (eve
     const value = event?.target ? (event.target.files ? event.target.files[0] : event.currentTarget?.value || event.target.value) : event
     if (value !== {{ tableInfo.table.name | friendly }}data[name]) {
       set{{ tableInfo.table.name | friendly }}data((oldValues) => {
-        retur {
+        return {
           ...oldValues,
           [name]: value
         }
