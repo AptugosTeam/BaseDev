@@ -344,6 +344,25 @@ export const unclusteredPointLayer: LayerProps = {
     ref={mapRef}
     mapStyle={{ element.values.style |default('mapbox://styles/mapbox/light-v9') | textOrVariable }}
     mapboxAccessToken='{{ element.values.accessToken }}'
+    onLoad={(e) => {
+      if (mapRef.current) {
+        const loadURL = (url) => {
+          return axios.get(url, { responseType: 'arraybuffer' }).then(response => {
+            const imageBlob = new Blob([response.data], { type: 'image/jpeg' })
+            return URL.createObjectURL(imageBlob)
+          })
+        }
+        
+        mapRef.current.on('styleimagemissing', (e) => {
+          loadURL(e.id).then(response => {
+            mapRef.current.loadImage(response, (error, image) => {
+              if (error) return
+              mapRef.current.addImage(e.id, image)
+            })
+          })
+        })
+      }
+    }}
     onIdle={onMapIdle}
     {% if onPressArray %}
       onClick={(pressedShape) => { {{ onPressArray | join | raw }} }}

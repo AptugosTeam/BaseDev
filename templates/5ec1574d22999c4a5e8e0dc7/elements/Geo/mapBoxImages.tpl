@@ -12,3 +12,17 @@ options:
     type: text
     options: ''
 */
+{% set bpr %}
+import Map, { Source } from 'react-map-gl'
+{% endset %}
+{{ save_delayed('bpr',bpr)}}
+<Source
+  type="image"
+  images={ {{ element.values.variableToUse }}}
+  onImageMissing={(url) => {
+    {{ element.values.functionToUse }}({
+      ...{{ element.values.variableToUse }},
+      [url]: { uri: url },
+    })
+  }}
+/>
