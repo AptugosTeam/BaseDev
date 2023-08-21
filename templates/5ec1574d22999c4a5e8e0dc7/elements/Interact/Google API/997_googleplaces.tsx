@@ -119,6 +119,7 @@ const AutoComplete = (props: any) => {
       value={input}
       onChange={(e) => setInput(e.target.value)}
       placeholder={props.placeholder || 'Enter a Location'}
+      disabled={props.disabled}
     />
   )
 }
