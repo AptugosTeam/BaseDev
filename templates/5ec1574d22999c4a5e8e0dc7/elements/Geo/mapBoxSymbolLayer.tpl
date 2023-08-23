@@ -45,9 +45,9 @@ import { Layer } from 'react-map-gl'
     {% if element.values.textField %}"text-field": {{ element.values.textField | textOrVariableInCode }},{% endif %}
     {% if element.values.textSize %}"text-size": {{ element.values.textSize | textOrVariableInCode }},{% endif %}
     {% if element.values.textPitchAlignment %}"text-pitch-alignment": "{{ element.values.textPitchAlignment }}",{% endif %}
-    {% if element.values.iconImage %}"icon-image": "{{ element.values.iconImage }}",{% endif %}
-    {% if element.values.iconSize %}"icon-size": "{{ element.values.iconSize }}",{% endif %}
-    {% if element.values.iconAllowOverlap %}"icon-allow-overlap": "{{ element.values.iconAllowOverlap }}",{% endif %}
+    {% if element.values.iconImage %}"icon-image": {{ element.values.iconImage | textOrVariableInCode }},{% endif %}
+    {% if element.values.iconSize %}"icon-size": {{ element.values.iconSize | textOrVariableInCode }},{% endif %}
+    {% if element.values.iconAllowOverlap %}"icon-allow-overlap": {{ element.values.iconAllowOverlap | textOrVariableInCode }},{% endif %}
   } }
   paint={ {
     {% if element.values.textColor %}"text-color": "{{ element.values.textColor }}",{% endif %}
