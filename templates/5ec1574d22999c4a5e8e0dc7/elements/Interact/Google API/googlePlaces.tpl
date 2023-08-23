@@ -27,6 +27,8 @@ options:
 extraFiles:
   - source: 'elements/Interact/Google API/997_googleplaces.tsx'
     destination: 'front-end/Components/PlacesAutoComplete/index.tsx'
+  - source: 'elements/Interact/Google API/996_googleplacesmap.tsx'
+    destination: 'front-end/Components/PlacesAutoComplete/map.tsx'
 */
 {% set bpr %}
 import PlacesAutoComplete from '@components/PlacesAutocomplete'
@@ -40,5 +42,4 @@ import PlacesAutoComplete from '@components/PlacesAutocomplete'
   {% if element.values.initialValue %}initialValue={{ element.values.initialValue | textOrVariable }}{% endif %}
   {% if element.values.placeholder %}placeholder={{ element.values.placeholder | textOrVariable }}{% endif %}
   {% if element.values.disableVariable %}disabled={ {{ element.values.disableVariable }} }{% endif %}
-
 />
