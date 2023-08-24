@@ -15,6 +15,6 @@ import TextField from '@mui/material/TextField'
     'placesKey': field.apikey,
     'inputId': field.unique_id,
     'onchange': '(e) => { handle' ~ tableName ~ 'Change("' ~ (field.column_name | friendly) ~ '")([e.lat, e.long]) }',
-    'initialValue': 'var:{' ~ tableName ~ 'data.' ~ (field.column_name | friendly) ~ " || ''}",
+    'initialValue': 'var:' ~ tableName ~ 'data.' ~ (field.column_name | friendly) ~ " || ''",
     'placeholder': field.placeholder|default('')
 }}} %}
