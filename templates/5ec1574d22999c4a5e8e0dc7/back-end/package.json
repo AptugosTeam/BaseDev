@@ -22,14 +22,14 @@ children: []
     "express": "^4.17.1",
     "express-pino-logger": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "latest",
+    "mongoose": "^6.10.0",
     "process": "^0.11.10",
     "dotenv": "^16.0.3",
     "express-fileupload": "latest",
     "axios": "latest",
     "node_hash": "latest",
-    "mongoose-paginate-v2": "latest",
-    "mongodb": "latest"
+    "mongoose-paginate-v2": "^1.3.13",
+    "mongodb": "^5.0.0"
 {% set BackendPackages = insert_setting('BackendPackages') %}
 {% if BackendPackages %},{{ insert_setting('BackendPackages') | raw }}{% endif %}
   }
