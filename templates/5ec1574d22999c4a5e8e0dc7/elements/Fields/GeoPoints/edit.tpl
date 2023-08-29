@@ -14,7 +14,7 @@ import TextField from '@mui/material/TextField'
 {% include includeTemplate('googlePlaces.tpl') with { element: { values: {
     'placesKey': field.apikey,
     'inputId': field.unique_id,
-    'onchange': '(e) => { handle' ~ tableName ~ 'Change("' ~ (field.column_name | friendly) ~ '")([e.lat, e.long]) }',
+    'onchange': '(e) => { handle' ~ tableName ~ 'Change("' ~ (field.column_name | friendly) ~ '")([e.long, e.lat]) }',
     'initialValue': 'var:' ~ tableName ~ 'data.' ~ (field.column_name | friendly) ~ " || ''",
     'placeholder': field.placeholder|default('')
 }}} %}
