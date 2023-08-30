@@ -7,7 +7,7 @@ sourceType: javascript
 children: []
 */
 {% set bpr %}
-import DialogContent from '@mui/material/DialogContent'
+import { Dialog } from 'react-native-paper'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<DialogContent>{{ content | raw }}</DialogContent>
+<Dialog.Content>{{ content | raw }}</Dialog.Content>
