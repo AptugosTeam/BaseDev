@@ -43,11 +43,11 @@ settings:
 children: []
 extraFiles:
   - source: 'elements/Experimental/Tabs/index.tsx'
-    destination: 'front-end/src/components/TabNavigation/index.tsx'
+    destination: 'front-end/components/TabNavigation/index.tsx'
   - source: 'elements/Experimental/Tabs/tabnavigation.module.scss'
-    destination: 'front-end/src/components/TabNavigation/tabnavigation.module.scss'
+    destination: 'front-end/components/TabNavigation/tabnavigation.module.scss'
   - source: 'elements/Experimental/Tabs/TabNavigation.tsx'
-    destination: 'front-end/src/components/TabNavigation/TabNavigation.tsx'
+    destination: 'front-end/components/TabNavigation/TabNavigation.tsx'
 */
 {% set bpr %}
 import { TabView, SceneMap } from 'react-native-tab-view'
