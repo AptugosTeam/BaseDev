@@ -1,0 +1,17 @@
+
+.tabBar {
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #FFF;
+  width: auto;
+  flex-shrink: 0;
+  border-bottom: 1px solid red;
+}
+
+.tabItem {
+  flex-grow: 1;
+  align-items: center;
+  padding: .5rem;
+  flex-basis: 33%;
+  font-size: .1rem;
+}
