@@ -21,7 +21,7 @@ class AuthService {
       })
       .then((response) => {
         if (response.data.stsTokenManager) {
-          AsyncStorage.setItem('token', JSON.stringify(response.data.accessToken))
+          AsyncStorage.setItem('token', JSON.stringify(response.data.stsTokenManager.accessToken))
           AsyncStorage.setItem('user', JSON.stringify(response.data))
         }
         return response.data
@@ -36,9 +36,16 @@ class AuthService {
   }
 
   register(data) {
-    return axios.post(API_URL, data).then(_result => {
-      return this.login(data.Email, data.Password).then(afterLogin => { return afterLogin})
-    }).catch(e => { throw e })
+    return axios
+      .post(API_URL + 'register', data)
+      .then((_result) => {
+        return this.login(data.Email, data.Password).then((afterLogin) => {
+          return afterLogin
+        })
+      })
+      .catch((error) => {
+        throw error.response.data
+      })
   }
 
   async getCurrentUser() {

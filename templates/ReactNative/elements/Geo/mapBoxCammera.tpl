@@ -34,7 +34,12 @@ options:
 import { Camera } from '@rnmapbox/maps'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
+{% set ph %}
+const cameraRef{{ element.unique_id }} = React.useRef<Camera>(null)
+{% endset %}
+{{ save_delayed('ph',ph)}}
 <Camera
+  ref={cameraRef{{ element.unique_id }}}
   maxZoomLevel={ {{ element.values.maxZoomLevel|default(16) }} }
   minZoomLevel={ {{ element.values.minZoomLevel|default(1) }} }
   centerCoordinate={ {{ element.values.centerCoordinate|default('[50, 0]') }}}

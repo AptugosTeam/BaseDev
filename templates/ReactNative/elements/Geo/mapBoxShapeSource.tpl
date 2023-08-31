@@ -19,7 +19,7 @@ import { ShapeSource, CircleLayer, SymbolLayer } from '@rnmapbox/maps'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% set ph %}
-const shapeSource = React.useRef<ShapeSource>(null)
+const shapeSourceRef{{ element.unique_id }} = React.useRef<ShapeSource>(null)
 {% endset %}
 {{ save_delayed('ph',ph)}}
 <ShapeSource
@@ -27,7 +27,7 @@ const shapeSource = React.useRef<ShapeSource>(null)
   onPress={async (pressedShape) => {
     {{ element.values.onPress | raw }}
   }}
-  ref={shapeSource}
+  ref={shapeSourceRef{{ element.unique_id }}}
   cluster
   clusterRadius={50}
   clusterMaxZoomLevel={14}
