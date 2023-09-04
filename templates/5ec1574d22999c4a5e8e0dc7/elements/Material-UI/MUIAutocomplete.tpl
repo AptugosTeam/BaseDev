@@ -79,6 +79,10 @@ options:
     display: Multiple Selections
     type: checkbox
     advanced: true
+  - name: disableClearable
+    display: Disable Clearable
+    type: checkbox
+    advanced: true
 children: []
 */
 {% set bpr %}
@@ -153,6 +157,9 @@ import TextField from '@mui/material/TextField';
   {% endif %}
   {% if element.values.closeText %}
     closeText={{ element.values.closeText | textOrVariable }}
+  {% endif %}
+  {% if element.values.disableClearable %}
+    disableClearable
   {% endif %}
 
 />
