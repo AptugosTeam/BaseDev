@@ -13,6 +13,10 @@ const Map = (props: any) => {
   const ref = React.useRef(null)
 
   React.useEffect(() => {
+    document.getElementById('placesScript').addEventListener('load', renderGoogle)
+  }, [])
+
+  React.useEffect(() => {
     if (ref.current && window.mapsApi[inputId]) renderGoogle()
   }, [ref.current, window.mapsApi[inputId]])
 
