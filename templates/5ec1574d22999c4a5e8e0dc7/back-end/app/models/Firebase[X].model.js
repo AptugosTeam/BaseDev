@@ -54,7 +54,8 @@ const {{ friendlyTableName }}Model = {
     try {
       let docRef
       if (userData.id) {
-        docRef = await {{ friendlyTableName }}Collection.document("" + userData.id).set(userData)
+        docRef = await {{ friendlyTableName }}Collection.doc("" + userData.id).set(userData)
+        docRef.id = userData.id
       } else {
         docRef = await {{ friendlyTableName }}Collection.add(userData)
       }
