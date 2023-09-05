@@ -73,7 +73,15 @@ const {{ friendlyTableName }}Model = {
       if (!doc.exists) {
         return null
       }
-      return { id: doc.id, ...doc.data() }
+
+      let newDoc = doc.data()
+      Object.keys(newDoc).forEach((key) => {
+        if (newDoc[key] instanceof Timestamp) {
+          newDoc[key] = new Date( newDoc[key]._seconds * 1000 )
+        }
+      })
+
+      return { id: doc.id, ...newDoc }
     } catch (error) {
       console.error(error)
       return null
