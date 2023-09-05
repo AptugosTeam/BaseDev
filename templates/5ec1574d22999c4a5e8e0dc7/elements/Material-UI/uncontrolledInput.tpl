@@ -105,8 +105,7 @@ options:
     type: text
 children: []
 */
-{% if element.values.fullwidth %}{% set fullWidth = element.values.fullwidth %}{% endif %}
-{% if elements.values.fullWidth %}{% set fullWidth = element.values.fullWidth %}{% endif %}
+{% if element.values.fullWidth %}{% set fullWidth = true %}{% endif %}
 {% set bpr %}
 import TextField from '@mui/material/TextField'
 {% endset %}

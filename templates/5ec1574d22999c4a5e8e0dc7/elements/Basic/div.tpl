@@ -41,10 +41,8 @@ options:
       active: true
     advanced: true
   - name: title
-    display: Use Name as Title Property
-    type: checkbox
-    settings:
-      default: false    
+    display: Title Property
+    type: text
     advanced: true
 children: []
 helpText: Basic HTML Div element
@@ -52,8 +50,10 @@ helpText: Basic HTML Div element
 {% set tag = element.values.tag|default('div') %}
 <{{tag}}
   {% if element.values.title %}
-    title="{{ element.name }}"
+    title={{ element.values.title | textOrVariable }}
+    data-title={{ element.values.title | textOrVariable }}
   {% else %}
+    title="{{ element.name }}"
     data-title="{{ element.name }}"
   {% endif %}
   {% if element.values.useid %}

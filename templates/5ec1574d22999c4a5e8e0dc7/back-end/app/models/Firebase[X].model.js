@@ -50,9 +50,15 @@ const {{ friendlyTableName }}Model = {
   returnModel: () => {
     return {{ friendlyTableName }}Collection
   },
-  create: async function(userData, returnRef = false) {
+  create: async function (userData, returnRef = false) {
     try {
-      const docRef = await {{ friendlyTableName }}Collection.add(userData)
+      let docRef
+      if (userData.id) {
+        docRef = await {{ friendlyTableName }}Collection.document("" + userData.id).set(userData)
+      } else {
+        docRef = await {{ friendlyTableName }}Collection.add(userData)
+      }
+      
       return returnRef ? docRef : docRef.id
     } catch (error) {
       console.error(error)
