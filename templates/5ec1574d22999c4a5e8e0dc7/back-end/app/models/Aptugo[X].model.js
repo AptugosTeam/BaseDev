@@ -51,7 +51,9 @@ const mongoosePaginate = require('mongoose-paginate-v2')
     {% else %}
       {% if relatedField.relationshipType != '1:m' and table.unique_id == relData.table.unique_id %}
         {% set foundFieldData = relatedField | fieldData %}
-        {{ table.name | friendly }}Schema.virtual('{{ foundFieldData.table.name | friendly }}', {
+        {% set virtualName = foundFieldData.table.name | friendly %}
+        {% if relatedField.relationshipType == '1:1' %}{% set virtualName = (foundFieldData.table.name | friendly) ~ foundFieldData.column_name %}{% endif %}
+        {{ table.name | friendly }}Schema.virtual('{{ virtualName }}', {
           ref: '{{ foundFieldData.table.name | friendly }}',
           localField: '_id',
           foreignField: '{{ foundFieldData.column_name }}',
