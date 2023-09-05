@@ -1,0 +1,1 @@
+if(typeof data.{{ field.column_name | friendly }} !== 'undefined') updatedData['{{ field.column_name | friendly }}'] = Timestamp.fromDate(new Date( data.{{ field.column_name | friendly }} ))

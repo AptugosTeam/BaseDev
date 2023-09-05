@@ -15,7 +15,7 @@ const errors = require('../services/errors.service')
 
 {% for field in table.fields %}
   {% set fieldWithData = field | fieldData %}
-  {% include includeTemplate(['Fields' ~ field.data_type ~'updateImports.tpl', 'FieldsupdateImports.tpl']) %}
+  {% include includeTemplate(['Fields' ~ field.data_type ~'updateImportsFireBase.tpl', 'Fields' ~ field.data_type ~'updateImports.tpl', 'FieldsupdateImports.tpl']) %}
 {% endfor %}
 
 // Create and Save a new {{ table.singleName | friendly }}
@@ -128,7 +128,7 @@ exports.update = (options) => {
 
     {% for field in table.fields %}
       {% set fieldWithData = field | fieldData %}
-      {% include includeTemplate(['Fields' ~ field.data_type ~'update.tpl', 'Fieldsupdate.tpl']) %}
+      {% include includeTemplate(['Fields' ~ field.data_type ~ 'updateFireBase.tpl' , 'Fields' ~ field.data_type ~'update.tpl', 'Fieldsupdate.tpl']) %}
     {% endfor %}
     
     // Find {{ table.singleName }} and update it with the request body
