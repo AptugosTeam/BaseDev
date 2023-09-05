@@ -155,6 +155,9 @@ const {{ friendlyTableName }}Model = {
         })
       ).then((references) => {
         const data = references.reduce((acc, cur) => {
+          if (Object.values(cur)[0] instanceof Timestamp) {
+            cur[Object.keys(cur)[0]] = new Date(Object.values(cur)[0]._seconds * 1000)
+          }
           return {
             ...acc,
             ...cur
