@@ -45,6 +45,13 @@ options:
     display: Marks
     type: checkbox
     advanced: true
+  - name: marksArray
+    display: Marks Array
+    type: text
+    advanced: true
+    settings:
+      propertyCondition: marks
+      condition: true
   - name: Disabled
     display: Disabled?
     type: checkbox
@@ -68,7 +75,7 @@ children: []
   color= "{{ element.values.color|default(primary) }}"
   step={ {{element.values.step|default(1)}} }
   {% if element.values.marks %}
-    marks
+    marks{% if element.values.marksArray %}={ {{element.values.marksArray}} }{% endif %}
   {% endif %}
   min={ {{element.values.min|default(0)}} }
   max={ {{element.values.max|default(100)}} }
