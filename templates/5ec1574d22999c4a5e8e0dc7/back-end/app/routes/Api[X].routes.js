@@ -72,7 +72,7 @@ module.exports = (app) => {
     var data = mc.getMemCache(url)
     if (!data) {
       var axiosdata = await axios.get(url{% if table.headerparameters %}, { headers: extraHeaders }{% endif %})
-      data = axiosdata.data.{{ table.pathtodata }}
+      data = axiosdata.data.{{ table.pathtodata|default(table.pathToData) }}
       mc.save(url, data)
     }
     res.json(paginate(data, { page: req.query.page || 1 }))
@@ -85,7 +85,7 @@ module.exports = (app) => {
     var data = mc.getMemCache(url)
     if (!data) {
       var axiosdata = await axios.get(url)
-      data = axiosdata.data.{{ table.pathtodata }}
+      data = axiosdata.data.{{ table.pathtodata|default(table.pathToData) }}
       mc.save(url, data)
     }
     
