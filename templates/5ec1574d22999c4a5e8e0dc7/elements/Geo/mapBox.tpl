@@ -365,7 +365,7 @@ export const unclusteredPointLayer: LayerProps = {
     }}
     onIdle={onMapIdle}
     {% if onPressArray %}
-      onClick={(pressedShape) => { {{ onPressArray | join | raw }} }}
+      onClick={async(pressedShape) => { {{ onPressArray | join | raw }} }}
     {% endif %}
 {% if element.values.onClick %}onClick={ {{ element.values.onClick | functionOrCall }} }{% endif %}
   >
