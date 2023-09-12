@@ -156,7 +156,7 @@ import TextField from '@mui/material/TextField'
     {% if element.values.type != 'textarea' and element.values.type != 'numeric' %}
       type="{{ element.values.type|default('text') }}"
     {% endif %}
-    {% if fullWidth %}fullWidth{% endif %}
+    {% if element.values.fullWidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
 />
