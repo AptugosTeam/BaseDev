@@ -313,6 +313,17 @@ export const unclusteredPointLayer: LayerProps = {
 {{ save_delayed('bpr',bpr)}}
 {% set interactiveLayerIds = [] %}
 {% set onPressArraySource = [] %}
+{% for child in element.children %}
+  {% if child.values.onPress %}
+    {% set onPressArraySource = onPressArraySource|merge([child.values.onPress]) %}
+    {% set interactiveLayerIds = interactiveLayerIds|merge([child.unique_id]) %}
+    {% if child.children %}
+      {% for subchild in child.children %}
+        {% set interactiveLayerIds = interactiveLayerIds|merge([subchild.unique_id]) %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
 {% set onPressArray = [] %}
 {% for onclick in onPressArraySource %}
     {% if onclick not in onPressArray %}
