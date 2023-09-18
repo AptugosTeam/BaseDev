@@ -107,7 +107,12 @@ const AutoComplete = (props: any) => {
   }
 
   if (found) {
-    document.getElementById('placesScript').addEventListener('load', renderGoogle)
+    if (document.readyState === 'complete') {
+      renderGoogle()
+    } else {
+      document.getElementById('placesScript').addEventListener('load', renderGoogle)
+    }
+  
   }
 
   return (
