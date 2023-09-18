@@ -50,7 +50,7 @@ const quillModules = {
     placeholder="{{ field.placeholder|default(field.prompt)|default(field.column_name) }}" theme="snow" 
     modules={quillModules}
     value={ {{ tableName }}data.{{ field.column_name | friendly }} || ''} 
-    onChange={e => handle{{ tableName }}Change('{{ field.column_name | friendly }}')(e.replace('<p><br></p><p><br></p>', '<p><br></p>'))}
+    onChange={e => handle{{ tableName }}Change('{{ field.column_name | friendly }}')(e)}
   />
 </FormControl>
 {% endif %}
