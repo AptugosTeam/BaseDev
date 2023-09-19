@@ -53,7 +53,7 @@ const [value{{ element.unique_id }}, setValue{{ element.unique_id }}] = React.us
 {% endset %}
 {{ save_delayed('ph',ph)}}
 <TabContext value={value{{ element.unique_id }}}>
-  <TabList onChange={(newValue) => { setValue{{ element.unique_id }}(newValue) }}>
+  <TabList onChange={(_e, newValue) => { setValue{{ element.unique_id }}(newValue) }}>
   {% for child in element.children %}
     <Tab label={{ child.name | textOrVariable }} value="{{ child.unique_id }}" />
   {% endfor %}
