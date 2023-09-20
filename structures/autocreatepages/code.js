@@ -147,7 +147,11 @@ const newPage = {
 					}],
 					"type": "element",
 					"value": "Paper",
-					"collapseStatus": "expand"
+					"collapseStatus": "expand",
+					"values": {
+						"variant": "elevation",
+						"elevation": "3"
+					},
 				}],
 				"type": "element",
 				"value": "Container",
