@@ -25,7 +25,7 @@ class AptugoGoogleAuth {
    *
    * @return {Promise<any>}
    */
-  async doAuthorize() {
+  async doAuthorize () {
     this.auth = await this.authorize()
     return this.auth
   }
@@ -35,7 +35,7 @@ class AptugoGoogleAuth {
    *
    * @return {Promise<OAuth2Client|null>}
    */
-  async loadSavedCredentialsIfExist() {
+  async loadSavedCredentialsIfExist () {
     try {
       const content = await fs.promises.readFile(this.tokenPath)
       const credentials = JSON.parse(content)
@@ -51,7 +51,7 @@ class AptugoGoogleAuth {
    * @param {OAuth2Client} client
    * @return {Promise<void>}
    */
-  async saveCredentials(client) {
+  async saveCredentials (client) {
     const content = await fs.promises.readFile(this.credentialsPath)
     const keys = JSON.parse(content)
     const key = keys.installed || keys.web
@@ -68,7 +68,7 @@ class AptugoGoogleAuth {
    * Load or request or authorization to call APIs.
    *
    */
-  async authorize() {
+  async authorize () {
     let client = await this.loadSavedCredentialsIfExist()
     if (client) {
       return client
@@ -89,7 +89,7 @@ class AptugoGoogleAuth {
    * @param {*} options
    * @returns [events]
    */
-  async listEvents(options = { calendarId: 'primary', timeMin: new Date().toISOString(), maxResults: 50, singleEvents: true, orderBy: 'startTime' }) {
+  async listEvents (options = { calendarId: 'primary', timeMin: new Date().toISOString(), maxResults: 50, singleEvents: true, orderBy: 'startTime' }) {
     const auth = this.auth
     return new Promise(async (resolve, reject) => {
       const calendar = google.calendar({ version: 'v3', auth })
@@ -104,10 +104,19 @@ class AptugoGoogleAuth {
     })
   }
 
-  async createEvent(options) {
+  /**
+   * Creates a new event in the user's Google Calendar.
+   *
+   * @param {Object} options - Options for creating the event.
+   * @param {Boolean} [meet=false] - Indicates whether a Google Meet conference should be created for the event.
+   * @returns {Promise<Object>} - A Promise that resolves with the created event object if successful, or rejects with an error.
+   */
+  async createEvent (options, meet = false) {
     const auth = this.auth
     return new Promise(async (resolve, reject) => {
       const calendar = google.calendar({ version: 'v3', auth })
+
+      // Define the event object with provided options
       const event = {
         summary: options.summary,
         description: options.description,
@@ -127,26 +136,47 @@ class AptugoGoogleAuth {
         },
       }
 
+      // Define calendar options for event creation
+      const calendarOptions = {
+        auth: auth,
+        calendarId: 'primary',
+        resource: event,
+      }
+
+      // If 'meet' is true, include Google Meet conference data
+      if (meet) {
+        event.conferenceData = {
+          createRequest: { requestId: "7qxalsvy0e" }
+        }
+        calendarOptions.resource = event;
+        calendarOptions.sendNotifications = true
+        calendarOptions.conferenceDataVersion = 1
+      }
+
+      // Insert the event into the user's calendar
       calendar.events.insert(
-        {
-          auth: auth,
-          calendarId: 'primary',
-          resource: event,
-        },
+        calendarOptions,
         function (err, event) {
           if (err) {
             reject(err)
             return
           }
-
           resolve(event)
         }
       )
     })
   }
 
-  async addMeet(theEvent) {
+  /**
+   * Adds a Google Meet conference to an existing event in the user's Google Calendar.
+   *
+   * @param {Object} theEvent - The event to which the Google Meet conference will be added.
+   * @returns {Promise<Object>} - A Promise that resolves with the updated event object if successful, or rejects with an error.
+   */
+  async addMeet (theEvent) {
+    const auth = this.auth
     return new Promise((resolve, reject) => {
+      const calendar = google.calendar({ version: 'v3', auth })
       const eventPatch = {
         conferenceData: {
           createRequest: { requestId: '7qxalsvy0e' },

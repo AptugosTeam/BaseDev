@@ -23,7 +23,7 @@ import axios from 'axios'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 const data = {
-  id: {{ element.values.meetingID | textOrVariable }},
+  id: {{ element.values.meetingID | raw }},
 }
 axios.post(`{{ settings.apiURL }}/{{ element.values.endpointURL|default('addGoogleMeet') }}`, data).then(result => {
   {{ content | raw }}
