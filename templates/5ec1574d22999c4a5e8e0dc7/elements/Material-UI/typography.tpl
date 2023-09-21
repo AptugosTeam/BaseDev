@@ -29,6 +29,7 @@ import Typography from '@mui/material/Typography'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Typography
+  {% if type == 'Development' %}data-aptugo="{{ element.unique_id }}"{% endif %}
   variant="{{ element.values.tag }}"
   {% if element.values.color %}color="{{ element.values.color }}"{% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}>

@@ -366,3 +366,9 @@ img {
     }
   }
 }
+
+:global(.editionActive) {
+  &:hover {
+    border: 1px solid black;
+  }
+}

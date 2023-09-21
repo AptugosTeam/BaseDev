@@ -19,6 +19,37 @@ children: []
     <meta name="description" content="{{ application.settings.description }}">
     <meta content="width=device-width, height=device-height, initial-scale=1" name="viewport" />
     {{ insert_setting('IndexBodyAdd') }}
+    {% if type == 'Development' %}
+    <script>
+      activateEdition = () => {
+        editionClick = (e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          console.log(e.currentTarget)
+        }
+
+        editionHover = (e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          const elements = document.querySelectorAll('.editionActive')
+          elements.forEach((element) => { element.classList.remove('editionActive') })
+          e.currentTarget.classList.add('editionActive')
+        }
+
+        document.querySelectorAll('[data-aptugo]').forEach(item => {
+          item.removeEventListener('click', editionClick)
+          item.addEventListener('click', editionClick)
+          item.removeEventListener('mouseover', editionHover)
+          item.addEventListener('mouseover', editionHover)
+          item.classList.remove('editionActive')
+        })
+      }
+
+      window.addEventListener('message', (event) => {
+        if (event.data === 'activate') activateEdition() 
+      })
+    </script>
+    {% endif %}
   </head>
   <body>
     <div id="app"></div>
