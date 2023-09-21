@@ -93,6 +93,8 @@ options:
     display: Limit of Elements
     type: text
     options: ''
+    settings:
+      default: '25'
   - name: donotpopulate
     display: Do NOT populate related tables
     type: checkbox
@@ -157,7 +159,7 @@ const {{ varName }} = useSelector((state: IState){% if element.values.singleResu
 const [{{ innervarname }}loadoptions, set{{ innervarname }}loadoptions] = React.useState<any>({ 
   page: {{ element.values.defaultPage | default(1) }},
   populate: {% if element.values.donotpopulate %}false{% else %}true{% endif %},
-  limit: {{ element.values.elementsLimit|default(25) }},
+  {% if element.values.elementsLimit %}limit: {{element.values.elementsLimit}}{% else %}limit: 25{% endif %},
   sort: { field: {{ element.values.sortColumn | default('null') }}, method: '{{ element.values.sortMethod | default('DESC') }}' },
   {% if element.values.fieldToSearch %}
     searchField: {{ element.values.fieldToSearch | textOrVariable }},
