@@ -73,7 +73,7 @@ settings:
 import axios from 'axios'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-const data = {
+const calendarData = {
   summary: {{ element.values.summary | textOrVariable }},
   description: {{ element.values.description | textOrVariable }},
   dateTimeStart: {{ element.values.dateTimeStart | textOrVariable }},
