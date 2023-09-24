@@ -73,11 +73,11 @@ settings:
 import axios from 'axios'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-const data = {
+const calendarData = {
   summary: {{ element.values.summary | textOrVariable }},
   description: {{ element.values.description | textOrVariable }},
-  dateTimeStart: {{ element.values.dateTimeStart | textOrVariable }},
-  dateTimeEnd: {{ element.values.dateTimeEnd | textOrVariable }},
+  dateTimeStart: {{ element.values.dateTimeStart | raw }},
+  dateTimeEnd: {{ element.values.dateTimeEnd | raw }},
   timeZone: {{ element.values.timeZone | textOrVariable }},
   recurrence: [{{ element.values.recurrence | textOrVariable }}],
   attendees: {{ element.values.attendees | default([]) }},
@@ -87,6 +87,6 @@ const data = {
   },
   meet: {{ element.values.meet | default(false) }}
 }
-axios.post(`{{ settings.apiURL }}/{{ element.values.endpointURL|default('createCalendarEvent') }}`, data).then(result => {
+axios.post(`{{ settings.apiURL }}/{{ element.values.endpointURL|default('createCalendarEvent') }}`, calendarData).then(result => {
   {{ content | raw }}
 })
