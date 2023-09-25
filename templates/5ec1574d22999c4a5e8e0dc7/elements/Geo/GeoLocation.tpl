@@ -12,4 +12,6 @@ options:
 navigator.geolocation.getCurrentPosition((position) => {
     {{ element.values.statevar }}({ longitude: Number(position.coords.longitude), latitude: Number(position.coords.latitude) })
     {{ content | raw }}
+}, (error) => {
+  console.error('Geolocation Error:', error)
 })

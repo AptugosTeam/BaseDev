@@ -21,11 +21,11 @@ options:
     options: ''
 children: []
 */
-{% if element.values.className or element.values.ClassName %}
-  <span className={ {{ element.values.className|default(element.values.ClassName) }} }>
+{% if element.values.className or element.values.ClassName or type == 'Development' %}
+  <span {% if type == 'Development' %}data-aptugo="{{ element.unique_id }}"{% endif %} {% if element.values.className or element.values.ClassName %}className={ {{ element.values.className|default(element.values.ClassName) }} }{% endif %}>
 {% endif %}
   {{ element.values.Content | raw }}
   {{ content | raw }}
-{% if element.values.className or element.values.ClassName %}
+{% if element.values.className or element.values.ClassName or type == 'Development' %}
   </span>
 {% endif %}

@@ -23,9 +23,32 @@ children: []
     <script>
       activateEdition = () => {
         editionClick = (e) => {
+          const stylesheets = document.styleSheets
+          const classList = [...e.currentTarget.classList]
+          const appliedStyles = []
+          for (const stylesheet of stylesheets) {
+            let rules = stylesheet.rules || stylesheet.cssRules
+            for (const rule of rules) {
+              const selectorText = rule.selectorText?.startsWith('.') ? rule.selectorText?.slice(1) : rule.selectorText
+              if (selectorText) {
+                if (classList.indexOf(selectorText) > -1) {
+                  console.log( classList, selectorText )
+                  appliedStyles.push(rule.cssText)
+                }
+              }
+            }
+          }
+          
           e.preventDefault()
           e.stopPropagation()
-          console.log(e.currentTarget)
+          window.parent.postMessage({
+            action: 'edit',
+            id: e.currentTarget.dataset.aptugo,
+            contents: e.currentTarget.innerHTML,
+            styles: {...window.getComputedStyle(e.currentTarget)},
+            classes: [...e.currentTarget.classList],
+            appliedStyles: appliedStyles
+          }, '*');
         }
 
         editionHover = (e) => {
