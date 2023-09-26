@@ -33,23 +33,25 @@ const Map = (props: any) => {
     window.mapsApi['marker_' + inputId] = new window.google.maps.Marker({ map: window.mapsApi['map_' + inputId], anchorPoint: new window.google.maps.Point(0, -29) })
   
     window.mapsApi[inputId].addListener("place_changed", () => {
-      const place = window.mapsApi[inputId].getPlace()
-      const marker = window.mapsApi['marker_' + inputId]
-      marker.setVisible(false)
-
-      if (!place.geometry || !place.geometry.location) {
-        return
-      }
-
-      if (place.geometry.viewport) {
-        window.mapsApi['map_' + inputId].fitBounds(place.geometry.viewport)
-      } else {
-        window.mapsApi['map_' + inputId].setCenter(place.geometry.location)
-        window.mapsApi['map_' + inputId].setZoom(17)
-      }
-
-      marker.setPosition(place.geometry.location)
-      marker.setVisible(true)
+      setTimeout(() => {
+        const place = window.mapsApi[inputId].getPlace()
+        const marker = window.mapsApi['marker_' + inputId]
+        marker.setVisible(false)
+  
+        if (!place.geometry || !place.geometry.location) {
+          return
+        }
+  
+        if (place.geometry.viewport) {
+          window.mapsApi['map_' + inputId].fitBounds(place.geometry.viewport)
+        } else {
+          window.mapsApi['map_' + inputId].setCenter(place.geometry.location)
+          window.mapsApi['map_' + inputId].setZoom(17)
+        }
+  
+        marker.setPosition(place.geometry.location)
+        marker.setVisible(true)
+      },600)
     })
   }
 
