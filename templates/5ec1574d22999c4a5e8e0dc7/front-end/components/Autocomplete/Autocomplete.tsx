@@ -22,6 +22,7 @@ export interface AutocompleteProps {
   fullWidth?: boolean
   disabled?: any
   add?: boolean
+  noOptionsMessage?: (obj: { inputValue: string }) => ReactNode;
 }
 
 const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) => {
@@ -97,6 +98,7 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
           defaultMenuIsOpen={false}
           closeMenuOnSelect={true}
           options={dropdownOptions}
+          noOptionsMessage={props.noOptionsMessage}
         />
     </FormControl>
   )

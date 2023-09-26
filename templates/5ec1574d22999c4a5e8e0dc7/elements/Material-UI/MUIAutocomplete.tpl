@@ -12,15 +12,18 @@ options:
   - name: value
     display: Value
     type: text
-  - name: onChange
-    display: On Change
-    type: function
   - name: label
     display: Label
+    type: text
+  - name: placeholder
+    display: Placeholder
     type: text
   - name: className
     display: ClassName
     type: styles
+  - name: onChange
+    display: On Change
+    type: function
   - name: freeSolo
     display: Preserve Entry Text
     type: checkbox
@@ -31,10 +34,6 @@ options:
     display: Advanced Properties
     type: separator
     advanced: true
-  - name: getOptionLabel
-    display: Get Option Label
-    type: function
-    advanced: true
   - name: inputValue
     display: Input Value
     type: text
@@ -42,6 +41,10 @@ options:
   - name: DisableVariable
     display: Variable to disable input
     type: text
+    advanced: true
+  - name: getOptionLabel
+    display: Get Option Label
+    type: function
     advanced: true
   - name: onInputChange
     display: On Input Change
@@ -94,9 +97,6 @@ import TextField from '@mui/material/TextField';
   {% if element.values.className %}
     className={ {{element.values.className|raw}} }
   {% endif %}
-  {% if element.values.DisableVariable %}
-    disabled={ {{ element.values.DisableVariable }} }
-  {% endif %}
   {% if element.values.options %} 
     options={ {{ element.values.options | raw  }} }
   {% else %}
@@ -110,18 +110,6 @@ import TextField from '@mui/material/TextField';
         {{ element.values.onChange }} 
     }
   }
-  {% endif %}
-  {% if element.values.freeSolo %}
-    freeSolo
-  {% endif %}
-  {% if element.values.filterSelectedOptions %}
-    filterSelectedOptions
-  {% endif %}
-  {% if element.values.fullWidth %}
-    fullWidth
-  {% endif %}
-  {% if element.values.multiple %}
-    multiple
   {% endif %}
   {% if element.values.getOptionLabel %}
     getOptionLabel={ (option) => {
@@ -144,8 +132,11 @@ import TextField from '@mui/material/TextField';
     isOptionEqualToValue={ (option, value) => {{ element.values.isOptionEqualToValue }} }
   {% endif %} 
   renderInput={(params) => (
-    <TextField {...params} label="{{ element.values.label|default('') }}" />
+    <TextField {...params} label="{{ element.values.label|default('') }}" placeholder="{{ element.values.placeholder | default('')}}"/>
   )}
+  {% if element.values.DisableVariable %}
+    disabled={ {{ element.values.DisableVariable }} }
+  {% endif %}
   {% if element.values.noOptionsText %}
     noOptionsText={{ element.values.noOptionsText | textOrVariable }}
   {% endif %}
@@ -157,6 +148,18 @@ import TextField from '@mui/material/TextField';
   {% endif %}
   {% if element.values.closeText %}
     closeText={{ element.values.closeText | textOrVariable }}
+  {% endif %}
+  {% if element.values.freeSolo %}
+    freeSolo
+  {% endif %}
+  {% if element.values.filterSelectedOptions %}
+    filterSelectedOptions
+  {% endif %}
+  {% if element.values.fullWidth %}
+    fullWidth
+  {% endif %}
+  {% if element.values.multiple %}
+    multiple
   {% endif %}
   {% if element.values.disableClearable %}
     disableClearable
