@@ -33,10 +33,7 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
     <div className="thumbnail" key={file.name} onClick={() => { sethighlight(file)} }>
       <DeleteForeverIcon className="deleteIcon" onClick={(e) => { removeImage(file, e) }}/>
       <div className="thumbnailImageContainer">
-        <img
-          className="thumbnailImage"
-          src={file.preview}
-        />
+        <img className="thumbnailImage" src={file.Picture ? `/img/${file.Picture}` : file.preview} />
       </div>
     </div>
   ));
