@@ -74,7 +74,7 @@ async function checkNonce(req) {
   })
 }
 
-async function authenticate({ email, password, model, passwordField }) {
+async function authenticate({ email, password, model, passwordField, populate }) {
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -89,6 +89,7 @@ async function authenticate({ email, password, model, passwordField }) {
   return new Promise(function (resolve, reject) {
     if (!email || !password) reject({ message: 'Wrong parameters sent' })
     const query = model.findOne({ Email: new RegExp('^' + email.toLowerCase(), 'i') })
+    if (populate) query.populate(populate)
     const promise = query.exec()
 
     promise.then((user) => {
