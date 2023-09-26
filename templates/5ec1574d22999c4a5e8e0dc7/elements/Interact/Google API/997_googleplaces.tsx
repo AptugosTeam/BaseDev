@@ -108,10 +108,10 @@ const AutoComplete = (props: any) => {
     }
   
     if (found) {
-      if (document.readyState === 'complete') {
-        renderGoogle()
+      if (document.readyState === 'complete' && window.google && window.google.maps) {
+        window[`renderGoogle_${inputId}`]()
       } else {
-        document.getElementById('placesScript').addEventListener('load', renderGoogle)
+        document.getElementById('placesScript').addEventListener('load', window[`renderGoogle_${inputId}`])
       }
     }
   },[])
