@@ -28,6 +28,13 @@ options:
   - name: extraOptions
     display: Extra options
     type: text
+  - name: onError
+    display: Catch Error
+    type: function
+    options: ''
+    advanced: true
+    settings:
+      default: console.error(error)
 sourceType: javascript
 children: []
 */
@@ -41,4 +48,10 @@ import axios from 'axios'
 {% endif %}
 axios.{{ element.values.method|default('get') }}({{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}, {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}).then(result => {
  {{ content | raw }}
+}).catch((error) => {
+  {% if element.values.onError %}
+    {{ element.values.onError | functionOrCall }} }
+  {% else %}
+    console.error(error)
+  {% endif %}
 })
