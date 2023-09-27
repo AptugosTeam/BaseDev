@@ -246,6 +246,9 @@ options:
   - name: zoom
     display: Zoom
     type: text
+  - name: maxBounds
+    display: Max bounds
+    type: text
     settings:
       default: 0
 extraFiles:
@@ -363,6 +366,7 @@ export const unclusteredPointLayer: LayerProps = {
         })
       }
     }}
+    {% if element.values.maxBounds %}maxBounds={ {{ element.values.maxBounds }} }{% endif %}
     onIdle={onMapIdle}
     {% if onPressArray %}
       onClick={async(pressedShape) => { {{ onPressArray | join | raw }} }}
