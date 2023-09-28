@@ -8,11 +8,12 @@ import axios from 'axios'
 const API_URL = '{{ settings.apiURL }}/api/users/'
 
 class AuthService {
-  login(email, password) {
+  login(email, password, model = '') {
     return axios
       .post(API_URL + 'authenticate', {
         email,
         password,
+        model
       })
       .then((response) => {
         if (response.data.accessToken) {
@@ -53,24 +54,26 @@ class AuthService {
     return user ? JSON.parse(user) : {}
   }
 
-  recoverPassword({ email, subject, message, name }) {
+  recoverPassword({ email, subject, message, name, model = '' }) {
     return axios
       .post(API_URL + 'recoverpassword', {
         email,
         subject,
         message,
         name,
+        model
       })
       .then((response) => {
         return response.data
       })
   }
 
-  checkNonce(nonce, email) {
+  checkNonce(nonce, email, model = '') {
     return axios
       .post(API_URL + 'checknonce', {
         nonce,
         email,
+        model
       })
       .then((response) => {
         localStorage.setItem('token', response.data.accessToken)
@@ -78,6 +81,7 @@ class AuthService {
         return response.data.data._id
       })
   }
+
 }
 
 export default new AuthService()

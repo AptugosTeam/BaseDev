@@ -16,7 +16,7 @@ module.exports = {
   socialAuthenticate,
 }
 
-async function recoverPassword(req) {
+async function recoverPassword (req) {
   let { name, email, message, subject, model } = req.body
   if (!model) {
     const Users = require('../models/users.model.js')
@@ -34,6 +34,7 @@ async function recoverPassword(req) {
     promise.then((user) => {
       if (!user) {
         reject({ message: 'Email not found' })
+        return
       }
       const { Password, ...userWithoutPassword } = user._doc
       const nonce = Buffer.from(bcrypt.hashSync(JSON.stringify(userWithoutPassword), Password)).toString('base64')
@@ -45,7 +46,7 @@ async function recoverPassword(req) {
   })
 }
 
-async function checkNonce(req) {
+async function checkNonce (req) {
   return new Promise(function (resolve, reject) {
     let { nonce, email, model } = req.body
     if (!model) {
@@ -74,7 +75,7 @@ async function checkNonce(req) {
   })
 }
 
-async function authenticate({ email, password, model, passwordField }) {
+async function authenticate ({ email, password, model, passwordField }) {
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -112,7 +113,7 @@ async function authenticate({ email, password, model, passwordField }) {
   })
 }
 
-async function socialAuthenticate({ Name, ProfilePic, Email, Role }) {
+async function socialAuthenticate ({ Name, ProfilePic, Email, Role }) {
   const Users = require('../models/users.model.js')
   return new Promise(function (resolve, reject) {
     if (!Email) {
@@ -151,17 +152,17 @@ async function socialAuthenticate({ Name, ProfilePic, Email, Role }) {
         } else {
           reject({ message: 'Error, no se pudo generar el token' })
         }
-      } 
+      }
     })
   })
 }
 
-function cryptPassword(password) {
+function cryptPassword (password) {
   const hash = bcrypt.hashSync(password, 10)
   return hash
 }
 
-function jwtVerify(token) {
+function jwtVerify (token) {
   if (token) {
     const justTheToken = token.substr(token.indexOf(' ') + 1)
     try {
