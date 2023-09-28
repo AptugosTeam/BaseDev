@@ -2,7 +2,7 @@
 path: uncontrolledTextarea.tpl
 type: file
 unique_id: txareaOrrq
-icon: f:uncontrolledTextarea.svg
+icon: f:uncontrolledTextArea.svg
 sourceType: javascript
 options:
   - name: label
