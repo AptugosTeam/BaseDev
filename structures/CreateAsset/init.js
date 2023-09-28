@@ -11,7 +11,11 @@ if (!Parameters.empty && Parameters.path) {
   file = Parameters.file
 }
 
-aptugo.run({ _: ['assets', 'setfile'], binary: true, app: Application._id, filename: newAsset.name, id: newAsset.id }, { file: file })
+const parms = { _: ['assets', 'setfile'], binary: true, app: Application._id, filename: newAsset.name, id: newAsset.id }
+if (Parameters.state.writeFolder) {
+  parms.auth = Parameters.state.writeFolder
+}
+aptugo.run(parms, { file: file })
 Application.assets.push(newAsset)
 
 // Store [Object: null prototype] {

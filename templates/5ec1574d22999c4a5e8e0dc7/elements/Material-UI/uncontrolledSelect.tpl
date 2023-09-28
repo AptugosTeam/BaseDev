@@ -60,7 +60,7 @@ import MenuItem from '@mui/material/MenuItem'
       InputLabelProps={ { shrink: false, } }
     {% endif %}
     margin='{{ element.values.margin|default("dense") }}'
-    {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
+    {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     select
     {% if element.values.fullwidth %}fullWidth{% endif %}
