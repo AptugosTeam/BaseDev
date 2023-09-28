@@ -10,10 +10,7 @@ children: []
 options:
   - name: className
     display: ClassName
-    type: chips
-    options: >-
-      return aptugo.assetUtils.grabCssSelectors(
-      aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
+    type: styles
   - name: primaryColor
     display: Primary Color
     type: dropdown
@@ -23,8 +20,6 @@ options:
     display: Extra Theming options
     type: text    
 */
-
-
 {% if element.values.primaryColor %}
 {% set bpr %}
 import {{ element.values.primaryColor }} from '@mui/material/colors/{{ element.values.primaryColor }}'
