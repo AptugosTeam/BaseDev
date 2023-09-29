@@ -143,13 +143,16 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
   }
 
   const renderUploadedState = () => {
-    if (!state.selectedFile && !state.fileName && !props.value) return null
-    if (state.file && state.file.type === 'application/pdf') return <PictureAsPdf sx={classes.image} />
-    var src = state.selectedFile || `/img/${state.fileName}`
-    if (!state.selectedFile && !state.fileName) {
-      if (Object.keys(props.value).length === 0) return
-      src = `/img/${props.value}`
-    }
+     // if (!state.selectedFile && !state.fileName && !props.value) return null;
+    if (!state.selectedFile && !state.fileName) return null;
+    if (state.file && state.file.type === 'application/pdf')
+      return <PictureAsPdf sx={classes.image} />;
+    // var src = state.selectedFile || `/img/${state.fileName}`;
+    let src = state.selectedFile;
+    // if (!state.selectedFile && !state.fileName) {
+    //   if (Object.keys(props.value).length === 0) return;
+    //    src = `/img/${props.value}`;
+    // }
     return (
       <Box sx={classes.image} onClick={imageResetHandler}>
         <img style={classes.media} src={src} />
