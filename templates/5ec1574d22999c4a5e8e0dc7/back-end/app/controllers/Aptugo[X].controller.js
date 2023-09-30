@@ -129,9 +129,9 @@ exports.find = (options) => {
     const data = options.req ? options.req.body : options.data
     let findString =  query.searchString ? { $text: { $search: query.searchString } } : {}
     if (query.searchField) {
-      if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'Boolean') {
+      if ({{ table.name | friendly }}.schema.path(query.searchField)?.instance === 'Boolean') {
         findString = { [query.searchField]: JSON.parse(query.searchString) }
-      } else if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'Date') {
+      } else if ({{ table.name | friendly }}.schema.path(query.searchField)?.instance === 'Date') {
         findString = { $expr: {$eq: [query.searchString, { $dateToString: {date: `$${query.searchField}`, format: "%Y-%m-%d"}}]}}
       } else {
         if (query.exactMatch) {
@@ -140,8 +140,9 @@ exports.find = (options) => {
           findString = { [query.searchField]: { $regex : new RegExp(query.searchString, "i") } }
         }      }
       
-      if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'ObjectID' || {{ table.name | friendly }}.schema.path(query.searchField).instance === 'Array') {
-        findString = { [query.searchField]: require('mongoose').Types.ObjectId(query.searchString) }
+      if ({{ table.name | friendly }}.schema.path(query.searchField)?.instance === 'ObjectId' || {{ table.name | friendly }}.schema.path(query.searchField)?.instance === 'Array') {
+        const ObjectID = require('mongoose').Types.ObjectId
+        findString = { [query.searchField]: new ObjectID(query.searchString) }
       }
     } else if (query.filters) {
       query.filters.forEach(filter => {
