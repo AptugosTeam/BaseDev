@@ -162,7 +162,7 @@ const [{{ innervarname }}loadoptions, set{{ innervarname }}loadoptions] = React.
   {% if element.values.elementsLimit %}limit: {{element.values.elementsLimit}}{% else %}limit: 25{% endif %},
   sort: { field: {{ element.values.sortColumn | default('null') }}, method: '{{ element.values.sortMethod | default('DESC') }}' },
   {% if element.values.fieldToSearch %}
-    searchField: {{ element.values.fieldToSearch | textOrVariable }},
+    searchField: {{ element.values.fieldToSearch | textOrVariableInCode }},
   {% endif %}
   totalItems: 0,
   sortLanguage: '{{ element.values.sortLanguage|default('en') }}',
@@ -183,7 +183,7 @@ React.useEffect(() => {
   perform{{ innervarname }}load({
     ...{{ innervarname }}loadoptions
     {% if element.values.fixedSearchField %}, fixedSearch: { field: {{ element.values.fixedSearchField}}, value: {{ element.values.fixedSearchString }} }{% endif %}
-    {% if element.values.fieldToSearch %}, searchField: {{ element.values.fieldToSearch | textOrVariable }}{% endif %}
+    {% if element.values.fieldToSearch %}, searchField: {{ element.values.fieldToSearch | textOrVariableInCode }}{% endif %}
     {% if element.values.searchString %}, searchString: {{ element.values.searchString }}{% endif %}
     {% if element.values.useExactMatch %}, exactMatch: {{ element.values.useExactMatch }}{% endif %}
   })
