@@ -8,7 +8,7 @@ sourceType: javascript
 subtype: Firebase
 children: []
 */
-{{ add_setting('Packages', '"firebase": "9.21.0","firebase-admin": "11.7.0",') }}
+{{ add_setting('BackendPackages', '"firebase": "10.4.0","firebase-admin": "11.11.0",') }}
 {% set friendlyTableName = table.name | friendly %}
 const { initializeApp, cert } = require('firebase-admin/app')
 const { getFirestore, DocumentReference, Timestamp, FieldValue } = require('firebase-admin/firestore')
