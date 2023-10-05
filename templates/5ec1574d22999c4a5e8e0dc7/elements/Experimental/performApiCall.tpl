@@ -50,7 +50,7 @@ axios.{{ element.values.method|default('get') }}({{ url | textOrVariableInCode }
  {{ content | raw }}
 }).catch((error) => {
   {% if element.values.onError %}
-    {{ element.values.onError | functionOrCall }} }
+    {{ element.values.onError }} 
   {% else %}
     console.error(error)
   {% endif %}
