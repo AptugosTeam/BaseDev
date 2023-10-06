@@ -108,6 +108,7 @@ exports.findAll = (options) => {
   }
 
   {{ table.name | friendly }}.find(findString)
+  .select(query.select && query.select)
   .sort( query.sort && { [query.sort.field]: query.sort.method === 'desc' ? -1 : 1 })
   .collation({ locale: query.sortLanguage, strength: 1 })
    {% for field in table.fields %}
@@ -157,6 +158,7 @@ exports.find = (options) => {
     }
 
     {{ table.name | friendly }}.find(findString)
+    .select(query.select && query.select)
     .sort( query.sort && { [query.sort.field]: query.sort.method === 'desc' ? -1 : 1 })
     .collation({ locale: query.sortLanguage, strength: 1 })
     {% for field in table.fields %}
@@ -180,6 +182,7 @@ exports.findOne = ( options ) => {
     const query = { populate: 'true' }
     const id = options.req ? options.req.params.ID : options.ID
     {{ table.name | friendly }}.findById(id)
+      .select(query.select && query.select)
     {% for field in table.fields %}
       {% set fieldWithData = field | fieldData %}
       {% include includeTemplate(['Fields' ~ field.data_type ~'find.tpl', 'Fieldsfind.tpl']) %}
