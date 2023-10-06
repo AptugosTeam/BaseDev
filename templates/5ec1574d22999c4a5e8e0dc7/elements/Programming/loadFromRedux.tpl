@@ -89,6 +89,10 @@ options:
     type: dropdown
     options: 
       return [['en', 'English'],['es', 'Spanish']]
+  - name: selectedFields
+    display: Selected Fields to Retrieve (space between)
+    type: text
+    options: ''
   - name: elementsLimit
     display: Limit of Elements
     type: text
@@ -164,6 +168,9 @@ const [{{ innervarname }}loadoptions, set{{ innervarname }}loadoptions] = React.
   {% endif %}
   totalItems: 0,
   sortLanguage: '{{ element.values.sortLanguage|default('en') }}',
+  {% if element.values.selectedFields %}
+    select: '{{ element.values.selectedFields|default('') }}',
+  {% endif %}
 })
 const perform{{ innervarname }}load = (options) => {
   {% if element.values.searchString %}

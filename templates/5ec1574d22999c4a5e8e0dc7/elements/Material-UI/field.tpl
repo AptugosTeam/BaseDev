@@ -105,6 +105,11 @@ options:
     options: 
       return [['en', 'English'],['es', 'Spanish']]
     advanced: true
+  - name: selectedFields
+    display: Selected Fields to Retrieve (space between)
+    type: text
+    options: ''
+    advanced: true
 children: []
 */
 {% set bpr %}
