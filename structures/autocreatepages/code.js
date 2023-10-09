@@ -90,47 +90,35 @@ const b_container = {
 	"prevent_delete": false,
 	"cascades": false,
 	"children": [{
-		"name": "Paper",
+		"name": "Table Area",
 		"prevent_delete": false,
 		"cascades": false,
 		"children": [{
-			"name": "Table Area",
+			"name": "Body",
 			"prevent_delete": false,
 			"cascades": false,
 			"children": [{
-				"name": "Body",
+				"name": "Data Table",
 				"prevent_delete": false,
 				"cascades": false,
-				"children": [{
-					"name": "Data Table",
-					"prevent_delete": false,
-					"cascades": false,
-					"children": [],
-					"type": "element",
-					"value": "dataTable",
-					"collapseStatus": "expand",
-					"values": {
-						"table": Parameters.unique_id,
-						"editProcedure": "Internal"
-					},
-				}],
+				"children": [],
 				"type": "element",
-				"value": "div",
+				"value": "dataTable",
 				"collapseStatus": "expand",
+				"values": {
+					"table": Parameters.unique_id,
+					"editProcedure": "Internal"
+				},
 			}],
 			"type": "element",
 			"value": "div",
 			"collapseStatus": "expand",
-			"values": {
-				"class": "classes.tableResponsive"
-			},
 		}],
 		"type": "element",
-		"value": "Paper",
+		"value": "div",
 		"collapseStatus": "expand",
 		"values": {
-			"variant": "elevation",
-			"elevation": "3"
+			"class": "classes.tableResponsive"
 		},
 	}],
 	"type": "element",
