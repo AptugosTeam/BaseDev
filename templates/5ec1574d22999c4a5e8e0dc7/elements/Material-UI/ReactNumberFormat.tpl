@@ -27,6 +27,9 @@ options:
     display: Thousand Separator
     type: checkbox
     advanced: false
+settings:
+  - name: Packages
+    value: '"react-number-format": "^5.3.1",'
 */
 {% set bpr %}
 import { NumericFormat } from "react-number-format";
