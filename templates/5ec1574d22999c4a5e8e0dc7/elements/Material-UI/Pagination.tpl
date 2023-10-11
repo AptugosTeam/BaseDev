@@ -44,6 +44,10 @@ options:
     display: Advanced Properties
     type: separator
     advanced: true
+  - name: page
+    display: Current Page
+    type: variable
+    advanced: true
   - name: defaultPage
     display: Default Page
     type: variable
@@ -95,6 +99,9 @@ import Pagination from '@mui/material/Pagination'
   {% endif %}
   {% if element.values.disabled %}
     disabled={ {{element.values.disabled}} }
+  {% endif %}
+  {% if element.values.page %}
+    page={ {{element.values.page | default(1) }} }
   {% endif %}
   {% if element.values.defaultPage %}
     defaultPage={ {{element.values.defaultPage}} }
