@@ -125,7 +125,11 @@ const {{ friendlyTableName }}Model = {
 
   search: async function (searchField, searchTerm, options = {}) {
     let query = {{ friendlyTableName }}Collection
-    query = query.where(searchField, '>=', searchTerm).where(searchField, '<=', searchTerm + '\uf8ff')
+    if (PuntosSchema[searchField].type.name === 'Number'){
+      query = query.where(searchField, '==', Number(searchTerm))
+    } else {
+      query = query.where(searchField, '>=', searchTerm).where(searchField, '<=', searchTerm + '\uf8ff')
+    }
     const snapshot = await query.get()
     return await {{ friendlyTableName }}Model.paginateAndFill(snapshot, options)
   },
