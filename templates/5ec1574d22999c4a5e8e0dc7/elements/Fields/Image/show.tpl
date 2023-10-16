@@ -7,4 +7,7 @@ unique_id: Z1frMeIx
 import Field from '../components/Table/Field'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<Field value={(fieldData: any) => fieldData.{{ field.column_name | friendly }} ? <img src={`/img/${fieldData.{{ field.column_name | friendly }}}`} /> : <div />} />
+{% set columnName = field.column_name | friendly %}
+{% set path = '/img/${fieldData.{{ columnName }}}' %}
+{% if field.gcloud == '1' %}{% set path = '${fieldData.{{ columnName }}}' %}{% endif %}
+<Field value={(fieldData: any) => fieldData.{{ columnName }} ? <img src={`{{ path }}`} /> : <div />} />

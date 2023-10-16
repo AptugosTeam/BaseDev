@@ -125,7 +125,7 @@ const {{ friendlyTableName }}Model = {
 
   search: async function (searchField, searchTerm, options = {}) {
     let query = {{ friendlyTableName }}Collection
-    if (PuntosSchema[searchField].type.name === 'Number'){
+    if ({{ friendlyTableName }}Schema[searchField].type.name === 'Number'){
       query = query.where(searchField, '==', Number(searchTerm))
     } else {
       query = query.where(searchField, '>=', searchTerm).where(searchField, '<=', searchTerm + '\uf8ff')

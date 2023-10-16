@@ -36,7 +36,7 @@ exports.createAsPromise = (options) => {
 
     {% for field in table.fields %}
       {% set fieldWithData = field | fieldData %}
-      {% include includeTemplate(['Fields' ~ field.data_type ~'update.tpl', 'Fieldsupdate.tpl']) %}
+      {% include includeTemplate(['Fields' ~ field.data_type ~ 'updateFireBase.tpl' , 'Fields' ~ field.data_type ~'update.tpl', 'Fieldsupdate.tpl']) %}
     {% endfor %}
   
     // Save {{ table.singleName | friendly }} in the database
