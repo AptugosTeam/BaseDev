@@ -34,6 +34,10 @@ unique_id: sd4A39xT
         "value": "gcloud_projectID",
         "type": "text"
       },{
+        "display": "Folder Name",
+        "value": "gcloud_folder",
+        "type": "text"
+      },{
         "display": "Private Key ID",
         "value": "gcloud_privateKeyID",
         "type": "text"
