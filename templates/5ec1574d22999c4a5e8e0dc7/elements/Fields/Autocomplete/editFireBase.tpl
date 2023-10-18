@@ -1,7 +1,7 @@
 /*
-path: edit.tpl
+path: editFireBase.tpl
 type: file
-unique_id: XLsE3nbG
+unique_id: XLsE4nbG
 icon: ico-field
 sourceType: javascript
 settings:
@@ -9,15 +9,11 @@ settings:
     value: '"react-select": "^5.4.0",'
 children: []
 */
-{% set fieldTable = (field | fieldData).table %}
-{% if fieldTable.subtype == 'Firebase' %}
-  {% include includeTemplate('Fields' ~ field.data_type ~'editFireBase.tpl') %}
-{% else %}
 {% set bpr %}
 import { useSelector } from 'react-redux'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-{% set tableName = fieldTable.name | friendly %}
+{% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set referencedField = field.reference | fieldData %}
 {% if field.referencekey %}
   {% set referencekey = (field.referencekey | fieldData).column_name %}
@@ -74,10 +70,7 @@ const typeInSearch{{ field.column_name | friendly }}{{ referencedTable }} = (typ
 const [{{ columnName }}Value, set{{ columnName }}Value] = React.useState(null)
 React.useEffect(() => {
     if (!{{ tableName }}data.{{ columnName }}) return undefined
-    const asArray = Array.isArray({{ tableName }}data.{{ columnName }}) ? {{ tableName }}data.{{ columnName }} : [{{ tableName }}data.{{ columnName }}]
-    set{{ columnName }}Value(
-      asArray.map(item => ({ label: item.{{ referencedField.column_name | friendly }}, value: item._id }))
-    )
+    set{{ columnName }}Value({{ tableName }}data.{{ columnName }})
   }, [{{ tableName }}data.{{ columnName }}])
 
 {% endset %}
@@ -88,8 +81,7 @@ React.useEffect(() => {
   {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
   onType={ typeInSearch{{ field.column_name | friendly }}{{ referencedTable }} }
   onChange={(newValue) => {
-    // handle{{ tableName }}Change('{{ columnName }}')(newValue?.length ? newValue.map((item) => ({ id: item.value !== 'new' ? item.value : null, name: item.label }))[0].id : [])
-    handle{{ tableName }}Change('{{ columnName }}')(newValue?.length ? newValue.map(item => ({ _id: item.value !== 'new' ? item.value : null, {{ referencedField.column_name | friendly }}: item.label })) : [])
+    handle{{ tableName }}Change('{{ columnName }}')(newValue[0].value)
   }}
   loading={ {{ referencedTable | lower }}AutocompleteData.loadingStatus === 'loading' }
   {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}
@@ -100,4 +92,3 @@ React.useEffect(() => {
   margin='{{ element.values.margin|default("dense") }}'
   add={ {{ field.add|default('true') }} }
 />
-{% endif %}

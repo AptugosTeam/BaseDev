@@ -82,7 +82,7 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
           placeholder={props.placeholder || props.label}
           className={clsx(classes.aptugoDropdown, 'MuiOutlinedInput-notchedOutline')}
           classNamePrefix="aptugo"
-          value={props.value || null}
+          value={props.value ? { value: props.value, label : dropdownOptions.find(dodo => dodo.value === props.value)?.label } : null}
           isMulti={props.chips}
           isDisabled={props.disabled}
           onChange={(newValue) => {
@@ -99,20 +99,6 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
           options={dropdownOptions}
         />
     </FormControl>
-  )
-
-  return (
-    <div className={clsx('MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal MuiFormControl-fullWidth', classes.autocomplete)}>
-      <label
-        className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-marginDense MuiFormLabel-filled"
-        data-shrink="true"
-      >
-        {props.label}
-      </label>
-      <div className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-fullWidth MuiInput-fullWidth MuiInputBase-formControl MuiInput-formControl MuiInputBase-marginDense MuiInput-marginDense">
-        
-      </div>
-    </div>
   )
 }
 
