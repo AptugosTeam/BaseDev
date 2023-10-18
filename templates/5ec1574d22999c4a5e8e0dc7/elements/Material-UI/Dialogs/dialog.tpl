@@ -17,7 +17,7 @@ options:
     type: dropdown
     options: >-
       return [['No','None'],['Internal','Popup
-      Dialog'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) =>
+      Dialog'],['Custom','Custom'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) =>
       [unique_id, name])]
   - name: hideButton
     display: Hide Add Button
@@ -71,6 +71,9 @@ options:
     display: Delete - Button Text
     type: text
     options: ''
+  - name: customSaveHandler
+    display: Custom Save Handler
+    type: code
 children: []
 */
 {% set table = element.values.table | tableData %}
@@ -134,6 +137,9 @@ import AddDialog from '../components/Dialog/Dialog'
         const cleanData:any = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== null && v !== '' && (v.length !== 0 || v.length === undefined)));
         {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(cleanData)) : dispatch(edit{{ table.name | friendly | capitalize }}(cleanData))
       }
+    {% endif %}
+    {% if element.values.addProcedure == 'Custom' %}
+      {{ element.values.customSaveHandler | raw }}
     {% endif %}
   } }
   color='{{ element.values.color }}'
