@@ -8,7 +8,7 @@ options:
     type: text
   - name: style
     display: style
-    type: text
+    type: code
   - name: textField
     display: Text
     type: text
