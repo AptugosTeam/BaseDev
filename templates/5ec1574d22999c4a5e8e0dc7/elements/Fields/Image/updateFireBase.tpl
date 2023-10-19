@@ -26,8 +26,8 @@ if (options.req?.files && options.req.files.{{ columnName }} && options.req.file
     })
 
     const fileStream = new stream.PassThrough()
-    const fileName = {% if field.gcloud_folder %}'{{ field.gcloud_folder }}/' + {% endif %}options.req.files.icon.name
-    fileStream.end(options.req.files.icon.data)
+    const fileName = {% if field.gcloud_folder %}'{{ field.gcloud_folder }}/' + {% endif %}options.req.files.{{ field.column_name | friendly }}.name
+    fileStream.end(options.req.files.{{ field.column_name | friendly }}.data)
     
     const bucket = storage.bucket('{{ field.gcloud_projectID|default(fieldWithData.table.projectId)}}.appspot.com');
     const file = bucket.file(fileName)
