@@ -69,7 +69,7 @@ const {{ friendlyTableName }}Model = {
 
   getById: async function(id) {
     try {
-      const doc = await {{ friendlyTableName }}Collection.doc(id).get()
+      const doc = await {{ friendlyTableName }}Collection.doc("" + id).get()
       if (!doc.exists) {
         return null
       }
