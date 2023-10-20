@@ -5,5 +5,4 @@ completePath: >-
 keyPath: elements/Fields/Autocomplete/updateFirebase.tpl
 unique_id: 0W7xTXSM
 */
-const datafield = data.{{ field.column_name | friendly }}
-if (typeof datafield !== 'undefined') updatedData['{{ field.column_name | friendly }}'] = datafield === 'null' ? null : !isNaN(datafield) ? Number(datafield) : datafield
+if (typeof data.{{ field.column_name | friendly }} !== 'undefined') updatedData['{{ field.column_name | friendly }}'] = data.{{ field.column_name | friendly }} === 'null' ? null : !isNaN(data.{{ field.column_name | friendly }}) ? Number(data.{{ field.column_name | friendly }}) : data.{{ field.column_name | friendly }}
