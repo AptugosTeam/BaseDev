@@ -25,7 +25,7 @@ children: []
 */
 
 {% set bpr %}
-import Carousel from '../components/Carousel/Carousel'
+import Carousel from '@components/Carousel/Carousel'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Carousel
