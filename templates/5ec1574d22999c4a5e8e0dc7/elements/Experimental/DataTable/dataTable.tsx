@@ -95,8 +95,6 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
   if (hastaPagina < props.pages) {
     paginasAmostrar.push(props.pages)
   }
-
-  console.log(props.className)
   
   return (
     <div className={props.className ? props.className : styles.tableHolder}>
