@@ -56,6 +56,7 @@ const b_head = {
 		"collapseStatus": "expand",
 		"values": {
 			"table": Parameters.unique_id,
+			"avoidLoad": true
 		}
 	},{
 		"name": "dialog",

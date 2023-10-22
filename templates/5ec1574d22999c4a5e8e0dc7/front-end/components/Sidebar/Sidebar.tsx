@@ -15,7 +15,7 @@ import classes from './sidebar.module.scss'
 interface sidebarProps {
   handleDrawerToggle?: VoidFunction
   open: boolean
-  color: string
+  color?: string
   children?: ReactElement<any>[]
 }
 
