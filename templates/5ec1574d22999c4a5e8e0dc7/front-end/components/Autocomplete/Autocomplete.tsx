@@ -64,6 +64,8 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
     isFocused: false
   })
 
+  const theVal = props.value ? props.value[0]?.label ? props.value[0] : [{ value: props.value, label: dropdownOptions.find((dodo) => dodo.value === props.value)?.label }] : null
+
   return (
     <FormControl
       variant={props.variant || 'outlined' }
@@ -82,7 +84,7 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
           placeholder={props.placeholder || props.label}
           className={clsx(classes.aptugoDropdown, 'MuiOutlinedInput-notchedOutline')}
           classNamePrefix="aptugo"
-          value={props.value ? { value: props.value, label : dropdownOptions.find(dodo => dodo.value === props.value)?.label } : null}
+          value={theVal}
           isMulti={props.chips}
           isDisabled={props.disabled}
           onChange={(newValue) => {
