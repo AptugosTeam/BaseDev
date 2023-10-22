@@ -142,7 +142,7 @@ exports.find = (options) => {
       
       if ({{ table.name | friendly }}.schema.path(query.searchField)?.instance === 'ObjectId' || {{ table.name | friendly }}.schema.path(query.searchField)?.instance === 'Array') {
         const ObjectID = require('mongoose').Types.ObjectId
-        findString = { [query.searchField]: new ObjectID(query.searchString) }
+        findString = { [query.searchField]: query.searchString ? new ObjectID(query.searchString) : null }
       }
     } else if (query.filters) {
       query.filters.forEach(filter => {
