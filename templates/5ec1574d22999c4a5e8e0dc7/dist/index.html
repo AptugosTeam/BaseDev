@@ -19,7 +19,7 @@ children: []
     <meta name="description" content="{{ application.settings.description }}">
     <meta content="width=device-width, height=device-height, initial-scale=1" name="viewport" />
     {{ insert_setting('IndexBodyAdd') }}
-    {% if type == 'Development' %}
+    {% if type == 'DevelopmentDebug' %}
     <script>
       activateEdition = () => {
         editionClick = (e) => {
