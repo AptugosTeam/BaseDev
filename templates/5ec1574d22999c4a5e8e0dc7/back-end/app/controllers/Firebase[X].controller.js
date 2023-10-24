@@ -95,10 +95,6 @@ exports.findOne = ( options ) => {
     const query = { populate: 'true' }
     const id = options.req ? options.req.params.ID : options.ID
     {{ table.name | friendly }}.getById(id)
-    {% for field in table.fields %}
-      {% set fieldWithData = field | fieldData %}
-      {% include includeTemplate(['Fields' ~ field.data_type ~'find.tpl', 'Fieldsfind.tpl']) %}
-    {% endfor %}
       .then({{ table.singleName | friendly | lower }} => {
         if(!{{ table.singleName | friendly | lower }}) {
             return options.res.status(404).send({
