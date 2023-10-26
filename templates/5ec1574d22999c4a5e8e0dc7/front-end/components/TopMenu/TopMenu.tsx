@@ -10,6 +10,7 @@ import { NavLink } from 'react-router-dom'
 import classes from './topmenu.module.scss'
 
 interface menuItemProps {
+  children?: JSX.Element
   text: string
   link?: string
   isSubMenu?: boolean
@@ -17,6 +18,7 @@ interface menuItemProps {
 }
 
 interface topMenuProps {
+  children?: JSX.Element
   className?: any
 }
 
@@ -38,10 +40,10 @@ export const AptugoMenuItem: FunctionComponent<menuItemProps> = (props) => {
     return component
   } else {
     return (
-      <div onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} className={isOpen ? classes.selectedItem : undefined}>
+      <div onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)} className={clsx("menuItem", isOpen ? classes.selectedItem : undefined)}>
         {component}
         {props.children && (
-          <div className={classes.subMenu}>{React.Children.map(props.children, (child: any) => React.cloneElement(child, { isSubMenu: true }))}</div>
+          <div className={clsx("subMenu",classes.subMenu)}>{React.Children.map(props.children, (child: any) => React.cloneElement(child, { isSubMenu: true }))}</div>
         )}
       </div>
     )

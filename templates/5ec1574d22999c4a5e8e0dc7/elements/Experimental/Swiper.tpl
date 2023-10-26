@@ -53,6 +53,10 @@ options:
   - name: onChange
     display: When Active Index Changes
     type: text
+  - name: effectCards
+    display: Effect - Cards
+    type: checkbox
+    advanced: true
 settings:
   - name: Packages
     value: '"swiper": "^8.0.0",'
@@ -64,10 +68,17 @@ import { Pagination as SwiperPagination, Navigation } from "swiper";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "swiper/css/bundle";
+{% if element.values.effectCards %}
+import { EffectCards } from 'swiper'
+{% endif %}
 {% endset %}
 
 {{ save_delayed('bpr', bpr) }}    
   <Swiper
+    {% if element.values.effectCards %}
+    effect={'cards'}
+    grabCursor={true}
+    {% endif %}
     {% if element.values.ClassName %}
       className={ {{ element.values.ClassName }} } 
     {% endif %}
@@ -102,7 +113,7 @@ import "swiper/css/bundle";
     {% if element.values.onChange %}
       onActiveIndexChange={ {{ element.values.onChange }} } 
     {% endif %}
-    modules={[SwiperPagination, Navigation]}
+    modules={[SwiperPagination, Navigation{%if element.values.effectCards %}, EffectCards{% endif %}]}
   >
 {% if element.values.useSwiperSlide %}
   {% for unchild in element.children %}
