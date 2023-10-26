@@ -21,6 +21,14 @@ options:
     settings:
       default: false
     options: ''
+  - name: width
+    display: Video width (in PX or %)
+    type: text
+    options: ''
+  - name: height
+    display: Video height (in PX or %)
+    type: text
+    options: ''
 children: []
 settings:
   - name: Packages
@@ -41,6 +49,12 @@ import ReactPlayer from 'react-player'
     {% endif %}
     {% if element.values.loop %}
       loop={true} 
+    {% endif %}
+    {% if element.values.width %}
+      width='{{ element.values.width }}' 
+    {% endif %}
+    {% if element.values.height %}
+      height='{{ element.values.height }}' 
     {% endif %}
   />
 </div>
