@@ -15,8 +15,20 @@ options:
     settings:
       default: false
     options: ''
+  - name: playing
+    display: Autoplay video
+    type: checkbox
+    settings:
+      default: false
+    options: ''
   - name: loop
     display: Loop the Video
+    type: checkbox
+    settings:
+      default: false
+    options: ''
+  - name: muted
+    display: Muted video
     type: checkbox
     settings:
       default: false
@@ -47,8 +59,14 @@ import ReactPlayer from 'react-player'
     {% if element.values.controls %}
       controls={true} 
     {% endif %}
+    {% if element.values.playing %}
+      playing 
+    {% endif %}
     {% if element.values.loop %}
       loop={true} 
+    {% endif %}
+    {% if element.values.muted %}
+      muted={true} 
     {% endif %}
     {% if element.values.width %}
       width='{{ element.values.width }}' 
