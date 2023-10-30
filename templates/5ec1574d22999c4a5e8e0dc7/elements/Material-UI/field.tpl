@@ -71,6 +71,13 @@ options:
     settings:
       propertyCondition: Type
       condition: edit
+  - name: size
+    display: Size
+    type: dropdown
+    options: medium;small
+    settings:
+      propertyCondition: Type
+      condition: edit
   - name: classname
     display: ClassName
     type: styles

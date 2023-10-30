@@ -28,6 +28,10 @@ options:
     display: Margin
     type: dropdown
     options: none;normal;dense
+  - name: size
+    display: Size
+    type: dropdown
+    options: medium;small
   - name: fullwidth
     display: Use full width?
     type: checkbox
@@ -60,6 +64,7 @@ import MenuItem from '@mui/material/MenuItem'
       InputLabelProps={ { shrink: false, } }
     {% endif %}
     margin='{{ element.values.margin|default("dense") }}'
+    size='{{ element.values.size|default("medium") }}'
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     select

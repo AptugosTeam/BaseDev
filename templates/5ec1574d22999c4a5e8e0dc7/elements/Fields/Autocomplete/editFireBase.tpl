@@ -90,5 +90,6 @@ React.useEffect(() => {
   fullWidth
   variant="{{ element.values.variant|default('standard') }}"
   margin='{{ element.values.margin|default("dense") }}'
+  size='{{ element.values.size|default("medium") }}'
   add={ {{ field.add|default('true') }} }
 />

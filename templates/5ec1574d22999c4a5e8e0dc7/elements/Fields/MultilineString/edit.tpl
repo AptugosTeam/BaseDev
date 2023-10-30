@@ -14,6 +14,7 @@ children: []
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     margin='{{ element.values.margin|default("dense") }}'
+    size='{{ element.values.size|default("medium") }}'
     label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}
     type="text"

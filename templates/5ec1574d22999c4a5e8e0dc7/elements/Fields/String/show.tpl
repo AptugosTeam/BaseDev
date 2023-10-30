@@ -6,7 +6,6 @@ icon: ico-field
 sourceType: javascript
 children: []
 */
-
 {% set bpr %}
 import Field from '../components/Table/Field'
 {% endset %}

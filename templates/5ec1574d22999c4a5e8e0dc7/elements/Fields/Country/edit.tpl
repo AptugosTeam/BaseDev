@@ -19,6 +19,7 @@ import MenuItem from '@mui/material/MenuItem'
 {{ save_delayed('bpr', bpr) }}
 <FormControl
     margin='{{ element.values.margin|default("dense") }}'
+    size='{{ element.values.size|default("medium") }}'
     variant="{{ element.values.variant|default('standard') }}"
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
