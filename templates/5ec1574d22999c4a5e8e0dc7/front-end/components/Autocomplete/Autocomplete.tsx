@@ -64,7 +64,13 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
     isFocused: false
   })
 
-  const theVal = props.value ? props.value[0]?.label ? props.value : [{ value: props.value, label: dropdownOptions.find((dodo) => dodo.value === props.value)?.label }] : null
+  let theVal = props.value
+    ? props.value[0]?.label
+      ? props.value
+      : [{ value: props.value, label: dropdownOptions.find((dodo) => dodo.value === props.value)?.label }]
+    : null
+
+  if (Array.isArray(props.value) && !props.value.length) theVal = ''
 
   return (
     <FormControl
