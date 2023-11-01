@@ -78,7 +78,6 @@ $fontSize: 100%;
         border-bottom: 1px solid #ebeff3;
         background: #fff;
         display: flex;
-        align-items: center;
 
         & th {
           border-right: 1px solid #ebeff3;
@@ -96,10 +95,18 @@ $fontSize: 100%;
           text-overflow: ellipsis;
           text-align: left;
           position: relative;
+          display: flex;
 
           & > svg {
             height: 0.5625rem;
             margin-right: 0.25rem;
+          }
+
+          & .columnDeletion {
+            margin: 0 0.5rem 0 auto;
+            cursor: pointer;
+            display: none;
+
           }
 
           & .resizer {
@@ -116,6 +123,10 @@ $fontSize: 100%;
           }
 
           &:hover {
+            & .columnDeletion {
+              display: block;
+            }
+
             & .resizer {
               cursor: col-resize;
               background: #bbdcfe;
@@ -196,7 +207,6 @@ $fontSize: 100%;
     }
   }
 }
-
 
 :global(.editableInput) {
   border: 0;

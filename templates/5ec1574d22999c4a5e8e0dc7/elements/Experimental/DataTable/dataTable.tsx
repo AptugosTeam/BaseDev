@@ -55,6 +55,7 @@ interface tableProps {
   onRequestSort: Function
   onRequestPaginate: Function
   onRequestUpdate?: Function
+  onColumnRemoval?: Function
   className?: any
 }
 
