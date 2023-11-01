@@ -220,7 +220,7 @@ console.log('theData', theData, props.tableData)
                   <div
                     className="button"
                     onClick={() => {
-                      props.onRequestRemove(props.tableData[rowIndex])
+                      props.onRequestRemove(props.tableData[rowIndex], row)
                     }}
                   >
                     <svg width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg" className="svg-md valign-middle mg-r-5">
