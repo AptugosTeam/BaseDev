@@ -106,7 +106,6 @@ $fontSize: 100%;
             margin: 0 0.5rem 0 auto;
             cursor: pointer;
             display: none;
-
           }
 
           & .resizer {
@@ -120,6 +119,12 @@ $fontSize: 100%;
             transform: translateX(50%);
             z-index: 1;
             touch-action: none;
+          }
+
+          & :global(.editableInput) {
+            height: 100%;
+            padding: 0;
+            margin: 0;
           }
 
           &:hover {
@@ -219,9 +224,10 @@ $fontSize: 100%;
   height: calc(2.5rem + 14px);
   margin: -1rem;
   background: transparent;
-  &:active, &:focus-visible {
+  &:active,
+  &:focus-visible {
     outline: 1px solid rgb(40, 151, 255);
     outline-offset: -1px;
-    box-shadow: inset 0px 0px 3px 1px rgba(40,151,255,.5);
+    box-shadow: inset 0px 0px 3px 1px rgba(40, 151, 255, 0.5);
   }
 }

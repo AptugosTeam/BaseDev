@@ -1,7 +1,5 @@
 /*
 path: thHeader.tsx
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/elements/Experimental/DataTable/thHeader.tsx
 keyPath: elements/Experimental/DataTable/thHeader.tsx
 unique_id: N4ewiTpp
 */
@@ -11,7 +9,22 @@ import styles from './table.module.scss'
 
 const AptugoDataTableTH: FunctionComponent<any> = (props) => {
   const { header, onRequestSort } = props
-  const currentColumn = props.columnInfo[header.index]
+  const [currentColumn, setcurrentColumn] = React.useState(props.columnInfo[header.index])
+  const [isEditing, setisEditing] = React.useState(false)
+
+  const switchEdition = () => {
+    setisEditing(!isEditing)
+  }
+
+  const onBlur = (e) => {
+    if (currentColumn.header !== header.column.columnDef.header) {
+      props.onColumnRename(e, currentColumn)
+    }
+    setisEditing(false)
+  }
+
+  
+
   return (
     <th key={header.id} colSpan={header.colSpan} style={ { width: header.getSize() }}>
       { {
@@ -36,7 +49,14 @@ const AptugoDataTableTH: FunctionComponent<any> = (props) => {
           </svg>
         ),
       }[header.column.getIsSorted() as string] ?? ''}
-      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+      {!header.isPlaceholder &&
+        <div>
+          {!!currentColumn.allowRenaming && <>{
+            isEditing ? <input className="editableInput" onBlur={onBlur} onChange={(e) => { setcurrentColumn({...currentColumn, header: e.target.value }) }} value={currentColumn.header}></input> : <div onClick={switchEdition}>{flexRender(header.column.columnDef.header, header.getContext())}</div>
+          }</>}
+          {!currentColumn.allowRenaming && <>{flexRender(header.column.columnDef.header, header.getContext())}</>}
+        </div>
+      }
       <div
         className={styles.actionContainer}
         onClick={(e) => {
@@ -51,16 +71,18 @@ const AptugoDataTableTH: FunctionComponent<any> = (props) => {
           </svg>
         </div>
       </div>
-      {!!currentColumn.allowDeletion && <div className={styles.columnDeletion} onClick={(e) => props.onColumnRemoval(e, header.column)}>
-        <svg width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg" className="svg-md valign-middle mg-r-5">
-          <g fill="none" fillRule="evenodd">
-            <path fillOpacity=".01" fill="#FFF" opacity=".01" d="M-1 0h14v14H-1z"></path>
-            <g stroke="#000" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M.042 3.1H11.742M10.442 3.1v9.1a1.3 1.3 0 0 1-1.3 1.3h-6.5a1.3 1.3 0 0 1-1.3-1.3V3.1M3.292 3.1V1.8a1.3 1.3 0 0 1 1.3-1.3h2.6a1.3 1.3 0 0 1 1.3 1.3v1.3M4.592 6.35v3.9M7.192 6.35v3.9"></path>
+      {!!currentColumn.allowDeletion && (
+        <div className={styles.columnDeletion} onClick={(e) => props.onColumnRemoval(e, header.column)}>
+          <svg width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg" className="svg-md valign-middle mg-r-5">
+            <g fill="none" fillRule="evenodd">
+              <path fillOpacity=".01" fill="#FFF" opacity=".01" d="M-1 0h14v14H-1z"></path>
+              <g stroke="#000" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M.042 3.1H11.742M10.442 3.1v9.1a1.3 1.3 0 0 1-1.3 1.3h-6.5a1.3 1.3 0 0 1-1.3-1.3V3.1M3.292 3.1V1.8a1.3 1.3 0 0 1 1.3-1.3h2.6a1.3 1.3 0 0 1 1.3 1.3v1.3M4.592 6.35v3.9M7.192 6.35v3.9"></path>
+              </g>
             </g>
-          </g>
-        </svg>
-      </div>}
+          </svg>
+        </div>
+      )}
       <div
         {...{
           onMouseDown: header.getResizeHandler(),

@@ -56,6 +56,7 @@ interface tableProps {
   onRequestPaginate: Function
   onRequestUpdate?: Function
   onColumnRemoval?: Function
+  onColumnRename?: Function
   className?: any
 }
 

@@ -48,6 +48,11 @@ options:
     type: function
     options: ''
     advanced: true
+  - name: onColumnRename
+    display: On Rename Column
+    type: function
+    options: ''
+    advanced: true
   - name: onColumnRemoval
     display: On Delete Column
     type: function
@@ -96,6 +101,9 @@ import DataTable from '../components/DataTable/dataTable'
   {% endif %}
   {% if element.values.onColumnRemoval %}
   onColumnRemoval={ {{ element.values.onColumnRemoval | functionOrCall }} }
+  {% endif %}
+  {% if element.values.onColumnRename %}
+  onColumnRename={ {{ element.values.onColumnRename | functionOrCall }} }
   {% endif %}
   {% if element.values.className %}
     className={ {{element.values.className}} }
