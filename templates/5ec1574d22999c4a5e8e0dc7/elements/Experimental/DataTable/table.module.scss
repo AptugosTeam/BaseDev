@@ -78,6 +78,7 @@ $fontSize: 100%;
         border-bottom: 1px solid #ebeff3;
         background: #fff;
         display: flex;
+        align-items: center;
 
         & th {
           border-right: 1px solid #ebeff3;
@@ -101,7 +102,7 @@ $fontSize: 100%;
             margin-right: 0.25rem;
           }
 
-          & :global(.resizer) {
+          & .resizer {
             display: inline-block;
             background: none;
             width: 3px;
@@ -115,7 +116,7 @@ $fontSize: 100%;
           }
 
           &:hover {
-            & :global(.resizer) {
+            & .resizer {
               cursor: col-resize;
               background: #bbdcfe;
               &.isResizing {
