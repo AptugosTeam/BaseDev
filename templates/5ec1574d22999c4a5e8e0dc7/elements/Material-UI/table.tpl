@@ -20,7 +20,7 @@ options:
     display: Table
     type: dropdown
     options: >-
-      return [['var','Use a
+      return [['useVar','Use a
       variable'],...aptugo.store.getState().application.tables.map(({ unique_id,
       name }) => [unique_id, name])]
   - name: variableToUse
@@ -28,7 +28,7 @@ options:
     type: text
     options: ''
     settings:
-      condition: var
+      condition: useVar
       propertyCondition: table
   - name: headerVariable
     display: Variable to use in Header
@@ -112,7 +112,7 @@ children: []
 {% set allowEdit = element.values.allowEdit|default(true) %}
 {% set allowDeletion = element.values.allowDeletion|default(true) %}
 {% set tableFields = [] %}
-{% if element.values.table == 'var' %}
+{% if element.values.table == 'useVar' or element.values.table == 'var' %}
   {% set table = element.values.editionTable | tableData %}
   {% set tableName = table.name | friendly %}
   {% set tableSingleName = table.singleName | friendly | capitalize %}
@@ -175,7 +175,7 @@ children: []
       {% endif %}
     }
     tableData={ {{ tableData }} }
-    {% if element.values.table != 'var' %}
+    {% if element.values.table != 'useVar' and element.values.table != 'var' %}
       orderBy={ {{ innervarname }}loadoptions.sort.field }
       order={ {{ innervarname }}loadoptions.sort.method }
       onRequestSort={(event, property) => {

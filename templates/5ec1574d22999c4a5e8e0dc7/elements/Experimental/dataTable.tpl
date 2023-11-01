@@ -20,7 +20,15 @@ options:
     display: Table
     type: dropdown
     options: >-
-      return [...aptugo.store.getState().application.tables.map(({ unique_id, name }) => [unique_id, name])]
+      return [['useVar','Use a
+      variable'],...aptugo.store.getState().application.tables.map(({ unique_id,name }) => [unique_id, name])]
+  - name: variableToUse
+    display: Variable to use
+    type: text
+    options: ''
+    settings:
+      condition: useVar
+      propertyCondition: table
   - name: editProcedure
     display: Edit Procedure
     type: dropdown
@@ -30,7 +38,24 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: onRequestUpdate
+    display: On Update
+    type: function
+    options: ''
+    advanced: true
+  - name: columnInfo
+    display: Column Info
+    type: code
+    options: ''
+    advanced: true
+  - name: allowEdit
+    display: Allow Edition
+    type: checkbox
+    settings:
+      default: true
+      condition: ''
 */
+{% set allowEdit = element.values.allowEdit|default(true) %}
 {% set editProc = element.values.editProcedure|default('No') %}
 {% set table = element.values.table | tableData %}
 {% set innervarname = 'table' %}
@@ -38,34 +63,50 @@ options:
 {% set tableSingleName = table.singleName | friendly | capitalize %}
 {% set setEditDataFunctionName = 'set' ~ tableName ~ 'data' %}
 {% set fields = table.fields %}
-{% set tableData = '(' ~ tableName|lower ~ 'Data.found' ~ tableName|lower ~ '.length ? ' ~ tableName|lower ~ 'Data.found' ~ tableName|lower ~ ' : ' ~ tableName|lower ~ 'Data.' ~ tableName|lower ~ ' as any)' %}
-{% set eleWithoutChilds = element %}
-{% set eleWithoutChilds = eleWithoutChilds|merge({'children': null,'name':'table'}) %}
-{% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage } %}
+{% if element.values.table == 'useVar' %}
+  {% set tableData = element.values.variableToUse %}
+  {% set totalDocs = tableData ~ '.length' %}
+{% else %}
+  {% set tableData = '(' ~ tableName|lower ~ 'Data.found' ~ tableName|lower ~ '.length ? ' ~ tableName|lower ~ 'Data.found' ~ tableName|lower ~ ' : ' ~ tableName|lower ~ 'Data.' ~ tableName|lower ~ ' as any)' %}
+  {% set eleWithoutChilds = element %}
+  {% set eleWithoutChilds = eleWithoutChilds|merge({'children': null,'name':'table'}) %}
+  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage } %}
+  {% set totalDocs = (tableName|lower) ~ 'Data.totalDocs' %}
+{% endif %}
 {% set bpr %}
 import DataTable from '../components/DataTable/dataTable'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <DataTable
+  {% if element.values.onRequestUpdate %}
+  onRequestUpdate={ {{ element.values.onRequestUpdate | functionOrCall }} }
+  {% endif %}
   {% if element.values.className %}
     className={ {{element.values.className}} }
   {% endif %}
   tableData={ {{ tableData }} }
-  pages={Math.ceil({{ tableName|lower }}Data.totalDocs / {{ innervarname }}loadoptions.limit)}
-  columnInfo={[
-    {% if not element.children %}
-      {% for field in fields %}
-        {% set innerParams = { 'element': { values: { 'Field': field.unique_id } } } %}
-        {% include includeTemplate('dtfield.tpl') with innerParams %}
+  pages={Math.ceil({{ totalDocs }} / {{ innervarname }}loadoptions.limit)}
+  columnInfo={
+    {% if element.values.columnInfo %}
+      {{ element.values.columnInfo }}
+    {% else %}
+    [
+      {% if not element.children %}
+        {% for field in fields %}
+          {% set innerParams = { 'element': { values: { 'Field': field.unique_id } } } %}
+          {% include includeTemplate('dtfield.tpl') with innerParams %}
+        {% endfor %}
+      {% endif %}
+      {% for child in element.children %}
+        {{ child.rendered }}
       {% endfor %}
+    ]
     {% endif %}
-    {% for child in element.children %}
-      {{ child.rendered }}
-    {% endfor %}
-  ]}
+  }
   onRequestPaginate={(options) => {
     set{{ innervarname }}loadoptions({ ...{{ innervarname }}loadoptions, ...options })
   }}
+  {% if allowEdit %}
   onRequestEdit={row => {
     {% if editProc == 'Internal' %}
       {{ setEditDataFunctionName }}(row)
@@ -75,9 +116,12 @@ import DataTable from '../components/DataTable/dataTable'
       props.history.push(url)
     {% endif %}
   }}
+  {% endif %}
+  {% if allowEdit %}
   onRequestRemove={row => {
     dispatch(remove{{ tableSingleName }}(row))
   }}
+  {% endif %}
   onRequestSort={property => {
     set{{ innervarname }}loadoptions({
       ...{{ innervarname }}loadoptions,
