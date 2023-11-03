@@ -103,6 +103,12 @@ options:
   - name: DisableVariable
     display: Variable to disable input
     type: text
+  - name: style
+    display: Extra Styles
+    type: text
+    options: ''
+    settings: 
+      advanced: true
 children: []
 */
 {% if element.values.fullwidth %}{% set fullWidth = element.values.fullwidth %}{% endif %}
@@ -159,4 +165,7 @@ import TextField from '@mui/material/TextField'
     {% if element.values.fullWidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
+    {% if element.values.style %}
+      style={ {{element.values.style}} }
+    {% endif %}
 />
