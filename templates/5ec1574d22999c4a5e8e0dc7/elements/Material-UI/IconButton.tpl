@@ -94,7 +94,7 @@ import IconButton from '@mui/material/IconButton'
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
 {% if element.values.useFontAwesome %}
-  {% set fai = element.values.FontAwesomeIcon|capitalize %}
+  {% set fai = element.values.FontAwesomeIcon|replace({'-': ' '})|title|replace({' ': ''}) %}
   {% if fai == 'Menu' %}{% set fai = 'Bars' %}{% endif %}
   {% if fai == 'Alt-route' %}{% set fai = 'Route' %}{% endif %}
   {% if fai == 'Map-marker-alt' %}{% set fai = 'LocationDot' %}{% endif %}
