@@ -28,6 +28,13 @@ options:
   - name: extraOptions
     display: Extra options
     type: text
+  - name: onError
+    display: Catch Error
+    type: function
+    options: ''
+    advanced: true
+    settings:
+      default: console.error(error)
 sourceType: javascript
 children: []
 */
