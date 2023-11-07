@@ -41,4 +41,10 @@ import axios from 'axios'
 {% endif %}
 axios.{{ element.values.method|default('get') }}({{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}, {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}).then(result => {
  {{ content | raw }}
+}).catch((error) => {
+  {% if element.values.onError %}
+    {{ element.values.onError }} 
+  {% else %}
+    console.error(error)
+  {% endif %}
 })
