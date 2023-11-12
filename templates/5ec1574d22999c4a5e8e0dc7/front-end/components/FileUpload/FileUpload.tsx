@@ -51,13 +51,11 @@ const altStyles = {
     },
   },
   image: {
-    maxHeight: '48px',
     margin: '5px 4px 5px auto',
     borderRadius: '5px',
     overflow: 'hidden'
   },
   media: {
-    maxHeight: '48px',
   },
   input: {
     display: 'none',
