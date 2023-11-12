@@ -49,6 +49,10 @@ options:
             aptugoUtils.variables.setPageVariable(currentPage, element.unique_id, { theme: cssinfo, hidden: selectedAsset })
           })
         }
+  - name: extraThemeOptions
+    display: Extra Theme options
+    type: code
+    advanced: true
 sourceType: javascript
 children: []
 */
