@@ -14,6 +14,9 @@ options:
     advanced: true
     settings:
       default: "'InlineLink'"
+  - name: renderInPlace
+    display: Render In Place
+    type: checkbox
 */
 
 {% set bpr %}
@@ -33,4 +36,8 @@ function {{ element.values.internalfunctionName|default('InlineLink') }}(emailPa
   return emailParameters.content || renderEmail(<div>{{ content | raw }}</div>)
 }
 {% endset %}
-{{ save_delayed('ph',ph) }}
+{% if element.values.renderInPlace %}
+  {{ ph }}
+{% else %}
+  {{ save_delayed('ph',ph) }}
+{% endif %}

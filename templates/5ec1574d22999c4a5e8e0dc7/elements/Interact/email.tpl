@@ -62,6 +62,9 @@ options:
     type: text
     options: ''
     required: true
+  - name: renderInPlace
+    display: Render In Place
+    type: checkbox
 settings:
   - name: BackendPackages
     value: '"nodemailer": "^6.4.11",'
@@ -163,6 +166,11 @@ const {{ functionName }} = (to, extra:any = {}) => {
   }
 {% endset %}
 {% endset %}
-{{ save_delayed('ph',ph,1) }}
-{{ save_delayed('bpr',bpr) }}
+{% if element.values.renderInPlace %}
+  {{ bpr }}
+  {{ ph }}
+{% else %}
+  {{ save_delayed('bpr',bpr) }}
+  {{ save_delayed('ph',ph,1) }}
+{% endif %}
 {{ content | raw }}
