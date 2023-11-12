@@ -23,41 +23,55 @@ const AptugoDataTableTH: FunctionComponent<any> = (props) => {
     setisEditing(false)
   }
 
-  
+  const allowSorting = false
+  const sortingObject = {
+    asc: (
+      <svg width="1em" height="1em" viewBox="0 0 10 14" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" fillRule="evenodd">
+          <path fillOpacity="0.01" fill="#FFF" opacity="0.01" d="M-2 0h14v14H-2z"></path>
+          <g stroke="#000" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M.875 4.813 4.938.75 9 4.813M4.938 13.25V.75"></path>
+          </g>
+        </g>
+      </svg>
+    ),
+    desc: (
+      <svg width="1em" height="1em" viewBox="0 0 10 14" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" fillRule="evenodd">
+          <path fillOpacity="0.01" fill="#FFF" opacity="0.01" d="M-2 0h14v14H-2z"></path>
+          <g stroke="#000" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9.125 9.187 5.063 13.25 1 9.187M5.062.75v12.5"></path>
+          </g>
+        </g>
+      </svg>
+    ),
+  }
 
   return (
-    <th key={header.id} colSpan={header.colSpan} style={ { width: header.getSize() }}>
-      { {
-        asc: (
-          <svg width="1em" height="1em" viewBox="0 0 10 14" xmlns="http://www.w3.org/2000/svg">
-            <g fill="none" fillRule="evenodd">
-              <path fillOpacity="0.01" fill="#FFF" opacity="0.01" d="M-2 0h14v14H-2z"></path>
-              <g stroke="#000" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M.875 4.813 4.938.75 9 4.813M4.938 13.25V.75"></path>
-              </g>
-            </g>
-          </svg>
-        ),
-        desc: (
-          <svg width="1em" height="1em" viewBox="0 0 10 14" xmlns="http://www.w3.org/2000/svg">
-            <g fill="none" fillRule="evenodd">
-              <path fillOpacity="0.01" fill="#FFF" opacity="0.01" d="M-2 0h14v14H-2z"></path>
-              <g stroke="#000" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9.125 9.187 5.063 13.25 1 9.187M5.062.75v12.5"></path>
-              </g>
-            </g>
-          </svg>
-        ),
-      }[header.column.getIsSorted() as string] ?? ''}
-      {!header.isPlaceholder &&
+    <th key={header.id} colSpan={header.colSpan} style={ { width: header.getSize() } }>
+      {!!allowSorting && (sortingObject[header.column.getIsSorted() as string] ?? '')}
+      {!header.isPlaceholder && (
         <div>
-          {!!currentColumn.allowRenaming && <>{
-            isEditing ? <input className="editableInput" onBlur={onBlur} onChange={(e) => { setcurrentColumn({...currentColumn, header: e.target.value }) }} value={currentColumn.header}></input> : <div onClick={switchEdition}>{flexRender(header.column.columnDef.header, header.getContext())}</div>
-          }</>}
+          {!!currentColumn.allowRenaming && (
+            <>
+              {isEditing ? (
+                <input
+                  className="editableInput"
+                  onBlur={onBlur}
+                  onChange={(e) => {
+                    setcurrentColumn({ ...currentColumn, header: e.target.value })
+                  }}
+                  value={currentColumn.header}
+                ></input>
+              ) : (
+                <div onClick={switchEdition}>{flexRender(header.column.columnDef.header, header.getContext())}</div>
+              )}
+            </>
+          )}
           {!currentColumn.allowRenaming && <>{flexRender(header.column.columnDef.header, header.getContext())}</>}
         </div>
-      }
-      <div
+      )}
+      {!!allowSorting && <div
         className={styles.actionContainer}
         onClick={(e) => {
           onRequestSort(header.column.id)
@@ -70,7 +84,7 @@ const AptugoDataTableTH: FunctionComponent<any> = (props) => {
             <path fillRule="evenodd" clipRule="evenodd" d="m7 10.5-5.5-6h11l-5.5 6Z" fill="#666"></path>
           </svg>
         </div>
-      </div>
+      </div>}
       {!!currentColumn.allowDeletion && (
         <div className={styles.columnDeletion} onClick={(e) => props.onColumnRemoval(e, header.column)}>
           <svg width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg" className="svg-md valign-middle mg-r-5">

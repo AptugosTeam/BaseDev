@@ -63,6 +63,12 @@ options:
     type: code
     options: ''
     advanced: true
+  - name: allowSorting
+    display: Allow Sorting by Column
+    type: checkbox
+    settings:
+      default: true
+      condition: ''
   - name: allowEdit
     display: Allow Edition
     type: checkbox
@@ -71,6 +77,7 @@ options:
       condition: ''
 */
 {% set allowEdit = element.values.allowEdit|default(true) %}
+{% set allowSorting = element.values.allowSorting|default(true) %}
 {% set editProc = element.values.editProcedure|default('No') %}
 {% set table = element.values.table | tableData %}
 {% set innervarname = 'table' %}
@@ -93,6 +100,7 @@ import DataTable from '../components/DataTable/dataTable'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <DataTable
+  {% if allowSorting %}allowSorting{% endif %}
   {% if element.values.onRequestUpdate %}
   onRequestUpdate={ {{ element.values.onRequestUpdate | functionOrCall }} }
   {% endif %}

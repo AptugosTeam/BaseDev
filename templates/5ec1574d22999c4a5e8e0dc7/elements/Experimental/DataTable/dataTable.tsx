@@ -119,7 +119,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
   React.useEffect(() => {
     setData(props.tableData)
   },[props.tableData])
-console.log('theData', theData, props.tableData)
+
   const table = useReactTable({
     data: theData,
     pageCount: props.pages,
