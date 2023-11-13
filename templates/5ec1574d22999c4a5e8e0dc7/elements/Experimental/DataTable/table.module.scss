@@ -1,7 +1,5 @@
 /*
 path: table.module.scss
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/extendedTemplates/5ec1574d22999c4a5e8e0dc7/elements/Experimental/DataTable/table.module.scss
 keyPath: elements/Experimental/DataTable/table.module.scss
 unique_id: c7UnmA6M
 */
@@ -97,13 +95,20 @@ $fontSize: 100%;
           text-overflow: ellipsis;
           text-align: left;
           position: relative;
+          display: flex;
 
           & > svg {
             height: 0.5625rem;
             margin-right: 0.25rem;
           }
 
-          & :global(.resizer) {
+          & .columnDeletion {
+            margin: 0 0.5rem 0 auto;
+            cursor: pointer;
+            display: none;
+          }
+
+          & .resizer {
             display: inline-block;
             background: none;
             width: 3px;
@@ -116,8 +121,18 @@ $fontSize: 100%;
             touch-action: none;
           }
 
+          & :global(.editableInput) {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+          }
+
           &:hover {
-            & :global(.resizer) {
+            & .columnDeletion {
+              display: block;
+            }
+
+            & .resizer {
               cursor: col-resize;
               background: #bbdcfe;
               &.isResizing {
@@ -195,5 +210,24 @@ $fontSize: 100%;
         }
       }
     }
+  }
+}
+
+:global(.editableInput) {
+  border: 0;
+  width: 100%;
+  box-sizing: unset;
+  padding: 0 1rem;
+  margin: 0;
+  display: block;
+  border-radius: 0;
+  height: calc(2.5rem + 14px);
+  margin: -1rem;
+  background: transparent;
+  &:active,
+  &:focus-visible {
+    outline: 1px solid rgb(40, 151, 255);
+    outline-offset: -1px;
+    box-shadow: inset 0px 0px 3px 1px rgba(40, 151, 255, 0.5);
   }
 }

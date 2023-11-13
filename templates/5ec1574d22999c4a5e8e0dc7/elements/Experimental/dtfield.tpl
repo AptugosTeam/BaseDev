@@ -67,7 +67,11 @@ options:
     type: checkbox
 children: []
 */
-{% if not field %}
-{% set field = element.values.Field | fieldData %}
+{% if element.values.Field == "useVar" %}
+  { id: '{{ element.values.fieldVariable }}', header: '{{ element.values.columnName }}', type: 'string', size: 300, renderValue: (cell) => { {{ content | raw}}; return cell.getValue() || '---'} },
+{% else %}
+  {% if not field %}
+    {% set field = element.values.Field | fieldData %}
+  {% endif %}
+  {% include includeTemplate(['Fields' ~ field.data_type ~'datatable.tpl', 'Fieldsdatatable.tpl']) %}
 {% endif %}
-{% include includeTemplate(['Fields' ~ field.data_type ~'datatable.tpl', 'Fieldsdatatable.tpl']) %}
