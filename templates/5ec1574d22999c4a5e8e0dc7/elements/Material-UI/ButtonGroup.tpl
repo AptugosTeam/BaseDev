@@ -17,6 +17,10 @@ options:
   - name: disableElevation
     display: Disable Elevation
     type: checkbox
+  - name: fullWidth
+    display: Full Width
+    type: checkbox
+    options: ''
 */
 {% set bpr %}
 import ButtonGroup from '@mui/material/ButtonGroup'
@@ -27,6 +31,7 @@ import ButtonGroup from '@mui/material/ButtonGroup'
   size="{{ element.values.size|default('medium') }}"
   orientation="{{ element.values.orientation|default('horizontal') }}"
   {% if element.values.disableElevation %}disableElevation{% endif %}
+  {% if element.values.fullWidth %}fullWidth{% endif %}
 >
   {{ content | raw }}
 </ButtonGroup>
