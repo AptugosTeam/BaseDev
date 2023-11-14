@@ -98,6 +98,7 @@ import { Legend, Tooltip, Line, CartesianGrid, XAxis, YAxis, ComposedChart, Area
   <YAxis {% if element.values.hideY %}hide={true}{% endif %} />
   <Tooltip />
   {% if not element.values.hideLegend %}
+  {{ content | raw }}
   <Legend
   {% if element.values.onClickLegend %}
   onClick={ {{element.values.onClickLegend | functionOrCall}} }
@@ -105,6 +106,5 @@ import { Legend, Tooltip, Line, CartesianGrid, XAxis, YAxis, ComposedChart, Area
    />
   {% endif %}
   {% if not element.values.hideGrid %}<CartesianGrid stroke="#f5f5f5" />{% endif %}
-{{ content | raw }}
 </ComposedChart>
 {% if element.values.responsive %}</ResponsiveContainer>{% endif %}
