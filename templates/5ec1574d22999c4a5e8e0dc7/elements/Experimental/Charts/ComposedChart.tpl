@@ -32,6 +32,11 @@ options:
     type: dropdown
     options:
       top;middle;bottom
+  - name: onClickLegend
+    display: onClick Legend
+    type: function
+    options: ''
+    advanced: true
   - name: Variable
     display: Variable to Use
     type: text
@@ -54,8 +59,8 @@ options:
     display: Hide Y Axis
     type: checkbox
     advanced: true
-  - name: hideLeyend
-    display: Hide Leyend
+  - name: hideLegend
+    display: Hide Legend
     type: checkbox
     advanced: true
   - name: hideGrid
@@ -92,7 +97,13 @@ import { Legend, Tooltip, Line, CartesianGrid, XAxis, YAxis, ComposedChart, Area
   <XAxis dataKey="{% if indexBy.column_name %}{{ indexBy.column_name }}{% else %}{{ element.values.indexVariable }}{% endif %}" {% if element.values.hideX %}hide={true}{% endif %}/>
   <YAxis {% if element.values.hideY %}hide={true}{% endif %} />
   <Tooltip />
-  {% if not element.values.hideLeyend %}<Legend />{% endif %}
+  {% if not element.values.hideLegend %}
+  <Legend
+  {% if element.values.onClickLegend %}
+  onClick={ {{element.values.onClickLegend | functionOrCall}} }
+  {% endif %}
+   />
+  {% endif %}
   {% if not element.values.hideGrid %}<CartesianGrid stroke="#f5f5f5" />{% endif %}
 {{ content | raw }}
 </ComposedChart>
