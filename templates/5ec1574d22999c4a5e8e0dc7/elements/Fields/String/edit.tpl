@@ -21,7 +21,9 @@ import TextField from '@mui/material/TextField'
     {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}
     margin='{{ element.values.margin|default("dense") }}'
     size='{{ element.values.size|default("medium") }}'
-    label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    {% if not element.values.disableLabel %}
+        label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    {% endif %}
     type="text"
     fullWidth
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}

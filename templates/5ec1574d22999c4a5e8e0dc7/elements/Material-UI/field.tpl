@@ -36,6 +36,10 @@ options:
       propertyCondition: Field
       condition: useVar
       active: true
+  - name: disableLabel
+    display: Disable Label
+    type: checkbox
+    options: ''
   - name: Type
     display: Type
     type: dropdown
@@ -88,7 +92,7 @@ options:
     display: Autofilling Input
     type: text
   - name: fieldname
-    display: fieldname
+    display: Field Name
     type: text
     options: ''
   - name: onBlur
