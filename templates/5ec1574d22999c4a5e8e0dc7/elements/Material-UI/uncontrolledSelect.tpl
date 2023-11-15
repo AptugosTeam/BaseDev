@@ -21,6 +21,10 @@ options:
     display: Options
     type: text
     options: ''
+  - name: defaultValue
+    display: Default Value
+    type: text
+    options: ''
   - name: showall
     display: Show "All" for empty
     type: checkbox
@@ -71,6 +75,7 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.fullwidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
+    {% if element.values.defaultValue %}defaultValue={{ element.values.defaultValue }}{% endif %}
 >
 {% if element.values.showall %}<MenuItem value=""><em>All</em></MenuItem>{% endif %}
 { {{ element.values.options }}.map((item: { value: any, name: string } | any, index: number) => <MenuItem value={item.value ? item.value : item} key={index}>{item.name ? item.name : item}</MenuItem> )}
