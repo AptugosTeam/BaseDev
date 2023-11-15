@@ -51,11 +51,13 @@ const altStyles = {
     },
   },
   image: {
+    maxHeight: '48px',
     margin: '5px 4px 5px auto',
     borderRadius: '5px',
     overflow: 'hidden'
   },
   media: {
+    maxHeight: '48px',
   },
   input: {
     display: 'none',
@@ -97,7 +99,7 @@ const altStyles = {
 }
 
 const AptugoImageUpload: FunctionComponent<any> = (props) => {
-  const classes = props.variant === 'standard' ? useStyles : altStyles
+  const classes = props.visual === 'standard' ? useStyles : altStyles
 
   const [state, setState] = React.useState({
     uploading: false,
@@ -105,7 +107,7 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
     selectedFile: null,
     fileName: props.value,
     accept: props.accept || 'image/*',
-    visual: props.variant || 'staandard',
+    visual: props.visual || 'staandard',
   })
 
   const handleUploadClick = (event) => {
@@ -181,7 +183,7 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
 
   const alternativeVisual = () => {
     return (
-      <FormControl margin="normal" fullWidth sx={classes.root}>
+      <FormControl margin="normal" fullWidth variant={props.variant} sx={classes.root}>
         <Input
           sx={classes.altVisual}
           value={state.fileName || ''}
@@ -202,7 +204,7 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
     )
   }
 
-  return state.visual === 'standard' ? alternativeVisual() : standardVisual()
+  return state.visual === 'standard' ? standardVisual() : alternativeVisual()
 }
 
 export default AptugoImageUpload
