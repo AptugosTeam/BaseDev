@@ -6,6 +6,9 @@ unique_id: aOViR3kP
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const errors = require('../services/errors.service')
+const axios = require('axios');
+const fs = require('fs')
+const path = require('path');
 
 module.exports = {
   authenticate,
@@ -113,12 +116,59 @@ async function authenticate ({ email, password, model, passwordField }) {
   })
 }
 
-async function socialAuthenticate ({ Name, ProfilePic, Email, Role }) {
+const downloadImage = async (url, savePath) => {
+  try {
+    const response = await axios({
+      method: 'get',
+      url: url,
+      responseType: 'stream'
+    })
+
+    const writer = fs.createWriteStream(savePath)
+
+    return new Promise((resolve, reject) => {
+      writer.on('finish', () => resolve(true));
+      writer.on('error', (error) => reject(error));
+
+      response.data.pipe(writer);
+
+      response.data.on('end', () => writer.end());
+    });
+  } catch (error) {
+    console.error(`Failed to download image: ${error.message}`);
+    return false
+  }
+}
+
+async function socialAuthenticate (options) {
+
   const Users = require('../models/users.model.js')
-  return new Promise(function (resolve, reject) {
+
+  return new Promise(async function (resolve, reject) {
+    const { FirstName, LastName, googleProfilePic, Email, Role } = options.req.body.data
+    let ProfilePic = null;
+
     if (!Email) {
       reject({ message: 'There was an error' })
     }
+
+    if (googleProfilePic) {
+      const filesFolder = options.req.app.get('filesFolder');
+
+      if (!fs.existsSync(filesFolder)) {
+        fs.mkdirSync(filesFolder, { recursive: true });
+      }
+
+      const googleLocalImagePath = path.join(filesFolder, `${Email}_google_profile_picture.jpg`);
+      const success = await downloadImage(googleProfilePic, googleLocalImagePath)
+
+      if (success) {
+        ProfilePic = `${Email}_google_profile_picture.jpg`
+      } else {
+        console.log('Failed to download and save Google profile picture.');
+      }
+    }
+
     const query = Users.findOne({ Email: new RegExp('^' + Email.toLowerCase(), 'i') })
     const promise = query.exec()
     promise.then((user) => {
@@ -127,12 +177,15 @@ async function socialAuthenticate ({ Name, ProfilePic, Email, Role }) {
           Email,
           Password: 123,
           Role,
+          ProfilePic,
+          FirstName,
+          LastName
         }
         const User = new Users(data)
         User.save()
           .then((result) => {
-            const { Email, Role, _id } = result._doc
-            const cleanUser = { Email, Role, _id }
+            const { Email, Role, _id, ProfilePic } = result._doc
+            const cleanUser = { Email, Role, _id, ProfilePic }
             const token = jwt.sign(cleanUser, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
             if (token) {
               resolve({ accessToken: token, data: cleanUser })
