@@ -12,11 +12,10 @@ import MenuIcon from '@mui/icons-material/Menu'
 
 import classes from './sidebar.module.scss'
 
-interface sidebarProps {
+interface sidebarProps extends React.PropsWithChildren {
   handleDrawerToggle?: VoidFunction
   open: boolean
   color?: string
-  children?: ReactElement<any>[]
 }
 
 const Sidebar: FunctionComponent<sidebarProps> = (props) => {

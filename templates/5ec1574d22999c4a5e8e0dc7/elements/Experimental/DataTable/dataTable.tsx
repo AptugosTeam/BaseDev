@@ -120,10 +120,9 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
     setData(props.tableData)
   },[props.tableData])
 
-  const table = useReactTable({
+  const tableOptions:any = {
     data: theData,
     pageCount: props.pages,
-    defaultColumn,
     state: {
       sorting,
       pagination,
@@ -153,7 +152,11 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
         props.onRequestUpdate && props.onRequestUpdate(row, columnId, value)
       },
     },
-  })
+  }
+
+  if (props.onRequestUpdate) tableOptions.defaultColumn = defaultColumn
+
+  const table = useReactTable(tableOptions)
 
   const desdePagina = pageIndex - 2 < 0 ? 0 : pageIndex - 2
   const hastaPagina = pageIndex + 2 < props.pages ? desdePagina + 5 : props.pages
