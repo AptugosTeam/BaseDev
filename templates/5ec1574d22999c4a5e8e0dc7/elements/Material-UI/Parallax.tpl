@@ -7,8 +7,6 @@ sourceType: javascript
 settings:
   - name: Packages
     value: '"react-parallax": "^3.5.1",'
-  - name: npmScripts
-    value: '"postbuild": "react-parallax",'
 options:
   - name: bgImage
     display: Use an asset
