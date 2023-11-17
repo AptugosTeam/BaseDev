@@ -48,6 +48,16 @@ options:
     display: Remove indicators
     type: checkbox
     options: ''
+  - name: indicatorContainerProps
+    display: Indicators Extra Props
+    type: code
+    options: ''
+    advanced: true
+  - name: activeIndicatorIconButtonProps
+    display: Active Indicator Button Extra Props
+    type: code
+    options: ''
+    advanced: true
 children: []
 settings:
   - name: Packages
@@ -58,6 +68,8 @@ import Carousel from 'react-material-ui-carousel'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Carousel 
+{% if element.values.indicatorContainerProps %}indicatorContainerProps={ {{ element.values.indicatorContainerProps }} }{% endif %}
+{% if element.values.activeIndicatorIconButtonProps %}activeIndicatorIconButtonProps={ {{ element.values.activeIndicatorIconButtonProps }} }{% endif %}
 {% if element.values.ClassName %}className={ {{ element.values.ClassName }} } {% endif %}  
 {% if element.values.Height %}height= { {{ element.values.Height }} }{% else %}height= { {{ 500 }} } {% endif %} 
 {% if element.values.navButtonsAlwaysVisible %}navButtonsAlwaysVisible={true}{% else %}navButtonsAlwaysVisible={false}{% endif %}
