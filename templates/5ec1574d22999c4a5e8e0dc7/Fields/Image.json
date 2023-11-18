@@ -9,6 +9,13 @@ unique_id: sd4A39xT
   "dataType": "String",
   "initialValue": "",
   "options": {
-    "frontEndType": "string"
+    "frontEndType": "string",
+    "extra": [
+      {
+        "display": "Resize Width Before Upload (optional)",
+        "value": "resizeWidth",
+        "type": "text"
+      }
+    ]
   }
 }

@@ -100,7 +100,7 @@ const altStyles = {
 
 const AptugoImageUpload: FunctionComponent<any> = (props) => {
   const classes = props.visual === 'standard' ? useStyles : altStyles
-
+  const { resizeWidth } = props;
   const [state, setState] = React.useState({
     uploading: false,
     file: null,
@@ -116,16 +116,50 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
     const reader = new FileReader()
 
     reader.onloadend = function (e) {
-      setState({
-        ...state,
-        file: file,
-        fileName: file.name,
-        uploading: false,
-        selectedFile: [reader.result],
-      })
+      try {
+        if (resizeWidth && typeof resizeWidth === 'number') {
+          const img = new Image();
+          img.src = typeof reader.result === 'string' ? reader.result : '';
 
-      props.onChange(event)
-    }
+          img.onload = async function (e) {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+
+            const aspectRatio = img.width / img.height;
+            const resizeHeight = resizeWidth / aspectRatio;
+
+            canvas.width = resizeWidth;
+            canvas.height = resizeHeight;
+
+            context.drawImage(img, 0, 0, resizeWidth, resizeHeight);
+
+            const resizedURL = canvas.toDataURL(file.type);
+
+            setState({
+              ...state,
+              file: file,
+              fileName: file.name,
+              uploading: false,
+              selectedFile: [resizedURL],
+            });
+
+            props.onChange(event);
+          };
+        } else {
+          setState({
+            ...state,
+            file: file,
+            fileName: file.name,
+            uploading: false,
+            selectedFile: [reader.result],
+          });
+
+          props.onChange(event);
+        }
+      } catch (error) {
+        console.error('Error handling file:', error);
+      }
+    };
 
     setState({
       ...state,

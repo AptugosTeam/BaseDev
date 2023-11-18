@@ -2,6 +2,19 @@
 path: fileUpload.tpl
 keyPath: elements/Interact/fileUpload.tpl
 unique_id: Iak20dlO
+options:
+  - name: resize
+    display: Resize Images Before Upload?
+    type: checkbox
+    settings:
+      default: false
+  - name: resizeWidth
+    display: Resize Width
+    type: text
+    settings:
+      propertyCondition: resize
+      condition: true
+      active: true
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
@@ -15,4 +28,8 @@ import FileUpload from '../components/FileUpload/FileUpload'
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
     variant="{{ element.values.variant|default('standard') }}"
+    {% if element.values.resize and element.values.resizeWidth %}
+        resizeWidth={ Number( {{element.values.resizeWidth}} ) | default(800)}
+    {% endif %}
+/>
 />
