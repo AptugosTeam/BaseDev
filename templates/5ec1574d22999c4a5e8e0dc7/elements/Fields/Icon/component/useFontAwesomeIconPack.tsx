@@ -1,11 +1,8 @@
 /*
 path: useFontAwesomeIconPack.tsx
-completePath: >-
-  C:\Users\maxi_\Aptugo\BaseDev\templates\5ec1574d22999c4a5e8e0dc7\front-end\components\IconPicker\useFontAwesomeIconPack.tsx
-keyPath: front-end\components\IconPicker\useFontAwesomeIconPack.tsx
-unique_id: TqtlAq6r
+keyPath: elements/Fields/Icon/component/useFontAwesomeIconPack.tsx
+unique_id: QWnsXD9B
 */
-
 import { useState, useEffect } from 'react'
 import { IconName, IconLookup, library } from '@fortawesome/fontawesome-svg-core'
 
