@@ -1,10 +1,11 @@
 /*
 path: iconPicker.tsx
 completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/elements/Fields/Icon/component/iconPicker.tsx
-keyPath: elements/Fields/Icon/component/iconPicker.tsx
-unique_id: r0HSdxMk
+  C:\Users\maxi_\Aptugo\BaseDev\templates\5ec1574d22999c4a5e8e0dc7\front-end\components\IconPicker\iconPicker.tsx
+keyPath: front-end\components\IconPicker\iconPicker.tsx
+unique_id: kOb5tKW7
 */
+
 import React, { useState } from 'react'
 import { useFontAwesomeIconPack } from './useFontAwesomeIconPack'
 import { IconButton, Popover, TextField, InputAdornment, Divider, Skeleton } from '@mui/material'
