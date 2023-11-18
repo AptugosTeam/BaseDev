@@ -60,7 +60,7 @@ children: []
 {% if element.values.primaryColor %}
 {% set bpr %}
   import {{ element.values.primaryColor }} from '@mui/material/colors/{{ element.values.primaryColor }}'
-  import colors_{{ element.values.primaryColor }} from '../components/Themes/colors_{{ element.values.primaryColor }}.module.scss'
+  import colors_{{ element.values.primaryColor }} from '@components/Themes/colors_{{ element.values.primaryColor }}.module.scss'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% endif %}

@@ -45,4 +45,4 @@ import { useFontAwesomeIconPack } from '@components/IconPicker/useFontAwesomeIco
 useFontAwesomeIconPack()
 {% endset %}
 {{ save_delayed('ph',ph) }}
-<FontAwesomeIcon icon={['fas', {{ element.values.icon|textOrVariableInCode}}]} color="#556ee6" />
+<FontAwesomeIcon icon={['fas', {{ element.values.icon|textOrVariableInCode}}]} />
