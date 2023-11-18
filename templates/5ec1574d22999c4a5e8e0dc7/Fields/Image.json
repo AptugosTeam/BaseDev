@@ -73,6 +73,10 @@ unique_id: sd4A39xT
         "display": "Universe Domain",
         "value": "gcloud_universeDomain",
         "type": "text"
+      }, {
+        "display": "Resize Width Before Upload (optional)",
+        "value": "resizeWidth",
+        "type": "text"
       }
     ]
   }
