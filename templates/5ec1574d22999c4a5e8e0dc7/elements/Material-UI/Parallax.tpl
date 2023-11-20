@@ -46,17 +46,23 @@ options:
     display: Blur Max
     type: text
     advanced: true
+  - name: parentSelector
+    display: Parent
+    type: text
+    advanced: true
 children: []
 */
 {% set bpr %}
 import { Parallax, Background } from 'react-parallax'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
+{% if not element.values.parentSelector %}
 {% set ph %}
   const mainApp = document.getElementById('app')
-    mainApp.style.height = "auto";
+  mainApp.style.height = "auto";
 {% endset %}
 {{ save_delayed('ph',ph) }}
+{% endif %}
 {% set path = element.values.path %}
 {% set height = element.values.height|default('auto') %}
 {% if element.values.bgImage and element.values.bgImage != 'none' %}
@@ -67,6 +73,7 @@ import { Parallax, Background } from 'react-parallax'
   {% set path = '/img/' ~ asset.name %}
 {% endif %}
 <Parallax
+  {% if element.values.parentSelector %}parent={ {{ element.values.parentSelector}} }{% endif %}
     blur={ { min: {{ element.values.blurmin|default(0)}} , max: {{ element.values.blurmax|default(0)}} } }
     bgImage={{ path|textOrVariable }}
     bgImageAlt='{{element.values.bgImageAlt}}'
