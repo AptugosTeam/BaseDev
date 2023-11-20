@@ -9,6 +9,7 @@ const errors = require('../services/errors.service')
 const axios = require('axios');
 const fs = require('fs')
 const path = require('path');
+const crypto = require('crypto')
 
 module.exports = {
   authenticate,
@@ -17,6 +18,7 @@ module.exports = {
   recoverPassword,
   checkNonce,
   socialAuthenticate,
+  dataEncryption
 }
 
 async function recoverPassword (req) {
@@ -226,5 +228,50 @@ function jwtVerify (token) {
     }
   } else {
     return { error: 'Unauthorized' }
+  }
+}
+
+/**
+ * Encrypts or decrypts data using AES-256-CBC algorithm.
+ *
+ * @param {string} data - The data to be encrypted or decrypted.
+ * @param {string} [type='encrypt'] - The operation type. Use 'encrypt' to encrypt data or 'decrypt' to decrypt.
+ * @param {string} [secret='my secret key'] - The secret key used for encryption or decryption.
+ * @returns {string} The encrypted or decrypted data.
+ * @throws {Error} If an invalid type is provided or an error occurs during encryption/decryption.
+ *
+ * @example
+ * // Encrypt data
+ * const encryptedData = dataEncryption('Hello, World!', 'encrypt', 'my secret key');
+ * console.log(encryptedData);
+ *
+ * // Decrypt data
+ * const decryptedData = dataEncryption(encryptedData, 'decrypt', 'my secret key');
+ * console.log(decryptedData);
+ */
+function dataEncryption (data, type = 'encrypt', secret = 'my secret key') {
+  try {
+    const algorithm = 'aes-256-cbc';
+    const key = crypto.scryptSync(secret, 'salt', 32);
+    const iv = Buffer.alloc(16, 0);
+    const cipher = crypto.createCipheriv(algorithm, key, iv);
+    const decipher = crypto.createDecipheriv(algorithm, key, iv);
+
+    if (type === 'encrypt') {
+      let encrypted = cipher.update(data, 'utf8', 'hex');
+      encrypted += cipher.final('hex');
+      return encrypted
+    }
+
+    if (type === 'decrypt') {
+      let decrypted = decipher.update(data, 'hex', 'utf8');
+      decrypted += decipher.final('utf8');
+      return decrypted
+    }
+
+    throw new Error('Invalid type. Use "encrypt" or "decrypt".');
+  } catch (error) {
+    console.error('Error in encrypDecrypt:', error);
+    throw error;
   }
 }
