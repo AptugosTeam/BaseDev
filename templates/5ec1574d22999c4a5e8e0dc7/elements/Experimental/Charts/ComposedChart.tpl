@@ -5,33 +5,37 @@ type: file
 unique_id: 5l4alkmn
 icon: f:ComposedChart.svg
 options:
-  - name: responsive
-    display: Responsive?
-    type: checkbox
-    options: ''
   - name: width
-    display: Width (in pixels)
+    display: Chart width (in pixels)
     type: text
     options: ''
-    settings:
-      propertyCondition: responsive
-      condition: true
-      conditionNegate: true
-      active: true
   - name: height
-    display: Height (in pixels)
+    display: Chart height (in pixels)
     type: text
     options: ''
-    settings:
-      propertyCondition: responsive
-      condition: true
-      conditionNegate: true
-      active: true
   - name: verticalAlign
     display: Legend
     type: dropdown
     options:
       top;middle;bottom
+  - name: responsive
+    display: Responsive?
+    type: checkbox
+    options: ''
+  - name: responsiveWidth
+    display: Container width (in pixels or percentage)
+    type: text
+    options: ''
+    settings:
+      propertyCondition: responsive
+      condition: true
+  - name: responsiveHeight
+    display: Container height (in pixels or percentage)
+    type: text
+    options: ''
+    settings:
+      propertyCondition: responsive
+      condition: true
   - name: onClickLegend
     display: onClick Legend
     type: function
@@ -87,12 +91,15 @@ import { Legend, Tooltip, Line, CartesianGrid, XAxis, YAxis, ComposedChart, Area
 {% endif %}
 {% endset %}
 {{ save_delayed('ph',ph)}}
-{% if element.values.responsive %}<ResponsiveContainer>{% endif %}
+{% if element.values.responsive %}
+<ResponsiveContainer 
+ {% if element.values.responsiveWidth %}width={ {{element.values.responsiveWidth}} }{% endif %} 
+  height={ {{element.values.responsiveHeight | default(300)}} }
+>
+{% endif %}
 <ComposedChart
-  {% if not element.values.responsive %}
-    {% if element.values.width %}width={ {{element.values.width}} }{% endif %} 
-    {% if element.values.height %}height={ {{element.values.height}} }{% endif %}
-  {% endif %}
+  {% if element.values.width %}width={ {{element.values.width}} }{% endif %} 
+  {% if element.values.height %}height={ {{element.values.height}} }{% endif %}
   data={ {{ element.values.Variable }} }>
   <XAxis dataKey="{% if indexBy.column_name %}{{ indexBy.column_name }}{% else %}{{ element.values.indexVariable }}{% endif %}" {% if element.values.hideX %}hide={true}{% endif %}/>
   <YAxis {% if element.values.hideY %}hide={true}{% endif %} />
