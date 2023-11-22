@@ -45,6 +45,14 @@ options:
     type: dropdown
     options: >-
       None;Add;Home;Link;Send;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
+  - name: buttonType
+    display: Button Type
+    type: dropdown
+    options:
+      return [['default', 'Default'],['reset', 'Reset'],['submit', 'Submit']]
+    settings:
+      default: default
+    advanced: true
   - name: extraCode
     display: Extra Code
     type: function
@@ -64,6 +72,7 @@ import Button from '@mui/material/Button'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <Button 
+  {% if element.values.buttonType != 'default' and element.values.buttonType != '' %}type='{{ element.values.buttonType }}'{% endif %}
   {% if element.values.Variant %}variant='{{ element.values.Variant }}'{% endif %}
   {% if element.values.Color %}color='{% if element.values.Color == 'default' %}inherit{% else %}{{ element.values.Color }}{% endif %}'{% endif %}
   {% if element.values.Action %}onClickCapture={ {{ element.values.Action | functionOrCall }} }{% endif %}
