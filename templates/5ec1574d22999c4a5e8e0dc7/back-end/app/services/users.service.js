@@ -257,6 +257,10 @@ function dataEncryption (data, type = 'encrypt', secret = 'my secret key') {
     const cipher = crypto.createCipheriv(algorithm, key, iv);
     const decipher = crypto.createDecipheriv(algorithm, key, iv);
 
+    if (!data) {
+      return data
+    }
+
     if (type === 'encrypt') {
       let encrypted = cipher.update(data, 'utf8', 'hex');
       encrypted += cipher.final('hex');
@@ -264,6 +268,10 @@ function dataEncryption (data, type = 'encrypt', secret = 'my secret key') {
     }
 
     if (type === 'decrypt') {
+      if (!/^[0-9a-fA-F]+$/.test(data)) {
+        console.warn('Input data is not a valid hex string. Returning original data.');
+        return data;
+      }
       let decrypted = decipher.update(data, 'hex', 'utf8');
       decrypted += decipher.final('utf8');
       return decrypted
