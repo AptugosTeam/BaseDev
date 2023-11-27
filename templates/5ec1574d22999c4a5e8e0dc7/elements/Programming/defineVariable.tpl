@@ -43,6 +43,10 @@ options:
   - name: serverSide
     display: Back-End Variable
     type: checkbox
+  - name: type
+    display: Type Definition
+    type: text
+    advanced: true
 settings:
   - name: ServerAddenum
     value: |-
@@ -52,4 +56,4 @@ settings:
 sourceType: javascript
 children: []
 */
-{% if not element.values.serverSide %}{% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }} = {{ element.values.variableValue|default(content | raw)}}{% endif %}
+{% if not element.values.serverSide %}{% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }}{% if element.values.type %}:{{ element.values.type }}{% endif %} = {{ element.values.variableValue|default(content | raw)}}{% endif %}

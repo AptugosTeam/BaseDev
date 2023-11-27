@@ -1,0 +1,169 @@
+/*
+path: draggabletree.module.scss
+keyPath: elements/Experimental/DraggableTree/draggabletree.module.scss
+unique_id: 3oKBrlK6
+*/
+.container {
+  padding: 0;
+}
+
+.listItem {
+  list-style-type: none;
+}
+
+// .dropTarget {
+// }
+
+.draggingSource {
+  background-color: aqua;
+}
+
+.placeholder {
+  background-color: bisque;
+}
+
+.node {
+  background-color: chartreuse;
+  display: inline-block;
+  padding: .5rem;
+  min-width: 20rem;
+  margin-top: .5rem;
+  margin-left: .5rem;
+}
+
+.switcher {
+  background-color: blueviolet;
+  margin-right: .3rem;
+}
+
+.nodeRoot {
+  align-items: center;
+  display: inline-flex;
+
+  &:global(.errored) {
+    & :global(.label) {
+      background-color: rgb(248, 200, 200);
+    }
+  }
+
+  & :global(.nodeType) {
+    background-color: brown;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &:global(.Formula) {
+    & :global(.label) {
+      background-color: #f3fdf3;
+      & :global(.nodeType) {
+        background-image: url(/img/icon-formula-green.png);
+        width: 1rem;
+        height: 1rem;
+        background-size: .9rem;
+        background-repeat: no-repeat;  
+      }
+    }
+  }
+
+  &:global(.Value) {
+    & :global(.nodeType) {
+      background-color: blue;
+      width: .5rem;
+      height: .5rem;
+      border-radius: 2.5rem;
+    }
+  }
+
+  &:global(.Selector) {
+    & :global(.nodeType) {
+      background-image: url('/img/selector.png');
+      background-color: unset;
+      width: 1rem;
+      height: 1rem;
+      background-size: 1rem;
+    }
+  }
+
+  &:global(.Constant) {
+    & :global(.nodeType) {
+      background-color: rgb(0, 255, 106);
+      width: .5rem;
+      height: .5rem;
+      border-radius: 2.5rem;
+    }
+  }
+
+  & :global(.undefined) {
+    & :global(.nodeType) {
+      background-color: red;
+      width: .5rem;
+      height: .5rem;
+      border-radius: 2.5rem;
+    }
+  }
+
+  & .inputWrapper {
+    display: inline-flex;
+  }
+
+  .container {
+    padding-inline-start: 8px;
+    position: relative;
+    margin-right: auto;
+  }
+  
+  .arrow {
+    cursor: pointer;
+    display: flex;
+    left: -16px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform linear 120ms;
+    &.open {
+      transform: rotateZ(90deg) translateY(0%) translateX(-50%);
+    }
+  }
+
+  & .label {
+    background-color: white;
+    padding: 0.5rem;
+    margin: 0.2rem;
+    box-shadow: 0px 1px 2px 1px #174e68;
+    border-radius: 3px;
+    min-width: 15rem;
+    justify-content: space-between;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  & .actionButtons {
+    position: absolute;
+    right: -2rem;
+    top: -.5rem;
+    display: flex;
+    background-color: #FFF;
+    padding: 0.1rem;
+    margin: 0.2rem;
+    box-shadow: 0px 1px 2px 1px #174e68;
+    border-radius: 3px;
+    & .actionButton {
+      margin: 0;
+    }
+  }
+}
+
+.placeholderContainer {
+  position: relative;
+}
+
+.placeholder {
+  background-color: #1967d2;
+  height: 2px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateY(-50%);
+}

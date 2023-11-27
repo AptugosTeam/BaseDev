@@ -40,10 +40,15 @@ options:
   - name: renderInPlace
     display: Render In Place
     type: checkbox
+    advanced: true
+  - name: type
+    display: Type Definition
+    type: text
+    advanced: true
 children: []
 */
 {% set ph %}
-const [{{ element.values.variableName }}, set{{ element.values.variableName }}] = React.useState<any>({{ element.values.defaultValue }})
+const [{{ element.values.variableName }}, set{{ element.values.variableName }}] = React.useState<{{ element.values.type|default('any') }}>({{ element.values.defaultValue }})
 {% endset %}
 {% if element.values.renderInPlace %}
   {{ ph }}
