@@ -85,7 +85,7 @@ const AptugoTable: FunctionComponent<tableProps> = (props) => {
       })
 
       const newChild = React.cloneElement(child, newProps)
-      return <TableCell className={'tableCell'} key={`child${index}`}>{newChild}</TableCell>
+      return <TableCell className={'tableCell'} key={`child${index}`} data-label={props.tableHead[index]}>{newChild}</TableCell>
     })
   }
 
