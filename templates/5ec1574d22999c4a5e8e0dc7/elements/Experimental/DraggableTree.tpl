@@ -20,6 +20,10 @@ options:
     display: On Change Node Type
     type: function
     advanced: true
+  - name: ClassName
+    display: ClassName
+    type: styles
+    options: ''
 settings:
   - name: Packages
     value: '"react-dnd": "16.0.1","@minoru/react-dnd-treeview": "3.4.4",'
@@ -39,6 +43,8 @@ import DraggableTree from '@components/DraggableTree'
 {{ save_delayed('bpr',bpr)}}
 <DraggableTree
   {% if element.values.tree %}tree={ {{ element.values.tree }} }{% endif %}
+  
+  {% if element.values.ClassName %}className={ {{ element.values.ClassName }} } {% endif %}  
   {% if element.values.onSave %}onSave={ {{ element.values.onSave }} }{% endif %}
   {% if element.values.onSave %}onUpdate={ {{ element.values.onUpdate }} }{% endif %}
   {% if element.values.onSave %}onDelete={ {{ element.values.onDelete }} }{% endif %}
