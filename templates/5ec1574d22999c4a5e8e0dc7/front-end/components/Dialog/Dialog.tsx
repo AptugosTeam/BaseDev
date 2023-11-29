@@ -39,10 +39,11 @@ interface addDialogProps {
   hideButton?: boolean
   children?: ReactElement<any, any>[]
   className?: any
+  cancelButtonText?: any
 }
 
 const AddDialog: FunctionComponent<addDialogProps> = (props) => {
-  const { isOpen, onOpen, onSave, onClose, action, saveDataHandler, color, data, initialData, setData, allowMultipleSubmit, hideButton } = props
+  const { isOpen, onOpen, onSave, onClose, action, saveDataHandler, color, data, initialData, setData, allowMultipleSubmit, hideButton, cancelButtonText } = props
   const [options, setOptions] = useState({ title: '', text: '', button: ''})
   const [switchState, setSwitchState] = useState({ addMultiple: false })
 
@@ -110,7 +111,7 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
             </Tooltip>
           )}
           <Button onClick={handleClose} color="primary">
-            Cancel
+            {cancelButtonText || 'Cancel'}
           </Button>
           <Button onClick={handleSubmit} color="primary">
             {options.button}

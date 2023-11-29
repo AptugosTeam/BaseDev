@@ -71,6 +71,10 @@ options:
     display: Delete - Button Text
     type: text
     options: ''
+  - name: cancelButton
+    display: Cancel - Button Text
+    type: text
+    options: ''
 children: []
 */
 {% set table = element.values.table | tableData %}
@@ -141,6 +145,7 @@ import AddDialog from '../components/Dialog/Dialog'
   initialData={initialData{{ table.name | friendly }}}
   setData={set{{ table.name | friendly }}data}
   allowMultipleSubmit={ {{ dialogVariable }} === 'add'}
+  cancelButtonText='{{ element.values.cancelButton | default("Cancel") }}'
 >
 {% for field in fields %}
  {% set subvalues = { element: { values: { Field: field.unique_id, Type: 'edit' } }  } %}
