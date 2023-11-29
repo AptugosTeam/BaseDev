@@ -194,7 +194,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
               {row.getVisibleCells().map((cell, cellIndex) => {
                 const toRender = flexRender(cell.column.columnDef.cell, cell.getContext())
                 return (
-                  <td key={cell.id} style={ { width: cell.column.getSize() }}>
+                  <td key={cell.id} style={ { width: cell.column.getSize() }} data-label={(tableOptions.columns.map(label =>  label.header))[cellIndex]}>
                     {toRender}
                   </td>
                 )
