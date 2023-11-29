@@ -33,6 +33,10 @@ options:
     type: dropdown
     options: >-
       return [['default','Use default name'], ...aptugo.variables.variables.filter(v => v.type === 'Function').map(v => [v.name, v.name])]
+  - name: elementsLimit
+    display: Limit of Elements
+    type: text
+    options: ''
 */
 {% set updateFunctionName = element.values.updateFunctionName|default('settableloadoptions') %}
 {% if updateFunctionName == 'default' %}{% set updateFunctionName = 'settableloadoptions' %}{% endif %}
@@ -66,7 +70,7 @@ const searchFor{{ table.name | friendly }} = (event, field = null) => {
 {% endset %}
 {{ save_delayed('ph',ph)}}
 {% if not element.values.avoidLoad %}
-  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
+  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element, 'limit': element.values.elementsLimit } %}
 {% endif %}
 {% if element.values.searchField %}
   {% set searchFieldParams = {

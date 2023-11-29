@@ -95,6 +95,10 @@ options:
   - name: fixedSearchString
     display: Search this string always
     type: text
+  - name: elementsLimit
+    display: Limit of Elements
+    type: text
+    options: ''
   - name: defaultPage
     display: Default Page
     type: text
@@ -106,6 +110,10 @@ options:
     display: Sort Method
     type: dropdown
     options: desc;asc
+  - name: actionsLabel
+    display: Actions Label
+    type: text
+    options: ''
 children: []
 */
 {% set editProc = element.values.editProcedure|default('No') %}
@@ -135,7 +143,7 @@ children: []
   {% set innervarname = element.name | friendly %}
   {% set eleWithoutChilds = element %}
   {% set eleWithoutChilds = eleWithoutChilds|merge({'children': null}) %}
-  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage, 'sortColumn':element.values.sortColumn, sortMethod: element.values.sortMethod, 'fixedSearchField': element.values.fixedSearchField, 'fixedSearchString': element.values.fixedSearchString } %}
+  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage, 'sortColumn':element.values.sortColumn, sortMethod: element.values.sortMethod, 'fixedSearchField': element.values.fixedSearchField, 'fixedSearchString': element.values.fixedSearchString, 'limit': element.values.elementsLimit } %}
   {% if element.children %}
       {% for field in element.children %}
         {% if field.values.Field == 'useVar' %}
@@ -171,7 +179,7 @@ children: []
       {% if element.values.headerVariable %}
         {{element.values.headerVariable}}
       {% else %}
-        [{% for field in tableFields %}"{{ field }}",{% endfor %}{% if editProc != 'No' or allowEdit or allowDeletion %}"Actions"{% endif %}]
+        [{% for field in tableFields %}"{{ field }}",{% endfor %}{% if editProc != 'No' or allowEdit or allowDeletion %}'{{ element.values.actionsLabel | default("Actions") }}'{% endif %}]
       {% endif %}
     }
     tableData={ {{ tableData }} }
