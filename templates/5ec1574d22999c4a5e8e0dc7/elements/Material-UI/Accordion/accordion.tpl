@@ -25,6 +25,12 @@ options:
   - name: color
     display: Color
     type: text
+  - name: onChange
+    display: on Change
+    type: text
+  - name: expanded
+    display: Open/Close Variable
+    type: text
 childs:
   - name:  accordionSummary
     element: accordionSummary
@@ -35,7 +41,8 @@ childs:
 import Accordion from '@mui/material/Accordion'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<Accordion sx={ {
+<Accordion {% if element.values.expanded %} expanded={ {{ element.values.expanded }} } {% endif %} {% if element.values.onChange %} onChange={ {{ element.values.onChange }} }{% endif %} sx={ {
+  
   {% if element.values.width %}
     width:'{{ element.values.width|default('100%') }}',
   {% endif %} 
