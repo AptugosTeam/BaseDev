@@ -147,7 +147,7 @@ const getBillInfo = async (options) => {
 * @returns {Object} - Bill information.
 * @throws {Error} - If the voucher creation or bill information retrieval fails.
 */
-const createVoucher = (options = {}) => {
+const createVoucher = async (options = {}) => {
   try {
     const data = options.req ? options.req.body : options.data
     const {
