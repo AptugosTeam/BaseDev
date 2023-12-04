@@ -186,7 +186,8 @@ const createVoucher = async (options = {}) => {
       untaxedAmount,
       taxedAmount,
       ivaFreeAmount,
-      ivaAmount
+      ivaAmount,
+      date
     })
     /**
      * Obligatorios para los conceptos 2 y 3
@@ -246,7 +247,8 @@ const prepareBillData = ({
   untaxedAmount,
   taxedAmount,
   ivaFreeAmount,
-  ivaAmount
+  ivaAmount,
+  date
 }) => {
   return {
     CantReg: 1, // Cantidad de facturas/comprobantes a registrar
