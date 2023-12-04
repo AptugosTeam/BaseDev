@@ -3,7 +3,7 @@ path: 999_afip.js
 completePath: >-
   /Users/robrondon/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/elements/Experimental/Afip/999_afip.js
 keyPath: elements/Experimental/Afip/999_afip.js
-unique_id: w2mTGPez
+unique_id: GE1XabDo
 */
 const Afip = require('@afipsdk/afip.js');
 const errors = require('../services/errors.service')
@@ -40,9 +40,6 @@ const getServerStatus = async () => {
   }
 };
 
-/*
-  * No esta funcionando.. se abrio issue en github
-  */
 
 /**
  * Retrieve the list of sales points from AFIP Electronic Billing.
@@ -141,12 +138,7 @@ const getBillInfo = async (options) => {
     9 = 2.5%
   */
 
-/**
-* Create a new voucher and return the corresponding bill information.
-* @param {Object} options - Options object containing request data or other relevant information.
-* @returns {Object} - Bill information.
-* @throws {Error} - If the voucher creation or bill information retrieval fails.
-*/
+
 const createVoucher = async (options = {}) => {
   try {
     const data = options.req ? options.req.body : options.data
