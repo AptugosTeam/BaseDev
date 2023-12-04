@@ -45,6 +45,7 @@ import { SymbolLayer } from '@rnmapbox/maps'
   {% if element.values.filter %}filter={ {{ element.values.filter}} }{% endif %}
   {% if element.values.style %}style={ {{ element.values.style }} }{% endif %}
   {% if element.values.iconImage %}style={ {
+    {% if element.values.iconAllowOverlap %} iconAllowOverlap: true {% endif %},
     {% if element.values.iconImage %}iconImage: {{ element.values.iconImage | textOrVariableInCode }}{% endif %},
     {% if element.values.iconSize %}iconSize: {{ element.values.iconSize | textOrVariableInCode }}{% endif %},
   } }{% endif %}
