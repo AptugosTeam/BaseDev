@@ -66,6 +66,13 @@ options:
     options: >-
       return [['No','None'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) =>
       [unique_id, name])]
+  - name: icon
+    display: Icon
+    type: dropdown
+    options: >-
+      More;MoreVert
+    settings: 
+      default: More
   - name: searchString
     display: Search String
     type: text
@@ -163,7 +170,7 @@ children: []
   import EditIcon from '@mui/icons-material/Edit'
   import DeleteIcon from '@mui/icons-material/Delete'
   import IconButton from '@mui/material/IconButton'
-  import MoreIcon from '@mui/icons-material/More'
+  import {{ element.values.icon | default('More') }}Icon from '@mui/icons-material/{{ element.values.icon | default('More') }}'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <Table    
@@ -201,13 +208,13 @@ children: []
     {% if element.values.detailsURL and element.values.detailsURL != 'No' %}
     <IconButton
       aria-label="edit"
-      color="primary"
+      color="inherit"
       onClickCapture={(e: any) => { 
         const url = '{{ (element.values.detailsURL | elementData ).path }}'.replace(':id', e.element._id)
         props.history.push(url)
-      }}
+      } }
     >
-      <MoreIcon fontSize="small" />
+      <{{element.values.icon | default('More')}}Icon fontSize="small" />
     </IconButton>
     {% endif %}
     {% if allowEdit %}
@@ -222,7 +229,7 @@ children: []
           const url = '{{ (editProc | elementData ).path }}'.replace(':id', e.element._id)
           props.history.push(url)
         {% endif %}
-      }}
+      } }
     >
       <EditIcon fontSize="small" />
     </IconButton>
