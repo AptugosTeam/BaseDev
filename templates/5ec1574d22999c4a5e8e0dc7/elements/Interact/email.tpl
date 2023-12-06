@@ -128,7 +128,7 @@ settings:
           const email = req.body.email
           const message = req.body.messageHtml
           const subject = req.body.subject
-          const result = await res.json(app.get('sendEmail')({ name, email, message, subject }, req.body.extra))
+          const result = await app.get('sendEmail')({ name, email, message, subject }, req.body.extra)
           res.json(result)
         } catch (error) {
           console.error(error);
