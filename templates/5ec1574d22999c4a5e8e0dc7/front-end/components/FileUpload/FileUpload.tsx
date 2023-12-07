@@ -135,9 +135,13 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
 
             const resizedURL = canvas.toDataURL(file.type);
 
+            const resizedFile = new File([resizedURL], file.name, {
+              type: file.type,
+            });
+
             setState({
               ...state,
-              file: file,
+              file: resizedFile,
               fileName: file.name,
               uploading: false,
               selectedFile: [resizedURL],
