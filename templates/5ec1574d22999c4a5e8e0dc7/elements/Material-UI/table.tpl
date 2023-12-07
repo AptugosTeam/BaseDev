@@ -35,8 +35,23 @@ options:
     type: text
     options: ''
     settings:
-      condition: var
+      condition: useVar
+      propertyCondition: table    
+  - name: header
+    display: Use header variable
+    type: checkbox
+    settings:
       propertyCondition: table
+      conditionNegate: true
+      active: true   
+      condition: useVar
+  - name: headerVariable
+    display: Variable to use in Header
+    type: text
+    options: ''
+    settings:
+      condition: true
+      propertyCondition: header
   - name: editProcedure
     display: Edit Procedure
     type: dropdown
