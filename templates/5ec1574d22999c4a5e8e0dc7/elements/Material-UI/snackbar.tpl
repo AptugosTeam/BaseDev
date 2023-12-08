@@ -22,6 +22,10 @@ options:
     settings:
       default: snackBarOpen
       active: true
+  - name: className
+    display: className
+    type: styles 
+    options: ''   
 children: []
 */
 {% set bpr %}
@@ -39,4 +43,5 @@ const [{{ element.values.varName }}, set{{ element.values.varName }}] = React.us
   {% if element.values.autohide %}autoHideDuration={ {{ element.values.autohide }} }{% endif %}
   onClose={() => { set{{ element.values.varName }}(false) } }
   anchorOrigin={ { vertical: '{{splited[0]|lower}}', horizontal: '{{splited[1]|lower}}' } }
+  {% if element.values.className %} className={ {{ element.values.className }} } {% endif %}
 >{{ content | raw }}</Snackbar>
