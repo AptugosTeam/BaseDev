@@ -41,6 +41,9 @@ options:
     display: fieldname
     type: text
     options: ''
+  - name: readOnly
+    display: Read Only?
+    type: checkbox
   - name: fullWidth
     display: Use full width?
     type: checkbox
@@ -106,6 +109,9 @@ options:
 children: []
 */
 {% if element.values.fullWidth %}{% set fullWidth = true %}{% endif %}
+{% if element.values.readOnly %}
+  {% set readOnly = true %}
+{% endif %}
 {% set bpr %}
 import TextField from '@mui/material/TextField'
 {% endset %}
@@ -122,6 +128,11 @@ import TextField from '@mui/material/TextField'
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
+    {% if readOnly %}
+      inputProps={ {
+        readOnly: true,
+      } }
+    {% endif %}
     {% if element.values.type == 'number' %}
       {% if element.values.minNum or element.values.maxNum %}
         inputProps={ {
