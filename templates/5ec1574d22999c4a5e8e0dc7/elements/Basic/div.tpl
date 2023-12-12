@@ -44,15 +44,19 @@ options:
     display: Title Property
     type: text
     advanced: true
+  - name: valor
+    display: Valor Property
+    type: text
+    advanced: true
 children: []
 helpText: Basic HTML Div element
 */
 {% set tag = element.values.tag|default('div') %}
 <{{tag}}
   {% if type == 'DevelopmentDebug' %}data-aptugo="{{ element.unique_id }}"{% endif %}
-  {% if element.values.title %}
+  {% if element.values.title and element.values.valor %}
     title={{ element.values.title | textOrVariable }}
-    data-title={{ element.values.title | textOrVariable }}
+    data-{{ element.values.title | textOrVariable }}={{ element.values.valor | textOrVariable }}
   {% else %}
     title="{{ element.name }}"
     data-title="{{ element.name }}"
