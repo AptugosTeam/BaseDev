@@ -44,22 +44,41 @@ options:
     display: Title Property
     type: text
     advanced: true
-  - name: valor
-    display: Valor Property
+  - name: dataAttribute
+    display: Add Data Attribute
+    type: checkbox
+    settings:
+      default: false
+    advanced: true
+  - name: nameAttribute
+    display: Name of Data Attribute
     type: text
     advanced: true
+    settings:
+      condition: true
+      propertyCondition: dataAttribute
+  - name: valueAttribute
+    display: Value of Data Attribute
+    type: text
+    advanced: true
+    settings:
+      condition: true
+      propertyCondition: dataAttribute
 children: []
 helpText: Basic HTML Div element
 */
 {% set tag = element.values.tag|default('div') %}
 <{{tag}}
   {% if type == 'DevelopmentDebug' %}data-aptugo="{{ element.unique_id }}"{% endif %}
-  {% if element.values.title and element.values.valor %}
+  {% if element.values.title %}
     title={{ element.values.title | textOrVariable }}
-    data-{{ element.values.title | textOrVariable }}={{ element.values.valor | textOrVariable }}
+    data-title={{ element.values.title | textOrVariable }}
   {% else %}
     title="{{ element.name }}"
     data-title="{{ element.name }}"
+  {% endif %}
+  {% if element.values.dataAttribute and element.values.nameAttribute and element.values.valueAttribute %}
+    data-{{ element.values.nameAttribute }}={ {{ element.values.valueAttribute }} }
   {% endif %}
   {% if element.values.useid %}
     id="{{ element.unique_id }}"
