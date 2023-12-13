@@ -32,7 +32,7 @@ import { NumericFormat } from 'react-number-format'
 {% endset %}
 {{ save_delayed('ph',ph) }}
 <NumericFormat 
-    value= { {{ tableName }}data.{{ field.column_name | friendly }} || '' }
+    value= { {{ tableName }}data.{{ field.column_name | friendly }} || 0 }
     label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     fullWidth
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
@@ -47,7 +47,7 @@ import { NumericFormat } from 'react-number-format'
     {% endif %}
     customInput={TextField}
     onValueChange={(values, sourceInfo) => {
-      handle{{ tableName }}Change("{{ field.column_name | friendly }}")(values.floatValue)
+      handle{{ tableName }}Change("{{ field.column_name | friendly }}")(values.floatValue || 0)
     }}
     {...{{ field.column_name | friendly }}TextFieldProps}
 />
