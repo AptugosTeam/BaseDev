@@ -5,7 +5,8 @@ unique_id: UgJmibXm
 icon: ico-field
 children: []
 */
-import { Icon } from '@iconify/react'
+import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
+import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import Button from '@mui/material/Button'
 import React, { FunctionComponent } from 'react'
 import classes from './pagination.module.scss'
@@ -29,7 +30,7 @@ const Pagination: FunctionComponent<paginationProps> = (props) => {
             props.setPage(props.currentPage - 1)
           }}
         >
-          <Icon icon="material-symbols:chevron-left-rounded" />
+          <ChevronLeftRoundedIcon />
         </Button>
       )}
       <div className={classes.pagination}>
@@ -60,7 +61,7 @@ const Pagination: FunctionComponent<paginationProps> = (props) => {
             props.setPage(props.currentPage + 1)
           }}
         >
-          <Icon icon="material-symbols:chevron-right-rounded" />
+          <ChevronRightRoundedIcon />
         </Button>
       )}
     </div>
