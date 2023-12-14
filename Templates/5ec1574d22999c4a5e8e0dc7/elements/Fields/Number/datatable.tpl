@@ -9,6 +9,9 @@ unique_id: Uf65zU5B
   return cell.getValue() ? <NumericFormat 
     value= { cell.getValue() }
     displayType="text"
+    {% if field.decimalScale %}
+      decimalScale={ {{ field.decimalScale }} }
+    {% endif %}
     {% if field.formatNumber == "dotComma" %}
         thousandSeparator="."
         decimalSeparator=","

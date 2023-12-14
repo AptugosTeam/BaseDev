@@ -36,6 +36,9 @@ import { NumericFormat } from 'react-number-format'
     label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     fullWidth
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
+    {% if field.decimalScale %}
+      decimalScale={ {{ field.decimalScale }} }
+    {% endif %}
     {% if field.formatNumber == "dotComma" %}
         thousandSeparator="."
         decimalSeparator=","

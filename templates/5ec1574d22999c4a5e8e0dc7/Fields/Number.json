@@ -33,6 +33,11 @@ unique_id: 5wQBTRfF
             "value": "commaDot"
           }
         ]
+      },
+      {
+        "display": "Decimal scale",
+        "value": "decimalScale",
+        "type": "text"
       }
     ],
     "validations": [
