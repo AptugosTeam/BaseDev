@@ -72,6 +72,17 @@ options:
     display: Should use an exact match?
     type: checkbox
     options: ''
+  - name: customEffect
+    display: Customize actions on search?
+    type: checkbox
+    options: ''
+  - name: effectOnSearch
+    display: Custom actions on search
+    type: function
+    options: ''
+    settings:
+      condition: true
+      propertyCondition: customEffect
   - name: fieldToSearch
     display: Field To Search
     type: text
@@ -180,6 +191,9 @@ const perform{{ innervarname }}load = (options) => {
 {{ save_delayed('ph',ph)}}
 {% set ph %}
 React.useEffect(() => {
+{% if element.values.searchString and element.values.customEffect and element.values.effectOnSearch %}
+  {{ element.values.effectOnSearch | raw }}
+{% else %}
   perform{{ innervarname }}load({
     ...{{ innervarname }}loadoptions
     {% if element.values.fixedSearchField %}, fixedSearch: { field: {{ element.values.fixedSearchField}}, value: {{ element.values.fixedSearchString }} }{% endif %}
@@ -187,6 +201,7 @@ React.useEffect(() => {
     {% if element.values.searchString %}, searchString: {{ element.values.searchString }}{% endif %}
     {% if element.values.useExactMatch %}, exactMatch: {{ element.values.useExactMatch }}{% endif %}
   })
+{% endif %}
 },[{{ innervarname }}loadoptions{% if element.values.searchString %}, {{ element.values.searchString }}{% endif %}])
 {% endset %}
 {{ save_delayed('ph',ph)}}
