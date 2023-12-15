@@ -71,9 +71,18 @@ options:
     display: Delete - Button Text
     type: text
     options: ''
+  - name: customOnOpen
+    display: Custom Open Handler
+    type: text
+    settings:
+      condition: Custom
+      propertyCondition: addProcedure
   - name: customSaveHandler
     display: Custom Save Handler
     type: code
+    settings:
+      condition: Custom
+      propertyCondition: addProcedure
 children: []
 */
 {% set table = element.values.table | tableData %}
@@ -120,7 +129,7 @@ import AddDialog from '../components/Dialog/Dialog'
   {% if element.values.classname %}className={ {{ element.values.classname }} }{% endif %}
   {% if element.values.hideButton %}hideButton={true}{% endif %}
   isOpen={ {{ dialogVariable }} !== ''}
-  onOpen={() => {% if element.values.addProcedure != 'No' %}{% if element.values.addProcedure == 'Internal' %}set{{ dialogVariable }}('add'){% else %}props.history.push('{{ (element.values.addProcedure | elementData ).path | withoutVars }}'){% endif %}{% else %}{}{%endif%}}
+  onOpen={() => {% if element.values.addProcedure != 'No' %}{% if element.values.addProcedure == 'Internal' %}set{{ dialogVariable }}('add'){% elseif element.values.addProcedure == 'Custom' %}set{{ dialogVariable }}('{{element.values.customOnOpen}}'){% else %}props.history.push('{{ (element.values.addProcedure | elementData ).path | withoutVars }}'){% endif %}{% else %}{}{%endif%}}
   {% if not element.values.manuallyManaged %}
     onSave={() => set{{ dialogVariable }}('')}
   {% endif %}
