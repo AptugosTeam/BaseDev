@@ -7,6 +7,7 @@ unique_id: 1zJ50rgp
 .prevnext {
   display: flex;
   align-items: center;
+  justify-content: center;
 
   button {
     min-width: 1rem;
@@ -18,6 +19,14 @@ unique_id: 1zJ50rgp
 
     svg {
       font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .pagination {
+      button {
+        display: none;
+      }
     }
   }
 
@@ -38,6 +47,7 @@ unique_id: 1zJ50rgp
         box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
       }
     }
+
     .activePage {
       border-radius: 0.3125rem;
       border: 1px solid rgba(0, 0, 0, 0.356);
