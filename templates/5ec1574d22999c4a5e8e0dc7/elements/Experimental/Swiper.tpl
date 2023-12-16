@@ -70,12 +70,12 @@ options:
     advanced: true
 settings:
   - name: Packages
-    value: '"swiper": "^8.0.0",'
+    value: '"swiper": "^10.0.0",'
 children: []
 */
 {% set bpr %}
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination as SwiperPagination, Navigation, Autoplay } from "swiper";
+import { Pagination as SwiperPagination, Navigation, Autoplay } from "swiper/modules";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "swiper/css/bundle";

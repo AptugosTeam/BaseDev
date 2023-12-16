@@ -15,11 +15,7 @@ options:
     type: text 
     options: ''
 children: []
-*/
-{% set bpr %}
-import { SwiperSlide } from "swiper/react";
-{% endset %}
-{{ save_delayed('bpr', bpr) }}    
+*/  
   <SwiperSlide key={ '{{ element.unique_id }}_' {% if element.values.keyAdd %} + {{ element.values.keyAdd }}{% endif %} }
     {% if element.values.ClassName %}
       className={ {{ element.values.ClassName }} } 
