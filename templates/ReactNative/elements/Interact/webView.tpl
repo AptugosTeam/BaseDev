@@ -1,10 +1,10 @@
 /*
-path: youtubeVideo.tpl
-keyPath: elements/Interact/youtubeVideo.tpl
-unique_id: mDZain0m
+path: webView.tpl
+keyPath: elements/Interact/webView.tpl
+unique_id: mDZain0p
 options:
-  - name: videoID
-    display: YouTube Video ID
+  - name: uri
+    display: URI
     type: text
     options: ''
   - name: className
@@ -19,9 +19,8 @@ settings:
 import WebView from 'react-native-webview'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-{% set uri = "https://www.youtube.com/embed/" ~ element.values.videoID ~ "?rel=0&autoplay=0&showinfo=0&controls=0" %}
 <WebView
   {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
-  source={ { uri: `{{ uri }}` } }
+  source={ { uri: `{{ element.values.uri }}` } }
   javaScriptEnabled={true}
 />
