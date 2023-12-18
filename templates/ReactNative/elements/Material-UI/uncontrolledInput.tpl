@@ -64,6 +64,15 @@ options:
   - name: placeholderTextColor
     display: PlaceHolder Text Color
     type: text
+  - name: onFocus
+    display: On Focus
+    type: function
+    options: ''
+  - name: labelWithVar
+    display: Label With Variables
+    type: text
+    options: ''
+    advanced: true
 children: []
 */
 {% if element.values.type == 'date' %}
@@ -82,6 +91,7 @@ children: []
     {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
     {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
     {% if element.values.activeUnderlineColor %}activeUnderlineColor={ {{ element.values.activeUnderlineColor | textOrVariable }}}{% endif %}
+    {% if element.values.labelWithVar %}label={ {{element.values.labelWithVar}} }{% endif %}
     inputMode="start"
   />
 {% else %}
@@ -97,6 +107,8 @@ children: []
       {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
       {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
       {% if element.values.theme %}theme={ {{ element.values.theme }} }{% endif %}
+      {% if element.values.labelWithVar %}label={ {{element.values.labelWithVar}} }{% endif %}
+      {% if element.values.onFocus %}onFocus={() => {{element.values.onFocus}} }{% endif %}
       {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
       {% if element.values.type == 'number' %}keyboardType='numeric'{% endif %}
       {% if element.values.type == 'password' %}secureTextEntry={true}{% endif %}
