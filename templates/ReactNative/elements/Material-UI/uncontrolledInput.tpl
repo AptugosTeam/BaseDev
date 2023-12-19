@@ -73,6 +73,10 @@ options:
     type: text
     options: ''
     advanced: true
+  - name: error
+    display: Error
+    type: variable
+    options: ''
 children: []
 */
 {% if element.values.type == 'date' %}
@@ -109,6 +113,7 @@ children: []
       {% if element.values.theme %}theme={ {{ element.values.theme }} }{% endif %}
       {% if element.values.labelWithVar %}label={ {{element.values.labelWithVar}} }{% endif %}
       {% if element.values.onFocus %}onFocus={() => {{element.values.onFocus}} }{% endif %}
+      {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
       {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
       {% if element.values.type == 'number' %}keyboardType='numeric'{% endif %}
       {% if element.values.type == 'password' %}secureTextEntry={true}{% endif %}
