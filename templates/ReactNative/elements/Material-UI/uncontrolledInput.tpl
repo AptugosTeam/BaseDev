@@ -88,7 +88,7 @@ options:
     settings: 
       propertyCondition: useHelperText
       condition: true
-  - name: HelperText
+  - name: helperText
     display: Helper Text
     type: text
     options: ''
@@ -161,13 +161,19 @@ children: []
       {% if element.values.leftIcon and element.values.leftIcon != 'none' %}left={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} icon='{{element.values.leftIcon}}' />}{% endif %}
       {% if element.values.rightIcon and element.values.rightIcon != 'none' %}right={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} icon='{{element.values.rightIcon}}' />}{% endif %}
   />
-      {% if element.values.visible %}
+    {% if useHelperText %}
         <HelperText
-          type="error"
-          visible={ {{element.values.visible}} }
+          {% if element.values.messageType %}
+            type="{{element.values.messageType}}"
+          {% endif %}
+          {% if element.values.visible %}
+            visible={ {{element.values.visible}} }
+          {% endif %}
           {% if element.values.helperStyle %}style={ {{element.values.helperStyle}} } {% endif %}
         >
-          {{element.values.HelperText}}
+          {% if element.values.helperText %}
+            {{ element.values.helperText | default("Help!!!!") }}
+          {% endif %}
         </HelperText>
       {% endif %}
 {% endif %}
