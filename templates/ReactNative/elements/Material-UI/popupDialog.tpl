@@ -31,7 +31,7 @@ childs:
 children: []
 */
 {% set bpr %}
-import { Modal } from 'react-native'
+import { Modal, TouchableOpacity } from 'react-native'
 import { Portal } from 'react-native-paper'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
