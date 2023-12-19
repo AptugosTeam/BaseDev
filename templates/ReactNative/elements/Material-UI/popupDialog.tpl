@@ -40,8 +40,8 @@ import { Portal } from 'react-native-paper'
     animationType="fade"
     transparent={true}
     visible={ {{ element.values.visible }} }
-    onDismiss={ {{ element.values.onclose | functionOrCall }} }
-    onRequestClose={ {{ element.values.onclose | functionOrCall }} }
+    onDismiss={() => {{ element.values.onclose }} }
+    onRequestClose={() => {{ element.values.onclose }} }
   >
     <TouchableOpacity
       style={ {{ element.values.dimClass }}}
