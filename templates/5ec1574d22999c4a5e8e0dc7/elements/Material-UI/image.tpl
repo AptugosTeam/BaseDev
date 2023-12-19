@@ -51,6 +51,10 @@ options:
     display: Use as Background
     type: checkbox
     options: ''
+  - name: draggable
+    display: Disable image drag
+    type: checkbox
+    options: ''
 */
 {% set tag = 'picture' %}
 {% if element.values.background %}{%set tag = 'div' %}{% endif %}
@@ -84,9 +88,21 @@ options:
   <img
     src={{ path|textOrVariable }}
     alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
-    {% if width %}width={{ width|textOrVariable }}{% endif %}
-    {% if height %}height={{ height|textOrVariable }}{% endif %}
-    {% if element.values.onError %}onError={ {{element.values.onError}} }{% endif %}
+    {% if width %}
+      width={{ width|textOrVariable }}
+    {% endif %}
+    {% if height %}
+      height={{ height|textOrVariable }}
+    {% endif %}
+    {% if element.values.onError %}
+      onError={ {{element.values.onError}} }
+    {% endif %}
+    {% if element.values.onError %}
+      onError={ {{element.values.onError}} }
+    {% endif %}
+    {% if element.values.draggable %}
+      draggable={false}
+    {% endif %}
   />
   {{ content | raw }}
 </{{ tag }}>
