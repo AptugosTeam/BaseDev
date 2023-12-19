@@ -77,8 +77,39 @@ options:
     display: Error
     type: variable
     options: ''
+  - name: useHelperText
+    display: Use Helper Text?
+    type: checkbox
+    options: ''
+  - name: visible
+    display: Visible
+    type: text
+    options: ''
+    settings: 
+      propertyCondition: useHelperText
+      condition: true
+  - name: HelperText
+    display: Helper Text
+    type: text
+    options: ''
+    settings: 
+      propertyCondition: useHelperText
+      condition: true
+  - name: messageType
+    display: Type of message
+    type: dropdown
+    options: >-
+      return [['info','Info'],['error','Error']]
+  - name: helperStyle
+    display: Classname for Helper
+    type: text
+    options: ''
+    settings:
+      propertyCondition: useHelperText
+      condition: true
 children: []
 */
+{% if element.values.useHelperText %}{% set useHelperText = true %}{% endif %}
 {% if element.values.type == 'date' %}
   {{ add_setting('Packages', '"react-native-paper-dates": "^0.18.12",') }}
   {% set bpr %}
@@ -100,7 +131,7 @@ children: []
   />
 {% else %}
   {% set bpr %}
-  import { TextInput } from 'react-native-paper'
+  import { TextInput, HelperText } from 'react-native-paper'
   {% endset %}
   {{ save_delayed('bpr', bpr) }}
   <TextInput
@@ -130,4 +161,13 @@ children: []
       {% if element.values.leftIcon and element.values.leftIcon != 'none' %}left={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} icon='{{element.values.leftIcon}}' />}{% endif %}
       {% if element.values.rightIcon and element.values.rightIcon != 'none' %}right={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} icon='{{element.values.rightIcon}}' />}{% endif %}
   />
+      {% if element.values.visible %}
+        <HelperText
+          type="error"
+          visible={ {{element.values.visible}} }
+          {% if element.values.helperStyle %}style={ {{element.values.helperStyle}} } {% endif %}
+        >
+          {{element.values.HelperText}}
+        </HelperText>
+      {% endif %}
 {% endif %}
