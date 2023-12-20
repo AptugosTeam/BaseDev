@@ -121,6 +121,8 @@ options:
     display: Load when Site Loads
     type: checkbox
     advanced: true
+    settings:
+      default: false
 children: []
 */
 {% if data %}
