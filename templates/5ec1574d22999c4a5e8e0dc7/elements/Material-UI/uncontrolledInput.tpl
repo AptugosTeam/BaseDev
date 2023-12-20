@@ -106,6 +106,10 @@ options:
   - name: DisableVariable
     display: Variable to disable input
     type: text
+  - name: endAdornment
+    display: Child is end adornment
+    type: checkbox
+    advanced: true
 children: []
 */
 {% if element.values.fullWidth %}{% set fullWidth = true %}{% endif %}
@@ -116,6 +120,12 @@ children: []
 import TextField from '@mui/material/TextField'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
+{% if element.values.endAdornment %}
+{% set bpr %}
+import InputAdornment from '@mui/material/InputAdornment'
+{% endset %}
+{{ save_delayed('bpr', bpr) }}
+{% endif %}
 <TextField
     variant="{{ element.values.variant|default('standard') }}"
     {% if element.values.Autofocus %}autoFocus{% endif %}
@@ -169,4 +179,9 @@ import TextField from '@mui/material/TextField'
     {% if fullWidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
+    {% if element.values.endAdornment %}
+      InputProps={ {
+        endAdornment: <InputAdornment position="end">{{ content | raw }}</InputAdornment>
+      } }
+    {% endif %}
 />
