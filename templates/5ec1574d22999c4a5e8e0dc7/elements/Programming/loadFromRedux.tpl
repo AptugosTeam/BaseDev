@@ -117,6 +117,10 @@ options:
     advanced: true
     settings:
       default: '1'
+  - name: loadWhenSiteLoads
+    display: Load when Site Loads
+    type: checkbox
+    advanced: true
 children: []
 */
 {% if data %}
@@ -128,8 +132,16 @@ children: []
 {% if element.name != 'loadFromDatabase' %}
   {% set innervarname = element.name | friendly %}
 {% endif %}
-
 {% set varName = element.values.variableName|default(table.name | friendly | lower ~ 'Data') %}
+{% if element.values.loadWhenSiteLoads %}
+  {# Special method to load on page load #}
+  {% set goesToIndex %}
+    import { load{{ table.name | friendly | capitalize }} } from './store/actions/{{ table.name | friendly | lower }}Actions'
+    store.dispatch(load{{ table.name | friendly | capitalize }}({}))
+  {% endset %}
+  {{ add_setting('IndexPreAdd', goesToIndex)}}
+{% else %}
+  {# Standard usage #}
 {% set bpr %}
 import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
@@ -218,4 +230,4 @@ React.useEffect(() => {
   }
 }, [{{ table.name | friendly | lower }}Data.{{ functionCall }}])
 {% endif %}
-
+{% endif %}

@@ -39,7 +39,7 @@ childs:
     className={ {{element.values.className}} }
   {% endif %}
   {% if element.values.onclick %}
-    onClick={ {{ element.values.onclick }} }
+    onClick={ {{ element.values.onclick | functionOrCall }} }
   {% endif %}
   {% if element.values.disabled %}
     disabled={ {{ element.values.disabled }} }
