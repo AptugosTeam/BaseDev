@@ -139,7 +139,7 @@ children: []
   {# Special method to load on page load #}
   {% set goesToIndex %}
     import { load{{ table.name | friendly | capitalize }} } from './store/actions/{{ table.name | friendly | lower }}Actions'
-    store.dispatch(load{{ table.name | friendly | capitalize }}({}))
+    store.dispatch(load{{ table.name | friendly | capitalize }}({ limit: 500 }))
   {% endset %}
   {{ add_setting('IndexPreAdd', goesToIndex)}}
 {% else %}
