@@ -9,12 +9,11 @@ options:
     display: Content
     type: text
     options: ''
-  - name: CountryCode
-    display: Country Code (en-US)
-    type: text
-    settings:
-      default: '''en-US'''
-      active: true
+  - name: formatNumber
+    display: Format number
+    type: dropdown
+    options: 
+      return [['none', 'None'],['"de-DE"', 'Thousand separator "."; Decimal separator ","'],['"en-US"', 'Thousand separator ","; Decimal separator "."']]
   - name: ClassName
     display: ClassName
     type: styles
@@ -22,7 +21,8 @@ options:
   - name: Style
     display: Style
     type: dropdown
-    options: None;Decimal;Percent;Currency;Unit
+    options: 
+      return [['None', 'None'],['Decimal', 'Decimal'],['Percent', 'Percent'],['Currency', 'Currency'],['Unit', 'Unit']]
   - name: Currency
     display: Currency
     type: text
@@ -40,14 +40,24 @@ options:
       active: true
       propertyCondition: Style
       condition: Currency
-      default: '"symbol"'
 */
 {% if element.values.ClassName %}<span className={ {{ element.values.ClassName }} }>{% endif %}
 {
-  new Intl.NumberFormat({{ element.values.CountryCode }}, {
-    {% if element.values.Style and element.values.Style != 'None' %}style: '{{ element.values.Style|lower }}',{% endif %}
-    {% if element.values.Style == 'Currency' %}currency: {{ element.values.Currency|default('"USD"') }},{% endif %}
-    {% if element.values.CurrencyDisplay %}currencyDisplay: '{{ element.values.CurrencyDisplay }}',{% endif %}
-    maximumFractionDigits: 2 }).format({{ element.values.Content | raw }}{{ content | raw }})
+  {% if element.values.formatNumber and element.values.formatNumber != 'none' %}
+    new Intl.NumberFormat({{ element.values.formatNumber }}, {
+      {% if element.values.Style and element.values.Style != 'None' %}
+        style: '{{ element.values.Style|lower }}',
+      {% endif %}
+      {% if element.values.Style == 'Currency' %}
+        currency: {{ element.values.Currency|default('"USD"') }},
+      {% endif %}
+      {% if element.values.CurrencyDisplay and element.values.Style == 'Currency' %}
+        currencyDisplay: '{{ element.values.CurrencyDisplay }}',
+      {% endif %}
+      maximumFractionDigits: 2 }).format({{ element.values.Content | raw }}{{ content | raw }})
+  {% endif %}
+  {% if element.values.formatNumber == 'none' %}
+    {{ element.values.Content | raw }}{{ content | raw }}
+  {% endif %}  
 }
 {% if element.values.ClassName %}</span>{% endif %}
