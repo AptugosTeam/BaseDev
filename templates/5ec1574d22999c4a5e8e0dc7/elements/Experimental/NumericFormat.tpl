@@ -27,15 +27,60 @@ options:
     display: Decimal Scale
     type: text
     options: ''
+  - name: fieldFormat
+    display: Use field format
+    type: checkbox
+    settings:
+      default: false
+  - name: onValueChange
+    display: On value change
+    type: function
+    options: ''
+    settings:
+      propertyCondition: fieldFormat
+      condition: true
+      active: true
+settings:
+  - name: Packages
+    value: |-
+      "react-number-format": "5.2.0",
 children: []
 */
 {% set bpr %}
 import { NumericFormat } from 'react-number-format'
 {% endset %}
-{{ save_delayed('bpr', bpr) }} 
+{{ save_delayed('bpr', bpr) }}
+{% if element.values.fieldFormat %}
+  {% set ph %}
+    const {{ field.column_name | friendly }}TextFieldProps = {
+      id: "filled-multiline-flexible",
+      {% if element.values.DisableUnderline %}
+          InputProps: { disableUnderline: true },
+      {% endif %}
+      {% if element.values.Autofocus %}autoFocus,{% endif %}
+      {% if element.values.DisableVariable %}disabled: {{ element.values.DisableVariable | raw }} ,{% endif %}
+      {% if field.placeholder %}placeholder: {{ field.placeholder | textOrVariable }},{% endif %}
+      margin: '{{ element.values.margin|default("dense") }}',
+      size: '{{ element.values.size|default("medium") }}',
+      type: "number",
+      multiline: true,
+      maxRows: 4,
+      variant: "{{ element.values.variant|default('standard') }}",
+    };
+  {% endset %}
+  {{ save_delayed('ph',ph) }}
+{% endif %}
   <NumericFormat 
       value= { {{ element.values.content | raw }}{{ content | raw }} }
-      displayType="text"
+      {% if element.values.fieldFormat %}
+        displayType="input"
+        customInput={TextField}
+        {% if element.values.onValueChange %}
+          onValueChange={ (values, sourceInfo) => { {{ element.values.onValueChange | raw }} } }
+        {% endif %}
+        {% else %}
+        displayType="text"
+      {% endif %}
       {% if element.values.label %}
         label= { {{ element.values.label | raw }} }
       {% endif %}
@@ -43,13 +88,13 @@ import { NumericFormat } from 'react-number-format'
         className={ {{ element.values.className }} }
       {% endif %}
       {% if element.values.formatNumber == "dotComma" %}
-          thousandSeparator="."
+        thousandSeparator="."
+        decimalSeparator=","
+        {% elseif element.values.formatNumber == "commaDot" %}
+          thousandSeparator=","
+          decimalSeparator="."
+        {% else %}
           decimalSeparator=","
-          {% elseif element.values.formatNumber == "commaDot" %}
-            thousandSeparator=","
-            decimalSeparator="."
-          {% else %}
-            decimalSeparator=","
       {% endif %}
       {% if element.values.decimalScale %}
         decimalScale={ {{ element.values.decimalScale }} }
