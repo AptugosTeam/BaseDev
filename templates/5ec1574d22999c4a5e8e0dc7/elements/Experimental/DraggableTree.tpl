@@ -24,6 +24,13 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: Theme
+    display: Theme
+    type: dropdown
+    options: >-
+      return [['none', 'none'],
+      ...aptugo.assetUtils.stylesheets().map(stylesheet => [stylesheet.id,
+      stylesheet.name])]
 settings:
   - name: Packages
     value: '"react-dnd": "16.0.1","@minoru/react-dnd-treeview": "3.4.4",'
@@ -41,9 +48,17 @@ extraFiles:
 import DraggableTree from '@components/DraggableTree'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
+{% if element.values.Theme and element.values.Theme != 'none' %}
+  {% set asset = element.values.Theme|assetData %}
+  {% set theme = asset.name|friendly %}
+  {% set bpr %}
+    import {{ asset.name|friendly }} from 'dist/css/{{ asset.name }}'
+  {% endset %}
+  {{ save_delayed('bpr',bpr) }}
+{% endif %}
 <DraggableTree
   {% if element.values.tree %}tree={ {{ element.values.tree }} }{% endif %}
-  
+  {% if element.values.Theme %}theme={ {{ theme }} }{% endif %}
   {% if element.values.ClassName %}className={ {{ element.values.ClassName }} } {% endif %}  
   {% if element.values.onSave %}onSave={ {{ element.values.onSave }} }{% endif %}
   {% if element.values.onSave %}onUpdate={ {{ element.values.onUpdate }} }{% endif %}
