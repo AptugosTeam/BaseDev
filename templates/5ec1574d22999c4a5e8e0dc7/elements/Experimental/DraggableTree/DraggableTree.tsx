@@ -234,7 +234,15 @@ const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
         />}
       />
     </DndProvider>
-    <button onClick={() => { props.onSave(treeData)}}>Guardar</button>
+      {props.onSave && (
+        <button
+          onClick={() => {
+            props.onSave(treeData);
+          }}
+        >
+          Guardar
+        </button>
+      )}
     </>
   )
 }
