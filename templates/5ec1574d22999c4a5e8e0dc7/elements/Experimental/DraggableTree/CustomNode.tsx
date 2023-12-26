@@ -15,9 +15,9 @@ import React, { useState } from 'react'
 const CustomNode = ({ testIdPrefix = '', ...props }) => {
   const classes = props.theme
   const { id, text, className } = props.node
+  const { activeMenuNodeId, onMenuOpen, onMenuClose } = props;
   const [visibleInput, setVisibleInput] = useState(props.node.nodeType === 'Input')
   const [labelText, setLabelText] = useState(text)
-  const [activeMenu, setactiveMenu] = useState(false)
 
   const indent = props.depth * 16
 
@@ -116,7 +116,7 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
                 <div
                   className={classes.threeVerticalDots}
                   onMouseOver={(e) => {
-                    setactiveMenu(true)
+                    onMenuOpen(id);
                     e.stopPropagation()
                   }}
                 >
@@ -124,11 +124,11 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
                 </div>
               )}
             </div>
-            {props.node.editable !== false && activeMenu && (
+            {props.node.editable !== false && activeMenuNodeId === id && (
               <div
                 className={classes.actionButtons}
-                onMouseLeave={(e) => {
-                  setactiveMenu(false)
+                onMouseLeave={() => {
+                  onMenuClose();
                 }}
               >
                 {!!(props.node.permissions & (1 << 5)) && <div className={classes.actionButton}>
