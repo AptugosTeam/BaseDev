@@ -16,9 +16,13 @@ options:
   - name: condition
     display: Condition
     type: text
+  - name: solicitudEnviada
+    display: SolicitudEnviada
+    type: text
+    advanced: true
   - name: variablename
     display: Variable name to save
-    type: variable
+    type: text
     settings:
       default: 'data'
 children: []
@@ -55,6 +59,7 @@ if ({{ element.values.variablename | default('data') }}._id) {
 }
 {% if element.values.condition %}}{% endif %}
 {% if element.children %}
+{% if element.values.solicitudEnviada %}{{ element.values.solicitudEnviada }} {% endif %}
   resolve('ok')
 }).then(result => {
   {{ content | raw }}

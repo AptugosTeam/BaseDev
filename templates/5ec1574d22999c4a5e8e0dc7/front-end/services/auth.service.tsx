@@ -1,11 +1,6 @@
-/*
-path: auth.service.tsx
-completePath: front-end/services/auth.service.tsx
-unique_id: dDixye51
-*/
-import axios from 'axios'
+import axios from 'axios';
 
-const API_URL = '{{ settings.apiURL }}/api/users/'
+let API_URL = 'http://127.0.0.1:4567/api/users/';
 
 class AuthService {
   login(email, password, model = '') {
@@ -13,45 +8,32 @@ class AuthService {
       .post(API_URL + 'authenticate', {
         email,
         password,
-        model
+        model,
       })
       .then((response) => {
         if (response.data.accessToken) {
-          localStorage.setItem('token', response.data.accessToken)
-          localStorage.setItem('user', JSON.stringify(response.data.data))
+          localStorage.setItem('token', response.data.accessToken);
+          localStorage.setItem('user', JSON.stringify(response.data.data));
         }
-        return response.data
-      })
-  }
-  socialLogin(data){
-    console.log("Authservice",data)
-    return axios
-      .post(API_URL + 'socialauthenticate', {
-        data
-      })
-      .then((response) => {
-        if (response.data.accessToken) {
-          localStorage.setItem('token', response.data.accessToken)
-          localStorage.setItem('user', JSON.stringify(response.data.data))
-        }
-        return response.data
-      })
+        return response.data;
+      });
   }
 
   logout() {
-    localStorage.removeItem('user')
-    localStorage.removeItem('token')
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
   }
 
-  register(data) {
-    return axios.post(API_URL, data).then(_result => {
-      return this.login(data.Email, data.Password).then(afterLogin => { return afterLogin})
-    }).catch(e => { throw e })
+  register(username, email, password) {
+    return axios.post(API_URL + 'signup', {
+      username,
+      email,
+      password,
+    });
   }
 
-  async getCurrentUser() {
-    const user = localStorage.getItem('user')
-    return user ? JSON.parse(user) : {}
+  getCurrentUser() {
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   recoverPassword({ email, subject, message, name, model = '' }) {
@@ -61,11 +43,11 @@ class AuthService {
         subject,
         message,
         name,
-        model
+        model,
       })
       .then((response) => {
-        return response.data
-      })
+        return response.data;
+      });
   }
 
   checkNonce(nonce, email, model = '') {
@@ -73,15 +55,18 @@ class AuthService {
       .post(API_URL + 'checknonce', {
         nonce,
         email,
-        model
+        model,
       })
       .then((response) => {
-        localStorage.setItem('token', response.data.accessToken)
-        localStorage.setItem('user', JSON.stringify(response.data.data))
-        return response.data.data._id
-      })
+        localStorage.setItem('token', response.data.accessToken);
+        localStorage.setItem('user', JSON.stringify(response.data.data));
+        return response.data.data._id;
+      });
   }
 
+  changeURL(url) {
+    API_URL = url;
+  }
 }
 
-export default new AuthService()
+export default new AuthService();
