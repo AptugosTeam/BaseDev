@@ -43,6 +43,10 @@ options:
     options: >-
       return aptugo.assetUtils.grabCssSelectors(
       aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
+  - name: onLoad
+    display: On Load
+    type: text
+    advanced: true
   - name: onError
     display: On Error
     type: text
@@ -51,10 +55,12 @@ options:
     display: Use as Background
     type: checkbox
     options: ''
+    advanced: true
   - name: draggable
     display: Disable image drag
     type: checkbox
     options: ''
+    advanced: true
 */
 {% set tag = 'picture' %}
 {% if element.values.background %}{%set tag = 'div' %}{% endif %}
@@ -94,11 +100,11 @@ options:
     {% if height %}
       height={{ height|textOrVariable }}
     {% endif %}
-    {% if element.values.onError %}
-      onError={ {{element.values.onError}} }
+    {% if element.values.onLoad %}
+      onLoad={ {{ element.values.onLoad }} }
     {% endif %}
     {% if element.values.onError %}
-      onError={ {{element.values.onError}} }
+      onError={ {{ element.values.onError }} }
     {% endif %}
     {% if element.values.draggable %}
       draggable={false}
