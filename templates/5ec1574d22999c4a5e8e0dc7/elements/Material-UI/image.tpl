@@ -51,6 +51,16 @@ options:
     display: On Error
     type: text
     advanced: true
+  - name: background
+    display: Use as Background
+    type: checkbox
+    options: ''
+    advanced: true
+  - name: draggable
+    display: Disable image drag
+    type: checkbox
+    options: ''
+    advanced: true
 */
 {% set path = element.values.path %}
 {% set webppath = element.values.webppath %}
@@ -81,10 +91,21 @@ options:
     {% if element.values.className %}className={ {{element.values.className}} }{% endif %}
     src={{ path|textOrVariable }}
     alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
-    {% if width %}width={{ width|textOrVariable }}{% endif %}
-    {% if height %}height={{ height|textOrVariable }}{% endif %}
-    {% if element.values.onLoad %}onLoad={ {{element.values.onLoad}} }{% endif %}
-    {% if element.values.onError %}onError={ {{element.values.onError}} }{% endif %}
+    {% if width %}
+      width={{ width|textOrVariable }}
+    {% endif %}
+    {% if height %}
+      height={{ height|textOrVariable }}
+    {% endif %}
+    {% if element.values.onLoad %}
+      onLoad={ {{ element.values.onLoad }} }
+    {% endif %}
+    {% if element.values.onError %}
+      onError={ {{ element.values.onError }} }
+    {% endif %}
+    {% if element.values.draggable %}
+      draggable={false}
+    {% endif %}
   />
 </picture>
 
