@@ -43,6 +43,10 @@ options:
     options: >-
       return aptugo.assetUtils.grabCssSelectors(
       aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
+  - name: onLoad
+    display: On Load
+    type: text
+    advanced: true
   - name: onError
     display: On Error
     type: text
