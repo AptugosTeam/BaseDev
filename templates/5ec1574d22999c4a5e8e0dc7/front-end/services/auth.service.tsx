@@ -1,3 +1,10 @@
+/*
+path: auth.service.tsx
+completePath: >-
+  /Users/robrondon/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/front-end/services/auth.service.tsx
+keyPath: front-end/services/auth.service.tsx
+unique_id: K5MiOG7B
+*/
 import axios from 'axios';
 
 let API_URL = 'http://127.0.0.1:4567/api/users/';
