@@ -133,9 +133,6 @@ const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
   }
 
   const handleClick = (id) => {
-    // console.log('handle click', id)
-
-    // props.onClick(id)
   }
 
   const handleChangeVar = (id, newValue) => {
@@ -145,7 +142,6 @@ const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
       }
       return node
     })
-    // console.log(newData)
     // setTreeData(newData)
     // props.onUpdate(newData)
   }
