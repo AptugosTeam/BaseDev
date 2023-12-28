@@ -115,7 +115,7 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
               {props.node.editable && (
                 <div
                   className={classes.threeVerticalDots}
-                  onMouseOver={(e) => {
+                  onClick={(e) => {
                     onMenuOpen(id);
                     e.stopPropagation()
                   }}

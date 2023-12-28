@@ -78,8 +78,8 @@ const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
     return <div className={finalClasses.placeholder} style={ { left }}></div>
   }
 
-  const handleDrop = (newTreeData, props) => {
-    const { dragSourceId, dropTargetId } = props
+  const handleDrop = (newTreeData, event) => {
+    const { dragSourceId, dropTargetId } = event
     const newData = newTreeData.map((node) => {
       if (node.id === dragSourceId) {
         const subnode = { ...node }
@@ -93,7 +93,7 @@ const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
       return node
     })
     setTreeData(newData)
-    props.onUpdate(newData)
+    if (props.onUpdate) props.onUpdate(newData)
   }
 
   React.useEffect(() => {
