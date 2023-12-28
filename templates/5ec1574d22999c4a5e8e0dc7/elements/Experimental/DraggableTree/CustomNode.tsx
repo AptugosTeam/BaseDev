@@ -29,6 +29,7 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
   }
 
   const handleShowInput = () => {
+    setactiveMenu(null)
     setVisibleInput(true)
   }
 
