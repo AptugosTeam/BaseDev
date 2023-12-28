@@ -62,16 +62,7 @@ interface ExtendedNodeModel extends NodeModel {
 
 const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
   const [treeData, setTreeData] = useState(props.tree || initialData)
-  const [activeMenuNodeId, setActiveMenuNodeId] = useState(null);
   const finalClasses = props.theme ? props.theme : classes
-
-  const handleMenuOpen = (nodeId) => {
-    setActiveMenuNodeId(nodeId);
-  };
-
-  const handleMenuClose = () => {
-    setActiveMenuNodeId(null);
-  };
 
   const Placeholder = (props) => {
     const left = props.depth * 24
@@ -216,9 +207,6 @@ const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
             return (<CustomNode
               theme={finalClasses}
               node={node}
-              activeMenuNodeId={activeMenuNodeId}
-              onMenuOpen={handleMenuOpen}
-              onMenuClose={handleMenuClose}
               onClick={handleClick}
               onDelete={handleDelete}
               onCopy={handleCopy}

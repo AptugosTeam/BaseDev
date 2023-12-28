@@ -6,6 +6,7 @@ keyPath: elements/Experimental/DraggableTree/CustomNode.tsx
 unique_id: 0AxxpVFC
 */
 import { AddCircle, Check, Close, Delete, Edit, FileCopy, HighlightAlt, Loop, MoreVert } from '@mui/icons-material'
+import Popover from '@mui/material/Popover';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import { MenuItem, Select, Tooltip } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
@@ -15,9 +16,9 @@ import React, { useState } from 'react'
 const CustomNode = ({ testIdPrefix = '', ...props }) => {
   const classes = props.theme
   const { id, text, className } = props.node
-  const { activeMenuNodeId, onMenuOpen, onMenuClose } = props;
   const [visibleInput, setVisibleInput] = useState(props.node.nodeType === 'Input')
   const [labelText, setLabelText] = useState(text)
+  const [activeMenu, setactiveMenu] = useState(null)
 
   const indent = props.depth * 16
 
@@ -116,7 +117,7 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
                 <div
                   className={classes.threeVerticalDots}
                   onClick={(e) => {
-                    onMenuOpen(id);
+                    setactiveMenu(e.currentTarget)
                     e.stopPropagation()
                   }}
                 >
@@ -124,52 +125,93 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
                 </div>
               )}
             </div>
-            {props.node.editable !== false && activeMenuNodeId === id && (
-              <div
+            {props.node.editable !== false && activeMenu && (
+              <Popover
                 className={classes.actionButtons}
-                onMouseLeave={() => {
-                  onMenuClose();
-                }}
+                open={Boolean(activeMenu)}
+                anchorEl={activeMenu}
+                onClose={() => setactiveMenu(null)}
+                anchorOrigin={ {
+                  vertical: 'center',
+                  horizontal: 'center',
+                } }
               >
-                {!!(props.node.permissions & (1 << 5)) && <div className={classes.actionButton}>
-                  <IconButton size="small" onClick={handleShowInput}>
-                    <HighlightAlt fontSize="small" />
-                  </IconButton>
-                  Assign Match
-                </div>}
-                {!!(props.node.permissions & (1 << 4)) && <div className={classes.actionButton} onClick={(e) => handleAdd(id, e)}>
-                  <IconButton size="small">
-                    <AddCircle fontSize="small" />
-                  </IconButton>
-                  {(props.node.nodeType === 'Selector' || props.node.nodeType === 'Main') ? 'Add Value' : 'Add Child'}
-                </div>}
-                {!!(props.node.permissions & (1 << 3)) && <div className={classes.actionButton} onClick={(e) => { props.onChangeType(id, e)}}>
-                  <IconButton size="small">
-                    <Loop fontSize="small" />
-                  </IconButton>
-                  Switch Type
-                </div>}
-                {!!(props.node.permissions & (1 << 2)) && !!(props.node.permissions & (1 << 1)) && <div className={classes.separator}></div>}
-                {!!(props.node.permissions & (1 << 2)) && <div className={classes.actionButton} onClick={handleShowInput}>
-                  <IconButton size="small">
-                    <Edit fontSize="small" />
-                  </IconButton>
-                  Edit
-                </div>}
-                {!!(props.node.permissions & (1 << 1)) && <div className={classes.actionButton} onClick={() => props.onCopy(id)}>
-                  <IconButton size="small">
-                    <FileCopy fontSize="small" />
-                  </IconButton>
-                  Copy
-                </div>}
-                {!!(props.node.permissions & 1) && <div className={classes.separator}></div>}
-                {!!(props.node.permissions & 1) && <div className={classes.actionButtonDanger} onClick={() => props.onDelete(id)}>
-                  <IconButton size="small">
-                    <Delete fontSize="small" />
-                  </IconButton>
-                  Delete
-                </div>}
-              </div>
+                {!!(props.node.permissions & (1 << 5)) && (
+                  <div className={classes.actionButton}>
+                    <IconButton size="small" onClick={handleShowInput}>
+                      <HighlightAlt fontSize="small" />
+                    </IconButton>
+                    Assign Match
+                  </div>
+                )}
+                {!!(props.node.permissions & (1 << 4)) && (
+                  <div
+                    className={classes.actionButton}
+                    onClick={(e) => handleAdd(id, e)}
+                  >
+                    <IconButton size="small">
+                      <AddCircle fontSize="small" />
+                    </IconButton>
+                    {props.node.nodeType === 'Selector' ||
+                    props.node.nodeType === 'Main'
+                      ? 'Add Value'
+                      : 'Add Child'}
+                  </div>
+                )}
+                {!!(props.node.permissions & (1 << 3)) && (
+                  <div
+                    className={classes.actionButton}
+                    onClick={(e) => {
+                      props.onChangeType(id, e);
+                    }}
+                  >
+                    <IconButton size="small">
+                      <Loop fontSize="small" />
+                    </IconButton>
+                    Switch Type
+                  </div>
+                )}
+                {!!(props.node.permissions & (1 << 2)) &&
+                  !!(props.node.permissions & (1 << 1)) && (
+                    <div className={classes.separator}></div>
+                  )}
+                {!!(props.node.permissions & (1 << 2)) && (
+                  <div
+                    className={classes.actionButton}
+                    onClick={handleShowInput}
+                  >
+                    <IconButton size="small">
+                      <Edit fontSize="small" />
+                    </IconButton>
+                    Edit
+                  </div>
+                )}
+                {!!(props.node.permissions & (1 << 1)) && (
+                  <div
+                    className={classes.actionButton}
+                    onClick={() => props.onCopy(id)}
+                  >
+                    <IconButton size="small">
+                      <FileCopy fontSize="small" />
+                    </IconButton>
+                    Copy
+                  </div>
+                )}
+                {!!(props.node.permissions & 1) && (
+                  <div className={classes.separator}></div>
+                )}
+                {!!(props.node.permissions & 1) && (
+                  <div
+                    className={classes.actionButtonDanger}
+                    onClick={() => props.onDelete(id)}
+                  >
+                    <IconButton size="small">
+                      <Delete fontSize="small" />
+                    </IconButton>
+                    Delete
+                  </div>
+                )}
+              </Popover>
             )}
           </div>
         )}
