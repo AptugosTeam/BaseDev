@@ -168,6 +168,7 @@ const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
     const oldData = [...treeData]
     oldData[treeData.findIndex((td) => td.id === id)].text = newValue
     setTreeData(oldData)
+    props.onUpdate(oldData);
   }
 
   return (
