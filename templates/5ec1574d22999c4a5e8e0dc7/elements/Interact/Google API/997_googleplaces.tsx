@@ -7,7 +7,7 @@ keyPath: elements/Interact/Google API/997_googleplaces.tsx
 unique_id: gKXn32rU
 */
 import React from 'react'
-
+declare const window: any;
 declare global {
   interface Window {
     mapsApi: any[]
@@ -30,7 +30,7 @@ const AutoComplete = (props: any) => {
   const renderGoogle = () => {
     if (!document.getElementById(inputId)) {
       setTimeout(renderGoogle, 100)
-    } else {
+    } else if (window.google) {
       // @ts-ignore
       window.mapsApi[inputId] = new window.google.maps.places.Autocomplete(ref.current, {})
       const handlePlaceSelect = () => {

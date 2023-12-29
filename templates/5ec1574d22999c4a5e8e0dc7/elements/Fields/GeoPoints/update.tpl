@@ -1,6 +1,6 @@
 /*
 path: update.tpl
-completePath: elements/Fields/Computed/update.tpl
+completePath: elements/Fields/GeoPoints/update.tpl
 unique_id: hcosdddstez
 */
 if (data.{{ field.column_name | friendly }}) data.{{ field.column_name | friendly }} = JSON.parse(data.{{ field.column_name | friendly }})
