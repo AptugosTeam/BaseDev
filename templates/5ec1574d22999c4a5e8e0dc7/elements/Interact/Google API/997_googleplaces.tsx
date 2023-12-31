@@ -7,7 +7,7 @@ keyPath: elements/Interact/Google API/997_googleplaces.tsx
 unique_id: gKXn32rU
 */
 import React from 'react'
-declare const window: any;
+import PlacesMap from './map'
 declare global {
   interface Window {
     mapsApi: any[]
@@ -23,14 +23,14 @@ const AutoComplete = (props: any) => {
   React.useEffect(() => {
     if (ref.current) {
       ref.current.value = props.initialValue || ''
-      setInput(props.initialValue || '')
+      setInput(props.initialValue || '')
     }
-  },[props.initialValue])
-  
+  }, [props.initialValue])
+
   const renderGoogle = () => {
     if (!document.getElementById(inputId)) {
       setTimeout(renderGoogle, 100)
-    } else if (window.google) {
+    } else {
       // @ts-ignore
       window.mapsApi[inputId] = new window.google.maps.places.Autocomplete(ref.current, {})
       const handlePlaceSelect = () => {
@@ -96,24 +96,25 @@ const AutoComplete = (props: any) => {
     props.onChange && props.onChange(output)
   }
 
-  let found = document.getElementById('placesScript') ? true : false
-  if (!found) {
-    const script = document.createElement('script')
-    script.id = 'placesScript'
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=' + placesKey + '&libraries=places'
-    script.async = true
-    script.onload = () => renderGoogle()
-    document.body.appendChild(script)
-  }
-
-  if (found) {
-    if (document.readyState === 'complete') {
-      renderGoogle()
-    } else {
-      document.getElementById('placesScript').addEventListener('load', renderGoogle)
+  React.useEffect(() => {
+    window[`renderGoogle_${inputId}`] = renderGoogle
+    let found = document.getElementById('placesScript') ? true : false
+    if (!found) {
+      const script = document.createElement('script')
+      script.id = 'placesScript'
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${placesKey}&libraries=places&callback=renderGoogle_${inputId}`
+      script.async = true
+      document.body.appendChild(script)
     }
   
-  }
+    if (found) {
+      if (document.readyState === 'complete' && window.google && window.google.maps) {
+        window[`renderGoogle_${inputId}`]()
+      } else {
+        document.getElementById('placesScript').addEventListener('load', window[`renderGoogle_${inputId}`])
+      }
+    }
+  },[])
 
   return (
     <input
@@ -124,8 +125,10 @@ const AutoComplete = (props: any) => {
       value={input}
       onChange={(e) => setInput(e.target.value)}
       placeholder={props.placeholder || 'Enter a Location'}
+      disabled={props.disabled}
     />
   )
 }
 
+export { PlacesMap }
 export default AutoComplete

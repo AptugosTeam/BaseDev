@@ -9,10 +9,6 @@ icon: ico-field
   type: {
     type: String,
     enum: ['Point'],
-    required: true
   },
-  coordinates: {
-    type: [Number],
-    required: true
-  }
+  coordinates: { type: [Number], index: '2dsphere', sparse: true, default: null }
 },
