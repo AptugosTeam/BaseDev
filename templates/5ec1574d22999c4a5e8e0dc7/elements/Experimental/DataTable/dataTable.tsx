@@ -58,6 +58,7 @@ interface tableProps {
   onColumnRemoval?: Function
   onColumnRename?: Function
   className?: any
+  pagination?: Boolean
 }
 
 const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
@@ -242,6 +243,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
             </tr>
           ))}
         </tbody>
+        {props.pagination !== false && (
         <tfoot>
           {table.getFooterGroups().map((footerGroup) => {
             return (
@@ -307,6 +309,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
             )
           })}
         </tfoot>
+        )}
       </table>
     </div>
   )
