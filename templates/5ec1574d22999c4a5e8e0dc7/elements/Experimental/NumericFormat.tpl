@@ -27,6 +27,20 @@ options:
     display: Decimal Scale
     type: text
     options: ''
+  - name: allowNegative
+    display: Disable negative number
+    type: checkbox
+    settings:
+      default: false
+  - name: disabled
+    display: Disable number
+    type: checkbox
+    settings:
+      default: false
+  - name: isAllowed
+    display: Max value
+    type: text
+    options: ''
   - name: fieldFormat
     display: Use field format
     type: checkbox
@@ -72,17 +86,19 @@ import { NumericFormat } from 'react-number-format'
 {% endif %}
   <NumericFormat 
       value= { {{ element.values.content | raw }}{{ content | raw }} }
-      {% if element.values.fieldFormat %}
-        displayType="input"
-        customInput={TextField}
-        {% if element.values.onValueChange %}
-          onValueChange={ (values, sourceInfo) => { {{ element.values.onValueChange | raw }} } }
-        {% endif %}
-        {% else %}
-        displayType="text"
+      {% if element.values.disabled %}
+        disabled={true}
+      {% endif %}
+      {% if element.values.decimalScale == 0 %}
+        decimalScale={0}
+        {% elseif element.values.decimalScale %}
+        decimalScale={ {{ element.values.decimalScale | raw }} }
+      {% endif %}
+      {% if element.values.allowNegative %}
+        allowNegative={false}
       {% endif %}
       {% if element.values.label %}
-        label= { {{ element.values.label | raw }} }
+        label= { {{ element.values.label | textOrVariable }} }
       {% endif %}
       {% if element.values.className %}
         className={ {{ element.values.className }} }
@@ -96,7 +112,20 @@ import { NumericFormat } from 'react-number-format'
         {% else %}
           decimalSeparator=","
       {% endif %}
-      {% if element.values.decimalScale %}
-        decimalScale={ {{ element.values.decimalScale }} }
+      {% if element.values.fieldFormat %}
+        displayType="input"
+        customInput={TextField}
+        {% if element.values.onValueChange %}
+          onValueChange={ (values, sourceInfo) => { {{ element.values.onValueChange | raw }} } }
+        {% endif %}
+        {% else %}
+        displayType="text"
+      {% endif %}
+      {% if element.values.isAllowed %}
+        isAllowed=  {(values) => {
+          const MAX_LIMIT = {{ element.values.isAllowed | raw }};
+          const { floatValue } = values;
+          return floatValue <= MAX_LIMIT;
+        }} 
       {% endif %}
   />
