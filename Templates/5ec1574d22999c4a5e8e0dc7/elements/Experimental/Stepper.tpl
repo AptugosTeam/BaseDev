@@ -4,9 +4,6 @@ completePath: elements/Experimental/Stepper.tpl
 unique_id: UPjrYrt3y
 sourceType: javascript
 options:
-  - name: steps
-    display: Steps to be used, you can use an array here
-    type: text
   - name: activeStep
     display: Value defining the active step
     type: text
@@ -14,72 +11,43 @@ options:
     display: className
     type: styles
     options: ''
-  - name: stepClassName
-    display: stepClassName
-    type: styles
-    options: ''
-  - name: useSingleStep
-    display: Use SingleStep?
+  - name: linear?
+    display: Determines wether you can advance if the step isnt finished or not
     type: checkbox
     settings:
       default: false
     options: ''
-  - name: hideConnectors
-    display: Hide the step connectors?
+  - name: alternativeLabel?
+    display: If set to 'true' and orientation is horizontal, then the step label will be positioned under the icon.
     type: checkbox
     settings:
       default: false
     options: ''
-  - name: nonLinear
-    display: Allow users to enter the flow at any point
-    type: checkbox
-    settings:
-      default: false
-    options: ''
-  - name: connectorStateColors
-    display: Use different colors for connector lines based on adjacent steps state
-    type: checkbox
-    settings:
-      default: false
-    options: ''
+  - name: orientation
+    display: Stepper orientation
+    type: dropdown
+    options: horizontal;vertical
 */
 {% set bpr %}
-import { Stepper } from 'react-form-stepper';
+import Stepper from '@mui/material/Stepper';
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Stepper
-    {% if element.values.steps %}
-        steps='{{ element.values.steps }}'
-    {% endif %}
     {% if element.values.activeStep %}
         activeStep='{{ element.values.activeStep|default('1') }}'
     {% endif %}
     {% if element.values.className %}
         className='{{ element.values.className }}'
     {% endif %}
-    {% if element.values.stepClassName %}
-        stepClassName='{{ element.values.stepClassName }}'
+    {% if element.values.linear %}
+        linear={ {{ element.values.linear|default('false') }} }
     {% endif %}
-    {% if element.values.stepClassName %}
-        stepClassName='{{ element.values.stepClassName }}'
+    {% if element.values.alternativeLabel %}
+        alternativeLabel={ {{ element.values.alternativeLabel }} }
     {% endif %}
-    {% if element.values.hideConnectors %}
-        hideConnectors={ {{ element.values.hideConnectors|default('false') }} }
-    {% endif %}
-    {% if element.values.nonLinear %}
-        nonLinear={ {{ element.values.nonLinear|default('false') }} }
-    {% endif %}
-    {% if element.values.connectorStateColors %}
-        connectorStateColors={ {{ element.values.connectorStateColors }} }
+    {% if element.values.orientation %}
+        orientation={ {{ element.values.orientation }} }
     {% endif %}
     >
-    {% if element.values.useSingleStep %}
-        {% for unchild in element.children %}
-            <Step>
-            {{ unchild.rendered | raw }}
-            </Step>
-        {% endfor %}
-    {% else %}
     {{ content | raw }}
-    {% endif %}
 </Stepper>

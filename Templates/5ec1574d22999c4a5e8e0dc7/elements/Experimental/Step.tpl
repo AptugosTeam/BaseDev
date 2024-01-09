@@ -4,9 +4,6 @@ completePath: elements/Experimental/Step.tpl
 unique_id: UPjnuRt3y
 sourceType: javascript
 options:
-  - name: label
-    display: Value to be displayed under each step
-    type: text
   - name: active
     display: Value to indicate should the step be displayed as active
     type: checkbox
@@ -15,6 +12,24 @@ options:
     options: ''
   - name: completed
     display: Value to indicate should the step be displayed as completed
+    type: checkbox
+    settings:
+      default: false
+    options: ''
+  - name: disabled
+    display: If true, the step is disabled, will also disable the button if StepButton is a child of Step
+    type: checkbox
+    settings:
+      default: false
+    options: ''
+  - name: expanded
+    display: Step expanded?
+    type: checkbox
+    settings:
+      default: false
+    options: ''
+  - name: last
+    display: Last step?
     type: checkbox
     settings:
       default: false
@@ -28,12 +43,12 @@ options:
     options: ''
 */
 {% set bpr %}
-import { Stepper } from 'react-form-stepper';
+import Step from '@mui/material/Step';
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Step
-    {% if element.values.label %}
-        label='{{ element.values.label }}'
+    {% if element.values.active %}
+        active={ {{ element.values.active }} }
     {% endif %}
     {% if element.values.index %}
         index='{{ element.values.index }}'
@@ -41,8 +56,14 @@ import { Stepper } from 'react-form-stepper';
     {% if element.values.className %}
       className={ {{ element.values.className }} }
     {% endif %}
-    {% if element.values.active %}
-        active={ {{ element.values.active }} }
+    {% if element.values.disabled %}
+        disabled={ {{ element.values.disabled }} }
+    {% endif %}
+    {% if element.values.expanded %}
+        expanded={ {{ element.values.expanded }} }
+    {% endif %}
+    {% if element.values.last %}
+        last={ {{ element.values.last }} }
     {% endif %}
     {% if element.values.completed %}
         completed={ {{ element.values.completed }} }
