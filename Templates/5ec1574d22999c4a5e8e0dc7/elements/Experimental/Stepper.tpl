@@ -49,7 +49,7 @@ import { Stepper } from 'react-form-stepper';
 {{ save_delayed('bpr',bpr) }}
 <Stepper
     {% if element.values.steps %}
-        steps='{{ element.values.steps') }}'
+        steps='{{ element.values.steps }}'
     {% endif %}
     {% if element.values.activeStep %}
         activeStep='{{ element.values.activeStep|default('1') }}'
