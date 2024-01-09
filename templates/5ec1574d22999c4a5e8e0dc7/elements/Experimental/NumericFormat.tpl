@@ -103,7 +103,7 @@ import { NumericFormat } from 'react-number-format'
         isAllowed=  {(values) => {
           const MAX_LIMIT = {{ element.values.isAllowed | raw }};
           const { floatValue } = values;
-          return floatValue <= MAX_LIMIT;
+          return floatValue === undefined || floatValue <= MAX_LIMIT;
         }} 
       {% endif %}
   />
