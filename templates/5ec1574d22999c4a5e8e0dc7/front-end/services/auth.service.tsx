@@ -22,6 +22,22 @@ class AuthService {
         return response.data
       })
   }
+
+  loginWithSession(email, password) {
+    return axios
+      .post(API_URL + 'authenticate', {
+        email,
+        password,
+      })
+      .then((response) => {
+        if (response.data.accessToken || response.data.stsTokenManager) {
+          sessionStorage.setItem('tokenSession', response.data.accessToken || response.data.stsTokenManager)
+          sessionStorage.setItem('userSession', JSON.stringify(response.data.data || response.data))
+        }
+        return response.data
+      })
+  }
+
   socialLogin(data){
     console.log("Authservice",data)
     return axios
@@ -40,6 +56,8 @@ class AuthService {
   logout() {
     localStorage.removeItem('user')
     localStorage.removeItem('token')
+    sessionStorage.removeItem('userSession')
+    sessionStorage.removeItem('tokenSession')
   }
 
   register(data) {
@@ -49,7 +67,7 @@ class AuthService {
   }
 
   async getCurrentUser() {
-    const user = localStorage.getItem('user')
+    const user = localStorage.getItem('user') || sessionStorage.getItem('userSession')
     return user ? JSON.parse(user) : {}
   }
 
