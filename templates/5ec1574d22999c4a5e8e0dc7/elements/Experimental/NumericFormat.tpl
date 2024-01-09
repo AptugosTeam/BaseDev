@@ -34,9 +34,7 @@ options:
       default: false
   - name: disabled
     display: Disable number
-    type: checkbox
-    settings:
-      default: false
+    type: text
   - name: isAllowed
     display: Max value
     type: text
@@ -87,7 +85,7 @@ import { NumericFormat } from 'react-number-format'
   <NumericFormat 
       value= { {{ element.values.content | raw }}{{ content | raw }} }
       {% if element.values.disabled %}
-        disabled={true}
+        disabled={ {{element.values.disabled}} }
       {% endif %}
       {% if element.values.decimalScale == 0 %}
         decimalScale={0}
