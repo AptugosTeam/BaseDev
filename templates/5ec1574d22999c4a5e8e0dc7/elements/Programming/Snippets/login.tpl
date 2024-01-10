@@ -18,13 +18,17 @@ options:
     type: dropdown
     options: return aptugo.pageUtils.getAllPages()
     required: true
+  - name: alternativeCall
+    display: Alternative Call to AuthService
+    type: text
+    advanced: true
 children: []
 */
 {% set bpr %}
 import AuthService from '@services/auth.service'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-AuthService.login({{ element.values.Email }}, {{ element.values.Password }}).then(
+AuthService[{{ element.values.alternativeCall | default("'login'") }}]({{ element.values.Email }}, {{ element.values.Password }}).then(
   (res) => {
     navigation.push('{{ (element.values.OnSuccess | elementData).path }}')
   },
