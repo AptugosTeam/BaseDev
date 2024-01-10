@@ -22,13 +22,19 @@ options:
     display: Alternative Call to AuthService
     type: text
     advanced: true
+  - name: fullUser
+    display: Retrieve full user?
+    type: checkbox
+    settings:
+      default: true
+    advanced: true
 children: []
 */
 {% set bpr %}
 import AuthService from '@services/auth.service'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-AuthService[{{ element.values.alternativeCall | default("'login'") }}]({{ element.values.Email }}, {{ element.values.Password }}).then(
+AuthService[{{ element.values.alternativeCall | default("'login'") }}]({{ element.values.Email }}, {{ element.values.Password }}, {{ element.values.fullUser | default(true) }}).then(
   (res) => {
     navigation.push('{{ (element.values.OnSuccess | elementData).path }}')
   },

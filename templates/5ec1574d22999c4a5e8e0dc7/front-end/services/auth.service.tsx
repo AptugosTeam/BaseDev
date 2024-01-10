@@ -8,11 +8,12 @@ import axios from 'axios'
 const API_URL = '{{ settings.apiURL }}/api/users/'
 
 class AuthService {
-  login(email, password) {
+  login(email, password, fullUser = true) {
     return axios
       .post(API_URL + 'authenticate', {
         email,
         password,
+        fullUser
       })
       .then((response) => {
         if (response.data.accessToken || response.data.stsTokenManager) {
@@ -23,11 +24,12 @@ class AuthService {
       })
   }
 
-  loginWithSession(email, password) {
+  loginWithSession(email, password, fullUser = true) {
     return axios
       .post(API_URL + 'authenticate', {
         email,
         password,
+        fullUser
       })
       .then((response) => {
         if (response.data.accessToken || response.data.stsTokenManager) {

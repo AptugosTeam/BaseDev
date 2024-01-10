@@ -76,7 +76,7 @@ async function checkNonce (req) {
   })
 }
 
-async function authenticate ({ email, password, model, passwordField, populate }) {
+async function authenticate ({ email, password, model, passwordField, populate, fullUser = true }) {
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -104,11 +104,14 @@ async function authenticate ({ email, password, model, passwordField, populate }
         bcrypt.compare(password, user[passwordField]).then((isMatch) => {
           if (isMatch) {
             const { Password, ...userWithoutPassword } = user._doc
-            const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
-            resolve({ accessToken: token, data: userWithoutPassword })
+            const { _id: id } = userWithoutPassword
+            const userID = { id }
+            const token = jwt.sign( fullUser ? userWithoutPassword : userID, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+            resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
           } else {
             reject({ message: 'Password incorrect' })
           }
+          
         })
       }
     })
