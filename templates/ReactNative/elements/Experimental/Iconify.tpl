@@ -23,7 +23,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-svg": "13.4.0",'
+    value: '"react-native-svg": "13.9.0",'
   - name: Packages
     value: '"react-native-iconify": "^0.2.10",'
 */

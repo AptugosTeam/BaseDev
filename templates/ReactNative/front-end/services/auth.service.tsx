@@ -4,7 +4,7 @@ completePath: front-end/services/auth.service.tsx
 unique_id: dDixye51
 settings:
   - name: Packages
-    value: '"@react-native-async-storage/async-storage": "^1.17.6",'
+    value: '"@react-native-async-storage/async-storage": "1.18.2",'
 */
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'

@@ -45,7 +45,7 @@ options:
     type: function
 settings:
   - name: Packages
-    value: '"expo-dev-client": "~2.2.1","@rnmapbox/maps": "github:rnmapbox/maps#main",'
+    value: '"expo-dev-client": "~2.4.12","@rnmapbox/maps": "github:rnmapbox/maps#main",'
 */
 {% set bpr %}
 import { MapView, setAccessToken } from '@rnmapbox/maps'
