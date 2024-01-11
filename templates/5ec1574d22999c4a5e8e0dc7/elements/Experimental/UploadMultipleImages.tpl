@@ -51,6 +51,10 @@ options:
     options: >-
       return aptugo.assetUtils.grabCssSelectors(
       aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
+  - name: filesLimit
+    display: Limit of files
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"react-dropzone": "^11.4.2",'
@@ -86,4 +90,5 @@ import MultipleFileUpload from '@components/MultipleFileUpload'
   {% if width %}width={{ width | textOrVariable }}{% endif %}
   {% if height %}height={{ height | textOrVariable }}{% endif %}
   {% if element.values.alt %}alt={{ element.values.alt | textOrVariable }}{% endif %}
+  {% if element.values.filesLimit %}maxFiles={ {{ element.values.filesLimit | textOrVariable }} }{% endif %}
 />

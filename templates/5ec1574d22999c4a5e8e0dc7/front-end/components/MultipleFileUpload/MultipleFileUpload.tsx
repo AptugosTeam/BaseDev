@@ -14,6 +14,10 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
   const {getRootProps, getInputProps} = useDropzone({
     accept: 'image/*',
     onDrop: acceptedFiles => {
+      if ( props.maxFiles && files.length + acceptedFiles.length > props.maxFiles) {
+        console.error('File limit exceeded!');
+        return;
+      }
       const newFile = acceptedFiles.map(file => Object.assign(file, {
         preview: URL.createObjectURL(file)
       }))
