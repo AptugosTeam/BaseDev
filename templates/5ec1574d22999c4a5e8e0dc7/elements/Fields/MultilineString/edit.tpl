@@ -26,6 +26,6 @@ import TextField from '@mui/material/TextField'
     multiline
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
     variant="{{ element.values.variant|default('standard') }}"
-    value={ {{ tableName }}data.{{ field.column_name | friendly }}}
+    value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
 />
