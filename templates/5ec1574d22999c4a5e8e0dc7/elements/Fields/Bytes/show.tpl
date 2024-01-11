@@ -22,4 +22,4 @@ function formatBytes(bytes: number, decimals = 2): string {
 }
 {% endset %}
 {{ save_delayed('ph',ph)}}
-<Field value={(fieldData: any) => formatBytes(fieldData.{{ field.column_name | friendly }})}/>
+<Field {% if element.values.classname %} className={ {{ element.values.classname }} } {% endif %} value={(fieldData: any) => formatBytes(fieldData.{{ field.column_name | friendly }})}/>

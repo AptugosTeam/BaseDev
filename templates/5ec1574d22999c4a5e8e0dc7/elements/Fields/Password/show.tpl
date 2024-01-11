@@ -7,4 +7,4 @@ unique_id: BRhZfZVu
 import Field from '../components/Table/Field'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<Field value={'*****'}/>
+<Field {% if element.values.classname %} className={ {{ element.values.classname }} } {% endif %} value={'*****'}/>

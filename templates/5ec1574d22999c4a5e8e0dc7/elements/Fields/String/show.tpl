@@ -10,4 +10,4 @@ children: []
 import Field from '../components/Table/Field'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<Field value={(fieldData: any) => fieldData.{{ field.column_name | friendly }}}/>
+<Field {% if element.values.classname %} className={ {{ element.values.classname }} } {% endif %} value={(fieldData: any) => fieldData.{{ field.column_name | friendly }}}/>

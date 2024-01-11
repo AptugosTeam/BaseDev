@@ -20,7 +20,7 @@ import Field from '../components/Table/Field'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% if field.displaytype == 'chips' %}
-<Field value={(fieldData: any) => fieldData.{{ field.column_name | friendly }}?.map(item => <span key={`autocomplete_${item._id}`} className={classes.tableChip}>{item.{{ referencedField.column_name | friendly }}}</span>) } />
+<Field value={(fieldData: any) => fieldData.{{ field.column_name | friendly }}?.map(item => <span key={`autocomplete_${item._id}`} {% if element.values.classname %} className={ {{ element.values.classname }} } {% else %} className={classes.tableChip} {% endif %}>{item.{{ referencedField.column_name | friendly }}}</span>) } />
 {% else %}
-  <Field value={(fieldData: any) => {{ 'fieldData.' ~  (field.column_name | friendly) }} ? {{ referencedString }} : '' }/>
+  <Field {% if element.values.classname %} className={ {{ element.values.classname }} } {% endif %} value={(fieldData: any) => {{ 'fieldData.' ~  (field.column_name | friendly) }} ? {{ referencedString }} : '' }/>
 {% endif %}

@@ -6,7 +6,7 @@ icon: ico-field
 children: []
 */
 {% if element.children %}
-<Field value={(fieldData: any) => {% for child in element.children %}{{ child.rendered | raw }}{% endfor %} }  />
+<Field {% if element.values.classname %} className={ {{ element.values.classname }} } {% endif %} value={(fieldData: any) => {% for child in element.children %}{{ child.rendered | raw }}{% endfor %} }  />
 {% else %}
-<Field value={(fieldData: any) => {{ element.values.fieldVariable }} } />
+<Field {% if element.values.classname %} className={ {{ element.values.classname }} } {% endif %} value={(fieldData: any) => {{ element.values.fieldVariable }} } />
 {% endif %}

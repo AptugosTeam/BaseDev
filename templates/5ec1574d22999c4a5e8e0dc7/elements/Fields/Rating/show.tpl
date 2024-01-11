@@ -8,4 +8,4 @@ icon: file.svg
 import Rating from '@mui/material/Rating';
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-<Field value={(fieldData: any) => <Rating value={ fieldData.{{ field.column_name | friendly }} } readOnly /> } />
+<Field {% if element.values.classname %} className={ {{ element.values.classname }} } {% endif %} value={(fieldData: any) => <Rating value={ fieldData.{{ field.column_name | friendly }} } readOnly /> } />

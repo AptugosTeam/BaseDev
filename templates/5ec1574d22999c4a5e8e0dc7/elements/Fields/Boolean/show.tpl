@@ -13,5 +13,5 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked'
 export { RadioButtonUncheckedIcon }
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<Field value={(fieldData: any) => fieldData.{{ field.column_name | friendly }} ? <RadioButtonCheckedIcon /> : <RadioButtonUncheckedIcon /> }/>
+<Field {% if element.values.classname %} className={ {{ element.values.classname }} } {% endif %} value={(fieldData: any) => fieldData.{{ field.column_name | friendly }} ? <RadioButtonCheckedIcon /> : <RadioButtonUncheckedIcon /> }/>
 
