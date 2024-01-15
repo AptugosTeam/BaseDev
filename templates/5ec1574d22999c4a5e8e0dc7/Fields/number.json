@@ -38,6 +38,35 @@ unique_id: 5wQBTRfF
         "display": "Decimal scale",
         "value": "decimalScale",
         "type": "text"
+      },
+      {
+        "display": "Max value",
+        "value": "isAllowed",
+        "type": "text"
+      },
+      {
+        "display": "Min value",
+        "value": "minLimit",
+        "type": "text"
+      },
+      {
+        "display": "Disable negative number",
+        "value": "allowNegative",
+        "type": "select",
+        "options": [
+          {
+            "label": "None",
+            "value": "none"
+          },
+          {
+            "label": "True",
+            "value": "true"
+          },
+          {
+            "label": "False",
+            "value": "false"
+          }
+        ]
       }
     ],
     "validations": [

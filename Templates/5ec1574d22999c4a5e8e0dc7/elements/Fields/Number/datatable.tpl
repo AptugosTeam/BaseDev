@@ -29,5 +29,22 @@ import { NumericFormat } from 'react-number-format'
         {% else %}
           decimalSeparator=","
     {% endif %}
+    {% if field.isAllowed %}
+        isAllowed=  {(values) => {
+          {% if field.minLimit %}
+            const MIN_LIMIT = {{ field.minLimit }}
+          {% endif %}
+          const MAX_LIMIT = {{ field.isAllowed | raw }}
+          const { floatValue } = values
+          {% if field.minLimit %}
+            return floatValue === undefined || floatValue === null || (floatValue >= MIN_LIMIT && floatValue <= MAX_LIMIT)
+          {% else %}
+            return floatValue === undefined || floatValue === null || floatValue <= MAX_LIMIT
+          {% endif %}
+        }} 
+    {% endif %}
+    {% if field.allowNegative == "false" %}
+      allowNegative={false}
+    {% endif %}
   /> : '---'} },
 
