@@ -39,6 +39,10 @@ options:
     display: Max value
     type: text
     options: ''
+  - name: minLimit
+    display: Min value
+    type: text
+    options: ''
   - name: fieldFormat
     display: Use field format
     type: checkbox
@@ -108,9 +112,16 @@ import { NumericFormat } from 'react-number-format'
       {% endif %}
       {% if element.values.isAllowed %}
         isAllowed=  {(values) => {
-          const MAX_LIMIT = {{ element.values.isAllowed | raw }};
+          {% if element.values.minLimit %}
+            const MIN_LIMIT = {{ element.values.minLimit }}
+          {% endif %}
+          const MAX_LIMIT = {{ element.values.isAllowed | raw }}
           const { floatValue } = values;
-          return floatValue === undefined || floatValue <= MAX_LIMIT;
+          {% if element.values.minLimit %}
+            return floatValue === undefined || floatValue === null || (floatValue >= MIN_LIMIT && floatValue <= MAX_LIMIT)
+          {% else %}
+            return floatValue === undefined || floatValue === null || floatValue <= MAX_LIMIT
+          {% endif %}
         }} 
       {% endif %}
-  />
+/>

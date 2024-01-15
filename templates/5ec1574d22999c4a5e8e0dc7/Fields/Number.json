@@ -45,6 +45,11 @@ unique_id: 5wQBTRfF
         "type": "text"
       },
       {
+        "display": "Min value",
+        "value": "minLimit",
+        "type": "text"
+      },
+      {
         "display": "Disable negative number",
         "value": "allowNegative",
         "type": "select",
