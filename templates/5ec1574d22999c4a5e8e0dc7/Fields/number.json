@@ -43,6 +43,25 @@ unique_id: 5wQBTRfF
         "display": "Max value",
         "value": "isAllowed",
         "type": "text"
+      },
+      {
+        "display": "Disable negative number",
+        "value": "allowNegative",
+        "type": "select",
+        "options": [
+          {
+            "label": "None",
+            "value": "none"
+          },
+          {
+            "label": "True",
+            "value": "true"
+          },
+          {
+            "label": "False",
+            "value": "false"
+          }
+        ]
       }
     ],
     "validations": [

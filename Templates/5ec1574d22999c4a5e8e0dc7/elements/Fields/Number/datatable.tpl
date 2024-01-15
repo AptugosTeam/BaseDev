@@ -36,5 +36,10 @@ import { NumericFormat } from 'react-number-format'
           return floatValue === undefined || floatValue <= MAX_LIMIT;
         }} 
     {% endif %}
+    {% if field.allowNegative == "false" %}
+      allowNegative={false}
+      {% else field.allowNegative == "true" %}
+        allowNegative={true}
+    {% endif %}
   /> : '---'} },
 
