@@ -57,8 +57,6 @@ import { NumericFormat } from 'react-number-format'
     {% endif %}
     {% if field.allowNegative == "false" %}
       allowNegative={false}
-      {% else field.allowNegative == "true" %}
-        allowNegative={true}
     {% endif %}
     customInput={TextField}
     onValueChange={(values, sourceInfo) => {

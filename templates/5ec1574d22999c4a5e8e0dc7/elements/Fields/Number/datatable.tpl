@@ -30,8 +30,6 @@ unique_id: Uf65zU5B
     {% endif %}
     {% if field.allowNegative == "false" %}
       allowNegative={false}
-      {% else field.allowNegative == "true" %}
-        allowNegative={true}
     {% endif %}
   /> : '---'} },
 
