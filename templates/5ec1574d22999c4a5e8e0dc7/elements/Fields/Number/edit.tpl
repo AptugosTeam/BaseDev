@@ -48,6 +48,13 @@ import { NumericFormat } from 'react-number-format'
         {% else %}
           decimalSeparator=","
     {% endif %}
+        {% if field.isAllowed %}
+        isAllowed=  {(values) => {
+          const MAX_LIMIT = {{ field.isAllowed | raw }};
+          const { floatValue } = values;
+          return floatValue === undefined || floatValue <= MAX_LIMIT;
+        }} 
+    {% endif %}
     customInput={TextField}
     onValueChange={(values, sourceInfo) => {
       handle{{ tableName }}Change("{{ field.column_name | friendly }}")(values.floatValue || 0)
