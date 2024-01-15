@@ -1,0 +1,83 @@
+/*
+path: image.json
+completePath: Fields/image.json
+unique_id: sd4A39xT
+*/
+{
+  "label": "Image",
+  "value": "Image",
+  "dataType": "String",
+  "initialValue": "",
+  "options": {
+    "frontEndType": "string",
+    "extra": [
+      {
+        "display": "Store in Google Cloud",
+        "value": "gcloud",
+        "type": "select",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "1"
+          },
+          {
+            "label": "No",
+            "value": "0"
+          }
+        ]
+      },{
+        "display": "Google Cloud Type",
+        "value": "gcloud_type",
+        "type": "text"
+      },{
+        "display": "Project ID",
+        "value": "gcloud_projectID",
+        "type": "text"
+      },{
+        "display": "Folder Name",
+        "value": "gcloud_folder",
+        "type": "text"
+      },{
+        "display": "Private Key ID",
+        "value": "gcloud_privateKeyID",
+        "type": "text"
+      },{
+        "display": "Private Key",
+        "value": "gcloud_privateKey",
+        "type": "text"
+      },{
+        "display": "Client Email",
+        "value": "gcloud_clientEmail",
+        "type": "text"
+      },{
+        "display": "Client ID",
+        "value": "gcloud_clientID",
+        "type": "text"
+      },{
+        "display": "Auth URI",
+        "value": "gcloud_authUri",
+        "type": "text"
+      },{
+        "display": "Token URI",
+        "value": "gcloud_tokenUri",
+        "type": "text"
+      },{
+        "display": "Auth Provider X509 URL",
+        "value": "gcloud_authx509url",
+        "type": "text"
+      },{
+        "display": "Client X509 URL",
+        "value": "gcloud_x509url",
+        "type": "text"
+      },{
+        "display": "Universe Domain",
+        "value": "gcloud_universeDomain",
+        "type": "text"
+      }, {
+        "display": "Resize Width Before Upload (optional)",
+        "value": "resizeWidth",
+        "type": "text"
+      }
+    ]
+  }
+}

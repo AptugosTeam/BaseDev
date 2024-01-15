@@ -1,0 +1,22 @@
+/*
+path: source_10_actionLookup.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Database/source_10_actionLookup.source
+keyPath: elements/Code Snippets/Database/source_10_actionLookup.source
+unique_id: kx5H2Xyq
+name: actionLookup
+fullload: true
+*/
+
+var from = Block.getFieldValue('MODEL')
+var local = Blockly.JavaScript.valueToCode(Block, 'LOCALFIELD', Blockly.JavaScript.ORDER_NONE)
+var foreign = Blockly.JavaScript.valueToCode(Block, 'FOREIGNFIELD', Blockly.JavaScript.ORDER_NONE)
+var as = Block.getFieldValue('AS')
+var code = `$lookup: {\n  from: "${from}",\n  localField: "${local}",\n  foreignField: "${foreign}",\n  as: "${as}"\n}`
+if (Block.outputConnection.targetConnection) {
+  return [code, Blockly.JavaScript.ORDER_NONE]
+} else {
+  return code
+}
+

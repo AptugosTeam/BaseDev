@@ -1,0 +1,14 @@
+/*
+path: _app.tsx
+completePath: /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/src/pages/_app.tsx
+keyPath: src/pages/_app.tsx
+unique_id: VgbVvbLq
+*/
+import type { AppProps } from 'next/app'
+import { AppCacheProvider } from '@mui/material-nextjs/v13-pagesRouter'
+
+import '@components/Themes/layout.scss';
+
+export default function App({ Component, pageProps }: AppProps) {
+  return <AppCacheProvider {...pageProps}><Component {...pageProps} /></AppCacheProvider>
+}

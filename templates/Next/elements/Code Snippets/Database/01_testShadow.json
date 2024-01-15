@@ -1,0 +1,86 @@
+/*
+path: 01_testShadow.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Database/01_testShadow.json
+keyPath: elements/Code Snippets/Database/01_testShadow.json
+unique_id: rg8TsJOl
+name: testShadow
+fullload: true
+*/
+{
+  init: function() {
+    this.appendValueInput("SHADOW_INPUT")
+      .setCheck(null)
+      .appendField("type:")
+      .appendField(new _globalBlockly.FieldDropdown(
+          [
+            ["number", "NUMBER"],
+            ["string", "STRING"]
+          ], this.updateShape_.bind(this)), "TYPE");
+    this.setInputsInline(true);
+    this.setColour(230);
+    this.updateShape_(this.getFieldValue('TYPE'));
+  },
+  updateShape_: function(type) {
+    console.log(1)
+    var connection = this.getInput('SHADOW_INPUT').connection;
+    console.log(2)
+    var otherConnection;
+    console.log(3, connection.isConnected())
+    if (connection.isConnected()) {
+      console.log(4)
+      var otherBlock = connection.targetConnection.getSourceBlock();
+      console.log(4.5)
+      if (otherBlock.isShadow()) {
+        console.log(4.6)
+        // Don't respawn shadows.
+        connection.setShadowDom(null);
+        console.log(4.7, connection)
+        // connection.disconnect();
+        console.log(4.8)
+        otherBlock.dispose(false);
+      } else {
+        console.log(4.9)
+        // Used to reconnect non-shadows later.
+        otherConnection = connection.targetConnection;
+
+
+        // This is assuming you don't want to mess with actual blocks that have
+        // been connected (e.g handling types). You could do special handling
+        // here though.
+      }
+    }
+
+    console.log(5)
+    var dom;
+    switch(type) {
+      case 'NUMBER':
+        dom = _globalBlockly.Xml.textToDom(
+          '<xml>' +
+          '  <shadow type="math_number"></shadow>' +
+          '</xml>');
+        // textToDom expects top level <xml> tags, but setShadowDom expects
+        // top level <shadow> tags. Issue #2029
+        dom = dom.children[0];
+        break;
+      case 'STRING':
+        dom = _globalBlockly.Xml.textToDom(
+          '<xml>' +
+          '  <shadow type="text"></shadow>' +
+          '</xml>').children[0];
+        break;
+    }
+
+
+    connection.setShadowDom(dom);
+    // This is a private function, meaning it /is not/ safe to call and may
+    // change in the future.
+    connection.respawnShadow_();
+
+
+    if (otherConnection) {
+      connection.connect(otherConnection);
+    }
+  },
+}

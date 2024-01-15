@@ -1,0 +1,18 @@
+/*
+path: math_random_float.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/C_Math/math_random_float.json
+keyPath: elements/Code Snippets/Scripting/C_Math/math_random_float.json
+unique_id: BmaATz82
+name: math_random_float
+fullload: true
+*/
+{
+  "type": "math_random_float",
+  "message0": "%{BKY_MATH_RANDOM_FLOAT_TITLE_RANDOM}",
+  "output": "Number",
+  "style": "math_blocks",
+  "tooltip": "%{BKY_MATH_RANDOM_FLOAT_TOOLTIP}",
+  "helpUrl": "%{BKY_MATH_RANDOM_FLOAT_HELPURL}"
+}

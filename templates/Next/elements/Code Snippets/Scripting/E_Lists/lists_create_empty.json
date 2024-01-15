@@ -1,0 +1,18 @@
+/*
+path: lists_create_empty.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/E_Lists/lists_create_empty.json
+keyPath: elements/Code Snippets/Scripting/E_Lists/lists_create_empty.json
+unique_id: HTBe3B2p
+name: lists_create_empty
+fullload: true
+*/
+{
+  "type": "lists_create_empty",
+  "message0": "%{BKY_LISTS_CREATE_EMPTY_TITLE}",
+  "output": "Array",
+  "style": "list_blocks",
+  "tooltip": "%{BKY_LISTS_CREATE_EMPTY_TOOLTIP}",
+  "helpUrl": "%{BKY_LISTS_CREATE_EMPTY_HELPURL}"
+}

@@ -1,0 +1,16 @@
+/*
+path: return.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Aptugo
+  Internal Use/Code Snippets/Basic/return.json
+keyPath: elements/Aptugo Internal Use/Code Snippets/Basic/return.json
+unique_id: FRknd7dD
+name: js_return
+fullload: true
+*/
+{
+  "message0": "Return Data",
+  "previousStatement": null,
+  "colour": 230,
+  "tooltip": "Ends the function and returns."
+}

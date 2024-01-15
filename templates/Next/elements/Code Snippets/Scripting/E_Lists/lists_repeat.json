@@ -1,0 +1,29 @@
+/*
+path: lists_repeat.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/E_Lists/lists_repeat.json
+keyPath: elements/Code Snippets/Scripting/E_Lists/lists_repeat.json
+unique_id: OCWbA8UM
+name: lists_repeat
+fullload: true
+*/
+{
+  "type": "lists_repeat",
+  "message0": "%{BKY_LISTS_REPEAT_TITLE}",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "ITEM"
+    },
+    {
+      "type": "input_value",
+      "name": "NUM",
+      "check": "Number"
+    }
+  ],
+  "output": "Array",
+  "style": "list_blocks",
+  "tooltip": "%{BKY_LISTS_REPEAT_TOOLTIP}",
+  "helpUrl": "%{BKY_LISTS_REPEAT_HELPURL}"
+}

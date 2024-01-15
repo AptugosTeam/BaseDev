@@ -1,0 +1,12 @@
+/*
+path: returnStatement.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/returnStatement.source
+keyPath: elements/Code Snippets/Scripting/Z_AST/returnStatement.source
+unique_id: kKEZdkCE
+name: js_return_statement
+fullload: true
+*/
+var code = 'return ' + Blockly.JavaScript.valueToCode(Block, 'VALUE', Blockly.JavaScript.ORDER_NONE) + ';';
+return code + '\n';
