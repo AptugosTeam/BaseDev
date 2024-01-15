@@ -141,7 +141,7 @@ import AddDialog from '../components/Dialog/Dialog'
       } else {
         try {
           await fetcher("/api/{{ table.name | friendly | lower }}", {
-            method: dialogMoviesAction === "add" ? "POST" : "PATCH",
+            method: {{ dialogVariable }} === "add" ? "POST" : "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
           });
