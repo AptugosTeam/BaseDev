@@ -127,6 +127,7 @@ import InputAdornment from '@mui/material/InputAdornment'
 {{ save_delayed('bpr', bpr) }}
 {% endif %}
 <TextField
+    {% if element.values.id %}id="{{ element.values.id }}"{% endif %}
     variant="{{ element.values.variant|default('standard') }}"
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.placeholder %}placeholder={{ element.values.placeholder | textOrVariable }}{% endif %}
