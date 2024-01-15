@@ -38,6 +38,11 @@ unique_id: 5wQBTRfF
         "display": "Decimal scale",
         "value": "decimalScale",
         "type": "text"
+      },
+      {
+        "display": "Max value",
+        "value": "isAllowed",
+        "type": "text"
       }
     ],
     "validations": [

@@ -21,5 +21,12 @@ unique_id: Uf65zU5B
         {% else %}
           decimalSeparator=","
     {% endif %}
+    {% if field.isAllowed %}
+        isAllowed=  {(values) => {
+          const MAX_LIMIT = {{ field.isAllowed | raw }};
+          const { floatValue } = values;
+          return floatValue === undefined || floatValue <= MAX_LIMIT;
+        }} 
+    {% endif %}
   /> : '---'} },
 
