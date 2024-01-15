@@ -31,9 +31,16 @@ import { NumericFormat } from 'react-number-format'
     {% endif %}
     {% if field.isAllowed %}
         isAllowed=  {(values) => {
-          const MAX_LIMIT = {{ field.isAllowed | raw }};
-          const { floatValue } = values;
-          return floatValue === undefined || floatValue <= MAX_LIMIT;
+          {% if field.minLimit %}
+            const MIN_LIMIT = {{ field.minLimit }}
+          {% endif %}
+          const MAX_LIMIT = {{ field.isAllowed | raw }}
+          const { floatValue } = values
+          {% if field.minLimit %}
+            return floatValue === undefined || floatValue === null || (floatValue >= MIN_LIMIT && floatValue <= MAX_LIMIT)
+          {% else %}
+            return floatValue === undefined || floatValue === null || floatValue <= MAX_LIMIT
+          {% endif %}
         }} 
     {% endif %}
     {% if field.allowNegative == "false" %}
