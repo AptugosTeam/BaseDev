@@ -55,6 +55,11 @@ import { NumericFormat } from 'react-number-format'
           return floatValue === undefined || floatValue <= MAX_LIMIT;
         }} 
     {% endif %}
+    {% if field.allowNegative == "false" %}
+      allowNegative={false}
+      {% else field.allowNegative == "true" %}
+        allowNegative={true}
+    {% endif %}
     customInput={TextField}
     onValueChange={(values, sourceInfo) => {
       handle{{ tableName }}Change("{{ field.column_name | friendly }}")(values.floatValue || 0)
