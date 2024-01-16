@@ -57,19 +57,22 @@ handler.get(async (req, res) => {
 });
 
 handler.post(
+  (req, _res, next) => {
+    {% for field in table.fields %}
+      {% if field.relationshipType == 'm:1' %}
+        if (typeof req.body.{{ field.column_name | friendly | lower }} === 'object') req.body.{{ field.column_name | friendly | lower }} = req.body.{{ field.column_name | friendly | lower }}._id
+      {% endif %}
+    {% endfor %}
+    next()
+  },
   validateBody({
     type: "object",
     properties: {
       ...ValidateProps.{{ singleName }},
     },
-    // required: ['_id'],
     additionalProperties: true,
   }),
   async (req, res) => {
-    // if (!req.user) {
-    //   return res.status(401).end();
-    // }
-
     const {{ singleName }} = await insert{{ singleName }}(req.db, {
       {% for field in table.fields %}
         {{ field.column_name | friendly | lower }}: req.body.{{ field.column_name | friendly | lower }},
@@ -80,6 +83,14 @@ handler.post(
 );
 
 handler.patch(
+  (req, _res, next) => {
+    {% for field in table.fields %}
+      {% if field.relationshipType == 'm:1' %}
+        if (typeof req.body.{{ field.column_name | friendly | lower }} === 'object') req.body.{{ field.column_name | friendly | lower }} = req.body.{{ field.column_name | friendly | lower }}._id
+      {% endif %}
+    {% endfor %}
+    next()
+  },
   validateBody({
     type: "object",
     properties: {

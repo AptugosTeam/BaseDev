@@ -15,7 +15,7 @@ import { mergeClasses } from '@services/utils'
 const {{ page.name | friendly }}: FunctionComponent = (props: any) => {
   const {
     history: navigation,
-    match: { params } = {},
+    match: { params = {} } = {},
   } = props;
   {% for delay in delayed %}
     {{ delay }}

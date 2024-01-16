@@ -24,10 +24,6 @@ options:
 children: []
 */
 {% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
-{% set bpr %}
-import { useSelector } from 'react-redux'
-{% endset %}
-{{ save_delayed('bpr', bpr ) }}
 {% if element.children %}
 new Promise((resolve) => {
 {% endif %}

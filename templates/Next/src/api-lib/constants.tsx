@@ -11,7 +11,12 @@ export const ValidateProps = {
   {% for table in application.tables %}
   {{ table.singleName | friendly | lower }}: {
     {% for field in table.fields %}
-      {{ field.column_name | friendly | lower }}: { type: "{{ field.data_type | lower }}" },
+      {% set type = field.data_type | lower %}
+      {% set fieldWithData = field|fieldData %}
+      {% if fieldWithData.data_type == 'Autocomplete' %}{% set type = "string" %}
+      {% elseif fieldWithData.options.frontEndType %}{% set type = fieldWithData.options.frontEndType %}
+      {% endif %}
+      {{ field.column_name | friendly | lower }}: { type: "{{ type }}" },
     {% endfor %}
   },
   {% endfor %}

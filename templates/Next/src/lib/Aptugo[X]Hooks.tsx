@@ -15,7 +15,7 @@ import useSWR from "swr";
 
 export function use{{ tableName }}(limit = undefined) {
   const { data, error } = useSWR(
-    `/api/{{ singleName }}s?limit=${limit ?? Number.MAX_SAFE_INTEGER}`,
+    `/api/{{ tableName }}?limit=${limit ?? Number.MAX_SAFE_INTEGER}`,
     fetcher
   );
   return {
@@ -26,7 +26,7 @@ export function use{{ tableName }}(limit = undefined) {
 }
 
 export function use{{ singleName }}({ {{ singleName }}Id }) {
-  const { data, error } = useSWR(`/api/{{ singleName }}s/${{{ singleName }}Id}`, fetcher);
+  const { data, error } = useSWR(`/api/{{ tableName }}/${{{ singleName }}Id}`, fetcher);
 
   return {
     data,

@@ -18,7 +18,7 @@ children: []
   {% endif %}
 {% endif %}
 {
-  id: '{{ referencedString }}',
+  id: '{{ referencedString | lower }}',
   header: '{{ field.displaylabel|default(field.column_name) }}',
   type: 'string',
   size: 300,
