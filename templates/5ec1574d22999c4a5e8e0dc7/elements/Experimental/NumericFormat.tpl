@@ -107,6 +107,8 @@ import { NumericFormat } from 'react-number-format'
         {% elseif element.values.formatNumber == "commaDot" %}
           thousandSeparator=","
           decimalSeparator="."
+        {% elseif element.values.formatNumber == "none" %}
+        
         {% else %}
           decimalSeparator=","
       {% endif %}
