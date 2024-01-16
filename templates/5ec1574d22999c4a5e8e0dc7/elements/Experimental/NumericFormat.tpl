@@ -82,7 +82,14 @@ import { NumericFormat } from 'react-number-format'
         className={ {{ element.values.className }} }
       {% endif %}
       {% if element.values.formatNumber == "dotComma" %}
-          thousandSeparator="."
+        thousandSeparator="."
+        decimalSeparator=","
+        {% elseif element.values.formatNumber == "commaDot" %}
+          thousandSeparator=","
+          decimalSeparator="."
+        {% elseif element.values.formatNumber == "none" %}
+        
+        {% else %}
           decimalSeparator=","
           {% elseif element.values.formatNumber == "commaDot" %}
             thousandSeparator=","
