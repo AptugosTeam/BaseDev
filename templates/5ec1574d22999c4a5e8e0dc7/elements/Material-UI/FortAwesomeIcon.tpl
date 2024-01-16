@@ -35,6 +35,9 @@ options:
     display: Size (rem, em, px)
     type: text
 unique_id: MzMqVMi7
+settings:
+  - name: Packages
+    value: '"@fortawesome/fontawesome-svg-core": "6.3.0","@fortawesome/free-solid-svg-icons": "6.3.0","@fortawesome/react-fontawesome": "0.2.0",'
 */
 {% set bpr %}
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

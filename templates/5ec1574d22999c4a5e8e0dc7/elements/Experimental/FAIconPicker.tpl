@@ -1,8 +1,14 @@
 /*
 path: FAIconPicker.tpl
+completePath: >-
+  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/elements/Experimental/FAIconPicker.tpl
+icon: f:Skeleton.svg
 type: file
 unique_id: hFATHDCA
 sourceType: javascript
+settings:
+  - name: Packages
+    value: '"@fortawesome/fontawesome-svg-core": "6.3.0","@fortawesome/free-solid-svg-icons": "6.3.0","@fortawesome/react-fontawesome": "0.2.0",'
 options:
   - name: value
     display: Value
