@@ -65,7 +65,27 @@ children: []
 {% set bpr %}
 import { NumericFormat } from 'react-number-format'
 {% endset %}
-{{ save_delayed('bpr', bpr) }} 
+{{ save_delayed('bpr', bpr) }}
+{% if element.values.fieldFormat %}
+  {% set ph %}
+    const {{ field.column_name | friendly }}TextFieldProps = {
+      id: "filled-multiline-flexible",
+      {% if element.values.DisableUnderline %}
+          InputProps: { disableUnderline: true },
+      {% endif %}
+      {% if element.values.Autofocus %}autoFocus,{% endif %}
+      {% if element.values.DisableVariable %}disabled: {{ element.values.DisableVariable | raw }} ,{% endif %}
+      {% if field.placeholder %}placeholder: {{ field.placeholder | textOrVariable }},{% endif %}
+      margin: '{{ element.values.margin|default("dense") }}',
+      size: '{{ element.values.size|default("medium") }}',
+      type: "number",
+      multiline: true,
+      maxRows: 4,
+      variant: "{{ element.values.variant|default('standard') }}",
+    };
+  {% endset %}
+  {{ save_delayed('ph',ph) }}
+{% endif %}
   <NumericFormat 
       value= { {{ element.values.content | raw }}{{ content | raw }} }
       {% if element.values.disabled %}
@@ -91,15 +111,8 @@ import { NumericFormat } from 'react-number-format'
         {% elseif element.values.formatNumber == "commaDot" %}
           thousandSeparator=","
           decimalSeparator="."
-        {% elseif element.values.formatNumber == "none" %}
-        
         {% else %}
           decimalSeparator=","
-          {% elseif element.values.formatNumber == "commaDot" %}
-            thousandSeparator=","
-            decimalSeparator="."
-          {% else %}
-            decimalSeparator=","
       {% endif %}
       {% if element.values.fieldFormat %}
         displayType="input"
