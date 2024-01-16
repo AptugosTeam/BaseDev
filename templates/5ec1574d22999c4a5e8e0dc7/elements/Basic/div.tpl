@@ -44,6 +44,12 @@ options:
     display: Title Property
     type: text
     advanced: true
+  - name: enableTooltip
+    display: Enable Tooltip
+    type: checkbox
+    settings:
+      default: false
+    advanced: true
   - name: dataAttribute
     display: Add Data Attribute
     type: checkbox
@@ -70,12 +76,20 @@ helpText: Basic HTML Div element
 {% set tag = element.values.tag|default('div') %}
 <{{tag}}
   {% if type == 'DevelopmentDebug' %}data-aptugo="{{ element.unique_id }}"{% endif %}
-  {% if element.values.title %}
-    title={{ element.values.title | textOrVariable }}
-    data-title={{ element.values.title | textOrVariable }}
+  {% if element.values.enableTooltip %}
+    {% if element.values.title %}
+      title={{ element.values.title | textOrVariable }}
+      data-title={{ element.values.title | textOrVariable }}
+    {% else %}
+      title="{{ element.name }}"
+      data-title="{{ element.name }}"
+    {% endif %}
   {% else %}
-    title="{{ element.name }}"
-    data-title="{{ element.name }}"
+    {% if element.values.title %}
+      data-title={{ element.values.title | textOrVariable }}
+    {% else %}
+      data-title="{{ element.name }}"
+    {% endif %}
   {% endif %}
   {% if element.values.dataAttribute and element.values.nameAttribute and element.values.valueAttribute %}
     data-{{ element.values.nameAttribute }}={ {{ element.values.valueAttribute }} }
