@@ -11,13 +11,13 @@ options:
     display: className
     type: styles
     options: ''
-  - name: linear?
+  - name: linear
     display: Determines wether you can advance if the step isnt finished or not
     type: checkbox
     settings:
       default: false
     options: ''
-  - name: alternativeLabel?
+  - name: alternativeLabel
     display: If set to 'true' and orientation is horizontal, then the step label will be positioned under the icon.
     type: checkbox
     settings:
@@ -34,20 +34,19 @@ import Stepper from '@mui/material/Stepper';
 {{ save_delayed('bpr',bpr) }}
 <Stepper
     {% if element.values.activeStep %}
-        activeStep='{{ element.values.activeStep|default('1') }}'
+        activeStep='{{ element.values.activeStep|default("1") }}'
     {% endif %}
     {% if element.values.className %}
         className='{{ element.values.className }}'
     {% endif %}
     {% if element.values.linear %}
-        linear={ {{ element.values.linear|default('false') }} }
+        linear={ {{ element.values.linear | default(false) }} }
     {% endif %}
     {% if element.values.alternativeLabel %}
-        alternativeLabel={ {{ element.values.alternativeLabel }} }
+        alternativeLabel={ {{ element.values.alternativeLabel | default(false) }} }
     {% endif %}
     {% if element.values.orientation %}
         orientation={ {{ element.values.orientation }} }
-    {% endif %}
-    >
-    {{ content | raw }}
+    {% endif %}>
+  {{ content | raw }}
 </Stepper>
