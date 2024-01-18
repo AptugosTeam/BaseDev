@@ -45,7 +45,7 @@ const errorMessages = {
 };
 
 async function recoverPassword (req) {
-  let { name, email, message, subject, model } = req.body
+  let { name, email, message, subject, model, lang = "en" } = req.body;
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -55,13 +55,13 @@ async function recoverPassword (req) {
   }
 
   return new Promise(function (resolve, reject) {
-    if (!email) reject({ message: 'Wrong parameters sent' })
+    if (!email) reject({ message: errorMessages[lang].wrong })
     const query = model.findOne({ Email: email })
     const promise = query.exec()
 
     promise.then((user) => {
       if (!user) {
-        reject({ message: 'Email not found' })
+        reject({ message: errorMessages[lang].email })
         return
       }
       const { Password, ...userWithoutPassword } = user._doc
