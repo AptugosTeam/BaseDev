@@ -100,7 +100,7 @@ async function checkNonce (req) {
   })
 }
 
-async function authenticate ({ email, password, model, passwordField, populate, fullUser = true }) {
+async function authenticate ({ email, password, model, passwordField, populate, fullUser = true, fieldsToRetrieve = [] }) {
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -130,6 +130,11 @@ async function authenticate ({ email, password, model, passwordField, populate, 
             const { Password, ...userWithoutPassword } = user._doc
             const { _id: id } = userWithoutPassword
             const userID = { id }
+            if (!fullUser) {
+              fieldsToRetrieve.map((fieldName) => {
+                userID[fieldName] = userWithoutPassword[fieldName]
+              })
+            }
             const token = jwt.sign( fullUser ? userWithoutPassword : userID, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
             resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
           } else {
