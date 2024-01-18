@@ -34,6 +34,18 @@ options:
   - name: skipFrontEnd
     display: Do not render anything in the front-end
     type: checkbox
+  - name: amount
+    display: Is an Amount
+    type: checkbox
+    options: ''
+    settings:
+      default: false
+  - name: idPrice
+    display: Id product
+    type: text
+    settings:
+      propertyCondition: amount
+      condition: true
 
 settings:
   - name: BackendPackages
@@ -41,9 +53,30 @@ settings:
   - name: ServerRoute
     value: |
       const stripe = require('stripe')('{{ type == 'Development' ? element.values.devApiKey : element.values.apikey }}');
-      app.post('/create-checkout-session/:qty?/:productid?/:mode?', async (req, res) => {
+      app.post('/create-checkout-session/:qty?/:productid?/:mode?/:currency?', async (req, res) => {
         const successURL = req.body.successURL || `{{ element.values.successURL }}`
         const cancelURL = req.body.cancelURL || `{{ element.values.cancelURL }}`
+        {% if element.values.amount %}
+          const {amount} = req.body;
+          const {currency = 'usd' } = req.params
+          let amountToCharge
+          if(currency === 'usd') {
+            amountToCharge  = parseInt(amount * 100)
+          } else {
+            amountToCharge = amount
+          }
+          stripe.checkout.sessions.create({
+            line_items: [
+              {
+                price_data: {
+                  unit_amount: amountToCharge,
+                  currency,
+                  product: '{{ element.values.idPrice }}'
+                } ,
+                quantity: req.params.qty || 1,
+              },
+          ],
+        {% else %}
         stripe.checkout.sessions.create({
           line_items: [
             {
@@ -51,6 +84,7 @@ settings:
               quantity: req.params.qty || 1,
             },
           ],
+        {% endif %}
           mode: req.params.mode || 'payment',
           client_reference_id: req.body.client_reference_id || null,
           success_url: successURL,
