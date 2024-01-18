@@ -15,6 +15,7 @@ export const ValidateProps = {
       {% set fieldWithData = field|fieldData %}
       {% if fieldWithData.data_type == 'Autocomplete' %}{% set type = "string" %}
       {% elseif fieldWithData.options.frontEndType %}{% set type = fieldWithData.options.frontEndType %}
+      {% elseif fieldWithData.extraOptions.frontEndType %}{% set type = fieldWithData.extraOptions.frontEndType %}
       {% endif %}
       {{ field.column_name | friendly | lower }}: { type: "{{ type }}" },
     {% endfor %}

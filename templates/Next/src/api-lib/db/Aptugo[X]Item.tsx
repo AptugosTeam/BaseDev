@@ -97,23 +97,9 @@ export async function insert{{ singleName }}(
   return {{ singleName }};
 }
 
-export async function update{{ singleName }}ById(
-  db,
-  _id,
-  {
-    {% for field in table.fields %}
-      {{ field.column_name | friendly | lower }},
-    {% endfor %}
-  }
-) {
+export async function update{{ singleName }}ById(db, _id, fields) {
   const {{ singleName }} = {
-    {% for field in table.fields %}
-      {% if field.data_type == 'Autocomplete' %}
-        {{ field.column_name | friendly | lower }}: new ObjectId({{ field.column_name | friendly | lower }}),
-      {% else %}
-        {{ field.column_name | friendly | lower }},
-      {% endif %}
-    {% endfor %}
+    ...fields,
     createdAt: new Date(),
   };
 

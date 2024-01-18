@@ -8,7 +8,7 @@ unique_id: 8H1LaeTw
   "value": "Dropdown",
   "dataType": "String",
   "initialValue": "",
-  "options": {
+  "extraOptions": {
     "frontEndType": "string",
     "extra": [
       {

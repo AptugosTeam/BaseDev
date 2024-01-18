@@ -5,7 +5,7 @@ unique_id: 1NX62QJ2
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
-import FileUpload from '../components/FileUpload/FileUpload'
+import FileUpload from '@components/FileUpload'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <FileUpload
@@ -16,8 +16,8 @@ import FileUpload from '../components/FileUpload/FileUpload'
     {% if field.placeholder %}
         placeholder={{ field.placeholder | textOrVariable }}
     {% endif %}
-    value={ {{ tableName }}data.{{ field.column_name | friendly }}}
-    onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
+    value={ {{ tableName }}data.{{ field.column_name | friendly | lower }}}
+    onChange={handle{{ tableName }}Change("{{ field.column_name | friendly | lower }}")}
     variant="{{ element.values.variant|default('standard') }}"
     {% if field.resizeWidth %}
         resizeWidth={ Number( {{field.resizeWidth|default(800)}} ) }

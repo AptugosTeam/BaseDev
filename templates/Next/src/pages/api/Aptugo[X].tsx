@@ -10,7 +10,7 @@ children: []
 */
 {% set tableName = table.name | friendly | lower %}
 {% set singleName = table.singleName | friendly | lower %}
-import { ValidateProps } from "../../../api-lib/constants";
+import { ValidateProps } from "../../../api-lib/constants"
 import {
   find{{ tableName }},
   count{{ tableName }},
@@ -18,24 +18,48 @@ import {
   update{{ singleName }}ById,
   find{{ singleName }}ById,
   delete{{ singleName }}ById,
-} from "../../../api-lib/db";
-import { database, validateBody } from "../../../api-lib/middlewares";
+} from "../../../api-lib/db"
+import { database, validateBody, parseBody } from "../../../api-lib/middlewares"
 import { ncOpts } from "../../../api-lib/nc"
-import nc from "next-connect";
+import nc from "next-connect"
+import multer from 'multer'
 
-const handler = nc(ncOpts);
-handler.use(database);
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
 
-const ITEMS_PER_PAGE = 6;
+const upload = multer({ 
+  storage: multer.diskStorage({
+    filename: (_req, file, callback) => {
+      const uniqueFileName = Date.now() + '-' + file.originalname;
+      callback(null, uniqueFileName)
+    },
+    destination: (_req, _file, callback) => {
+      callback(null, './public/img')
+    }
+  }),
+  limits: {
+    fileSize: 5 * 1024 * 1024
+  }
+})
+
+const handler = nc(ncOpts)
+handler.use(database)
+handler.use(upload.single('file'))
+handler.use(parseBody)
+
+const ITEMS_PER_PAGE = 6
 handler.get(async (req, res) => {
-  const page = req.query.page || 1;
-  const skip = (page - 1) * ITEMS_PER_PAGE;
+  const page = req.query.page || 1
+  const skip = (page - 1) * ITEMS_PER_PAGE
   const {{ singleName }}InfoAll = await count{{ tableName }}(
     req.db,
     req.query.before ? new Date(req.query.before) : undefined,
     req.query.by
-  );
-  const countPromise = {{ singleName }}InfoAll.length;
+  )
+  const countPromise = {{ singleName }}InfoAll.length
   // add skip and limit query for pagination
   const {{ singleName }}Info = await find{{ tableName }}(
     req.db,
@@ -43,9 +67,9 @@ handler.get(async (req, res) => {
     req.query.by,
     req.query.skip ? req.query.skip : skip,
     req.query.limit ? +req.query.limit : ITEMS_PER_PAGE
-  );
-  const [count, items] = await Promise.all([countPromise, {{ singleName }}Info]);
-  const pageCount = Math.ceil(countPromise / ITEMS_PER_PAGE);
+  )
+  const [count, items] = await Promise.all([countPromise, {{ singleName }}Info])
+  const pageCount = Math.ceil(countPromise / ITEMS_PER_PAGE)
 
   return res.json({
     pagination: {
@@ -53,8 +77,8 @@ handler.get(async (req, res) => {
       pageCount,
     },
     {{ tableName }}: items,
-  });
-});
+  })
+})
 
 handler.post(
   (req, _res, next) => {
@@ -77,10 +101,10 @@ handler.post(
       {% for field in table.fields %}
         {{ field.column_name | friendly | lower }}: req.body.{{ field.column_name | friendly | lower }},
       {% endfor %}
-    });
-    return res.json({ {{ singleName }} });
+    })
+    return res.json({ {{ singleName }} })
   }
-);
+)
 
 handler.patch(
   (req, _res, next) => {
@@ -105,21 +129,21 @@ handler.patch(
       {% for field in table.fields %}
         {{ field.column_name | friendly | lower }},
       {% endfor %}
-    } = req.body;
+    } = req.body
     const {{ tableName }} = await update{{ singleName }}ById(req.db, _id, {
       {% for field in table.fields %}
         {{ field.column_name | friendly | lower }},
       {% endfor %}
-    });
+    })
 
-    res.json({ {{ tableName }} });
+    res.json({ {{ tableName }} })
   }
-);
+)
 
 handler.delete(async (req, res) => {
   const { _id } = req.body
   const {{ singleName }} = await delete{{ singleName }}ById(req.db, _id)
   res.json({ {{ singleName }} })
-});
+})
 
-export default handler;
+export default handler

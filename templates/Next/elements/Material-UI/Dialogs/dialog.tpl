@@ -140,6 +140,17 @@ import AddDialog from '../components/Dialog/Dialog'
         dispatch(remove{{ friendlySingleName }}(data))
       } else {
         try {
+          if (data.profilepic) {
+                        const formData = new FormData();
+                        formData.append("_id", data._id)
+                        formData.append("file", data.profilepic);
+                        const response = await fetcher('/api/users', {
+                          method: 'PATCH',
+                          body: formData
+                        })
+                        data.profilepic = response.filename
+                      } 
+                      
           await fetcher("/api/{{ table.name | friendly | lower }}", {
             method: {{ dialogVariable }} === "add" ? "POST" : "PATCH",
             headers: { "Content-Type": "application/json" },
