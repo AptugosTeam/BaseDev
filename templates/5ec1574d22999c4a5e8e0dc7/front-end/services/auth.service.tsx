@@ -73,13 +73,15 @@ class AuthService {
     return user ? JSON.parse(user) : {}
   }
 
-  recoverPassword({ email, subject, message, name }) {
+  recoverPassword({ email, subject, message, name, model = '', lang = 'en' }) {
     return axios
       .post(API_URL + 'recoverpassword', {
         email,
         subject,
         message,
         name,
+        model, 
+        lang,
       })
       .then((response) => {
         return response.data
