@@ -69,12 +69,13 @@ class AuthService {
       })
   }
 
-  checkNonce(nonce, email, model = '') {
+  checkNonce(nonce, email, model = '', lang = 'en' ) {
     return axios
       .post(API_URL + 'checknonce', {
         nonce,
         email,
-        model
+        model, 
+        lang,
       })
       .then((response) => {
         localStorage.setItem('token', response.data.accessToken)
