@@ -69,7 +69,7 @@ import Step from '@mui/material/Step';
         completed={ {{ element.values.completed }} }
     {% endif %}
     {% if element.values.open %}
-        open={ {{ element.values.open|default('true') }} }
+        open={ {{ element.values.open | default(true) }} }
     {% endif %}
     >
 {{ content | raw }}
