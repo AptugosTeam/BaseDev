@@ -21,6 +21,29 @@ module.exports = {
   dataEncryption
 }
 
+const errorMessages = {
+  en: {
+    wrong: "Wrong parameters sent",
+    email: "Email not found",
+    badNonce: "Bad bad nonce",
+    notPassword: "User does not have a password",
+    wrongPassword: "Password incorrect",
+    error: "There was an error",
+    token: "Error, token could not be generated",
+    unauthorized: "Unauthorized",
+  },
+  es: {
+    wrong: "La información enviada no es válida",
+    email: "Email no encontrado",
+    badNonce: "Código incorrecto",
+    notPassword: "El usuario no tiene contraseña",
+    wrongPassword: "Contraseña incorrecta",
+    error: "Ocurrió un error",
+    token: "Error, no se pudo generar el token",
+    unauthorized: "Acceso denegado",
+  },
+};
+
 async function recoverPassword (req) {
   let { name, email, message, subject, model } = req.body
   if (!model) {
