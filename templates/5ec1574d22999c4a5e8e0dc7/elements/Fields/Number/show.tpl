@@ -13,6 +13,8 @@ import Field from '../components/Table/Field'
     displayType="text"
     {% if field.decimalScale %}
         decimalScale={ {{ field.decimalScale }} }
+    {% elseif field.decimalScale == 0 %}
+      decimalScale={0}
     {% endif %}
     {% if field.formatNumber == "dotComma" %}
         thousandSeparator="."
