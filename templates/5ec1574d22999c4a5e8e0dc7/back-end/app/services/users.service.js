@@ -76,7 +76,7 @@ async function recoverPassword (req) {
 
 async function checkNonce (req) {
   return new Promise(function (resolve, reject) {
-    let { nonce, email, model } = req.body
+     let { nonce, email, model, lang = 'en' } = req.body
     if (!model) {
       const Users = require('../models/users.model.js')
       model = Users
@@ -96,7 +96,7 @@ async function checkNonce (req) {
           const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
           resolve({ accessToken: token, data: userWithoutPassword })
         } else {
-          reject({ message: 'Bad bad nonce' })
+          reject({ message: errorMessages[lang].badNonce })
         }
       })
     })

@@ -42,6 +42,8 @@ import { NumericFormat } from 'react-number-format'
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
     {% if field.decimalScale %}
       decimalScale={ {{ field.decimalScale }} }
+    {% elseif field.decimalScale == 0 %}
+      decimalScale={0}
     {% endif %}
     {% if field.formatNumber == "dotComma" %}
         thousandSeparator="."
