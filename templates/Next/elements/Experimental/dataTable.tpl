@@ -160,7 +160,7 @@ import DataTable from '../components/DataTable/dataTable'
   {% if allowEdit %}
   onRequestRemove={async (row) => {
     try {
-      await fetcher('/api/{{ tableName | lower }}', {
+      await fetcher(`/api/{{ tableName | lower }}/${row._id}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(row),

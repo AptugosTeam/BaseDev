@@ -72,24 +72,19 @@ export function count{{tableName }}(db, before, by) {
     .toArray();
 }
 
-export async function insert{{ singleName }}(
-  db,
-  {
-    {% for field in table.fields %}
-      {{ field.column_name | friendly | lower }},
-    {% endfor %}
-  }
-) {
+export async function insert{{ singleName }}( db, fields) {
   const {{ singleName }}:any = {
-    {% for field in table.fields %}
-      {% if field.data_type == 'Autocomplete' %}
-        {{ field.column_name | friendly | lower }}: new ObjectId({{ field.column_name | friendly | lower }}),
-      {% else %}
-        {{ field.column_name | friendly | lower }},
-      {% endif %}
-    {% endfor %}
-    createdAt: new Date(),
-  };
+    createdAt: new Date()
+  }
+  
+  {% for field in table.fields %}
+    {% if field.data_type == 'Autocomplete' %}
+    if (fields.{{ field.column_name | friendly | lower }}) {{ singleName }}.{{ field.column_name | friendly | lower }} = new ObjectId(fields.{{ field.column_name | friendly | lower }})
+    {% else %}
+      if (fields.{{ field.column_name | friendly | lower }}) {{ singleName }}.{{ field.column_name | friendly | lower }} = fields.{{ field.column_name | friendly | lower }}
+    {% endif %}
+  {% endfor %}
+
   const { insertedId } = await db
     .collection("{{ tableName }}")
     .insertOne({{ singleName }});
@@ -98,10 +93,17 @@ export async function insert{{ singleName }}(
 }
 
 export async function update{{ singleName }}ById(db, _id, fields) {
-  const {{ singleName }} = {
-    ...fields,
-    createdAt: new Date(),
-  };
+  const {{ singleName }}:any = {
+    createdAt: new Date()
+  }
+  
+  {% for field in table.fields %}
+    {% if field.data_type == 'Autocomplete' %}
+    if (fields.{{ field.column_name | friendly | lower }}) {{ singleName }}.{{ field.column_name | friendly | lower }} =  new ObjectId(fields.{{ field.column_name | friendly | lower }})
+    {% else %}
+      if (fields.{{ field.column_name | friendly | lower }}) {{ singleName }}.{{ field.column_name | friendly | lower }} = fields.{{ field.column_name | friendly | lower }}
+    {% endif %}
+  {% endfor %}
 
   return db
     .collection("{{ tableName }}")
