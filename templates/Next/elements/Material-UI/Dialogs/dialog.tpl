@@ -145,14 +145,14 @@ import AddDialog from '../components/Dialog/Dialog'
                         formData.append("_id", data._id)
                         formData.append("file", data.profilepic);
                         const response = await fetcher('/api/users', {
-                          method: 'PATCH',
+                          method: 'PUT',
                           body: formData
                         })
                         data.profilepic = response.filename
                       } 
-                      
-          await fetcher("/api/{{ table.name | friendly | lower }}", {
-            method: {{ dialogVariable }} === "add" ? "POST" : "PATCH",
+
+          await fetcher(`/api/{{ table.name | friendly | lower }}${ {{ dialogVariable }} !== "add" ? '/' + data._id : ''}`, {
+            method: {{ dialogVariable }} === "add" ? "POST" : "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
           });

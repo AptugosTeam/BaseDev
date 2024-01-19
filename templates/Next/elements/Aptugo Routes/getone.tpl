@@ -5,7 +5,8 @@ unique_id: qQA9SMGy
 icon: ico-field
 children: []
 */
-{% if table.beforeRetrieve %}{{ table.beforeRetrieve }}{% endif %}
-{{ table.name | friendly | lower }}.findOne({ req, res }).then((result) => {
-  res.send(result)
-})
+async (req, res) => {
+  {% if table.beforeRetrieve %}{{ table.beforeRetrieve }}{% endif %}
+  const article = await findarticleById(req.db, req.query.ID)
+  res.json(article)
+}
