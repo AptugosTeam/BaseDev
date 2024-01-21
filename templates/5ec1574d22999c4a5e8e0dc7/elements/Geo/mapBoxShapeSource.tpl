@@ -23,6 +23,7 @@ options:
   id="{{ element.unique_id }}"
   type="geojson"
   data={ {{ element.values.shape }} }
+  {% if element.values.cluster %}cluster={ {{ element.values.cluster }} }{% endif %}
   clusterMaxZoom={14}
   clusterRadius={50}
   {% if element.values.clusterProperties %}clusterProperties={ {{ element.values.clusterProperties }} }{% endif %}
