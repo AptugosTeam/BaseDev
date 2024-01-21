@@ -7,7 +7,7 @@ unique_id: i1kD8rN4
   "expo": {
     "name": "{{ application.settings.name }}",
     "slug": "{{ application.settings.name | lower | friendly }}",
-    "version": "1.0.0",
+    "version": "{{ insert_setting('version')|default('1.0.0') }}",
     "orientation": "portrait",
     "icon": "./assets/img/icon.png",
     "splash": {
@@ -28,11 +28,8 @@ unique_id: i1kD8rN4
     },
     "android": {
       {{ insert_setting('AppJsonAndroid') | raw }}
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/img/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.aptugo.{{ application.settings.name | lower | friendly }}"
+      "package": "com.aptugo.{{ application.settings.name | lower | friendly }}",
+      "versionCode": {{ insert_setting('versionCode')|default('1') }}
     },
     "web": {
       "favicon": "./assets/img/favicon.png"

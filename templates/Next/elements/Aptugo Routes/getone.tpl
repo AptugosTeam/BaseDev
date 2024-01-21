@@ -7,6 +7,6 @@ children: []
 */
 async (req, res) => {
   {% if table.beforeRetrieve %}{{ table.beforeRetrieve }}{% endif %}
-  const article = await findarticleById(req.db, req.query.ID)
-  res.json(article)
+  const {{ singleName }} = await find{{ singleName }}ById(req.db, req.query.ID)
+  res.json({{ singleName }})
 }

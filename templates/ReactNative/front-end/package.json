@@ -23,6 +23,7 @@ unique_id: GFoENpEW
     "react-native-sass-transformer": "^2.0.0",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
     "expo-image-picker": "~14.3.2",
+    "react-native-gradle-plugin": "^0.71.19",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "react-native-gesture-handler": "~2.12.0",
