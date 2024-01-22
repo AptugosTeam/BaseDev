@@ -13,7 +13,6 @@ options:
       aptugoOnLoad: |-
         const element = arguments[0];
         let finalVarsToAdd = { result: { data: '' }}
-        console.log(finalVarsToAdd, aptugo.variables)
         aptugo.variables.setElementVariable(element.unique_id, finalVarsToAdd);
       active: true
   - name: method

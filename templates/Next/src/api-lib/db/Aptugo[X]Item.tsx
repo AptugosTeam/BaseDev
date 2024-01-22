@@ -79,11 +79,8 @@ export async function insert{{ singleName }}( db, fields) {
   }
   
   {% for field in table.fields %}
-    {% if field.data_type == 'Autocomplete' %}
-    if (fields.{{ field.column_name | friendly | lower }}) {{ singleName }}.{{ field.column_name | friendly | lower }} = new ObjectId(fields.{{ field.column_name | friendly | lower }})
-    {% else %}
-      if (fields.{{ field.column_name | friendly | lower }}) {{ singleName }}.{{ field.column_name | friendly | lower }} = fields.{{ field.column_name | friendly | lower }}
-    {% endif %}
+    {% set fieldWithData = field | fieldData %}
+    {% include includeTemplate(['Fields' ~ field.data_type ~'update.tpl', 'Fieldsupdate.tpl']) %}
   {% endfor %}
 
   const { insertedId } = await db
@@ -99,11 +96,8 @@ export async function update{{ singleName }}ById(db, _id, fields) {
   }
   
   {% for field in table.fields %}
-    {% if field.data_type == 'Autocomplete' %}
-    if (fields.{{ field.column_name | friendly | lower }}) {{ singleName }}.{{ field.column_name | friendly | lower }} =  new ObjectId(fields.{{ field.column_name | friendly | lower }})
-    {% else %}
-      if (fields.{{ field.column_name | friendly | lower }}) {{ singleName }}.{{ field.column_name | friendly | lower }} = fields.{{ field.column_name | friendly | lower }}
-    {% endif %}
+    {% set fieldWithData = field | fieldData %}
+    {% include includeTemplate(['Fields' ~ field.data_type ~'update.tpl', 'Fieldsupdate.tpl']) %}
   {% endfor %}
 
   return db

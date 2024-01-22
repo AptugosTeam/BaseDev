@@ -7,11 +7,6 @@ children: []
 */
 (req, _res, next) => {
   {% if table.beforeCreate %}{{ table.beforeCreate }}{% endif %}
-  {% for field in table.fields %}
-    {% if field.relationshipType == 'm:1' %}
-      if (typeof req.body.{{ field.column_name | friendly | lower }} === 'object') req.body.{{ field.column_name | friendly | lower }} = req.body.{{ field.column_name | friendly | lower }}._id
-    {% endif %}
-  {% endfor %}
   next()
 },
 validateBody({

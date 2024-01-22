@@ -1,7 +1,5 @@
 /*
 path: typesenseSearch.tpl
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/Experimental/typesenseSearch.tpl
 keyPath: elements/Experimental/typesenseSearch.tpl
 unique_id: riZn4TX2
 options:
@@ -10,6 +8,21 @@ options:
     type: dropdown
     options: >-
       return [...aptugo.store.getState().application.tables.map(({ unique_id,name }) => [unique_id, name])]
+    settings:
+      aptugoOnLoad: |-
+        const element = arguments[0];
+        var selectedTable = (element.values?.collection) ? element.values?.collection : null;
+        if (selectedTable) {
+          if (!element.options) element.options = []
+          const allFields = aptugo.tableUtils.getAllFields(selectedTable)
+          allFields.forEach(field => {
+            if (field[3].data_type === 'String' || field[3].data_type === 'Computed' || field[3].data_type === 'Wysiwyg') {
+              if (!element.options.find(eo => eo.name === `typesense_${field[3].column_name}`)) element.options.push({ name: `typesense_${field[3].column_name}`, display: `Search for ${field[1]}`, type: "checkbox" })
+              if (!element.options.find(eo => eo.name === `typesense_facet_${field[3].column_name}`)) element.options.push({ name: `typesense_facet_${field[3].column_name}`, display: `Facet ${field[1]}`, type: "checkbox" })
+            }
+          })
+        }
+      active: true
 extraFiles:
   - source: 'elements/Experimental/999_typesense.js'
     destination: '/src/api-lib/typesense.tsx'
@@ -53,13 +66,14 @@ export async function setupTypesense_{{ tableName }}(typesenseClient, db) {
   let schema = {
     name: '{{ tableName }}',
     fields: [
-      
       {% for field in table.fields %}
-      {
-        name: '{{ field.column_name | friendly | lower }}',
-        type: 'string',
-        facet: false,
-      },
+        {% if element.values['typesense_' ~ (field.column_name | friendly)] %}
+        {
+          name: '{{ field.column_name | friendly | lower }}',
+          type: 'string',
+          facet: {{ element.values['typesense_facet_' ~ (field.column_name | friendly)]|default(false) }},
+        },
+        {% endif %}
       {% endfor %}
     ]
   }
@@ -101,5 +115,5 @@ export async function setupTypesense_{{ tableName }}(typesenseClient, db) {
 {{ save_delayed('ph',ph) }}
 <InstantSearch indexName="articles" searchClient={searchClient}>
   <SearchBox />
-  <Hits />
+  <Hits {% if element.children %}hitComponent={(props) => {% for child in element.children %}{{ child.rendered }}{% endfor %}}{% endif %}/>
 </InstantSearch>
