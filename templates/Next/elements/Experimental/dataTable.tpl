@@ -125,7 +125,7 @@ import DataTable from '../components/DataTable/dataTable'
     className={ {{element.values.className}} }
   {% endif %}
   tableData={ {{ tableData }} }
-  pages={data?.pagination.pagesCount}
+  pages={data?.pagination.pageCount}
   columnInfo={
     {% if element.values.columnInfo %}
       {{ element.values.columnInfo }}
@@ -144,7 +144,7 @@ import DataTable from '../components/DataTable/dataTable'
     {% endif %}
   }
   onRequestPaginate={(options) => {
-    set{{ innervarname }}loadoptions({ ...{{ innervarname }}loadoptions, ...options })
+    set{{ tableName | lower }}Page(options.page)
   }}
   {% if allowEdit %}
   onRequestEdit={row => {

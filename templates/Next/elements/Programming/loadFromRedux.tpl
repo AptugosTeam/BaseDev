@@ -150,7 +150,8 @@ children: []
   {% endset %}
   {{ save_delayed('bpr', bpr)}}
   {% set ph %}
-    const { data, isLoading, isError } = use{{ tableName }}Pages(1)
+    const [{{ tableName }}Page, set{{ tableName }}Page] = React.useState(1)
+    const { data, isLoading, isError } = use{{ tableName }}Pages({{ tableName }}Page)
   {% endset %}
   {{ save_delayed('ph', ph)}}
 {% if element.values.onload or element.children %}

@@ -8,6 +8,7 @@ sourceType: javascript
 subtype: Aptugo
 children: []
 */
+{{ insert_setting('modelAddenumHead') | raw }}
 {% set tableName = table.name | friendly | lower %}
 {% set singleName = table.singleName | friendly | lower %}
 import { ObjectId } from "mongodb"
@@ -123,3 +124,5 @@ export async function delete{{ singleName }}ById(db, _id) {
       console.log("Error: " + err);
     });
 }
+
+{{ insert_setting('modelAddenum') | raw }}

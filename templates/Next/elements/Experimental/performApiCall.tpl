@@ -43,14 +43,14 @@ sourceType: javascript
 children: []
 */
 {% set bpr %}
-import axios from 'axios'
+import { fetcher } from '@lib/fetch'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set url = element.values.url %}
 {% if element.values.urlFULL %}
 {% set url = settings.apiURL ~ element.values.url %}
 {% endif %}
-axios.{{ element.values.method|default('get') }}({{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}, {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}).then({{ element.values.resultVar|default('result') }} => {
+fetcher({{ url | textOrVariableInCode }}, { method: '{{ element.values.method|default('GET') }}'}).then({{ element.values.resultVar|default('result') }} => {
  {{ content | raw }}
 }).catch((error) => {
   {% if element.values.onError %}

@@ -27,12 +27,30 @@ import Input from '@mui/material/Input'
   const QuillEditor = dynamic(() => import('react-quill'), { ssr: false })
   {% endset %}
   {{ save_delayed('bpr', bpr) }}
+  {% set ph %}
+  const quillModules = {
+    toolbar: [
+        [{ font: [] }],
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        ["bold", "italic", "underline", "strike"],
+        [{ color: [] }, { background: [] }],
+        [{ script:  "sub" }, { script:  "super" }],
+        ["blockquote", "code-block"],
+        [{ list:  "ordered" }, { list:  "bullet" }],
+        [{ indent:  "-1" }, { indent:  "+1" }, { align: [] }],
+        ["link", "image", "video"],
+        ["clean"],
+    ]
+  }
+  {% endset %}
+  {{ save_delayed('ph', ph) }}
   <FormControl margin="normal" size="medium" variant='standard' fullWidth>
     <InputLabel htmlFor='contentsInput' shrink>Contents</InputLabel>
     <QuillEditor
+      modules={quillModules}
       placeholder="{{ field.placeholder|default(field.prompt)|default(field.column_name) }}"
       value={ {{ tableName }}data.{{ field.column_name | friendly | lower }} || ''} 
-      onChange={e => handle{{ tableName }}Change('{{ field.column_name | friendly | lower }}')(e.replace('<p><br></p><p><br></p>', '<p><br></p>'))}
+      onChange={e => handle{{ tableName }}Change('{{ field.column_name | friendly | lower }}')(e)}
       theme="snow"
     />
   </FormControl>

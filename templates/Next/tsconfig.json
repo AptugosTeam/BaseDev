@@ -32,6 +32,7 @@ unique_id: Zw2zePwz
     "paths": {
       "@components/*": ["./src/components/*"],
       "@api-lib/*": ["./src/api-lib/*"],
+      "@lib/*": ["./src/lib/*"],
       "@/*": ["./src/*"],
       "dist": ["dist"]
     }
