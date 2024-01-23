@@ -12,9 +12,7 @@ options:
       default: false
   - name: variableName
     display: Store In
-    type: dropdown
-    options: >-
-      return [...aptugoUtils.variables.retrievePageVariablesFromElement(arguments[0]).filter(rpvfe => rpvfe.type === 'Variable').map(({ unique_id, name }) => [unique_id, name])]
+    type: text
   - name: userType
     display: User role to check
     type: text
@@ -34,14 +32,34 @@ options:
       active: true
       default: login
 children: []
+extraFiles:
+  - source: 'elements/Programming/Snippets/extraFiles/997_userHook.tsx'
+    destination: '/src/lib/user/hooks.tsx'
+  - source: 'elements/Programming/Snippets/extraFiles/996_userHookIndex.tsx'
+    destination: '/src/lib/user/index.tsx'
+  - source: 'elements/Programming/Snippets/extraFiles/995_userApi.tsx'
+    destination: '/src/pages/api/user/index.tsx'
+  - source: 'elements/Programming/Snippets/extraFiles/994_passportIndex.tsx'
+    destination: '/src/api-lib/auth/index.tsx'
+  - source: 'elements/Programming/Snippets/extraFiles/993_passport.tsx'
+    destination: '/src/api-lib/auth/passport.tsx'
+  - source: 'elements/Programming/Snippets/extraFiles/992_authMiddleware.tsx'
+    destination: '/src/api-lib/middlewares/auth.tsx'
+  - source: 'elements/Programming/Snippets/extraFiles/991_sessionMiddleware.tsx'
+    destination: '/src/api-lib/middlewares/session.tsx'
+  - source: 'elements/Programming/Snippets/extraFiles/990_dbAdded.tsx'
+    destination: '/src/api-lib/db/auth.tsx'
 */
+{% set addedMiddleWare %}
+export { default as auths } from './auth'
+{% endset %}
+{{ add_setting('addedMiddleware', addedMiddleWare) }}
+{% set addedModel %}
+export * from './auth'
+{% endset %}
+{{ add_setting('addedModel', addedModel) }}
 {% set bpr %}
-import AuthService from '@services/auth.service'
+import { useCurrentUser } from '../lib/user'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-React.useEffect(() => {
-    AuthService.getCurrentUser().then(currentUser => {
-        set{{ (element.values.variableName | elementData).values.variableName }}(currentUser)
-        {% if element.values.checkUserRole %}if (currentUser && currentUser.Role !== '{{ element.values.userType }}') props.history.push('/{{ element.values.goTo|default('login') }}'){% endif %}
-    })
-}, [])
+const {{ element.values.variableName }} = useCurrentUser().data

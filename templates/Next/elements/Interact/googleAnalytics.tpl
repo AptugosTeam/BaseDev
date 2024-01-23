@@ -12,15 +12,10 @@ sourceType: javascript
 children: []
 */
 {% set IBA %}
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ element.values.trackingid }}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', '{{ element.values.trackingid }}');
-</script>
+import { GoogleAnalytics } from '@next/third-parties/google'
 {% endset %}
-{{ add_setting('IndexBodyAdd', IBA) }}
-// Google Analytics Track
+{{ add_setting('SiteWideBeforePageRenderAddenum', IBA) }}
+{% set IBB %}
+<GoogleAnalytics gaId="{{ element.values.trackingid }}" />
+{% endset %}
+{{ add_setting('SiteWideAddenum'), IBB }}

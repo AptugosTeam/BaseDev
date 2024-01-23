@@ -26,7 +26,7 @@ options:
 */
 {% set table = element.values.saveTable | tableData %}
 {% set bpr %}
-import ContEditor from '../components/ContentEdit'
+import ContEditor from '@components/ContentEdit'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set bpr %}

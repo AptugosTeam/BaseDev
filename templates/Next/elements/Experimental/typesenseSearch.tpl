@@ -13,12 +13,12 @@ options:
         const element = arguments[0];
         var selectedTable = (element.values?.collection) ? element.values?.collection : null;
         if (selectedTable) {
-          if (!element.options) element.options = []
+          if (!element.moreOptions) element.moreOptions = []
           const allFields = aptugo.tableUtils.getAllFields(selectedTable)
           allFields.forEach(field => {
             if (field[3].data_type === 'String' || field[3].data_type === 'Computed' || field[3].data_type === 'Wysiwyg') {
-              if (!element.options.find(eo => eo.name === `typesense_${field[3].column_name}`)) element.options.push({ name: `typesense_${field[3].column_name}`, display: `Search for ${field[1]}`, type: "checkbox" })
-              if (!element.options.find(eo => eo.name === `typesense_facet_${field[3].column_name}`)) element.options.push({ name: `typesense_facet_${field[3].column_name}`, display: `Facet ${field[1]}`, type: "checkbox" })
+              if (!element.moreOptions.find(eo => eo.name === `typesense_${field[3].column_name}`)) element.moreOptions.push({ name: `typesense_${field[3].column_name}`, display: `Search for ${field[1]}`, type: "checkbox" })
+              if (!element.moreOptions.find(eo => eo.name === `typesense_facet_${field[3].column_name}`)) element.moreOptions.push({ name: `typesense_facet_${field[3].column_name}`, display: `Facet ${field[1]}`, type: "checkbox" })
             }
           })
         }

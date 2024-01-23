@@ -30,15 +30,15 @@ options:
     advanced: true
 children: []
 */
-{% set bpr %}
-import AuthService from '@services/auth.service'
-{% endset %}
-{{ save_delayed('bpr',bpr)}}
-AuthService[{{ element.values.alternativeCall | default("'login'") }}]({{ element.values.Email }}, {{ element.values.Password }}, {{ element.values.fullUser | default(true) }}).then(
-  (res) => {
-    navigation.push('{{ (element.values.OnSuccess | elementData).path }}')
-  },
-  (error) => {
-    setloginError(error.response.data.message)
-  }
-)
+fetcher('/api/auth', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    email: loginData.Email,
+    password: loginData.Password,
+  }),
+}).then(res => {
+  console.log('logged in', res)
+}).catch(error => {
+  setloginError(error)
+})

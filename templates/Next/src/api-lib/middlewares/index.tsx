@@ -6,3 +6,4 @@ unique_id: d2HfTKek
 export { validateBody } from './ajv'
 export { default as database } from './database'
 export { parseBody } from './parseBody'
+{{ insert_setting('addedMiddleware') | raw }}
