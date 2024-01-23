@@ -16,7 +16,7 @@ options:
     display: Use Tag
     type: dropdown
     options: >-
-      return [['navigate', 'Navigate'], ['push', 'Push']]
+      return [['navigate', 'Navigate'], ['push', 'Push'], ['A', 'External']]
   - name: className
     display: ClassName
     type: text
