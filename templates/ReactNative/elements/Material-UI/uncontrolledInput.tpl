@@ -29,6 +29,9 @@ options:
     display: ClassName
     type: text
     options: ''
+  - name: textColor
+    display: Text Color
+    type: text
   - name: theme
     display: Theme
     type: text
@@ -124,6 +127,7 @@ children: []
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
     {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
+    {% if element.values.textColor %}textColor={ {{ element.values.textColor | textOrVariable }}}{% endif %}
     {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
     {% if element.values.activeUnderlineColor %}activeUnderlineColor={ {{ element.values.activeUnderlineColor | textOrVariable }}}{% endif %}
     {% if element.values.labelWithVar %}label={ {{element.values.labelWithVar}} }{% endif %}
@@ -153,6 +157,7 @@ children: []
       {% endif %}
       outlineColor={ {{ element.values.outlineColor|default('transparent') | textOrVariable }}}
       activeOutlineColor={ {{ element.values.activeOutlineColor|default('#3A528A') | textOrVariable }}}
+      {% if element.values.textColor %}textColor={ {{ element.values.textColor | textOrVariable }}}{% endif %}
       {% if element.values.value %}value={{ element.values.value }}{% endif %}
       {% if element.values.onChange %}onChangeText={ {{ element.values.onChange | replace({ '.target.value': '' }) | functionOrCall }} }{% endif %}
       {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
