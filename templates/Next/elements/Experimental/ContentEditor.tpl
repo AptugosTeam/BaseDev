@@ -6,7 +6,12 @@ icon: f:ContentEditor.svg
 children: []
 settings:
   - name: Packages
-    value: '"ContentTools": "latest",'
+    value: '"ContentTools": "latest","image-size": "^1.1.1",'
+extraFiles:
+  - source: 'elements/Programming/Snippets/extraFiles/989_contentEditor.tsx'
+    destination: '/src/components/ContentEdit/index.tsx'
+  - source: 'elements/Programming/Snippets/extraFiles/988_fileUpload.tsx'
+    destination: '/src/pages/api/upload.tsx'
 options:
   - name: saveTable
     display: Save To
@@ -23,6 +28,11 @@ options:
   - name: uploadPath
     display: Upload Path (back-end)
     type: text
+    advanced: true
+  - name: stylesDefinition
+    display: Styles stylesDefinition
+    type: code
+    advanced: true
 */
 {% set table = element.values.saveTable | tableData %}
 {% set bpr %}
@@ -35,6 +45,7 @@ import { edit{{ table.name | friendly | capitalize }} } from '../store/actions/
 {{ save_delayed('bpr', bpr ) }}
 <ContEditor
   content={{ element.values.content | textOrVariable }}
-  uploadPath={{ element.values.uploadPath | textOrVariable }}
+  uploadPath={{ element.values.uploadPath|default('/api/upload') | textOrVariable }}
   onSave={ {{ element.values.onSave }} }
+  {% if element.values.stylesDefinition %}StylePalette={ {{ element.values.stylesDefinition }} }{% endif %}
 />

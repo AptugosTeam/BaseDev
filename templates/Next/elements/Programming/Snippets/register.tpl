@@ -17,11 +17,27 @@ options:
 children: []
 */
 {% set bpr %}
-import AuthService from '@services/auth.service'
+import { fetcher } from '@lib/fetch'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-AuthService.register({{ element.values.Data }}).then(_result => {
-    navigation.push('{{ (element.values.OnSuccess | elementData).path }}')
-}).catch(error => {
-    setregisterError(error.response.data.message)
-})
+    try {
+      if (data.profilepic) {
+        const formData = new FormData()
+        formData.append('_id', data._id)
+        formData.append('file', data.profilepic)
+        const response = await fetcher('/api/users', {
+          method: 'PUT',
+          body: formData,
+        })
+        data.profilepic = response.filename
+      }
+
+      await fetcher(`/api/users`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+
+    } catch (e) {
+      console.log('catch', e)
+    }

@@ -13,6 +13,11 @@ children: []
 {% set singleName = table.singleName | friendly | lower %}
 import { ObjectId } from "mongodb"
 
+{% for field in table.fields %}
+  {% set fieldWithData = field | fieldData %}
+  {% include includeTemplate(['Fields' ~ field.data_type ~'updateImports.tpl', 'FieldsupdateImports.tpl']) %}
+{% endfor %}
+
 export async function find{{ singleName }}ById(db, _id) {
   const {{ tableName }} = await db
     .collection("{{ tableName }}")

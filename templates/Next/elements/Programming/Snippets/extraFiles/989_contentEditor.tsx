@@ -1,7 +1,9 @@
 /*
-path: index.tsx
-completePath: front-end/components/ContentEdit/index.tsx
-unique_id: UPhKOA4J
+path: 989_contentEditor.tsx
+completePath: >-
+  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/Programming/Snippets/extraFiles/989_contentEditor.tsx
+keyPath: elements/Programming/Snippets/extraFiles/989_contentEditor.tsx
+unique_id: fh45AsTw
 */
 import axios from 'axios'
 import ContentTools from 'ContentTools'
@@ -32,8 +34,8 @@ const ContEditor: FunctionComponent = (props: any) => {
           },
         })
         .then((res) => {
-          imagePath = '/img/' + res.data.name
-          imageSize = [res.data.width, res.data.height]
+          imagePath = '/img/' + res.data.filename
+          imageSize = [res.data.dimensions.width, res.data.dimensions.height]
           _dialog.progress(100)
         })
 
@@ -74,6 +76,10 @@ const ContEditor: FunctionComponent = (props: any) => {
       if (props.content !== state.content) {
         const ct = ContentTools
         ct.IMAGE_UPLOADER = ImageUploader
+
+        if (props.StylePalette) {
+          ct.StylePalette.add(props.StylePalette.map(sp => new ContentTools.Style(sp[0], sp[1], sp[2])))
+        }
         editor = new ct.EditorApp.get()
         editor.init('*[data-editable]', 'data-name')
         editor.addEventListener('start', () => {})
