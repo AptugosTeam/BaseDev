@@ -56,7 +56,15 @@ options:
     display: Edit Procedure
     type: dropdown
     options: >-
-      return [['No','None'],['Internal','Popup Dialog'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) => [unique_id, name])]
+      return [['No','None'],['custom', 'Custom'],['Internal','Popup Dialog'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) => [unique_id, name])]
+  - name: customUrl
+    display: Url for Edit
+    type: text
+    options: ''
+    settings:
+      propertyCondition: editProcedure
+      condition: custom
+      active: true
   - name: allowEdit
     display: Allow Edition
     type: checkbox
@@ -67,8 +75,7 @@ options:
     display: Table used in Edits (or deletes)
     type: dropdown
     options: >-
-      return [...aptugo.store.getState().application.tables.map(({ unique_id,
-      name }) => [unique_id, name])]
+      return [...aptugo.store.getState().application.tables.map(({ unique_id,name }) => [unique_id, name])]
   - name: allowDeletion
     display: Allow Deletion
     type: checkbox
@@ -240,6 +247,9 @@ children: []
         {% if editProc == 'Internal' %}
           {{ setEditDataFunctionName }}(e.element)
           setdialog{{ tableName | capitalize }}Action('edit')
+          {% elseif element.values.customUrl %}
+          const url = `{{ element.values.customUrl }}`
+          props.history.push(url)
         {% else %}
           const url = '{{ (editProc | elementData ).path }}'.replace(':id', e.element._id)
           props.history.push(url)
