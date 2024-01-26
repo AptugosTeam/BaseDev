@@ -70,6 +70,12 @@ class AuthService {
     }).catch(e => { throw e })
   }
 
+  registerWithSession(data) {
+    return axios.post(API_URL, data).then((_result) => {
+        return this.loginWithSession(data.Email, data.Password).then((afterLogin) => { return afterLogin})
+      }).catch(e => { throw e })
+  }
+
   async getCurrentUser() {
     const user = localStorage.getItem('user') || sessionStorage.getItem('userSession')
     return user ? JSON.parse(user) : {}
