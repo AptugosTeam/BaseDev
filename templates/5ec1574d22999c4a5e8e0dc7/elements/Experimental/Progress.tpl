@@ -22,7 +22,7 @@ const [{{ element.values.varName }}, set{{ element.values.varName }}] = React.us
 {{ save_delayed('ph', ph ) }}
 <Backdrop
   open={ {{ element.values.varName }} }
-  sx={ { color: '#fff' } }
+  sx={ { color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 } }
 >
 <CircularProgress color="inherit" />
 {{ content | raw }}
