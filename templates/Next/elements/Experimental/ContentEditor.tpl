@@ -33,19 +33,31 @@ options:
     display: Styles stylesDefinition
     type: code
     advanced: true
+  - name: active
+    display: Active State Variable
+    type: text
 */
-{% set table = element.values.saveTable | tableData %}
 {% set bpr %}
 import ContEditor from '@components/ContentEdit'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{% set bpr %}
-import { edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
-{% endset %}
-{{ save_delayed('bpr', bpr ) }}
+{% if element.values.active %}
+  { {{ element.values.active }} ? 
+    <ContEditor
+      content={{ element.values.content | textOrVariable }}
+      uploadPath={{ element.values.uploadPath|default('/api/upload') | textOrVariable }}
+      onSave={ {{ element.values.onSave }} }
+      {% if element.values.stylesDefinition %}StylePalette={ {{ element.values.stylesDefinition }} }{% endif %}
+    />
+  : React.createElement('div', {
+    key: 'my-region',
+    dangerouslySetInnerHTML: { __html: '<div data-editable="my-region">' + {{ element.values.content | textOrVariableInCode }} + '</div>' },
+  }) }
+{% else %}
 <ContEditor
   content={{ element.values.content | textOrVariable }}
   uploadPath={{ element.values.uploadPath|default('/api/upload') | textOrVariable }}
   onSave={ {{ element.values.onSave }} }
   {% if element.values.stylesDefinition %}StylePalette={ {{ element.values.stylesDefinition }} }{% endif %}
 />
+{% endif %}

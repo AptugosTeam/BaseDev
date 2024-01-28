@@ -13,7 +13,7 @@ import {
 
 export default function Document(props) {
   return (
-    <Html>
+    <Html lang="en">
       <Head>
         <DocumentHeadTags {...props} />
       </Head>

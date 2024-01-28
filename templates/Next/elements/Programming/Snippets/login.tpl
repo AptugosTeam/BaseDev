@@ -30,6 +30,10 @@ options:
     advanced: true
 children: []
 */
+{% set bpr %}
+import { fetcher } from '@lib/fetch'
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
 fetcher('/api/auth', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },

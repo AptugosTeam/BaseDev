@@ -13,10 +13,11 @@ options:
 children: []
 */
 {% set bpr %}
-import AuthService from '@services/auth.service'
+import { fetcher } from '@lib/fetch'
 {% endset %}
-{{ save_delayed('bpr',bpr)}}
-AuthService.logout().then(
-  (res) => {
-    navigation.push('{{ (element.values.Logout | elementData).path }}')
-  })
+{{ save_delayed('bpr',bpr) }}
+fetcher('/api/auth', {
+  method: 'DELETE'
+}).then(res => {
+  console.log('logged out', res)
+})

@@ -1,6 +1,5 @@
 /*
 path: _app.tsx
-completePath: /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/src/pages/_app.tsx
 keyPath: src/pages/_app.tsx
 unique_id: VgbVvbLq
 */
@@ -10,5 +9,8 @@ import { AppCacheProvider } from '@mui/material-nextjs/v13-pagesRouter'
 import '@components/Themes/layout.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <AppCacheProvider {...pageProps}>{{ insert_setting('SiteWideAddenum') | raw }}<Component {...pageProps} /></AppCacheProvider>
+  return <AppCacheProvider {...pageProps}>
+    {{ insert_setting('SiteWideAddenum') | raw }}
+    <Component {...pageProps} />
+  </AppCacheProvider>
 }

@@ -64,7 +64,7 @@ import { NumericFormat } from 'react-number-format'
 {{ save_delayed('bpr', bpr) }}
 {% if element.values.fieldFormat %}
   {% set ph %}
-    const {{ field.column_name | friendly }}TextFieldProps = {
+    const {{ field.column_name | friendly }}TextFieldProps:any = {
       id: "filled-multiline-flexible",
       {% if element.values.DisableUnderline %}
           InputProps: { disableUnderline: true },

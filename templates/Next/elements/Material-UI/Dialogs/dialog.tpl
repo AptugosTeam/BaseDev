@@ -136,9 +136,7 @@ import AddDialog from '../components/Dialog/Dialog'
   removeOptions={ { title: '{{ element.values.deleteTitle }}', text: '{{ element.values.deleteIntroText }}', button: '{{ element.values.deleteButton }}' } }
   saveDataHandler={ async (data) => {
     {% if element.values.addProcedure == 'Internal' %}
-      if ({{ dialogVariable }} === 'delete') {
-        dispatch(remove{{ friendlySingleName }}(data))
-      } else {
+      
         try {
           if (data.profilepic) {
                         const formData = new FormData();
@@ -160,7 +158,7 @@ import AddDialog from '../components/Dialog/Dialog'
         } catch (e) {
           console.log('catch', e)
         }
-      }
+      
     {% endif %}
     {% if element.values.addProcedure == 'Custom' %}
       {{ element.values.customSaveHandler | raw }}

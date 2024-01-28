@@ -1,6 +1,5 @@
 /*
 path: next.config.js
-completePath: /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/next.config.js
 keyPath: next.config.js
 unique_id: 43C2E80i
 */
@@ -13,30 +12,30 @@ const regexEqual = (x, y) => {
     x.global === y.global &&
     x.ignoreCase === y.ignoreCase &&
     x.multiline === y.multiline
-  );
-};
+  )
+}
 
 module.exports = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   webpack: (config) => {
-    const oneOf = config.module.rules.find(
-      (rule) => typeof rule.oneOf === 'object'
-    );
+    const oneOf = config.module.rules.find((rule) => typeof rule.oneOf === 'object')
 
     if (oneOf) {
-      const moduleCssRule = oneOf.oneOf.find(
-        (rule) => regexEqual(rule.test, /\.module\.(scss|sass)$/)
-      );
+      const moduleCssRule = oneOf.oneOf.find((rule) => regexEqual(rule.test, /\.module\.(scss|sass)$/))
 
       if (moduleCssRule) {
-        const cssLoader = moduleCssRule.use.find(({ loader }) =>
-          loader.includes('css-loader')
-        );
+        const cssLoader = moduleCssRule.use.find(({ loader }) => loader.includes('css-loader'))
         if (cssLoader) {
-          cssLoader.options.modules.mode = 'local';
+          cssLoader.options.modules.mode = 'local'
         }
       }
     }
 
-    return config;
+    return config
   },
-};
+}

@@ -3,6 +3,8 @@
   "name": "React/Typescript Server Side Rendering",
   "renderingFolder": "/src/Pages",
   "namingSchema": "{% if pageDefinition.path == '/' %}index{% else %}{{ pageDefinition.path }}{% endif %}.tsx",
+  "templateCommandsAfterDeploy": "npm run build",
+  "deployScript": "templatescripts/deploy.js",
   "tableTypes": [
     { "key": "Aptugo", "name": "Aptugo Table" },
     {

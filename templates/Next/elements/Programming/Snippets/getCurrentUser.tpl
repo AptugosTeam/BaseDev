@@ -34,7 +34,7 @@ options:
 children: []
 settings:
   - name: Packages
-    value: '"passport": "^0.7.0","passport-local": "^1.0.0","bcryptjs": "^2.4.3","connect-mongo": "^5.1.0",'
+    value: '"passport": "^0.7.0","passport-local": "^1.0.0","bcryptjs": "^2.4.3","connect-mongo": "^5.1.0","next-session": "^4.0.5",'
 extraFiles:
   - source: 'elements/Programming/Snippets/extraFiles/997_userHook.tsx'
     destination: '/src/lib/user/hooks.tsx'
