@@ -30,7 +30,6 @@ options:
   - name: loopFillGroupWithBlank
     display:  Cancel blanks
     type: checkbox
-    advanced: true
     options: ''
   - name: navigation
     display: Delete Arrows
@@ -40,6 +39,17 @@ options:
     display: Delete Pagination
     type: checkbox
     options: ''
+  - name: autoplay
+    display: Autoplay
+    type: checkbox
+    options: ''
+  - name: delay
+    display: Delay (ms)
+    type: text
+    options: ''
+    settings:
+      propertyCondition: autoplay
+      condition: true
   - name: useSwiperSlide
     display: Use SwiperSlide?
     type: checkbox
@@ -53,21 +63,32 @@ options:
   - name: onChange
     display: When Active Index Changes
     type: text
+  - name: effectCards
+    display: Effect - Cards
+    type: checkbox
+    advanced: true
 settings:
   - name: Packages
-    value: '"swiper": "^8.0.0",'
+    value: '"swiper": "^10.0.0",'
 children: []
 */
 {% set bpr %}
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination as SwiperPagination, Navigation } from "swiper";
+import { Pagination as SwiperPagination, Navigation, Autoplay } from "swiper/modules";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "swiper/css/bundle";
+{% if element.values.effectCards %}
+import { EffectCards } from 'swiper'
+{% endif %}
 {% endset %}
 
 {{ save_delayed('bpr', bpr) }}    
   <Swiper
+    {% if element.values.effectCards %}
+    effect={'cards'}
+    grabCursor={true}
+    {% endif %}
     {% if element.values.ClassName %}
       className={ {{ element.values.ClassName }} } 
     {% endif %}
@@ -94,7 +115,7 @@ import "swiper/css/bundle";
     {% endif %}
     {% if element.values.loopFillGroupWithBlank %}
     {% else %}
-      loopFillGroupWithBlank={true}
+    loopFillGroupWithBlank={{ element.values.loopFillGroupWithBlank | default(true) }}
     {% endif %}
     {% if element.values.onSwiper %}
       onSwiper={ {{ element.values.onSwiper }} } 
@@ -102,7 +123,13 @@ import "swiper/css/bundle";
     {% if element.values.onChange %}
       onActiveIndexChange={ {{ element.values.onChange }} } 
     {% endif %}
-    modules={[SwiperPagination, Navigation]}
+    {% if element.values.autoplay %}
+      autoplay={ { 
+        delay: {{ element.values.delay | default(2500) }},
+        disableOnInteraction: false
+      } }
+    {% endif %}
+    modules={[SwiperPagination, Navigation{%if element.values.effectCards %}, EffectCards{% endif %}, Autoplay]}
   >
 {% if element.values.useSwiperSlide %}
   {% for unchild in element.children %}
@@ -114,3 +141,5 @@ import "swiper/css/bundle";
   {{ content | raw }}
 {% endif %}
 </Swiper>
+
+  
