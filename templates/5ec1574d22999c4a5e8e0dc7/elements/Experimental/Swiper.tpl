@@ -114,8 +114,9 @@ import { EffectCards } from 'swiper'
       pagination= { {clickable: true} }
     {% endif %}
     {% if element.values.loopFillGroupWithBlank %}
+    loopFillGroupWithBlank={true}
     {% else %}
-    loopFillGroupWithBlank={{ element.values.loopFillGroupWithBlank | default(true) }}
+    
     {% endif %}
     {% if element.values.onSwiper %}
       onSwiper={ {{ element.values.onSwiper }} } 
