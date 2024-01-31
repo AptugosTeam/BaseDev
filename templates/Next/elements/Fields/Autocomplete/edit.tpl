@@ -35,7 +35,7 @@ children: []
     const {{ columnName }}Options = await fetcher('/api/{{ referencedTable | lower }}').then(arc => {
         return arc.{{ referencedTable | lower }}.map(ac => { return { value: ac._id, title: ac.{{ referencedField.column_name | friendly | lower }} }})
       })
-      return CategoryOptions
+      return {{ columnName }}Options
   }
   {% endset %}
   {{ save_delayed('ph',ph) }}

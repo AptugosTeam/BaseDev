@@ -34,22 +34,3 @@ options:
     options: >-
       return [['default','Use default name'], ...aptugo.variables.variables.filter(v => v.type === 'Function').map(v => [v.name, v.name])]
 */
-{% set updateFunctionName = element.values.updateFunctionName|default('settableloadoptions') %}
-{% if updateFunctionName == 'default' %}{% set updateFunctionName = 'settableloadoptions' %}{% endif %}
-{% set updateVarName = element.values.updateVarName|default('tableloadoptions') %}
-{% if updateVarName == 'default' %}{% set updateVarName = 'tableloadoptions' %}{% endif %}
-{% set table = element.values.table | tableData %}
-{% if not element.values.avoidLoad %}
-  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
-{% endif %}
-{% if element.values.searchField %}
-  {% set searchFieldParams = {
-    element: {
-      values: { 
-        onChange: '(e) => { searchFor' ~ table.name|friendly  ~ '(e, "' ~ (element.values.searchField | fieldData).column_name ~ '") }', placeholder: element.values.placeholderText | default('Search ' ~ table.singleName|friendly ~ '...'), variant: 'outlined', size: 'small', margin: 'dense', className: 'theme.extensibleInput' } } } %}
-{% else %}
-  {% set searchFieldParams = { element: { values: { onChange: 'searchFor' ~ table.name|friendly, placeholder: element.values.placeholderText | default('Search ' ~ table.singleName|friendly ~ '...'), variant: 'outlined', size: 'small', margin: 'dense', className: 'theme.extensibleInput' } } } %}
-{% endif %}
-{% include includeTemplate('uncontrolledInput.tpl') with searchFieldParams %}
-
-

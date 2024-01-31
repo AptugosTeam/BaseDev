@@ -7,5 +7,8 @@ unique_id: fcoiRgvk
   "label": "Multiline text",
   "value": "MultilineString",
   "dataType": "String",
-  "initialValue": ""
+  "initialValue": "",
+  "options": {
+    "frontEndType": "string"
+  }
 }
