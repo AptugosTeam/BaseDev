@@ -12,8 +12,40 @@ $color2: hsl(224, 44%, 95%);
 $color3: rgb(202, 216, 228);
 
 :global(.MuiPopover-paper) {
-  background-color: rgba(90,158,157,.5);
+  background-color: rgba(90, 158, 157, 0.5);
   border: 1px solid #ebeff3;
+}
+
+:global(.MuiDialog-container) {
+  & :global(.MuiPaper-root) {
+    background-color: #5295cec2;
+    border: 1px solid white;
+    box-shadow: 0px 2px 4px 1px rgb(255 255 255 / 20%), 1px 8px 7px 3px rgb(255 255 255 / 14%), 0px 9px 46px 8px rgb(255 255 255 / 12%);
+
+    &::before {
+      content: "";
+      background-image: linear-gradient(#a5bfd021 0.5px, transparent 0.5px, transparent calc(100% - 0.5px), #a5bfd021 calc(100% - -0.5px)), linear-gradient(90deg, #a5bfd021 0.5px, transparent 0.5px, transparent calc(100% - 0.5px), #a5bfd021 calc(100% - 0.5px));
+      background-size: 4rem 4rem;
+      position: absolute;
+      width: 300%;
+      height: 300%;
+      transform: rotate(45deg) translateX(-50%);
+    }
+
+    & h2 {
+      color: #f5f5f5;
+      background-color: rgba(0,0,0,.25);
+      margin-bottom: 1rem;
+    }
+
+    & :global(.MuiTypography-root), & :global(.MuiInputBase-input), & :global(.MuiFormLabel-root) {
+      color: rgba(240, 240, 240, 0.5);
+    }
+
+    & :global(.MuiButtonBase-root) {
+      border: 1px solid;
+    }
+  }
 }
 
 .pages {
@@ -48,8 +80,6 @@ $color3: rgb(202, 216, 228);
       border: 1px solid #ebeff3;
     }
   }
-
-  
 
   & .mainarea {
     flex-grow: 1;
@@ -119,4 +149,3 @@ $color3: rgb(202, 216, 228);
     }
   }
 }
-
