@@ -55,7 +55,9 @@ const {{ element.unique_id }}quillModules = {
 {{ save_delayed('ph', ph) }}
 <FormControl margin="dense" fullWidth>
   <ReactQuill
-    placeholder={{ element.values.placeholder | textOrVariable }}
+    {% if element.values.placeholder %}
+    placeholder={{ element.values.placeholder | default('') }}
+    {% endif %}
     theme="snow"
     modules={ {{element.unique_id}}quillModules}
     value={ {{element.values.value | default('') }} }
