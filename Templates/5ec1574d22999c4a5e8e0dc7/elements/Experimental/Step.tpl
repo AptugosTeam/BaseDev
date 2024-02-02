@@ -4,17 +4,31 @@ completePath: elements/Experimental/Step.tpl
 unique_id: UPjnuRt3y
 sourceType: javascript
 options:
+  - name: className
+    display: ClassName
+    type: styles
+    options: ''
   - name: active
     display: Value to indicate should the step be displayed as active
-    type: checkbox
-    settings:
-      default: true
+    type: text
     options: ''
   - name: completed
     display: Value to indicate should the step be displayed as completed
     type: checkbox
     settings:
       default: false
+    options: ''
+  - name: optional
+    display: Optional label
+    type: text
+    options: ''
+  - name: label
+    display: Step label
+    type: text
+    options: ''
+  - name: error
+    display: Error
+    type: text
     options: ''
   - name: disabled
     display: If true, the step is disabled, will also disable the button if StepButton is a child of Step
@@ -37,18 +51,18 @@ options:
   - name: index
     display: Index value of the step
     type: text
-  - name: className
-    display: className
-    type: styles
-    options: ''
 */
 {% set bpr %}
 import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel'
+{% if element.values.optional %}
+  import Typography from '@mui/material/Typography'
+{% endif %}
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Step
     {% if element.values.active %}
-        active={ {{ element.values.active }} }
+        active={ {{element.values.active}} }
     {% endif %}
     {% if element.values.index %}
         index='{{ element.values.index }}'
@@ -72,5 +86,15 @@ import Step from '@mui/material/Step';
         open={ {{ element.values.open | default(true) }} }
     {% endif %}
     >
+    <StepLabel
+        {% if element.values.error %}
+          error={ {{element.values.error}} }
+        {% endif %}
+        {% if element.values.optional %}
+          optional={ <Typography variant="caption">{{element.values.optional}}</Typography> }
+        {% endif %}
+    >
+        {{ element.values.label | default('') }}
+    </StepLabel>
 {{ content | raw }}
-<Step/>
+</Step>
