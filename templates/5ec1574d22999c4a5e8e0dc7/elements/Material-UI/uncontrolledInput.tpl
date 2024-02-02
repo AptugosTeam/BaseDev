@@ -50,7 +50,7 @@ options:
   - name: type
     display: Type
     type: dropdown
-    options: text;password;date;number;textarea;numeric
+    options: text;password;date;datetime-local;number;textarea;numeric
     settings:
       default: text
       active: true
