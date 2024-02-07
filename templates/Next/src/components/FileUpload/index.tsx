@@ -1,6 +1,6 @@
 /*
-path: FileUpload.tsx
-completePath: front-end/components/FileUpload/FileUpload.tsx
+path: index.tsx
+completePath: front-end/components/FileUpload/index.tsx
 unique_id: QZm2nTtL
 */
 import PublishIcon from '@mui/icons-material/Publish'

@@ -204,7 +204,7 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
                 {!!(props.node.permissions & 1) && (
                   <div
                     className={classes.actionButtonDanger}
-                    onClick={() => props.onDelete(id)}
+                    onClick={(e) => { e.stopPropagation(); props.onDelete(id) }}
                   >
                     <IconButton size="small">
                       <Delete fontSize="small" />
