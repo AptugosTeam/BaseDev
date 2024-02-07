@@ -1,11 +1,13 @@
 /*
-path: image.tpl
-completePath: elements/Material-UI/image.tpl
-unique_id: ZdcUOO3m
-children: []
-icon: ico-image
-helpText: Easily use images from Assets or the web
+path: ImageListItem.tpl
+completePath: elements/Material-UI/ImageListItem.tpl
+unique_id: ZdAppl3m
+icon: ico-field
 options:
+  - name: key
+    display: Key value
+    type: text
+    options: ''
   - name: useAsset
     display: Use an asset
     type: dropdown
@@ -61,7 +63,12 @@ options:
     type: checkbox
     options: ''
     advanced: true
+children: []
 */
+{% set bpr %}
+import ImageListItem from "@mui/material/ImageListItem";
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
 {% set tag = 'picture' %}
 {% if element.values.background %}{%set tag = 'div' %}{% endif %}
 {% set path = element.values.path %}
@@ -91,24 +98,30 @@ options:
   {% if webppath %}
   <source type="image/webp" srcSet="{{ webppath }}" />
   {% endif %}
-  <img
-    src={{ path|textOrVariable }}
-    alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
-    {% if width %}
-      width={{ width|textOrVariable }}
+  <ImageListItem
+    {% if element.values.key %}
+      key={ {{ element.values.key }} }
     {% endif %}
-    {% if height %}
-      height={{ height|textOrVariable }}
-    {% endif %}
-    {% if element.values.onLoad %}
-      onLoad={ {{ element.values.onLoad }} }
-    {% endif %}
-    {% if element.values.onError %}
-      onError={ {{ element.values.onError }} }
-    {% endif %}
-    {% if element.values.draggable %}
-      draggable={false}
-    {% endif %}
-  />
+  >
+    <img
+      src={{ path|textOrVariable }}
+      alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
+      {% if width %}
+        width={{ width|textOrVariable }}
+      {% endif %}
+      {% if height %}
+        height={{ height|textOrVariable }}
+      {% endif %}
+      {% if element.values.onLoad %}
+        onLoad={ {{ element.values.onLoad }} }
+      {% endif %}
+      {% if element.values.onError %}
+        onError={ {{ element.values.onError }} }
+      {% endif %}
+      {% if element.values.draggable %}
+        draggable={false}
+      {% endif %}
+    />
+  </ImageListItem>
   {{ content | raw }}
 </{{ tag }}>

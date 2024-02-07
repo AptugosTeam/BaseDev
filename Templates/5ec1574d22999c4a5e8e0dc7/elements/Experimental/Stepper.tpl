@@ -8,7 +8,7 @@ options:
     display: Value defining the active step
     type: text
   - name: className
-    display: className
+    display: ClassName
     type: styles
     options: ''
   - name: linear
@@ -26,7 +26,8 @@ options:
   - name: orientation
     display: Stepper orientation
     type: dropdown
-    options: horizontal;vertical
+    options: >-
+      return [['horizontal', 'Horizontal'], ['vertical', 'Vertical']]
 */
 {% set bpr %}
 import Stepper from '@mui/material/Stepper';
@@ -34,7 +35,7 @@ import Stepper from '@mui/material/Stepper';
 {{ save_delayed('bpr',bpr) }}
 <Stepper
     {% if element.values.activeStep %}
-        activeStep='{{ element.values.activeStep|default("1") }}'
+        activeStep={ {{element.values.activeStep|default("1")}} }
     {% endif %}
     {% if element.values.className %}
         className='{{ element.values.className }}'
@@ -46,7 +47,7 @@ import Stepper from '@mui/material/Stepper';
         alternativeLabel={ {{ element.values.alternativeLabel | default(false) }} }
     {% endif %}
     {% if element.values.orientation %}
-        orientation={ {{ element.values.orientation }} }
+        orientation={ "{{element.values.orientation}}" }
     {% endif %}>
   {{ content | raw }}
 </Stepper>

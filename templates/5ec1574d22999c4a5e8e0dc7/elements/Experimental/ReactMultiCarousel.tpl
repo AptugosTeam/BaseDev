@@ -241,6 +241,8 @@ import "react-multi-carousel/lib/styles.css";
 {% endif %}
 {% if element.values.swipeable %}
   swipeable={true}
+{% else %}
+  swipeable={false}
 {% endif %}
 {% if element.values.minimumTouchDrag %}
   minimumTouchDrag={ {{ element.values.minimumTouchDrag|default('50') }} }

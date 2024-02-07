@@ -71,8 +71,9 @@ class AuthService {
   }
 
   registerWithSession(data) {
+    const { fullUser = true , fieldsToRetrieve = [] } = data
     return axios.post(API_URL, data).then((_result) => {
-        return this.loginWithSession(data.Email, data.Password).then((afterLogin) => { return afterLogin})
+        return this.loginWithSession(data.Email, data.Password, fullUser, fieldsToRetrieve).then((afterLogin) => { return afterLogin})
       }).catch(e => { throw e })
   }
 

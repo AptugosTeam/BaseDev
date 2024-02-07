@@ -39,7 +39,7 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
       <div className="thumbnailImageContainer">
         <img
           className="thumbnailImage"
-          src={file.preview}
+          src={file.Image ? `/img/${file.Image}` : file.preview}
         />
       </div>
     </div>
@@ -48,6 +48,10 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
   React.useEffect(() => {
     if (props.onChange) props.onChange(files)
   }, [files])
+
+  React.useEffect(() => {
+    setFiles(props.files)
+  }, [props.files])
 
   return <section className={props.className}>
     {highlight &&

@@ -24,10 +24,10 @@ settings:
     value: '"@iconify/react": "^4.1.1",'
 */
 {% set bpr %}
-import { Icon } from '@iconify/react'
+import { Icon as YesIcon} from '@iconify/react'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-  <Icon 
+  <YesIcon
   {% if element.values.icon %}
   icon="{{element.values.icon}}" 
   {% endif %}
