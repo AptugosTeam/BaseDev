@@ -17,6 +17,9 @@ options:
     type: dropdown
     options: return aptugo.pageUtils.getAllPages()
     required: true
+  - name: codeOnError
+    display: On Error
+    type: function
   - name: alternativeCall
     display: Alternative Call to AuthService
     type: checkbox
@@ -46,7 +49,11 @@ AuthService.registerWithSession({{ element.values.Data }}).then(_result => {
   {% endif %}
     navigation.push('{{ (element.values.OnSuccess | elementData).path }}')
 }).catch(error => {
-    setregisterError(error.response.data.message)
+    {% if element.values.codeOnError %}
+      {{ element.values.codeOnError }}
+    {% else %}
+      setregisterError(error.response.data.message)
+    {% endif %}
 })
 {% else %}
 AuthService.register({{ element.values.Data }}).then(_result => {
@@ -55,6 +62,10 @@ AuthService.register({{ element.values.Data }}).then(_result => {
     {% endif %}
     navigation.push('{{ (element.values.OnSuccess | elementData).path }}')
 }).catch(error => {
-    setregisterError(error.response.data.message)
+    {% if element.values.codeOnError %}
+      {{ element.values.codeOnError }}
+    {% else %}
+      setregisterError(error.response.data.message)
+    {% endif %}
 })
 {% endif %}

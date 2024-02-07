@@ -56,6 +56,7 @@ exports.create = async (options) => {
 exports.createAsPromise = (options) => {
   return new Promise(async (resolve, reject) => {
     const data = options.req ? options.req.body : options.data
+    const { errorMessages } = data
     const updatedData = {}
     if (data._id) updatedData._id = data._id
     
@@ -88,7 +89,7 @@ exports.createAsPromise = (options) => {
       }
     })
     .catch((err) => {
-      reject( errors.prepareError(err) )
+      reject(errors.prepareError(err, errorMessages))
     })
   })
 }
