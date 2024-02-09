@@ -100,7 +100,7 @@ async function checkNonce (req) {
   })
 }
 
-async function authenticate ({ email, password, model, passwordField, populate, fullUser = true, fieldsToRetrieve = [] }) {
+async function authenticate ({ email, password, model, passwordField, populate, fullUser = true, fieldsToRetrieve = [], lang = 'en' }) {
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -113,17 +113,17 @@ async function authenticate ({ email, password, model, passwordField, populate, 
     passwordField = 'Password'
   }
   return new Promise(function (resolve, reject) {
-    if (!email || !password) reject({ message: 'Wrong parameters sent' })
+    if (!email || !password) reject({ message: errorMessages[lang].wrong })
     const query = model.findOne({ Email: new RegExp('^' + email.toLowerCase(), 'i') })
     if (populate) query.populate(populate)
     const promise = query.exec()
 
     promise.then((user) => {
       if (!user) {
-        return reject({ message: 'Email not found' })
+        return reject({ message: errorMessages[lang].email })
       }
 
-      if (!user[passwordField]) reject({ message: 'User does not have a password', user: user })
+      if (!user[passwordField]) reject({ message: errorMessages[lang].notPassword, user: user })
       else {
         bcrypt.compare(password, user[passwordField]).then((isMatch) => {
           if (isMatch) {
@@ -135,12 +135,12 @@ async function authenticate ({ email, password, model, passwordField, populate, 
                 userID[fieldName] = userWithoutPassword[fieldName]
               })
             }
-            const token = jwt.sign( fullUser ? userWithoutPassword : userID, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+            const token = jwt.sign(fullUser ? userWithoutPassword : userID, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
             resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
           } else {
-            reject({ message: 'Password incorrect' })
+            reject({ message: errorMessages[lang].wrongPassword })
           }
-          
+
         })
       }
     })

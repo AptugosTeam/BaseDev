@@ -35,17 +35,34 @@ options:
       default: []
       propertyCondition: fullUser
     advanced: true
+  - name: codeOnError
+    display: On Error
+    type: function
+    advanced: true
+  - name: errorLanguage
+    display: On Error
+    type: dropdown
+    options: >-
+      return [['en', 'English'], ['es', 'Spanish']]
+    settings:
+      default: 'en'
+    advanced: true
 children: []
 */
 {% set bpr %}
 import AuthService from '@services/auth.service'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-AuthService[{{ element.values.alternativeCall | default("'login'") }}]({{ element.values.Email }}, {{ element.values.Password }}, {{ element.values.fullUser | default(true) }}, {% if element.values.fullUser != true %} {{ element.values.fieldsToRetrieve | default([]) }} {% endif %}).then(
+AuthService[{{ element.values.alternativeCall | default("'login'") }}]({{ element.values.Email }}, {{ element.values.Password }}, {{ element.values.fullUser | default(true) }}, {% if element.values.fullUser != true %} {{ element.values.fieldsToRetrieve | default([]) }} {% endif %} {% if element.values.errorLanguage %}, '{{ element.values.errorLanguage | default('en') }}' {% endif %} ).then(
   (res) => {
     navigation.push('{{ (element.values.OnSuccess | elementData).path }}')
   },
   (error) => {
-    setloginError(error.response.data.message)
+    {% if element.values.codeOnError %}
+      {{ element.values.codeOnError }}
+    {% else %}
+      setloginError(error.response.data.message)
+    {% endif %}
+    
   }
 )
