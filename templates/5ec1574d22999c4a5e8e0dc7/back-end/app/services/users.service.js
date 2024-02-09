@@ -28,6 +28,7 @@ const errorMessages = {
     error: "There was an error",
     token: "Error, token could not be generated",
     unauthorized: "Unauthorized",
+    failed: 'Something failed'
   },
   es: {
     wrong: "La información enviada no es válida",
@@ -38,6 +39,7 @@ const errorMessages = {
     error: "Ocurrió un error",
     token: "Error, no se pudo generar el token",
     unauthorized: "Acceso denegado",
+    failed: 'Ocurrió un error'
   },
 };
 
@@ -56,7 +58,7 @@ async function recoverPassword (req) {
     const query = model.findOne({ Email: email })
     const promise = query.exec()
 
-    promise.then((user) => {
+    promise.then(async (user) => {
       if (!user) {
         reject({ message: errorMessages[lang].email })
         return
@@ -65,8 +67,13 @@ async function recoverPassword (req) {
       const nonce = Buffer.from(bcrypt.hashSync(JSON.stringify(userWithoutPassword), Password)).toString('base64')
       let parsedmessage = message.replace('**nonce**', nonce)
       parsedmessage = parsedmessage.replace('**email**', Buffer.from(userWithoutPassword.Email).toString('base64'))
-      req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
-      resolve(user)
+
+      try {
+        const emailResponse = await req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
+        resolve(user)
+      } catch (error) {
+        reject({ message: errorMessages[lang].failed })
+      }
     })
   })
 }

@@ -87,7 +87,7 @@ settings:
         }
       {% endif %}
 
-      var transporter = nodemailer.createTransport(transport);
+      const transporter = nodemailer.createTransport(transport);
       transporter.verify((error, success) => {
         if (error) {
           console.log(error);
@@ -97,31 +97,41 @@ settings:
       });
       app.use(express.json());
       app.set('sendEmail', async function(emailDetails, extra) {
-        var mail = {
-          from: emailDetails.name,
-          to: emailDetails.email,
-          subject: emailDetails.subject,
-          html: emailDetails.message,
-        }
-
-        if (typeof addICal === "function" && extra && extra.sendWithIcal) {
-          addICal(mail, extra)
-        }
-        
-        transporter.sendMail(mail, (err, data) => {
-          if (err) {
-            return { msg: 'fail' }
-          } else {
-            return { msg: 'success' }
+        return new Promise((resolve, reject) => {
+          const mail = {
+            from: emailDetails.name,
+            to: emailDetails.email,
+            subject: emailDetails.subject,
+            html: emailDetails.message,
           }
+
+          if (typeof addICal === 'function' && extra && extra.sendWithIcal) {
+            addICal(mail, extra)
+          }
+
+          transporter.sendMail(mail, (err, data) => {
+            if (err) {
+              console.log('err', err)
+              reject({ msg: 'fail' })
+            } else {
+              console.log('data', data)
+              resolve({ msg: 'success' })
+            }
+          })
         })
       })
-      app.post("/api/sendEmail", (req, res, next) => {
-        const name = req.body.name
-        const email = req.body.email
-        const message = req.body.messageHtml
-        const subject = req.body.subject
-        res.json( app.get('sendEmail')( { name, email, message, subject }, req.body.extra) )
+      app.post("/api/sendEmail", async (req, res, next) => {
+        try {
+          const name = req.body.name
+          const email = req.body.email
+          const message = req.body.messageHtml
+          const subject = req.body.subject
+          const result = await app.get('sendEmail')({ name, email, message, subject }, req.body.extra)
+          res.json(result)
+        } catch (error) {
+          console.error(error)
+          res.status(500).json({ msg: 'fail', error: 'Internal Server Error' })
+        }
       });
 childs:
   - name: Email Content
