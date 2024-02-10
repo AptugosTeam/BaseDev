@@ -28,6 +28,7 @@ const errorMessages = {
     error: "There was an error",
     token: "Error, token could not be generated",
     unauthorized: "Unauthorized",
+    failed: 'Something failed'
   },
   es: {
     wrong: "La información enviada no es válida",
@@ -38,6 +39,7 @@ const errorMessages = {
     error: "Ocurrió un error",
     token: "Error, no se pudo generar el token",
     unauthorized: "Acceso denegado",
+    failed: 'Ocurrió un error'
   },
 };
 
@@ -56,7 +58,7 @@ async function recoverPassword (req) {
     const query = model.findOne({ Email: email })
     const promise = query.exec()
 
-    promise.then((user) => {
+    promise.then(async (user) => {
       if (!user) {
         reject({ message: errorMessages[lang].email })
         return
@@ -65,8 +67,13 @@ async function recoverPassword (req) {
       const nonce = Buffer.from(bcrypt.hashSync(JSON.stringify(userWithoutPassword), Password)).toString('base64')
       let parsedmessage = message.replace('**nonce**', nonce)
       parsedmessage = parsedmessage.replace('**email**', Buffer.from(userWithoutPassword.Email).toString('base64'))
-      req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
-      resolve(user)
+
+      try {
+        const emailResponse = await req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
+        resolve(user)
+      } catch (error) {
+        reject({ message: errorMessages[lang].failed })
+      }
     })
   })
 }
@@ -100,7 +107,7 @@ async function checkNonce (req) {
   })
 }
 
-async function authenticate ({ email, password, model, passwordField, populate, fullUser = true, fieldsToRetrieve = [] }) {
+async function authenticate ({ email, password, model, passwordField, populate, fullUser = true, fieldsToRetrieve = [], lang = 'en' }) {
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -113,17 +120,17 @@ async function authenticate ({ email, password, model, passwordField, populate, 
     passwordField = 'Password'
   }
   return new Promise(function (resolve, reject) {
-    if (!email || !password) reject({ message: 'Wrong parameters sent' })
+    if (!email || !password) reject({ message: errorMessages[lang].wrong })
     const query = model.findOne({ Email: new RegExp('^' + email.toLowerCase(), 'i') })
     if (populate) query.populate(populate)
     const promise = query.exec()
 
     promise.then((user) => {
       if (!user) {
-        return reject({ message: 'Email not found' })
+        return reject({ message: errorMessages[lang].email })
       }
 
-      if (!user[passwordField]) reject({ message: 'User does not have a password', user: user })
+      if (!user[passwordField]) reject({ message: errorMessages[lang].notPassword, user: user })
       else {
         bcrypt.compare(password, user[passwordField]).then((isMatch) => {
           if (isMatch) {
@@ -135,12 +142,12 @@ async function authenticate ({ email, password, model, passwordField, populate, 
                 userID[fieldName] = userWithoutPassword[fieldName]
               })
             }
-            const token = jwt.sign( fullUser ? userWithoutPassword : userID, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+            const token = jwt.sign(fullUser ? userWithoutPassword : userID, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
             resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
           } else {
-            reject({ message: 'Password incorrect' })
+            reject({ message: errorMessages[lang].wrongPassword })
           }
-          
+
         })
       }
     })

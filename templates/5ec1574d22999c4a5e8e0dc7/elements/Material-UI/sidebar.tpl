@@ -17,7 +17,7 @@ children: []
 */
 
 {% set bpr %}
-import Sidebar from '../components/Sidebar/Sidebar'
+import Sidebar from '@components/Sidebar/Sidebar'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <Sidebar
