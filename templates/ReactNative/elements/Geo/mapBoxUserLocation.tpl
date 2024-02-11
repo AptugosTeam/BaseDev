@@ -14,7 +14,7 @@ options:
     type: function
 settings:
   - name: Packages
-    value: '"expo-location": "~15.1.1",'
+    value: '"expo-location": "~16.5.3",'
 */
 {% set bpr %}
 import * as Location from 'expo-location'

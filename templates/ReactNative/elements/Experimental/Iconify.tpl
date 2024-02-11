@@ -23,9 +23,9 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-svg": "13.9.0",'
-  - name: Packages
-    value: '"react-native-iconify": "^0.2.10",'
+    value: '"react-native-svg": "13.9.0","react-native-iconify": "^1.0.0",'
+  - name: BabelAdd
+    value: 'plugins.push("react-native-iconify/plugin")'
 */
 {% set bpr %}
 import { Iconify } from 'react-native-iconify'

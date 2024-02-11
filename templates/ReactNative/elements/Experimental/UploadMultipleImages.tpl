@@ -25,7 +25,7 @@ options:
     default: "Drag 'n' drop some files here, or click to select files"
 settings:
   - name: Packages
-    value: '"expo-image-picker": "~11.0.3",'
+    value: '"expo-image-picker": "~14.3.2",'
 children: []
 */
 {% set bpr %}

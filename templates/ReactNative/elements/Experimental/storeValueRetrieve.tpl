@@ -6,7 +6,7 @@ icon: ico-field
 helpText: Retrieves a stored value
 settings:
   - name: Packages
-    value: '"@react-native-async-storage/async-storage": "1.18.2",'
+    value: '"@react-native-async-storage/async-storage": "1.21.0",'
 options:
   - name: variableName
     display: Name
