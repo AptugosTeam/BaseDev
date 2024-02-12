@@ -59,6 +59,7 @@ interface tableProps {
   onColumnRename?: Function
   className?: any
   pagination?: Boolean
+  allowSorting?: Boolean
 }
 
 const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
