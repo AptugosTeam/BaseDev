@@ -18,8 +18,8 @@ options:
     type: dropdown
     options: return aptugo.pageUtils.getAllPages()
     required: true
-  - name: alternativeCall
-    display: Alternative Call to AuthService
+  - name: rememberMe
+    display: Remember me variable
     type: text
     advanced: true
   - name: fullUser
@@ -34,6 +34,12 @@ options:
     settings:
       default: []
       propertyCondition: fullUser
+    advanced: true
+  - name: validateUser
+    display: Validate user?
+    type: checkbox
+    settings:
+      default: false
     advanced: true
   - name: codeOnError
     display: On Error
@@ -53,7 +59,17 @@ children: []
 import AuthService from '@services/auth.service'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-AuthService[{{ element.values.alternativeCall | default("'login'") }}]({{ element.values.Email }}, {{ element.values.Password }}, {{ element.values.fullUser | default(true) }}, {% if element.values.fullUser != true %} {{ element.values.fieldsToRetrieve | default([]) }} {% endif %} {% if element.values.errorLanguage %}, '{{ element.values.errorLanguage | default('en') }}' {% endif %} ).then(
+AuthService.login({{ element.values.Email }}, {{ element.values.Password }}
+  {% if element.values.fullUser or element.values.fieldsToRetrieve or element.values.errorLanguage or element.values.rememberMe or element.values.validateUser %}, 
+  {
+  {% if not element.values.fullUser %} fullUser: {{ element.values.fullUser | default(true) }}, {% endif %}
+  {% if element.values.fullUser != true and element.values.fieldsToRetrieve %} fieldsToRetrieve: {{ element.values.fieldsToRetrieve | default([]) }}, {% endif %} 
+  {% if element.values.errorLanguage %} lang: '{{ element.values.errorLanguage | default('en') }}',{% endif %} 
+  {% if element.values.rememberMe %} remember: {{ element.values.rememberMe | default(true) }},{% endif %} 
+  {% if element.values.validateUser %} validate: {{ element.values.validateUser | default(false) }},{% endif %} 
+  }
+  {% endif %} 
+).then(
   (res) => {
     navigation.push('{{ (element.values.OnSuccess | elementData).path }}')
   },

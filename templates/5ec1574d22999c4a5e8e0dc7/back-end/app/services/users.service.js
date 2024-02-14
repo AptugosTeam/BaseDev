@@ -28,7 +28,8 @@ const errorMessages = {
     error: "There was an error",
     token: "Error, token could not be generated",
     unauthorized: "Unauthorized",
-    failed: 'Something failed'
+    failed: 'Something failed',
+    unverified: 'Account not validated. Please check your email to validate your account'
   },
   es: {
     wrong: "La información enviada no es válida",
@@ -39,7 +40,8 @@ const errorMessages = {
     error: "Ocurrió un error",
     token: "Error, no se pudo generar el token",
     unauthorized: "Acceso denegado",
-    failed: 'Ocurrió un error'
+    failed: 'Ocurrió un error',
+    unverified: 'Cuenta no validada. Por favor revisa tu correo electrónico para validar tu cuenta'
   },
 };
 
@@ -107,7 +109,8 @@ async function checkNonce (req) {
   })
 }
 
-async function authenticate ({ email, password, model, passwordField, populate, fullUser = true, fieldsToRetrieve = [], lang = 'en' }) {
+async function authenticate ({ email, password, model, passwordField, populate, options }) {
+  const { fullUser = true, fieldsToRetrieve = [], lang = 'en', validate = false } = options
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -131,6 +134,7 @@ async function authenticate ({ email, password, model, passwordField, populate, 
       }
 
       if (!user[passwordField]) reject({ message: errorMessages[lang].notPassword, user: user })
+      if (validate && !user.Verified) reject({ message: errorMessages[lang].unverified, user: user })
       else {
         bcrypt.compare(password, user[passwordField]).then((isMatch) => {
           if (isMatch) {

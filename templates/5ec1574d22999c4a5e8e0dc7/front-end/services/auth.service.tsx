@@ -7,23 +7,37 @@ import axios from 'axios'
 
 const API_URL = '{{ settings.apiURL }}/api/users/'
 
+interface LoginOptions {
+  remember?: boolean;
+}
+
 class AuthService {
-  login(email, password, fullUser = true, fieldsToRetrieve = [], lang = 'en') {
+  login(email, password, options: LoginOptions = {}) {
+    const { remember = true} = options
     return axios
       .post(API_URL + 'authenticate', {
         email,
         password,
-        fullUser,
-        fieldsToRetrieve,
-        lang
+        options,
       })
       .then((response) => {
-        if (response.data.accessToken || response.data.stsTokenManager) {
-          localStorage.setItem('token', response.data.accessToken || response.data.stsTokenManager)
-          localStorage.setItem('user', JSON.stringify(response.data.data || response.data))
+        if (response.data.accessToken || response.data.stsTokenManager) {
+          if(remember) {
+            localStorage.setItem(
+              'token',
+              response.data.accessToken || response.data.stsTokenManager
+            );
+            localStorage.setItem(
+              'user',
+              JSON.stringify(response.data.data || response.data)
+            );
+          } else {
+            sessionStorage.setItem('token', response.data.accessToken || response.data.stsTokenManager)
+            sessionStorage.setItem('user', JSON.stringify(response.data.data || response.data))
+          }
         }
-        return response.data
-      })
+        return response.data;
+      });
   }
 
   loginWithSession(email, password, fullUser = true, fieldsToRetrieve = [], lang = 'en') {
@@ -60,10 +74,12 @@ class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('user')
-    localStorage.removeItem('token')
-    sessionStorage.removeItem('userSession')
-    sessionStorage.removeItem('tokenSession')
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userSession');
+    sessionStorage.removeItem('tokenSession');
   }
 
   register(data) {
@@ -80,7 +96,10 @@ class AuthService {
   }
 
   async getCurrentUser() {
-    const user = localStorage.getItem('user') || sessionStorage.getItem('userSession')
+    const user =
+      localStorage.getItem('user') ||
+      sessionStorage.getItem('userSession') ||
+      sessionStorage.getItem('user');
     return user ? JSON.parse(user) : {}
   }
 
