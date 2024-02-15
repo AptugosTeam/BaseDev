@@ -28,7 +28,7 @@ unique_id: i1kD8rN4
     },
     "android": {
       {{ insert_setting('AppJsonAndroid') | raw }}
-      "package": "com.aptugo.{{ application.settings.name | lower | friendly }}",
+      "package": "{{ insert_setting('androidPackage')|default('com.aptugo.' ~ application.settings.name | lower | friendly) }}",
       "versionCode": {{ insert_setting('versionCode')|default('1') }}
     },
     "web": {
@@ -40,6 +40,19 @@ unique_id: i1kD8rN4
     },
     "plugins": [
       {{ insert_setting('AppJsonPlugins') | raw }}
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 31,
+            "targetSdkVersion": 31,
+            "buildToolsVersion": "31.0.0"
+          },
+          "ios": {
+            "deploymentTarget": "13.0"
+          }
+        }
+      ],
       [
         "expo-image-picker",
         {

@@ -6,7 +6,7 @@ keyPath: elements/Interact/appleLogin.tpl
 unique_id: zo8Ko18x
 settings:
   - name: Packages
-    value: '"expo-apple-authentication": "~6.3.0",'
+    value: '"expo-apple-authentication": "~6.1.0",'
 */
 {% set AppJsonAndroid %}"googleServicesFile": "./google-services.json",{% endset %}
 {{ add_setting('AppJsonAndroid', AppJsonAndroid)}}

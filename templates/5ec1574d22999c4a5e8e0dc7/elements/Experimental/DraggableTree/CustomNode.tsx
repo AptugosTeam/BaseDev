@@ -28,9 +28,13 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
     e.stopPropagation()
   }
 
-  const handleShowInput = () => {
-    setactiveMenu(null)
-    setVisibleInput(true)
+  const handleShowInput = (e) => {
+    e.stopPropagation()
+    if (props.node.onEdit) props.node.onEdit(props.node)
+    else {
+      setactiveMenu(null)
+      setVisibleInput(true)
+    }
   }
 
   const handleCancel = () => {

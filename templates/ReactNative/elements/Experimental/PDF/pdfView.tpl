@@ -14,7 +14,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"expo-dev-client": "~2.4.12","react-native-pdf": "6.7.4","react-native-blob-util": "0.19.6",'
+    value: '"expo-dev-client": "~2.4.13","react-native-pdf": "6.7.4","react-native-blob-util": "0.19.6",'
 */
 {% set bprA %}
 import { Dimensions, StyleSheet } from 'react-native'

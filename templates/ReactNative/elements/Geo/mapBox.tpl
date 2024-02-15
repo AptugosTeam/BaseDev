@@ -45,8 +45,24 @@ options:
     type: function
 settings:
   - name: Packages
-    value: '"expo-dev-client": "~2.4.12","@rnmapbox/maps": "github:rnmapbox/maps#main",'
+    value: '"expo-dev-client": "~2.4.13","@rnmapbox/maps": "github:rnmapbox/maps#main",'
 */
+{% set AppJsonPlugins %}
+[
+  "@rnmapbox/maps",
+  {
+    "RNMapboxMapsVersion": "10.16.2",
+    "RNMapboxMapsDownloadToken": "{{ element.values.accessToken }}"
+  },
+  [
+    "expo-build-properties",
+    {
+      "MAPBOX_DOWNLOADS_TOKEN": "{{ element.values.accessToken }}"
+    }
+  ],
+],
+{% endset %}
+{{ add_setting('AppJsonPlugins', AppJsonPlugins)}}
 {% set bpr %}
 import { MapView, setAccessToken } from '@rnmapbox/maps'
 setAccessToken('{{ element.values.accessToken }}')

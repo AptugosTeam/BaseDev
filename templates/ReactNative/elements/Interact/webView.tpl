@@ -13,7 +13,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-webview": "13.6.4",'
+    value: '"react-native-webview": "13.2.2",'
 */
 {% set bpr %}
 import WebView from 'react-native-webview'

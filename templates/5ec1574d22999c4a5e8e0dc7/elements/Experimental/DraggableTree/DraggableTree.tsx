@@ -51,6 +51,7 @@ export interface FormulaTreeProps {
   tree?: any
   theme?: any
   onSave?: Function
+  onEdit?: Function
   onUpdate?: Function
   onDelete?: Function
   onChangeType?: Function
