@@ -9,6 +9,18 @@ const API_URL = '{{ settings.apiURL }}/api/users/'
 
 interface LoginOptions {
   remember?: boolean;
+  validate?: boolean;
+  lang?: string;
+  validationEmail?: RecoverOptions;
+}
+
+interface RecoverOptions {
+  email: string;
+  subject: string;
+  message: string;
+  name: string;
+  model?: string;
+  lang?: string;
 }
 
 class AuthService {
@@ -82,10 +94,44 @@ class AuthService {
     sessionStorage.removeItem('tokenSession');
   }
 
-  register(data) {
-    return axios.post(API_URL, data).then(_result => {
-      return this.login(data.Email, data.Password).then(afterLogin => { return afterLogin})
-    }).catch(e => { throw e })
+  register(data, options: LoginOptions = {}) {
+    const { validate = false, lang = 'en' } = options;
+    const messages = {
+      en: {
+        success: 'Successful registration, check your email to validate your account',
+        invalidEmailSettings: 'Invalid settings for validation email',
+      },
+      es: {
+        success: 'Registro exitoso, revisa tu correo electrónico para validar tu cuenta',
+        invalidEmailSettings: 'Configuración inválida para la verificación por email',
+      },
+    };
+
+    return axios
+      .post(API_URL, data)
+      .then((_result) => {
+        if (validate) {
+          if (
+            !options.validationEmail ||
+            Object.keys(options.validationEmail).length === 0
+          )
+            throw messages[lang].invalidEmailSettings;
+          return this.recoverPassword(options.validationEmail)
+            .then((_result) => {
+              return {
+                message: messages[lang].success,
+              };
+            })
+            .catch((e) => { throw e });
+        } else {
+          return this.login(data.Email, data.Password, options).then(
+            (afterLogin) => {
+              return afterLogin;
+            }
+          );
+        }
+      })
+      .catch((e) => { throw e });
   }
 
   registerWithSession(data) {
