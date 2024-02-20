@@ -96,15 +96,22 @@ async function checkNonce (req) {
     const query = model.findOne({ Email: asciiEMail })
     const promise = query.exec()
     promise.then((user) => {
-      const { Password, ...userWithoutPassword } = user._doc
-      bcrypt.compare(JSON.stringify(userWithoutPassword), ascii).then((isMatch) => {
-        if (isMatch) {
-          const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
-          resolve({ accessToken: token, data: userWithoutPassword })
-        } else {
-          reject({ message: 'Bad bad nonce' })
-        }
-      })
+      if (user) {
+        const { Password, ...userWithoutPassword } = user._doc
+        bcrypt.compare(JSON.stringify(userWithoutPassword), ascii).then((isMatch) => {
+          if (isMatch) {
+            const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+            resolve({ accessToken: token, data: userWithoutPassword })
+          } else {
+            reject({ message: 'Bad bad nonce' })
+          }
+        })
+          .catch(e => {
+            reject({ message: 'Bad bad nonce' })
+          })
+      } else {
+        reject({ message: 'Bad bad nonce' })
+      }
     })
   })
 }

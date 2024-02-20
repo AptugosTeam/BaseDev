@@ -175,6 +175,9 @@ class AuthService {
         localStorage.setItem('user', JSON.stringify(response.data.data))
         return response.data.data._id
       })
+      .catch((e) => {
+        throw e;
+      });
   }
 }
 
