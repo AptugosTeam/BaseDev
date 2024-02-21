@@ -19,7 +19,7 @@ unique_id: Zw2zePwz
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "outDir": "./dist",
+    "outDir": "./public",
     "jsx": "preserve",
     "verbatimModuleSyntax": false,
     "incremental": true,
@@ -34,7 +34,7 @@ unique_id: Zw2zePwz
       "@api-lib/*": ["./src/api-lib/*"],
       "@lib/*": ["./src/lib/*"],
       "@/*": ["./src/*"],
-      "dist": ["dist"]
+      "public": ["public"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

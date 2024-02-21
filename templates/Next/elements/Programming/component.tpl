@@ -1,7 +1,7 @@
 /*
 path: component.tpl
 keyPath: elements/Programming/component.tpl
-unique_id: zHZJ3XKp
+unique_id: zHZJ3Xpo
 usesDelays: [bpr]
 delayContext: true
 options:
@@ -28,7 +28,7 @@ options:
     type: checkbox
 extraFiles:
   - source: 'elements/Programming/baseComponent.tsx'
-    destination: 'front-end/components/{{ element.values.name | friendly }}/index.tsx'
+    destination: 'src/components/{{ element.values.name | friendly }}/{{ element.values.name | friendly }}.tsx'
 childs:
   - name:  componentHeader
     element: componentHeader

@@ -5,6 +5,7 @@
   "namingSchema": "{% if pageDefinition.path == '/' %}index{% else %}{{ pageDefinition.path }}{% endif %}.tsx",
   "templateCommandsAfterDeploy": "npm i && npm run build",
   "deployScript": "templatescripts/deploy.js",
+  "assetsFolder": "/public",
   "tableTypes": [
     { "key": "Aptugo", "name": "Aptugo Table" },
     {

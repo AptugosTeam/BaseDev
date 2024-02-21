@@ -1,7 +1,7 @@
 /*
 path: useComponent.tpl
 keyPath: elements/Programming/useComponent.tpl
-unique_id: CGNFDsCQ
+unique_id: CGNFDsui
 options:
   - name: name
     display: ComponentName
@@ -15,7 +15,7 @@ options:
     type: text
 */
 {% set bpr %}
-import {{ element.values.name | friendly }} from '@components/{{ element.values.name | friendly }}'
+import {{ element.values.name | friendly }} from '@components/{{ element.values.name | friendly }}/{{ element.values.name | friendly }}'
 {% endset %}
 {{ save_delayed('bpr', bpr)}}
 <{{ element.values.name | friendly }} {% if element.values.props %}properties={ { {{ element.values.props }} } }{% endif %}/>
