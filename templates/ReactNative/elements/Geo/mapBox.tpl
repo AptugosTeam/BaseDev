@@ -53,13 +53,12 @@ settings:
   {
     "RNMapboxMapsVersion": "10.16.2",
     "RNMapboxMapsDownloadToken": "{{ element.values.accessToken }}"
-  },
+  }],
   [
     "expo-build-properties",
     {
       "MAPBOX_DOWNLOADS_TOKEN": "{{ element.values.accessToken }}"
     }
-  ],
 ],
 {% endset %}
 {{ add_setting('AppJsonPlugins', AppJsonPlugins)}}
