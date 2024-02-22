@@ -152,6 +152,17 @@ children: []
   {% set ph %}
     const [{{ tableName }}Page, set{{ tableName }}Page] = React.useState(1)
     const { data, isLoading, isError } = use{{ tableName }}Pages({{ tableName }}Page)
+    const [{{ innervarname }}loadoptions, set{{ innervarname }}loadoptions] = React.useState<any>({ 
+    page: {{ element.values.defaultPage | default(1) }},
+    populate: {% if element.values.donotpopulate %}false{% else %}true{% endif %},
+    {% if element.values.elementsLimit %}limit: {{element.values.elementsLimit}}{% else %}limit: 25{% endif %},
+    sort: { field: {{ element.values.sortColumn | default('null') }}, method: '{{ element.values.sortMethod | default('DESC') }}' },
+    {% if element.values.fieldToSearch %}
+      searchField: {{ element.values.fieldToSearch | textOrVariableInCode }},
+    {% endif %}
+    totalItems: 0,
+    sortLanguage: '{{ element.values.sortLanguage|default('en') }}',
+  })
   {% endset %}
   {{ save_delayed('ph', ph)}}
 {% if element.values.onload or element.children %}
