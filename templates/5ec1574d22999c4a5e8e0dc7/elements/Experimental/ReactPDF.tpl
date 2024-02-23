@@ -22,6 +22,11 @@ children: []
 */
 
 {% set bpr %}
+  import { pdfjs } from 'react-pdf';
+  pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+    'pdfjs-dist/build/pdf.worker.min.js',
+    import.meta.url,
+  ).toString();
   import ReactPDF from '@components/ReactPDF/ReactPDF'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
