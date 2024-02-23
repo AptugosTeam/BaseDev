@@ -17,7 +17,11 @@ function ReactPDF(props) {
   const [pageNumber, setPageNumber] = useState<number>(1);
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
-    props.maxNumPages ? setNumPages(props.maxNumPages) : setNumPages(numPages)
+    if (props.maxNumPages) {
+      props.maxNumPages === false ? setNumPages(numPages) : setNumPages(props.maxNumPages)
+    } else {
+      setNumPages(numPages)
+    }
   }
 
   return (
