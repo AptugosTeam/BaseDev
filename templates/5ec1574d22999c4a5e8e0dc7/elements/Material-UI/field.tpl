@@ -64,6 +64,10 @@ options:
     display: Disable Underline
     type: checkbox
     options: ''
+  - name: maxLength
+    display: Max Characters Length
+    type: text
+    options: ''
   - name: margin
     display: margin
     type: dropdown
