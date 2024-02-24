@@ -20,7 +20,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-pdf": "7.7.1", "browserify-zlib": "^0.2.0","buffer": "^6.0.3","process": "^0.11.10","stream-browserify": "^3.0.0","util": "^0.12.4", "assert": "2.1.0",'
+    value: '"react-pdf": "7.7.1", "browserify-zlib": "^0.2.0","buffer": "^6.0.3","process": "^0.11.10","stream-browserify": "^3.0.0","util": "^0.12.4",'
 children: []
 */
 
