@@ -62,6 +62,16 @@ options:
     type: text
     options: ''
     required: true
+  - name: onSuccess
+    display: On Email Success
+    type: function
+    options: ''
+    advanced: true
+  - name: onError
+    display: On Email Error
+    type: function
+    options: ''
+    advanced: true
 settings:
   - name: BackendPackages
     value: '"nodemailer": "^6.4.11",'
@@ -165,11 +175,25 @@ const {{ functionName }} = (to, extra:any = {}) => {
       }
     }).then((response)=>{
       if (response.data.msg === 'success'){
+      {% if element.values.onSuccess %}
+        {{ element.values.onSuccess }} 
+      {% else %}
         console.log("Email sent, awesome!");
+      {% endif %}
       } else if(response.data.msg === 'fail'){
-        console.log('error', response)
+          {% if element.values.onError %}
+            {{ element.values.onError }} 
+          {% else %}
+            console.log('error', response)
+          {% endif %}
       }
-    })
+    }).catch((error) => {
+  {% if element.values.onError %}
+    {{ element.values.onError }} 
+  {% else %}
+    console.error(error)
+  {% endif %}
+})
   }
 {% endset %}
 {% endset %}
