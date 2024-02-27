@@ -381,6 +381,108 @@ $color3: rgb(202, 216, 228);
       }
     }
   }
+.footerTwo {
+  display: none;
+  height: auto;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(53, 49, 60, 0.75);
+  background-size: 100vw 100vh;
+  background-image: radial-gradient(50% 50% at 50% 50%, rgb(60 49 49 / 75%) 0%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(180deg, rgb(51 55 58) 0%, hsl(240, 13%, 31%) 15%, hsl(224deg 4.63% 19.75%) 50%);
+
+  @media screen and (max-width: 678px) {
+    height: auto;
+    position: relative;
+    width: 100%;
+  }
+
+  .containerFooterTwo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    padding: 3rem 2rem;
+
+    @media screen and (max-width: 678px) {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      height: 100%;
+      width: 100%;
+    }
+
+    .containerImage {
+      @media screen and (max-width: 678px) {
+        text-align: center;
+        width: 100%;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      picture {
+        img {
+          width: 80px;
+          margin: 0 auto;
+        }
+      }
+    }
+
+    .containerCategories {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+
+      @media screen and (max-width: 450px) {
+        text-align: center;
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      h5 {
+        border-bottom: 1px solid black;
+        display: table;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+        font-size: 1rem;
+
+        @media screen and (max-width: 678px) {
+          text-align: center;
+          width: 100%;
+          margin: 2rem 0;
+        }
+      }
+    }
+
+    .flexSocials {
+      width: 100%;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      @media screen and (max-width: 678px) {
+        text-align: center;
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .copyright {
+      font-size: 0.5rem;
+      text-align: center;
+    }
+  }
+}
 
   
   & .mainarea {

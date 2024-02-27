@@ -1,0 +1,20 @@
+{
+    "_id": "layoutFooterTwo",
+    "name": "Layout: FooterTwo",
+    "category": "Footer",
+    "runable": true,
+    "desc": "",
+    "icon": "icon.png",
+    "type": "layout",
+    "afterRun": "",
+    "parameters": [
+      {
+        "name": "parentPage",
+        "display": "Container Page",
+        "type": "dropdown",
+        "options": "return Object.keys(aptugo.pages).map(pageID => { return [pageID,aptugo.pages[pageID].name]})",
+        "helpText": "Unique ID for the container page"
+      }
+    ]
+  }
+  
