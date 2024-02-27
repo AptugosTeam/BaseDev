@@ -64,6 +64,10 @@ options:
     display: margin
     type: dropdown
     options: dense;normal;none
+  - name: maxLength
+    display: Max Characters Length
+    type: text
+    options: ''
   - name: variant
     display: Variant
     type: dropdown
