@@ -68,6 +68,20 @@ options:
     display: Effect - Cards
     type: checkbox
     advanced: true
+  - name: onSlideNextTransitionStart
+    display: On Slide Next Transition Start
+    type: function
+    advanced: true
+    settings:
+      propertyCondition: navigation
+      condition: false
+  - name: onSlidePrevTransitionStart
+    display: On Slide Previous Transition Start
+    type: function
+    advanced: true
+    settings:
+      propertyCondition: navigation
+      condition: false
 settings:
   - name: Packages
     value: '"swiper": "^10.0.0",'
@@ -129,6 +143,16 @@ import { EffectCards } from 'swiper'
         delay: {{ element.values.delay | default(2500) }},
         disableOnInteraction: false
       } }
+    {% endif %}
+    {% if element.values.onSlideNextTransitionStart %}
+       onSlideNextTransitionStart={() => {
+        {{element.values.onSlideNextTransitionStart}}
+       }}
+    {% endif %}
+    {% if element.values.onSlidePrevTransitionStart %}
+      onSlidePrevTransitionStart={() => {
+        {{element.values.onSlidePrevTransitionStart}}
+      }}
     {% endif %}
     modules={[SwiperPagination, Navigation{%if element.values.effectCards %}, EffectCards{% endif %}, Autoplay]}
   >
