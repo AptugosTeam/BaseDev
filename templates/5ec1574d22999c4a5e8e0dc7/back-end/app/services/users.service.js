@@ -46,7 +46,7 @@ const errorMessages = {
 };
 
 async function recoverPassword (req) {
-  let { name, email, message, subject, model, lang = "en" } = req.body;
+  let { name, email, message, subject, model, lang = "en", username } = req.body;
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -69,6 +69,7 @@ async function recoverPassword (req) {
       const nonce = Buffer.from(bcrypt.hashSync(JSON.stringify(userWithoutPassword), Password)).toString('base64')
       let parsedmessage = message.replace('**nonce**', nonce)
       parsedmessage = parsedmessage.replace('**email**', Buffer.from(userWithoutPassword.Email).toString('base64'))
+      if (username) parsedmessage = parsedmessage.replace('**username**', userWithoutPassword[username])
 
       try {
         const emailResponse = await req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
