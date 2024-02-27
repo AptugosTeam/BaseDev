@@ -483,7 +483,178 @@ $color3: rgb(202, 216, 228);
     }
   }
 }
+.footerThree {
+  height: auto;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(53, 49, 60, 0.75);
+  background-size: 100vw 100vh;
+  background-image: radial-gradient(50% 50% at 50% 50%, rgb(60 49 49 / 75%) 0%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(180deg, rgb(51 55 58) 0%, hsl(240, 13%, 31%) 15%, hsl(224deg 4.63% 19.75%) 50%);
 
+  @media screen and (max-width: 678px) {
+    height: auto;
+    position: relative;
+    width: 100%;
+  }
+
+  .containerFooterThree {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    padding: 3rem 2rem;
+
+    @media screen and (max-width: 678px) {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      height: 100%;
+      width: 100%;
+    }
+
+    .containersection {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      border-bottom: 1px solid grey;
+      margin-bottom: 2rem;
+      @media screen and (max-width: 678px) {
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+      .containerImage {
+        @media screen and (max-width: 678px) {
+          text-align: center;
+          width: 100%;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        picture {
+          img {
+            width: 80px;
+            margin: 0 auto;
+          }
+        }
+      }
+
+      .containerCategories {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+
+        @media screen and (max-width: 450px) {
+          text-align: center;
+          width: 100%;
+          flex-wrap: wrap;
+          gap: 20px;
+        }
+
+        h5 {
+          border-bottom: 1px solid black;
+          display: table;
+          padding-bottom: 0.5rem;
+          margin-bottom: 1rem;
+          font-weight: 700;
+          font-size: 1rem;
+
+          @media screen and (max-width: 678px) {
+            text-align: center;
+            width: 100%;
+            margin: 2rem 0;
+          }
+        }
+      }
+
+      .flexSocials {
+        width: unset;
+        height: 100px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+
+        @media screen and (max-width: 678px) {
+          text-align: center;
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    }
+
+    .containerSubscribe {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 40%;
+      gap: 40px;
+      margin-bottom: 2rem;
+      @media (min-width: 450px) and (max-width: 900px) {
+        flex-direction: column;
+        width: 100%;
+      }
+      @media screen and (max-width: 450px) {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      h5 {
+        font-weight: 700;
+        font-size: 1rem;
+
+        @media screen and (max-width: 450px) {
+          text-align: center;
+          width: 100%;
+          margin: 1rem 0;
+        }
+      }
+
+      .flexFieldYourEmail {
+        display: flex;
+        width: 100%;
+        align-items: center;
+
+        .hardcordField {
+          background-color: white;
+          width: 90%;
+          height: 30px;
+          border-radius: 25px 0 0 25px;
+          display: flex;
+          align-items: center;
+          padding-left: 1rem;
+          font-family: sans-serif;
+          font-size: 0.75rem;
+        }
+
+        button {
+          background-color: blue;
+          color: white;
+          width: 10px;
+          border-radius: 0 25px 25px 0;
+        }
+      }
+    }
+    .copyright {
+      font-size: 0.5rem;
+      text-align: center;
+      width: 100%;
+      @media screen and (max-width: 450px) {
+        width: 100%;
+      }
+     }
+    }
+  }
   
   & .mainarea {
     flex-grow: 1;
