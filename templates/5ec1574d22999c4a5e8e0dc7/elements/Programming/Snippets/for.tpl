@@ -29,7 +29,7 @@ options:
       default: 'item'
 children: []
 */
-for (var {{ element.values.variablename | default('item') }} = {{ element.values.from | default(0) }}; {{ element.values.variablename | default('item') }} {{ element.values.until }}; {{ element.values.variablename | default('item') }}++) {
+for (let {{ element.values.variablename | default('item') }} = {{ element.values.from | default(0) }}; {{ element.values.variablename | default('item') }} {{ element.values.until }}; {{ element.values.variablename | default('item') }}++) {
 {% if element.values.code %}
   {{ element.values.code }}
 {% endif %}
