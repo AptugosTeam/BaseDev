@@ -70,6 +70,10 @@ options:
     settings:
       condition: true
       propertyCondition: dataAttribute
+  - name: key
+    display: Key
+    type: text
+    advanced: true
 children: []
 helpText: Basic HTML Div element
 */
@@ -110,6 +114,9 @@ helpText: Basic HTML Div element
   {% endif %}
   {% if element.values.onclick %}
     onClick={(e) => {{element.values.onclick}} }
+  {% endif %}
+  {% if element.values.key %}
+    key={ {{element.values.key}} }
   {% endif %}
 >
 {{ content | raw }}
