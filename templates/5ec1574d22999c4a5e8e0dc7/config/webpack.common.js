@@ -22,6 +22,7 @@ module.exports = {
     },
     fallback: {
       'process/browser': require.resolve('process/browser'),
+      assert: require.resolve('assert/')
     }
   },
   context: resolve(__dirname, '../'),

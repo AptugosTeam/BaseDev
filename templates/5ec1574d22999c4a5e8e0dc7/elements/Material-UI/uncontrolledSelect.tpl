@@ -51,6 +51,12 @@ options:
   - name: DisableVariable
     display: Variable to disable input
     type: text
+  - name: disabled
+    display: Disabled
+    type: variable
+    options: ''
+    settings:
+      active: true
 children: []
 */
 
@@ -67,6 +73,7 @@ import MenuItem from '@mui/material/MenuItem'
     {% if not element.values.shrink %}
       InputLabelProps={ { shrink: false, } }
     {% endif %}
+    {% if element.values.disabled %}disabled={ {{element.values.disabled}} }{% endif %}
     margin='{{ element.values.margin|default("dense") }}'
     size='{{ element.values.size|default("medium") }}'
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
