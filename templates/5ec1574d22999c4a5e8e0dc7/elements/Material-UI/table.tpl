@@ -35,7 +35,7 @@ options:
     type: text
     options: ''
     settings:
-      condition: var
+      condition: useVar
       propertyCondition: table
   - name: editProcedure
     display: Edit Procedure
