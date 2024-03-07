@@ -147,8 +147,8 @@ async function authenticate ({ email, password, model, passwordField, populate, 
         bcrypt.compare(password, user[passwordField]).then((isMatch) => {
           if (isMatch) {
             const { Password, ...userWithoutPassword } = user._doc
-            const { _id: id } = userWithoutPassword
-            const userID = { id }
+            const { _id } = userWithoutPassword
+            const userID = { id: _id, _id }
             if (!fullUser) {
               fieldsToRetrieve.map((fieldName) => {
                 userID[fieldName] = userWithoutPassword[fieldName]

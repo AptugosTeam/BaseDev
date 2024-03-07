@@ -47,4 +47,5 @@ import {{element.values.icon}}Icon from '@mui/icons-material/{{element.values.ic
         {% endif %}
     </TimelineDot>
     <TimelineConnector />
+    {{ content | raw }}
 </TimelineSeparator>
