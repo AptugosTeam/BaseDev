@@ -25,6 +25,6 @@ import FontAwesomeIconPicker from '@components/IconPicker/IconPicker'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <FontAwesomeIconPicker 
-    {% if element.values.value %}value={{ element.values.value }}{% endif %}
+    {% if element.values.value %}value={{ '@fortawesome/free-solid-svg-icons/' ~ element.values.value | iconUnicode }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
 />
