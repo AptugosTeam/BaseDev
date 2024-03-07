@@ -38,6 +38,34 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: pages
+    display: Pages
+    type: text
+    options: ''
+    settings:
+      condition: useVar
+      propertyCondition: table
+  - name: onRequestPaginate
+    display: On Request Paginate
+    type: function
+    options: ''
+    settings:
+      condition: useVar
+      propertyCondition: table
+  - name: onRequestEdit
+    display: On Request Edit
+    type: function
+    options: ''
+    settings:
+      condition: useVar
+      propertyCondition: table
+  - name: onRemove
+    display: On Request Remove
+    type: function
+    options: ''
+    settings:
+      condition: useVar
+      propertyCondition: table
   - name: onRequestUpdate
     display: On Update
     type: function
@@ -117,7 +145,11 @@ import DataTable from '../components/DataTable/dataTable'
     className={ {{element.values.className}} }
   {% endif %}
   tableData={ {{ tableData }} }
-  pages={Math.ceil({{ totalDocs }} / {{ innervarname }}loadoptions.limit)}
+  {% if element.values.table == 'useVar' %}
+    pages={ {{element.values.pages}} }
+  {% else %}
+    pages={Math.ceil({{ totalDocs }} / {{ innervarname }}loadoptions.limit)}
+  {% endif %}
   columnInfo={
     {% if element.values.columnInfo %}
       {{ element.values.columnInfo }}
@@ -135,24 +167,42 @@ import DataTable from '../components/DataTable/dataTable'
     ]
     {% endif %}
   }
-  onRequestPaginate={(options) => {
-    set{{ innervarname }}loadoptions({ ...{{ innervarname }}loadoptions, ...options })
-  }}
+  {% if element.values.table == 'useVar' %}
+      onRequestPaginate={(options) => { 
+        {{element.values.onRequestPaginate}}
+      }}
+  {% else %}
+    onRequestPaginate={(options) => {
+      set{{ innervarname }}loadoptions({ ...{{ innervarname }}loadoptions, ...options })
+    }}
+  {% endif %}
   {% if allowEdit %}
-  onRequestEdit={row => {
-    {% if editProc == 'Internal' %}
-      {{ setEditDataFunctionName }}(row)
-      setdialog{{ tableName|capitalize }}Action('edit')
+    {% if element.values.table == 'useVar' %}
+      onRequestEdit={row => {
+        {{element.values.onRequestEdit}}
+      }}
+    {% else %}
+      onRequestEdit={row => {
+        {% if editProc == 'Internal' %}
+          {{ setEditDataFunctionName }}(row)
+          setdialog{{ tableName|capitalize }}Action('edit')
     {% else %}
       const url = '{{ (editProc | elementData ).path }}'.replace(':id', row._id)
       props.history.push(url)
     {% endif %}
-  }}
+      }}
+    {% endif %}
   {% endif %}
   {% if allowEdit %}
-  onRequestRemove={row => {
-    dispatch(remove{{ tableSingleName }}(row))
-  }}
+    {% if element.values.table == 'useVar' %}
+      onRequestRemove={row => {
+        {{element.values.onRemove}}
+      }}
+    {% else %}
+      onRequestRemove={row => {
+        dispatch(remove{{ tableSingleName }}(row))
+      }}
+  {% endif %}
   {% endif %}
   onRequestSort={property => {
     set{{ innervarname }}loadoptions({
