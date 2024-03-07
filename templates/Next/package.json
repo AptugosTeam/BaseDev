@@ -4,7 +4,7 @@ keyPath: package.json
 unique_id: siFqPBQK
 */
 {
-  "name": "gastonnext",
+  "name": "aptugonext",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -30,6 +30,9 @@ unique_id: siFqPBQK
     "next-connect": "^0.10.2",
     "react": "^18",
     "react-dom": "^18",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-import": "^16.0.1",
+    "postcss-preset-env": "^9.5.0",
     {{ insert_setting('Packages') | raw }}
     "swr": "^2.2.4"
   },

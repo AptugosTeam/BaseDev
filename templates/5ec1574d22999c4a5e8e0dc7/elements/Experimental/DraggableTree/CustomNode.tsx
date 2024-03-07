@@ -1,15 +1,13 @@
 /*
 path: CustomNode.tsx
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/elements/Experimental/DraggableTree/CustomNode.tsx
 keyPath: elements/Experimental/DraggableTree/CustomNode.tsx
 unique_id: 0AxxpVFC
 */
 import { AddCircle, Check, Close, Delete, Edit, FileCopy, HighlightAlt, Loop, MoreVert } from '@mui/icons-material'
-import Popover from '@mui/material/Popover';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
-import { MenuItem, Select, Tooltip } from '@mui/material'
+import { InputAdornment, MenuItem, Select, Tooltip } from '@mui/material'
 import IconButton from '@mui/material/IconButton'
+import Popover from '@mui/material/Popover'
 import TextField from '@mui/material/TextField'
 import React, { useState } from 'react'
 
@@ -64,7 +62,7 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
   const toReturn = (
     <div
       className={`${classes.nodeRoot} ${className} ${classes[props.node.nodeType]} ${props.node.errored && classes.errored}`}
-      style={ { paddingInlineStart: indent }}
+      style={ { paddingInlineStart: indent } }
       data-testid={`${testIdPrefix}custom-node-${id}-${props.node.nodeType}`}
       onClick={(_e) => {
         if (props.node.onClick) props.node.onClick(props.node)
@@ -79,7 +77,18 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
         )}
         {visibleInput ? (
           <div className={`${classes.inputWrapper} inputWrapper`}>
-            <TextField focused fullWidth className={`${classes.textField} ${classes.nodeInput}`} value={labelText} onChange={handleChangeText} />
+            <TextField
+              InputProps={
+                {
+                  startAdornment: props.node.preText ? <InputAdornment position='start'>{props.node.preText}</InputAdornment> : ''
+                }
+              }
+              focused
+              fullWidth
+              className={`${classes.textField} ${classes.nodeInput}`}
+              value={labelText}
+              onChange={handleChangeText}
+            />
             <IconButton className={classes.editButton} onClick={handleSubmit} disabled={labelText === ''}>
               <Check className={classes.editIcon} />
             </IconButton>
@@ -90,12 +99,6 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
         ) : (
           <div className={`${classes.inputWrapper} inputWrapper`}>
             <div className={`${classes.label} label`}>
-              {/* <div
-                className={`${classes.nodeType ? classes.nodeType : ''} nodeType`}
-                onClick={(e) => {
-                  props.onChangeType(id, e)
-                }}
-              ></div> */}
               {props.node.text}
               {(props.node.nodeType === 'Selector' || props.node.nodeType === 'Constant') && (
                 <div>
@@ -114,7 +117,10 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
                       ))}
                     </Select>
                   ) : (
-                    <div onClick={switchSelector}> <span>{props.node.data.VariableName || 'Not used'}</span></div>
+                    <div onClick={switchSelector}>
+                      {' '}
+                      <span>{props.node.data.VariableName || 'Not used'}</span>
+                    </div>
                   )}
                 </div>
               )}
@@ -139,7 +145,7 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
                 anchorOrigin={ {
                   vertical: 'center',
                   horizontal: 'center',
-                } }
+                }}
               >
                 {!!(props.node.permissions & (1 << 5)) && (
                   <div className={classes.actionButton}>
@@ -150,24 +156,18 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
                   </div>
                 )}
                 {!!(props.node.permissions & (1 << 4)) && (
-                  <div
-                    className={classes.actionButton}
-                    onClick={(e) => handleAdd(id, e)}
-                  >
+                  <div className={classes.actionButton} onClick={(e) => handleAdd(id, e)}>
                     <IconButton size="small">
                       <AddCircle fontSize="small" />
                     </IconButton>
-                    {props.node.nodeType === 'Selector' ||
-                    props.node.nodeType === 'Main'
-                      ? 'Add Value'
-                      : 'Add Child'}
+                    {props.node.nodeType === 'Selector' || props.node.nodeType === 'Main' ? 'Add Value' : 'Add Child'}
                   </div>
                 )}
                 {!!(props.node.permissions & (1 << 3)) && (
                   <div
                     className={classes.actionButton}
                     onClick={(e) => {
-                      props.onChangeType(id, e);
+                      props.onChangeType(id, e)
                     }}
                   >
                     <IconButton size="small">
@@ -176,15 +176,9 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
                     Switch Type
                   </div>
                 )}
-                {!!(props.node.permissions & (1 << 2)) &&
-                  !!(props.node.permissions & (1 << 1)) && (
-                    <div className={classes.separator}></div>
-                  )}
+                {!!(props.node.permissions & (1 << 2)) && !!(props.node.permissions & (1 << 1)) && <div className={classes.separator}></div>}
                 {!!(props.node.permissions & (1 << 2)) && (
-                  <div
-                    className={classes.actionButton}
-                    onClick={handleShowInput}
-                  >
+                  <div className={classes.actionButton} onClick={handleShowInput}>
                     <IconButton size="small">
                       <Edit fontSize="small" />
                     </IconButton>
@@ -192,23 +186,21 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
                   </div>
                 )}
                 {!!(props.node.permissions & (1 << 1)) && (
-                  <div
-                    className={classes.actionButton}
-                    onClick={() => props.onCopy(id)}
-                  >
+                  <div className={classes.actionButton} onClick={() => props.onCopy(id)}>
                     <IconButton size="small">
                       <FileCopy fontSize="small" />
                     </IconButton>
                     Copy
                   </div>
                 )}
-                {!!(props.node.permissions & 1) && (
-                  <div className={classes.separator}></div>
-                )}
+                {!!(props.node.permissions & 1) && <div className={classes.separator}></div>}
                 {!!(props.node.permissions & 1) && (
                   <div
                     className={classes.actionButtonDanger}
-                    onClick={(e) => { e.stopPropagation(); props.onDelete(id) }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      props.onDelete(id)
+                    }}
                   >
                     <IconButton size="small">
                       <Delete fontSize="small" />
@@ -225,18 +217,29 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
   )
 
   if (props.node.tooltip) {
-    return <Tooltip enterDelay={500} arrow classes={ { popper: classes.tooltip }} placement="top-start" slotProps={ {
-      popper: {
-        modifiers: [
-          {
-            name: 'offset',
-            options: {
-              offset: [0, -15],
-            },
+    return (
+      <Tooltip
+        enterDelay={500}
+        arrow
+        classes={ { popper: classes.tooltip }}
+        placement="top-start"
+        slotProps={ {
+          popper: {
+            modifiers: [
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, -15],
+                },
+              },
+            ],
           },
-        ],
-      },
-    }} title={props.node.tooltip}>{toReturn}</Tooltip>
+        }}
+        title={props.node.tooltip}
+      >
+        {toReturn}
+      </Tooltip>
+    )
   } else {
     return toReturn
   }
