@@ -1,7 +1,5 @@
 /*
 path: 995_userApi.tsx
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/Programming/Snippets/extraFiles/995_userApi.tsx
 keyPath: elements/Programming/Snippets/extraFiles/995_userApi.tsx
 unique_id: iB9N9QTq
 */

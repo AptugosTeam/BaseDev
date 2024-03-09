@@ -1,1 +1,1 @@
-npm install --loglevel timing 2>&1 
+npm install --loglevel notice 2>&1 
