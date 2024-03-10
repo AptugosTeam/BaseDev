@@ -1,5 +1,6 @@
 /*
 path: InfiniteLooper.tsx
+completePath: front-end/components/InfiniteLooper/InfiniteLooper.tsx
 type: file
 unique_id: sMlINF1O
 icon: ico-field
@@ -7,7 +8,7 @@ sourceType: typescript
 children: []
 */
 
-import React, { useState, useEffect, useRef, useCallback, FC, ReactNode } from "react";
+import React, { useState, useEffect, useRef, useCallback, FunctionComponent, ReactNode } from "react";
 import classes from './InfiniteLooper.module.scss'
 
 interface InfiniteLooperProps {
@@ -17,7 +18,7 @@ interface InfiniteLooperProps {
 }
 
 const InfiniteLooper:
-FC<InfiniteLooperProps> = (props) => {
+FunctionComponent<InfiniteLooperProps> = (props) => {
   const [looperInstances, setLooperInstances] = useState(1);
   const outerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
