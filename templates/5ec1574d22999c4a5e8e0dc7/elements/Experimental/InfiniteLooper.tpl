@@ -9,11 +9,15 @@ options:
   - name: speed
     display: Speed
     type: text
-    options: ''
+    settings:
+      default: '1'
   - name: direction
     display: Direction
-    type: text
-    options: ''
+    type: dropdown
+    options: 
+      return [['reverse', 'Right'], ['normal', 'Left']]
+    settings:
+      default: 'normal'
 children: []
 */
 
@@ -23,10 +27,10 @@ import InfiniteLooper from '@components/InfiniteLooper/InfiniteLooper'
 {{ save_delayed('bpr', bpr) }}
 <InfiniteLooper
   {% if element.values.speed %}
-    speed='{{ element.values.speed }}'
+    speed='{{ element.values.speed|default("1") }}'
   {% endif %}
   {% if element.values.direction %}
-    direction='{{ element.values.direction }}'
+    direction='{{ element.values.direction|default("normal") }}'
   {% endif %}
 >   
   {{ content | raw }}
