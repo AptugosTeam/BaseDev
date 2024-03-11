@@ -15,9 +15,9 @@ options:
     display: Direction
     type: dropdown
     options: 
-      return [['reverse', 'Right'], ['normal', 'Left']]
+      return [['right', 'Right'], ['left', 'Left']]
     settings:
-      default: 'normal'
+      default: 'left'
 children: []
 */
 
@@ -30,7 +30,7 @@ import InfiniteLooper from '@components/InfiniteLooper/InfiniteLooper'
     speed='{{ element.values.speed|default("1") }}'
   {% endif %}
   {% if element.values.direction %}
-    direction='{{ element.values.direction|default("normal") }}'
+    direction='{{ element.values.direction|default("left") }}'
   {% endif %}
 >   
   {{ content | raw }}
