@@ -55,6 +55,19 @@ options:
     display: Limit of files
     type: text
     options: ''
+  - name: createThumb
+    display: Create image thumbnail
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
+  - name: resizeWidth
+    display: Thumbnail Width (Number)
+    type: text
+    advanced: true
+    settings:
+      condition: true
+      propertyCondition: createThumb
 settings:
   - name: Packages
     value: '"react-dropzone": "^11.4.2",'
@@ -78,6 +91,10 @@ import MultipleFileUpload from '@components/MultipleFileUpload'
   {% set path = '/img/' ~ asset.name %}
 {% endif %}
 <MultipleFileUpload
+
+  {% if element.values.createThumb and  element.values.resizeWidth %}
+  thumbnails={ { resizeWidth: {{ element.values.resizeWidth | default(300)}} } }
+  {% endif %}
   {% if element.values.value %}files={{ element.values.value | textOrVariable }}{% endif %}
   {% if element.values.innerText %}innerText={{ element.values.innerText | textOrVariable }}{% endif %}
   {% if element.values.classname %}className={ {{ element.values.classname }} }{% endif %}
