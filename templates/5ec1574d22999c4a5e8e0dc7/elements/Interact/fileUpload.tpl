@@ -54,6 +54,6 @@ import FileUpload from '../components/FileUpload/FileUpload'
     onChange={ {{element.values.onChange | functionOrCall }} }
     variant="{{ element.values.variant| default('standard') }}"
     {% if element.values.resize and element.values.resizeWidth %}
-        resizeWidth={ Number( {{element.values.resizeWidth}} ) | default(800)}
+        resizeWidth={ Number( {{ element.values.resizeWidth | default(800) }}) }
     {% endif %}
 />
