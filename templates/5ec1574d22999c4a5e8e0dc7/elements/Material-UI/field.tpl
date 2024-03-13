@@ -99,6 +99,10 @@ options:
     display: Field Name
     type: text
     options: ''
+  - name: inputLabel
+    display: Input Label
+    type: text
+    options: ''
   - name: onBlur
     display: On Focus Lost
     type: function
