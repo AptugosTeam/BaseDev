@@ -10,7 +10,7 @@ options:
     options: ''
   - name: OnClick
     display: OnClick
-    type: text
+    type: function
     options: ''
   - name: label
     display: label

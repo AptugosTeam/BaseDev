@@ -43,7 +43,7 @@ options:
     advanced: true
   - name: code
     display: Code
-    type: text
+    type: function
     options: ''
   - name: usefragment
     display: Do Not Use Fragment
