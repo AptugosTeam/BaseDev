@@ -60,7 +60,8 @@ const {{ element.unique_id }}quillModules = {
     modules={ {{element.unique_id}}quillModules}
     value={ {{element.values.value | default('') }} }
     onChange={(e) => {
-        {{ element.values.onChangeWysiwyg }}(e.replace('<p><br></p><p><br></p>', '<p><br></p>'))
+        e.replace('<p><br></p><p><br></p>', '<p><br></p>')
+        {{ element.values.onChangeWysiwyg }}
         {{ element.values.onSaveData }}
       } 
     }
