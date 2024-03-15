@@ -17,6 +17,11 @@ options:
     display: On Change
     type: function
     options: ''
+  - name: onBlur
+    display: On Focus Lost
+    type: function
+    options: ''
+    advanced: true
   - name: placeholder
     display: Placeholder
     type: text
@@ -180,6 +185,7 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if fullWidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
+    {% if element.values.onBlur %}onBlur={ {{ element.values.onBlur | functionOrCall }} }{% endif %}
     {% if element.values.endAdornment %}
       InputProps={ {
         endAdornment: <InputAdornment position="end">{{ content | raw }}</InputAdornment>
