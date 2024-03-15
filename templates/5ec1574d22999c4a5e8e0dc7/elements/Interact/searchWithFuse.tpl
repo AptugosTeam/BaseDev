@@ -105,7 +105,7 @@ options:
     type: checkbox
     advanced: true
 settings:
-  - name: Packages
+  - name: BackendPackages
     value: '"fuse.js": "latest",'
 children: []
 */
