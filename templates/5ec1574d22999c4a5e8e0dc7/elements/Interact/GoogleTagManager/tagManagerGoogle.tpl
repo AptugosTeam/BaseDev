@@ -34,3 +34,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager (noscript) -->
 {% endset %}
 {{ add_setting('IndexPageAdd', IPA) }}
+
+{% set SWBPRA %}
+  import PageView from '@components/PageView/PageView'
+{% endset %}
+
+{{ add_setting('SiteWideBeforePageRenderAddenum', SWBPRA) }}
+{% set SWBS %}
+  <PageView />
+{% endset %}
+{{ add_setting('SiteWideBeforeStart', SWBS) }}

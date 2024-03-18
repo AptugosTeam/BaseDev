@@ -1,3 +1,10 @@
+/*
+path: PageView.tsx
+completePath: >-
+  /Users/robrondon/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/front-end/components/PageView/PageView.tsx
+keyPath: front-end/components/PageView/PageView.tsx
+unique_id: Mm2MXMCD
+*/
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
