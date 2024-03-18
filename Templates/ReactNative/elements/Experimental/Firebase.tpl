@@ -15,10 +15,7 @@ options:
     display: Config firebase
     type: code
     options: ''
-settings:
-    
-  - name: BackendPackages
-    value: '"stripe": "^8.201.0",'
+settings:    
   - name: ServerRoute
     value: |
         const firebaseConfig = {{ element.values.config }}
