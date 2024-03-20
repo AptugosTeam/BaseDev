@@ -64,7 +64,7 @@ const AptugoTable: FunctionComponent<tableProps> = (props) => {
       children = [...(props.children as Array<any>)]
     } catch (e) {}
 
-    return children.map((child: any, index) => {
+    return children.filter((c) => !!c).map((child: any, index) => {
       let newProps: any = { ...child.props }
 
       for (const [key, value] of Object.entries(newProps)) {
