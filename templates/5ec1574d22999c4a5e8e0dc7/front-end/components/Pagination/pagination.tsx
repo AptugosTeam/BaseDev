@@ -71,6 +71,7 @@ const Pagination: FunctionComponent<paginationProps> = (props) => {
           onClickCapture={() => {
             props.setPage(props.currentPage + 1)
           }}
+          disabled={props.disabledNextButton}
         >
           {props.textInsideNextButton}
           <ChevronRightRoundedIcon />
