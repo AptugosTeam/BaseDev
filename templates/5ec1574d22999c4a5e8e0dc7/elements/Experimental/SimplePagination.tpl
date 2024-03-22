@@ -50,7 +50,7 @@ import Pagination from '../components/Pagination'
       disabledPrevButton={tableloadoptions.page == 1}
     {% endif %}
     {% if element.values.disabledNextButton %}
-      disabledNextButton={emisionsourcesData.totalDocs < tableloadoptions.page * tableloadoptions.limit}
+      disabledNextButton={ {{ element.values.variableToUse }}.totalDocs < tableloadoptions.page * tableloadoptions.limit}
     {% endif %}
     {% if element.values.textInsidePrevButton %}
       textInsidePrevButton={{ element.values.textInsidePrevButton | textOrVariable}} 
