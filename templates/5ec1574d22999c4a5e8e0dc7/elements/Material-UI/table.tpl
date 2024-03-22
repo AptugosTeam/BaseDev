@@ -105,6 +105,9 @@ options:
     options: ''
     settings:
       default: false
+  - name: startSeparatorPagination
+    display: Start Pagination Properties
+    type: separator
   - name: elementsLimit
     display: Elements Per Page
     type: text
@@ -114,6 +117,63 @@ options:
       propertyCondition: usePagination
       condition: '"true"'
       active: true
+  - name: alwaysActivePrevButton
+    display: Always Active Previous Button?
+    type: checkbox
+    options: ''
+    settings: 
+      default: false
+      propertyCondition: usePagination
+      condition: '"true"'
+      active: true
+  - name: alwaysActiveNextButton
+    display: Always Active Next Button?
+    type: checkbox
+    options: ''
+    settings:
+      default: false
+      propertyCondition: usePagination
+      condition: '"true"'
+      active: true
+  - name: disabledPrevButton
+    display: Disable Previous Button
+    type: checkbox
+    options: ''
+    settings:
+      default: false
+      propertyCondition: usePagination
+      condition: '"true"'
+      active: true
+  - name: disabledNextButton
+    display: Disable Next Button
+    type: checkbox
+    options: ''
+    settings:
+      default: false
+      propertyCondition: usePagination
+      condition: '"true"'
+      active: true
+  - name: textInsidePrevButton
+    display: Text Inside the Previous Button
+    type: text
+    options: ''
+    settings:
+      default: 'Previous'
+      propertyCondition: usePagination
+      condition: '"true"'
+      active: true
+  - name: textInsideNextButton
+    display: Text Inside the Next Button
+    type: text
+    options: ''
+    settings:
+      default: 'Next'
+      propertyCondition: usePagination
+      condition: '"true"'
+      active: true
+  - name: endSeparatorPagination
+    display: End Pagination Properties
+    type: separator
   - name: confirmDeletes
     display: Show a confirmation before deleting
     type: checkbox
@@ -275,6 +335,6 @@ children: []
 {% endif %}
 </Table>
 {% if element.values.usePagination %}
-{% set innerParams = { 'element': { 'unique_id': item.unique_id, values: { 'variableToUse': table.name | friendly | lower ~ 'Data', 'table': element.values.table, 'elementsLimit': element.values.elementsLimit, 'totalDocs': element.values.variableToUse.totalDocs } } } %}
+{% set innerParams = { 'element': { 'unique_id': item.unique_id, values: { 'variableToUse': table.name | friendly | lower ~ 'Data', 'table': element.values.table, 'elementsLimit': element.values.elementsLimit, 'totalDocs': element.values.variableToUse.totalDocs, 'alwaysActivePrevButton': element.values.alwaysActivePrevButton, 'alwaysActiveNextButton': element.values.alwaysActiveNextButton, 'disabledPrevButton': element.values.disabledPrevButton, 'disabledNextButton': element.values.disabledNextButton, 'textInsidePrevButton': element.values.textInsidePrevButton, 'textInsideNextButton': element.values.textInsideNextButton } } } %}
 {% include includeTemplate('SimplePagination.tpl') with innerParams %}
 {% endif %}
