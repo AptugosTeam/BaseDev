@@ -28,7 +28,7 @@ options:
   - name: size
     display: Size
     type: dropdown
-    options: normal;small
+    options: normal;small;medium
   - name: margin
     display: Margin
     type: dropdown

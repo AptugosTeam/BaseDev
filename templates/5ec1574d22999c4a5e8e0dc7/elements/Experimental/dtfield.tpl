@@ -24,6 +24,10 @@ options:
       propertyCondition: Field
       condition: useVar
       active: true
+  - name: size
+    display: Size
+    type: dropdown
+    options: normal;small;medium
   - name: Type
     display: Type
     type: dropdown
