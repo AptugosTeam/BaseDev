@@ -21,34 +21,6 @@ options:
       return [['none', 'none'],
       ...aptugo.assetUtils.stylesheets().map(stylesheet => [stylesheet.id,
       stylesheet.name])]
-    settings:
-      aptugoOnChange: >-
-        element = arguments[0]
-
-        var selectedAsset = element.values?.useAsset
-
-        if (selectedAsset !== 'none') {
-
-        //  const assetInfo = aptugo.assetUtils.stylesheets().find(ss => ss.id
-        === //selectedAsset)
-
-        //  const currentPage =
-        //aptugo.pageUtils.findContainerPage(aptugo.variables.retrieveGlobalVariables('currentElement').unique_id).unique_id
-
-        //  aptugo.variables.setPageVariable(currentPage,{ theme: assetInfo })
-
-          console.log('onchange', element, selectedAsset)
-        }
-      aptugoOnLoad: |-
-        element = arguments[0];
-        var selectedAsset = (element.values?.useAsset && element.values?.useAsset !== 'none') ? element.values?.useAsset : null;
-        if (selectedAsset) {
-          const assetInfo = aptugoUtils.assets.stylesheets().find(ss => ss.id === selectedAsset);
-          const currentPage = aptugoUtils.helpers.findContainerPage(element).unique_id;
-          aptugoUtils.assets.grabCssSelectors(assetInfo).then(cssinfo => {
-            aptugoUtils.variables.setPageVariable(currentPage, element.unique_id, { theme: cssinfo, hidden: selectedAsset })
-          })
-        }
   - name: extraThemeOptions
     display: Extra Theme options
     type: code
@@ -68,7 +40,7 @@ children: []
   {% set asset = element.values.useAsset|assetData %}
   {% set theme = asset.name|friendly %}
   {% set bpr %}
-    import {{ asset.name|friendly }} from 'dist/css/{{ asset.name }}'
+    import {{ asset.name|friendly }} from 'public/css/{{ asset.name }}'
   {% endset %}
 {% else %}
   {% set theme = element.values.theme %}

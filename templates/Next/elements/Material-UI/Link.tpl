@@ -23,18 +23,18 @@ options:
 children: []
 */
 {% set bpr %}
-import { NavLink } from 'react-router-dom'
+import Link from 'next/link'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<NavLink
-  to={{ element.values.destination|textOrVariable|default("''") }}
-  key='{{ element.unique_id }}'
+<Link
   {% if element.values.draggable %}
     draggable={false}
   {% endif %}
+  key='{{ element.unique_id }}'
+  href={{ element.values.destination|textOrVariable|default("''") }}
 >
-  {% if element.values.innerText %}
+{% if element.values.innerText %}
     {{ element.values.innerText }}
   {% endif %}
   {{ content | raw }}
-</NavLink>
+</Link>

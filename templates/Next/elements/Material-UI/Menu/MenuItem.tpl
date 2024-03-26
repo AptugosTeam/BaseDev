@@ -34,6 +34,10 @@ childs:
   - name: text
     element: text
 */
+{% set bpr %}
+import MenuItem from '@mui/material/MenuItem'
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
 <MenuItem
   {% if element.values.className %}
     className={ {{element.values.className}} }

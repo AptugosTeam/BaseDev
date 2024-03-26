@@ -1,7 +1,5 @@
 /*
 path: 999_afip.js
-completePath: >-
-  /Users/robrondon/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/elements/Experimental/Afip/999_afip.js
 keyPath: elements/Experimental/Afip/999_afip.js
 unique_id: GE1XabDo
 */
