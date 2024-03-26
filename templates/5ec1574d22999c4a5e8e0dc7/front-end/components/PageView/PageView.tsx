@@ -18,7 +18,7 @@ const PageView = () => {
   const location = useLocation()
 
   useEffect(()=>{
-    window.dataLayer.push({
+    window?.dataLayer?.push({
       event: 'page_view'
     })
   }, [location])

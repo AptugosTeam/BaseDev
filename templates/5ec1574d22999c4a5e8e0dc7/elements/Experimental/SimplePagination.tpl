@@ -37,4 +37,25 @@ import Pagination from '../components/Pagination'
     currentPage={tableloadoptions.page}
     setPage={(page) => { settableloadoptions({ ...tableloadoptions, page: page })}}
     totalItems={ {{ element.values.variableToUse }}.totalDocs}
+    {% if element.values.minPage %}
+      minPage={ {{element.values.minPage}} }
+    {% endif %}
+    {% if element.values.alwaysActivePrevButton %}
+      alwaysActivePrevButton={ {{element.values.alwaysActivePrevButton}} }
+    {% endif %}
+    {% if element.values.alwaysActiveNextButton %}
+      alwaysActiveNextButton={ {{element.values.alwaysActiveNextButton}} }
+    {% endif %}
+    {% if element.values.disabledPrevButton %}
+      disabledPrevButton={tableloadoptions.page == 1}
+    {% endif %}
+    {% if element.values.disabledNextButton %}
+      disabledNextButton={ {{ element.values.variableToUse }}.totalDocs < tableloadoptions.page * tableloadoptions.limit}
+    {% endif %}
+    {% if element.values.textInsidePrevButton %}
+      textInsidePrevButton={{ element.values.textInsidePrevButton | textOrVariable}} 
+    {% endif %}
+    {% if element.values.textInsideNextButton %}
+      textInsideNextButton={{ element.values.textInsideNextButton | textOrVariable }}
+    {% endif %}
 />

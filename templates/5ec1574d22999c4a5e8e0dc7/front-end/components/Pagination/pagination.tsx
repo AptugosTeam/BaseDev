@@ -16,21 +16,32 @@ interface paginationProps {
   setPage: Function
   totalItems: number
   itemsPerPage: number
+  alwaysActivePrevButton: boolean
+  alwaysActiveNextButton: boolean
+  disabledPrevButton: boolean
+  disabledNextButton: boolean
+  textInsidePrevButton: string
+  textInsideNextButton: string
 }
 
 const Pagination: FunctionComponent<paginationProps> = (props) => {
   const totalPages = Math.ceil(props.totalItems / props.itemsPerPage)
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1)
+  const alwaysActivePrevButton = props.alwaysActivePrevButton ? props.currentPage > 0 : props.currentPage > 1
+  const alwaysActiveNextButton = props.alwaysActiveNextButton ? props.totalItems : props.totalItems > props.currentPage * props.itemsPerPage
   const maxPageNumbersToShow = 5;
+
   return (
     <div className={classes.prevnext}>
-      {props.currentPage > 1 && (
+      {alwaysActivePrevButton && (
         <Button
           onClickCapture={() => {
             props.setPage(props.currentPage - 1)
           }}
+            disabled={props.disabledPrevButton}
         >
           <ChevronLeftRoundedIcon />
+          {props.textInsidePrevButton}
         </Button>
       )}
       <div className={classes.pagination}>
@@ -55,12 +66,14 @@ const Pagination: FunctionComponent<paginationProps> = (props) => {
         })}
       </div>
 
-      {props.totalItems > props.currentPage * props.itemsPerPage && (
+      {alwaysActiveNextButton && (
         <Button
           onClickCapture={() => {
             props.setPage(props.currentPage + 1)
           }}
+          disabled={props.disabledNextButton}
         >
+          {props.textInsideNextButton}
           <ChevronRightRoundedIcon />
         </Button>
       )}

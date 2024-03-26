@@ -71,7 +71,7 @@ const sendStripeForm = (price = null, extraData = null) => {
 {% if element.values.cancelURL %}
   let cancelField = document.createElement('input')
   cancelField.name = 'cancelURL'
-  cancelField.value = {{ element.values.cancelURL | textOrVariable }}
+  cancelField.value = {{ element.values.cancelURL }}
   form.appendChild(cancelField)
 {% endif %}
 
