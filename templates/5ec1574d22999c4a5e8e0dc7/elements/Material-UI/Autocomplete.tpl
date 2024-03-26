@@ -50,6 +50,10 @@ options:
     display: Variant
     type: dropdown
     options: standard;filled;outlined
+  - name: disabled
+    display: Disabled
+    type: text
+    options: ''
 helpText: >-
   The autocomplete is a normal text input enhanced by a panel of suggested options.
 icon: ico-field
@@ -71,4 +75,5 @@ import TextField from '@mui/material/TextField'
       {% if element.values.variant %}variant={{ element.values.variant | textOrVariable }}{% endif %}
       {% if element.values.margin %}margin={{ element.values.margin | textOrVariable }}{% endif %}
       {% if element.values.chips %}chips{% endif %}
+      {% if element.values.disabled %}disabled={ {{element.values.disabled}} } {% endif %}
   />
