@@ -23,6 +23,15 @@ options:
           })
         }
       active: true
+  - name: hitsclassName
+    display: ClassName For Results
+    type: styles
+  - name: searchclassName
+    display: ClassName For Search Box
+    type: styles
+  - name: hideHits
+    display: Hit initially hidden
+    type: checkbox
 extraFiles:
   - source: 'elements/Experimental/999_typesense.js'
     destination: '/src/api-lib/typesense.tsx'
@@ -38,7 +47,7 @@ import Typesense from 'typesense'
 {% set databasePiece %}
 let client = new Typesense.Client({
   nodes: [{
-    host: "localhost",
+    host: "127.0.0.1",
     port: 8108,
     path: "",
     protocol: "http",
@@ -78,7 +87,8 @@ export async function setupTypesense_{{ tableName }}(typesenseClient, db) {
     ]
   }
 
-  createSchema(schema, typesenseClient)
+  const documents = await db.collection('{{ tableName }}').find({}).toArray()
+  createSchema('{{ tableName }}', schema, typesenseClient, documents)
   
   try {
     await monitorListingsUsingEventEmitter(db, typesenseClient)
@@ -87,7 +97,7 @@ export async function setupTypesense_{{ tableName }}(typesenseClient, db) {
   }
 }
 {% endset %}
-{{ add_setting('modelAddenum', modelAddenum, '/src/api-lib/db/articles.tsx') }}
+{{ add_setting('modelAddenum', modelAddenum, '/src/api-lib/db/' ~ tableName ~ '.tsx') }}
 {# Current Position Render #}
 {% set bpr %}
   import { InstantSearch, SearchBox, Hits } from 'react-instantsearch'
@@ -113,7 +123,18 @@ export async function setupTypesense_{{ tableName }}(typesenseClient, db) {
   const searchClient = typesenseInstantsearchAdapter.searchClient;
 {% endset %}
 {{ save_delayed('ph',ph) }}
-<InstantSearch indexName="articles" searchClient={searchClient}>
-  <SearchBox />
-  <Hits {% if element.children %}hitComponent={(props) => {% for child in element.children %}{{ child.rendered }}{% endfor %}}{% endif %}/>
+{% if element.values.hideHits %}
+  {% include includeTemplate(['useState.tpl']) with { 'element': { 'values': { variableName: 'typesenseQuery', defaultValue: "''"} } } %}
+{% endif %}
+<InstantSearch
+  indexName="{{ tableName }}"
+  searchClient={searchClient}
+  {% if element.values.hideHits %}
+    onStateChange={(state) => { settypesenseQuery(state.uiState.{{ tableName }}.query || '') }}
+  {% endif %}
+>
+  <SearchBox {% if element.values.searchclassName %}className={ {{element.values.searchclassName}} }{% endif %}  />
+  {% if element.values.hideHits %}{typesenseQuery && {% endif %}
+  <Hits {% if element.values.hitsclassName %}className={ {{element.values.hitsclassName}} }{% endif %} {% if element.children %}hitComponent={(props) => {% for child in element.children %}{{ child.rendered }}{% endfor %}}{% endif %}/>
+  {% if element.values.hideHits %}}{% endif %}
 </InstantSearch>

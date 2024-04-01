@@ -1,12 +1,9 @@
 /*
 path: 999_typesense.js
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/Experimental/999_typesense.js
 keyPath: elements/Experimental/999_typesense.js
 unique_id: sFBPRd3J
 */
-
-export async function createSchema(schema, typesense) {
+export async function createSchema(schemaName, schema, typesense, documents = []) {
   const collectionsList = await typesense.collections().retrieve()
   var toCreate = collectionsList.find((value, index, array) => {
     return value['name'] == schema['name']
@@ -14,6 +11,11 @@ export async function createSchema(schema, typesense) {
 
   if (!toCreate) {
     await typesense.collections().create(schema)
+    documents.map(async (document) => {
+      document.id = document['_id']      
+      let data = JSON.stringify(document)
+      await typesense.collections(schemaName).documents().upsert(data)
+    })
   }
 }
 
