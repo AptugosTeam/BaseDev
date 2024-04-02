@@ -62,7 +62,7 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
   const toReturn = (
     <div
       className={`${classes.nodeRoot} ${className} ${classes[props.node.nodeType]} ${props.node.errored && classes.errored}`}
-      style={ { paddingInlineStart: indent } }
+      style={ { paddingInlineStart: indent }}
       data-testid={`${testIdPrefix}custom-node-${id}-${props.node.nodeType}`}
       onClick={(_e) => {
         if (props.node.onClick) props.node.onClick(props.node)
@@ -78,11 +78,9 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
         {visibleInput ? (
           <div className={`${classes.inputWrapper} inputWrapper`}>
             <TextField
-              InputProps={
-                {
-                  startAdornment: props.node.preText ? <InputAdornment position='start'>{props.node.preText}</InputAdornment> : ''
-                }
-              }
+              InputProps={ {
+                startAdornment: props.node.preText ? <InputAdornment position="start">{props.node.preText}</InputAdornment> : '',
+              }}
               focused
               fullWidth
               className={`${classes.textField} ${classes.nodeInput}`}
@@ -142,7 +140,7 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
                 open={Boolean(activeMenu)}
                 anchorEl={activeMenu}
                 onClose={() => setactiveMenu(null)}
-                anchorOrigin={ {
+                anchorOrigin={ {
                   vertical: 'center',
                   horizontal: 'center',
                 }}
@@ -199,7 +197,7 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
                     className={classes.actionButtonDanger}
                     onClick={(e) => {
                       e.stopPropagation()
-                      props.onDelete(id)
+                      props.onDelete(props.node)
                     }}
                   >
                     <IconButton size="small">
@@ -221,9 +219,9 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
       <Tooltip
         enterDelay={500}
         arrow
-        classes={ { popper: classes.tooltip }}
+        classes={ { popper: classes.tooltip }}
         placement="top-start"
-        slotProps={ {
+        slotProps={ {
           popper: {
             modifiers: [
               {
