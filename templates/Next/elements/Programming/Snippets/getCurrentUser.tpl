@@ -62,7 +62,7 @@ export * from './auth'
 {% endset %}
 {{ add_setting('addedModel', addedModel) }}
 {% set bpr %}
-import { useCurrentUser } from '../lib/user'
+import { useCurrentUser } from '@lib/user'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 const {{ element.values.variableName }} = useCurrentUser().data

@@ -1,7 +1,5 @@
 /*
 path: DraggableTree.tsx
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/elements/Experimental/DraggableTree/DraggableTree.tsx
 keyPath: elements/Experimental/DraggableTree/DraggableTree.tsx
 unique_id: MA0y47Iq
 */
@@ -44,7 +42,7 @@ const initialData = [
   },
 ]
 
-import { getBackendOptions, getDescendants, getParents, MultiBackend, Tree, NodeModel } from '@minoru/react-dnd-treeview'
+import { getBackendOptions, getDescendants, getParents, MultiBackend, NodeModel, Tree } from '@minoru/react-dnd-treeview'
 import { DndProvider } from 'react-dnd'
 
 export interface FormulaTreeProps {
@@ -58,7 +56,7 @@ export interface FormulaTreeProps {
 }
 
 interface ExtendedNodeModel extends NodeModel {
-  hidden?: boolean;
+  hidden?: boolean
 }
 
 const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
@@ -72,12 +70,16 @@ const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
 
   const handleDrop = (newTreeData, event) => {
     const { dragSourceId, dropTargetId } = event
+
     const newData = newTreeData.map((node) => {
-      if (node.id === dragSourceId) {
+      if (node.id === dropTargetId) {
+        return { ...node, changed: true }
+      } else if (node.id === dragSourceId) {
         const subnode = { ...node }
         delete subnode.ref
         return {
           ...subnode,
+          changed: true,
           parent: dropTargetId,
         }
       }
@@ -96,11 +98,17 @@ const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
     }
   }, [props.tree])
 
-  const handleDelete = (id) => {
-    const deleteIds = [id, ...getDescendants(treeData, id).map((node) => node.id)]
-    const newTree = treeData.filter((node) => !deleteIds.includes(node.id))
-    props.onDelete(deleteIds)
-    setTreeData(newTree)
+  const handleDelete = (node) => {
+    if (node.nodeType === 'Formula') {
+      const newTree = treeData.filter((treenode) => treenode.id !== node.id)
+      newTree.filter((treenode) => treenode.id === node.parent)[0].changed = true
+      props.onUpdate(newTree)
+    } else {
+      const deleteIds = [node.id, ...getDescendants(treeData, node.id).map((node) => node.id)]
+      const newTree = treeData.filter((treenode) => !deleteIds.includes(treenode.id))
+      props.onDelete(deleteIds)
+      setTreeData(newTree)
+    }
   }
 
   const handleCopy = (id) => {
@@ -133,8 +141,7 @@ const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
     ])
   }
 
-  const handleClick = (id) => {
-  }
+  const handleClick = (id) => {}
 
   const handleChangeVar = (id, newValue) => {
     const newData = treeData.map((node) => {
@@ -156,8 +163,9 @@ const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
         editable: true,
         droppable: true,
         nodeType: 'Value',
+        changed: true,
         text: '...',
-        permissions: 31
+        permissions: 31,
       },
       ...treeData,
     ]
@@ -167,9 +175,11 @@ const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
 
   const handleEdit = (id, newValue) => {
     const oldData = [...treeData]
-    oldData[treeData.findIndex((td) => td.id === id)].text = newValue
+    const editedNode = oldData[treeData.findIndex((td) => td.id === id)]
+    editedNode.text = newValue
+    editedNode.changed = true
     setTreeData(oldData)
-    props.onUpdate(oldData);
+    props.onUpdate(oldData)
   }
 
   return (
@@ -200,20 +210,22 @@ const DraggableTree: FunctionComponent<any> = (props: FormulaTreeProps) => {
             if (node.draggable === false) return false
             return node.parent !== 0
           }}
-          render={(node:ExtendedNodeModel, options) => {
-            if ( getParents(treeData, node.id).some((obj:ExtendedNodeModel) => obj.hidden) || node.hidden ) return
-            return (<CustomNode
-              theme={finalClasses}
-              node={node}
-              onClick={handleClick}
-              onDelete={handleDelete}
-              onCopy={handleCopy}
-              onAdd={handleAdd}
-              onTextChange={handleEdit}
-              onChangeType={props.onChangeType}
-              handleChangeVar={handleChangeVar}
-              {...options}
-            />)
+          render={(node: ExtendedNodeModel, options) => {
+            if (getParents(treeData, node.id).some((obj: ExtendedNodeModel) => obj.hidden) || node.hidden) return
+            return (
+              <CustomNode
+                theme={finalClasses}
+                node={node}
+                onClick={handleClick}
+                onDelete={handleDelete}
+                onCopy={handleCopy}
+                onAdd={handleAdd}
+                onTextChange={handleEdit}
+                onChangeType={props.onChangeType}
+                handleChangeVar={handleChangeVar}
+                {...options}
+              />
+            )
           }}
         />
       </DndProvider>

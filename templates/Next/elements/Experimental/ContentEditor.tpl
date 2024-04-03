@@ -6,12 +6,14 @@ icon: f:ContentEditor.svg
 children: []
 settings:
   - name: Packages
-    value: '"ContentTools": "latest","image-size": "^1.1.1",'
+    value: '"ContentTools": "latest","image-size": "^1.1.1","prismjs": "^1.29.0",'
 extraFiles:
   - source: 'elements/Programming/Snippets/extraFiles/989_contentEditor.tsx'
     destination: '/src/components/ContentEdit/index.tsx'
   - source: 'elements/Programming/Snippets/extraFiles/988_fileUpload.tsx'
     destination: '/src/pages/api/upload.tsx'
+  - source: 'elements/Programming/Snippets/extraFiles/987_contentEditorModule.module.scss'
+    destination: '/src/pages/api/ContentEdit/extendedcss.module.scss'
 options:
   - name: saveTable
     display: Save To
