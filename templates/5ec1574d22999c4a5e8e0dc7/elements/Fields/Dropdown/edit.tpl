@@ -24,7 +24,7 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     margin='{{ element.values.margin|default("dense") }}'
     size='{{ element.values.size|default("medium") }}'
-    label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    label={{ element.values.inputLabel | default(field.column_name) | textOrVariable }}
     type="text"
     fullWidth
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}

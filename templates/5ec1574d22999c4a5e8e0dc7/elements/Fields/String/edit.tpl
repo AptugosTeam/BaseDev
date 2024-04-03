@@ -25,7 +25,7 @@ import TextField from '@mui/material/TextField'
     margin='{{ element.values.margin|default("dense") }}'
     size='{{ element.values.size|default("medium") }}'
     {% if not element.values.disableLabel %}
-        label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+        label={{ element.values.inputLabel | default(field.column_name) | textOrVariable }}
     {% endif %}
     type="text"
     fullWidth
