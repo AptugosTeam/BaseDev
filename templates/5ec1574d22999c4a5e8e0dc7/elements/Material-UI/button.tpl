@@ -55,6 +55,11 @@ options:
     type: function
     options: ''
     advanced: true
+  - name: style
+    display: Extra Styles
+    type: text
+    options: ''
+    advanced: true
 sourceType: javascript
 children: []
 */
@@ -78,6 +83,7 @@ import Button from '@mui/material/Button'
   {% if element.values.icon and element.values.icon != 'None' %}startIcon={<{{ element.values.icon }}Icon />}{% endif %}
   {% if element.values.disabled %}disabled={ {{element.values.disabled}} }{% endif %}
   {% if element.values.extraCode %} {{element.values.extraCode}} {% endif %}
+  {% if element.values.style %} style={ {{element.values.style}} }{% endif %}
 >
   {{ element.values.ButtonText }}{{ content | raw }}
 </Button>
