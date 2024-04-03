@@ -22,6 +22,12 @@ options:
     type: function
     required: true
     advanced: true
+  - name: mtl
+    display: Use MTL template
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
 settings:
   - name: Packages
     value: '"react-quill": "2.0.0",'
@@ -60,8 +66,15 @@ const {{ element.unique_id }}quillModules = {
     modules={ {{element.unique_id}}quillModules}
     value={ {{element.values.value | default('') }} }
     onChange={(e) => {
-      {{ element.values.onChangeWysiwyg }}(e.replace('<p><br></p><p><br></p>', '<p><br></p>'))
-        {{ element.values.onSaveData }}
+        {% if element.values.mtl == true %}
+          e.replace('<p><br></p><p><br></p>', '<p><br></p>')
+          {{ element.values.onChangeWysiwyg }}
+          {{ element.values.onSaveData }}
+        {% endif %}
+        {% if element.values.mtl == false %}
+          {{ element.values.onChangeWysiwyg }}e.replace('<p><br></p><p><br></p>', '<p><br></p>')
+          {{ element.values.onSaveData }}
+        {% endif %}
       } 
     }
   />
