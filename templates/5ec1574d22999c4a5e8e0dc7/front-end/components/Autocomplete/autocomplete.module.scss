@@ -16,7 +16,10 @@ unique_id: gJ2B9fc6
     }
 
     & :global(.aptugo__menu) {
-      z-index: 10;
+      position: relative;
+      :global(.css-1nmdiq5-menu) {
+        position: relative !important;
+      }
     }
 
     & :global(.aptugo__control--is-focused) {
