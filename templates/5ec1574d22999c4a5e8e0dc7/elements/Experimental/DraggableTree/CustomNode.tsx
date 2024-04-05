@@ -17,6 +17,8 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
   const [visibleInput, setVisibleInput] = useState(props.node.nodeType === 'Input')
   const [labelText, setLabelText] = useState(text)
   const [activeMenu, setactiveMenu] = useState(null)
+  const [isChecked, setisChecked] = useState(false);
+  const [isModified, setisModified] = useState(false);
 
   const indent = props.depth * 16
 
@@ -42,11 +44,13 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
 
   const handleChangeText = (e) => {
     setLabelText(e.target.value)
+    setisModified(true)
   }
 
   const handleSubmit = () => {
     setVisibleInput(props.node.nodeType === 'Input')
     props.onTextChange(id, labelText)
+    setisChecked(true)  
   }
 
   const handleToggle = (e) => {
@@ -56,7 +60,7 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
 
   const [SelectorActive, setSelectorActive] = useState(false)
   const switchSelector = () => {
-    setSelectorActive(!SelectorActive)
+    setSelectorActive(!SelectorActive)   
   }
 
   const toReturn = (
@@ -78,6 +82,9 @@ const CustomNode = ({ testIdPrefix = '', ...props }) => {
         {visibleInput ? (
           <div className={`${classes.inputWrapper} inputWrapper`}>
             <TextField
+              style={ {
+                background: isModified && !isChecked ? '#FFDD65' : '#4da8ba'
+              }}
               InputProps={ {
                 startAdornment: props.node.preText ? <InputAdornment position="start">{props.node.preText}</InputAdornment> : '',
               }}
