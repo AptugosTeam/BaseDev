@@ -35,7 +35,7 @@ import { NumericFormat } from 'react-number-format'
     {% if field.minLimit %}
       value={ {{ tableName }}data.{{ field.column_name | friendly }} || {{ field.minLimit }} }
     {% else %}
-      value={ {{ tableName }}data.{{ field.column_name | friendly }} || 0 }
+      value={ {{ tableName }}data.{{ field.column_name | friendly }} || {{ field.defaultValue }} }
     {% endif %}
     label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     fullWidth
