@@ -37,7 +37,9 @@ import { NumericFormat } from 'react-number-format'
     {% else %}
       value={ {{ tableName }}data.{{ field.column_name | friendly }} || {{ field.defaultValue }} }
     {% endif %}
-    label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    {% if not element.values.disableLabel %}
+        label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    {% endif %}
     fullWidth
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
     {% if field.decimalScale %}

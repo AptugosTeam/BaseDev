@@ -103,6 +103,10 @@ options:
     display: Input Label
     type: text
     options: ''
+  - name: placeholder
+    display: Placeholder
+    type: text
+    options: ''
   - name: onBlur
     display: On Focus Lost
     type: function
