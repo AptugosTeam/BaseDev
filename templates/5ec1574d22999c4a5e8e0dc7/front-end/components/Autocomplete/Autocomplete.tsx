@@ -15,7 +15,7 @@ export interface AutocompleteProps {
   label: string
   value: any
   chips?: boolean
-  onType: Function
+  onType?: Function
   placeholder: string
   variant?: "outlined" | "standard" | "filled"
   margin?: 'dense' | 'none' | 'normal'
@@ -38,14 +38,18 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
     }
     setLocalTimeout(
       setTimeout(() => {
-        props.onType(inputValue)
+        if (props.onType) {
+          props.onType(inputValue)
+        }
       }, 150)
     )
     return inputValue
   }
 
   React.useEffect(() => {
-    props.onType('')
+    if (props.onType) {
+      props.onType('')
+    }
   }, [])
 
   React.useEffect(() => {
@@ -74,38 +78,38 @@ const AptugoAutocomplete: FunctionComponent<any> = (props: AutocompleteProps) =>
 
   return (
     <FormControl
-      variant={props.variant || 'outlined' }
-      margin={props.margin || 'normal' }
-      fullWidth={props.fullWidth || false}
-      className={clsx(classes.autocomplete,state.isFocused && 'MuiOutlinedInput-root', state.isFocused && 'Mui-focused')}
+      variant={props.variant || 'outlined'}
+      margin={props.margin || 'normal'}
+      fullWidth={props.fullWidth || false}
+      className={clsx(classes.autocomplete, state.isFocused && 'MuiOutlinedInput-root', state.isFocused && 'Mui-focused')}
     >
-      <InputLabel ref={selectRefLabel} focused={state.isFocused} shrink={state.isFocused || props.value ? true : false }>{props.label}</InputLabel>
+      <InputLabel ref={selectRefLabel} focused={state.isFocused} shrink={state.isFocused || props.value ? true : false}>{props.label}</InputLabel>
       <Select
-          onFocus={(e) => {
-            setstate({ ...state, isFocused: true })
-          }}
-          onBlur={(e) => {
-            setstate({ ...state, isFocused: false })
-          }}
-          placeholder={props.placeholder || props.label}
-          className={clsx(classes.aptugoDropdown, 'MuiOutlinedInput-notchedOutline')}
-          classNamePrefix="aptugo"
-          value={theVal}
-          isMulti={props.chips}
-          isDisabled={props.disabled}
-          onChange={(newValue) => {
-            if (!Array.isArray(newValue)) newValue = [newValue]
-            newValue = newValue.map((vals) => (vals.value === 'new' ? { value: null, label: localValue } : vals))
-            props.onChange(newValue)
-          }}
-          
-          onInputChange={handleInputChange}
-          cacheOptions={false}
-          defaultOptions
-          defaultMenuIsOpen={false}
-          closeMenuOnSelect={true}
-          options={dropdownOptions}
-        />
+        onFocus={(e) => {
+          setstate({ ...state, isFocused: true })
+        }}
+        onBlur={(e) => {
+          setstate({ ...state, isFocused: false })
+        }}
+        placeholder={props.placeholder || props.label}
+        className={clsx(classes.aptugoDropdown, 'MuiOutlinedInput-notchedOutline')}
+        classNamePrefix="aptugo"
+        value={theVal}
+        isMulti={props.chips}
+        isDisabled={props.disabled}
+        onChange={(newValue) => {
+          if (!Array.isArray(newValue)) newValue = [newValue]
+          newValue = newValue.map((vals) => (vals.value === 'new' ? { value: null, label: localValue } : vals))
+          props.onChange(newValue)
+        }}
+
+        onInputChange={handleInputChange}
+        cacheOptions={false}
+        defaultOptions
+        defaultMenuIsOpen={false}
+        closeMenuOnSelect={true}
+        options={dropdownOptions}
+      />
     </FormControl>
   )
 }
