@@ -34,9 +34,12 @@ import { NumericFormat } from 'react-number-format'
 <NumericFormat
     {% if field.minLimit %}
       value={ {{ tableName }}data.{{ field.column_name | friendly }} || {{ field.minLimit }} }
-    {% else %}
+    {% elseif field.defaultValue %}
       value={ {{ tableName }}data.{{ field.column_name | friendly }} || {{ field.defaultValue }} }
+    {% else %}
+      value={ {{ tableName }}data.{{ field.column_name | friendly }} || 0 }
     {% endif %}
+
     {% if not element.values.disableLabel %}
         label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     {% endif %}
