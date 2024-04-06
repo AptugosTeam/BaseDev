@@ -86,7 +86,7 @@ options:
 children: []
 */
 {% set bpr %}
-import { fetcher } from "../lib/fetch"
+import { fetcher } from "@lib/fetch"
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set bpr %}
@@ -110,7 +110,7 @@ import TextField from '@mui/material/TextField'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr2 %}
-import AddDialog from '../components/Dialog/Dialog'
+import AddDialog from '@components/Dialog/Dialog'
 {% endset %}
 {{ save_delayed('bpr', bpr2 ) }}
 {% set ph %}

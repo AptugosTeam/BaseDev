@@ -103,7 +103,7 @@ options:
   {% set totalDocs = (tableName|lower) ~ 'Data.totalDocs' %}
 {% endif %}
 {% set bpr %}
-import DataTable from '../components/DataTable/dataTable'
+import DataTable from '@components/DataTable/dataTable'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <DataTable

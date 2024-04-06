@@ -146,7 +146,7 @@ children: []
 {% else %}
   {# Standard usage #}
   {% set bpr %}
-    import { use{{ tableName }}Pages } from "../lib/{{ tableName }}";
+    import { use{{ tableName }}Pages } from "@lib/{{ tableName }}";
   {% endset %}
   {{ save_delayed('bpr', bpr)}}
   {% set ph %}
