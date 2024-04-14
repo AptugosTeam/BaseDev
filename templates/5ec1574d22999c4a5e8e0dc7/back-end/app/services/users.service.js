@@ -117,7 +117,7 @@ async function checkNonce (req) {
   })
 }
 
-async function authenticate ({ email, password, model, passwordField, populate, options }) {
+async function authenticate ({ email, password, model, passwordField, populate, options = {} }) {
   const { fullUser = true, fieldsToRetrieve = [], lang = 'en', validate = false } = options
   if (!model) {
     const Users = require('../models/users.model.js')

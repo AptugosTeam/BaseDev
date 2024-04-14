@@ -63,6 +63,8 @@ options:
     options: ''
     required: true
 settings:
+  - name: Packages
+    value: '"axios": "1.6.8",'
   - name: BackendPackages
     value: '"nodemailer": "^6.4.11",'
   - name: ServerRoute
