@@ -11,6 +11,10 @@ options:
   - name: onChange
     display: On Change
     type: text
+  - name: onMonthChange
+    display: On Change Month
+    type: function
+    options: ''
   - name: iconDays
     display: Icon for Days
     type: text
@@ -35,6 +39,7 @@ const [{{ element.values.selectDays }}, set{{ element.values.selectDays }}] = Re
   <DateCalendar
     {% if element.values.value %}value={{ element.values.value|textOrVariable }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
+    {% if element.values.onMonthChange %}onMonthChange={ {{ element.values.onMonthChange | functionOrCall }} }{% endif %}
     {% if element.values.iconDays %}slots={ { day: {{ element.values.iconDays }} } }{% endif %}
     {% if element.values.selectDays %}slotProps={ { day: { {{ element.values.selectDays }} } as any } }{% endif %}
   />
