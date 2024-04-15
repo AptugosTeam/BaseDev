@@ -37,7 +37,7 @@ children: []
 
 {% set ph %}
 const sendStripeForm = (price = null, extraData = null) => {
-  const url = `{{ settings.apiURL  ~'/create-checkout-session/' ~ element.values.clientReferenceID | default(1) ~ '/' }}{{ type == 'Development' ? element.values.devPriceItem : element.values.priceItem }}` || ''
+  const url = `{{ '${process.env.APIURL}'  ~'/create-checkout-session/' ~ element.values.clientReferenceID | default(1) ~ '/' }}{{ type == 'Development' ? element.values.devPriceItem : element.values.priceItem }}` || ''
 
 
   const form = document.createElement('form')
