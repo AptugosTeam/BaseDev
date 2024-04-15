@@ -22,8 +22,17 @@ options:
     settings:
       default: '800'
       active: true
+  - name: height
+    display: Chart height
+    type: text
+    settings:
+      default: '500'
+      active: true
   - name: colors
     display: Fill Color
+    type: text
+  - name: textColor
+    display: Text color
     type: text
 settings:
   - name: Packages
@@ -44,9 +53,10 @@ import { Treemap, ResponsiveContainer } from 'recharts'
 class CustomizedContent extends PureComponent {
   render() {
     // @ts-ignore
-    const { root, depth, x, y, width, height, index, payload, subtitle, name } = this.props
-    const colors = ['#8889DD', '#9597E4', '#8DC77B', '#A5D297', '#E2CF45', '#F8C12D']
-
+    const { root, depth, x, y, width, height, index, payload, subtitle, name, category } = this.props
+    {% if element.children %}
+    const colors = {{ element.values.colors}}
+    {% endif %}
     return (
       {% for child in element.children %}
         {{ child.rendered | raw }}
@@ -60,8 +70,8 @@ class CustomizedContent extends PureComponent {
 {{ save_delayed('bpr',bpr) }}
 <Treemap
   {% if element.children %}
-    content={<CustomizedContent colors={COLORS} />}
+    content={<CustomizedContent colors={colors} />}
   {% endif %}
   width={ {{ element.values.width | default('800') }} }
-  height={500} data={ {{ varToUse }} } dataKey="size" aspectRatio={4 / 3} stroke="#fff" fill="#8884d8" animationDuration={100}
+  height={ {{ element.values.height | default('500') }} } data={ {{ varToUse }} } dataKey="size" aspectRatio={4 / 3} stroke=" {{ element.values.textColor }} " fill="#8884d8" animationDuration={100}
 />
