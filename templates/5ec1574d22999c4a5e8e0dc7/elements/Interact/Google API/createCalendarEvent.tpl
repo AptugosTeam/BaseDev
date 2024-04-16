@@ -65,6 +65,6 @@ const data = {
     'overrides': {{ element.values.reminders }}
   }
 }
-axios.post(`{{ settings.apiURL }}/{{ element.values.endpointURL|default('createCalendarEvent') }}`, data).then(result => {
+axios.post(`${process.env.APIURL}/{{ element.values.endpointURL|default('createCalendarEvent') }}`, data).then(result => {
   {{ content | raw }}
 })

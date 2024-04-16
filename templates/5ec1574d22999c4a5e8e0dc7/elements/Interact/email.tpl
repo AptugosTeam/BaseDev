@@ -165,7 +165,7 @@ const {{ functionName }} = (to, extra:any = {}) => {
     const messageHtml = {{ element.values.internalfunctionName|default('InlineLink') }}({{ element.values.parameters }})
     axios({
       method: "POST", 
-      url:"{{ settings.apiURL | raw }}/api/sendEmail",
+      url:`${process.env.APIURL}/api/sendEmail`,
       data: {
         name: from,
         email: to,

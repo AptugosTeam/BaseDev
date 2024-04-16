@@ -27,7 +27,7 @@ settings:
       })
 */
 {% if not element.values.backendRoute %}
-  axios.get(`{{ settings.apiURL }}/stripe-order-details/${ {{ element.values.sessionID }} }`).then(res => {
+  axios.get(`${process.env.APIURL}/stripe-order-details/${ {{ element.values.sessionID }} }`).then(res => {
     {{ content | raw }}
   })
 {% endif %}

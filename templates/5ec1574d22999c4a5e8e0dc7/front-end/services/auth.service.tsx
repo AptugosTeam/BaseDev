@@ -5,7 +5,7 @@ unique_id: dDixye51
 */
 import axios from 'axios'
 
-const API_URL = '{{ settings.apiURL }}/api/users/'
+const API_URL = `${process.env.APIURL}/api/users/`
 
 interface LoginOptions {
   remember?: boolean;
