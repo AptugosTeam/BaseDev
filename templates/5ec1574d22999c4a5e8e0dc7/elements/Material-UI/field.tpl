@@ -128,6 +128,14 @@ options:
     options: 
       return [['en', 'English'],['es', 'Spanish']]
     advanced: true
+  - name: InputProps
+    display: Input Props (allows min and max date)
+    type: text
+    options: ''
+    advanced: true
+    settings:
+      propertyCondition: Type
+      condition: edit
 children: []
 */
 {% set bpr %}
