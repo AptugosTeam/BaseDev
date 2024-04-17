@@ -138,18 +138,18 @@ children: []
 {% if element.values.loadWhenSiteLoads %}
   {# Special method to load on page load #}
   {% set goesToIndex %}
-    import { load{{ table.name | friendly | capitalize }} } from './store/actions/{{ table.name | friendly | lower }}Actions'
+    import { load{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
     store.dispatch(load{{ table.name | friendly | capitalize }}({ limit: 500 }))
   {% endset %}
   {{ add_setting('IndexPreAdd', goesToIndex)}}
 {% else %}
   {# Standard usage #}
 {% set bpr %}
-import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import { IState } from '../store/reducers/index'
+import { IState } from '@store/reducers/index'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
@@ -172,7 +172,7 @@ const {{ table.name | friendly | lower ~ 'Data' }} = useSelector((state: IState)
 {% endif %}
 {% if element.values.singleResult %}
 {% set bpr %}
-import { I{{ table.name | friendly }}Item } from '../store/models'
+import { I{{ table.name | friendly }}Item } from '@store/models'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% endif %}
