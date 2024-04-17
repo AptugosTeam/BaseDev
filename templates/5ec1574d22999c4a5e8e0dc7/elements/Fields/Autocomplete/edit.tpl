@@ -31,7 +31,7 @@ set{{ columnName }}Value(null)
 {% endset %}
 {{ add_setting('OnDialogClose', odc) }}
 {% set bpr %}
-import { search{{ referencedTable }} } from '../store/actions/{{ referencedTable | lower }}Actions'
+import { search{{ referencedTable }} } from '@store/actions/{{ referencedTable | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set bpr %}
