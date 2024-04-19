@@ -74,10 +74,6 @@ options:
     display: Edit Icon
     type: text
     options: ''
-  - name: editIcon
-    display: Edit Icon
-    type: text
-    options: ''
   - name: calendarIcon
     display: Calendar Icon (MaterialCommunityIcons)
     type: text
