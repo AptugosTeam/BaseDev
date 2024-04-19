@@ -20,7 +20,7 @@ options:
   - name: service
     display: Email Sending service
     type: dropdown
-    options: SMTP;MailGun
+    options: SMTP;MailGun;GmailOAuth2
   - name: smpthost
     display: Host (smtp)
     type: text
@@ -49,6 +49,47 @@ options:
     type: text
     options: ''
     required: true
+    settings:
+      propertyCondition: service
+      conditionNegate: GmailOAuth2
+      condition: GmailOAuth2
+      active: true
+  - name: clientId
+    display: Client ID (gOAuth2)
+    type: text
+    options: ''
+    required: true
+    settings:
+      propertyCondition: service
+      condition: GmailOAuth2
+      active: true
+  - name: clientSecret
+    display: Client Secret (gOAuth2)
+    type: text
+    options: ''
+    required: true
+    settings:
+      propertyCondition: service
+      condition: GmailOAuth2
+      active: true
+  - name: refreshToken
+    display: Refresh Token (gOAuth2)
+    type: text
+    options: ''
+    required: true
+    settings:
+      propertyCondition: service
+      condition: GmailOAuth2
+      active: true
+  - name: redirectUri
+    display: Redirect URI (gOAuth2)
+    type: text
+    options: ''
+    required: true
+    settings:
+      propertyCondition: service
+      condition: GmailOAuth2
+      active: true
   - name: subject
     display: Email Subject
     type: text
@@ -78,25 +119,80 @@ settings:
   - name: ServerRoute
     value: |
       const nodemailer = require("nodemailer");
-      {% if element.values.service != 'MailGun' %}
-        var transport = {
-          host: "{{ element.values.smpthost|default("smtp.gmail.com") }}",
-          port: "{{ element.values.smptport|default("465") }}",
-          auth: {
-            user: "{{ element.values.smptuser }}",
-            pass: "{{ element.values.smptpass }}",
-          },
-        };
-      {% else %}
-        var transport = {
-          service: 'Mailgun',
-          auth: {
-            user: "{{ element.values.smptuser }}",
-            pass: "{{ element.values.smptpass }}",
-          }
-        }
-      {% endif %}
+      {% if element.values.service == 'SMTP' %}
+      const transport = {
+        host: "{{ element.values.smpthost|default("smtp.gmail.com") }}",
+        port: "{{ element.values.smptport|default("465") }}",
+        auth: {
+          user: "{{ element.values.smptuser }}",
+          pass: "{{ element.values.smptpass }}",
+        },
+      };
+      {% elseif element.values.service == 'GmailOAuth2' %}
+      {{ add_setting('BackendPackages', '"googleapis": "134.0.0",') }}
+      const { google } = require('googleapis')
+      const CLIENT_ID = {{ element.values.clientId }}
+      const CLIENT_SECRET = {{ element.values.clientSecret }}
+      const REDIRECT_URI = {{ element.values.redirectUri }}
+      const REFRESH_TOKEN = {{ element.values.refreshToken }}
 
+      const oAuth2Client = new google.auth.OAuth2(
+        CLIENT_ID,
+        CLIENT_SECRET,
+        REDIRECT_URI
+      );
+      oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+      {% else %}
+      const transport = {
+        service: 'Mailgun',
+        auth: {
+          user: "{{ element.values.smptuser }}",
+          pass: "{{ element.values.smptpass }}",
+        }
+      }
+      {% endif %}
+      app.use(express.json());
+      {% if element.values.service == 'GmailOAuth2' %}
+      app.set('sendEmail', async function(emailDetails, extra) {
+        const { name, email, subject, message } = emailDetails
+        return new Promise(async (resolve, reject) => {
+          try {
+            const accessToken = await oAuth2Client.getAccessToken();
+            const transport = nodemailer.createTransport({
+              service: 'gmail',
+              auth: {
+                type: 'OAuth2',
+                user: '{{ element.values.smptuser }}',
+                clientId: CLIENT_ID,
+                clientSecret: CLIENT_SECRET,
+                refreshToken: REFRESH_TOKEN,
+                accessToken
+              },
+            });
+            const mail = {
+              from: name,
+              to: email,
+              subject,
+              html: message,
+            }
+            if (typeof addICal === 'function' && extra && extra.sendWithIcal) {
+              addICal(mail, extra)
+            }
+            transport.sendMail(mail, (err, data) => {
+              if (err) {
+                console.log('err', err)
+                reject({ msg: 'fail' })
+              } else {
+                console.log('data', data)
+                resolve({ msg: 'success' })
+              }
+            })
+          } catch (error) {
+              console.log(error)
+          }
+        })
+      })
+      {% else %}
       const transporter = nodemailer.createTransport(transport);
       transporter.verify((error, success) => {
         if (error) {
@@ -105,7 +201,6 @@ settings:
           console.log("All works fine, congratz!");
         }
       });
-      app.use(express.json());
       app.set('sendEmail', async function(emailDetails, extra) {
         return new Promise((resolve, reject) => {
           const mail = {
@@ -130,6 +225,7 @@ settings:
           })
         })
       })
+      {% endif %}
       app.post("/api/sendEmail", async (req, res, next) => {
         try {
           const name = req.body.name
