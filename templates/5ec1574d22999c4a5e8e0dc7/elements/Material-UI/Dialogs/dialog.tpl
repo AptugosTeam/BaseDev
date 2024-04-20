@@ -94,7 +94,7 @@ children: []
   {% set fields = table.fields %}
 {% endif %}
 {% set bpr %}
-import { I{{ friendlyTableName }}Item } from '../store/models'
+import { I{{ friendlyTableName }}Item } from '@store/models'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
@@ -102,15 +102,15 @@ import TextField from '@mui/material/TextField'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import { add{{ friendlyTableName }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { add{{ friendlyTableName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import { edit{{ friendlyTableName }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { edit{{ friendlyTableName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import { remove{{ friendlySingleName }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { remove{{ friendlySingleName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr2 %}

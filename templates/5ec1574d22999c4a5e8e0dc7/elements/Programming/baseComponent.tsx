@@ -12,6 +12,14 @@ import baseClasses from '@components/Themes/layout.module.scss'
   {% endfor %}
 {% endfor %}
 
+
+{% for child in element.children %}
+  {% if child.value == 'componentBeforeRender' %} 
+    {{ child.rendered }}
+  {% endif %}
+{% endfor %}
+
+
 const AptugoComponent: FunctionComponent<any> = (props) => {
   {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props.properties{% endif %}
   {% for child in element.children %}
@@ -28,5 +36,11 @@ const AptugoComponent: FunctionComponent<any> = (props) => {
   {% endfor %}
   </React.Fragment>)
 }
+
+  {% for child in element.children %}
+    {% if child.value == 'componentAfterRender' %} 
+      {{ child.rendered }}
+    {% endif %}
+  {% endfor %}
 
 export default AptugoComponent

@@ -48,7 +48,7 @@ const dispatch = useDispatch()
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% set bpr %}
-import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set ph %}

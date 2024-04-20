@@ -67,6 +67,9 @@ options:
   - name: placeholderTextColor
     display: PlaceHolder Text Color
     type: text
+  - name: selectionColor
+    display: Cursor Color
+    type: text
   - name: onFocus
     display: On Focus
     type: function
@@ -163,6 +166,7 @@ children: []
       {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
       {% if element.values.activeUnderlineColor %}activeUnderlineColor={ {{ element.values.activeUnderlineColor | textOrVariable }}}{% endif %}
       {% if element.values.placeholderTextColor %}placeholderTextColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif %}
+      {% if element.values.selectionColor %}selectionColor={ {{ element.values.selectionColor | textOrVariable }} }{% endif %}
       {% if element.values.leftIcon and element.values.leftIcon != 'none' %}left={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} icon='{{element.values.leftIcon}}' />}{% endif %}
       {% if element.values.rightIcon and element.values.rightIcon != 'none' %}right={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} icon='{{element.values.rightIcon}}' />}{% endif %}
   />

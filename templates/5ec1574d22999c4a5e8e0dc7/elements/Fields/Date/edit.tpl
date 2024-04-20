@@ -29,6 +29,9 @@ import moment from 'moment'
     {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}
     type="date"
     fullWidth
+    {% if element.values.InputProps %}
+    inputProps={ {{ element.values.InputProps }} } 
+    {% endif %}
     InputLabelProps={ { shrink: true } }
     value={ {{ tableName }}data.{{ field.column_name | friendly }}?.slice(0,10) || {% if field.defaultToToday == "1" %}moment().utc().format('YYYY-MM-DD'){% else %}''{% endif %}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}

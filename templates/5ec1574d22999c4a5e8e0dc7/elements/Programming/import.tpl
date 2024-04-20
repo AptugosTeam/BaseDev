@@ -13,6 +13,11 @@ options:
     display: Module Path
     type: text
     options: ''
+  - name: dependencies
+    display: dependencies Path
+    type: text
+    options: ''
+    advanced: true
   - name: forceBPR
     display: Force import place
     type: checkbox
@@ -27,6 +32,10 @@ options:
     advanced: true
     settings:
       default: false
+
+settings:
+  - name: Packages
+    value: '{{ element.values.dependencies }}'
 children: []
 */
 {% if element.values.importOnRoot %}
