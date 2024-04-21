@@ -11,11 +11,19 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"html-react-parser": "3.0.9",'
+    value: '"react-native-render-html": "^6.3.4",'
 children: []
 */
 {% set bpr %}
-import parser from 'html-react-parser'
+import RenderHtml from 'react-native-render-html'
+import { useWindowDimensions } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{ parser ({{ element.values.html | raw }}{{ content | raw }}) }
+{% set ph %}
+const { width } = useWindowDimensions()
+{% endset %}
+{{ save_delayed('ph',ph) }}
+<RenderHtml
+  contentWidth={width}
+  source={ {{ element.values.html | raw }} }
+/>

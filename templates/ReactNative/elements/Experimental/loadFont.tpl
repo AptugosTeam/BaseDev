@@ -14,7 +14,7 @@ import { useFonts } from 'expo-font'
 {{ save_delayed('bpr',bpr)}}
 {% set ph %}
 useFonts({
-  fontAwesome: require('../assets/fontawesome-webfont_solid.ttf')
+  fontAwesome: require('@assets/fontawesome-webfont_solid.ttf')
 })
 {% endset %}
 {{ save_delayed('ph',ph)}}

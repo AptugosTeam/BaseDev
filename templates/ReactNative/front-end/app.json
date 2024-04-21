@@ -21,6 +21,9 @@ unique_id: i1kD8rN4
     "assetBundlePatterns": [
       "**/*"
     ],
+    "experiments": {
+      "tsconfigPaths": true
+    },
     "ios": {
       {{ insert_setting('AppJsonIos') | raw }}
       "supportsTablet": true,

@@ -13,15 +13,13 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-webview": "13.6.4",'
+    value: '"react-native-youtube-iframe": "^2.3.0",'
 */
 {% set bpr %}
-import WebView from 'react-native-webview'
+import YoutubePlayer from "react-native-youtube-iframe"
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-{% set uri = "https://www.youtube.com/embed/" ~ element.values.videoID ~ "?rel=0&autoplay=0&showinfo=0&controls=0" %}
-<WebView
-  {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
-  source={ { uri: `{{ uri }}` } }
-  javaScriptEnabled={true}
+<YoutubePlayer
+  height={300}
+  videoId={ {{ element.values.videoID}} }
 />
