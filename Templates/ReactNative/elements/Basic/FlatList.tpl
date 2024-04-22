@@ -22,6 +22,10 @@ options:
     display: Key Extractor
     type: text
     options: ''
+  - name: nestedScrollEnabled
+    display: Enable nested scrolling?
+    type: checkbox
+    options: ''
 children: []
 helpText: Basic HTML Div element
 */
@@ -31,6 +35,7 @@ import { FlatList } from 'react-native'
 {{ save_delayed('bpr',bpr)}}
 <FlatList
   {% if element.values.Style %}style={ {{element.values.Style}} }{% endif %}
+  {% if element.values.nestedScrollEnabled %}nestedScrollEnabled{% endif %}
   {% if element.values.data %}data={ {{element.values.data}} }{% endif %}
   {% if element.values.renderItem %}renderItem={ {{element.values.renderItem}} }{% endif %}
   {% if element.values.keyExtractor %}keyExtractor={ {{element.values.keyExtractor}} }{% endif %}
