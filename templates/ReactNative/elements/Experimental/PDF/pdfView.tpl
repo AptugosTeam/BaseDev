@@ -12,6 +12,9 @@ options:
     display: ClassName
     type: text
     options: ''
+  - name: extraStyles
+    display: PDF Style
+    type: text
 settings:
   - name: Packages
     value: '"expo-dev-client": "~2.4.13","react-native-pdf": "6.7.4","react-native-blob-util": "0.19.6",'
@@ -25,6 +28,13 @@ import Pdf from 'react-native-pdf'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set bprB %}
+{% if element.values.extraStyles %}
+const PDFstyles = StyleSheet.create({
+  pdf: {
+      {{ element.values.extraStyles }}
+  }
+})
+{% else %}
 const PDFstyles = StyleSheet.create({
   pdf: {
       flex:1,
@@ -32,6 +42,7 @@ const PDFstyles = StyleSheet.create({
       height:Dimensions.get('window').height,
   }
 })
+{% endif %}
 {% endset %}
 {{ save_delayed('bpr', bprB) }}
 <Pdf

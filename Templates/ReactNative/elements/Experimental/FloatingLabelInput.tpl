@@ -21,6 +21,10 @@ options:
     display: Placeholder
     type: text
     options: ''
+  - name: staticLabel
+    display: Static Label?
+    type: checkbox
+    options: ''
   - name: customLabelStyles
     display: Custom Label Styles?
     type: checkbox
@@ -112,6 +116,10 @@ options:
     display: On Focus
     type: function
     options: ''
+  - name: keyboardType
+    display: Keyboard Type
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"react-native-floating-label-input": "1.4.2","react-native-reanimated": "1.13.2",'
@@ -123,9 +131,11 @@ settings:
   {% endset %}
   {{ save_delayed('bpr', bpr) }}
   <FloatingLabelInput
-      {% if element.values.placeholder %}placeholder={{ element.values.placeholder|textOrVariable }}{% endif %}
+      {% if element.values.placeholder %}hint={{ element.values.placeholder|textOrVariable }}{% endif %}
+      {% if element.values.staticLabel %}staticLabel{% endif %}
       {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
       {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
+      {% if element.values.keyboardType %}keyboardType={{ element.values.keyboardType | textOrVariable }}{% endif %}
       {% if element.values.labelStyles %}labelStyles={ {{ element.values.labelStyles }} }{% endif %}
       {% if element.values.customLabelStyles %}
         customLabelStyles={ { 
