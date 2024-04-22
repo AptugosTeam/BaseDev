@@ -7,6 +7,12 @@ unique_id: alNzyRKN
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "noImplicitAny": false,
-    "strict": true
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": [
+        "assets/*"
+      ]
+    }
   }
 }

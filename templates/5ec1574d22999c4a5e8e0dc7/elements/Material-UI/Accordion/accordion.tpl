@@ -2,7 +2,7 @@
 path: accordion.tpl
 completePath: elements/Material-UI/Accordion/accordion.tpl
 unique_id: WCeFNW3P
-icon: f:accordion.svg
+icon: f:accordion/accordion.svg
 options:
   - name: disabled
     display: Disabled?

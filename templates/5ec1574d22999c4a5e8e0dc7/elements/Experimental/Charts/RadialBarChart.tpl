@@ -3,7 +3,7 @@ path: RadialBarChart.tpl
 completePath: elements/Experimental/Charts/RadialBarChart.tpl
 type: file
 unique_id: 2s1fbMXv
-icon: f:radialBarChart.svg
+icon: f:charts/radialBarChart.svg
 options:
   - name: width
     display: Width

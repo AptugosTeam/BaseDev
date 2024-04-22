@@ -89,7 +89,7 @@ import { {{tag}} } from 'react-native'
   {% endif %}
 <{{tag}}
   {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
-  source={require('../assets{{ path }}')}
+  source={require('@assets{{ path }}')}
   {% if element.values.style %}style={ { {{element.values.style}} } }{% endif %}
   {% if element.values.resizeMode %}resizeMode={ {{element.values.resizeMode | textOrVariable }} }{% endif %}
 >{{ content | raw }}</{{tag}}>
