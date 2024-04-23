@@ -25,6 +25,10 @@ options:
     display: Extra Styles
     type: text
     options: ''
+  - name: activeOpacity
+    display: Opacity
+    type: text
+    options: ''
 sourceType: javascript
 children: []
 */
@@ -40,6 +44,7 @@ import { TouchableOpacity, Linking } from "react-native"
   onPress={() => navigation.{{ element.values.tagToUse|default('push') }}( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
   {% endif %}
   key='{{ element.unique_id }}'
+  {% if element.values.activeOpacity %}activeOpacity={ {{ element.values.activeOpacity}} }{% endif %}
 >
   {{ content | raw }}
 </TouchableOpacity>
