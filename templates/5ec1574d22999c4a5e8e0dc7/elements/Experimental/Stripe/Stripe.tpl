@@ -15,6 +15,12 @@ options:
     display: Stripe's Price Item code for DEVELOPMENT
     type: text
     options: ''
+  - name: devIdPrice
+    display: Stripe's Product Id for DEVELOPMENT
+    type: text
+    settings:
+      propertyCondition: amount
+      condition: true
   - name: apikey
     display: Secret Stripe's API key.
     type: text
@@ -71,7 +77,7 @@ settings:
                 price_data: {
                   unit_amount: amountToCharge,
                   currency,
-                  product: '{{ element.values.idPrice }}'
+                  product: '{{ type == 'Development' ? element.values.devIdPrice : element.values.idPrice }}'
                 } ,
                 quantity: req.params.qty || 1,
               },
