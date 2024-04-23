@@ -9,6 +9,10 @@ options:
     display: Anchor Element (State Variable)
     type: text
     options: ''
+  - name: onClose
+    display: onClose
+    type: text
+    options: ''
   - name: className
     display: ClassName
     type: styles
@@ -51,9 +55,13 @@ import Popover from "@mui/material/Popover";
 <Popover 
     {% if element.values.className %} className={ {{ element.values.className }} } {% endif %} 
     open={Boolean( {{ element.values.anchorEl | default(false) }} )}
-     {% if element.values.anchorEl %}
-      anchorEl={ {{ element.values.anchorEl | default(true) }} } 
-       onClose={ () => { set{{ element.values.anchorEl }}(null) } }
+      {% if element.values.anchorEl %}
+        anchorEl={ {{ element.values.anchorEl | default(true) }} }
+        {% if element.values.onClose %}
+          onClose={ () => { {{ element.values.onClose }} } }
+        {% else %}
+          onClose={ () => { set{{ element.values.anchorEl }}(null) } }
+        {% endif %} 
       {% endif %} 
     {% if element.values.anchorVer or element.values.anchorHor %}
     anchorOrigin={ {
