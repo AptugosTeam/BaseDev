@@ -6,6 +6,9 @@ options:
   - name: document
     display: Document Path
     type: text
+settings:
+  - name: Packages
+    value: '"@epubjs-react-native/core": "^1.4.1","@epubjs-react-native/expo-file-system": "^1.1.3",'
 */
 {% set SWAI %}import { ReaderProvider } from '@epubjs-react-native/core'{% endset %}{{ add_setting('AppImport', SWAI) }}
 {% set SWBS %}<ReaderProvider>{% endset %}{{ add_setting('SiteWideWrapStart', SWBS) }}

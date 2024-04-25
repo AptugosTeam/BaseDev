@@ -27,7 +27,8 @@ unique_id: i1kD8rN4
     "ios": {
       {{ insert_setting('AppJsonIos') | raw }}
       "supportsTablet": true,
-      "bundleIdentifier": "com.aptugo.{{ application.settings.name | lower | friendly }}"
+      "bundleIdentifier": "com.aptugo.{{ application.settings.name | lower | friendly }}",
+      "buildNumber": "{{ insert_setting('versionCode')|default('1') }}"
     },
     "android": {
       {{ insert_setting('AppJsonAndroid') | raw }}
@@ -47,8 +48,7 @@ unique_id: i1kD8rN4
         "expo-build-properties",
         {
           "ios": {
-            "deploymentTarget": "13.4",
-            "buildNumber": "{{ insert_setting('versionCode')|default('1') }}"
+            "deploymentTarget": "13.4"
           }
         }
       ],
