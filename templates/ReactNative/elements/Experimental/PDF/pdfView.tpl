@@ -47,7 +47,7 @@ const PDFstyles = StyleSheet.create({
 {{ save_delayed('bpr', bprB) }}
 <Pdf
   trustAllCerts={false}
-  source={ { uri: {{ element.values.document | textOrVariableInCode }}, cache: true }}
+  source={ { uri: encodeURI({{ element.values.document | textOrVariableInCode }}), cache: true }}
   {% if element.values.onLoad %}
   onLoadComplete={(numberOfPages, filePath) => {
     {{ element.values.onLoadComplete }}

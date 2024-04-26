@@ -15,7 +15,7 @@ options:
     options: ''
   - name: onChange
     display: On Change
-    type: text
+    type: function
     options: ''
   - name: placeholder
     display: Placeholder
@@ -120,6 +120,10 @@ options:
     display: Keyboard Type
     type: text
     options: ''
+  - name: editable
+    display: Disable
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"react-native-floating-label-input": "1.4.2","react-native-reanimated": "1.13.2",'
@@ -133,7 +137,7 @@ settings:
   <FloatingLabelInput
       {% if element.values.placeholder %}hint={{ element.values.placeholder|textOrVariable }}{% endif %}
       {% if element.values.staticLabel %}staticLabel{% endif %}
-      {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
+      {% if element.values.editable %}editable={ {{ element.values.editable }} }{% endif %}
       {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
       {% if element.values.keyboardType %}keyboardType={{ element.values.keyboardType | textOrVariable }}{% endif %}
       {% if element.values.labelStyles %}labelStyles={ {{ element.values.labelStyles }} }{% endif %}
