@@ -5,5 +5,5 @@ unique_id: cTdff9kS
 */
 // Database connection string
 module.exports = {
-  url: '{{ settings.dbconnectstring | raw }}'
+  url: `${process.env.MONGO_URL}`
 }
