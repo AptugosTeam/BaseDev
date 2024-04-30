@@ -116,6 +116,10 @@ options:
     display: On Focus
     type: function
     options: ''
+  - name: onBlur
+    display: On Blur
+    type: function
+    options: ''
   - name: keyboardType
     display: Keyboard Type
     type: text
@@ -156,6 +160,7 @@ settings:
       {% if element.values.containerStyles %}containerStyles={ {{ element.values.containerStyles }} }{% endif %}
       {% if element.values.inputStyles %}inputStyles={ {{ element.values.inputStyles }} }{% endif %}
       {% if element.values.onFocus %}onFocus={() => {{element.values.onFocus}} }{% endif %}
+      {% if element.values.onBlur %}onBlur={() => {{element.values.onBlur}} }{% endif %}
       {% if element.values.textColor %}textColor={ {{ element.values.textColor | textOrVariable }}}{% endif %}
       {% if element.values.value %}value={{ element.values.value | textOrVariable }}{% endif %}
       {% if element.values.onChange %}onChangeText={ {{ element.values.onChange | replace({ '.target.value': '' }) | functionOrCall }} }{% endif %}
