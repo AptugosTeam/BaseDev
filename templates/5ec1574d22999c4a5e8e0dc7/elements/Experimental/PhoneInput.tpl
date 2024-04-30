@@ -95,6 +95,8 @@ import PhoneInput from 'react-phone-input-2'
         disableDropdown={ {{elementva.value.disableDropdown}} }
     {% endif %}
     {% if element.values.onChange %}
-        onChange={ {{element.values.onChange}} }
+        onChange={ (value, country, e, formattedValue) => {
+          {{element.values.onChange}}
+        } }
     {% endif %}
 />
