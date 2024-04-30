@@ -13,7 +13,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-youtube-iframe": "^2.3.0",'
+    value: '"react-native-youtube-iframe": "^2.3.0","react-native-webview": "13.2.2",'
 */
 {% set bpr %}
 import YoutubePlayer from "react-native-youtube-iframe"

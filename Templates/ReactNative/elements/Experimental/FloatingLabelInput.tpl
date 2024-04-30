@@ -126,9 +126,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-floating-label-input": "1.4.2","react-native-reanimated": "1.13.2",'
-  - name: BabelAdd
-    value: 'plugins.push("react-native-reanimated/plugin")'
+    value: '"react-native-floating-label-input": "1.4.2",'
 */
   {% set bpr %}
   import { FloatingLabelInput } from 'react-native-floating-label-input'
