@@ -153,8 +153,8 @@ settings:
         {% if element.values.topBlurred %}topBlurred:{{ element.values.topBlurred }},{% endif %}
         {% if element.values.fontSizeFocused %}fontSizeFocused:{{ element.values.fontSizeFocused }},{% endif %}
         {% if element.values.fontSizeBlurred %}fontSizeBlurred:{{ element.values.fontSizeBlurred }},{% endif %}
-        {% if element.values.colorFocused %}colorFocused:{{ element.values.colorFocused | textOrVariable }},{% endif %}
-        {% if element.values.colorBlurred %}colorBlurred:{{ element.values.colorBlurred | textOrVariable }},{% endif %}
+        {% if element.values.colorFocused %}colorFocused:{{ element.values.colorFocused }},{% endif %}
+        {% if element.values.colorBlurred %}colorBlurred:{{ element.values.colorBlurred }},{% endif %}
         } }
       {% endif %}
       {% if element.values.containerStyles %}containerStyles={ {{ element.values.containerStyles }} }{% endif %}
