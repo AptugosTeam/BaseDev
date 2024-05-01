@@ -15,7 +15,7 @@ module.exports = (app) => {
   {% for route in table.definedRoutes %}
     {% if route.route_active %}
       // {{ route.route_name }}
-      app.{{ route.route_method }}('{{ parse(route.route_path, { route: route, table: table }) }}', async (req, res) => {
+      app.{{ route.route_method }}('{{ parse(route.route_path, { route: route, table: table }) }}', async (req, res, next) => {
         {% if route.route_template != 'source' %}
           {% include includeTemplate('Aptugo Routes' ~ route.route_template ~ '.tpl') %}
         {% else %}
