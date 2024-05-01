@@ -6,7 +6,7 @@ unique_id: ShaumHAq
 icon: file.svg
 helpText: Allows you to upload multiple image files by selection or drag and drop
 options:
-  - name: classname
+  - name: className
     display: ClassName
     type: text
     options: ''
@@ -37,7 +37,7 @@ import { Shadow } from 'react-native-shadow-2'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Shadow
-{% if element.values.classname %}
+{% if element.values.className %}
 style={ {{element.values.className}} }
 {% endif %}
 {% if element.values.containerStyle %}
