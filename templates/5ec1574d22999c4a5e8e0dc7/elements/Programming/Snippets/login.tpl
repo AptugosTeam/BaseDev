@@ -46,7 +46,7 @@ options:
     type: function
     advanced: true
   - name: errorLanguage
-    display: On Error
+    display: Error Language
     type: dropdown
     options: >-
       return [['en', 'English'], ['es', 'Spanish']]
