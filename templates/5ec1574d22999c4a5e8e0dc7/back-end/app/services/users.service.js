@@ -292,18 +292,21 @@ async function verifyForPassport (email, password, options = {}) {
     const user = await Users.findOne({ Email: email })
     if (!user) throw new Error(errorMessages[lang].email)
 
-    const { Password, ...userWithoutPassword } = user
+    const { Password, ...userWithoutPassword } = user._doc
     if (validate && !user.Verified) throw new Error(errorMessages[lang].unverified)
 
     const isMatch = await bcrypt.compare(password, Password)
     if (!isMatch) throw new Error(errorMessages[lang].wrongPassword)
-    if (!fullUser && fieldsToRetrieve.lenght > 0) {
-      const partialUser = fieldsToRetrieve.map(field => ({
-        [field] : userWithoutPassword[field]
-      }))
+
+    if (!fullUser && fieldsToRetrieve.length > 0) {
+      const { _id } = userWithoutPassword
+      const partialUser = { id: _id, _id }
+      fieldsToRetrieve.forEach(field => {
+        partialUser[field] = userWithoutPassword[field]
+      })
       return partialUser
     }
-    else return userWithoutPassword 
+    else return userWithoutPassword
   } catch (error) {
     console.error('Error in verifyForPassport:', error);
     throw error;
