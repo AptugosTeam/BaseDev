@@ -15,7 +15,10 @@ module.exports = {
   recoverPassword,
   checkNonce,
   socialAuthenticate,
-  dataEncryption
+  dataEncryption,
+  verifyForPassport,
+  getPassportUser,
+  getToken
 }
 
 const errorMessages = {
@@ -280,4 +283,48 @@ function dataEncryption (data, type = 'encrypt', secret = 'my secret key') {
     console.error('Error in encrypDecrypt:', error);
     throw error;
   }
+}
+
+async function verifyForPassport (email, password, options = {}) {
+  const { validate = false, lang = 'en', fullUser = true, fieldsToRetrieve = [] } = options
+  const Users = require('../models/users.model.js')
+  try {
+    const user = await Users.findOne({ Email: email })
+    if (!user) throw new Error(errorMessages[lang].email)
+
+    const { Password, ...userWithoutPassword } = user
+    if (validate && !user.Verified) throw new Error(errorMessages[lang].unverified)
+
+    const isMatch = await bcrypt.compare(password, Password)
+    if (!isMatch) throw new Error(errorMessages[lang].wrongPassword)
+    if (!fullUser && fieldsToRetrieve.lenght > 0) {
+      const partialUser = fieldsToRetrieve.map(field => ({
+        [field] : userWithoutPassword[field]
+      }))
+      return partialUser
+    }
+    else return userWithoutPassword 
+  } catch (error) {
+    console.error('Error in verifyForPassport:', error);
+    throw error;
+  }
+}
+
+async function getPassportUser (id, lang) {
+  const Users = require('../models/users.model.js')
+  try {
+    const user = await Users.findById(id)
+    if (!user) throw new Error(errorMessages[lang].email)
+
+    const { Password, ...userWithoutPassword } = user
+    return userWithoutPassword
+  } catch (error) {
+    console.error('Error in getPassportUser:', error);
+    throw error;
+  }
+}
+
+async function getToken (user, secret = 'thisisthesecretandshouldbeconfigurable') {
+  const token = jwt.sign(user, secret, { expiresIn: '7d' })
+  return token
 }
