@@ -258,7 +258,8 @@ import axios from 'axios'
 const {{ functionName }} = (to, extra:any = {}) => {
     const from = extra.from || '{{ element.values.from }}'
     const subject = extra.subject || {{ element.values.subject|default(" ") }}
-    const messageHtml = {{ element.values.internalfunctionName|default('InlineLink') }}({{ element.values.parameters }})
+    let messageHtml = InlineLink()
+    messageHtml = messageHtml.replaceAll('||||', '<br />')
     axios({
       method: "POST", 
       url:"{{ settings.apiURL | raw }}/api/sendEmail",
