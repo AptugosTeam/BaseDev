@@ -25,7 +25,7 @@ unique_id: CL5VFILG
   left: 0;
   bottom: 0;
   
-  background-color: red;
+  background-color: rgb(255, 255, 255);
 }
 
 .drawerOpen {
@@ -48,7 +48,7 @@ unique_id: CL5VFILG
 
 .color:global(.MuiPaper-root) {
   @extend .baseColor;
-  background-color: rgb(219, 54, 76);
+  background-color: rgb(255, 255, 255);
 }
 
 .colorBlack:global(.MuiPaper-root) {
