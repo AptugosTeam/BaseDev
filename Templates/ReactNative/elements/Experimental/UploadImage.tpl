@@ -26,7 +26,10 @@ options:
     display: Text for dropzone
     type: text
     options: ''
-    default: "Drag 'n' drop some files here, or click to select files"
+  - name: disabled
+    display: Disable
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"expo-image-picker": "~14.3.2",'
@@ -84,7 +87,7 @@ const [image, setImage] = React.useState(null)
   {% endif %}
 {% endset %}
 {{ save_delayed('ph',ph) }}
-<TouchableOpacity onPress={openImagePickerAsync} {% if element.values.classname %}style={ {{ element.values.classname }} }{% endif %}>
+<TouchableOpacity onPress={openImagePickerAsync} {% if element.values.classname %}style={ {{ element.values.classname }} }{% endif %} {% if element.values.disabled %}disabled={ {{ element.values.disabled }} }{% endif %}>
   {% if element.children %}{% for child in element.children %}{{ child.rendered | raw }}{% endfor %}
   {% elseif not element.children %}
   <Text {% if element.values.classname %}style={ {{ element.values.classname ~ 'text' }} }{% endif %}>{{ element.values.innerText | default('Pick a Photo') }}</Text>
