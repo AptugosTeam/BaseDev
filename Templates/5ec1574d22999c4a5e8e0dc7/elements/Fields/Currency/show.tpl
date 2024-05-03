@@ -9,4 +9,4 @@ unique_id: ho99hhyR
 import Field from '../components/Table/Field'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<Field value={(fieldData: any) => new Intl.NumberFormat('{{ field.locale|default('en-US') }}', { style: 'currency', currency: '{{ field.currency|default('USD') }}' }).format(fieldData.{{ field.column_name | friendly }})}/>
+<Field {% if element.values.classname %} className={ {{ element.values.classname }} } {% endif %} value={(fieldData: any) => new Intl.NumberFormat('{{ field.locale|default('en-US') }}', { style: 'currency', currency: '{{ field.currency|default('USD') }}' }).format(fieldData.{{ field.column_name | friendly }})}/>

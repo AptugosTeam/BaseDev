@@ -18,6 +18,9 @@ options:
   - name: zoom
     display: Initial Zoom
     type: text
+  - name: renderMarker
+    display: Render Marker
+    type: checkbox
 extraFiles:
   - source: 'elements/Interact/Google API/997_googleplaces.tsx'
     destination: 'front-end/Components/PlacesAutoComplete/index.tsx'
@@ -34,4 +37,5 @@ import { PlacesMap } from '@components/PlacesAutocomplete'
   {% if element.values.lat %}lat={ {{ element.values.lat }} }{% endif %}
   {% if element.values.lng %}lng={ {{ element.values.lng }} }{% endif %}
   {% if element.values.zoom %}zoom={ {{ element.values.zoom }} }{% endif %}
+  {% if element.values.renderMarker %}renderMarker{% endif %}
 />

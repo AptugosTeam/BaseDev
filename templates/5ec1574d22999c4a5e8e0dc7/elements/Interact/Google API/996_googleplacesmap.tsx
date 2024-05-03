@@ -31,6 +31,13 @@ const Map = (props: any) => {
 
     // @ts-ignore
     window.mapsApi['marker_' + inputId] = new window.google.maps.Marker({ map: window.mapsApi['map_' + inputId], anchorPoint: new window.google.maps.Point(0, -29) })
+
+    if (props.renderMarker && props.lat && props.lng) {
+      window.mapsApi['marker_' + inputId].setPosition({
+        lat: props.lat,
+        lng: props.lng,
+      });
+    }
   
     window.mapsApi[inputId].addListener("place_changed", () => {
       setTimeout(() => {

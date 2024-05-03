@@ -4,7 +4,15 @@ completePath: >-
   /Users/max/Aptugo/BaseDev/Templates/5ec1574d22999c4a5e8e0dc7/elements/Fields/Number/datatable.tpl
 keyPath: elements/Fields/Number/datatable.tpl
 unique_id: Uf65zU5B
+settings:
+  - name: Packages
+    value: |-
+      "react-number-format": "5.2.0",
 */
+{% set bpr %}
+import { NumericFormat } from 'react-number-format'
+{% endset %}
+{{ save_delayed('bpr', bpr) }}
 { id: '{{ field.column_name | friendly }}', header: '{{ field.displaylabel|default(field.column_name) }}', type: 'string', size: 300, renderValue: (cell) => { 
   return cell.getValue() ? <NumericFormat 
     value= { cell.getValue() }
@@ -23,9 +31,16 @@ unique_id: Uf65zU5B
     {% endif %}
     {% if field.isAllowed %}
         isAllowed=  {(values) => {
-          const MAX_LIMIT = {{ field.isAllowed | raw }};
-          const { floatValue } = values;
-          return floatValue === undefined || floatValue <= MAX_LIMIT;
+          {% if field.minLimit %}
+            const MIN_LIMIT = {{ field.minLimit }}
+          {% endif %}
+          const MAX_LIMIT = {{ field.isAllowed | raw }}
+          const { floatValue } = values
+          {% if field.minLimit %}
+            return floatValue === undefined || floatValue === null || (floatValue >= MIN_LIMIT && floatValue <= MAX_LIMIT)
+          {% else %}
+            return floatValue === undefined || floatValue === null || floatValue <= MAX_LIMIT
+          {% endif %}
         }} 
     {% endif %}
     {% if field.allowNegative == "false" %}
