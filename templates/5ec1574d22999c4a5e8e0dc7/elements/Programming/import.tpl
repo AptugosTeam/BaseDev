@@ -13,6 +13,18 @@ options:
     display: Module Path
     type: text
     options: ''
+  - name: dependencies
+    display: dependencies Path
+    type: text
+    options: ''
+    advanced: true
+  - name: forceBPR
+    display: Force import place
+    type: checkbox
+    options: ''
+    advanced: true
+    settings:
+      default: false
   - name: importOnRoot
     display: Import on Root
     type: checkbox
@@ -20,6 +32,10 @@ options:
     advanced: true
     settings:
       default: false
+
+settings:
+  - name: Packages
+    value: '{{ element.values.dependencies }}'
 children: []
 */
 {% if element.values.importOnRoot %}
@@ -28,4 +44,11 @@ children: []
   {% endset %}
   {{ add_setting('SiteWideBeforePageRenderAddenum', IBA) }}
 {% endif %}
+{% if element.values.forceBPR %}
+{% set bpr %}
 import {{ element.values.moduleName }} from '{{ element.values.modulePath }}'
+{% endset %}
+{{ save_delayed('bpr', bpr )}}
+{% else %}
+import {{ element.values.moduleName }} from '{{ element.values.modulePath }}'
+{% endif %}

@@ -22,7 +22,7 @@ const TabNavigation: FunctionComponent<any> = (props) => {
             <TouchableOpacity
               style={ { ...classes.tabItem, borderBottomWidth: 1, borderBottomColor }}
               onPress={() => props.onPress(i)}>
-              <Animated.Text style={{ fontSize: 11, color }}>{route.title}</Animated.Text>
+              <Animated.Text style={ { fontSize: 11, color }}>{route.title}</Animated.Text>
             </TouchableOpacity>
           )
         })}

@@ -25,7 +25,7 @@ options:
     default: "Drag 'n' drop some files here, or click to select files"
 settings:
   - name: Packages
-    value: '"expo-image-picker": "~11.0.3",'
+    value: '"expo-image-picker": "~14.3.2",'
 children: []
 */
 {% set bpr %}
@@ -37,6 +37,7 @@ import * as ImagePicker from 'expo-image-picker'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set ph %}
+const [image, setImage] = React.useState(null)
 const openImagePickerAsync = async () => {
   let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync()
     if (permissionResult.granted === false) {
@@ -58,5 +59,8 @@ const openImagePickerAsync = async () => {
 {% endset %}
 {{ save_delayed('ph',ph) }}
 <TouchableOpacity onPress={openImagePickerAsync} {% if element.values.classname %}style={ {{ element.values.classname }} }{% endif %}>
+  {% if element.children %}{% for child in element.children %}{{ child.rendered | raw }}{% endfor %}
+  {% elseif not element.children %}
   <Text {% if element.values.classname %}style={ {{ element.values.classname ~ 'text' }} }{% endif %}>{{ element.values.innerText | default('Pick a Photo') }}</Text>
+  {% endif %}
 </TouchableOpacity>

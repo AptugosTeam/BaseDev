@@ -17,7 +17,7 @@ options:
     type: dropdown
     options: >-
       return [['No','None'],['Internal','Popup
-      Dialog'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) =>
+      Dialog'],['Custom','Custom'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) =>
       [unique_id, name])]
   - name: hideButton
     display: Hide Add Button
@@ -75,6 +75,18 @@ options:
     display: Cancel - Button Text
     type: text
     options: ''
+  - name: customOnOpen
+    display: Custom Open Handler
+    type: text
+    settings:
+      condition: Custom
+      propertyCondition: addProcedure
+  - name: customSaveHandler
+    display: Custom Save Handler
+    type: code
+    settings:
+      condition: Custom
+      propertyCondition: addProcedure
 children: []
 */
 {% set table = element.values.table | tableData %}
@@ -86,7 +98,7 @@ children: []
   {% set fields = table.fields %}
 {% endif %}
 {% set bpr %}
-import { I{{ friendlyTableName }}Item } from '../store/models'
+import { I{{ friendlyTableName }}Item } from '@store/models'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
@@ -94,15 +106,15 @@ import TextField from '@mui/material/TextField'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import { add{{ friendlyTableName }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { add{{ friendlyTableName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import { edit{{ friendlyTableName }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { edit{{ friendlyTableName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import { remove{{ friendlySingleName }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { remove{{ friendlySingleName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr2 %}
@@ -121,7 +133,7 @@ import AddDialog from '../components/Dialog/Dialog'
   {% if element.values.classname %}className={ {{ element.values.classname }} }{% endif %}
   {% if element.values.hideButton %}hideButton={true}{% endif %}
   isOpen={ {{ dialogVariable }} !== ''}
-  onOpen={() => {% if element.values.addProcedure != 'No' %}{% if element.values.addProcedure == 'Internal' %}set{{ dialogVariable }}('add'){% else %}props.history.push('{{ (element.values.addProcedure | elementData ).path | withoutVars }}'){% endif %}{% else %}{}{%endif%}}
+  onOpen={() => {% if element.values.addProcedure != 'No' %}{% if element.values.addProcedure == 'Internal' %}set{{ dialogVariable }}('add'){% elseif element.values.addProcedure == 'Custom' %}set{{ dialogVariable }}('{{element.values.customOnOpen}}'){% else %}props.history.push('{{ (element.values.addProcedure | elementData ).path | withoutVars }}'){% endif %}{% else %}{}{%endif%}}
   {% if not element.values.manuallyManaged %}
     onSave={() => set{{ dialogVariable }}('')}
   {% endif %}
@@ -138,6 +150,9 @@ import AddDialog from '../components/Dialog/Dialog'
         const cleanData:any = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== null && v !== '' && (v.length !== 0 || v.length === undefined)));
         {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(cleanData)) : dispatch(edit{{ table.name | friendly | capitalize }}(cleanData))
       }
+    {% endif %}
+    {% if element.values.addProcedure == 'Custom' %}
+      {{ element.values.customSaveHandler | raw }}
     {% endif %}
   } }
   color='{{ element.values.color }}'

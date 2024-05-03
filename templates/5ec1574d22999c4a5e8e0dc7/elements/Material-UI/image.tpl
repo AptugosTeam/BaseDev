@@ -62,6 +62,8 @@ options:
     options: ''
     advanced: true
 */
+{% set tag = 'picture' %}
+{% if element.values.background %}{%set tag = 'div' %}{% endif %}
 {% set path = element.values.path %}
 {% set webppath = element.values.webppath %}
 {% set width = element.values.width|default(null) %}
@@ -83,12 +85,13 @@ options:
     {% endfor %}
   {% endif %}
 {% endif %}
-<picture>
+<{{ tag }}
+  {% if element.values.className %}className={ {{element.values.className}} }{% endif %}
+>
   {% if webppath %}
-  <source type="image/webp" srcSet="{{ webppath }}" />
+  <source type="image/webp" srcSet="{{ webppath }}" />
   {% endif %}
   <img
-    {% if element.values.className %}className={ {{element.values.className}} }{% endif %}
     src={{ path|textOrVariable }}
     alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
     {% if width %}
@@ -107,5 +110,5 @@ options:
       draggable={false}
     {% endif %}
   />
-</picture>
-
+  {{ content | raw }}
+</{{ tag }}>

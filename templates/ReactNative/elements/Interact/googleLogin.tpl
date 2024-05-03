@@ -6,7 +6,7 @@ keyPath: elements/Interact/googleLogin.tpl
 unique_id: zo8Ko17z
 settings:
   - name: Packages
-    value: '"expo-build-properties": "~0.6.0","@react-native-firebase/app": "^18.0.0", "@react-native-firebase/auth": "^18.0.0", "@react-native-google-signin/google-signin": "^10.0.1",'
+    value: '"expo-build-properties": "~0.8.3","@react-native-firebase/app": "^18.0.0", "@react-native-firebase/auth": "^18.0.0", "@react-native-google-signin/google-signin": "^10.0.1",'
 */
 {% set AppJsonAndroid %}"googleServicesFile": "./google-services.json",{% endset %}
 {{ add_setting('AppJsonAndroid', AppJsonAndroid)}}

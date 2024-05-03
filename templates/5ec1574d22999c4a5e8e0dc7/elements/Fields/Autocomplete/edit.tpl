@@ -9,14 +9,21 @@ settings:
     value: '"react-select": "^5.4.0",'
 children: []
 */
+{% set fieldTable = (field | fieldData).table %}
+{% if fieldTable.subtype == 'Firebase' %}
+  {% include includeTemplate('Fields' ~ field.data_type ~'editFireBase.tpl') %}
+{% else %}
 {% set bpr %}
 import { useSelector } from 'react-redux'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-{% set tableName = ( field | fieldData ).table.name | friendly %}
+{% set tableName = fieldTable.name | friendly %}
 {% set referencedField = field.reference | fieldData %}
-{% set referencekey = '_id' %}
-
+{% if field.referencekey %}
+  {% set referencekey = (field.referencekey | fieldData).column_name %}
+{% else %}
+  {% set referencekey = '_id' %}
+{% endif %}
 {% set referencedTable = referencedField.table.name | friendly | capitalize %}
 {% set columnName = field.column_name | friendly %}
 {% set odc %}
@@ -24,7 +31,7 @@ set{{ columnName }}Value(null)
 {% endset %}
 {{ add_setting('OnDialogClose', odc) }}
 {% set bpr %}
-import { search{{ referencedTable }} } from '../store/actions/{{ referencedTable | lower }}Actions'
+import { search{{ referencedTable }} } from '@store/actions/{{ referencedTable | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set bpr %}
@@ -56,7 +63,12 @@ const typeInSearch{{ field.column_name | friendly }}{{ referencedTable }} = (typ
     {% endif %}
   }
   axios.get('{{ settings.apiURL }}/api/{{ referencedTable | lower }}/search/', { params: searchOptions }).then(result => { 
-    set{{ columnName }}Options(result.data.docs.map({{ referencedField.table.singleName | friendly | lower }} => { return { label: {{ referencedField.table.singleName | friendly | lower }}.{{ referencedField.column_name | friendly }}, value: {{ referencedField.table.singleName | friendly | lower }}.{{ referencekey }} }}))
+    set{{ columnName }}Options(result.data.docs.map({{ referencedField.table.singleName | friendly | lower }} => {
+      return {
+        label: {{ referencedField.table.singleName | friendly | lower }}.{{ referencedField.column_name | friendly }},
+        value: {{ referencedField.table.singleName | friendly | lower }}.{{ referencekey }}
+      }
+    }))
   })
 }
 {% endset %}
@@ -78,7 +90,10 @@ React.useEffect(() => {
   value={ {{ columnName }}Value }
   {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
   onType={ typeInSearch{{ field.column_name | friendly }}{{ referencedTable }} }
-  onChange={(newValue) => handle{{ tableName }}Change('{{ columnName }}')(newValue?.length ? newValue.map(item => ({ _id: item.value !== 'new' ? item.value : null, {{ referencedField.column_name | friendly }}: item.label })) : [])}
+  onChange={(newValue) => {
+    // handle{{ tableName }}Change('{{ columnName }}')(newValue?.length ? newValue.map((item) => ({ id: item.value !== 'new' ? item.value : null, name: item.label }))[0].id : [])
+    handle{{ tableName }}Change('{{ columnName }}')(newValue?.length ? newValue.map(item => ({ _id: item.value !== 'new' ? item.value : null, {{ referencedField.column_name | friendly }}: item.label })) : [])
+  }}
   loading={ {{ referencedTable | lower }}AutocompleteData.loadingStatus === 'loading' }
   {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}
   options={ {{ columnName }}Options }
@@ -86,5 +101,7 @@ React.useEffect(() => {
   fullWidth
   variant="{{ element.values.variant|default('standard') }}"
   margin='{{ element.values.margin|default("dense") }}'
+  size='{{ element.values.size|default("medium") }}'
   add={ {{ field.add|default('true') }} }
 />
+{% endif %}

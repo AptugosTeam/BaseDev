@@ -8,7 +8,7 @@ sourceType: javascript
 subtype: Firebase
 children: []
 */
-{{ add_setting('Packages', '"firebase": "9.21.0","firebase-admin": "11.7.0",') }}
+{{ add_setting('BackendPackages', '"firebase": "10.4.0","firebase-admin": "11.11.0",') }}
 {% set friendlyTableName = table.name | friendly %}
 const { initializeApp, cert } = require('firebase-admin/app')
 const { getFirestore, DocumentReference, Timestamp, FieldValue } = require('firebase-admin/firestore')
@@ -50,9 +50,16 @@ const {{ friendlyTableName }}Model = {
   returnModel: () => {
     return {{ friendlyTableName }}Collection
   },
-  create: async function(userData, returnRef = false) {
+  create: async function (userData, returnRef = false) {
     try {
-      const docRef = await {{ friendlyTableName }}Collection.add(userData)
+      let docRef
+      if (userData.id) {
+        docRef = await {{ friendlyTableName }}Collection.doc("" + userData.id).set(userData)
+        docRef.id = userData.id
+      } else {
+        docRef = await {{ friendlyTableName }}Collection.add(userData)
+      }
+      
       return returnRef ? docRef : docRef.id
     } catch (error) {
       console.error(error)
@@ -62,11 +69,19 @@ const {{ friendlyTableName }}Model = {
 
   getById: async function(id) {
     try {
-      const doc = await {{ friendlyTableName }}Collection.doc(id).get()
+      const doc = await {{ friendlyTableName }}Collection.doc("" + id).get()
       if (!doc.exists) {
         return null
       }
-      return { id: doc.id, ...doc.data() }
+
+      let newDoc = doc.data()
+      Object.keys(newDoc).forEach((key) => {
+        if (newDoc[key] instanceof Timestamp) {
+          newDoc[key] = new Date( newDoc[key]._seconds * 1000 )
+        }
+      })
+
+      return { id: doc.id, ...newDoc }
     } catch (error) {
       console.error(error)
       return null
@@ -110,7 +125,11 @@ const {{ friendlyTableName }}Model = {
 
   search: async function (searchField, searchTerm, options = {}) {
     let query = {{ friendlyTableName }}Collection
-    query = query.where(searchField, '>=', searchTerm).where(searchField, '<=', searchTerm + '\uf8ff')
+    if ({{ friendlyTableName }}Schema[searchField].type.name === 'Number'){
+      query = query.where(searchField, '==', Number(searchTerm))
+    } else {
+      query = query.where(searchField, '>=', searchTerm).where(searchField, '<=', searchTerm + '\uf8ff')
+    }
     const snapshot = await query.get()
     return await {{ friendlyTableName }}Model.paginateAndFill(snapshot, options)
   },
@@ -148,6 +167,9 @@ const {{ friendlyTableName }}Model = {
         })
       ).then((references) => {
         const data = references.reduce((acc, cur) => {
+          if (Object.values(cur)[0] instanceof Timestamp) {
+            cur[Object.keys(cur)[0]] = new Date(Object.values(cur)[0]._seconds * 1000)
+          }
           return {
             ...acc,
             ...cur

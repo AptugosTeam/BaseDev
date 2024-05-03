@@ -16,6 +16,10 @@ options:
     required: true
     type: text
     options: ''
+  - name: draggable
+    display: Disable link drag
+    type: checkbox
+    options: ''
 children: []
 */
 {% set bpr %}
@@ -25,6 +29,9 @@ import { NavLink } from 'react-router-dom'
 <NavLink
   to={{ element.values.destination|textOrVariable|default("''") }}
   key='{{ element.unique_id }}'
+  {% if element.values.draggable %}
+    draggable={false}
+  {% endif %}
 >
   {% if element.values.innerText %}
     {{ element.values.innerText }}

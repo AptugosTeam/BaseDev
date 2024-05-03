@@ -1,0 +1,34 @@
+/*
+path: math_round.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/C_Math/math_round.json
+keyPath: elements/Code Snippets/Scripting/C_Math/math_round.json
+unique_id: E7LwqPOM
+name: math_round
+fullload: true
+*/
+{
+  "type": "math_round",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "OP",
+      "options": [
+        ["%{BKY_MATH_ROUND_OPERATOR_ROUND}", "ROUND"],
+        ["%{BKY_MATH_ROUND_OPERATOR_ROUNDUP}", "ROUNDUP"],
+        ["%{BKY_MATH_ROUND_OPERATOR_ROUNDDOWN}", "ROUNDDOWN"]
+      ]
+    },
+    {
+      "type": "input_value",
+      "name": "NUM",
+      "check": "Number"
+    }
+  ],
+  "output": "Number",
+  "style": "math_blocks",
+  "helpUrl": "%{BKY_MATH_ROUND_HELPURL}",
+  "tooltip": "%{BKY_MATH_ROUND_TOOLTIP}"
+}

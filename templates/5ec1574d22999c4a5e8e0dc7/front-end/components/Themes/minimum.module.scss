@@ -7,6 +7,13 @@ body {
   background-color: white !important;
 }
 
+.containerWithDots {
+  margin-top: 10%;
+  padding-bottom: 20px;
+  width: 100vw;
+  user-select: none;
+}
+
 .pages {
   margin: 1rem 0;
   flex-grow: 2;

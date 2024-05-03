@@ -72,6 +72,17 @@ options:
     display: Should use an exact match?
     type: checkbox
     options: ''
+  - name: customEffect
+    display: Customize actions on search?
+    type: checkbox
+    options: ''
+  - name: effectOnSearch
+    display: Custom actions on search
+    type: function
+    options: ''
+    settings:
+      condition: true
+      propertyCondition: customEffect
   - name: fieldToSearch
     display: Field To Search
     type: text
@@ -97,6 +108,8 @@ options:
     display: Limit of Elements
     type: text
     options: ''
+    settings:
+      default: '25'
   - name: donotpopulate
     display: Do NOT populate related tables
     type: checkbox
@@ -108,6 +121,12 @@ options:
     advanced: true
     settings:
       default: '1'
+  - name: loadWhenSiteLoads
+    display: Load when Site Loads
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
 children: []
 */
 {% if data %}
@@ -119,14 +138,22 @@ children: []
 {% if element.name != 'loadFromDatabase' %}
   {% set innervarname = element.name | friendly %}
 {% endif %}
-
 {% set varName = element.values.variableName|default(table.name | friendly | lower ~ 'Data') %}
+{% if element.values.loadWhenSiteLoads %}
+  {# Special method to load on page load #}
+  {% set goesToIndex %}
+    import { load{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
+    store.dispatch(load{{ table.name | friendly | capitalize }}({ limit: 500 }))
+  {% endset %}
+  {{ add_setting('IndexPreAdd', goesToIndex)}}
+{% else %}
+  {# Standard usage #}
 {% set bpr %}
-import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import { IState } from '../store/reducers/index'
+import { IState } from '@store/reducers/index'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
@@ -149,7 +176,7 @@ const {{ table.name | friendly | lower ~ 'Data' }} = useSelector((state: IState)
 {% endif %}
 {% if element.values.singleResult %}
 {% set bpr %}
-import { I{{ table.name | friendly }}Item } from '../store/models'
+import { I{{ table.name | friendly }}Item } from '@store/models'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% endif %}
@@ -161,10 +188,10 @@ const {{ varName }} = useSelector((state: IState){% if element.values.singleResu
 const [{{ innervarname }}loadoptions, set{{ innervarname }}loadoptions] = React.useState<any>({ 
   page: {{ element.values.defaultPage | default(1) }},
   populate: {% if element.values.donotpopulate %}false{% else %}true{% endif %},
-  limit: {{ element.values.elementsLimit|default(25) }},
+  {% if element.values.elementsLimit %}limit: {{element.values.elementsLimit}}{% else %}limit: 25{% endif %},
   sort: { field: {{ element.values.sortColumn | default('null') }}, method: '{{ element.values.sortMethod | default('DESC') }}' },
   {% if element.values.fieldToSearch %}
-    searchField: {{ element.values.fieldToSearch | textOrVariable }},
+    searchField: {{ element.values.fieldToSearch | textOrVariableInCode }},
   {% endif %}
   totalItems: 0,
   sortLanguage: '{{ element.values.sortLanguage|default('en') }}',
@@ -185,13 +212,17 @@ const perform{{ innervarname }}load = (options) => {
 {{ save_delayed('ph',ph)}}
 {% set ph %}
 React.useEffect(() => {
+{% if element.values.searchString and element.values.customEffect and element.values.effectOnSearch %}
+  {{ element.values.effectOnSearch | raw }}
+{% else %}
   perform{{ innervarname }}load({
     ...{{ innervarname }}loadoptions
     {% if element.values.fixedSearchField %}, fixedSearch: { field: {{ element.values.fixedSearchField}}, value: {{ element.values.fixedSearchString }} }{% endif %}
-    {% if element.values.fieldToSearch %}, searchField: {{ element.values.fieldToSearch | textOrVariable }}{% endif %}
+    {% if element.values.fieldToSearch %}, searchField: {{ element.values.fieldToSearch | textOrVariableInCode }}{% endif %}
     {% if element.values.searchString %}, searchString: {{ element.values.searchString }}{% endif %}
     {% if element.values.useExactMatch %}, exactMatch: {{ element.values.useExactMatch }}{% endif %}
   })
+{% endif %}
 },[{{ innervarname }}loadoptions{% if element.values.searchString %}, {{ element.values.searchString }}{% endif %}])
 {% endset %}
 {{ save_delayed('ph',ph)}}
@@ -208,4 +239,4 @@ React.useEffect(() => {
   }
 }, [{{ table.name | friendly | lower }}Data.{{ functionCall }}])
 {% endif %}
-
+{% endif %}

@@ -1,0 +1,20 @@
+/*
+path: 99_NotImplemented.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/99_NotImplemented.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/99_NotImplemented.json
+unique_id: tGu364wu
+name: js_notimplemented
+fullload: true
+*/
+{
+  init: function() {
+    this.setColour(0);
+    this.setOutput(true)
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.appendDummyInput().appendField('Importer for').appendField("TYPE").appendField('not yet implemented :(');
+    this.setTooltip('Function returns the value of input.');
+  }
+}

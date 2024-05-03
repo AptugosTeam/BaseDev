@@ -33,4 +33,12 @@ module.exports = class memCache {
       fs.writeFileSync(__dirname + '/cache/' + file, contents, { flag: 'w' })
     }
   }
+
+  reset(url) {
+    const file = hash.md5(url)
+    if (!fs.existsSync(__dirname + '/cache/')) {
+      fs.mkdirSync(__dirname + '/cache')
+    }
+    fs.unlinkSync(__dirname + '/cache/' + file)
+  }
 }

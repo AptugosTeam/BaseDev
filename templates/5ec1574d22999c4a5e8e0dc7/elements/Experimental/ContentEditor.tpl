@@ -30,7 +30,7 @@ import ContEditor from '../components/ContentEdit'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set bpr %}
-import { edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { edit{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <ContEditor

@@ -6,7 +6,7 @@ icon: ico-dialog-actions
 children: []
 */
 {% set bpr %}
-import DialogActions from '@mui/material/DialogActions'
+import { Dialog } from 'react-native-paper'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<DialogActions>{{ content | raw }}</DialogActions>
+<Dialog.Actions>{{ content | raw }}</Dialog.Actions>

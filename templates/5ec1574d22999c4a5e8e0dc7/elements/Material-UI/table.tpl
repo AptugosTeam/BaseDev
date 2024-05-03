@@ -20,7 +20,7 @@ options:
     display: Table
     type: dropdown
     options: >-
-      return [['var','Use a
+      return [['useVar','Use a
       variable'],...aptugo.store.getState().application.tables.map(({ unique_id,
       name }) => [unique_id, name])]
   - name: variableToUse
@@ -28,20 +28,43 @@ options:
     type: text
     options: ''
     settings:
-      condition: var
+      condition: useVar
       propertyCondition: table
   - name: headerVariable
     display: Variable to use in Header
     type: text
     options: ''
     settings:
-      condition: var
+      condition: useVar
+      propertyCondition: table    
+  - name: header
+    display: Use header variable
+    type: checkbox
+    settings:
       propertyCondition: table
+      conditionNegate: true
+      active: true   
+      condition: useVar
+  - name: headerVariable
+    display: Variable to use in Header
+    type: text
+    options: ''
+    settings:
+      condition: true
+      propertyCondition: header
   - name: editProcedure
     display: Edit Procedure
     type: dropdown
     options: >-
-      return [['No','None'],['Internal','Popup Dialog'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) => [unique_id, name])]
+      return [['No','None'],['custom', 'Custom'],['Internal','Popup Dialog'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) => [unique_id, name])]
+  - name: customUrl
+    display: Url for Edit
+    type: text
+    options: ''
+    settings:
+      propertyCondition: editProcedure
+      condition: custom
+      active: true
   - name: allowEdit
     display: Allow Edition
     type: checkbox
@@ -52,8 +75,7 @@ options:
     display: Table used in Edits (or deletes)
     type: dropdown
     options: >-
-      return [...aptugo.store.getState().application.tables.map(({ unique_id,
-      name }) => [unique_id, name])]
+      return [...aptugo.store.getState().application.tables.map(({ unique_id,name }) => [unique_id, name])]
   - name: allowDeletion
     display: Allow Deletion
     type: checkbox
@@ -66,6 +88,13 @@ options:
     options: >-
       return [['No','None'],...aptugo.pageUtils.plainpages.map(({unique_id, name }) =>
       [unique_id, name])]
+  - name: icon
+    display: Icon
+    type: dropdown
+    options: >-
+      More;MoreVert
+    settings: 
+      default: More
   - name: searchString
     display: Search String
     type: text
@@ -76,6 +105,9 @@ options:
     options: ''
     settings:
       default: false
+  - name: startSeparatorPagination
+    display: Start Pagination Properties
+    type: separator
   - name: elementsLimit
     display: Elements Per Page
     type: text
@@ -85,6 +117,63 @@ options:
       propertyCondition: usePagination
       condition: '"true"'
       active: true
+  - name: alwaysActivePrevButton
+    display: Always Active Previous Button?
+    type: checkbox
+    options: ''
+    settings: 
+      default: false
+      propertyCondition: usePagination
+      condition: '"true"'
+      active: true
+  - name: alwaysActiveNextButton
+    display: Always Active Next Button?
+    type: checkbox
+    options: ''
+    settings:
+      default: false
+      propertyCondition: usePagination
+      condition: '"true"'
+      active: true
+  - name: disabledPrevButton
+    display: Disable Previous Button
+    type: checkbox
+    options: ''
+    settings:
+      default: false
+      propertyCondition: usePagination
+      condition: '"true"'
+      active: true
+  - name: disabledNextButton
+    display: Disable Next Button
+    type: checkbox
+    options: ''
+    settings:
+      default: false
+      propertyCondition: usePagination
+      condition: '"true"'
+      active: true
+  - name: textInsidePrevButton
+    display: Text Inside the Previous Button
+    type: text
+    options: ''
+    settings:
+      default: 'Previous'
+      propertyCondition: usePagination
+      condition: '"true"'
+      active: true
+  - name: textInsideNextButton
+    display: Text Inside the Next Button
+    type: text
+    options: ''
+    settings:
+      default: 'Next'
+      propertyCondition: usePagination
+      condition: '"true"'
+      active: true
+  - name: endSeparatorPagination
+    display: End Pagination Properties
+    type: separator
   - name: confirmDeletes
     display: Show a confirmation before deleting
     type: checkbox
@@ -120,7 +209,7 @@ children: []
 {% set allowEdit = element.values.allowEdit|default(true) %}
 {% set allowDeletion = element.values.allowDeletion|default(true) %}
 {% set tableFields = [] %}
-{% if element.values.table == 'var' %}
+{% if element.values.table == 'useVar' or element.values.table == 'var' %}
   {% set table = element.values.editionTable | tableData %}
   {% set tableName = table.name | friendly %}
   {% set tableSingleName = table.singleName | friendly | capitalize %}
@@ -161,7 +250,7 @@ children: []
   {% endif %}
   {% set tableData = '(' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ '.length ? ' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ ' : ' ~ table.name|friendly|lower ~ 'Data.' ~ table.name|friendly|lower ~ ' as any)' %}
   {% set bpr %}
-  import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+  import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
   {% endset %}
   {{ save_delayed('bpr', bpr ) }}
 {% endif %}
@@ -171,7 +260,7 @@ children: []
   import EditIcon from '@mui/icons-material/Edit'
   import DeleteIcon from '@mui/icons-material/Delete'
   import IconButton from '@mui/material/IconButton'
-  import MoreIcon from '@mui/icons-material/More'
+  import {{ element.values.icon | default('More') }}Icon from '@mui/icons-material/{{ element.values.icon | default('More') }}'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <Table    
@@ -183,7 +272,7 @@ children: []
       {% endif %}
     }
     tableData={ {{ tableData }} }
-    {% if element.values.table != 'var' %}
+    {% if element.values.table != 'useVar' and element.values.table != 'var' %}
       orderBy={ {{ innervarname }}loadoptions.sort.field }
       order={ {{ innervarname }}loadoptions.sort.method }
       onRequestSort={(event, property) => {
@@ -209,13 +298,13 @@ children: []
     {% if element.values.detailsURL and element.values.detailsURL != 'No' %}
     <IconButton
       aria-label="edit"
-      color="primary"
+      color="inherit"
       onClickCapture={(e: any) => { 
         const url = '{{ (element.values.detailsURL | elementData ).path }}'.replace(':id', e.element._id)
         props.history.push(url)
-      }}
+      } }
     >
-      <MoreIcon fontSize="small" />
+      <{{element.values.icon | default('More')}}Icon fontSize="small" />
     </IconButton>
     {% endif %}
     {% if allowEdit %}
@@ -226,11 +315,14 @@ children: []
         {% if editProc == 'Internal' %}
           {{ setEditDataFunctionName }}(e.element)
           setdialog{{ tableName | capitalize }}Action('edit')
+          {% elseif element.values.customUrl %}
+          const url = `{{ element.values.customUrl }}`
+          props.history.push(url)
         {% else %}
           const url = '{{ (editProc | elementData ).path }}'.replace(':id', e.element._id)
           props.history.push(url)
         {% endif %}
-      }}
+      } }
     >
       <EditIcon fontSize="small" />
     </IconButton>
@@ -251,6 +343,6 @@ children: []
 {% endif %}
 </Table>
 {% if element.values.usePagination %}
-{% set innerParams = { 'element': { 'unique_id': item.unique_id, values: { 'variableToUse': table.name | friendly | lower ~ 'Data', 'table': element.values.table, 'elementsLimit': element.values.elementsLimit, 'totalDocs': element.values.variableToUse.totalDocs } } } %}
+{% set innerParams = { 'element': { 'unique_id': item.unique_id, values: { 'variableToUse': table.name | friendly | lower ~ 'Data', 'table': element.values.table, 'elementsLimit': element.values.elementsLimit, 'totalDocs': element.values.variableToUse.totalDocs, 'alwaysActivePrevButton': element.values.alwaysActivePrevButton, 'alwaysActiveNextButton': element.values.alwaysActiveNextButton, 'disabledPrevButton': element.values.disabledPrevButton, 'disabledNextButton': element.values.disabledNextButton, 'textInsidePrevButton': element.values.textInsidePrevButton, 'textInsideNextButton': element.values.textInsideNextButton } } } %}
 {% include includeTemplate('SimplePagination.tpl') with innerParams %}
 {% endif %}

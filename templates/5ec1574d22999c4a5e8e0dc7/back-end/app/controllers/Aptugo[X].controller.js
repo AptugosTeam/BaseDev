@@ -56,6 +56,7 @@ exports.create = async (options) => {
 exports.createAsPromise = (options) => {
   return new Promise(async (resolve, reject) => {
     const data = options.req ? options.req.body : options.data
+    const { errorMessages } = data
     const updatedData = {}
     if (data._id) updatedData._id = data._id
     
@@ -88,7 +89,7 @@ exports.createAsPromise = (options) => {
       }
     })
     .catch((err) => {
-      reject( errors.prepareError(err) )
+      reject(errors.prepareError(err, errorMessages))
     })
   })
 }
@@ -130,9 +131,9 @@ exports.find = (options) => {
     const data = options.req ? options.req.body : options.data
     let findString =  query.searchString ? { $text: { $search: query.searchString } } : {}
     if (query.searchField) {
-      if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'Boolean') {
+      if ({{ table.name | friendly }}.schema.path(query.searchField)?.instance === 'Boolean') {
         findString = { [query.searchField]: JSON.parse(query.searchString) }
-      } else if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'Date') {
+      } else if ({{ table.name | friendly }}.schema.path(query.searchField)?.instance === 'Date') {
         findString = { $expr: {$eq: [query.searchString, { $dateToString: {date: `$${query.searchField}`, format: "%Y-%m-%d"}}]}}
       } else {
         if (query.exactMatch) {
@@ -141,8 +142,9 @@ exports.find = (options) => {
           findString = { [query.searchField]: { $regex : new RegExp(query.searchString, "i") } }
         }      }
       
-      if ({{ table.name | friendly }}.schema.path(query.searchField).instance === 'ObjectID' || {{ table.name | friendly }}.schema.path(query.searchField).instance === 'Array') {
-        findString = { [query.searchField]: require('mongoose').Types.ObjectId(query.searchString) }
+      if ({{ table.name | friendly }}.schema.path(query.searchField)?.instance === 'ObjectId' || {{ table.name | friendly }}.schema.path(query.searchField)?.instance === 'Array') {
+        const ObjectID = require('mongoose').Types.ObjectId
+        findString = { [query.searchField]: query.searchString ? new ObjectID(query.searchString) : null }
       }
     } else if (query.filters) {
       query.filters.forEach(filter => {
@@ -213,6 +215,15 @@ exports.update = (options) => {
     const id = options.req ? options.req.params.ID : options.ID
     const data = options.req ? options.req.body : options.data
     const updatedData = {}
+
+    {% for field in table.fields %}
+      {% for key, value in field|castToArray %}
+        {% if 'validators.' in value[0] and value[1] %}
+          {% set validator = value[0][11:] %}
+          {% include includeTemplate(['Fields' ~ field.data_type ~ validator ~ '.tpl']) %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
 
     {% for field in table.fields %}
       {% set fieldWithData = field | fieldData %}

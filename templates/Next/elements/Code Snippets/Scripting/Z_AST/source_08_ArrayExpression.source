@@ -1,0 +1,22 @@
+/*
+path: source_08_ArrayExpression.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/source_08_ArrayExpression.source
+keyPath: elements/Code Snippets/Scripting/Z_AST/source_08_ArrayExpression.source
+unique_id: bv3HFp6P
+name: js_array_expression
+fullload: true
+*/
+const args = []
+for (var i = 0; i < Block.argumentsCount; i++) {
+  args.push( Blockly.JavaScript.valueToCode(Block, 'ARGUMENT' + i, Blockly.JavaScript.ORDER_ATOMIC) )
+}
+
+const joinedArgs = args.join(', ')
+const code = `[${joinedArgs}]`
+if (Block.outputConnection) {
+  return [code, Blockly.JavaScript.ORDER_ATOMIC]
+} else {
+  return code + '\n'
+}

@@ -52,6 +52,10 @@ options:
     display: Default Page
     type: variable
     advanced: true
+  - name: page
+    display: Value Page
+    type: variable
+    advanced: true
   - name: boundaryCount
     display: Boundary Count
     type: text
@@ -93,6 +97,12 @@ import Pagination from '@mui/material/Pagination'
   {% endif %}
   {% if element.values.boundaryCount %}
     boundaryCount={ {{ element.values.boundaryCount }} }
+  {% endif %}
+  {% if element.values.defaultPage %}
+    defaultPage={ {{element.values.defaultPage}} }
+  {% endif %}
+  {% if element.values.page %}
+    page={ {{element.values.page}} }
   {% endif %}
   {% if element.values.onChange %}
     onChange={ {{ element.values.onChange | functionOrCall }} }

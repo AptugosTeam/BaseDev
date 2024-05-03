@@ -11,7 +11,7 @@ const path = require('path')
 module.exports = merge(commonConfig, {
   mode: 'development',
   entry: [
-    'webpack-dev-server/client?http://127.0.0.1:8080', // bundle the client for webpack-dev-server and connect to the provided endpoint
+    'webpack-dev-server/client?http://127.0.0.1:{{ insert_setting('frontport')|default('8080') }}', // bundle the client for webpack-dev-server and connect to the provided endpoint
     './front-end/index.tsx', // the entry point of our app
   ],
   output: {
@@ -20,6 +20,7 @@ module.exports = merge(commonConfig, {
   devServer: {
     open: true,
     hot: false,
+    port: {{ insert_setting('frontport')|default('8080') }},
     liveReload: true,
     historyApiFallback: true,
     static: {

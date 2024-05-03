@@ -58,6 +58,8 @@ interface tableProps {
   onColumnRemoval?: Function
   onColumnRename?: Function
   className?: any
+  pagination?: Boolean
+  allowSorting?: Boolean
 }
 
 const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
@@ -120,7 +122,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
     setData(props.tableData)
   },[props.tableData])
 
-  const table = useReactTable({
+  const tableOptions:any = {
     data: theData,
     pageCount: props.pages,
     defaultColumn,
@@ -153,7 +155,11 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
         props.onRequestUpdate && props.onRequestUpdate(row, columnId, value)
       },
     },
-  })
+  }
+
+  if (props.onRequestUpdate) tableOptions.defaultColumn = defaultColumn
+
+  const table = useReactTable(tableOptions)
 
   const desdePagina = pageIndex - 2 < 0 ? 0 : pageIndex - 2
   const hastaPagina = pageIndex + 2 < props.pages ? desdePagina + 5 : props.pages
@@ -191,7 +197,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
               {row.getVisibleCells().map((cell, cellIndex) => {
                 const toRender = flexRender(cell.column.columnDef.cell, cell.getContext())
                 return (
-                  <td key={cell.id} style={ { width: cell.column.getSize() }}>
+                  <td key={cell.id} style={ { width: cell.column.getSize() }} data-label={(tableOptions.columns.map(label =>  label.header))[cellIndex]}>
                     {toRender}
                   </td>
                 )
@@ -239,6 +245,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
             </tr>
           ))}
         </tbody>
+        {props.pagination !== false && (
         <tfoot>
           {table.getFooterGroups().map((footerGroup) => {
             return (
@@ -304,6 +311,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
             )
           })}
         </tfoot>
+        )}
       </table>
     </div>
   )

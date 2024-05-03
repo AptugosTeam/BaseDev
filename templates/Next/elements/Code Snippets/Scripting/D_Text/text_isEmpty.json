@@ -1,0 +1,25 @@
+/*
+path: text_isEmpty.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/D_Text/text_isEmpty.json
+keyPath: elements/Code Snippets/Scripting/D_Text/text_isEmpty.json
+unique_id: NoIThOFc
+name: text_isEmpty
+fullload: true
+*/
+{
+  "type": "text_isEmpty",
+  "message0": "%{BKY_TEXT_ISEMPTY_TITLE}",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "check": ["String", "Array"]
+    }
+  ],
+  "output": "Boolean",
+  "style": "text_blocks",
+  "tooltip": "%{BKY_TEXT_ISEMPTY_TOOLTIP}",
+  "helpUrl": "%{BKY_TEXT_ISEMPTY_HELPURL}"
+}

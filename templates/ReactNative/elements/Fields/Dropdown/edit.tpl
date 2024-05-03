@@ -5,6 +5,9 @@ unique_id: uxhx3Vzb
 icon: ico-field
 sourceType: javascript
 children: []
+settings:
+  - name: Packages
+    value: '"react-native-select-dropdown": "^3.3.3",'
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}

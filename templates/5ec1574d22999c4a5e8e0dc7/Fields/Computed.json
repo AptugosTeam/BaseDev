@@ -12,10 +12,15 @@ unique_id: uXS2fFGc
     "frontEndType": "string",
     "extra": [
       {
+        "display": "Default Value",
+        "value": "defaultValue",
+        "type": "text"
+      },
+      {
         "display": "Data Type",
         "value": "datatype",
         "type": "select",
-        "options": "[{ label: 'String', value: 'String' },{ label: 'Number', value: 'Number' }]"
+        "options": "[{ label: 'String', value: 'String' },{ label: 'Number', value: 'Number' },{ label: 'Array of Objects', value: '[{}]' },{ label: 'Array of Strings', value: '[String]'}]"
       },
       {
         "display": "How the value is calculated?",

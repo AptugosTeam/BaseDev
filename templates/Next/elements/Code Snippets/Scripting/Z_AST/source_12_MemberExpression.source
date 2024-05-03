@@ -1,0 +1,22 @@
+/*
+path: source_12_MemberExpression.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/source_12_MemberExpression.source
+keyPath: elements/Code Snippets/Scripting/Z_AST/source_12_MemberExpression.source
+unique_id: 3U5p3q7p
+name: js_member_expression
+fullload: true
+*/
+const args = []
+for (var i = 0; i < Block.argumentsCount; i++) {
+  args.push( Blockly.JavaScript.valueToCode(Block, 'MEMBER' + i, Blockly.JavaScript.ORDER_ATOMIC) )
+}
+const joinedArgs = args.join('.')
+code = joinedArgs
+
+if (Block.outputConnection.targetConnection) {
+  return [code, Blockly.JavaScript.ORDER_MEMBER]
+} else {
+  return code
+}

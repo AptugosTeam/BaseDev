@@ -5,11 +5,20 @@ unique_id: spqWQO2m
 internalUse: true
 */
 import React, { FunctionComponent } from 'react'
+import baseClasses from '@components/Themes/layout.module.scss'
 {% for delay in delayed %}
   {% for specificDelay in delay.bpr %}
     {{ specificDelay }}
   {% endfor %}
 {% endfor %}
+
+
+{% for child in element.children %}
+  {% if child.value == 'componentBeforeRender' %} 
+    {{ child.rendered }}
+  {% endif %}
+{% endfor %}
+
 
 const AptugoComponent: FunctionComponent<any> = (props) => {
   {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props.properties{% endif %}
@@ -27,5 +36,11 @@ const AptugoComponent: FunctionComponent<any> = (props) => {
   {% endfor %}
   </React.Fragment>)
 }
+
+  {% for child in element.children %}
+    {% if child.value == 'componentAfterRender' %} 
+      {{ child.rendered }}
+    {% endif %}
+  {% endfor %}
 
 export default AptugoComponent

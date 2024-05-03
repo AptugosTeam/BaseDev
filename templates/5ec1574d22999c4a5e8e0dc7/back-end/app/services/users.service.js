@@ -21,8 +21,35 @@ module.exports = {
   dataEncryption
 }
 
+const errorMessages = {
+  en: {
+    wrong: "Wrong parameters sent",
+    email: "Email not found",
+    badNonce: "Bad bad nonce",
+    notPassword: "User does not have a password",
+    wrongPassword: "Password incorrect",
+    error: "There was an error",
+    token: "Error, token could not be generated",
+    unauthorized: "Unauthorized",
+    failed: 'Something failed',
+    unverified: 'Account not validated. Please check your email to validate your account'
+  },
+  es: {
+    wrong: "La información enviada no es válida",
+    email: "Email no encontrado",
+    badNonce: "Código incorrecto",
+    notPassword: "El usuario no tiene contraseña",
+    wrongPassword: "Contraseña incorrecta",
+    error: "Ocurrió un error",
+    token: "Error, no se pudo generar el token",
+    unauthorized: "Acceso denegado",
+    failed: 'Ocurrió un error',
+    unverified: 'Cuenta no validada. Por favor revisa tu correo electrónico para validar tu cuenta'
+  },
+};
+
 async function recoverPassword (req) {
-  let { name, email, message, subject, model } = req.body
+  let { name, email, message, subject, model, lang = "en", username } = req.body;
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -32,21 +59,27 @@ async function recoverPassword (req) {
   }
 
   return new Promise(function (resolve, reject) {
-    if (!email) reject({ message: 'Wrong parameters sent' })
+    if (!email) reject({ message: errorMessages[lang].wrong })
     const query = model.findOne({ Email: email })
     const promise = query.exec()
 
-    promise.then((user) => {
+    promise.then(async (user) => {
       if (!user) {
-        reject({ message: 'Email not found' })
+        reject({ message: errorMessages[lang].email })
         return
       }
       const { Password, ...userWithoutPassword } = user._doc
       const nonce = Buffer.from(bcrypt.hashSync(JSON.stringify(userWithoutPassword), Password)).toString('base64')
       let parsedmessage = message.replace('**nonce**', nonce)
       parsedmessage = parsedmessage.replace('**email**', Buffer.from(userWithoutPassword.Email).toString('base64'))
-      req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
-      resolve(user)
+      if (username) parsedmessage = parsedmessage.replace('**username**', userWithoutPassword[username])
+
+      try {
+        const emailResponse = await req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
+        resolve(user)
+      } catch (error) {
+        reject({ message: errorMessages[lang].failed })
+      }
     })
   })
 }
@@ -67,20 +100,28 @@ async function checkNonce (req) {
     const query = model.findOne({ Email: asciiEMail })
     const promise = query.exec()
     promise.then((user) => {
-      const { Password, ...userWithoutPassword } = user._doc
-      bcrypt.compare(JSON.stringify(userWithoutPassword), ascii).then((isMatch) => {
-        if (isMatch) {
-          const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
-          resolve({ accessToken: token, data: userWithoutPassword })
-        } else {
-          reject({ message: 'Bad bad nonce' })
-        }
-      })
+      if (user) {
+        const { Password, ...userWithoutPassword } = user._doc
+        bcrypt.compare(JSON.stringify(userWithoutPassword), ascii).then((isMatch) => {
+          if (isMatch) {
+            const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+            resolve({ accessToken: token, data: userWithoutPassword })
+          } else {
+            reject({ message: 'Bad bad nonce' })
+          }
+        })
+          .catch(e => {
+            reject({ message: 'Bad bad nonce' })
+          })
+      } else {
+        reject({ message: 'Bad bad nonce' })
+      }
     })
   })
 }
 
-async function authenticate ({ email, password, model, passwordField }) {
+async function authenticate ({ email, password, model, passwordField, populate, options = {} }) {
+  const { fullUser = true, fieldsToRetrieve = [], lang = 'en', validate = false } = options
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -93,25 +134,35 @@ async function authenticate ({ email, password, model, passwordField }) {
     passwordField = 'Password'
   }
   return new Promise(function (resolve, reject) {
-    if (!email || !password) reject({ message: 'Wrong parameters sent' })
+    if (!email || !password) reject({ message: errorMessages[lang].wrong })
     const query = model.findOne({ Email: new RegExp('^' + email.toLowerCase(), 'i') })
+    if (populate) query.populate(populate)
     const promise = query.exec()
 
     promise.then((user) => {
       if (!user) {
-        return reject({ message: 'Email not found' })
+        return reject({ message: errorMessages[lang].email })
       }
 
-      if (!user[passwordField]) reject({ message: 'User does not have a password', user: user })
+      if (!user[passwordField]) reject({ message: errorMessages[lang].notPassword, user: user })
+      if (validate && !user.Verified) reject({ message: errorMessages[lang].unverified, user: user })
       else {
         bcrypt.compare(password, user[passwordField]).then((isMatch) => {
           if (isMatch) {
             const { Password, ...userWithoutPassword } = user._doc
-            const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
-            resolve({ accessToken: token, data: userWithoutPassword })
+            const { _id } = userWithoutPassword
+            const userID = { id: _id, _id }
+            if (!fullUser) {
+              fieldsToRetrieve.map((fieldName) => {
+                userID[fieldName] = userWithoutPassword[fieldName]
+              })
+            }
+            const token = jwt.sign(fullUser ? userWithoutPassword : userID, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+            resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
           } else {
-            reject({ message: 'Password incorrect' })
+            reject({ message: errorMessages[lang].wrongPassword })
           }
+
         })
       }
     })

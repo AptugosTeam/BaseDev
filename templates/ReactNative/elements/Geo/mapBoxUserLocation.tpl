@@ -14,8 +14,13 @@ options:
     type: function
 settings:
   - name: Packages
-    value: '"expo-location": "~15.1.1",'
+    value: '"expo-location": "~16.1.0",'
 */
+{% set AppJsonPlugins %}[
+  "expo-location",
+  { "locationWhenInUsePermission": "Show current location on map." }
+],{% endset %}
+{{ add_setting('AppJsonPlugins', AppJsonPlugins)}}
 {% set bpr %}
 import * as Location from 'expo-location'
 import { UserLocation } from '@rnmapbox/maps'

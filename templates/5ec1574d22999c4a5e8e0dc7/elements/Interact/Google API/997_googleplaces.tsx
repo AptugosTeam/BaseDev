@@ -27,6 +27,12 @@ const AutoComplete = (props: any) => {
     }
   }, [props.initialValue])
 
+  React.useEffect(() => {
+    if (input.length === 0) {
+      callBack('');
+    }
+  }, [input]);
+
   const renderGoogle = () => {
     if (!document.getElementById(inputId)) {
       setTimeout(renderGoogle, 100)

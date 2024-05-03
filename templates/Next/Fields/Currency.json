@@ -1,0 +1,51 @@
+/*
+path: Currency.json
+completePath: >-
+  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/Fields/Currency.json
+keyPath: Fields/Currency.json
+unique_id: vGVIwncb
+*/
+{
+  "label": "Currency",
+  "value": "Currency",
+  "dataType": "Number",
+  "initialValue": "",
+  "options": {
+    "extra": [
+      {
+        "display": "Default Value",
+        "value": "defaultValue",
+        "type": "text"
+      },
+      {
+        "display": "Locale",
+        "value": "locale",
+        "type": "select",
+        "options": [
+          {
+            "label": "Español/Argentina",
+            "value": "es-AR"
+          },
+          {
+            "label": "English/United States",
+            "value": "en-US"
+          }
+        ]
+      },{
+        "display": "Currency",
+        "value": "currency",
+        "type": "select",
+        "options": [
+          {
+            "label": "Argentinean Pesos",
+            "value": "ARS"
+          },
+          {
+            "label": "United States Dollars",
+            "value": "USD"
+          }
+        ]
+      }
+    ]
+  }
+}

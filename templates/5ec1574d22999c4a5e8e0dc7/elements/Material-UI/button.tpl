@@ -27,7 +27,7 @@ options:
   - name: Color
     display: Color
     type: dropdown
-    options: default;inherit;primary;secondary
+    options: default;inherit;primary;secondary;error;info;success;warning
     settings:
       default: primary
   - name: disabled
@@ -45,9 +45,19 @@ options:
     type: dropdown
     options: >-
       None;Add;Home;Link;Send;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
+  - name: buttonType
+    display: Type Submit
+    type: checkbox
+    options: ''
+    advanced: true
   - name: extraCode
     display: Extra Code
     type: function
+    options: ''
+    advanced: true
+  - name: style
+    display: Extra Styles
+    type: text
     options: ''
     advanced: true
 sourceType: javascript
@@ -64,6 +74,7 @@ import Button from '@mui/material/Button'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <Button 
+  {% if element.values.buttonType %}type='submit'{% endif %}
   {% if element.values.Variant %}variant='{{ element.values.Variant }}'{% endif %}
   {% if element.values.Color %}color='{% if element.values.Color == 'default' %}inherit{% else %}{{ element.values.Color }}{% endif %}'{% endif %}
   {% if element.values.Action %}onClickCapture={ {{ element.values.Action | functionOrCall }} }{% endif %}
@@ -72,6 +83,7 @@ import Button from '@mui/material/Button'
   {% if element.values.icon and element.values.icon != 'None' %}startIcon={<{{ element.values.icon }}Icon />}{% endif %}
   {% if element.values.disabled %}disabled={ {{element.values.disabled}} }{% endif %}
   {% if element.values.extraCode %} {{element.values.extraCode}} {% endif %}
+  {% if element.values.style %} style={ {{element.values.style}} }{% endif %}
 >
   {{ element.values.ButtonText }}{{ content | raw }}
 </Button>

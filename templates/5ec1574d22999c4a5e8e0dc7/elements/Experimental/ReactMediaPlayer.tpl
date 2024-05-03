@@ -9,74 +9,78 @@ options:
     display: Video URL to play
     type: text
     options: ''
-  - name: showPlayPause
-    display: Show Control - Play/Pause
-    type: checkbox
+  - name: playVideoDB
+    display: Video database URL to play
+    type: text
     options: ''
-  - name: showCurrentTime
-    display: Show Control - Current Time
+  - name: controls
+    display: Show Video controls
     type: checkbox
+    settings:
+      default: false
     options: ''
-  - name: showProgress
-    display: Show Control - Progress
+  - name: playing
+    display: Autoplay video
     type: checkbox
+    settings:
+      default: false
     options: ''
-  - name: showSeekBar
-    display: Show Control - Seek Bar
+  - name: loop
+    display: Loop the Video
     type: checkbox
+    settings:
+      default: false
     options: ''
-  - name: showDuration
-    display: Show Control - Duration
+  - name: muted
+    display: Muted video
     type: checkbox
+    settings:
+      default: false
     options: ''
-  - name: showMuteUnmute
-    display: Show Control - Mute/Unmute
-    type: checkbox
+  - name: width
+    display: Video width (in PX or %)
+    type: text
     options: ''
-  - name: showVolume
-    display: Show Control - Volume
-    type: checkbox
-    options: ''
-  - name: showFullscreen
-    display: Show Control - FullScreen
-    type: checkbox
+  - name: height
+    display: Video height (in PX or %)
+    type: text
     options: ''
 children: []
 settings:
   - name: Packages
-    value: '"react-player": "2.12.0",'
+    value: '"react-player": "2.13.0",'
 */
 {% set bpr %}
 import ReactPlayer from 'react-player'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}
-const { 
-  {% if element.values.showPlayPause %}PlayPause,{% endif %}
-  {% if element.values.showCurrentTime %}CurrentTime,{% endif %}
-  Progress,
-  SeekBar,
-  Duration,
-  MuteUnmute,
-  Volume,
-  Fullscreen 
-} = controls
 {% endset %}
 {{ save_delayed('ph',ph) }}
-<Media>
-  <div className="media">
-    <div className="media-player">
-      <ReactPlayer url={{element.values.playVideo}} />
-    </div>
-    <div className="media-controls">
-      {% if element.values.showPlayPause %}<PlayPause />{% endif %}
-      {% if element.values.showCurrentTime %}<CurrentTime />{% endif %}
-      {% if element.values.showProgress %}<Progress />{% endif %}
-      {% if element.values.showSeekBar %}<SeekBar />{% endif %}
-      {% if element.values.showDuration %}<Duration />{% endif %}
-      {% if element.values.showMuteUnmute %}<MuteUnmute />{% endif %}
-      {% if element.values.showVolume %}<Volume />{% endif %}
-      {% if element.values.showFullscreen %}<Fullscreen />{% endif %}
-    </div>
-  </div>
-</Media>
+<div className="media-player">
+  <ReactPlayer 
+  {% if element.values.playVideoDB %}
+    url={ {{ element.values.playVideoDB }} }
+  {% else %}
+    url='{{ element.values.playVideo }}'
+  {% endif %}
+    {% if element.values.controls %}
+      controls={true} 
+    {% endif %}
+    {% if element.values.playing %}
+      playing 
+    {% endif %}
+    {% if element.values.loop %}
+      loop={true} 
+    {% endif %}
+    {% if element.values.muted %}
+      muted={true} 
+    {% endif %}
+    {% if element.values.width %}
+      width='{{ element.values.width }}' 
+    {% endif %}
+    {% if element.values.height %}
+      height='{{ element.values.height }}' 
+    {% endif %}
+  />
+</div>

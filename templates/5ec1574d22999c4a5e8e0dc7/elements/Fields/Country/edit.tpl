@@ -15,16 +15,22 @@ import FormControl from '@mui/material/FormControl'
 {{ save_delayed('bpr', bpr) }}
 {% set bpr %}
 import MenuItem from '@mui/material/MenuItem'
+import { InputLabel } from '@mui/material';
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <FormControl
     margin='{{ element.values.margin|default("dense") }}'
+    size='{{ element.values.size|default("medium") }}'
     variant="{{ element.values.variant|default('standard') }}"
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
 >
+    {% if element.values.inputLabel %}
+  <InputLabel id={{ field.prompt|default(field.column_name)  | textOrVariable }}>{{ element.values.inputLabel }}</InputLabel>
+    {% endif %}
   <Select
     label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    labelId={{ field.prompt|default(field.column_name)  | textOrVariable }}
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
     displayEmpty

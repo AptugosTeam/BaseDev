@@ -39,15 +39,15 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-pager-view": "6.1.2","react-native-tab-view": "^3.5.1",'
+    value: '"react-native-pager-view": "6.2.0","react-native-tab-view": "^3.5.1",'
 children: []
 extraFiles:
   - source: 'elements/Experimental/Tabs/index.tsx'
-    destination: 'front-end/src/components/TabNavigation/index.tsx'
+    destination: 'front-end/components/TabNavigation/index.tsx'
   - source: 'elements/Experimental/Tabs/tabnavigation.module.scss'
-    destination: 'front-end/src/components/TabNavigation/tabnavigation.module.scss'
+    destination: 'front-end/components/TabNavigation/tabnavigation.module.scss'
   - source: 'elements/Experimental/Tabs/TabNavigation.tsx'
-    destination: 'front-end/src/components/TabNavigation/TabNavigation.tsx'
+    destination: 'front-end/components/TabNavigation/TabNavigation.tsx'
 */
 {% set bpr %}
 import { TabView, SceneMap } from 'react-native-tab-view'
@@ -69,7 +69,7 @@ const TAB{{ child.unique_id}}Route = ({% if element.values.passVariable %}{ {{ e
 const [tabIndex, setTabIndex] = React.useState(0);
 const [tabRoutes] = React.useState([
   {% for child in element.children %}
-  { key: '{{ child.unique_id}}', title: '{{ child.name }}' },
+  { key: '{{ child.unique_id}}', title: `{{ child.name }}` },
   {% endfor %}
 ])
 const renderScene = ({ route }) => {

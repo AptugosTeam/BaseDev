@@ -1,0 +1,31 @@
+/*
+path: math_atan2.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/C_Math/math_atan2.json
+keyPath: elements/Code Snippets/Scripting/C_Math/math_atan2.json
+unique_id: HCBwXNa1
+name: math_atan2
+fullload: true
+*/
+{
+  "type": "math_atan2",
+  "message0": "%{BKY_MATH_ATAN2_TITLE}",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "X",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "Y",
+      "check": "Number"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Number",
+  "style": "math_blocks",
+  "tooltip": "%{BKY_MATH_ATAN2_TOOLTIP}",
+  "helpUrl": "%{BKY_MATH_ATAN2_HELPURL}"
+}

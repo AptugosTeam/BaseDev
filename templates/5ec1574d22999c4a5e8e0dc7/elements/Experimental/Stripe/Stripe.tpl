@@ -15,6 +15,12 @@ options:
     display: Stripe's Price Item code for DEVELOPMENT
     type: text
     options: ''
+  - name: devIdPrice
+    display: Stripe's Product Id for DEVELOPMENT
+    type: text
+    settings:
+      propertyCondition: amount
+      condition: true
   - name: apikey
     display: Secret Stripe's API key.
     type: text
@@ -52,7 +58,7 @@ settings:
     value: '"stripe": "^8.201.0",'
   - name: ServerRoute
     value: |
-      const stripe = require('stripe')('{{ type == 'Development' ? element.values.devApiKey : element.values.apikey }}');
+      const stripe = require('stripe')(`{{ type == 'Development' ? element.values.devApiKey : element.values.apikey }}`);
       app.post('/create-checkout-session/:qty?/:productid?/:mode?/:currency?', async (req, res) => {
         const successURL = req.body.successURL || `{{ element.values.successURL }}`
         const cancelURL = req.body.cancelURL || `{{ element.values.cancelURL }}`
@@ -71,7 +77,7 @@ settings:
                 price_data: {
                   unit_amount: amountToCharge,
                   currency,
-                  product: '{{ element.values.idPrice }}'
+                  product: `{{ type == 'Development' ? element.values.devIdPrice : element.values.idPrice }}`
                 } ,
                 quantity: req.params.qty || 1,
               },
@@ -80,7 +86,7 @@ settings:
         stripe.checkout.sessions.create({
           line_items: [
             {
-              price: req.params.productid || '{{ type == 'Development' ? element.values.devPriceItem : element.values.priceItem }}',
+              price: req.params.productid || `{{ type == 'Development' ? element.values.devPriceItem : element.values.priceItem }}`,
               quantity: req.params.qty || 1,
             },
           ],

@@ -38,6 +38,9 @@ childs:
     display: e
   - name: JSON Keys file
     element: oauthkeysjson
+settings:
+  - name: Packages
+    value: '"@react-native-firebase/app": "^19.2.2",'
 */
 
 {% set bpr %}

@@ -36,6 +36,9 @@ options:
     type: text
     options: ''
 children: []
+settings:
+  - name: Packages
+    value: '"react-native-select-dropdown": "^3.3.3",'
 */
 {% set bpr %}
 import SelectDropdown from 'react-native-select-dropdown'

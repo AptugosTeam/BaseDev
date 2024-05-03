@@ -36,6 +36,10 @@ options:
       propertyCondition: Field
       condition: useVar
       active: true
+  - name: disableLabel
+    display: Disable Label
+    type: checkbox
+    options: ''
   - name: Type
     display: Type
     type: dropdown
@@ -60,6 +64,10 @@ options:
     display: Disable Underline
     type: checkbox
     options: ''
+  - name: maxLength
+    display: Max Characters Length
+    type: text
+    options: ''
   - name: margin
     display: margin
     type: dropdown
@@ -75,6 +83,13 @@ options:
     settings:
       propertyCondition: Type
       condition: edit
+  - name: size
+    display: Size
+    type: dropdown
+    options: medium;small
+    settings:
+      propertyCondition: Type
+      condition: edit
   - name: classname
     display: ClassName
     type: styles
@@ -85,7 +100,15 @@ options:
     display: Autofilling Input
     type: text
   - name: fieldname
-    display: fieldname
+    display: Field Name
+    type: text
+    options: ''
+  - name: inputLabel
+    display: Input Label
+    type: text
+    options: ''
+  - name: placeholder
+    display: Placeholder
     type: text
     options: ''
   - name: onBlur
@@ -114,6 +137,14 @@ options:
     type: text
     options: ''
     advanced: true
+  - name: InputProps
+    display: Input Props (allows min and max date)
+    type: text
+    options: ''
+    advanced: true
+    settings:
+      propertyCondition: Type
+      condition: edit
 children: []
 */
 {% set bpr %}

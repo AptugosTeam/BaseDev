@@ -1,7 +1,5 @@
 /*
 path: youtubeVideo.tpl
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/ReactNative/elements/Interact/youtubeVideo.tpl
 keyPath: elements/Interact/youtubeVideo.tpl
 unique_id: mDZain0m
 options:
@@ -15,15 +13,13 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-webview": "11.26.0",'
+    value: '"react-native-youtube-iframe": "^2.3.0","react-native-webview": "13.2.2",'
 */
 {% set bpr %}
-import WebView from 'react-native-webview'
+import YoutubePlayer from "react-native-youtube-iframe"
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-{% set uri = "https://www.youtube.com/embed/" ~ element.values.videoID ~ "?rel=0&autoplay=0&showinfo=0&controls=0" %}
-<WebView
-  {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
-  source={ { uri: `{{ uri }}` } }
-  javaScriptEnabled={true}
+<YoutubePlayer
+  height={300}
+  videoId={ {{ element.values.videoID}} }
 />

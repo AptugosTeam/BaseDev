@@ -5,8 +5,14 @@ unique_id: EMoVmyLd
 */
 module.exports = function(api) {
   api.cache(true);
+
+  const plugins = ['transform-inline-environment-variables']
+  const presets = ['babel-preset-expo']
+
+  {{ insert_setting('BabelAdd') | raw }}
+
+  plugins.push('react-native-reanimated/plugin')
   return {
-    presets: ['babel-preset-expo'],
-    plugins: ["transform-inline-environment-variables"]
+    presets, plugins
   };
 };

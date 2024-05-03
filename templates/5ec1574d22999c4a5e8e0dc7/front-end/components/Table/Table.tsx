@@ -3,7 +3,6 @@ path: Table.tsx
 completePath: front-end/components/Table/Table.tsx
 unique_id: KaVZdzkg
 */
-
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -13,7 +12,7 @@ import TableRow from '@mui/material/TableRow'
 import React, { FunctionComponent } from 'react'
 import styles from './table.module.scss'
 
-interface tableProps {
+interface tableProps extends React.PropsWithChildren {
   addProcedure?: Function
   addTitle?: string
   addText?: string
@@ -65,7 +64,7 @@ const AptugoTable: FunctionComponent<tableProps> = (props) => {
       children = [...(props.children as Array<any>)]
     } catch (e) {}
 
-    return children.map((child: any, index) => {
+    return children.filter((c) => !!c).map((child: any, index) => {
       let newProps: any = { ...child.props }
 
       for (const [key, value] of Object.entries(newProps)) {
@@ -86,7 +85,7 @@ const AptugoTable: FunctionComponent<tableProps> = (props) => {
       })
 
       const newChild = React.cloneElement(child, newProps)
-      return <TableCell className={'tableCell'} key={`child${index}`}>{newChild}</TableCell>
+      return <TableCell className={'tableCell'} key={`child${index}`} data-label={props.tableHead[index]}>{newChild}</TableCell>
     })
   }
 
@@ -101,7 +100,7 @@ const AptugoTable: FunctionComponent<tableProps> = (props) => {
               <TableRow key={key} className={styles.tableBodyRow}>
                 {Array.isArray(props.children)
                   ? RenderCells({...row, key})
-                  : fields.map((field, subkey) => (
+                  : fields.map((field:React.ReactNode, subkey) => (
                       <TableCell className={styles.tableCell} key={subkey}>
                         {field}
                       </TableCell>

@@ -28,6 +28,10 @@ options:
   - name: extraOptions
     display: Extra options
     type: text
+  - name: resultVar
+    display: Result Variable Name
+    type: text
+    advanced: true
   - name: onError
     display: Catch Error
     type: function
@@ -46,7 +50,7 @@ import axios from 'axios'
 {% if element.values.urlFULL %}
 {% set url = settings.apiURL ~ element.values.url %}
 {% endif %}
-axios.{{ element.values.method|default('get') }}({{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}, {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}).then(result => {
+axios.{{ element.values.method|default('get') }}({{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}, {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}).then({{ element.values.resultVar|default('result') }} => {
  {{ content | raw }}
 }).catch((error) => {
   {% if element.values.onError %}

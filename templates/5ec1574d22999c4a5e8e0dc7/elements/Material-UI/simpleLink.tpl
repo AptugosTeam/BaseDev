@@ -33,26 +33,33 @@ options:
     display: Link Target
     type: dropdown
     options: _self;_blank;_parent;_top
+  - name: draggable
+    display: Disable link drag
+    type: checkbox
+    options: ''
 sourceType: javascript
 children: []
 */
-
 {% set bpr %}
 import { NavLink } from 'react-router-dom'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set dest = element.values.destination %}
 {% if element.values.parameters %}
-  {% set dest = element.values.destination ~ element.values.parameters %}
+  {% set params = element.values.parameters|parseParameters %}
+  {% set dest = element.values.destination ~ '/$' ~ params|join('$') %}
 {% endif %}
 {% if element.values.tagToUse == 'A' %}
 <a
   {% if element.values.target %}target={{ element.values.target | textOrVariable }}{% endif %}
   {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
-  {% if element.values.class %}className={ {{element.values.class}} }{% endif %}
-  href={{ element.values.destination | textOrVariable }}>{{ content | raw }}</a>
+  {% if element.values.className %}className={ {{element.values.className }} }{% endif %}
+  href={{ element.values.destination | textOrVariable }}   {% if element.values.draggable %} draggable={false} {% endif %}>{{ content | raw }}</a>
 {% else %}
 <NavLink {% if element.values.style %}style={ {{element.values.style}} }{% endif %} {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-  to={{ dest | textOrVariable }} {% if element.values.Action %}onClickCapture={ {{ element.values.Action }} }{% endif %}>
+  to={{ dest | textOrVariable }} {% if element.values.Action %}onClickCapture={ {{ element.values.Action }} }{% endif %}
+  {% if element.values.draggable %}
+    draggable={false}
+  {% endif %}>
 {{ content | raw }}</NavLink>
 {% endif %}

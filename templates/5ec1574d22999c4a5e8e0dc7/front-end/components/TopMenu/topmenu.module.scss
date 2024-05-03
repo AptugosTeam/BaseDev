@@ -6,6 +6,7 @@ unique_id: vigUEG7k
 .menu {
   display: flex;
   margin-left: 3rem;
+  z-index: 2;
   & > div {
     & :global(.MuiButton-root) {
       &:hover {
@@ -20,7 +21,7 @@ unique_id: vigUEG7k
         width: 0;
         height: 3px;
         background: #d10125;
-        transition: .33s all ease-out;
+        transition: 0.33s all ease-out;
       }
     }
   }
@@ -31,12 +32,21 @@ unique_id: vigUEG7k
   background: white;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(30px);
   overflow: hidden;
-  transition: all 330ms ease-out 0ms;
+  transform: translateY(-30px) scaleY(0);
+  transform-origin: 0 0;
+  z-index: 1;
+  transition: all 180ms ease-out 0ms;
   margin-top: 1rem;
   border-top: 3px solid #d10125;
   padding: 1.5rem 2.2rem;
+
+  & .menu {
+    margin-left: 0;
+    & :global(.menu) {
+      flex-direction: column;
+    }
+  }
 
   & a {
     display: block;
@@ -45,10 +55,10 @@ unique_id: vigUEG7k
   & :global(.MuiButton-root) {
     color: #9f9f9f;
     padding-right: 1rem;
-    transition: all 330ms ease-out 0ms;
+    transition: all 180ms ease-out 0ms;
     &::before {
       content: '>';
-      transition: all 330ms ease-out 0ms;
+      transition: all 180ms ease-out 0ms;
       width: 0;
       overflow: hidden;
     }
@@ -67,7 +77,7 @@ unique_id: vigUEG7k
 .selectedItem {
   & .subMenu {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scaleY(1);
     visibility: visible;
   }
 

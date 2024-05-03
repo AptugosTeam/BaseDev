@@ -31,13 +31,24 @@ import { NumericFormat } from 'react-number-format'
   };
 {% endset %}
 {{ save_delayed('ph',ph) }}
-<NumericFormat 
-    value={ {{ tableName }}data.{{ field.column_name | friendly }} || 0 }
-    label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+<NumericFormat
+    {% if field.minLimit %}
+      value={ {{ tableName }}data.{{ field.column_name | friendly }} || {{ field.minLimit }} }
+    {% elseif field.defaultValue %}
+      value={ {{ tableName }}data.{{ field.column_name | friendly }} || {{ field.defaultValue }} }
+    {% else %}
+      value={ {{ tableName }}data.{{ field.column_name | friendly }} || 0 }
+    {% endif %}
+
+    {% if not element.values.disableLabel %}
+        label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    {% endif %}
     fullWidth
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
     {% if field.decimalScale %}
       decimalScale={ {{ field.decimalScale }} }
+    {% elseif field.decimalScale == 0 %}
+      decimalScale={0}
     {% endif %}
     {% if field.formatNumber == "dotComma" %}
         thousandSeparator="."
@@ -50,9 +61,16 @@ import { NumericFormat } from 'react-number-format'
     {% endif %}
         {% if field.isAllowed %}
         isAllowed=  {(values) => {
-          const MAX_LIMIT = {{ field.isAllowed | raw }};
-          const { floatValue } = values;
-          return floatValue === undefined || floatValue <= MAX_LIMIT;
+          {% if field.minLimit %}
+            const MIN_LIMIT = {{ field.minLimit }}
+          {% endif %}
+          const MAX_LIMIT = {{ field.isAllowed | raw }}
+          const { floatValue } = values
+          {% if field.minLimit %}
+            return floatValue === undefined || floatValue === null || (floatValue >= MIN_LIMIT && floatValue <= MAX_LIMIT)
+          {% else %}
+            return floatValue === undefined || floatValue === null || floatValue <= MAX_LIMIT
+          {% endif %}
         }} 
     {% endif %}
     {% if field.allowNegative == "false" %}
@@ -60,7 +78,11 @@ import { NumericFormat } from 'react-number-format'
     {% endif %}
     customInput={TextField}
     onValueChange={(values, sourceInfo) => {
+    {% if field.minLimit %}
+      handle{{ tableName }}Change("{{ field.column_name | friendly }}")(values.floatValue || {{ field.minLimit }})
+    {% else %}
       handle{{ tableName }}Change("{{ field.column_name | friendly }}")(values.floatValue || 0)
+    {% endif %}
     }}
     {...{{ field.column_name | friendly }}TextFieldProps}
 />

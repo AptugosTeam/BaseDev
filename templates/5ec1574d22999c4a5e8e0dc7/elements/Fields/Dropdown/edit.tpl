@@ -23,16 +23,19 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     margin='{{ element.values.margin|default("dense") }}'
-    label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    size='{{ element.values.size|default("medium") }}'
+    {% if not element.values.disableLabel %}
+        label={{ element.values.inputLabel | default(field.column_name) | textOrVariable }}
+    {% endif %}
     type="text"
     fullWidth
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
     variant="{{ element.values.variant|default('standard') }}"
-    value={ {{ tableName }}data.{{ field.column_name | friendly }}}
+    value={ {{ tableName }}data.{{ field.column_name | friendly }} || "{{ field.placeholder }}" }
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
 >
 {% if field.placeholder %}
-<MenuItem value="" disabled>{{ field.placeholder }}</MenuItem>
+<MenuItem key="{{ field.placeholder }}_{{ field.placeholder|friendly }}" value="{{ field.placeholder }}" disabled>{{ field.placeholder }}</MenuItem>
 {% endif %}
 {% for item in field.options|split(';') %}
     {% set key = item|split('|')[0]|default(item) %}

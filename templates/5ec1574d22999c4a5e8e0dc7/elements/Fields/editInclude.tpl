@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux'
 {{ save_delayed('bpr', bpr ) }}
 {% if element.values.autosave %}
 {% set bpr %}
-import { edit{{ tableInfo.table.name | friendly | capitalize }} } from '../store/actions/{{ tableInfo.table.name | friendly | lower }}Actions'
+import { edit{{ tableInfo.table.name | friendly | capitalize }} } from '@store/actions/{{ tableInfo.table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% endif %}
@@ -54,7 +54,7 @@ const handle{{ tableInfo.table.name | friendly }}Change = (name: string) => (eve
       }
       {% endif %}
     }
-    resolve()
+    resolve(value)
   })
   }
 {% endset %}

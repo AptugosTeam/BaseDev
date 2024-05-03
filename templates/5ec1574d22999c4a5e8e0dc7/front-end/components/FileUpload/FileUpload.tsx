@@ -3,16 +3,16 @@ path: FileUpload.tsx
 completePath: front-end/components/FileUpload/FileUpload.tsx
 unique_id: QZm2nTtL
 */
+import PublishIcon from '@mui/icons-material/Publish'
+import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import IconButton from '@mui/material/IconButton'
 import Input from '@mui/material/Input'
-import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
-import PublishIcon from '@mui/icons-material/Publish'
 
-import SearchIcon from '@mui/icons-material/Search'
 import PictureAsPdf from '@mui/icons-material/PictureAsPdf'
-import React, { FunctionComponent } from 'react'
+import SearchIcon from '@mui/icons-material/Search'
+import React, { FunctionComponent, ReactEventHandler } from 'react'
 
 const useStyles = {
   root: {
@@ -34,7 +34,7 @@ const useStyles = {
     right: 0,
     top: '-8px',
   },
-  altVisual: {}
+  altVisual: {},
 }
 
 const altStyles = {
@@ -49,14 +49,11 @@ const altStyles = {
     },
   },
   image: {
-    maxHeight: '48px',
     margin: '5px 4px 5px auto',
     borderRadius: '5px',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
-  media: {
-    maxHeight: '48px',
-  },
+  media: {},
   input: {
     display: 'none',
   },
@@ -105,15 +102,15 @@ function FileListItem(a) {
 }
 
 const AptugoImageUpload: FunctionComponent<any> = (props) => {
-  const classes = props.visual === 'standard' ? useStyles : altStyles
-  const { resizeWidth } = props;
+  const classes = props.variant === 'standard' ? useStyles : altStyles
+  const { resizeWidth } = props
   const [state, setState] = React.useState({
     uploading: false,
     file: null,
     selectedFile: null,
     fileName: props.value,
     accept: props.accept || 'image/*',
-    visual: props.visual || 'staandard',
+    visual: props.variant || 'staandard',
   })
 
   const handleUploadClick = (event) => {
@@ -219,7 +216,7 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
 
   const alternativeVisual = () => {
     return (
-      <FormControl margin="normal" fullWidth variant={props.variant} sx={classes.root}>
+      <FormControl margin="normal" fullWidth sx={classes.root}>
         <Input
           sx={classes.altVisual}
           value={state.fileName || ''}
@@ -240,7 +237,7 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
     )
   }
 
-  return state.visual === 'standard' ? standardVisual() : alternativeVisual()
+  return state.visual === 'standard' ? alternativeVisual() : standardVisual()
 }
 
 export default AptugoImageUpload

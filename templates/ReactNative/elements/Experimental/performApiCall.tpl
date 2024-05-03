@@ -28,6 +28,12 @@ options:
   - name: extraOptions
     display: Extra options
     type: text
+  - name: await
+    display: Await?
+    type: checkbox
+    options: ''
+    settings:
+      value: 'false'
 sourceType: javascript
 children: []
 */
@@ -39,6 +45,6 @@ import axios from 'axios'
 {% if element.values.urlFULL %}
 {% set url = settings.apiURL ~ element.values.url %}
 {% endif %}
-axios.{{ element.values.method|default('get') }}({{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}, {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}).then(result => {
+{% if element.values.await %}await{% endif %} axios.{{ element.values.method|default('get') }}({{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}, {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}).then(result => {
  {{ content | raw }}
 })

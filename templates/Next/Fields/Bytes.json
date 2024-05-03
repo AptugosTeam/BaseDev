@@ -1,0 +1,20 @@
+/*
+path: bytes.json
+completePath: Fields/bytes.json
+unique_id: 5wQBTBBB
+*/
+{
+  "label": "Bytes",
+  "value": "Bytes",
+  "dataType": "Number",
+  "initialValue": "",
+  "options": {
+    "extra": [
+      {
+        "display": "Default Value",
+        "value": "defaultValue",
+        "type": "text"
+      }
+    ]
+  }
+}

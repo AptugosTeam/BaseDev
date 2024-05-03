@@ -1,0 +1,14 @@
+/*
+path: MultilineString.json
+completePath: Fields/MultilineString.json
+unique_id: fcoiRgvk
+*/
+{
+  "label": "Multiline text",
+  "value": "MultilineString",
+  "dataType": "String",
+  "initialValue": "",
+  "options": {
+    "frontEndType": "string"
+  }
+}

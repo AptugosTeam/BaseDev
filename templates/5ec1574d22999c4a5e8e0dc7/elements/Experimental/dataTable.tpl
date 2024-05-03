@@ -75,9 +75,16 @@ options:
     settings:
       default: true
       condition: ''
+  - name: allowPagination
+    display: Allow Pagination
+    type: checkbox
+    settings:
+      default: true
+      condition: ''
 */
 {% set allowEdit = element.values.allowEdit|default(true) %}
 {% set allowSorting = element.values.allowSorting|default(true) %}
+{% set allowPagination = element.values.allowPagination|default(true) %}
 {% set editProc = element.values.editProcedure|default('No') %}
 {% set table = element.values.table | tableData %}
 {% set innervarname = 'table' %}
@@ -101,6 +108,7 @@ import DataTable from '../components/DataTable/dataTable'
 {{ save_delayed('bpr',bpr) }}
 <DataTable
   {% if allowSorting %}allowSorting{% endif %}
+  {% if not allowPagination %}pagination={ {{allowPagination}} }{% endif %}
   {% if element.values.onRequestUpdate %}
   onRequestUpdate={ {{ element.values.onRequestUpdate | functionOrCall }} }
   {% endif %}

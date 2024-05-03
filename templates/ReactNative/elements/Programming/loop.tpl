@@ -30,6 +30,11 @@ options:
     display: Condition to filter source values
     type: text
     advanced: true
+  - name: filterFunction
+    display: Filter function
+    type: function
+    options: ''
+    advanced: true
   - name: code
     display: Code
     type: text
@@ -40,7 +45,11 @@ children: []
 {% if element.values.filtersource %}
 {% set addExtra = '.filter(tmp => tmp.' ~ element.values.filtersource ~ ')' %}
 {% endif %}
+{% if not element.values.filtersource and element.values.filterFunction%}
+{% set addExtra = '.filter(tmp => ' ~ element.values.filterFunction ~ ')' %}
+{% endif %}
 { {{ element.values.variable }}{{ addExtra }}.map(({{ element.values.variablename | default('item') }},index) => {
-{% if element.values.code %}{{ element.values.code }}{% endif %}
+{% if element.values.code %}{{ element.values.code }}
+{% endif %}
     return <React.Fragment key={index}>{{ content | raw }}</React.Fragment>
 })}

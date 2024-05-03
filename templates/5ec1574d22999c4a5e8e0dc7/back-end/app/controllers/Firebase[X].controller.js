@@ -15,7 +15,7 @@ const errors = require('../services/errors.service')
 
 {% for field in table.fields %}
   {% set fieldWithData = field | fieldData %}
-  {% include includeTemplate(['Fields' ~ field.data_type ~'updateImports.tpl', 'FieldsupdateImports.tpl']) %}
+  {% include includeTemplate(['Fields' ~ field.data_type ~'updateImportsFireBase.tpl', 'Fields' ~ field.data_type ~'updateImports.tpl', 'FieldsupdateImports.tpl']) %}
 {% endfor %}
 
 // Create and Save a new {{ table.singleName | friendly }}
@@ -36,7 +36,7 @@ exports.createAsPromise = (options) => {
 
     {% for field in table.fields %}
       {% set fieldWithData = field | fieldData %}
-      {% include includeTemplate(['Fields' ~ field.data_type ~'update.tpl', 'Fieldsupdate.tpl']) %}
+      {% include includeTemplate(['Fields' ~ field.data_type ~ 'updateFireBase.tpl' , 'Fields' ~ field.data_type ~'update.tpl', 'Fieldsupdate.tpl']) %}
     {% endfor %}
   
     // Save {{ table.singleName | friendly }} in the database
@@ -95,10 +95,6 @@ exports.findOne = ( options ) => {
     const query = { populate: 'true' }
     const id = options.req ? options.req.params.ID : options.ID
     {{ table.name | friendly }}.getById(id)
-    {% for field in table.fields %}
-      {% set fieldWithData = field | fieldData %}
-      {% include includeTemplate(['Fields' ~ field.data_type ~'find.tpl', 'Fieldsfind.tpl']) %}
-    {% endfor %}
       .then({{ table.singleName | friendly | lower }} => {
         if(!{{ table.singleName | friendly | lower }}) {
             return options.res.status(404).send({
@@ -128,7 +124,7 @@ exports.update = (options) => {
 
     {% for field in table.fields %}
       {% set fieldWithData = field | fieldData %}
-      {% include includeTemplate(['Fields' ~ field.data_type ~'update.tpl', 'Fieldsupdate.tpl']) %}
+      {% include includeTemplate(['Fields' ~ field.data_type ~ 'updateFireBase.tpl' , 'Fields' ~ field.data_type ~'update.tpl', 'Fieldsupdate.tpl']) %}
     {% endfor %}
     
     // Find {{ table.singleName }} and update it with the request body

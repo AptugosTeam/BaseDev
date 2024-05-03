@@ -28,8 +28,12 @@ if (existing) {
     assetId = newAsset.id
 }
 
+const parms = { _: ['assets', 'setfile'], binary: false, app: Application._id, id: assetId, details: newAsset }
+if (Parameters.state.writeFolder) {
+    parms.auth = Parameters.state.writeFolder
+}
 if (Parameters.asset.fileContents) {
-    aptugo.run({ _: ['assets', 'setfile'], binary: false, app: Application._id, id: assetId, details: newAsset }, { file: JSON.stringify(Parameters.asset.fileContents) })
+    aptugo.run(parms, { file: JSON.stringify(Parameters.asset.fileContents) })
     // if ( window.sendAptugoCommand ) {
     //     window.sendAptugoCommand({
     //         section: 'assets',

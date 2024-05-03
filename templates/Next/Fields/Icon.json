@@ -1,0 +1,16 @@
+/*
+path: Icon.json
+completePath: >-
+  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/Fields/Icon.json
+keyPath: Fields/Icon.json
+unique_id: h0rw52pk
+*/
+{
+  "label": "Icon",
+  "value": "Icon",
+  "dataType": "String",
+  "initialValue": "''",
+  "options": {
+    "frontEndType": "string"
+  }
+}
