@@ -10,6 +10,8 @@ module.exports = function(api) {
   const presets = ['babel-preset-expo']
 
   {{ insert_setting('BabelAdd') | raw }}
+
+  plugins.push('react-native-reanimated/plugin')
   return {
     presets, plugins
   };

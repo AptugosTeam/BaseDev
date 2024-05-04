@@ -16,7 +16,7 @@ options:
     display: Use Tag
     type: dropdown
     options: >-
-      return [['navigate', 'Navigate'], ['push', 'Push'], ['A', 'External']]
+      return [['navigate', 'Navigate'], ['push', 'Push'], ['A', 'External'], ['self','Self Managed']]
   - name: className
     display: ClassName
     type: text
@@ -38,10 +38,12 @@ import { TouchableOpacity, Linking } from "react-native"
 {{ save_delayed('bpr', bpr ) }}
 <TouchableOpacity
   {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
-  {% if element.values.tagToUse == "A" %}
-  onPress={() => Linking.openURL( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
+  {% if element.values.tagToUse == "self" %}
+    onPress={ {{ element.values.destination|functionOrCall}} }
+  {% elseif element.values.tagToUse == "A" %}
+    onPress={() => Linking.openURL( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
   {% else %}
-  onPress={() => navigation.{{ element.values.tagToUse|default('push') }}( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
+    onPress={() => navigation.{{ element.values.tagToUse|default('push') }}( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
   {% endif %}
   key='{{ element.unique_id }}'
   {% if element.values.activeOpacity %}activeOpacity={ {{ element.values.activeOpacity}} }{% endif %}

@@ -26,6 +26,13 @@ options:
     display: Enable nested scrolling?
     type: checkbox
     options: ''
+  - name: getItemLayout
+    display: Item Layout Control
+    type: code
+    options: ''
+  - name: initialScrollIndex
+    display: Initial Scroll index
+    type: text
 children: []
 helpText: Basic HTML Div element
 */
@@ -37,6 +44,9 @@ import { FlatList } from 'react-native'
   {% if element.values.Style %}style={ {{element.values.Style}} }{% endif %}
   {% if element.values.nestedScrollEnabled %}nestedScrollEnabled{% endif %}
   {% if element.values.data %}data={ {{element.values.data}} }{% endif %}
-  {% if element.values.renderItem %}renderItem={ {{element.values.renderItem}} }{% endif %}
+  {% if element.children %}renderItem={(item) => {% for child in element.children %}{{ child.rendered | raw }}{% endfor %} }
+  {% elseif element.values.renderItem %}renderItem={ {{element.values.renderItem | functionOrCall }} }{% endif %}
   {% if element.values.keyExtractor %}keyExtractor={ {{element.values.keyExtractor}} }{% endif %}
+  {% if element.values.getItemLayout %}getItemLayout={(data:any, index:number) => ({{ element.values.getItemLayout }})}{% endif %}
+  {% if element.values.initialScrollIndex %}initialScrollIndex={{ element.values.initialScrollIndex | textOrVariable }}{% endif %}
 />

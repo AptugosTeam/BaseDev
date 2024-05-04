@@ -116,6 +116,10 @@ options:
     display: On Focus
     type: function
     options: ''
+  - name: onBlur
+    display: On Blur
+    type: function
+    options: ''
   - name: keyboardType
     display: Keyboard Type
     type: text
@@ -126,9 +130,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-floating-label-input": "1.4.2","react-native-reanimated": "1.13.2",'
-  - name: BabelAdd
-    value: 'plugins.push("react-native-reanimated/plugin")'
+    value: '"react-native-floating-label-input": "1.4.2",'
 */
   {% set bpr %}
   import { FloatingLabelInput } from 'react-native-floating-label-input'
@@ -149,13 +151,14 @@ settings:
         {% if element.values.topBlurred %}topBlurred:{{ element.values.topBlurred }},{% endif %}
         {% if element.values.fontSizeFocused %}fontSizeFocused:{{ element.values.fontSizeFocused }},{% endif %}
         {% if element.values.fontSizeBlurred %}fontSizeBlurred:{{ element.values.fontSizeBlurred }},{% endif %}
-        {% if element.values.colorFocused %}colorFocused:{{ element.values.colorFocused | textOrVariable }},{% endif %}
-        {% if element.values.colorBlurred %}colorBlurred:{{ element.values.colorBlurred | textOrVariable }},{% endif %}
+        {% if element.values.colorFocused %}colorFocused:{{ element.values.colorFocused }},{% endif %}
+        {% if element.values.colorBlurred %}colorBlurred:{{ element.values.colorBlurred }},{% endif %}
         } }
       {% endif %}
       {% if element.values.containerStyles %}containerStyles={ {{ element.values.containerStyles }} }{% endif %}
       {% if element.values.inputStyles %}inputStyles={ {{ element.values.inputStyles }} }{% endif %}
       {% if element.values.onFocus %}onFocus={() => {{element.values.onFocus}} }{% endif %}
+      {% if element.values.onBlur %}onBlur={() => {{element.values.onBlur}} }{% endif %}
       {% if element.values.textColor %}textColor={ {{ element.values.textColor | textOrVariable }}}{% endif %}
       {% if element.values.value %}value={{ element.values.value | textOrVariable }}{% endif %}
       {% if element.values.onChange %}onChangeText={ {{ element.values.onChange | replace({ '.target.value': '' }) | functionOrCall }} }{% endif %}

@@ -21,7 +21,7 @@ options:
     display: Slides properties
     type: separator
   - name: slidesDesktop
-    display: How many slides to Show in desktop (Breakpoint 5000px to 1025px)
+    display: How many slides to Show in desktop (Default breakpoint 5000px to 1025px)
     type: text
     options: ''
     settings:
@@ -33,7 +33,7 @@ options:
     settings:
       default: '2'
   - name: slidesTablet
-    display: How many slides to Show in tablet (Breakpoint 1024px to 601px)
+    display: How many slides to Show in tablet (Default breakpoint 1024px to 601px)
     type: text
     options: ''
     settings:
@@ -45,7 +45,7 @@ options:
     settings:
       default: '1'
   - name: slidesMobile
-    display: How many slides to Show in mobile (Breakpoint 600px to 0px)
+    display: How many slides to Show in mobile (Default breakpoint 600px to 0px)
     type: text
     options: ''
     settings:
@@ -68,6 +68,45 @@ options:
     display: CSS class for carousel item (Optional)
     type: styles
     options: ''
+  - name: separatorBreakpoint
+    display: Breakpoints
+    type: separator
+  - name: maxBreakpointDesktop
+    display: Max breakpoint Desktop
+    type: text
+    options: ''
+    settings:
+      default: '5000'
+  - name: minBreakpointDesktop
+    display: Min breakpoint Desktop
+    type: text
+    options: ''
+    settings:
+      default: '1025'
+  - name: maxBreakpointTablet
+    display: Max breakpoint Tablet
+    type: text
+    options: ''
+    settings:
+      default: '1024'
+  - name: minBreakpointTablet
+    display: Min breakpoint Tablet
+    type: text
+    options: ''
+    settings:
+      default: '601'
+  - name: maxBreakpointMobile
+    display: Max breakpoint Mobile
+    type: text
+    options: ''
+    settings:
+      default: '600'
+  - name: minBreakpointMobile
+    display: Min breakpoint Mobile
+    type: text
+    options: ''
+    settings:
+      default: '0'
   - name: separator
     display: Autoplay properties
     type: separator
@@ -279,8 +318,8 @@ import "react-multi-carousel/lib/styles.css";
     responsive={ {
     desktop: {
       breakpoint: {
-        max: 5000,
-        min: 1025,
+        max: {{ element.values.maxBreakpointDesktop|default('5000') }},
+        min: {{ element.values.minBreakpointDesktop|default('1025') }},
       },
       items: {{ element.values.slidesDesktop|default('4') }},
       slidesToSlide: {{ element.values.slidesToSlideDesktop|default('2') }},
@@ -288,8 +327,8 @@ import "react-multi-carousel/lib/styles.css";
     },
     tablet: {
       breakpoint: {
-        max: 1024,
-        min: 601,
+        max: {{ element.values.maxBreakpointTablet|default('1024') }},
+        min: {{ element.values.minBreakpointTablet|default('601') }},
       },
       items: {{ element.values.slidesTablet|default('2') }},
       slidesToSlide: {{ element.values.slidesToSlideTablet|default('1') }},
@@ -297,8 +336,8 @@ import "react-multi-carousel/lib/styles.css";
     },
     mobile: {
       breakpoint: {
-        max: 600,
-        min: 0,
+        max: {{ element.values.maxBreakpointMobile|default('600') }},
+        min: {{ element.values.minBreakpointMobile|default('0') }},
       },
       items: {{ element.values.slidesMobile|default('1') }},
       slidesToSlide: {{ element.values.slidesToSlideMobile|default('1') }},
