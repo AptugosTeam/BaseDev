@@ -39,7 +39,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 {% if element.values.valueToVar %}
   const {{ element.values.valueToVar }} ={% if element.values.Parse %}JSON.parse({% endif %}await AsyncStorage.getItem('{{ element.values.variableName }}'){% if element.values.Parse %}){% endif %}
 {% else %}
-  AsyncStorage.getItem('{{ element.values.variableName }}').then(res => {
+  AsyncStorage.getItem('{{ element.values.variableName }}').then((res:any) => {
     {% if element.values.onLoad %}
       {{ element.values.onLoad }}(
         {% if element.values.makeItBoolean %}Boolean({% endif %}

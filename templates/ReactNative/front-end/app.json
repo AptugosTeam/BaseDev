@@ -5,7 +5,7 @@ unique_id: i1kD8rN4
 */
 {
   "expo": {
-    "name": "{{ application.settings.name }}",
+    "name": "{{ insert_setting('fancyName')|default(application.settings.name) }}",
     "slug": "{{ application.settings.name | lower | friendly }}",
     "version": "{{ insert_setting('version')|default('1.0.0') }}",
     "orientation": "portrait",
