@@ -26,7 +26,12 @@ options:
     options: ''
     advanced: true
   - name: sx
-    display: Styles
+    display: Styles Sx Prop
+    type: text
+    options: ''
+    advanced: true
+  - name: style 
+    display: Styles Style Prop
     type: text
     options: ''
     advanced: true
@@ -56,6 +61,9 @@ children: []
   {% endif %}
   {% if element.values.sx %}
     sx={ { {{ element.values.sx }} } }
+  {% endif %}
+  {% if element.values.style %}
+    style={ { {{ element.values.style }} } } 
   {% endif %}
 >
   {{ content | raw }}
