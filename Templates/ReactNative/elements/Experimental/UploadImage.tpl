@@ -35,6 +35,12 @@ settings:
     value: '"expo-image-picker": "~14.3.2",'
 children: []
 */
+{% set AppJsonIos %}
+"infoPlist": {
+  "NSPhotoLibraryUsageDescription": "Para setear la imagen de perfil, necesitamos permiso de acceder a tus fotos"
+},
+{% endset %}
+{{ add_setting('AppJsonIos', AppJsonIos)}}
 {% set bpr %}
 import { TouchableOpacity } from 'react-native'
 {% endset %}
