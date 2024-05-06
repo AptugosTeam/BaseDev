@@ -193,6 +193,7 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
     {% if element.values.style %}
       style={ {{element.values.style}} }
+    {% endif %}
     {% if element.values.onBlur %}onBlur={ {{ element.values.onBlur | functionOrCall }} }{% endif %}
     {% if element.values.endAdornment %}
       InputProps={ {
