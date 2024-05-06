@@ -29,7 +29,7 @@ import { Icon as YesIcon} from '@iconify/react'
 {{ save_delayed('bpr',bpr) }}
   <YesIcon
   {% if element.values.icon %}
-  icon="{{element.values.icon}}" 
+  icon={{ element.values.icon | textOrVariable }}
   {% endif %}
   {% if element.values.fontSize or element.values.color %}
     style={ { {% if element.values.fontSize %} fontSize: '{{element.values.fontSize}}', {% endif %} {% if element.values.color %} color: '{{element.values.color}}' {% endif %} } }

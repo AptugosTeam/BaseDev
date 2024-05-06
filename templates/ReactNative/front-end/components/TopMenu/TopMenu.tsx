@@ -3,10 +3,8 @@ path: TopMenu.tsx
 completePath: front-end/components/TopMenu/TopMenu.tsx
 unique_id: 4yBozeZw
 */
-import Button from '@mui/material/Button'
-import clsx from 'clsx'
+import { Button } from 'react-native-paper'
 import React, { FunctionComponent } from 'react'
-import { NavLink } from 'react-router-dom'
 import classes from './topmenu.module.scss'
 
 interface menuItemProps {
@@ -56,9 +54,9 @@ const AptugoTopMenu: FunctionComponent<topMenuProps> = (props) => {
   }
 
   return (
-    <div className={clsx(classes.menu, props.className)}>
+    <div className={props.className}>
       <div className={'actioner'} onClickCapture={switchMenuView}></div>
-      <div className={clsx('menu', isOpen && 'isOpen')}>{props.children}</div>
+      <div>{props.children}</div>
     </div>
   )
 }
