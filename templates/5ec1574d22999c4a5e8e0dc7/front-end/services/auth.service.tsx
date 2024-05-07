@@ -145,7 +145,7 @@ class AuthService {
       }).catch(e => { throw e })
   }
 
-  async getCurrentUser() {
+ getCurrentUser() {
     const user =
       localStorage.getItem('user') ||
       sessionStorage.getItem('userSession') ||
