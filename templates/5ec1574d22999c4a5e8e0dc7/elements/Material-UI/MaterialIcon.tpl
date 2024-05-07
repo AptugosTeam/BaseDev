@@ -29,6 +29,10 @@ options:
   - name: fontSize
     display: Size (rem, em, px)
     type: text
+  - name: viewBox
+    display: viewBox size
+    type: text
+    advanced: true
 */
 {% set bpr %}
 import { {{ element.values.icon|default('HelpOutline') }} } from '@mui/icons-material';
@@ -40,6 +44,9 @@ import { {{ element.values.icon|default('HelpOutline') }} } from '@mui/icons-mat
   {% endif %}
   {% if element.values.className %}
     className={ {{ element.values.className }} }
+  {% endif %}
+  {% if element.values.viewBox %}
+    viewBox=" {{ element.values.viewBox }} "
   {% endif %}
   sx={ {
     {% if element.values.fontSize %}fontSize: {{ element.values.fontSize }},{% endif %}
