@@ -11,6 +11,10 @@ options:
     display: Session Secret
     type: text
     options: ''
+  - name: routes
+    display: Allowed Routes (array)
+    type: text
+    options: ''
 settings:
   - name: BackendPackages
     value: '"passport": "^0.7.0", "passport-jwt": "^4.0.1",'
@@ -18,7 +22,6 @@ settings:
     value: |-
       const passport = require('passport')
       const JwtStrategy = require('passport-jwt').Strategy;
-      const userService = require('./app/services/users.service')
 
       const getJwtFromReq = (req) => {
         try {
@@ -29,8 +32,23 @@ settings:
         }
       }
 
-      passport.use(new JwtStrategy({ secretOrKey: '{{ element.values.secret | default('thisShouldBeConfigurable') }}', jwtFromRequest: getJwtFromReq }, async (jwt_payload, done) => {
+      passport.use(new JwtStrategy({ secretOrKey: {{ element.values.secret | default("'thisShouldBeConfigurable'") }}, jwtFromRequest: getJwtFromReq }, async (jwt_payload, done) => {
         console.log("**",jwt_payload)
         done(null,jwt_payload)
       }))
+
+      const authMiddleware = (req, res, next) => {
+        const allowedRoutes = {{ element.values.routes | default('[]') }}
+        console.log('----- Estoy dentro del middleware -----')
+        console.log('req.url', req.url)
+        if (allowedRoutes.some(route => req.url.startsWith(route))) {
+          console.log('***** PASO *****')
+          next()
+        } else {
+          console.log('***** NO PASO *****')
+          return passport.authenticate('jwt', { session: false })(req, res, next)
+        }
+      }
+
+      app.use(authMiddleware)
 */
