@@ -27,12 +27,13 @@ interface RecoverOptions {
 }
 
 class AuthService {
-  login(email, password, options: LoginOptions = {}) {
+  login(email, password, model: string = '', options: LoginOptions = {}) {
     const { remember = true} = options
     return axios
       .post(API_URL + 'authenticate', {
         email,
         password,
+        model,
         options,
       })
       .then((response) => {
