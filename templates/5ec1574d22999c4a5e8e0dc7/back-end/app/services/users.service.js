@@ -157,7 +157,7 @@ async function authenticate ({ email, password, model, passwordField, populate, 
                 userID[fieldName] = userWithoutPassword[fieldName]
               })
             }
-            const token = jwt.sign(fullUser ? userWithoutPassword : userID, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+            const token = jwt.sign(fullUser ? userWithoutPassword : userID, `${process.env.PASSPORT_SECRET ? process.env.PASSPORT_SECRET : 'thisisthesecretandshouldbeconfigurable'}`, { expiresIn: '7d' })
             resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
           } else {
             reject({ message: errorMessages[lang].wrongPassword })

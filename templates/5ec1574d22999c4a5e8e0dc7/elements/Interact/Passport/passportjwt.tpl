@@ -25,27 +25,22 @@ settings:
 
       const getJwtFromReq = (req) => {
         try {
-          console.log('headers', req.headers)
           return req.headers.authorization
         } catch (error) {
           return null
         }
       }
 
-      passport.use(new JwtStrategy({ secretOrKey: {{ element.values.secret | default("'thisShouldBeConfigurable'") }}, jwtFromRequest: getJwtFromReq }, async (jwt_payload, done) => {
-        console.log("**",jwt_payload)
+      passport.use(new JwtStrategy({ secretOrKey: {{ element.values.secret | default("'thisisthesecretandshouldbeconfigurable'") }}, jwtFromRequest: getJwtFromReq }, async (jwt_payload, done) => {
         done(null,jwt_payload)
       }))
 
       const authMiddleware = (req, res, next) => {
+        if (req.method === 'OPTIONS') return res.status(200).end();
         const allowedRoutes = {{ element.values.routes | default('[]') }}
-        console.log('----- Estoy dentro del middleware -----')
-        console.log('req.url', req.url)
         if (allowedRoutes.some(route => req.url.startsWith(route))) {
-          console.log('***** PASO *****')
           next()
         } else {
-          console.log('***** NO PASO *****')
           return passport.authenticate('jwt', { session: false })(req, res, next)
         }
       }
