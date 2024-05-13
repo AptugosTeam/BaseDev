@@ -13,7 +13,7 @@ options:
     display: Value
     type: text
   - name: onChange
-    display: On Change
+    display: On Change (e, newValue)
     type: function
   - name: label
     display: Label
@@ -75,6 +75,10 @@ options:
     display: Full Width
     type: checkbox
     advanced: true
+  - name: disableClearable
+    display: Disable Clearable
+    type: checkbox
+    advanced: true
   - name: multiple
     display: Multiple Selections
     type: checkbox
@@ -112,6 +116,9 @@ import TextField from '@mui/material/TextField';
   {% endif %}
   {% if element.values.filterSelectedOptions %}
     filterSelectedOptions
+  {% endif %}
+  {% if element.values.disableClearable %}
+    disableClearable
   {% endif %}
   {% if element.values.fullWidth %}
     fullWidth
