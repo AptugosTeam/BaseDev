@@ -42,6 +42,7 @@ import AuthService from '@services/auth.service'
 React.useEffect(() => {
     AuthService.getCurrentUser().then(currentUser => {
         set{{ (element.values.variableName | elementData).values.variableName }}(currentUser)
+        {{ content | raw }}
         {% if element.values.checkUserRole %}if (currentUser {% for item in element.values.userType|split(';') %} && currentUser.Role !== '{{ item }}' {% endfor %}) props.history.push('/{{ element.values.goTo|default('login') }}'){% endif %}
     })
 }, [])

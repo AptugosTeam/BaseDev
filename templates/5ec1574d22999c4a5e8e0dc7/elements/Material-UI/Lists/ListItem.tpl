@@ -40,7 +40,7 @@ import ListItemButton from '@mui/material/ListItemButton'
   {% if element.values.selected %}selected={{ element.values.selected | textOrVariable }}{% endif %}
 >
 {% if element.values.onClick %}
-  <ListItemButton role={undefined} onClick={ {{ element.values.onClick }}  } dense>
+  <ListItemButton role={undefined} onClick={ {{ element.values.onClick | functionOrCall  }}  } dense>
 {% endif %}
   {{ content | raw }}
 {% if element.values.onClick %}

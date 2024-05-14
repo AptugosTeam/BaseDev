@@ -28,21 +28,36 @@ options:
     advanced: true
     settings:
       default: false
+  - name: serverSide
+    display: Back-End Function
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
+settings:
+  - name: ServerAddenum
+    value: |-
+      {% if element.values.serverSide %}
+      global.{{ element.values.functionName }} = {% if element.values.async%}async {% endif %}({{ element.values.functionParameters }}) => {
+        {{ element.values.functionBody | raw }}
+        {{ content | raw }}  
+      }
+      {% endif %}
 children: []
 */
-
-{% if element.values.priority %}
-{% set ph %}
-const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
-  {{ element.values.functionBody | raw }}
-  {{ content | raw }}  
-}
-{% endset %}
-{{ save_delayed('ph',ph,1) }}
-{% else %}
-const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
-  {{ element.values.functionBody | raw }}
-  {{ content | raw }}  
-}
+{% if not element.values.serverSide %}
+  {% if element.values.priority %}
+  {% set ph %}
+  const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
+    {{ element.values.functionBody | raw }}
+    {{ content | raw }}  
+  }
+  {% endset %}
+  {{ save_delayed('ph',ph,1) }}
+  {% else %}
+  const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
+    {{ element.values.functionBody | raw }}
+    {{ content | raw }}  
+  }
+  {% endif %}
 {% endif %}
-

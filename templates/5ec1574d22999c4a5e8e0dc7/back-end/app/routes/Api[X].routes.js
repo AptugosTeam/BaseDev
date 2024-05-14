@@ -79,7 +79,7 @@ module.exports = (app) => {
   })
   
   // Perform a search
-  app.get('/api/{{ table.name | friendly | lower }}/search/:searchstring', async (req, res) => {
+  app.get('/api/{{ table.name | friendly | lower }}/search/:searchstring', async (req, res) => {
     const mc = new memCache()
     const url = '{{ table.source }}'
     var data = mc.getMemCache(url)
