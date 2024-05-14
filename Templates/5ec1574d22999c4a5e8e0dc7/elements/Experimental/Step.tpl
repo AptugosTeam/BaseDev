@@ -51,6 +51,9 @@ options:
   - name: index
     display: Index value of the step
     type: text
+  - name: onclick
+    display: onClick
+    type: text
 */
 {% set bpr %}
 import Step from '@mui/material/Step';
@@ -84,6 +87,9 @@ import StepLabel from '@mui/material/StepLabel'
     {% endif %}
     {% if element.values.open %}
         open={ {{ element.values.open | default(true) }} }
+    {% endif %}
+    {% if element.values.onclick %}
+        onClick={(e) => { {{ element.values.onclick }}} }
     {% endif %}
     >
     <StepLabel
