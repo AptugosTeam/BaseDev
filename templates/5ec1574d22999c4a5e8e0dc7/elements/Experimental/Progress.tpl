@@ -9,6 +9,11 @@ options:
     display: Variable Name (Open Progress)
     type: text
     options: ''
+  - name: CircularProgress
+    display: Use circular progress
+    type: checkbox
+    settings:
+      default: true
 children: []
 */
 {% set bpr %}
@@ -24,6 +29,8 @@ const [{{ element.values.varName }}, set{{ element.values.varName }}] = React.us
   open={ {{ element.values.varName }} }
   sx={ { color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 } }
 >
-<CircularProgress color="inherit" />
+{% if element.values.CircularProgress %}
+  <CircularProgress color="inherit" />
+{% endif %}
 {{ content | raw }}
 </Backdrop>
