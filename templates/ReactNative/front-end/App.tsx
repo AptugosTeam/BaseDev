@@ -10,6 +10,7 @@ import store from './store/store'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 {{ insert_setting('AppImport') | raw }}
+{{ insert_setting('AppImports') | raw }}
 
 {% for page in application.pages | plain('type','page')  %}
   {% if page.filename %}
@@ -24,6 +25,9 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   const routeNameRef = React.useRef()
   const navigationRef = React.useRef()
+
+{{ insert_setting('AppPH') | raw }}
+
 
   return (
     <StateProvider store={store}>
@@ -47,6 +51,9 @@ export default function App() {
             }}
           >
             <Stack.Navigator screenOptions={ { headerShown: false } } initialRouteName="/">
+            {% if not AppB %}
+            {{ insert_setting('AppB') | raw }}
+            {% else %}
             {% for page in application.pages | plain('type','page') %}
               {% if page.filename %}
                 {% set splitParts = page.path|split('/') %}
@@ -70,6 +77,7 @@ export default function App() {
                 />
               {% endif %}
             {% endfor %}
+            {% endif %}
             </Stack.Navigator>
           </NavigationContainer>
         {{ insert_setting('SiteWideWrapEnd') | raw }}
