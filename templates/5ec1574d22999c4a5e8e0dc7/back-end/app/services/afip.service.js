@@ -1,7 +1,7 @@
 /*
-path: 999_afip.js
-keyPath: elements/Experimental/Afip/999_afip.js
-unique_id: GE1XabDo
+path: afip.service.js
+keyPath: back-end/app/services/afip.service.js
+unique_id: HR2CsnFp
 */
 const Afip = require('@afipsdk/afip.js');
 const errors = require('../services/errors.service')
@@ -260,7 +260,6 @@ const prepareBillData = ({
     MonCotiz: 1, // Cotización de la moneda usada (1 para pesos argentinos),
   }
 }
-
 
 // El TA dura 12hs y queda cacheado para no solicitarlo todo el tiempo, pero hay momentos en los cuales obtenemos un error y la forma de solucionarlo es descartando el TA actual. Con este método podes forzar a que se renueve.
 

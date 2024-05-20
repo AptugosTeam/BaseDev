@@ -20,18 +20,9 @@ options:
   - name: production
     display: Production Mode
     type: checkbox
-extraFiles:
-  - source: 'elements/Experimental/Afip/999_afip.js'
-    destination: 'back-end/app/services/afip.service.js'
-  - source: 'elements/Experimental/Afip/cert.crt'
-    destination: 'back-end/app/services/cert.crt'
-  - source: 'elements/Experimental/Afip/key.key'
-    destination: 'back-end/app/services/key.key'
-  - source: 'elements/Experimental/Afip/999_afip.routes.js'
-    destination: 'back-end/app/routes/afip.routes.js'
 settings:
   - name: BackendPackages
-    value: '"@afipsdk/afip.js": "0.7.10",'
+    value: '"@afipsdk/afip.js": "1.1.1",'
   - name: ServerAddenum
     value: |-
       require('./app/routes/afip.routes.js')(app)

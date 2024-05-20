@@ -1,0 +1,6 @@
+/*
+path: cert.cert
+completePath: back-end/app/services/cert.cert
+unique_id: sPBoT4lQ
+*/
+{{ insert_setting('Certificate') }}
