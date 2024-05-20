@@ -163,7 +163,6 @@ import { Area, Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, Responsive
     />
     <YAxis 
       {% if element.values.hideY %}hide={true}{% endif %} 
-      scale="band"
       {% if element.values.typeY %}type="category"{% endif %}
       {% if element.values.tickY %}tick={false}{% endif %}
       {% if element.values.yAxisVar %}dataKey="{{ element.values.yAxisVar }}"{% endif %}

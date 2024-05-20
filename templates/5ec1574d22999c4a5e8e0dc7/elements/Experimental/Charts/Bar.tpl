@@ -43,6 +43,6 @@ children: []
     <Bar 
       dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" 
       legendType="{{element.values.legendType|default('line')}}" 
-      barSize={ {{element.values.barSize|default(20)}} } 
+      {% if element.values.barSize %}barSize={ {{element.values.barSize}} }{% endif %}
       fill="#{{element.values.colors|default('000')}}" 
     />
