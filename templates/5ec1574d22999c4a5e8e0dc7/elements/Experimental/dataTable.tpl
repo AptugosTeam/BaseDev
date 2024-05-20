@@ -125,7 +125,9 @@ import DataTable from '../components/DataTable/dataTable'
     className={ {{element.values.className}} }
   {% endif %}
   tableData={ {{ tableData }} }
-  pages={Math.ceil({{ totalDocs }} / {{ innervarname }}loadoptions.limit)}
+  {% if allowPagination %}
+    pages={Math.ceil({{ totalDocs }} / {{ innervarname }}loadoptions.limit)}
+  {% endif %}
   columnInfo={
     {% if element.values.columnInfo %}
       {{ element.values.columnInfo }}
@@ -143,9 +145,11 @@ import DataTable from '../components/DataTable/dataTable'
     ]
     {% endif %}
   }
+  {% if allowPagination %}
   onRequestPaginate={(options) => {
     set{{ innervarname }}loadoptions({ ...{{ innervarname }}loadoptions, ...options })
   }}
+  {% endif %}
   {% if allowEdit %}
   onRequestEdit={row => {
     {% if editProc == 'Internal' %}
@@ -162,6 +166,7 @@ import DataTable from '../components/DataTable/dataTable'
     dispatch(remove{{ tableSingleName }}(row))
   }}
   {% endif %}
+  {% if allowSorting %}
   onRequestSort={property => {
     set{{ innervarname }}loadoptions({
       ...{{ innervarname }}loadoptions,
@@ -171,4 +176,5 @@ import DataTable from '../components/DataTable/dataTable'
       }
     })
   }}
+  {% endif %}
 />

@@ -16,6 +16,10 @@ options:
     display: Open Variable
     type: text
     options: ''
+  - name: onClose
+    display: On Close
+    type: text
+    options: ''
 */
 {% set bpr %}
 import Drawer from '@mui/material/Drawer';
@@ -30,6 +34,9 @@ import Drawer from '@mui/material/Drawer';
   {% endif %}
   {% if element.values.open %}
     open={ {{ element.values.open|default('true') }} }
+  {% endif %}
+  {% if element.values.onClose %}
+    onClose={ {{ element.values.onClose | functionOrCall }} }
   {% endif %}
 >{{ content | raw }}
 </Drawer>
