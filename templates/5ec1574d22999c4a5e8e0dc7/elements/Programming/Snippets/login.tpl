@@ -18,6 +18,10 @@ options:
     type: dropdown
     options: return aptugo.pageUtils.getAllPages()
     required: true
+  - name: codeOnSuccess
+    display: Extra code On Success
+    type: function
+    advanced: true
   - name: rememberMe
     display: Remember me variable
     type: text
@@ -72,6 +76,9 @@ AuthService.login({{ element.values.Email }}, {{ element.values.Password }}
 ).then(
   (res) => {
     navigation.push('{{ (element.values.OnSuccess | elementData).path }}')
+    {% if element.values.codeOnSuccess %}
+      {{ element.values.codeOnSuccess }}
+    {% endif %}
   },
   (error) => {
     {% if element.values.codeOnError %}

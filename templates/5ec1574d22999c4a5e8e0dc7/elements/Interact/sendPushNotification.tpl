@@ -32,7 +32,7 @@ async function sendPushNotification(expoPushToken, { title, body, data }) {
     data: data
   }
 
-  await axios('https://exp.host/--/api/v2/push/send', {
+  await axios('{{ settings.apiURL }}/api/sendPush', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -44,6 +44,7 @@ async function sendPushNotification(expoPushToken, { title, body, data }) {
 }
 {% endset %}
 {{ save_delayed('beforeClassDefinition',beforeClassDefinition) }}
+{{ save_delayed('ph',beforeClassDefinition) }}
 sendPushNotification(
   {{element.values.pushToken | textOrVariableInCode }},
   {

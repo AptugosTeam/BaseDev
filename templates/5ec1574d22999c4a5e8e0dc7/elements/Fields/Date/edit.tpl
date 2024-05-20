@@ -35,6 +35,6 @@ import moment from 'moment'
     InputLabelProps={ { shrink: true } }
     value={ {{ tableName }}data.{{ field.column_name | friendly }}?.slice(0,10) || {% if field.defaultToToday == "1" %}moment().utc().format('YYYY-MM-DD'){% else %}''{% endif %}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
-    error={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}'}
-    helperText={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}' && {{ tableName | lower }}Data.errMessage}
+    error={ {{ tableName}}data?.errField === '{{ field.column_name | friendly }}'}
+    helperText={ {{ tableName }}data?.errField === '{{ field.column_name | friendly }}' && {{ tableName}}data.errMessage}
 />

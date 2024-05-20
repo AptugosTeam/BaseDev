@@ -80,10 +80,10 @@ options:
       default: false
 */
 {% set bpr %}
-import Pagination from '@mui/material/Pagination'
+import PaginationMui from '@mui/material/Pagination'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-<Pagination
+<PaginationMui
   count={ {{ element.values.count|default(10) }}}
   {% if element.values.color %}
     color={ '{{ element.values.color }}' }

@@ -11,6 +11,9 @@ options:
   - name: WaitFor
     display: Wait for variable to be set
     type: text
+  - name: projectId
+    display: ProjectID
+    type: text
 children: []
 */
 {% set bpr %}
@@ -44,11 +47,10 @@ async function registerForPushNotificationsAsync() {
       alert('Failed to get push token for push notification!');
       return;
     }
-    token = (await Notifications.getExpoPushTokenAsync()).data;
+    token = (await Notifications.getExpoPushTokenAsync({% if element.values.projectId %}{ projectId: '{{ element.values.projectId }}' }{% endif %})).data;
     const currentToken = await AsyncStorage.getItem('mypushtoken')
     if (currentToken !== token) {
       AsyncStorage.setItem('mypushtoken', token)
-      // dispatch(editUsers({ PushID: token}))
     }
   } else {
     alert('Must use physical device for Push Notifications');

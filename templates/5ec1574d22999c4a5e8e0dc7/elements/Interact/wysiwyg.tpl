@@ -66,16 +66,14 @@ const {{ element.unique_id }}quillModules = {
     modules={ {{element.unique_id}}quillModules}
     value={ {{element.values.value | default('') }} }
     onChange={(e) => {
-        {% if element.values.mtl == true %}
-          e.replace('<p><br></p><p><br></p>', '<p><br></p>')
-          {{ element.values.onChangeWysiwyg }}
-          {{ element.values.onSaveData }}
-        {% endif %}
-        {% if element.values.mtl == false %}
-          {{ element.values.onChangeWysiwyg }}e.replace('<p><br></p><p><br></p>', '<p><br></p>')
-          {{ element.values.onSaveData }}
-        {% endif %}
-      } 
-    }
+      {% if element.values.mtl %}
+        e.replace('<p><br></p><p><br></p>', '<p><br></p>')
+        {{ element.values.onChangeWysiwyg }}
+        {{ element.values.onSaveData }}
+      {% else %}
+        {{ element.values.onChangeWysiwyg }}(e.replace('<p><br></p><p><br></p>', '<p><br></p>'))
+        {{ element.values.onSaveData }}
+      {% endif %}
+    }}
   />
 </FormControl>
