@@ -3,17 +3,19 @@ path: afip.service.js
 keyPath: back-end/app/services/afip.service.js
 unique_id: HR2CsnFp
 */
-const Afip = require('@afipsdk/afip.js');
-const errors = require('../services/errors.service')
+const Afip = require('@afipsdk/afip.js')
+const fs = require('fs');
+const path = require('path');
 
-const production = {{ insert_setting('Production') | default(false) }}
+const cert = fs.readFileSync(`${path.join(__dirname, 'cert.cert')}`, { encoding: 'utf8' });
+const key = fs.readFileSync(`${path.join(__dirname, 'key.key')}`, { encoding: 'utf8' });
+
+const production = {{ insert_setting('Production') | default (false) }}
 
 const options = {
-  CUIT: {{ insert_setting('ClientCuit') | default(20409378472) }},
-  cert: './cert.crt',
-  key: './key.key',
-  ta_folder: './',
-  res_folder: './',
+  CUIT: {{ insert_setting('ClientCuit') | default (20409378472) }},
+  cert: cert,
+  key: key
 }
 
 if (production) options.production = true
@@ -168,6 +170,7 @@ const createVoucher = async (options = {}) => {
       .split('T')[0];
 
     const billData = prepareBillData({
+      sellingPoint,
       billType,
       billConcept,
       docType,
@@ -211,6 +214,12 @@ const createVoucher = async (options = {}) => {
     }
 
     const voucher = await afip.ElectronicBilling.createVoucher(billData, true);
+    console.log({
+      'cae': res.CAE, //CAE asignado a la Factura
+      'vencimiento': res.CAEFchVto, //Fecha de vencimiento del CAE
+      'numeroFactura': billNumber
+    });
+
 
     if (voucher) {
       const bill = await getBillInfo({ billNumber, sellingPoint, billType });
@@ -229,6 +238,7 @@ const createVoucher = async (options = {}) => {
  * @returns {Object} - Prepared bill data.
  */
 const prepareBillData = ({
+  sellingPoint,
   billType,
   billConcept,
   docType,
@@ -264,9 +274,9 @@ const prepareBillData = ({
 // El TA dura 12hs y queda cacheado para no solicitarlo todo el tiempo, pero hay momentos en los cuales obtenemos un error y la forma de solucionarlo es descartando el TA actual. Con este método podes forzar a que se renueve.
 
 const tokenAuthorization = async () => {
-  try { 
+  try {
     const ta = await afip.ElectronicBilling.getTokenAuthorization(true);
-    console.log('token authorization',ta)
+    console.log('token authorization', ta)
     return ta
   } catch (error) {
     console.error('Error with Token Authorization:', error)
