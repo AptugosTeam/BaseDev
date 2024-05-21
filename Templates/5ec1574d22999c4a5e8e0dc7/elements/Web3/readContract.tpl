@@ -18,4 +18,4 @@ options:
       default: 'contractDeployed'
       active: true
 */
-const {{ element.value.contractVariableName | default('contractDeployed') }} = new web3.eth.Contract(JSON.parse({{ element.values.abi | textOrVariableInCode }}), {{ element.values.contractAddress }})
+const {{ element.value.contractVariableName | default('contractDeployed') }} = new web3.eth.Contract(JSON.parse({{ element.values.abi }}), {{ element.values.contractAddress }})
