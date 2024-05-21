@@ -48,6 +48,11 @@ options:
     display: On Change
     type: function
     options: ''
+  - name: plainOnChange
+    display: Use plain OnChange?
+    type: checkbox
+    settings:
+      default: false
   - name: disabled
     display: Disable input and dropdown
     type: text
@@ -56,6 +61,11 @@ options:
     display: Disable dropdown only
     type: text
     options: ''
+  - name: enableLongNumbers
+    display: Enable long numbers?
+    type: checkbox
+    settings:
+      default: false
 settings:
   - name: Packages
     value: '"react-phone-input-2": "^2.15.0",'
@@ -95,8 +105,16 @@ import PhoneInput from 'react-phone-input-2'
         disableDropdown={ {{elementva.value.disableDropdown}} }
     {% endif %}
     {% if element.values.onChange %}
+      {% if element.values.plainOnChange %}
+        onChange={ {{element.values.onChange}} }
+      {% endif %}
+      {% if element.values.plainOnChange == false %}
         onChange={ (value, country, e, formattedValue) => {
           {{element.values.onChange}}
         } }
+      {% endif %}
+    {% endif %}
+    {% if element.values.enableLongNumbers %}
+        enableLongNumbers={true}
     {% endif %}
 />
