@@ -107,8 +107,7 @@ import PhoneInput from 'react-phone-input-2'
     {% if element.values.onChange %}
       {% if element.values.plainOnChange %}
         onChange={ {{element.values.onChange}} }
-      {% endif %}
-      {% if element.values.plainOnChange == false %}
+      {% else %}
         onChange={ (value, country, e, formattedValue) => {
           {{element.values.onChange}}
         } }
