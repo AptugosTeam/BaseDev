@@ -27,11 +27,25 @@ options:
     type: text
     settings:
       default: 'item'
+  - name: decrement
+    display: Decrement
+    type: variable
+    options: ''
+    advanced: true
 children: []
 */
-for (let {{ element.values.variablename | default('item') }} = {{ element.values.from | default(0) }}; {{ element.values.variablename | default('item') }} {{ element.values.until }}; {{ element.values.variablename | default('item') }}++) {
-{% if element.values.code %}
-  {{ element.values.code }}
-{% endif %}
-{{ content | raw }}
+{% if element.values.decrement %}
+for (let {{ element.values.variablename | default('item') }} = {{ element.values.from | default(0) }}; {{ element.values.variablename | default('item') }} {{ element.values.until }}; {{ element.values.variablename | default('item') }}--) {
+  {% if element.values.code %}
+    {{ element.values.code }}
+  {% endif %}
+  {{ content | raw }}
 }
+{% else %}
+for (let {{ element.values.variablename | default('item') }} = {{ element.values.from | default(0) }}; {{ element.values.variablename | default('item') }} {{ element.values.until }}; {{ element.values.variablename | default('item') }}++) {
+  {% if element.values.code %}
+    {{ element.values.code }}
+  {% endif %}
+  {{ content | raw }}
+}
+{% endif %}
