@@ -66,6 +66,10 @@ options:
     type: checkbox
     settings:
       default: false
+  - name: buttonStyle
+    display: Country button styles
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"react-phone-input-2": "^2.15.0",'
@@ -115,5 +119,8 @@ import PhoneInput from 'react-phone-input-2'
     {% endif %}
     {% if element.values.enableLongNumbers %}
         enableLongNumbers={true}
+    {% endif %}
+    {% if element.values.buttonStyle %}
+        buttonStyle={ {{element.values.buttonStyle}} }
     {% endif %}
 />
