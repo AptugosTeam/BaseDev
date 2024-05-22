@@ -22,7 +22,7 @@ options:
     type: checkbox
 settings:
   - name: BackendPackages
-    value: '"@afipsdk/afip.js": "1.1.1",'
+    value: '"@afipsdk/afip.js": "1.1.1", "qrcode": "1.5.3"'
   - name: ServerAddenum
     value: |-
       require('./app/routes/afip.routes.js')(app)

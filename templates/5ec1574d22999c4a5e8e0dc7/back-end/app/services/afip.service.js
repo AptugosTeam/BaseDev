@@ -4,6 +4,7 @@ keyPath: back-end/app/services/afip.service.js
 unique_id: HR2CsnFp
 */
 const Afip = require('@afipsdk/afip.js')
+const QRCode = require('qrcode')
 const fs = require('fs');
 const path = require('path');
 
@@ -213,17 +214,15 @@ const createVoucher = async (options = {}) => {
       ];
     }
 
-    const voucher = await afip.ElectronicBilling.createVoucher(billData, true);
-    console.log({
-      'cae': res.CAE, //CAE asignado a la Factura
-      'vencimiento': res.CAEFchVto, //Fecha de vencimiento del CAE
-      'numeroFactura': billNumber
-    });
+    const { FeDetResp: { FECAEDetResponse } } = await afip.ElectronicBilling.createVoucher(billData, true)
 
-
-    if (voucher) {
-      const bill = await getBillInfo({ billNumber, sellingPoint, billType });
-      return bill
+    if (FECAEDetResponse) {
+      return {
+        billNumber,
+        CAE: Number(FECAEDetResponse.CAE),
+        CAEExp: afip.ElectronicBilling.formatDate(FECAEDetResponse.CAEFchVto),
+        voucherDate: afip.ElectronicBilling.formatDate(FECAEDetResponse.CbteFch)
+      }
     }
   } catch (error) {
     console.error('Error creating a new voucher:', error);
@@ -285,11 +284,21 @@ const tokenAuthorization = async () => {
   }
 }
 
+const generateQRCode = async (text) => {
+  try {
+    const qrCode = await QRCode.toDataURL(text)
+    return qrCode
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 module.exports = {
   createVoucher,
   getBillInfo,
   getLastBill,
   getSalesPoints,
   getServerStatus,
-  tokenAuthorization
+  tokenAuthorization,
+  generateQRCode
 }
