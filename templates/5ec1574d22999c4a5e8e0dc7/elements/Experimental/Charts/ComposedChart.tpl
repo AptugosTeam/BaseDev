@@ -129,7 +129,7 @@ settings:
 children: []
 */
 {% set bpr %}
-import { Area, Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Area, Bar, CartesianGrid, Cell, ComposedChart, BarChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}
