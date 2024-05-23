@@ -63,6 +63,18 @@ options:
       propertyCondition: Index
       condition: useVar
       active: true
+  - name: tickFormatter
+    display: The formatter function of tick
+    type: text
+  - name: strokeDasharray
+    display: Lines of the Cartesian Grid
+    type: text
+  - name: stroke
+    display: Stroke Color
+    type: text
+  - name: style
+    display: Stroke Style
+    type: text
   - name: yAxisVar
     display: YAxis Variable
     type: text
@@ -150,6 +162,13 @@ import { Area, Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, Responsive
       left: 20,
     } }
   >
+    {% if not element.values.hideGrid %}
+    <CartesianGrid
+    {% if element.values.strokeDasharray %}strokeDasharray="{{element.values.strokeDasharray}}"{% endif %}
+    {% if element.values.stroke %}stroke="{{element.values.stroke}}"{% else %}stroke="#f5f5f5"{% endif %}
+    {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
+    />
+    {% endif %}
     <XAxis 
       {% if indexBy.column_name or element.values.indexVariable%}
       dataKey="{% if indexBy.column_name %}{{ indexBy.column_name }}{% else %}{{ element.values.indexVariable }}{% endif %}"
@@ -166,16 +185,16 @@ import { Area, Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, Responsive
       {% if element.values.typeY %}type="category"{% endif %}
       {% if element.values.tickY %}tick={false}{% endif %}
       {% if element.values.yAxisVar %}dataKey="{{ element.values.yAxisVar }}"{% endif %}
+      {% if element.values.tickFormatter %}tickFormatter={ {{element.values.tickFormatter}} }{% endif %}
     />
     <Tooltip />
     {{ content | raw }}
     {% if not element.values.hideLegend %}
-    <Legend
-    {% if element.values.onClickLegend %}
-    onClick={ {{element.values.onClickLegend | functionOrCall}} }
+      <Legend
+      {% if element.values.onClickLegend %}
+        onClick={ {{element.values.onClickLegend | functionOrCall}} }
+      {% endif %}
+      />
     {% endif %}
-    />
-    {% endif %}
-    {% if not element.values.hideGrid %}<CartesianGrid stroke="#f5f5f5" />{% endif %}
   </ComposedChart>
 {% if element.values.responsive %}</ResponsiveContainer>{% endif %}
