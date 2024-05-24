@@ -16,7 +16,7 @@ options:
     options: ''
   - name: renderItem
     display: Render Item
-    type: text
+    type: code
     options: ''
   - name: keyExtractor
     display: Key Extractor
