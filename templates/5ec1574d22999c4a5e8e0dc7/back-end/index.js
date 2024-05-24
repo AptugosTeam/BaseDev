@@ -59,7 +59,8 @@ mongoose.Promise = global.Promise
 mongoose.set('strictQuery', false);
 mongoose.connect(dbConfig.url, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  dbName: 'mtl'
 }).then(() => {
   console.log("Successfully connected to the database")  
 }).catch(err => {
