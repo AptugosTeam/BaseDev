@@ -29,7 +29,8 @@ children: []
     "axios": "latest",
     "node_hash": "latest",
     "mongoose-paginate-v2": "latest",
-    "mongodb": "latest"
+    "mongodb": "latest",
+    "posthog-node": "^4.0.1"
 {% set BackendPackages = insert_setting('BackendPackages') %}
 {% if BackendPackages %},{{ insert_setting('BackendPackages') | raw }}{% endif %}
   }
