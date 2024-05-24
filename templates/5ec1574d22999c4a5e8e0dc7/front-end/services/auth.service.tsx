@@ -175,7 +175,7 @@ class AuthService {
       .then((response) => {
         localStorage.setItem('token', response.data.accessToken)
         localStorage.setItem('user', JSON.stringify(response.data.data))
-        return response.data.data._id
+        return {_id:response.data.data._id, redirect:true}
       })
       .catch((e) => {
         throw e;
