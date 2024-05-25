@@ -21,11 +21,29 @@ options:
     display: Gap between two bars in the same category.?
     type: text
     options: ''
+  - name: startSeparator
+    display: Legend Properties
+    type: separator
+  - name: layout
+    display: Legend
+    type: dropdown
+    options:
+      horizontal;vertical
   - name: verticalAlign
     display: Legend
     type: dropdown
     options:
       top;middle;bottom
+  - name: align
+    display: legend horizontal position
+    type: dropdown
+    options:
+      left;center;right
+  - name: onClickLegend
+    display: onClick Legend
+    type: function
+    options: ''
+    advanced: true
   - name: responsive
     display: Responsive?
     type: checkbox
@@ -44,11 +62,6 @@ options:
     settings:
       propertyCondition: responsive
       condition: true
-  - name: onClickLegend
-    display: onClick Legend
-    type: function
-    options: ''
-    advanced: true
   - name: Variable
     display: Variable to Use
     type: text
@@ -188,13 +201,16 @@ import { Area, Bar, CartesianGrid, Cell, ComposedChart, BarChart, Legend, Line, 
       {% if element.values.tickFormatter %}tickFormatter={ {{element.values.tickFormatter}} }{% endif %}
     />
     <Tooltip />
-    {{ content | raw }}
+    <Legend 
+    layout="{{element.values.layout|default('horizontal')}}" 
+    align="{{element.values.align|default('center')}}" 
+    verticalAlign="{{element.values.verticalAlign|default('bottom')}}" 
     {% if not element.values.hideLegend %}
-      <Legend
       {% if element.values.onClickLegend %}
         onClick={ {{element.values.onClickLegend | functionOrCall}} }
       {% endif %}
-      />
     {% endif %}
+    />
+    {{ content | raw }}
   </ComposedChart>
 {% if element.values.responsive %}</ResponsiveContainer>{% endif %}
