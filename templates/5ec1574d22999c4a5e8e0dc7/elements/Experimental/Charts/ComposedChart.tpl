@@ -13,6 +13,9 @@ options:
     display: Chart height (in pixels)
     type: text
     options: ''
+  - name: Variable
+    display: Variable to Use
+    type: text
   - name: verticalLayout
     display: Vertical Layout?
     type: checkbox
@@ -21,6 +24,45 @@ options:
     display: Gap between two bars in the same category.?
     type: text
     options: ''
+  - name: startSeparatorXAxis
+    display: XAxis Properties
+    type: separator
+  - name: Index
+    display: XAxis Variable
+    type: dropdown
+    options: return [['useVar','Use a Variable'], ...aptugo.tableUtils.getAllFields()]
+  - name: indexVariable
+    display: XAxis Variable
+    type: text
+    settings:
+      propertyCondition: Index
+      condition: useVar
+      active: true
+  - name: axisLineXAxis
+    display: X Axis Line (true or false)
+    type: text
+  - name: startSeparatorYAxis
+    display: YAxis Properties
+    type: separator
+  - name: tickFormatter
+  - name: axisLineYAxis
+    display: Y Axis Line (true or false)
+    type: text
+  - name: tickFormatter
+    display: The formatter function of tick
+    type: text
+  - name: startSeparatorCartesianGrid
+    display: CartesianGrid Properties
+    type: separator
+  - name: strokeDasharray
+    display: Lines of the Cartesian Grid
+    type: text
+  - name: stroke
+    display: Stroke Color
+    type: text
+  - name: style
+    display: Stroke Style
+    type: text
   - name: startSeparator
     display: Legend Properties
     type: separator
@@ -44,6 +86,9 @@ options:
     type: function
     options: ''
     advanced: true
+  - name: startSeparatorResponsive
+    display: Responsive Properties
+    type: separator
   - name: responsive
     display: Responsive?
     type: checkbox
@@ -62,32 +107,6 @@ options:
     settings:
       propertyCondition: responsive
       condition: true
-  - name: Variable
-    display: Variable to Use
-    type: text
-  - name: Index
-    display: XAxis Variable
-    type: dropdown
-    options: return [['useVar','Use a Variable'], ...aptugo.tableUtils.getAllFields()]
-  - name: indexVariable
-    display: XAxis Variable
-    type: text
-    settings:
-      propertyCondition: Index
-      condition: useVar
-      active: true
-  - name: tickFormatter
-    display: The formatter function of tick
-    type: text
-  - name: strokeDasharray
-    display: Lines of the Cartesian Grid
-    type: text
-  - name: stroke
-    display: Stroke Color
-    type: text
-  - name: style
-    display: Stroke Style
-    type: text
   - name: yAxisVar
     display: YAxis Variable
     type: text
@@ -192,6 +211,7 @@ import { Area, Bar, CartesianGrid, Cell, ComposedChart, BarChart, Legend, Line, 
       {% if element.values.typeX %}type="number"{% endif %}
       {% if element.values.domainX %}domain={ {{element.values.domainX}} }{% endif %}
       {% if element.values.ticksX %}ticks={ {{element.values.ticksX}} }{% endif %}
+      {% if element.values.axisLineXAxis %}axisLine={ {{ element.values.axisLineXAxis }} }{% endif %}
     />
     <YAxis 
       {% if element.values.hideY %}hide={true}{% endif %} 
@@ -199,6 +219,7 @@ import { Area, Bar, CartesianGrid, Cell, ComposedChart, BarChart, Legend, Line, 
       {% if element.values.tickY %}tick={false}{% endif %}
       {% if element.values.yAxisVar %}dataKey="{{ element.values.yAxisVar }}"{% endif %}
       {% if element.values.tickFormatter %}tickFormatter={ {{element.values.tickFormatter}} }{% endif %}
+      {% if element.values.axisLineYAxis %}axisLine={ {{ element.values.axisLineYAxis }} }{% endif %}
     />
     <Tooltip />
     <Legend 
