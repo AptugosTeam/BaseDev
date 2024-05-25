@@ -63,6 +63,12 @@ options:
   - name: style
     display: Stroke Style
     type: text
+  - name: horizontalGridLines
+    display: Horizontal Grid Lines (true or false)
+    type: text
+  - name: verticalGridLines
+    display: vertical Grid Lines (true or false)
+    type: text
   - name: startSeparator
     display: Legend Properties
     type: separator
@@ -199,6 +205,8 @@ import { Area, Bar, CartesianGrid, Cell, ComposedChart, BarChart, Legend, Line, 
     {% if element.values.strokeDasharray %}strokeDasharray="{{element.values.strokeDasharray}}"{% endif %}
     {% if element.values.stroke %}stroke="{{element.values.stroke}}"{% else %}stroke="#f5f5f5"{% endif %}
     {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
+    {% if element.values.horizontalGridLines %}horizontal={ {{element.values.horizontalGridLines}} }{% endif %}
+    {% if element.values.verticalGridLines %}vertical={ {{element.values.verticalGridLines}} }{% endif %}
     />
     {% endif %}
     <XAxis 
