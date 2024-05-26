@@ -16,6 +16,9 @@ import FileUpload from '../components/FileUpload/FileUpload'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <FileUpload
+    {% if element.values.classname %}
+      className={ {{ element.values.classname }} }
+    {% endif %}
     accept="{{ field.filetype|default('*') }}"
     label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}
