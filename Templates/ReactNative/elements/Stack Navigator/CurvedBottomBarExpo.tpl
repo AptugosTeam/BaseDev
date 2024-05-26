@@ -63,13 +63,19 @@ options:
     display: Screen Options
     type: code
     options: ''
+  - name: addStackScreen
+    display: Add Stack Screen?
+    type: checkbox
+    options: ''
 settings:
   - name: Packages
     value: '"react-native-curved-bottom-bar": "3.2.7", "@react-navigation/bottom-tabs": "^6.5.20",'
 children: []
 */
+{% if element.values.addStackScreen %}
 <Stack.Screen name="{{element.values.stackScreenName | default('mainApp')}}">
 {() => (
+{% endif %}
   <CurvedBottomBarExpo.Navigator
   type="{{element.values.type | default('DOWN')}}"
   {% if element.values.style %}
@@ -98,9 +104,11 @@ children: []
   {% endif %}
   renderCircle={({ selectedTab, navigate }) => (
     {% if element.children %}
-    {% for child in element.children %}
-    {{ child.rendered | raw }}
-    {% endfor %}
+     {% for child in element.children %}
+      {% if child.value != 'CurvedBottomBarExpoScreen' %}
+        {{ child.rendered | raw }}
+      {% endif %}
+     {% endfor %}
     {% else %}
     <View>
      <Text>Hello!</Text>
@@ -109,10 +117,15 @@ children: []
   )}
   tabBar={ {{element.values.tabBar}} }
 >
-  <CurvedBottomBarExpo.Screen name="Home" component={Home} position="LEFT" />
-  <CurvedBottomBarExpo.Screen name="Cursos" component={Cursos} position="LEFT" />
-  <CurvedBottomBarExpo.Screen name="Feedback" component={Feedback} position="RIGHT" />
-  <CurvedBottomBarExpo.Screen name="Account" component={Cursos} position="RIGHT" />
+  {% if element.children %}
+    {% for child in element.children %}
+     {% if child.value == 'CurvedBottomBarExpoScreen' %}
+      {{ child.rendered | raw }}
+     {% endif %}
+    {% endfor %}
+  {% endif %}
 </CurvedBottomBarExpo.Navigator>
+{% if element.values.addStackScreen %}
 )}
 </Stack.Screen>
+{% endif %}

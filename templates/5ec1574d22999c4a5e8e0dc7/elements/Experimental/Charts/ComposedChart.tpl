@@ -13,6 +13,9 @@ options:
     display: Chart height (in pixels)
     type: text
     options: ''
+  - name: Variable
+    display: Variable to Use
+    type: text
   - name: verticalLayout
     display: Vertical Layout?
     type: checkbox
@@ -21,11 +24,77 @@ options:
     display: Gap between two bars in the same category.?
     type: text
     options: ''
+  - name: startSeparatorXAxis
+    display: XAxis Properties
+    type: separator
+  - name: Index
+    display: XAxis Variable
+    type: dropdown
+    options: return [['useVar','Use a Variable'], ...aptugo.tableUtils.getAllFields()]
+  - name: indexVariable
+    display: XAxis Variable
+    type: text
+    settings:
+      propertyCondition: Index
+      condition: useVar
+      active: true
+  - name: axisLineXAxis
+    display: X Axis Line (true or false)
+    type: text
+  - name: startSeparatorYAxis
+    display: YAxis Properties
+    type: separator
+  - name: tickFormatter
+  - name: axisLineYAxis
+    display: Y Axis Line (true or false)
+    type: text
+  - name: tickFormatter
+    display: The formatter function of tick
+    type: text
+  - name: startSeparatorCartesianGrid
+    display: CartesianGrid Properties
+    type: separator
+  - name: strokeDasharray
+    display: Lines of the Cartesian Grid
+    type: text
+  - name: stroke
+    display: Stroke Color
+    type: text
+  - name: style
+    display: Stroke Style
+    type: text
+  - name: horizontalGridLines
+    display: Horizontal Grid Lines (true or false)
+    type: text
+  - name: verticalGridLines
+    display: vertical Grid Lines (true or false)
+    type: text
+  - name: startSeparator
+    display: Legend Properties
+    type: separator
+  - name: layout
+    display: Legend
+    type: dropdown
+    options:
+      horizontal;vertical
   - name: verticalAlign
     display: Legend
     type: dropdown
     options:
       top;middle;bottom
+  - name: align
+    display: legend horizontal position
+    type: dropdown
+    options:
+      left;center;right
+  - name: onClickLegend
+    display: onClick Legend
+    type: function
+    options: ''
+    advanced: true
+  - name: startSeparatorResponsive
+    display: Responsive Properties
+    type: separator
   - name: responsive
     display: Responsive?
     type: checkbox
@@ -44,25 +113,6 @@ options:
     settings:
       propertyCondition: responsive
       condition: true
-  - name: onClickLegend
-    display: onClick Legend
-    type: function
-    options: ''
-    advanced: true
-  - name: Variable
-    display: Variable to Use
-    type: text
-  - name: Index
-    display: XAxis Variable
-    type: dropdown
-    options: return [['useVar','Use a Variable'], ...aptugo.tableUtils.getAllFields()]
-  - name: indexVariable
-    display: XAxis Variable
-    type: text
-    settings:
-      propertyCondition: Index
-      condition: useVar
-      active: true
   - name: yAxisVar
     display: YAxis Variable
     type: text
@@ -117,7 +167,7 @@ settings:
 children: []
 */
 {% set bpr %}
-import { Area, Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Area, Bar, CartesianGrid, Cell, ComposedChart, BarChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}
@@ -150,6 +200,15 @@ import { Area, Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, Responsive
       left: 20,
     } }
   >
+    {% if not element.values.hideGrid %}
+    <CartesianGrid
+    {% if element.values.strokeDasharray %}strokeDasharray="{{element.values.strokeDasharray}}"{% endif %}
+    {% if element.values.stroke %}stroke="{{element.values.stroke}}"{% else %}stroke="#f5f5f5"{% endif %}
+    {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
+    {% if element.values.horizontalGridLines %}horizontal={ {{element.values.horizontalGridLines}} }{% endif %}
+    {% if element.values.verticalGridLines %}vertical={ {{element.values.verticalGridLines}} }{% endif %}
+    />
+    {% endif %}
     <XAxis 
       {% if indexBy.column_name or element.values.indexVariable%}
       dataKey="{% if indexBy.column_name %}{{ indexBy.column_name }}{% else %}{{ element.values.indexVariable }}{% endif %}"
@@ -160,22 +219,27 @@ import { Area, Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, Responsive
       {% if element.values.typeX %}type="number"{% endif %}
       {% if element.values.domainX %}domain={ {{element.values.domainX}} }{% endif %}
       {% if element.values.ticksX %}ticks={ {{element.values.ticksX}} }{% endif %}
+      {% if element.values.axisLineXAxis %}axisLine={ {{ element.values.axisLineXAxis }} }{% endif %}
     />
     <YAxis 
       {% if element.values.hideY %}hide={true}{% endif %} 
       {% if element.values.typeY %}type="category"{% endif %}
       {% if element.values.tickY %}tick={false}{% endif %}
       {% if element.values.yAxisVar %}dataKey="{{ element.values.yAxisVar }}"{% endif %}
+      {% if element.values.tickFormatter %}tickFormatter={ {{element.values.tickFormatter}} }{% endif %}
+      {% if element.values.axisLineYAxis %}axisLine={ {{ element.values.axisLineYAxis }} }{% endif %}
     />
     <Tooltip />
-    {{ content | raw }}
+    <Legend 
+    layout="{{element.values.layout|default('horizontal')}}" 
+    align="{{element.values.align|default('center')}}" 
+    verticalAlign="{{element.values.verticalAlign|default('bottom')}}" 
     {% if not element.values.hideLegend %}
-    <Legend
-    {% if element.values.onClickLegend %}
-    onClick={ {{element.values.onClickLegend | functionOrCall}} }
+      {% if element.values.onClickLegend %}
+        onClick={ {{element.values.onClickLegend | functionOrCall}} }
+      {% endif %}
     {% endif %}
     />
-    {% endif %}
-    {% if not element.values.hideGrid %}<CartesianGrid stroke="#f5f5f5" />{% endif %}
+    {{ content | raw }}
   </ComposedChart>
 {% if element.values.responsive %}</ResponsiveContainer>{% endif %}
