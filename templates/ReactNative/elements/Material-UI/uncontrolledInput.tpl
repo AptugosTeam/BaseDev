@@ -60,11 +60,11 @@ options:
     type: dropdown
     options: none;email-outline;eye;magnify
   - name: useonChangeIcon
-    display: Use on change icon?
+    display: Use on press when click the icon?
     type: checkbox
     options: ''
   - name: onChangeIcon
-    display: On Change when click icon
+    display: On press when click icon
     type: text
     options: ''
     settings: 
