@@ -17,6 +17,8 @@ module.exports = {
       zlib: "browserify-zlib",
       '@components': resolve(__dirname, '../', 'front-end/components'),
       '@services': resolve(__dirname, '../', 'front-end/services'),
+      "react/jsx-dev-runtime": "react/jsx-dev-runtime.js",
+      "react/jsx-runtime": "react/jsx-runtime.js"
     },
   },
   context: resolve(__dirname, '../'),
