@@ -13,7 +13,7 @@ extraFiles:
   - source: 'elements/Programming/Snippets/extraFiles/988_fileUpload.tsx'
     destination: '/src/pages/api/upload.tsx'
   - source: 'elements/Programming/Snippets/extraFiles/987_contentEditorModule.module.scss'
-    destination: '/src/pages/api/ContentEdit/extendedcss.module.scss'
+    destination: '/src/components/ContentEdit/extendedcss.module.scss'
 options:
   - name: saveTable
     display: Save To
