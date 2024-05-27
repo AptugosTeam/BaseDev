@@ -44,6 +44,13 @@ options:
     display: Type
     type: dropdown
     options: text;password;date;number;textarea
+  - name: secureTextEntry
+    display: Secure Text Entry
+    type: text
+    options: ''
+    settings: 
+      propertyCondition: type
+      condition: password
   - name: leftIcon
     display: Icon (left side)
     type: dropdown
@@ -154,7 +161,12 @@ children: []
       {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
       {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
       {% if element.values.type == 'number' %}keyboardType='numeric'{% endif %}
-      {% if element.values.type == 'password' %}secureTextEntry={true}{% endif %}
+      {% if element.values.type == 'password' %}
+        {% if element.values.secureTextEntry %}secureTextEntry={ {{ element.values.secureTextEntry }} }
+        {% else %}
+          secureTextEntry={true}
+        {% endif %}
+      {% endif %}
       {% if element.values.type == 'textarea' %}
         multiline
       {% endif %}
