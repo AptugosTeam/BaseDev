@@ -45,7 +45,7 @@ options:
     type: dropdown
     options: text;password;date;number;textarea
   - name: secureTextEntry
-    display: Secure Text Entry
+    display: Show Password variable
     type: text
     options: ''
     settings: 
