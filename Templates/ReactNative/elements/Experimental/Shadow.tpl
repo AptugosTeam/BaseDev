@@ -35,6 +35,10 @@ options:
     display: safeRender?
     type: checkbox
     options: ''
+  - name: stretch
+    display: Stretch?
+    type: checkbox
+    options: ''
   - name: startSidesSeparator
     display: Side Properties Start
     type: separator
@@ -101,6 +105,9 @@ containerStyle={ {{element.values.containerStyle}} }
 {% endif %}
 {% if element.values.safeRender %}
 safeRender
+{% endif %}
+{% if element.values.stretch %}
+stretch
 {% endif %}
 sides={ {
   start: {{element.values.start | default('false')}},
