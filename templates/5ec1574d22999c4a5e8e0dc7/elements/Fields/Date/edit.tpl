@@ -33,7 +33,11 @@ import moment from 'moment'
     inputProps={ {{ element.values.InputProps }} } 
     {% endif %}
     InputLabelProps={ { shrink: true } }
-    value={ {{ tableName }}data.{{ field.column_name | friendly }}?.slice(0,10) || {% if field.defaultToToday == "1" %}moment().utc().format('YYYY-MM-DD'){% else %}''{% endif %}}
+    {% if element.values.UseCustomValue %}
+        value={ {{element.values.CustomValue}} }
+    {% else %}
+        value={ {{ tableName }}data.{{ field.column_name | friendly }}?.slice(0,10) || {% if field.defaultToToday == "1" %}moment().utc().format('YYYY-MM-DD'){% else %}''{% endif %}}
+    {% endif %}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
     error={ {{ tableName}}data?.errField === '{{ field.column_name | friendly }}'}
     helperText={ {{ tableName }}data?.errField === '{{ field.column_name | friendly }}' && {{ tableName}}data.errMessage}

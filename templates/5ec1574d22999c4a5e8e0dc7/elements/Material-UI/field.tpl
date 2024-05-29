@@ -136,6 +136,21 @@ options:
     settings:
       propertyCondition: Type
       condition: edit
+  - name: UseCustomValue
+    display: Use custom Value?
+    type: checkbox
+    options: ''
+    advanced: true
+    settings:
+      default: false
+  - name: CustomValue
+    display: Custom Value
+    type: text
+    options: ''
+    advanced: true
+    settings:
+      propertyCondition: UseCustomValue
+      condition: true
 children: []
 */
 {% set bpr %}
