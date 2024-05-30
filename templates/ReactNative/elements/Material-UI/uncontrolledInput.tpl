@@ -74,11 +74,6 @@ options:
     display: On Focus
     type: function
     options: ''
-  - name: labelWithVar
-    display: Label With Variables
-    type: text
-    options: ''
-    advanced: true
   - name: error
     display: Error
     type: variable
@@ -132,8 +127,7 @@ children: []
     {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
     {% if element.values.textColor %}textColor={ {{ element.values.textColor | textOrVariable }}}{% endif %}
     {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
-    {% if element.values.activeUnderlineColor %}activeUnderlineColor={ {{ element.values.activeUnderlineColor | textOrVariable }}}{% endif %}
-    {% if element.values.labelWithVar %}label={ {{element.values.labelWithVar}} }{% endif %}
+    {% if element.values.activeUnderlineColor %}activeUnderlineColor={{ element.values.activeUnderlineColor | textOrVariable }}{% endif %}
     inputMode="start"
   />
 {% else %}
@@ -146,10 +140,9 @@ children: []
       {% if element.values.Autofocus %}autoFocus{% endif %}
       {% if element.values.placeholder %}placeholder={{ element.values.placeholder|textOrVariable }}{% endif %}
       {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
-      {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
+      {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
       {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
       {% if element.values.theme %}theme={ {{ element.values.theme }} }{% endif %}
-      {% if element.values.labelWithVar %}label={ {{element.values.labelWithVar}} }{% endif %}
       {% if element.values.onFocus %}onFocus={() => {{element.values.onFocus}} }{% endif %}
       {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
       {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
@@ -164,7 +157,7 @@ children: []
       {% if element.values.value %}value={{ element.values.value }}{% endif %}
       {% if element.values.onChange %}onChangeText={ {{ element.values.onChange | replace({ '.target.value': '' }) | functionOrCall }} }{% endif %}
       {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
-      {% if element.values.activeUnderlineColor %}activeUnderlineColor={ {{ element.values.activeUnderlineColor | textOrVariable }}}{% endif %}
+      {% if element.values.activeUnderlineColor %}activeUnderlineColor={{ element.values.activeUnderlineColor | textOrVariable }}{% endif %}
       {% if element.values.placeholderTextColor %}placeholderTextColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif %}
       {% if element.values.selectionColor %}selectionColor={ {{ element.values.selectionColor | textOrVariable }} }{% endif %}
       {% if element.values.leftIcon and element.values.leftIcon != 'none' %}left={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} icon='{{element.values.leftIcon}}' />}{% endif %}
