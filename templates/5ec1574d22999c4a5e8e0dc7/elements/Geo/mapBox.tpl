@@ -251,6 +251,9 @@ options:
     type: text
     settings:
       default: 0
+  - name: circleColor
+    display: Cluster circle color
+    type: text
 extraFiles:
   - source: 'elements/Geo/MapBox/mapbox.css'
     destination: 'front-end/components/MapBox/mapbox.css'
@@ -282,7 +285,7 @@ export const clusterLayer: LayerProps = {
   source: 'earthquakes',
   filter: ['has', 'point_count'],
   paint: {
-    'circle-color': ['step', ['get', 'point_count'], 'rgba(206, 13, 45, 0.75)', 10, 'rgba(206, 13, 45, 0.5)', 750, '#f28cb1'],
+    'circle-color': ['step', ['get', 'point_count'], '{{ element.values.circleColor|default("rgba(206, 13, 45, 0.75)") }}', 10, '{{ element.values.circleColor|default("rgba(206, 13, 45, 0.5)") }}', 750, '#f28cb1'],
     'circle-radius': ['step', ['get', 'point_count'], 16, 10, 32, 750, 64]
   }
 };
@@ -305,7 +308,7 @@ export const unclusteredPointLayer: LayerProps = {
   source: 'earthquakes',
   filter: ['!', ['has', 'point_count']],
   paint: {
-    'circle-color': 'rgb(206, 13, 45)',
+    'circle-color': '{{ element.values.circleColor|default("rgb(206, 13, 45)") }}',
     'circle-opacity': 0.84,
     'circle-radius': 8,
     'circle-stroke-width': 2,
