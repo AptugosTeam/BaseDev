@@ -44,7 +44,6 @@ options:
   - name: startSeparatorYAxis
     display: YAxis Properties
     type: separator
-  - name: tickFormatter
   - name: axisLineYAxis
     display: Y Axis Line (true or false)
     type: text
