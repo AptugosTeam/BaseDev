@@ -36,9 +36,7 @@ import PlacesAutoComplete from '@components/PlacesAutocomplete'
 {{ save_delayed('bpr',bpr) }}
 <PlacesAutoComplete 
   placesKey={{ element.values.placesKey | textOrVariable }}
-  {% if element.values.inputId %}
   inputId={{ element.values.inputId|default(element.unique_id) | textOrVariable }}
-  {% endif %}
   {% if element.values.className %}
     className={ {{ element.values.className }} }
   {% endif %}
