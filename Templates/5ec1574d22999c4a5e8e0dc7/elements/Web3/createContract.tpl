@@ -22,6 +22,7 @@ const compileContract = () => {
   const contractFilePath = 'back-end/contracts/{{ element.values.filename | raw }}.sol'
   const fileName = '{{ element.values.filename }}'
   const contractName = '{{ element.values.filename }}'
+  const fs = require ("fs")
   const sourceCode = fs.readFileSync(contractFilePath, 'utf8')
 
   const input = {
