@@ -2,7 +2,11 @@
 path: Drawer.tpl
 completePath: elements/Material-UI/Drawer.tpl
 unique_id: UPCetE3y
+<<<<<<< Updated upstream
 icon: f:accordion/accordion.svg
+=======
+icon: f:Accordion/accordion.svg
+>>>>>>> Stashed changes
 options:
   - name: anchor
     display: Side from which the drawer appears

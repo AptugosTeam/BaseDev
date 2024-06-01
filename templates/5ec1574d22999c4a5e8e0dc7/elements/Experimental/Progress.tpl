@@ -3,7 +3,11 @@ path: Progress.tpl
 completePath: elements/Experimental/Progress.tpl
 type: file
 unique_id: DaMiyMaX
+<<<<<<< Updated upstream
 icon: f:charts/radialBarChart.svg
+=======
+icon: f:../Charts/radialBarChart.svg
+>>>>>>> Stashed changes
 options:
   - name: varName
     display: Variable Name (Open Progress)

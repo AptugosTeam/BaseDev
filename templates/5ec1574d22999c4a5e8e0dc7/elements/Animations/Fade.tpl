@@ -3,7 +3,7 @@ path: Fade.tpl
 completePath: elements/Animations/Fade.tpl
 type: file
 unique_id: 5l446pgh
-icon: f:Fade.svg
+icon: n:Fade
 options:
   - name: direction
     display: Direction
