@@ -15,7 +15,7 @@ options:
     type: text
 settings:
   - name: Packages
-    value: '"solc": "0.8.17",'
+    value: '"solc": "0.8.17", "web3": "^4.8.0",' 
 */
 {{ addExtraFile('back-end/contracts/' ~ element.values.filename ~ '.sol', element.values.contract) }}
 const compileContract = () => {
