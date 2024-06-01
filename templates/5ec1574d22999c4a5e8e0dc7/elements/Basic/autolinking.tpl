@@ -11,6 +11,7 @@ options:
     options: return aptugo.pageUtils.getAllPages()
     required: true
 children: []
+order: 50
 */
 {% if element.values.fromLink %}
   {% set pageFrom = element.values.fromLink | elementData %}

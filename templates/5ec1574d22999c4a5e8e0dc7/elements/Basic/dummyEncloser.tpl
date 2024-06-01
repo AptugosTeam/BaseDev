@@ -4,6 +4,7 @@ completePath: elements/Basic/dummyEncloser.tpl
 unique_id: SXP50OTX
 icon: ico-dummy-enclosure
 helpText: Organizational unit with no render value
+order: 3
 options:
   - name: titleAsComment
     display: Use Name as Comment
