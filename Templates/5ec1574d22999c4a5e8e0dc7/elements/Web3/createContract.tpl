@@ -13,15 +13,26 @@ options:
   - name: arguments
     display: Arguments
     type: text
+  - name: customroute
+    display: Custom Route
+    type: text
 settings:
   - name: Packages
-    value: '"solc": "0.8.17",'
+    value: '"solc": "0.8.17", "web3": "^4.8.0",' 
+  - name: BackendPackages
+    value: '"solc": "0.8.17", "web3": "^4.8.0",' 
 */
-{{ addExtraFile('back-end/contracts/' ~ element.values.filename ~ '.sol', element.values.contract) }}
+  {% if element.values.customroute %}
+    {{ addExtraFile('{{element.values.customroute}}' ~ element.values.filename ~ '.sol', element.values.contract) }}
+  {% else %}
+    {{ addExtraFile('back-end/contracts/' ~ element.values.filename ~ '.sol', element.values.contract) }}
+  {% endif %}
+  
 const compileContract = () => {
-  const contractFilePath = 'back-end/contracts/{{ element.values.filename | raw }}.sol'
+  const contractFilePath = "{{element.values.customroute|default('back-end/contracts/')}}{{element.values.filename|raw }}.sol"
   const fileName = '{{ element.values.filename }}'
   const contractName = '{{ element.values.filename }}'
+  const fs = require ("fs")
   const sourceCode = fs.readFileSync(contractFilePath, 'utf8')
 
   const input = {
