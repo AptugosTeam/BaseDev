@@ -4,6 +4,7 @@ type: file
 unique_id: EECbOrrq
 icon: ico-uncontrolled-input
 sourceType: javascript
+order: 50
 options:
   - name: label
     display: Label

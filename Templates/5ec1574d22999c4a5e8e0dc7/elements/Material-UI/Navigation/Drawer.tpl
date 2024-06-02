@@ -2,7 +2,7 @@
 path: Drawer.tpl
 completePath: elements/Material-UI/Drawer.tpl
 unique_id: UPCetE3y
-icon: f:accordion/accordion.svg
+icon: f:../../Z-Icons/accordion.svg
 options:
   - name: anchor
     display: Side from which the drawer appears
