@@ -5,6 +5,7 @@ unique_id: hdTHQyeA
 icon: ico-button
 renderTag: button
 render: (elem) => { return elem.values.ButtonText }
+order: 2
 options:
   - name: ButtonText
     display: Button Text

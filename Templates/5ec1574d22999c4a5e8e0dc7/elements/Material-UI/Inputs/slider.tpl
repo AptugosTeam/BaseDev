@@ -2,7 +2,8 @@
 path: slider.tpl
 type: file
 unique_id: rMl7agO8
-icon: f:slider.svg
+order: 30
+icon: f:../../Z-Icons/slider.svg
 options:
   - name: defaultValue
     display: Default Value

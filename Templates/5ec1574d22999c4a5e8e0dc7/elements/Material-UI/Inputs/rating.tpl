@@ -3,7 +3,8 @@ path: rating.tpl
 completePath: elements/Material-UI/Forms/rating.tpl
 type: file
 unique_id: Wrw98VXK
-icon: f:rating.svg
+order: 20
+icon: f:../../Z-Icons/rating.svg
 children: []
 options:
   - name: max

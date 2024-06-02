@@ -3,7 +3,7 @@ path: ButtonWithIcon.tpl
 completePath: elements/Material-UI/ButtonWithIcon.tpl
 type: file
 unique_id: DXZgugbc
-icon: f:ButtonWithIcon.svg
+icon: f:../../Z-Icons/ButtonWithIcon.svg
 internalUse: true
 helpText: Shows a button with an icon
 children: []

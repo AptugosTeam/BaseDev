@@ -1,9 +1,11 @@
 /*
 path: MUIAutocomplete.tpl
 type: file
+display: Autocomplete (MUI)
 unique_id: MUIAUTOC
 icon: ico-uncontrolled-input
 sourceType: javascript
+order: 1
 options:
   - name: options
     display: Options

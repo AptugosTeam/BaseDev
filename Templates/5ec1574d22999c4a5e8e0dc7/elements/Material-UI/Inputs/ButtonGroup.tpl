@@ -1,6 +1,7 @@
 /*
 path: ButtonGroup.tpl
 unique_id: bpxcQQdK
+order: 3
 options:
   - name: Variant
     display: Variant

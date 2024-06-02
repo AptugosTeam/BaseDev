@@ -3,7 +3,8 @@ path: RadioGroup.tpl
 completePath: elements/Material-UI/Forms/RadioGroup.tpl
 type: file
 unique_id: Fmr87CZF
-icon: f:RadioGroup.svg
+order: 16
+icon: f:../../Z-Icons/RadioGroup.svg
 children: []
 options:
   - name: value

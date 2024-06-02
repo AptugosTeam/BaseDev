@@ -2,7 +2,9 @@
 path: uncontrolledSelect.tpl
 type: file
 unique_id: KZo70Wel
+display: Select (uncontrolled)
 icon: ico-uncontrolled-select
+order: 25
 sourceType: javascript
 options:
   - name: label

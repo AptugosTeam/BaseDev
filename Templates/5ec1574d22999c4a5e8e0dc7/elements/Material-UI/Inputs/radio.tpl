@@ -3,7 +3,8 @@ path: radio.tpl
 completePath: elements/Material-UI/Forms/radio.tpl
 type: file
 unique_id: Qeq87CZJ
-icon: f:radio.svg
+icon: f:../../Z-Icons/radio.svg
+order: 15
 children: []
 options:
   - name: value
