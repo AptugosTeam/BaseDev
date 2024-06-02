@@ -13,15 +13,18 @@ options:
   - name: arguments
     display: Arguments
     type: text
+  - name: customroute
+    display: Custom Route
+    type: text
 settings:
   - name: Packages
     value: '"solc": "0.8.17", "web3": "^4.8.0",' 
   - name: BackendPackages
     value: '"solc": "0.8.17", "web3": "^4.8.0",' 
 */
-{{ addExtraFile('back-end/contracts/' ~ element.values.filename ~ '.sol', element.values.contract) }}
+{{ addExtraFile({% if element.values.customroute %}{{element.values.customroute}}{% else %}'back-end/contracts/'{% endif %} ~ element.values.filename ~ '.sol', element.values.contract) }}
 const compileContract = () => {
-  const contractFilePath = 'back-end/contracts/{{ element.values.filename | raw }}.sol'
+  const contractFilePath = '{{ element.values.customroute | default('back-end/contracts/') }}{{ element.values.filename | raw }}.sol'
   const fileName = '{{ element.values.filename }}'
   const contractName = '{{ element.values.filename }}'
   const fs = require ("fs")
