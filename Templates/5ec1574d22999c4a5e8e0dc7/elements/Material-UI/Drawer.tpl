@@ -2,11 +2,7 @@
 path: Drawer.tpl
 completePath: elements/Material-UI/Drawer.tpl
 unique_id: UPCetE3y
-<<<<<<< Updated upstream
 icon: f:accordion/accordion.svg
-=======
-icon: f:Accordion/accordion.svg
->>>>>>> Stashed changes
 options:
   - name: anchor
     display: Side from which the drawer appears
@@ -18,10 +14,6 @@ options:
     options: permanent;persistent;temporary
   - name: open
     display: Open Variable
-    type: text
-    options: ''
-  - name: onClose
-    display: On Close
     type: text
     options: ''
 */
@@ -38,9 +30,6 @@ import Drawer from '@mui/material/Drawer';
   {% endif %}
   {% if element.values.open %}
     open={ {{ element.values.open|default('true') }} }
-  {% endif %}
-  {% if element.values.onClose %}
-    onClose={ {{ element.values.onClose | functionOrCall }} }
   {% endif %}
 >{{ content | raw }}
 </Drawer>

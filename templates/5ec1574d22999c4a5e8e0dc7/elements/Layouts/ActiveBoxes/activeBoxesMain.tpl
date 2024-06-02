@@ -4,6 +4,8 @@ completePath: elements/Layouts/ActiveBoxes/activeBoxesMain.tpl
 unique_id: Avpcw8C8
 icon: f:activeBoxesMain.svg
 */
+{% set parentElement = element.parent|elementData %}
+{% set variableName = parentElement.values.variableName|default('activeBoxesActive') %}
 {% set bpr %}
 import Grid from '@mui/material/Grid'
 {% endset %}
@@ -17,7 +19,7 @@ import Paper from '@mui/material/Paper'
   <Grid item xs={12} md={12}>
     <Paper elevation={1}>
       {% for child in element.children %}
-        {activeBoxesActive === {{ loop.index }} && (
+        { {{ variableName }} === {{ loop.index }} && (
           {{ child.rendered | raw }}
         )}
       {% endfor %}
