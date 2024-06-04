@@ -28,19 +28,21 @@ import 'react-quill/dist/quill.snow.css'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set ph %}
+const [visibleModules, setvisibleModules] = React.useState<any>(true)
+
 const quillModules = {
-    toolbar: [
-        [{ font: [] }],
-        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-        ["bold", "italic", "underline", "strike"],
-        [{ color: [] }, { background: [] }],
-        [{ script:  "sub" }, { script:  "super" }],
-        ["blockquote", "code-block"],
-        [{ list:  "ordered" }, { list:  "bullet" }],
-        [{ indent:  "-1" }, { indent:  "+1" }, { align: [] }],
-        ["link", "image", "video"],
-        ["clean"],
-    ]
+    toolbar: visibleModules?  [
+      [{ font: [] }],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ color: [] }, { background: [] }],
+      [{ script: 'sub' }, { script: 'super' }],
+      ['blockquote', 'code-block'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ indent: '-1' }, { indent: '+1' }, { align: [] }],
+      ['link', 'image', 'video'],
+      ['clean'],
+    ] : false
 }
 {% endset %}
 {{ save_delayed('ph', ph) }}
