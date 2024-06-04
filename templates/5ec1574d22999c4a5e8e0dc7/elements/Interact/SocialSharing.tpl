@@ -4,6 +4,7 @@ type: file
 unique_id: fldZPyDc
 icon: ico-social-sharing
 helpText: Allows to share your current page in Social Networks
+order: 20
 settings:
   - name: Packages
     value: '"react-social-sharing": "latest",'

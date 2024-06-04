@@ -4,6 +4,7 @@ type: file
 unique_id: nZQBVwLf
 icon: ico-flick-search
 children: []
+order: 10
 options:
   - name: apikey
     display: API Key
@@ -18,8 +19,6 @@ options:
     type: text
     options: ''
 */
-
-
 {% set bpr %}
 import axios from 'axios'
 {% endset %}
