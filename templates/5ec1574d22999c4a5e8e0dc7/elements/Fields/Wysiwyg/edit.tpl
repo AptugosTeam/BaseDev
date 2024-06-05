@@ -28,21 +28,19 @@ import 'react-quill/dist/quill.snow.css'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set ph %}
-const [visibleModules, setvisibleModules] = React.useState<any>(true)
-
 const quillModules = {
-    toolbar: visibleModules?  [
-      [{ font: [] }],
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ color: [] }, { background: [] }],
-      [{ script: 'sub' }, { script: 'super' }],
-      ['blockquote', 'code-block'],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      [{ indent: '-1' }, { indent: '+1' }, { align: [] }],
-      ['link', 'image', 'video'],
-      ['clean'],
-    ] : false
+    toolbar: [
+        [{ font: [] }],
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        ["bold", "italic", "underline", "strike"],
+        [{ color: [] }, { background: [] }],
+        [{ script:  "sub" }, { script:  "super" }],
+        ["blockquote", "code-block"],
+        [{ list:  "ordered" }, { list:  "bullet" }],
+        [{ indent:  "-1" }, { indent:  "+1" }, { align: [] }],
+        ["link", "image", "video"],
+        ["clean"],
+    ]
 }
 {% endset %}
 {{ save_delayed('ph', ph) }}
@@ -50,7 +48,11 @@ const quillModules = {
 <FormControl margin="dense" fullWidth>
   <ReactQuill 
     placeholder="{{ field.placeholder|default(field.prompt)|default(field.column_name) }}" theme="snow" 
-    modules={quillModules}
+    {% if element.values.UseCustomQuillModules %}
+        modules={ {{element.values.CustomQuillModules}} }
+    {% else %}
+        modules={quillModules}
+    {% endif %}
     value={ {{ tableName }}data.{{ field.column_name | friendly }} || ''} 
     onChange={e => handle{{ tableName }}Change('{{ field.column_name | friendly }}')(e.replace('<p><br></p><p><br></p>', '<p><br></p>'))}
   />

@@ -151,6 +151,22 @@ options:
     settings:
       propertyCondition: UseCustomValue
       condition: true
+  - name: UseCustomQuillModules
+    display: Use custom Quill Modules?
+    type: checkbox
+    options: ''
+    advanced: true
+    settings:
+      default: false
+  - name: CustomQuillModules
+    display: Custom Quill Modules
+    type: text
+    options: ''
+    advanced: true
+    settings:
+      propertyCondition: UseCustomQuillModules
+      condition: true
+  
 children: []
 */
 {% set bpr %}
