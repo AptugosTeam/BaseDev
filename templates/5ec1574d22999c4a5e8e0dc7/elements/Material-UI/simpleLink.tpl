@@ -33,6 +33,10 @@ options:
     display: Link Target
     type: dropdown
     options: _self;_blank;_parent;_top
+  - name: activeClassName
+    display: Active ClassName
+    type: styles
+    options: ''
 sourceType: javascript
 children: []
 */
@@ -52,7 +56,7 @@ import { NavLink } from 'react-router-dom'
   {% if element.values.class %}className={ {{element.values.class}} }{% endif %}
   href={{ element.values.destination | textOrVariable }}>{{ content | raw }}</a>
 {% else %}
-<NavLink {% if element.values.style %}style={ {{element.values.style}} }{% endif %} {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
+<NavLink {% if element.values.style %}style={ {{element.values.style}} }{% endif %} {% if element.values.className %}className={ {{ element.values.className }} }{% endif %} {% if element.values.activeClassName %}activeClassName={ {{ element.values.activeClassName }} }{% endif %}
   to={{ dest | textOrVariable }} {% if element.values.Action %}onClickCapture={ {{ element.values.Action }} }{% endif %}>
 {{ content | raw }}</NavLink>
 {% endif %}
