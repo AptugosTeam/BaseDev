@@ -21,7 +21,7 @@ import baseClasses from '@components/Themes/layout.module.scss'
 
 
 const AptugoComponent: FunctionComponent<any> = (props) => {
-  {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props.properties{% endif %}
+  {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props.properties || {} {% endif %}
   {% for child in element.children %}
     {% if child.value == 'componentHeader' %} 
       {{ child.rendered }}
