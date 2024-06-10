@@ -73,6 +73,8 @@ unique_id: 0i8AxGw6
     {{ insert_setting('DevPackages') | raw }}
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.592.0",
+    "@aws-sdk/lib-storage": "^3.592.0",
     "@mui/icons-material": "5.11.9",
     "@mui/material": "5.15.0",
     "@emotion/styled": "11.3.0",
