@@ -16,6 +16,9 @@ options:
     type: checkbox
     settings:
       default: false
+  - name: backendCode
+    display: Code to run on backend
+    type: code
 settings:
   - name: BackendPackages
     value: '"stripe": "^8.201.0",'
@@ -23,7 +26,11 @@ settings:
     value: |
       app.get('/stripe-order-details/:session_id', async (req, res) => {
         const session = await stripe.checkout.sessions.retrieve(req.params.session_id)
-        res.send(session)
+        {% if element.values.backendCode %}
+          {{ element.values.backendCode }}
+        {% else %}
+          res.send(session)
+        {% endif %}
       })
 */
 {% if not element.values.backendRoute %}
