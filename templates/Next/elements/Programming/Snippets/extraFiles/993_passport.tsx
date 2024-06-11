@@ -1,7 +1,5 @@
 /*
 path: 993_passport.tsx
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/Programming/Snippets/extraFiles/993_passport.tsx
 keyPath: elements/Programming/Snippets/extraFiles/993_passport.tsx
 unique_id: qyKlQDbZ
 */

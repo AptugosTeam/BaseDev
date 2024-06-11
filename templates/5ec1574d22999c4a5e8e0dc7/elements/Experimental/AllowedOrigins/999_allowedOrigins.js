@@ -1,9 +1,8 @@
 /*
 path: 999_allowedOrigins.js
-completePath: >-
-  /Users/robrondon/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/elements/Experimental/AllowedOrigins/999_allowedOrigins.js
 keyPath: elements/Experimental/AllowedOrigins/999_allowedOrigins.js
 unique_id: Vrpp9Mbv
+internalUse: true
 */
 const verifyOrigin = (req, res, next) => {
   // Temporalmente desactivado hasta resolver el insert_setting, 

@@ -2,7 +2,9 @@
 path: productCard.tpl
 completePath: elements/Layouts/ProductCards/productCard.tpl
 unique_id: 6cMXRUS3
+styledIcon: f:productCard.png
 icon: f:productCard.svg
+double: true
 helpText: Card for products, allows you to fully customize
 sourceType: javascript
 options:

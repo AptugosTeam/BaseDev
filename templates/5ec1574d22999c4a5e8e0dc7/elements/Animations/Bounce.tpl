@@ -3,7 +3,7 @@ path: Bounce.tpl
 completePath: elements/Animations/Bounce.tpl
 type: file
 unique_id: 5l431f5b
-icon: f:Bounce.svg
+icon: n:Bounce
 options:
   - name: direction
     display: Direction

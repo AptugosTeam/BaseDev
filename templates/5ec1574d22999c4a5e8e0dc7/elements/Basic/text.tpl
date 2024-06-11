@@ -3,6 +3,11 @@ path: text.tpl
 completePath: elements/Basic/text.tpl
 type: file
 unique_id: gBDZLTD1
+double: true
+color: FF0000
+backColor: 00FF00
+order: 2
+docurl: https://doc.next.aptugo.app/ref/Basic
 icon: ico-text
 helpText: >-
   Insert simple text anywhere. Can hold variables, code, and anything of your

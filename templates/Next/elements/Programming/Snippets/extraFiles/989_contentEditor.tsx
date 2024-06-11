@@ -97,7 +97,7 @@ const ContEditor: FunctionComponent = (props: any) => {
       formData.append('image', file)
 
       axios
-        .post(`http://localhost:8012${props.uploadPath}`, formData, {
+        .post(`{{ settings.apiURL }}/${props.uploadPath}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

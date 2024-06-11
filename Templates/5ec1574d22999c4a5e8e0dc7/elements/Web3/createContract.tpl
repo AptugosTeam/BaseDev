@@ -13,15 +13,32 @@ options:
   - name: arguments
     display: Arguments
     type: text
+  - name: customroute
+    display: Custom Route
+    type: text
+  - name: senderaddress
+    display: Sender Address
+    type: text
+  - name: senderprivatekey
+    display: Sender Private Key
+    type: text    
 settings:
   - name: Packages
-    value: '"solc": "0.8.17",'
+    value: '"solc": "0.8.17", "web3": "^4.8.0",' 
+  - name: BackendPackages
+    value: '"solc": "0.8.17", "web3": "^4.8.0",' 
 */
-{{ addExtraFile('back-end/contracts/' ~ element.values.filename ~ '.sol', element.values.contract) }}
+  {% if element.values.customroute %}
+    {{ addExtraFile('{{element.values.customroute}}' ~ element.values.filename ~ '.sol', element.values.contract) }}
+  {% else %}
+    {{ addExtraFile('back-end/contracts/' ~ element.values.filename ~ '.sol', element.values.contract) }}
+  {% endif %}
+  
 const compileContract = () => {
-  const contractFilePath = 'back-end/contracts/{{ element.values.filename | raw }}.sol'
+  const contractFilePath = "{{element.values.customroute|default('back-end/contracts/')}}{{element.values.filename|raw }}.sol"
   const fileName = '{{ element.values.filename }}'
   const contractName = '{{ element.values.filename }}'
+  const fs = require ("fs")
   const sourceCode = fs.readFileSync(contractFilePath, 'utf8')
 
   const input = {
@@ -51,32 +68,40 @@ const compileContract = () => {
   }  
 }
 
-async function deploy(compiledContract) {
-  const bytecode = compiledContract.bytecode
-  const abi = compiledContract.abi
-  
-  var gasprice = await web3.eth.getGasPrice()
+async function deployContract(bytecode, abi, constructorArgs) {
+  const clientAccount = '{{ element.values.senderaddress | default('0xYourClientAddress')}}'
+  const clientPrivateKey = '{{ element.values.senderprivatekey | default('YourClientPrivateKey')}}'
+
   const myContract = new web3.eth.Contract(JSON.parse(abi))
   myContract.handleRevert = true
 
-  const contractDeployer = myContract.deploy({
+  const deploy = myContract.deploy({
     data: '0x' + bytecode,
-    {% if element.values.arguments %}arguments: {{ element.values.arguments }}{% endif %}
+    arguments: constructorArgs
   })
 
-  const gas = await contractDeployer.estimateGas({ from: from })
+  const gas = await deploy.estimateGas({ from: clientAccount })
 	
   try {
-    const tx = await contractDeployer.send({
-      from: from,
+    const tx = {
+      from: clientAccount,
+      data: deploy.encodeABI(),
       gas: web3.utils.toHex(gas),
-      gasPrice: gasprice,
-    })
+      gasPrice: await web3.eth.getGasPrice(),
+    };
+
+    const signedTx = await web3.eth.accounts.signTransaction(tx, clientPrivateKey);
+    const receipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
 		
-    return tx.options.address
+    return {
+      contractAddress: receipt.contractAddress,
+      abi: abi,
+    };
   } catch (error) {
     console.error(error)
   }
 }
 const compiledContract = compileContract()
-const contractAddress = await deploy(compiledContract)
+const contractDeployment = await deployContract(compiledContract.bytecode, compiledContract.abi, contractArguments);
+
+return contractDeployment;

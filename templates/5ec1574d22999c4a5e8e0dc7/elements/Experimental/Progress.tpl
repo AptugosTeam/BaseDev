@@ -3,7 +3,7 @@ path: Progress.tpl
 completePath: elements/Experimental/Progress.tpl
 type: file
 unique_id: DaMiyMaX
-icon: f:charts/radialBarChart.svg
+icon: f:../Z-Icons/radialBarChart.svg
 options:
   - name: varName
     display: Variable Name (Open Progress)

@@ -37,9 +37,19 @@ import PlacesAutoComplete from '@components/PlacesAutocomplete'
 <PlacesAutoComplete 
   placesKey={{ element.values.placesKey | textOrVariable }}
   inputId={{ element.values.inputId|default(element.unique_id) | textOrVariable }}
-  {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-  onChange={ {{ element.values.onchange | functionOrCall }} }
-  {% if element.values.initialValue %}initialValue={{ element.values.initialValue | textOrVariable }}{% endif %}
-  {% if element.values.placeholder %}placeholder={{ element.values.placeholder | textOrVariable }}{% endif %}
-  {% if element.values.disableVariable %}disabled={ {{ element.values.disableVariable }} }{% endif %}
+  {% if element.values.className %}
+    className={ {{ element.values.className }} }
+  {% endif %}
+  {% if element.values.onchange %}
+    onChange={ {{ element.values.onchange | functionOrCall }} }
+  {% endif %}
+  {% if element.values.initialValue %}
+    initialValue={{ element.values.initialValue | textOrVariable }}
+  {% endif %}
+  {% if element.values.placeholder %}
+    placeholder={{ element.values.placeholder | textOrVariable }}
+  {% endif %}
+  {% if element.values.disableVariable %}
+    disabled={ {{ element.values.disableVariable }} }
+  {% endif %}
 />

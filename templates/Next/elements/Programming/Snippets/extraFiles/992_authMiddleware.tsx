@@ -1,7 +1,5 @@
 /*
 path: 992_authMiddleware.tsx
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/Programming/Snippets/extraFiles/992_authMiddleware.tsx
 keyPath: elements/Programming/Snippets/extraFiles/992_authMiddleware.tsx
 unique_id: Fxxw1Aln
 */
