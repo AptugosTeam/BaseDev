@@ -37,10 +37,14 @@ options:
         const page = arguments[2];
         if ( element.values.variableName ) aptugo.variables.setPageVariable(page, element.unique_id, { [element.values.variableName]: value });
       active: true
+  - name: typeAnnotation
+    display: Type Annotation in useState
+    type: text
+    options: ''
 children: []
 */
 
 {% set ph %}
-const [{{ element.values.variableName }}, set{{ element.values.variableName }}] = React.useState<any>({{ element.values.defaultValue }})
+const [{{ element.values.variableName }}, set{{ element.values.variableName }}] = React.useState<{{element.values.typeAnnotation | default('any')}}>({{ element.values.defaultValue }})
 {% endset %}
 {{ save_delayed('ph',ph,1) }}
