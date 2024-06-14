@@ -33,8 +33,7 @@ const quillModules = {
         [{ header: [1, 2, 3, 4, 5, 6, false] }],
         ["bold", "italic", "underline", "strike"],
         [{ color: [] }],
-        [{ list:  "ordered" }, { list:  "bullet" }],
-        ["clean"],
+        [{ list:  "ordered" }, { list:  "bullet" }]
     ]
 }
 {% endset %}
