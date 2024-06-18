@@ -29,13 +29,13 @@ options:
     options: ''
   - name: handleClick
     display: Fires onclick of hotspot
-    type: Function
+    type: function
 */
 {% set bpr %}
 import { Pannellum } from 'pannellum-react'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-<Pannellum.Hotspot 
+  <Pannellum.Hotspot 
     type="custom"
     {% if element.values.pitch %}pitch={ {{element.values.pitch}} }{% else %}pitch={0}{% endif %}
     yaw={ {{element.values.yaw|default("100")}} }
@@ -47,3 +47,4 @@ import { Pannellum } from 'pannellum-react'
   }
   {% endif %} 
 />
+  
