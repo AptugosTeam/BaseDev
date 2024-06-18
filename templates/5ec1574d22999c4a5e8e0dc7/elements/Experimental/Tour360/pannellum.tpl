@@ -113,6 +113,8 @@ options:
 settings:
   - name: Packages
     value: '"pannellum-react": "^1.2.4",'
+  - name: Packages
+    value: '"buffer": "^6.0.3",'
 children: []
 */
 {% set bpr %}
@@ -145,4 +147,5 @@ import { Pannellum } from 'pannellum-react'
         console.log('panorama loaded')
     }}
 >
+{{ content | raw }}
 </Pannellum>
