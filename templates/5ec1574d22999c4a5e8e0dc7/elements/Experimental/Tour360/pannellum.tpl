@@ -3,6 +3,8 @@ path: pannellum.tpl
 type: file
 unique_id: EEdcDaMrq
 icon: f:pannellumIcon.svg
+double: true
+order: 1
 helpText: virtual tour with the pannellum bookstore
 sourceType: javascript
 options:
