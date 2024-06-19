@@ -23,7 +23,20 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     margin='{{ element.values.margin|default("dense") }}'
-    label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    {% if not element.values.disableLabel %}
+        label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    {% endif %}
+    {% if field.placeholder and element.values.disableLabel %}
+        SelectProps={ {
+            displayEmpty: true,
+            renderValue: (selected) => {
+                if (!selected) {
+                    return <span>{{ field.placeholder }}</span>;
+                }
+                return selected
+        },
+    } }
+    {% endif %}
     type="text"
     fullWidth
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
@@ -31,7 +44,7 @@ import MenuItem from '@mui/material/MenuItem'
     value={ {{ tableName }}data.{{ field.column_name | friendly }}}
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
 >
-{% if field.placeholder %}
+{% if field.placeholder and not element.values.disableLabel %}
 <MenuItem value="" disabled>{{ field.placeholder }}</MenuItem>
 {% endif %}
 {% for item in field.options|split(';') %}
