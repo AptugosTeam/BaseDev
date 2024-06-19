@@ -41,6 +41,9 @@ const quillModules = {
 
 <FormControl margin="dense" fullWidth>
   <ReactQuill 
+    {% if element.values.ref %}
+        ref={ {{element.values.ref}} }
+    {% endif %}
     placeholder="{{ field.placeholder|default(field.prompt)|default(field.column_name) }}" theme="snow" 
     {% if element.values.UseCustomQuillModules %}
         modules={ {{element.values.CustomQuillModules}} }

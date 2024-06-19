@@ -136,6 +136,9 @@ options:
     settings:
       propertyCondition: Type
       condition: edit
+  - name: ref
+    display: Hide Modules
+    type: text
   - name: UseCustomValue
     display: Use custom Value?
     type: checkbox
