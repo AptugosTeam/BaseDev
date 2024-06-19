@@ -15,6 +15,37 @@ unique_id: LleJ843P
         "display": "File extensions",
         "value": "filetype",
         "type": "text"
+      },
+      {
+        "display": "Store in S3",
+        "value": "s3",
+        "type": "select",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "1"
+          },
+          {
+            "label": "No",
+            "value": "0"
+          }
+        ]
+      },{
+        "display": "S3 Bucket Name",
+        "value": "s3Bucket",
+        "type": "text"
+      },{
+        "display": "S3 Region",
+        "value": "s3Region",
+        "type": "text"
+      },{
+        "display": "S3 Access Key ID",
+        "value": "s3AccessKeyID",
+        "type": "text"
+      },{
+        "display": "S3 Access Key Secret",
+        "value": "s3AccessKeySecret",
+        "type": "text"
       }
     ]
   }
