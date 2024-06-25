@@ -93,7 +93,7 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
         <div className="thumbnailImageContainer">
           <img
             className="thumbnailImage"
-            src={file.Image ? `/img/${file.Image}` : file.preview}
+            src={file.Image ? `${file.Image}` : file.preview}
           />
         </div>
       </div>

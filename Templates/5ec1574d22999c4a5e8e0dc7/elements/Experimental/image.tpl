@@ -76,7 +76,7 @@ options:
   {% if height == null %}
     {% set height = asset.height %}
   {% endif %}
-  {% set path = '/img/' ~ asset.name %}
+  {% set path = "https://mtl-media.s3.us-east-1.amazonaws.com/" ~ asset.name %}
   {% if asset.versions %}
     {% for version in asset.versions %}
       {% if (version.type == 'webP' or version.type == 'webp') %}

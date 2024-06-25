@@ -27,7 +27,7 @@ function {{ element.values.internalfunctionName|default('InlineLink') }}(emailPa
 
   function renderEmail(emailComponent) {
     var doctype = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
-    return `${doctype}${_server2.default.renderToStaticMarkup(emailComponent).replaceAll('/img/','{{ settings.url }}/img/')}`
+    return `${doctype}${_server2.default.renderToStaticMarkup(emailComponent).replaceAll('/img/','https://mtl-media.s3.us-east-1.amazonaws.com/')}`
   }
 
   return emailParameters.content || renderEmail(<div>{{ content | raw }}</div>)
