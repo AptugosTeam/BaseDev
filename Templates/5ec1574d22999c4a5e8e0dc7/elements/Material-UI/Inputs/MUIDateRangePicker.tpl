@@ -35,9 +35,10 @@ children: []
 import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import 'dayjs/locale/es';
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-<LocalizationProvider dateAdapter={AdapterDayjs}>
+<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
       <DateRangePicker
         startText={ {{ element.values.startText | textOrVariable }} }
         endText={ {{ element.values.endText | textOrVariable }} }
