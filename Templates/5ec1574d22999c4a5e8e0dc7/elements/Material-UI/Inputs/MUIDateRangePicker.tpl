@@ -40,8 +40,7 @@ import 'dayjs/locale/es';
 {{ save_delayed('bpr', bpr) }}
 <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
       <DateRangePicker
-        startText={ {{ element.values.startText | textOrVariable }} }
-        endText={ {{ element.values.endText | textOrVariable }} }
+        localeText={{ start: {{ element.values.startText | textOrVariable }}, end: {{ element.values.endText | textOrVariable }} }}        
         value={ {{ element.values.value | textOrVariable }} }
         {% if element.values.onChange %}
             onChange={ {{ element.values.onChange | functionOrCall }} }
