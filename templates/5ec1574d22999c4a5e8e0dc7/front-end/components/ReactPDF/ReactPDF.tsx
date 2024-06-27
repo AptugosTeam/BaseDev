@@ -65,8 +65,8 @@ function ReactPDF(props) {
             />
           ))}
         {(props.maxNumPages !== false && numPages > props.maxNumPages && isActived)  && (
-          <div style={estilos1}>
-            <div style={estilos2}>
+          <div style={estilo1}>
+            <div style={estilo2}>
               <Page
                 key={`page-${maxPages + 1}`}
                 pageNumber={maxPages + 1}
@@ -76,10 +76,10 @@ function ReactPDF(props) {
               />
             </div>
             <div
-              style={estilos3}
+              style={estilo3}
             >
               <button onClick={() => props.action }
-              style={estilos4}
+              style={estilo4}
               >
                 {props.buttonText}
               </button>
