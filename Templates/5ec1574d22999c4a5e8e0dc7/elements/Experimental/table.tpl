@@ -23,6 +23,7 @@ options:
       return [['useVar','Use a
       variable'],...aptugo.store.getState().application.tables.map(({ unique_id,
       name }) => [unique_id, name])]
+    required: true
   - name: variableToUse
     display: Variable to use
     type: text
@@ -69,7 +70,7 @@ options:
     display: Allow Edition
     type: checkbox
     settings:
-      default: true
+      default: false
       condition: ''
   - name: editionTable
     display: Table used in Edits (or deletes)
@@ -80,7 +81,7 @@ options:
     display: Allow Deletion
     type: checkbox
     settings:
-      default: true
+      default: false
       condition: ''
   - name: detailsURL
     display: Details Page
@@ -198,8 +199,8 @@ options:
 children: []
 */
 {% set editProc = element.values.editProcedure|default('No') %}
-{% set allowEdit = element.values.allowEdit|default(true) %}
-{% set allowDeletion = element.values.allowDeletion|default(true) %}
+{% set allowEdit = element.values.allowEdit|default(false) %}
+{% set allowDeletion = element.values.allowDeletion|default(false) %}
 {% set tableFields = [] %}
 {% if element.values.table == 'useVar' or element.values.table == 'var' %}
   {% set table = element.values.editionTable | tableData %}
