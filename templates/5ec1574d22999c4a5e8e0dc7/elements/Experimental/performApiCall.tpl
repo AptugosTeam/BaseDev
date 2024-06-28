@@ -9,6 +9,7 @@ options:
     display: URL
     type: url
     options: ''
+    required: true
     settings:
       aptugoOnLoad: |-
         const element = arguments[0];
