@@ -1,11 +1,11 @@
 /*
-path: pannellum.tpl
+path: pannellumVideo.tpl
 type: file
-unique_id: EEdcDaMrq
+unique_id: EEdcMiChq
 icon: f:pannellumIcon.svg
 double: true
 order: 1
-helpText: virtual tour with the pannellum bookstore
+helpText: virtual video view with the panellum library
 sourceType: javascript
 options:
   - name: width
@@ -16,9 +16,21 @@ options:
     display: Height Panorama
     type: text
     options: ''
-  - name: image
-    display: ​​Image Route
+  - name: video
+    display: ​video Route
     type: text
+    options: ''
+  - name: loop
+    display: Looping over video
+    type: checkbox
+    options: ''
+  - name: controls
+    display: showing controls under
+    type: checkbox
+    options: ''
+  - name: muted
+    display: making video mute
+    type: checkbox
     options: ''
   - name: SeparatorPitch
     display: vertical tilt (pitch)
@@ -61,54 +73,13 @@ options:
     type: text
     options: ''
     advanced: true
-  - name: SeparatorText
-    display: Panorama texts
-    type: separator 
-  - name: title
-    display: Panorama Title
-    type: text
-    options: ''
-  - name: author
-    display: Author Of The Panorama
-    type: text
-    options: ''
   - name: autoRotate
     display: Rotation speed (Number)
     type: text
     options: ''
     advanced: true
-  - name: compass
-    display: activate compass(true or false)
-    type: checkbox
-    options: ''
-    advanced: true
-  - name: orientationOnByDefault
-    display: gyroscope activation
-    type: checkbox
-    options: ''
-    advanced: true
-  - name: showZoomCtrl
-    display: Display of zoom buttons
-    type: checkbox
-    options: ''
-    advanced: true
-  - name: keyboardZoom
-    display: disable the zoom control
-    type: checkbox
-    options: ''
-    advanced: true
-  - name: disableKeyboardCtrl
-    display: disable the control Keyboard
-    type: checkbox
-    options: ''
-    advanced: true
   - name: mouseZoom
     display: disable zoom control with mouse
-    type: checkbox
-    options: ''
-    advanced: true
-  - name: draggable
-    display: disable mouse dragging
     type: checkbox
     options: ''
     advanced: true
@@ -123,10 +94,10 @@ children: []
 import { Pannellum, PannellumVideo } from 'pannellum-react'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-<Pannellum
+<PannellumVideo
     {% if element.values.width %}width={" {{element.values.width}} "}{% else %}width={"50%"}{% endif %}
     {% if element.values.height %}height={" {{element.values.height}} "}{% else %}height={"400px"}{% endif %}
-    {% if element.values.image %}image={ {{element.values.image}} }{% else %}image={"https://pannellum.org/images/alma.jpg"}{% endif %}
+    {% if element.values.video %}video={ {{element.values.video}} }{% else %}video={"https://pannellum.org/images/video/jfk.webm"}{% endif %}
     {% if element.values.pitch %}pitch={ {{element.values.pitch}} }{% else %}pitch={0}{% endif %}
     {% if element.values.maxPitch %}maxPitch={ {{element.values.maxPitch}} }{% else %}maxPitch={90}{% endif %}
     {% if element.values.minPitch %}minPitch={ {{element.values.minPitch}} }{% else %}minPitch={-90}{% endif %}
@@ -135,19 +106,10 @@ import { Pannellum, PannellumVideo } from 'pannellum-react'
     {% if element.values.maxHfov %}maxHfov={ {{element.values.maxHfov}} }{% else %}maxHfov={150}{% endif %}
     {% if element.values.minHfov %}minHfov={ {{element.values.minHfov}} }{% else %}minHfov={50}{% endif %}
     {% if element.values.autoRotate %}autoRotate={ {{element.values.autoRotate}} }{% else %}autoRotate={0}{% endif %}
-    {% if element.values.compass %}compass={true}{% else %}compass={false}{% endif %}
-    {% if element.values.title %}title={" {{element.values.title}} "}{% endif %}
-    {% if element.values.author %}author={" {{element.values.author}} "}{% endif %}
-    {% if element.values.orientationOnByDefault %}orientationOnByDefault={true}{% else %}orientationOnByDefault={false}{% endif %}
-    {% if element.values.showZoomCtrl %}showZoomCtrl={true}{% else %}showZoomCtrl={false}{% endif %}
-    {% if element.values.keyboardZoom %}keyboardZoom={false}{% else %}keyboardZoom={true}{% endif %}
-    {% if element.values.disableKeyboardCtrl %}disableKeyboardCtrl={true}{% else %}disableKeyboardCtrl={false}{% endif %}
     {% if element.values.mouseZoom %}mouseZoom={false}{% else %}mouseZoom={true}{% endif %}
-    {% if element.values.draggable %}draggable={false}{% else %}draggable={true}{% endif %}
-    autoLoad
-    onLoad={() => {
-        console.log('panorama loaded')
-    }}
+    {% if element.values.loop %}loop={false}{% else %}loop={true}{% endif %}
+    {% if element.values.controls %}controls={true}{% else %}controls={false}{% endif %}
+    {% if element.values.muted %}muted={false}{% else %}muted={true}{% endif %}
 >
 {{ content | raw }}
-</Pannellum>
+</PannellumVideo>

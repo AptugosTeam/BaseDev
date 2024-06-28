@@ -1,5 +1,5 @@
 /*
-path: Hotspot.tpl
+path: HotspotCustom.tpl
 type: file
 unique_id: EEjgDaMrq
 icon: f:HotspotIcon.svg

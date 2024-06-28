@@ -70,7 +70,7 @@ options:
     display: Allow Edition
     type: checkbox
     settings:
-      default: false
+      default: true
       condition: ''
   - name: editionTable
     display: Table used in Edits (or deletes)
@@ -81,7 +81,7 @@ options:
     display: Allow Deletion
     type: checkbox
     settings:
-      default: false
+      default: true
       condition: ''
   - name: detailsURL
     display: Details Page
@@ -199,8 +199,8 @@ options:
 children: []
 */
 {% set editProc = element.values.editProcedure|default('No') %}
-{% set allowEdit = element.values.allowEdit|default(false) %}
-{% set allowDeletion = element.values.allowDeletion|default(false) %}
+{% set allowEdit = element.values.allowEdit|default(true) %}
+{% set allowDeletion = element.values.allowDeletion|default(true) %}
 {% set tableFields = [] %}
 {% if element.values.table == 'useVar' or element.values.table == 'var' %}
   {% set table = element.values.editionTable | tableData %}
