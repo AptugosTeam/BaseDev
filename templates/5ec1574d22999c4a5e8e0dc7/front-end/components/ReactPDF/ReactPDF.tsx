@@ -10,6 +10,7 @@ children: []
 import React, { useState } from 'react';
 import { Document, Page } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
+import { Typography } from '@mui/material'
 
 function ReactPDF(props) {
   const [numPages, setNumPages] = useState<number>(0);
@@ -23,10 +24,10 @@ function ReactPDF(props) {
   const maxPages = props.maxNumPages === false ? numPages : props.maxNumPages;
 
   const estilo1 = {
-    position: 'relative' 
+    position: 'relative',
   }
   const estilo2 = {
-    filter: 'blur(10px)'
+    filter: 'blur(0.5rem)',
   }
   const estilo3 = {
     position: 'absolute',
@@ -34,17 +35,25 @@ function ReactPDF(props) {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     background: 'rgba(255, 255, 255, 0.8)',
-    padding: '20px',
+    padding: '2rem 2rem 2.5rem',
     borderRadius: '10px',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "1.5rem",
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
   }
   const estilo4 = {
-    padding: '10px 20px',
-    fontSize: '15px',
-    fontWeight: 'bold',
-    color: '#fff',
-    backgroundColor: '#508acf',
+    marginTop: "1rem",
+    width: "12rem",
+    padding: '0.75rem 0rem',
+    fontSize: '0.875rem',
+    fontWeight: 'normal',
+    color: "#f0f0f0",
+    backgroundColor: '#46737a',
     border: 'none',
-    borderRadius: '5px',
+    borderRadius: '0.5rem',
     cursor: 'pointer',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
     transition: 'background-color 0.3s ease',
@@ -75,15 +84,16 @@ function ReactPDF(props) {
                 width={props.pageWidth}
               />
             </div>
-            <div
-              style={estilo3}
-            >
-              <button onClick={() => props.action }
-              style={estilo4}
-              >
-                {props.buttonText}
-              </button>
-            </div>
+
+              <div style={estilo3}>
+                <img src="https://mtl-media.s3.us-east-1.amazonaws.com/noEvaluations.svg" alt="/img/noEvaluations.svg" />
+
+                <Typography variant="body1">Debes <b>comenzar la evaluación</b> para acceder al manual</Typography>
+
+                <button onClickCapture={props.action} style={estilo4}>
+                  {props.buttonText}
+                </button>
+              </div>
           </div>
         )}
       </Document>
