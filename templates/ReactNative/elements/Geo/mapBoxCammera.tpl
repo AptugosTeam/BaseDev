@@ -30,7 +30,7 @@ options:
     settings:
       default: 12
   - name: maxBounds
-    display: Max Bounds
+    display: Variable with max Bounds
     type: text
 */
 {% set bpr %}
@@ -49,6 +49,6 @@ const cameraRef{{ element.unique_id }} = React.useRef<Camera>(null)
   zoomLevel={ {{ element.values.zoomLevel|default(6) }} }
   followZoomLevel={ {{ element.values.followZoomLevel|default(12) }} }
   {% if element.values.maxBounds %}
-    maxBounds={ { {{ element.values.maxBounds }} } }
+    maxBounds={  {{ element.values.maxBounds }}  }
   {% endif %}
 />
