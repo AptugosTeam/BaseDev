@@ -29,6 +29,9 @@ options:
     type: text
     settings:
       default: 12
+  - name: maxBounds
+    display: Max Bounds
+    type: text
 */
 {% set bpr %}
 import { Camera } from '@rnmapbox/maps'
@@ -45,4 +48,7 @@ const cameraRef{{ element.unique_id }} = React.useRef<Camera>(null)
   centerCoordinate={ {{ element.values.centerCoordinate|default('[50, 0]') }}}
   zoomLevel={ {{ element.values.zoomLevel|default(6) }} }
   followZoomLevel={ {{ element.values.followZoomLevel|default(12) }} }
+  {% if element.values.maxBounds %}
+    maxBounds={ { {{ element.values.maxBounds }} } }
+  {% endif %}
 />
