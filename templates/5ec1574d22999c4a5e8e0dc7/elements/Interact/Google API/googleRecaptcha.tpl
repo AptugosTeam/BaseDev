@@ -72,16 +72,6 @@ settings:
           res.status(500).send({ message: 'Error verifying CAPTCHA' });
         }
       })
-      app.post('/verifyCaptcha', async (req, res) => {
-        console.log("inicio backend")
-        const {captcha} = req.body;
-        const secretKey ='{{ element.values.secretKey }}';
-        const url = 'https://www.google.com/recaptcha/api/siteverify';
-        console.log("captcha", captcha)
-        const response = await axios.post(url, new URLSearchParams({secret: secretKey, response: captcha}))
-        console.log("response", response.data)
-        res.send(response.data)
-      })
 children: []
 */
 {% set bpr %}
