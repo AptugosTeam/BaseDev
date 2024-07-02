@@ -37,6 +37,16 @@ options:
     options: return [['normal','Normal'],['compact','Compact']]
     settings:
       default: 'normal'
+  - name: asyncScriptOnLoad
+    display: On Load
+    type: function
+    options: ''
+    advanced: true
+  - name: style
+    display: Extra Styles
+    type: text
+    options: ''
+    advanced: true
 settings:
   - name: Packages
     value: '"react-google-recaptcha": "^3.1.0",'
@@ -83,8 +93,16 @@ import ReCAPTCHA from 'react-google-recaptcha'
   {% if element.values.onChange %}
     onChange={ (recaptcha)=> { {{element.values.onChange}} } }
   {% endif %}
+  {% if element.values.asyncScriptOnLoad %}
+    asyncScriptOnLoad={ ({ loaded })=> { 
+      {{element.values.asyncScriptOnLoad}}
+    } }
+  {% endif %}
   {% if element.values.hl %}
     hl='{{ element.values.hl|default("en") }}'
+  {% endif %}
+  {% if element.values.style %}
+    style={ {{ element.values.style }} }
   {% endif %}
   {% if element.values.size %}
     size='{{ element.values.size|default("normal") }}'
