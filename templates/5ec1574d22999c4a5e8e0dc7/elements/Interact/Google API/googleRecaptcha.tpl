@@ -31,12 +31,37 @@ options:
     display: Ref (optional)
     type: text
     options: ''
+  - name: size
+    display: Size
+    type: dropdown
+    options: return [['normal','Normal'],['compact','Compact']]
+    settings:
+      default: 'normal'
 settings:
   - name: Packages
     value: '"react-google-recaptcha": "^3.1.0",'
   - name: ServerRoute
     value: |
       const axios = require('axios')
+      app.post('/verifyCaptcha', async (req, res) => {
+        try {
+          const { captcha } = req.body;
+
+          if (!captcha) return res.status(400).send({ message: 'CAPTCHA is required' });
+
+          const secretKey = '{{ element.values.secretKey }}';
+          const url = 'https://www.google.com/recaptcha/api/siteverify';
+
+          const { data } = await axios.post(url, new URLSearchParams({ secret: secretKey, response: captcha }));
+
+          if (data.success) return res.status(200).send(true);
+          else { 
+            return res.status(400).send({ message: 'Error verifying CAPTCHA' })
+          }
+        } catch (error) {
+          res.status(500).send({ message: 'Error verifying CAPTCHA' });
+        }
+      })
       app.post('/verifyCaptcha', async (req, res) => {
         console.log("inicio backend")
         const {captcha} = req.body;
@@ -60,5 +85,8 @@ import ReCAPTCHA from 'react-google-recaptcha'
   {% endif %}
   {% if element.values.hl %}
     hl='{{ element.values.hl|default("en") }}'
+  {% endif %}
+  {% if element.values.size %}
+    size='{{ element.values.size|default("normal") }}'
   {% endif %}
 />
