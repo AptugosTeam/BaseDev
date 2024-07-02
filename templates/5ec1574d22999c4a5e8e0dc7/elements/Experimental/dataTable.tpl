@@ -22,6 +22,7 @@ options:
     options: >-
       return [['useVar','Use a
       variable'],...aptugo.store.getState().application.tables.map(({ unique_id,name }) => [unique_id, name])]
+    required: true
   - name: variableToUse
     display: Variable to use
     type: text
