@@ -35,7 +35,7 @@ import { InputLabel } from '@mui/material';
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
     displayEmpty
   >
-    <MenuItem value=""><em>None</em></MenuItem>
+    <MenuItem value="None"><em>None</em></MenuItem>
     <MenuItem value="Ascension Island">🇦🇨 - Ascension Island</MenuItem>
     <MenuItem value="Andorra">🇦🇩 - Andorra</MenuItem>
     <MenuItem value="United Arab Emirates">🇦🇪 - United Arab Emirates</MenuItem>
