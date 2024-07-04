@@ -21,7 +21,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"@iconify/react": "^4.1.1",'
+    value: '"@iconify/react": "^4.1.1", "iconify": "^1.4.0",'
 */
 {% set bpr %}
 import { Icon } from '@iconify/react'
