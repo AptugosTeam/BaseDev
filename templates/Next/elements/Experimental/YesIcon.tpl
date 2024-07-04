@@ -32,6 +32,6 @@ import { Icon } from '@iconify/react'
   icon="{{element.values.icon}}" 
   {% endif %}
   {% if element.values.fontSize or element.values.color %}
-    style={ { {% if element.values.fontSize %} fontSize: '{{element.values.fontSize}}', {% endif %} {% if element.values.color %} color: '{{element.values.color}}' {% endif %} } }
+    style={ { {% if element.values.fontSize %} fontSize: '{{element.values.fontSize}}', {% endif %} {% if element.values.color %} color: {{element.values.color}} {% endif %} } }
   {% endif %}
 />
