@@ -22,11 +22,12 @@ module.exports = merge(commonConfig, {
   devtool: false,
   plugins: [
     new CleanWebpackPlugin(),
-    new GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true,
-      exclude: ['.htaccess']
-    }),
+    // PROBANDO DESACTIVAR SERVICE WORKER
+    // new GenerateSW({
+    //   clientsClaim: true,
+    //   skipWaiting: true,
+    //   exclude: ['.htaccess']
+    // }),
     new CopyPlugin({
       patterns: [
         {
