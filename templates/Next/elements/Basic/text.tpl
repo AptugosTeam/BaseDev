@@ -19,10 +19,18 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: extraStyles
+    display: Extra Styles
+    type: text
+    options: ''
 children: []
 */
 {% if element.values.className or element.values.ClassName or type == 'DevelopmentDebug' %}
-  <span {% if type == 'DevelopmentDebug' %}data-aptugo="{{ element.unique_id }}"{% endif %} {% if element.values.className or element.values.ClassName %}className={ {{ element.values.className|default(element.values.ClassName) }} }{% endif %}>
+  <span {% if type == 'DevelopmentDebug' %}data-aptugo="{{ element.unique_id }}"{% endif %} 
+  {% if element.values.className or element.values.ClassName %}className={ {{ element.values.className|default(element.values.ClassName) }} }{% endif %}
+  {% if element.values.extraStyles %}
+    style={ {{element.values.extraStyles}} }
+  {% endif %} >
 {% endif %}
   {{ element.values.Content | raw }}
   {{ content | raw }}
