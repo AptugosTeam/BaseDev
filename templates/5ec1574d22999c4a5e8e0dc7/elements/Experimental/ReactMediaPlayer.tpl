@@ -45,6 +45,20 @@ options:
     display: Video height (in PX or %)
     type: text
     options: ''
+  - name: playlist
+    display: URLs for Playlist 
+    type: checkbox
+    settings:
+      default: false
+    options: ''
+    advanced: true
+  - name: playlistArray
+    display: URLs for Playlist Arrays
+    type: text
+    options: ''
+    settings:
+      condition: true
+      propertyCondition: playlist   
 children: []
 settings:
   - name: Packages
@@ -62,7 +76,11 @@ import ReactPlayer from 'react-player'
   {% if element.values.playVideoDB %}
     url={ {{ element.values.playVideoDB }} }
   {% else %}
+    {% if element.values.playlist and element.values.playlistArray %}
+    url={ {{ element.values.playlistArray }} }
+    {% else %}
     url='{{ element.values.playVideo }}'
+    {% endif %}
   {% endif %}
     {% if element.values.controls %}
       controls={true} 
