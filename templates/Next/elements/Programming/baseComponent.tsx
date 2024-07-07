@@ -5,6 +5,7 @@ unique_id: spqWQO2m
 internalUse: true
 */
 import React, { FunctionComponent } from 'react'
+import { useRouter } from 'next/router'
 {% for delay in delayed %}
   {% for specificDelay in delay.bpr %}
     {{ specificDelay }}
