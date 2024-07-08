@@ -23,27 +23,33 @@ options:
     options: ''
   - name: className
     display: ClassName
-    type: styles
+    type: text
+    options: ''
   - name: isFlipped
     display: isFlipped
     type: text
+    options: ''
   - name: flipSpeedBackToFront
     display: Flip Speed Back To Front
     type: text
+    options: ''
   - name: flipSpeedFrontToBack
     display: Flip Speed Front To Back
     type: text
+    options: ''
   - name: infinite
     display: Rotate in the same direction?
     type: checkbox
+    options: ''
   - name: flipDirection
     display: Flip Direction
     type: dropdown
-    options: 
+    options: >-
       return [['horizontal', 'Horizontal'],['vertical', 'Vertical']]
+children: []
+settings:
   - name: Packages
     value: '"react-card-flip": "^1.2.3",'
-children: []
 */
 {% set bpr %}
 import ReactCardFlip from 'react-card-flip'
@@ -53,14 +59,14 @@ import ReactCardFlip from 'react-card-flip'
   {% if element.values.cardStylesFront or element.values.cardStylesBack %}
     cardStyles={ {
         {% if element.values.cardStylesFront %}front: {{element.values.cardStylesFront}},{% endif %}
-        {% if element.values.cardStylesBack %}back: {{element.values.cardStylesBack}},%{ endif %}
+        {% if element.values.cardStylesBack %}back: {{element.values.cardStylesBack}},{% endif %}
     }}
   {% endif %}
   {% if element.values.isFlipped %}
     isFlipped={ {{element.values.isFlipped}} }
   {% endif %}
   {% if element.values.cardZIndex %}
-    cardZIndex="{{element.values.cardZIndex}}"
+    cardZIndex=" {{element.values.cardZIndex}} "
   {% endif %}
   {% if element.values.containerStyle %}
     containerStyle={ {{element.values.containerStyle}} }
@@ -78,7 +84,7 @@ import ReactCardFlip from 'react-card-flip'
     infinite
   {% endif %}
   {% if element.values.flipDirection %}
-    flipDirection='{{element.values.flipDirection}}'
+    flipDirection=" {{element.values.flipDirection}} "
   {% endif %}
 >
   {{ content | raw }}
