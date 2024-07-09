@@ -9,9 +9,15 @@ options:
     display: Direction
     type: dropdown
     options: 
-      return [['none', 'None'],['left', 'Left'],['right', 'Right'],['down', 'Down'],['up', 'Up']]
+      return [['none', 'None'],['left', 'Left'],['right', 'Right'],['down', 'Down'],['up', 'Up'],['custom', 'Custom']]
     settings:
       default: none
+  - name: customDirection
+    display: Custom Direction
+    type: text
+    settings:
+      propertyCondition: direction
+      condition: custom
   - name: delay
     display: Delay
     type: text
@@ -54,7 +60,11 @@ import { Fade } from "react-awesome-reveal";
 {{ save_delayed('bpr',bpr) }}
 <Fade   
   {% if element.values.direction != "none" %}
+  {% if element.values.direction == 'custom' %}
+    direction={ {{ element.values.customDirection }} }
+  {% else %}
     direction={ "{{ element.values.direction }}" }
+  {% endif %}
   {% endif %}
   delay={ {{element.values.delay|default("0")}} } 
   duration={ {{element.values.duration|default("1000")}} }
