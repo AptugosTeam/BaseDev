@@ -22,8 +22,6 @@ options:
   - name: maxZoomLevel
     display: Max Zoom Level
     type: text
-    settings:
-      default: 16
   - name: followZoomLevel
     display: Follow Zoom Level
     type: text
