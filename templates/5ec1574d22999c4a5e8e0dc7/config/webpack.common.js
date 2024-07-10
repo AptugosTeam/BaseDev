@@ -7,23 +7,35 @@ unique_id: EpA5lGLz
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ProvidePlugin = require('webpack/lib/ProvidePlugin')
+
 module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.css'],
     alias: {
       dist: resolve(__dirname, '../', 'dist'),
       process: 'process/browser',
-      stream: "stream-browserify",
-      zlib: "browserify-zlib",
+      stream: 'stream-browserify',
+      zlib: 'browserify-zlib',
       '@components': resolve(__dirname, '../', 'front-end/components'),
       '@services': resolve(__dirname, '../', 'front-end/services'),
-      "react/jsx-dev-runtime": "react/jsx-dev-runtime.js",
-      "react/jsx-runtime": "react/jsx-runtime.js"
+      '@store': resolve(__dirname, '../', 'front-end/store'),
+      'react/jsx-dev-runtime.js': 'react/jsx-dev-runtime',
+      'react/jsx-runtime.js': 'react/jsx-runtime',
+    },
+    fallback: {
+      'process/browser': require.resolve('process/browser'),
+      assert: require.resolve('assert'),
     },
   },
   context: resolve(__dirname, '../'),
   module: {
     rules: [
+      {
+        test: /\.m?js$/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
       {
         test: [/\.jsx?$/, /\.tsx?$/],
         use: ['babel-loader'],
@@ -35,15 +47,26 @@ module.exports = {
       },
       {
         test: /\.(scss|sass)$/,
-        use: ['style-loader', { loader: 'css-loader', options: {
-          url: false,
-          modules: {
-            localIdentName: "[path][name]__[local]--[hash:base64:5]",
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false,
+              modules: {
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+              },
+            },
           },
-        }}, { loader: 'sass-loader', options: { sourceMap: true } }]
+          { loader: 'sass-loader', options: { sourceMap: true } },
+        ],
       },
       {
-        test: /\.(jpe?g|png|gif|svg|woff)$/i,
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        use: 'file-loader',
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
         use: [
           'file-loader?hash=sha512&digest=hex&name=img/[contenthash].[ext]',
           'image-webpack-loader?bypassOnDebug&optipng.optimizationLevel=7&gifsicle.interlaced=false',
@@ -51,10 +74,13 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: './dist/index.html' }),new ProvidePlugin({
-    process: 'process/browser',
-    Buffer: ['buffer', 'Buffer'],
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({ template: './dist/index.html' }),
+    new ProvidePlugin({
+      process: 'process/browser',
+      Buffer: ['buffer', 'Buffer'],
+    }),
+  ],
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',
