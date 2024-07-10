@@ -41,7 +41,9 @@ const cameraRef{{ element.unique_id }} = React.useRef<Camera>(null)
 {{ save_delayed('ph',ph)}}
 <Camera
   ref={cameraRef{{ element.unique_id }}}
-  maxZoomLevel={ {{ element.values.maxZoomLevel|default(16) }} }
+   {% if element.values.maxZoomLevel %}
+    maxZoomLevel={  {{ element.values.maxZoomLevel }}  }
+  {% endif %}
   minZoomLevel={ {{ element.values.minZoomLevel|default(1) }} }
   centerCoordinate={ {{ element.values.centerCoordinate|default('[50, 0]') }}}
   zoomLevel={ {{ element.values.zoomLevel|default(6) }} }
