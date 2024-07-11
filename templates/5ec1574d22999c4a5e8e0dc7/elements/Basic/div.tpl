@@ -46,6 +46,14 @@ options:
     settings:
       default: false    
     advanced: true
+  - name: onMouseEnter
+    display: On Mouse Enter
+    type: text
+    advanced: true
+  - name: onMouseLeave
+    display: On Mouse Leave
+    type: text
+    advanced: true
 children: []
 helpText: Basic HTML Div element
 */
@@ -72,6 +80,12 @@ helpText: Basic HTML Div element
   {% endif %}
   {% if element.values.onclick %}
     onClick={(e) => {{element.values.onclick}} }
+  {% endif %}
+  {% if element.values.onMouseEnter %}
+    onMouseEnter={() => {{element.values.onMouseEnter}} }
+  {% endif %}
+  {% if element.values.onMouseLeave %}
+    onMouseLeave={() => {{element.values.onMouseLeave}} }
   {% endif %}
 >
 {{ content | raw }}
