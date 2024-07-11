@@ -9,6 +9,7 @@ prevent_delete: true
 children: []
 */
 import React, { FunctionComponent } from 'react'
+import { useRouter } from 'next/router'
 {% for delay in delayed %}
   {{ delay }}
 {% endfor %}

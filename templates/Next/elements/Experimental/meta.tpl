@@ -42,4 +42,5 @@ import Head from 'next/head'
 {% if element.values.ogtitle %}<meta name="title" property="og:title" content={{ element.values.ogtitle | textOrVariable }} />{% endif %}
 {% if element.values.ogimage %}<meta name="image" property="og:image" content={{ element.values.ogimage | textOrVariable }}></meta>{% endif %}
 {% if element.values.ogurl %}<meta name="og:url" content={{ element.values.ogurl | textOrVariable }} />{% endif %}
+<link rel="icon" href="/img/favicon.png" />
 </Head>
