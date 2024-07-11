@@ -84,7 +84,7 @@ import ReactCardFlip from 'react-card-flip'
     infinite
   {% endif %}
   {% if element.values.flipDirection %}
-    flipDirection=" {{element.values.flipDirection}} "
+    flipDirection="{{element.values.flipDirection}}"
   {% endif %}
 >
   {{ content | raw }}
