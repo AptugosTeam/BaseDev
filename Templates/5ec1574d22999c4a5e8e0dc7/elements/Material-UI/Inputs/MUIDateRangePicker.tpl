@@ -21,7 +21,7 @@ options:
     type: text
   - name: shouldDisableDate
     display: shouldDisableDate
-    type: text
+    type: function
 settings:
   - name: Packages
     value: '"@mui/x-date-pickers": "latest",'
@@ -45,6 +45,9 @@ import 'dayjs/locale/es';
         {% if element.values.onChange %}
             onChange={ {{ element.values.onChange | functionOrCall }} }
         {% endif %}
-        shouldDisableDate={ {{ element.values.shouldDisableDate | raw }} }
+        {% if element.values.shouldDisableDate %}
+            shouldDisableDate={ {{ element.values.shouldDisableDate | functionOrCall }} }
+        {% endif %}
+        
       />
     </LocalizationProvider>
