@@ -22,6 +22,13 @@ options:
   - name: shouldDisableDate
     display: shouldDisableDate
     type: function
+  - name: disablePreviousMonths
+    display: Disable Previous Months?
+    type: checkbox
+    options: ''
+    settings:
+      default: true
+
 settings:
   - name: Packages
     value: '"@mui/x-date-pickers": "latest",'
@@ -48,6 +55,6 @@ import 'dayjs/locale/es';
         {% if element.values.shouldDisableDate %}
             shouldDisableDate={ {{ element.values.shouldDisableDate | functionOrCall }} }
         {% endif %}
-        
+        {% if element.values.disablePreviousMonths %}disablePast{% endif %}
       />
     </LocalizationProvider>
