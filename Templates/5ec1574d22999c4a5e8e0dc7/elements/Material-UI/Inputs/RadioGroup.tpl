@@ -19,6 +19,18 @@ options:
     display: Name attribute of the input element
     type: text
     options: ''
+  - name: formControlClassName
+    display: Form Control className
+    type: styles
+    options: ''
+  - name: radioGroupClassname
+    display: Radio Group Classname
+    type: styles
+    options: ''
+  - name: error
+    display: Error
+    type: variable
+    options: ''
   - name: separator
     display: Advanced Properties
     type: separator
@@ -32,6 +44,10 @@ options:
     display: Label ID
     type: text
     options: ''
+    advanced: true
+  - name: separator
+    display: End Advanced Properties
+    type: separator
     advanced: true
 childs:
   - name: radio
@@ -47,10 +63,10 @@ childs:
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 
-<FormControl>
+<FormControl component="fieldset" {% if element.values.formControlClassName %}className={ {{ element.values.formControlClassName }} }{% endif %}>
   {% if element.values.label %}
     <FormLabel id={{ element.values.labelid |textOrVariable }}>
-      {{ element.values.label }}
+      <label>{{ element.values.label }}</label>
     </FormLabel>
   {% endif %}
   <RadioGroup
@@ -66,7 +82,13 @@ childs:
     {% if element.values.name %}
       name={{ element.values.name | textOrVariable }}
     {% endif %}
+    {% if element.values.radioGroupClassname %}
+      className={ {{ element.values.radioGroupClassname }} }
+    {% endif %}
   >
     {{ content | raw }}
   </RadioGroup>
+    {% if element.values.error %}
+      {errorss[{{element.values.error}}] && <span className={theme.spanValidation}>{errorss[{{element.values.error}}]}</span>}
+    {% endif %}
 </FormControl>
