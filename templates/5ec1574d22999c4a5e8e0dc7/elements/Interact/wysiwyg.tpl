@@ -43,7 +43,7 @@ import 'react-quill/dist/quill.snow.css'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set ph %}
-const {{ element.unique_id }}quillModules = {
+const quillModules{{ element.unique_id }} = {
     toolbar: [
         [{ font: [] }],
         [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -63,7 +63,7 @@ const {{ element.unique_id }}quillModules = {
   <ReactQuill
     placeholder={{ element.values.placeholder | textOrVariable }}
     theme="snow"
-    modules={ {{element.unique_id}}quillModules}
+    modules={ quillModules{{element.unique_id}}}
     value={ {{element.values.value | default('') }} }
     onChange={(e) => {
       {% if element.values.mtl %}
