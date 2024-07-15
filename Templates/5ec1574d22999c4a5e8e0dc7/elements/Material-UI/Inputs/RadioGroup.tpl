@@ -89,6 +89,6 @@ childs:
     {{ content | raw }}
   </RadioGroup>
     {% if element.values.error %}
-      {errorss[{{element.values.error}}] && <span className={theme.spanValidation}>{errorss[{{element.values.error}}]}</span>}
+      {{element.values.error}}
     {% endif %}
 </FormControl>
