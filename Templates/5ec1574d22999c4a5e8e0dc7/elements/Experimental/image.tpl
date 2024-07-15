@@ -51,6 +51,11 @@ options:
     display: On Error
     type: text
     advanced: true
+  - name: style
+    display: Extra Styles
+    type: text
+    advanced: true
+    options: ''
   - name: background
     display: Use as Background
     type: checkbox
@@ -105,6 +110,9 @@ options:
     {% endif %}
     {% if element.values.onError %}
       onError={ {{ element.values.onError }} }
+    {% endif %}
+    {% if element.values.style %}
+      style={ {{element.values.style}} }
     {% endif %}
     {% if element.values.draggable %}
       draggable={false}

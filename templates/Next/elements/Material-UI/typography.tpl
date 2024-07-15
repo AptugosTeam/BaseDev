@@ -20,6 +20,11 @@ options:
     type: dropdown
     options: >-
       h1;h2;h3;h4;h5;h6;subtitle1;subtitle2;body1;body2;caption;button;overline;srOnly;inherit
+  - name: onclick
+    display: On Click
+    type: function
+    options: ''
+    advanced: true
 childs:
   - name: Text Content
     element: text
@@ -32,6 +37,10 @@ import Typography from '@mui/material/Typography'
   {% if type == 'DevelopmentDebug' %}data-aptugo="{{ element.unique_id }}"{% endif %}
   variant="{{ element.values.tag }}"
   {% if element.values.color %}color="{{ element.values.color }}"{% endif %}
-  {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}>
+  {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
+  {% if element.values.onclick %}
+    onClick={(e) => {{element.values.onclick}} }
+  {% endif %}
+  >
 {{ content | raw }}
 </Typography>
