@@ -37,6 +37,13 @@ options:
     display: Disable link drag
     type: checkbox
     options: ''
+  - name: customizedClassName
+    display: ClassName without theme
+    type: checkbox
+    options: ''
+    settings:
+      default: false
+    advanced: true
 sourceType: javascript
 children: []
 */
@@ -53,7 +60,11 @@ import { NavLink } from 'react-router-dom'
 <a
   {% if element.values.target %}target={{ element.values.target | textOrVariable }}{% endif %}
   {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
+  {% if element.values.customizedClassName %}
+  {% if element.values.className %}className="{{element.values.className }}"{% endif %}
+  {% else %}
   {% if element.values.className %}className={ {{element.values.className }} }{% endif %}
+  {% endif %}
   href={{ element.values.destination | textOrVariable }}   {% if element.values.draggable %} draggable={false} {% endif %}>{{ content | raw }}</a>
 {% else %}
 <NavLink {% if element.values.style %}style={ {{element.values.style}} }{% endif %} {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
