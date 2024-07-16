@@ -210,6 +210,8 @@ settings:
             html: emailDetails.message,
           }
 
+          if (emailDetails.bcc) mail.bcc = emailDetails.bcc
+
           if (typeof addICal === 'function' && extra && extra.sendWithIcal) {
             addICal(mail, extra)
           }
