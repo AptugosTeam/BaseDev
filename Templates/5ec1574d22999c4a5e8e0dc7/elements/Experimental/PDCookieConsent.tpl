@@ -4,6 +4,14 @@ type: file
 unique_id: av3v7cxo
 icon: ico-cookie-consent
 options:
+  - name: organizationName
+    display: Organization Name
+    type: text
+    options: ''
+  - name: organizationUrl
+    display: Organization URL
+    type: text
+    options: ''
   - name: cookiePolicyLink
     display: Cookie Policy Link
     type: text
@@ -25,8 +33,8 @@ children: []
     "defaultLang" : "es",
     "brand": {
     "dev" : true,
-    "name": "SOLUCIÓN DE OBLIGACIONES NORMATIVAS",
-    "url" : "https://sonorsolucionesnormativas.es",
+    "name": {{ element.values.organizationName | textOrVariable }},
+    "url" : {{ element.values.organizationUrl | textOrVariable }},
     "websiteOwner" : ""
     },
     "showRejectButton": true,
