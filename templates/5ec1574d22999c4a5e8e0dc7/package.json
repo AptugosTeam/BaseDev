@@ -72,6 +72,7 @@ unique_id: 0i8AxGw6
     "assert": "2.1.0",
     "posthog-js": "1.128.1",
     "posthog-node": "4.0.0",
+    "gleap": "13.8.0",
     {{ insert_setting('DevPackages') | raw }}
   },
   "dependencies": {
