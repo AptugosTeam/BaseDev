@@ -47,6 +47,11 @@ options:
     display: Type Definition
     type: text
     advanced: true
+  - name: priority
+    display: Priority
+    type: dropdown
+    options: Normal;High;Low
+    advanced: true
 settings:
   - name: ServerAddenum
     value: |-
@@ -56,4 +61,13 @@ settings:
 sourceType: javascript
 children: []
 */
-{% if not element.values.serverSide %}{% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }}{% if element.values.type %}:{{ element.values.type }}{% endif %} = {{ element.values.variableValue|default(content | raw)}}{% endif %}
+{% if not element.values.serverSide %}
+  {% if element.values.priority %}
+{% set ph %}
+{% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }}{% if element.values.type %}:{{ element.values.type }}{% endif %} = {{ element.values.variableValue|default(content | raw)}}
+{% endset %}
+{{ save_delayed('ph',ph,1) }}
+  {% else %}
+{% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }}{% if element.values.type %}:{{ element.values.type }}{% endif %} = {{ element.values.variableValue|default(content | raw)}}
+{% endif %}
+{% endif %}

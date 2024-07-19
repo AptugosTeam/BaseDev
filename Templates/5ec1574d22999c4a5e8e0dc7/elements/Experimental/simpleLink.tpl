@@ -68,7 +68,7 @@ import { NavLink } from 'react-router-dom'
   href={{ element.values.destination | textOrVariable }}   {% if element.values.draggable %} draggable={false} {% endif %}>{{ content | raw }}</a>
 {% else %}
 <NavLink {% if element.values.style %}style={ {{element.values.style}} }{% endif %} {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-  to={{ dest | textOrVariable }} {% if element.values.Action %}onClickCapture={ {{ element.values.Action }} }{% endif %}
+  to={{ dest | textOrVariable }} {% if element.values.Action %}onClickCapture={() => {{ element.values.Action }} }{% endif %}
   {% if element.values.draggable %}
     draggable={false}
   {% endif %}>
