@@ -74,13 +74,16 @@ class AuthService {
     return user ? JSON.parse(user) : {}
   }
 
-  recoverPassword({ email, subject, message, name }) {
+  recoverPassword({ email, subject, message, name, model = '', lang = 'en', username = '' }) {
     return axios
       .post(API_URL + 'recoverpassword', {
         email,
         subject,
         message,
         name,
+        model,
+        lang,
+        username,
       })
       .then((response) => {
         return response.data
@@ -94,9 +97,12 @@ class AuthService {
         email,
       })
       .then((response) => {
-        // localStorage.setItem('token', response.data.accessToken)
-        // localStorage.setItem('user', JSON.stringify(response.data.data))
+        localStorage.setItem('token', response.data.accessToken)
+        localStorage.setItem('user', JSON.stringify(response.data.data))
         return response.data.data._id
+      })
+      .catch((e) => {
+        throw e
       })
   }
 }
