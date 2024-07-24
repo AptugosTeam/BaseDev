@@ -56,6 +56,7 @@ options:
     display: URLs for Playlist Arrays
     type: text
     options: ''
+    advanced: true
     settings:
       condition: true
       propertyCondition: playlist   
