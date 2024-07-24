@@ -13,6 +13,10 @@ options:
     display: Value
     type: text
     options: ''
+  - name: buttonText
+    display: Text when no item is selected 
+    type: text
+    options: ''
   - name: onChange
     display: On Change
     type: text
@@ -46,6 +50,7 @@ import SelectDropdown from 'react-native-select-dropdown'
 {{ save_delayed('bpr', bpr) }}
 <SelectDropdown
   {% if element.values.value %}defaultValue={{ element.values.value }}{% endif %}
+  {% if element.values.buttonText %}defaultButtonText="{{ element.values.buttonText }}"{% endif %}
   data={ {{ element.values.options }} }
   buttonStyle={theme.inputSelector}
   buttonTextStyle={theme.inputSelectorText}
