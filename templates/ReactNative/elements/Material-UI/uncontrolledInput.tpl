@@ -44,6 +44,13 @@ options:
     display: Type
     type: dropdown
     options: text;password;date;number;textarea
+  - name: secureTextEntry
+    display: Show Password variable
+    type: text
+    options: ''
+    settings: 
+      propertyCondition: type
+      condition: password
   - name: leftIcon
     display: Icon (left side)
     type: dropdown
@@ -52,6 +59,17 @@ options:
     display: Icon (right side)
     type: dropdown
     options: none;email-outline;eye;magnify
+  - name: useonChangeIcon
+    display: Use on press when click the icon?
+    type: checkbox
+    options: ''
+  - name: onChangeIcon
+    display: On press when click icon
+    type: text
+    options: ''
+    settings: 
+      propertyCondition: useonChangeIcon
+      condition: true
   - name: underlineColor
     display: Underline Color
     type: text
@@ -154,7 +172,12 @@ children: []
       {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
       {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
       {% if element.values.type == 'number' %}keyboardType='numeric'{% endif %}
-      {% if element.values.type == 'password' %}secureTextEntry={true}{% endif %}
+      {% if element.values.type == 'password' %}
+        {% if element.values.secureTextEntry %}secureTextEntry={ {{ element.values.secureTextEntry }} }
+        {% else %}
+          secureTextEntry={true}
+        {% endif %}
+      {% endif %}
       {% if element.values.type == 'textarea' %}
         multiline
       {% endif %}
@@ -167,8 +190,9 @@ children: []
       {% if element.values.activeUnderlineColor %}activeUnderlineColor={ {{ element.values.activeUnderlineColor | textOrVariable }}}{% endif %}
       {% if element.values.placeholderTextColor %}placeholderTextColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif %}
       {% if element.values.selectionColor %}selectionColor={ {{ element.values.selectionColor | textOrVariable }} }{% endif %}
-      {% if element.values.leftIcon and element.values.leftIcon != 'none' %}left={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} icon='{{element.values.leftIcon}}' />}{% endif %}
-      {% if element.values.rightIcon and element.values.rightIcon != 'none' %}right={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} icon='{{element.values.rightIcon}}' />}{% endif %}
+      {% if element.values.leftIcon and element.values.leftIcon != 'none' %}left={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %}icon='{{element.values.leftIcon}}' />}{% endif %}
+      {% if element.values.rightIcon and element.values.rightIcon != 'none' %}right={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %} 
+ icon='{{element.values.rightIcon}}' />}{% endif %}
   />
     {% if useHelperText %}
         <HelperText
