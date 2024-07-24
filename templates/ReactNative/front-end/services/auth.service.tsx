@@ -58,7 +58,7 @@ class AuthService {
 
   register(data) {
     return axios
-      .post(API_URL + 'register', data)
+      .post(API_URL, data)
       .then((_result) => {
         return this.login(data.Email, data.Password).then((afterLogin) => {
           return afterLogin
@@ -70,7 +70,7 @@ class AuthService {
   }
 
   async getCurrentUser() {
-    const user = await AsyncStorage.getItem('user') || await AsyncStorage.getItem('userSession') || await AsyncStorage.getItem('user')
+    const user = (await AsyncStorage.getItem('user')) || (await AsyncStorage.getItem('userSession')) || (await AsyncStorage.getItem('user'))
     return user ? JSON.parse(user) : {}
   }
 
@@ -102,4 +102,3 @@ class AuthService {
 }
 
 export default new AuthService()
-
