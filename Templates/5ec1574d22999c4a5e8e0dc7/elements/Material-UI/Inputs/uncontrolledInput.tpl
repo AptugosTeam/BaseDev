@@ -151,7 +151,7 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
     {% if readOnly or element.values.inputProps %}
       inputProps={ {
-        {% if readOnly %}: true,{% endif %}
+        {% if readOnly %}readOnly: true,{% endif %}
         {{element.values.inputProps}}
       } }
     {% endif %}
