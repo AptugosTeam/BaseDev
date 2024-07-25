@@ -43,6 +43,14 @@ options:
     display: Min value
     type: text
     options: ''
+  - name: variant
+    display: Variant
+    type: dropdown
+    options: >-
+      return [['standard','Standard'],['filled','Filled'],['outlined','Outlined']]
+  - name: fullWidth
+    display: Use full width?
+    type: checkbox
   - name: fieldFormat
     display: Use field format
     type: checkbox
@@ -96,6 +104,8 @@ import { NumericFormat } from 'react-number-format'
         {% elseif element.values.decimalScale %}
         decimalScale={ {{ element.values.decimalScale | raw }} }
       {% endif %}
+      {% if element.values.fullWidth %}fullWidth{% endif %}
+      variant="{{ element.values.variant|default('standard') }}"
       {% if element.values.allowNegative %}
         allowNegative={false}
       {% endif %}
