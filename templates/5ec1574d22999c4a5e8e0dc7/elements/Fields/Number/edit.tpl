@@ -5,7 +5,7 @@ unique_id: iTMTweVR
 settings:
   - name: Packages
     value: |-
-      "react-number-format": "5.2.0",
+      "react-number-format": "5.4.0",
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}

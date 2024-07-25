@@ -46,11 +46,13 @@ options:
   - name: variant
     display: Variant
     type: dropdown
-    options: >-
-      return [['standard','Standard'],['filled','Filled'],['outlined','Outlined']]
+    options:
+      return [['standard', 'Standard'],['filled', 'Filled'],['outlined', 'Outlined']]
   - name: fullWidth
     display: Use full width?
     type: checkbox
+    settings:
+      default: false
   - name: fieldFormat
     display: Use field format
     type: checkbox
