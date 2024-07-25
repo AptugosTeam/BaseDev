@@ -22,7 +22,8 @@ options:
   - name: hideButton
     display: Hide Add Button
     type: checkbox
-    options: ''
+    settings:
+      default: false
   - name: color
     display: Color
     type: dropdown
@@ -30,7 +31,8 @@ options:
   - name: manuallyManaged
     display: Do not auto close
     type: checkbox
-    options: ''
+    settings:
+      default: false
   - name: classname
     display: ClassName
     type: styles
@@ -86,7 +88,8 @@ options:
   - name: notRenderFields
     display: Do not render fields?
     type: checkbox
-    options: ''
+    settings:
+      default: false
 children: []
 */
 {% set table = element.values.table | tableData %}
