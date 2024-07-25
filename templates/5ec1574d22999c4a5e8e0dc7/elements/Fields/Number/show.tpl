@@ -5,6 +5,7 @@ unique_id: Tp07vbno
 */
 {% set bpr %}
 import Field from '../components/Table/Field'
+import { NumericFormat } from 'react-number-format'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <NumericFormat 
