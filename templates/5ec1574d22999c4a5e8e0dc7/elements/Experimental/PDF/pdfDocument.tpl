@@ -40,7 +40,7 @@ options:
     advanced: true
 settings:
   - name: Packages
-    value: '"@react-pdf/renderer": "latest","browserify-zlib": "^0.2.0","buffer": "^6.0.3","process": "^0.11.10","stream-browserify": "^3.0.0","util": "^0.12.4",'
+    value: '"@react-pdf/renderer": "^3.4.4","browserify-zlib": "^0.2.0","buffer": "^6.0.3","process": "^0.11.10","stream-browserify": "^3.0.0","util": "^0.12.4",'
 childs:
   - name: pdfPage
     element: pdfPage
