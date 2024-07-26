@@ -14,10 +14,9 @@ unique_id: 0i8AxGw6
     "build": "webpack --config=config/webpack.prod.js",
     "clean-dist": "rimraf build/*",
     "lint": "eslint './src/**/*.{js,ts,tsx}' --quiet",
-    "start": "concurrently \"npm run dev:api\" \"npm run dev:client\"",
+    "start": "concurrently \"pnpm run dev:api\" \"pnpm run dev:client\"",
     "dev:client": "webpack serve --config=config/webpack.dev.js",
-    "dev:api": "nodemon --signal SIGTERM  --delay 5 --exec babel-node back-end/index.js",
-    "postinstall": "cd back-end && npm install"
+    "dev:api": "nodemon --signal SIGTERM  --delay 5 --exec babel-node back-end/index.js"
 {% set npmScripts = insert_setting('npmScripts') %}
 {% if npmScripts %},{{ insert_setting('npmScripts') | raw }}{% endif %}
   },

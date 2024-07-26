@@ -176,20 +176,26 @@ const apr = {
 	"collapseStatus": "collapse",
 }
 
+const parent = Parameters.parent ? Parameters.parent.unique_id : Application.pages ? Application.pages[0].unique_id : null
+console.log(Application)
 const newPage = {
 	"asociated_table": Parameters.unique_id,
 	"name": `() => aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").name`,
 	"type": "page",
 	"children": [bpr, ph, b, pf, apr],
 	"path": `() => '/' + aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").name`,
-	"parent": Application.pages[0].unique_id,
+	"parent": parent,
 	"collapseStatus": "collapse",
 	"filename": `() => aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").name + '.tsx'`
 }
 
 if (Parameters.parent) {
 	Parameters.parent.children.push(newPage)
-} else {
+} else if (parent) {
 	Application.pages[0].children.push(newPage)
+} else {
+	if (!Application.pages) Application.pages = []
+	Application.pages.push(newPage)
 }
+
 return Application
