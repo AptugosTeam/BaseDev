@@ -71,6 +71,8 @@ options:
 settings:
   - name: Packages
     value: '"react-dropzone": "^11.4.2",'
+  - name: Packages
+    value: '"react-beautiful-dnd": "13.1.1",'
 children: []
 */
 {% set bpr %}
