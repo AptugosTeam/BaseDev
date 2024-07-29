@@ -20,10 +20,6 @@ options:
     display: ClassName
     type: styles
     options: ''
-  - name: classNameList
-    display: ClassName (list)
-    type: styles
-    options: ''
   - name: onDrop
     display: On Drop
     type: text
@@ -42,6 +38,15 @@ options:
     display: Column Header Color
     type: text
     options: ''
+  - name: ref
+    display: Use Reference
+    type: text
+    options: ''
+    advanced: true
+  - name: onMouseDown
+    display: On Mouse Down
+    type: text
+    advanced: true
 sourceType: javascript
 settings:
   - name: Packages
@@ -116,7 +121,14 @@ const KanbanItem = ({ item, children, ...props }) => {
 {% endset %}
 {{ save_delayed('ph',ph) }}
 <DndProvider backend={HTML5Backend}>       
-<div className={clsx(classes.kanban {% if element.values.className %}, {{ element.values.className }}{% endif %})}>
+<div className={clsx(classes.kanban {% if element.values.className %}, {{ element.values.className }}{% endif %})}
+  {% if element.values.ref %}
+    ref={ {{element.values.ref}} }
+  {% endif %}
+  {% if element.values.onMouseDown %}
+    onMouseDown={ {{element.values.onMouseDown}} }
+  {% endif %}
+>
 { {{ element.values.Columns }}.map((columnItem, columnIndex) => {
     return ({{ content | raw }})
 })}
