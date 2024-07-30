@@ -14,9 +14,13 @@ options:
     display: Row Data
     type: text
     options: ''
+  - name: code
+    display: Code before match condition
+    type: function
+    options: ''
   - name: matchCondition
     display: Match Condition
-    type: text
+    type: code
     options: ''
   - name: onDrop
     display: On Drop
@@ -50,6 +54,9 @@ options:
   </div>
   <div className={ {% if element.values.classNameList %}{{ element.values.classNameList }}{% else %}classes.list{% endif %} }>
     { {{ element.values.RowData }}.map((rowItem, rowIndex) => {
+      {% if element.values.code %}
+        {{ element.values.code}}
+      {% endif %}
       if ({{ element.values.matchCondition }}) {
         return (
           <KanbanItem key={rowIndex} item={rowItem}>

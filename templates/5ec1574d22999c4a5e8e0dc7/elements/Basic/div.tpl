@@ -78,6 +78,10 @@ options:
     display: Key
     type: text
     advanced: true
+  - name: onMouseDown
+    display: On Mouse Down
+    type: text
+    advanced: true
 children: []
 helpText: Basic HTML Div element
 */
@@ -121,6 +125,9 @@ helpText: Basic HTML Div element
   {% endif %}
   {% if element.values.key %}
     key={ {{element.values.key}} }
+  {% endif %}
+  {% if element.values.onMouseDown %}
+    onMouseDown={ {{element.values.onMouseDown}} }
   {% endif %}
 >
 {{ content | raw }}
