@@ -82,6 +82,14 @@ options:
     display: On Mouse Down
     type: text
     advanced: true
+  - name: onMouseOver
+    display: On Mouse Over
+    type: text
+    advanced: true
+  - name: onMouseOut
+    display: On Mouse Out
+    type: text
+    advanced: true
 children: []
 helpText: Basic HTML Div element
 */
@@ -128,6 +136,12 @@ helpText: Basic HTML Div element
   {% endif %}
   {% if element.values.onMouseDown %}
     onMouseDown={ {{element.values.onMouseDown}} }
+  {% endif %}
+  {% if element.values.onMouseOver %}
+    onMouseOver={(e) => {{element.values.onMouseOver}} }
+  {% endif %}
+  {% if element.values.onMouseOut %}
+    onMouseOut={ {{element.values.onMouseOut}} }
   {% endif %}
 >
 {{ content | raw }}
