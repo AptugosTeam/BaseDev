@@ -8,6 +8,7 @@ options:
   - name: destination
     display: Destination
     type: text
+    required: true
     options: ''
   - name: parameters
     display: Parameters
@@ -17,6 +18,12 @@ options:
     display: Use Tag
     type: dropdown
     options: NavLink;A
+    required: true
+  - name: target
+    display: Link Target
+    type: dropdown
+    options: _self;_blank;_parent;_top
+    required: true
   - name: className
     display: ClassName
     type: styles
@@ -29,10 +36,6 @@ options:
     display: Extra Styles
     type: text
     options: ''
-  - name: target
-    display: Link Target
-    type: dropdown
-    options: _self;_blank;_parent;_top
   - name: draggable
     display: Disable link drag
     type: checkbox
