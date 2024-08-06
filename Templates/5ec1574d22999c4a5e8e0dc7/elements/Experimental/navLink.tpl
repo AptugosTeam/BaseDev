@@ -5,10 +5,6 @@ unique_id: RDDUIuWL
 icon: ico-navlink
 sourceType: javascript
 options:
-  - name: Destination
-    display: destination
-    type: text
-    options: ''
   - name: destination
     display: Destination
     type: text

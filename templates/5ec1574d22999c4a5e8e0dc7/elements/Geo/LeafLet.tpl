@@ -22,7 +22,7 @@ settings:
     value: '"react-leaflet": "2.8.0","leaflet": "latest",'
 */
 {% set bpr %}
-import LeafLet from '../components/LeafLet'
+import LeafLet from '@components/LeafLet/LeafLet.tsx'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}

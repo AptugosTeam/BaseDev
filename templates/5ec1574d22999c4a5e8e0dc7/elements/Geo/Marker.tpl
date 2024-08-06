@@ -11,7 +11,7 @@ options:
     options: ''
 */
 {% set bpr %}
-  import { Marker } from '../components/LeafLet'
+  import Marker from '@components/LeafLet/Marker.tsx'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Marker 

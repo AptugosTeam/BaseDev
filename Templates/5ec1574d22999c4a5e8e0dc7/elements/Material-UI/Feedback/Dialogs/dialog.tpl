@@ -22,7 +22,8 @@ options:
   - name: hideButton
     display: Hide Add Button
     type: checkbox
-    options: ''
+    settings:
+      default: false
   - name: color
     display: Color
     type: dropdown
@@ -30,7 +31,8 @@ options:
   - name: manuallyManaged
     display: Do not auto close
     type: checkbox
-    options: ''
+    settings:
+      default: false
   - name: classname
     display: ClassName
     type: styles
@@ -83,6 +85,11 @@ options:
     settings:
       condition: Custom
       propertyCondition: addProcedure
+  - name: notRenderFields
+    display: Do not render fields?
+    type: checkbox
+    settings:
+      default: false
 children: []
 */
 {% set table = element.values.table | tableData %}
@@ -157,9 +164,11 @@ import AddDialog from '../components/Dialog/Dialog'
   setData={set{{ table.name | friendly }}data}
   allowMultipleSubmit={ {{ dialogVariable }} === 'add'}
 >
+{% if not element.values.notRenderFields %}
 {% for field in fields %}
  {% set subvalues = { element: { values: { Field: field.unique_id, Type: 'edit' } }  } %}
  {% include includeTemplate('field.tpl') with subvalues %}
 {% endfor %}
+{% endif %}
 {{ content | raw }}
 </LocalAddDialog>

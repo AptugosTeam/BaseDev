@@ -116,6 +116,10 @@ options:
     display: Child is end adornment
     type: checkbox
     advanced: true
+  - name: inputProps
+    display: Enter your inputProps
+    type: code
+    advanced: true
 children: []
 */
 {% if element.values.fullWidth %}{% set fullWidth = true %}{% endif %}
@@ -145,9 +149,10 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
-    {% if readOnly %}
+    {% if readOnly or element.values.inputProps %}
       inputProps={ {
-        readOnly: true,
+        {% if readOnly %}readOnly: true,{% endif %}
+        {{element.values.inputProps}}
       } }
     {% endif %}
     {% if element.values.type == 'number' %}

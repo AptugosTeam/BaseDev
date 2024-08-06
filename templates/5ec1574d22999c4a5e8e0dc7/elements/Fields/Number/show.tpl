@@ -5,11 +5,12 @@ unique_id: Tp07vbno
 */
 {% set bpr %}
 import Field from '../components/Table/Field'
+import { NumericFormat } from 'react-number-format'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <NumericFormat 
     {% if element.values.classname %} className={ {{ element.values.classname }} } {% endif %}
-    value= { (fieldData: any) => fieldData.{{ field.column_name | friendly }} }
+    value= { (fieldData: number) => fieldData.{{ field.column_name | friendly }} }
     displayType="text"
     {% if field.decimalScale %}
         decimalScale={ {{ field.decimalScale }} }
