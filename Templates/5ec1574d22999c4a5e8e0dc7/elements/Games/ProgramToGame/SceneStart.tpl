@@ -8,7 +8,7 @@ options:
     display: SceneStart
     type: dropdown
     options: 
-      return [['start', 'Start'],['restart', 'Restart'],['stop', 'Stop'] ]
+      return [['start', 'Start'],['pause', 'Pause'],['restart', 'Restart'],['stop', 'Stop']]
     settings:
       default: start
   - name: sceneName
