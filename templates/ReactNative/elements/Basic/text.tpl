@@ -25,6 +25,11 @@ options:
   - name: adjustsFontSizeToFit
     display: Adjust Font Size to Fit
     type: checkbox
+  - name: onPress
+    display: On Press
+    type: text
+    options: ''
+    advanced: true
 children: []
 */
 {% set bpr %}
@@ -65,4 +70,5 @@ export function MoreLessText({ children, numberOfLines }) {
   {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
   {% if element.values.lines %}numberOfLines={ {{ element.values.lines }} }{% endif %}
   {% if element.values.adjustsFontSizeToFit %}adjustsFontSizeToFit{% endif %}
+  {% if element.values.onPress %}onPress={ {{ element.values.onPress }} }{% endif %}
 >{{ element.values.Content | raw }}{{ content | raw }}</{{ tag }}>
