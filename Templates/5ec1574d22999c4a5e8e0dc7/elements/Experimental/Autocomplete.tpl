@@ -57,6 +57,9 @@ options:
 helpText: >-
   The autocomplete is a normal text input enhanced by a panel of suggested options.
 icon: ico-field
+settings:
+  - name: Packages
+    value: '"react-select": "^5.8.0",'
 */
 {% set bpr %}
 import Autocomplete from '@components/Autocomplete'
