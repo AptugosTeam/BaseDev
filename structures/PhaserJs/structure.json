@@ -1,0 +1,12 @@
+{
+  "_id": "5f1997f0c76f1f4505418Ago",
+  "type": "structure",
+  "runable": true,
+  "afterRun": "",
+  "Created_date": {
+    "$date": "2020-07-23T14:00:16.549Z"
+  },
+  "__v": 0,
+  "desc": "Allows to quickly add PhaserJs templates to your application",
+  "name": "User PhaserJs01"
+}
