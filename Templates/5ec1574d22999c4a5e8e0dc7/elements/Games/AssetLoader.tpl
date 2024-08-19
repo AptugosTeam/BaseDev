@@ -52,7 +52,7 @@ options:
   {% if element.values.useSpritesheet %}
   {% set path = '/img/' ~ asset.name %}
     this.load.spritesheet('{{ element.values.name | friendly }}', {{ path | textOrVariableInCode }}, { frameWidth: {{ element.values.frameWidth | default(16)  }}, frameHeight: {{ element.values.frameHeight | default(16) }} });
-  {% else if %}
+  {% else %}
     {% set path = '/img/' ~ asset.name %}
     this.load.image('{{ element.values.name | friendly }}', {{ path | textOrVariableInCode }});
   {% endif %}
