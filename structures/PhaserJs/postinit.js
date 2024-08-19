@@ -27,63 +27,7 @@ const phaserTemplate = {
 		"prevent_delete": true,
 		"cascades": false,
 		"collapseStatus": "collapse",
-		"children": [
-		  {
-			"children": [
-			  {
-				"cascades": false,
-				"name": "Phaser Scene",
-				"path": "PhaserScene.tpl",
-				"prevent_delete": false,
-				"type": "element",
-				"value": "PhaserScene",
-				"values": {
-				  "name": "StartSceneDesafioTemplate"
-				},
-				"children": [
-				  {
-					"cascades": false,
-					"name": "Phaser Scene Function",
-					"path": "PhaserSceneFunction.tpl",
-					"prevent_delete": false,
-					"type": "element",
-					"value": "PhaserSceneFunction",
-					"values": {
-					  "stage": "preload"
-					},
-					"children": [
-					  {
-						"cascades": false,
-					  "name": "Asset Loader",
-						"path": "AssetLoader.tpl",
-						"prevent_delete": false,
-						"type": "element",
-						"value": "AssetLoader",
-						"values": {
-						  "name": "background",
-						  "useAsset": ['bg.png'],
-						  "imagePath": "/img/bg.png"
-					  }
-				  }
-					]
-				  }
-				]
-			  }
-			],
-			"cascades": false,
-			"name": "Phaser Game",
-			"path": "PhaserGame.tpl",
-			"prevent_delete": false,
-			"type": "element",
-			"value": "PhaserGame",
-			"values": {
-			  "Width": 950,
-			  "Height": 600,
-			  "PhysicsEngine": "arcade",
-			  "WholeScreen": true
-			}
-		  }
-		]
+		"children": []
 	  }, {
 	  "name": "Page Footer",
 	  "type": "element",
