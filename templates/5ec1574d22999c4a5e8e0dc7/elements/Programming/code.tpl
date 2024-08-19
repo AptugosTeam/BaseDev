@@ -23,4 +23,6 @@ settings:
       {% endif %}
 children: []
 */
-{{ element.values.code | raw }}
+{% if not element.values.serverSide %}
+  {{ element.values.code | raw }}
+{% endif %}
