@@ -10,6 +10,8 @@ const fs = require('fs')
 const express = require('express')
 const bodyParser = require('body-parser')
 const fileupload = require('express-fileupload')
+{{ insert_setting('BackendImports') | raw }}
+
 {% if settings.apiURL|slice(0,5) == 'https' %}
 const https = require('https')
 {% endif %}
