@@ -7,13 +7,12 @@ if (State.usersReducer) {
     Store.dispatch({ type: "SET_ERROR", error: error })
     return false
   }
-} else {
+} else if (State.apps) {
   if (State.apps.find(app => app.settings.name === Parameters.Name)) {
     const error = 'Application with the same name exists'
     return { error }
   }
 }
-
 
 // Backwards compatibility
 let defaultTemplate
