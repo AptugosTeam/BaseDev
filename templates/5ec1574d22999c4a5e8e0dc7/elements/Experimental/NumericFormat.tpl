@@ -43,6 +43,16 @@ options:
     display: Min value
     type: text
     options: ''
+  - name: variant
+    display: Variant
+    type: dropdown
+    options:
+      return [['standard', 'Standard'],['filled', 'Filled'],['outlined', 'Outlined']]
+  - name: fullWidth
+    display: Use full width?
+    type: checkbox
+    settings:
+      default: false
   - name: fieldFormat
     display: Use field format
     type: checkbox
@@ -59,7 +69,7 @@ options:
 settings:
   - name: Packages
     value: |-
-      "react-number-format": "5.2.0",
+      "react-number-format": "5.4.0",
 children: []
 */
 {% set bpr %}
@@ -96,6 +106,8 @@ import { NumericFormat } from 'react-number-format'
         {% elseif element.values.decimalScale %}
         decimalScale={ {{ element.values.decimalScale | raw }} }
       {% endif %}
+      {% if element.values.fullWidth %}fullWidth{% endif %}
+      variant="{{ element.values.variant|default('standard') }}"
       {% if element.values.allowNegative %}
         allowNegative={false}
       {% endif %}

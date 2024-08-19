@@ -5,7 +5,7 @@ unique_id: iTMTweVR
 settings:
   - name: Packages
     value: |-
-      "react-number-format": "5.2.0",
+      "react-number-format": "5.4.0",
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
@@ -14,7 +14,7 @@ import { NumericFormat } from 'react-number-format'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set ph %}
-  const {{ field.column_name | friendly }}TextFieldProps = {
+  const {{ element.values.textFieldPropsNumeric | default(field.column_name | friendly) }}TextFieldProps = {
     id: "filled-multiline-flexible",
     {% if element.values.DisableUnderline %}
         InputProps: { disableUnderline: true },
@@ -84,5 +84,5 @@ import { NumericFormat } from 'react-number-format'
       handle{{ tableName }}Change("{{ field.column_name | friendly }}")(values.floatValue || 0)
     {% endif %}
     }}
-    {...{{ field.column_name | friendly }}TextFieldProps}
+    {...{{ element.values.textFieldPropsNumeric | default(field.column_name) | friendly }}TextFieldProps}
 />

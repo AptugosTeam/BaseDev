@@ -16,6 +16,11 @@ options:
     display: Max Width
     type: dropdown
     options: false;'xs';'sm';'md';'lg';'xl'
+  - name: disableEscapeKeyDown
+    display: Disable Escape KeyDown close Popup
+    type: checkbox
+    settings:
+      default: false
   - name: className
     display: className
     type: styles
@@ -37,6 +42,7 @@ import Dialog from '@mui/material/Dialog'
   open={ {{ element.values.open|default(element.values.visible) }} }
   {% if element.values.onclose %}onClose={ {{ element.values.onclose | functionOrCall }} }{% endif %}
   {% if element.values.maxWidth %}maxWidth={ {{ element.values.maxWidth }} }{% endif %}
+  {% if element.values.disableEscapeKeyDown %}disableEscapeKeyDown={ {{ element.values.disableEscapeKeyDown|default("false") }} }{% endif %}
   {% if element.values.className %}
     className={ {{element.values.className}} }
   {% endif %}

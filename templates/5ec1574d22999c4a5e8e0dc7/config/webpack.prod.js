@@ -23,6 +23,8 @@ module.exports = merge(commonConfig, {
   plugins: [
     new CleanWebpackPlugin(),
     new GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
       exclude: ['.htaccess']
     }),
     new CopyPlugin({

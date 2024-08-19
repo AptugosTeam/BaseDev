@@ -69,6 +69,13 @@ options:
     options: ''
     settings:
       active: true
+  - name: error
+    display: Error
+    type: variable
+    options: ''
+  - name: helperText
+    display: Helper Text
+    type: text
 children: []
 */
 {% set bpr %}
@@ -90,6 +97,8 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     select
     {% if element.values.fullwidth %}fullWidth{% endif %}
+    {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
+    {% if element.values.helperText %}helperText={ {{ element.values.helperText }} }{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
     {% if element.values.defaultValue %}defaultValue={{ element.values.defaultValue }}{% endif %}

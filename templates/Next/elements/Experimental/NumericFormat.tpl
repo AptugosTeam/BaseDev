@@ -55,7 +55,7 @@ options:
 settings:
   - name: Packages
     value: |-
-      "react-number-format": "5.2.0",
+      "react-number-format": "5.4.0",
 children: []
 */
 {% set bpr %}

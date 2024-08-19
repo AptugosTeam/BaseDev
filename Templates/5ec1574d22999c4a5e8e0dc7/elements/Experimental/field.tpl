@@ -136,6 +136,10 @@ options:
     settings:
       propertyCondition: Type
       condition: edit
+  - name: textFieldPropsNumeric
+    display: Text Field Props (Numeric Format)
+    type: text
+    advanced: true
 children: []
 */
 {% set bpr %}

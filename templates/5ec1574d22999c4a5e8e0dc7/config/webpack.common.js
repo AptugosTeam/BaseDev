@@ -46,12 +46,14 @@ module.exports = {
       },
       {
         test: /\.(scss|sass)$/,
-        use: ['style-loader', { loader: 'css-loader', options: {
-          url: false,
-          modules: {
-            localIdentName: "[path][name]__[local]--[hash:base64:5]",
-          },
-        }}, { loader: 'sass-loader', options: { sourceMap: true } }]
+        use: ['style-loader', {
+          loader: 'css-loader', options: {
+            url: false,
+            modules: {
+              localIdentName: "[path][name]__[local]--[hash:base64:5]",
+            },
+          }
+        }, { loader: 'sass-loader', options: { sourceMap: true } }]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -66,10 +68,19 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: './dist/index.html' }),new ProvidePlugin({
-    process: 'process/browser',
-    Buffer: ['buffer', 'Buffer'],
-  })],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './dist/index.html',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+      },
+    }),
+    new ProvidePlugin({
+      process: 'process/browser',
+      Buffer: ['buffer', 'Buffer'],
+    })],
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',

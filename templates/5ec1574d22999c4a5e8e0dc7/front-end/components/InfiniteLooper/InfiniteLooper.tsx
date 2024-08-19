@@ -17,7 +17,7 @@ interface InfiniteLooperProps extends React.PropsWithChildren {
 }
 
 const InfiniteLooper: FunctionComponent<InfiniteLooperProps> = (props) => {
-  const [looperInstances, setLooperInstances] = useState(1)
+  const [looperInstances, setLooperInstances] = useState(2)
   const outerRef = useRef<HTMLDivElement>(null)
   const innerRef = useRef<HTMLDivElement>(null)
 

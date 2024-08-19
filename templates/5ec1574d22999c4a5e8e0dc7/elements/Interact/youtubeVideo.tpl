@@ -19,4 +19,8 @@ settings:
 import YouTube from 'react-youtube'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<YouTube videoId={{ element.values.videoID | textOrVariable }}/>
+<YouTube videoId={{ element.values.videoID | textOrVariable }}
+  {% if element.values.className %}
+    className={ {{element.values.className}} }
+  {% endif %}
+/>
