@@ -12,6 +12,8 @@ options:
   - name: zoomLevel
     display: Zoom Level
     type: text
+    settings:
+      default: 6
   - name: minZoomLevel
     display: Min Zoom Level
     type: text
@@ -44,9 +46,7 @@ const cameraRef{{ element.unique_id }} = React.useRef<Camera>(null)
   {% endif %}
   minZoomLevel={ {{ element.values.minZoomLevel|default(1) }} }
   centerCoordinate={ {{ element.values.centerCoordinate|default('[50, 0]') }}}
-   {% if element.values.zoomLevel %}
-    zoomLevel={  {{ element.values.zoomLevel }}  }
-  {% endif %}
+  zoomLevel={ {{ element.values.zoomLevel|default(6) }} }
   followZoomLevel={ {{ element.values.followZoomLevel|default(12) }} }
   {% if element.values.maxBounds %}
     maxBounds={  {{ element.values.maxBounds }}  }
