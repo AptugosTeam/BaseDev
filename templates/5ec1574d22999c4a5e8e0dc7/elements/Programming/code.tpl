@@ -9,6 +9,18 @@ options:
     display: Code
     type: code
     options: ''
+  - name: serverSide
+    display: Back-End Code
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
+settings:
+  - name: ServerAddenum
+    value: |-
+      {% if element.values.serverSide %}
+      {{ element.values.code | raw }}
+      {% endif %}
 children: []
 */
 {{ element.values.code | raw }}
