@@ -11,6 +11,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const fileupload = require('express-fileupload')
 
+{{ insert_setting('BackendImports') | raw }}
+
 const app = express()
 {% set imagesfolder = insert_setting('filesFolder') %}
 {% if imagesfolder %}app.set('filesFolder', "{{ imagesfolder }}" ){% else %}app.set('filesFolder',__dirname + '/../dist/img'){% endif %}

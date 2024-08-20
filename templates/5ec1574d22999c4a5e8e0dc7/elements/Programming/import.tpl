@@ -32,23 +32,35 @@ options:
     advanced: true
     settings:
       default: false
-
+  - name: serverSide
+    display: Back-End Import
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
 settings:
   - name: Packages
     value: '{{ element.values.dependencies }}'
+  - name: BackendImports
+    value: |-
+      {% if element.values.serverSide %}
+      const {{ element.values.moduleName }} = require('{{ element.values.modulePath }}')
+      {% endif %}
 children: []
 */
-{% if element.values.importOnRoot %}
-  {% set IBA %}
-    import {{ element.values.moduleName }} from '{{ element.values.modulePath }}'
+{% if not element.values.serverSide %}
+  {% if element.values.importOnRoot %}
+    {% set IBA %}
+      import {{ element.values.moduleName }} from '{{ element.values.modulePath }}'
+    {% endset %}
+    {{ add_setting('SiteWideBeforePageRenderAddenum', IBA) }}
+  {% endif %}
+  {% if element.values.forceBPR %}
+  {% set bpr %}
+  import {{ element.values.moduleName }} from '{{ element.values.modulePath }}'
   {% endset %}
-  {{ add_setting('SiteWideBeforePageRenderAddenum', IBA) }}
-{% endif %}
-{% if element.values.forceBPR %}
-{% set bpr %}
-import {{ element.values.moduleName }} from '{{ element.values.modulePath }}'
-{% endset %}
-{{ save_delayed('bpr', bpr )}}
-{% else %}
-import {{ element.values.moduleName }} from '{{ element.values.modulePath }}'
+  {{ save_delayed('bpr', bpr )}}
+  {% else %}
+  import {{ element.values.moduleName }} from '{{ element.values.modulePath }}'
+  {% endif %}
 {% endif %}

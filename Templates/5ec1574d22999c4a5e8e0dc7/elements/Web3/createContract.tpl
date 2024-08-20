@@ -29,7 +29,7 @@ settings:
     value: '"solc": "0.8.17", "web3": "^4.8.0",' 
 */
   {% if element.values.customroute %}
-    {{ addExtraFile('{{element.values.customroute}}' ~ element.values.filename ~ '.sol', element.values.contract) }}
+    {{ addExtraFile(element.values.customroute ~ element.values.filename ~ '.sol', element.values.contract) }}
   {% else %}
     {{ addExtraFile('back-end/contracts/' ~ element.values.filename ~ '.sol', element.values.contract) }}
   {% endif %}
