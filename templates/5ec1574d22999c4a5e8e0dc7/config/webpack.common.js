@@ -7,6 +7,11 @@ unique_id: EpA5lGLz
 const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ProvidePlugin = require('webpack/lib/ProvidePlugin')
+const webpack = require('webpack')
+const isProduction = process.env.NODE_ENV === 'production';
+const envFile = isProduction ? '.env.production' : '.env.development';
+const envPath = resolve(__dirname, envFile);
+const envVars = require('dotenv').config({ path: envPath }).parsed || {};
 module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.css'],
@@ -80,6 +85,9 @@ module.exports = {
     new ProvidePlugin({
       process: 'process/browser',
       Buffer: ['buffer', 'Buffer'],
+    }),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(envVars)
     })],
   externals: {
     react: 'React',
