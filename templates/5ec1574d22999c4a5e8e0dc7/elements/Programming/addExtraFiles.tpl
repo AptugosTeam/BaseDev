@@ -24,12 +24,12 @@ options:
 */
 
 {% set theconstructor %}
-  {{ element.values.code }}
-  {{ content | raw }}
+{{ element.values.code }}
+{{ content | raw }}
 {% endset %}
 
 {% if element.values.customroute %}
-  {{ addExtraFile(element.values.customroute ~ '/' ~ element.values.filename , theconstructor) }}
+{{ addExtraFile(element.values.customroute ~ '/' ~ element.values.filename , theconstructor) }}
 {% else %}
-  {{ addExtraFile( element.values.mainFolder | default("back-end") ~ '/' ~ element.values.folderPath ~ '/' ~ element.values.filename, theconstructor) }}
+{{ addExtraFile( element.values.mainFolder | default("back-end") ~ '/' ~ element.values.folderPath ~ '/' ~ element.values.filename, theconstructor) }}
 {% endif %}
