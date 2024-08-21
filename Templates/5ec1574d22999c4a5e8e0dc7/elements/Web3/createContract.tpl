@@ -14,7 +14,10 @@ options:
     display: Arguments
     type: text
   - name: customroute
-    display: Custom Route
+    display: Store File Path
+    type: text
+  - name: filePath
+    display: File Path
     type: text
   - name: senderaddress
     display: Sender Address
@@ -37,7 +40,7 @@ settings:
 const compileContract = () => {
   const fs = require ('fs')
   const solc = require('solc')
-  const contractFilePath = `${__dirname}/{{element.values.customroute|default('contracts')}}/{{element.values.filename|raw }}.sol`
+  const contractFilePath = `${__dirname}/{{element.values.filePath|default('contracts')}}/{{element.values.filename|raw }}.sol`
   const fileName = '{{ element.values.filename }}'
   const contractName = '{{ element.values.filename }}'
   try {
