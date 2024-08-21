@@ -117,7 +117,7 @@ import Grid from '@mui/material/Grid'
     {% if element.values.extrasmallcolumns %}xs={ {{ element.values.extrasmallcolumns }} }{% endif %}
     {% if element.values.smallcolumns %}sm={ {{ element.values.smallcolumns }} }{% endif %}
     {% if element.values.midcolumns %}md={ {{ element.values.midcolumns }} }{% endif %}
-    {% if element.values.large %}lg={ {{ element.values.large }} }{% endif %}
+    {% if element.values.largecolumns %}lg={ {{ element.values.largecolumns }} }{% endif %}
   {% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
 >
