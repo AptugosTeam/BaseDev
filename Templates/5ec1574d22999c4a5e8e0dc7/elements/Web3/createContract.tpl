@@ -75,7 +75,7 @@ const compileContract = () => {
 
 async function deployContract(bytecode, abi, constructorArgs) {
   const clientAccount = {{ element.values.senderaddress | textOrVariable | default('0xYourClientAddress')}}
-  const clientPrivateKey = {{ element.values.senderprivatekey | | textOrVariable | default('YourClientPrivateKey')}}
+  const clientPrivateKey = {{ element.values.senderprivatekey | textOrVariable | default('YourClientPrivateKey')}}
 
   try {
     const myContract = new web3.eth.Contract(JSON.parse(abi))
