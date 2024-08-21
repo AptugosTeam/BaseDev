@@ -74,8 +74,8 @@ const compileContract = () => {
 }
 
 async function deployContract(bytecode, abi, constructorArgs) {
-  const clientAccount = '{{ element.values.senderaddress | default('0xYourClientAddress')}}'
-  const clientPrivateKey = '{{ element.values.senderprivatekey | default('YourClientPrivateKey')}}'
+  const clientAccount = {{ element.values.senderaddress | textOrVariable | default('0xYourClientAddress')}}
+  const clientPrivateKey = {{ element.values.senderprivatekey | | textOrVariable | default('YourClientPrivateKey')}}
 
   try {
     const myContract = new web3.eth.Contract(JSON.parse(abi))
@@ -113,7 +113,7 @@ try {
   const compiledContract = compileContract()
   const contractDeployment = await deployContract(compiledContract.bytecode, compiledContract.abi, {{ element.values.arguments }});
   
-  console.log('********* contract created *********', contractDeployment.contractAddress)
+  console.log('********* contract created *********', contractDeployment?.contractAddress)
 
   return contractDeployment;
 } catch (error) {
