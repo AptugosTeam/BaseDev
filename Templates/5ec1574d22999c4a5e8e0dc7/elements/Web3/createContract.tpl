@@ -35,7 +35,7 @@ settings:
   {% endif %}
   
 const compileContract = () => {
-  const contractFilePath = "{{element.values.customroute|default('back-end/contracts/')}}{{element.values.filename|raw }}.sol"
+  const contractFilePath = `{{element.values.customroute|default('back-end/contracts/')}}{{element.values.filename|raw }}.sol`
   const fileName = '{{ element.values.filename }}'
   const contractName = '{{ element.values.filename }}'
   const fs = require ("fs")
