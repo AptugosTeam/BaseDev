@@ -21,6 +21,10 @@ options:
     display: On Press
     type: text
     options: ''
+  - name: onChangeText
+    display: On Change
+    type: code
+    options: ''
   - name: secureTextEntry
     display: Secure Text Entry
     type: text
@@ -58,10 +62,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 >
   <TextInput
  {% if element.values.inputStyle %} style={ {{ element.values.inputStyle }} }{% endif %}
-    {% if element.values.value %} value={{ element.values.value }} {% endif %}
-     {% if element.values.placeholder %} placeholder= "{{ element.values.placeholder }}" {% endif %}
-    {% if element.values.secureTextEntry %} secureTextEntry={{ element.values.secureTextEntry }} {% endif %}
-   
+ {% if element.values.onChangeText %} onChangeText = {(e) => {{ element.values.onChangeText }} } {% endif %}
+ {% if element.values.value %} value={{ element.values.value }} {% endif %}
+ {% if element.values.placeholder %} placeholder= "{{ element.values.placeholder }}" {% endif %}
+ {% if element.values.secureTextEntry %} secureTextEntry={{ element.values.secureTextEntry }} {% endif %}
   />
   <TouchableOpacity 
   {% if element.values.onPress %} onPress={{ element.values.onPress }} {% endif %}

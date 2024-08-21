@@ -22,7 +22,9 @@ import TextField from '@mui/material/TextField'
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     margin='{{ element.values.margin|default("dense") }}'
     size='{{ element.values.size|default("medium") }}'
-    label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    {% if not element.values.disableLabel %}
+        label={{ field.prompt | default(field.column_name) | textOrVariable }}
+    {% endif %}
     {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}
     type="text"
     fullWidth
