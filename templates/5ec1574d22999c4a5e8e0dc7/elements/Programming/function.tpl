@@ -48,6 +48,12 @@ settings:
       {% endif %}
 children: []
 */
+{% if element.values.comment %}
+  /*
+  {{ element.values.comment }}
+  */
+{% endif %}
+
 {% if not element.values.serverSide %}
   {% if element.values.priority %}
   {% set ph %}
