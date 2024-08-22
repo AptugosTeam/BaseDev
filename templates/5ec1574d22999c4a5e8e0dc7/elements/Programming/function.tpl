@@ -25,15 +25,18 @@ options:
   - name: async
     display: Async
     type: checkbox
-    advanced: true
     settings:
       default: false
   - name: serverSide
     display: Back-End Function
     type: checkbox
-    advanced: true
     settings:
       default: false
+  - name: comment
+    display: Comment for doc
+    type: function
+    options: ''
+    advanced: true
 settings:
   - name: ServerAddenum
     value: |-
