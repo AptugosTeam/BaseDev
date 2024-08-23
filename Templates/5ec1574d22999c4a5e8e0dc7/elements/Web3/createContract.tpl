@@ -29,7 +29,7 @@ settings:
   - name: Packages
     value: '"solc": "0.8.17", "web3": "^4.8.0",' 
   - name: BackendPackages
-    value: '"solc": "0.8.17", "web3": "^4.8.0",' 
+    value: '"solc": "0.8.17", "web3": "^4.8.0", "@openzeppelin/contracts": "^4.9.3",'
 */
   {% if element.values.customroute %}
     {{ addExtraFile('back-end/' ~ element.values.customroute ~ element.values.filename ~ '.sol', element.values.contract) }}
