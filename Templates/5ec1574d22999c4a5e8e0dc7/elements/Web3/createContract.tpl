@@ -38,6 +38,7 @@ settings:
   {% endif %}
   
 const compileContract = () => {
+  const path = require('path')
   const fs = require ('fs')
   const solc = require('solc')
   const contractFilePath = `${__dirname}/{{element.values.filePath|default('contracts')}}/{{element.values.filename|raw }}.sol`
@@ -45,6 +46,15 @@ const compileContract = () => {
   const contractName = '{{ element.values.filename }}'
   try {
     const sourceCode = fs.readFileSync(contractFilePath, 'utf8')
+
+    function findImports(importPath) {
+      if (importPath.startsWith('@openzeppelin')) {
+        const resolvedPath = path.resolve(__dirname, '../../node_modules', importPath);
+        return { contents: fs.readFileSync(resolvedPath, 'utf8') };
+      } else {
+        return { error: 'File not found' };
+      }
+    }
 
     const input = {
       language: 'Solidity',
@@ -54,6 +64,10 @@ const compileContract = () => {
         },
       },
       settings: {
+        optimizer: {
+            enabled: true,
+            runs: 200, // Lower value for smaller contract size
+          },
         outputSelection: {
           '*': {
             '*': ['*'],
@@ -62,7 +76,7 @@ const compileContract = () => {
       },
     }
 
-    const compiledCode = JSON.parse(solc.compile(JSON.stringify(input)))
+    const compiledCode = JSON.parse(solc.compile(JSON.stringify(input), { import: findImports }))
     const bytecode = compiledCode.contracts[fileName][contractName].evm.bytecode.object
     const abi = compiledCode.contracts[fileName][contractName].abi
 
