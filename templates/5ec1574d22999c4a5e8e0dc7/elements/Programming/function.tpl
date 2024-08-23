@@ -41,6 +41,11 @@ settings:
   - name: ServerAddenum
     value: |-
       {% if element.values.serverSide %}
+      {% if element.values.comment %}
+        /**
+        {{ element.values.comment }}
+        */
+      {% endif %}
       global.{{ element.values.functionName }} = {% if element.values.async%}async {% endif %}({{ element.values.functionParameters }}) => {
         {{ element.values.functionBody | raw }}
         {{ content | raw }}  
@@ -49,7 +54,7 @@ settings:
 children: []
 */
 {% if element.values.comment %}
-  /*
+  /**
   {{ element.values.comment }}
   */
 {% endif %}
