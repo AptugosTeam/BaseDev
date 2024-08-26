@@ -1,0 +1,8 @@
+/*
+path: components.json
+completePath: >-
+  C:\Users\Usuario\Aptugo\BaseDev\Templates\Next\elements\Shadcn-UI\components.json
+keyPath: elements\Shadcn-UI\components.json
+unique_id: ccOSzwJa
+*/
+{{ insert_setting('sheetJson') | raw }}

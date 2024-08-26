@@ -54,12 +54,12 @@ import authHeaders from '@services/auth-header'
 authHeaders().then(result => {
     {% if element.values.loginScreenNot != 'none' and element.values.loginScreenNot is defined %}
       if (!result) {
-        navigation.push( {{ destNot | textOrVariable }} )
+        router.push( {{ destNot | textOrVariable }} )
       }
     {% endif %}
     {% if element.values.loginScreen != 'none' and element.values.loginScreen is defined %}
       if (result) {
-        navigation.push( {{ dest | textOrVariable }} )
+        router.push( {{ dest | textOrVariable }} )
       }
     {% endif %}
   })

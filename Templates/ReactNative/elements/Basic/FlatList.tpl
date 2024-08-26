@@ -36,6 +36,13 @@ options:
   - name: parameter
     display: Parameter to Render Item
     type: text
+  - name: contentContainerStyle
+    display: Container Style
+    type: text
+  - name: horizontal
+    display: Is horizontal?
+    type: checkbox
+    options: ''  
 children: []
 helpText: Basic HTML Div element
 */
@@ -45,7 +52,9 @@ import { FlatList } from 'react-native'
 {{ save_delayed('bpr',bpr)}}
 <FlatList
   {% if element.values.Style %}style={ {{element.values.Style}} }{% endif %}
+  {% if element.values.contentContainerStyle %}contentContainerStyle={ {{element.values.contentContainerStyle}} }{% endif %}
   {% if element.values.nestedScrollEnabled %}nestedScrollEnabled{% endif %}
+  {% if element.values.horizontal %}horizontal{% endif %}
   {% if element.values.data %}data={ {{element.values.data}} }{% endif %}
   {% if element.children %}renderItem={({{element.values.parameter | default('item')}}) => {% for child in element.children %}{{ child.rendered | raw }}{% endfor %} }
   {% elseif element.values.renderItem %}renderItem={ {{element.values.renderItem | functionOrCall }} }{% endif %}

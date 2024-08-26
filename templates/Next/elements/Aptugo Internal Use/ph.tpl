@@ -13,6 +13,7 @@ import { mergeClasses } from '@services/utils'
   const localStyles = { {{ element.values.localStyles | raw }} }
 {% endif %}
 const {{ page.name | friendly }}: FunctionComponent = (props: any) => {
+  const router = useRouter()
   const {
     history: navigation,
     match: { params = {} } = {},
