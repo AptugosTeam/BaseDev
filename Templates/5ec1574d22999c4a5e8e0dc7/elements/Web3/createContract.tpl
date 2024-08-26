@@ -103,14 +103,15 @@ async function deployContract(bytecode, abi, constructorArgs) {
       arguments: constructorArgs
     })
 
-    const gas = await deploy.estimateGas({ from: clientAccount })
+    const nonce = await web3.eth.getTransactionCount(clientAccount, 'pending');
+    const gas = await deploy.estimateGas({ from: clientAccount, nonce })
 	
-
     const tx = {
       from: clientAccount,
       data: deploy.encodeABI(),
       gas: web3.utils.toHex(gas),
       gasPrice: await web3.eth.getGasPrice(),
+      nonce: web3.utils.toHex(nonce),
     };
 
     const signedTx = await web3.eth.accounts.signTransaction(tx, clientPrivateKey);
