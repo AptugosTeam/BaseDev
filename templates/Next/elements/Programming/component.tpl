@@ -6,7 +6,7 @@ usesDelays: [bpr]
 delayContext: true
 options:
   - name: name
-    display: ComponentName
+    display: Component Name
     type: text
     options: ''
     settings:
