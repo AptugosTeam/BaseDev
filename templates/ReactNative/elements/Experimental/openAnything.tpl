@@ -1,11 +1,41 @@
 /*
 path: openAnything.tpl
-completePath: >-
-  /Users/ari/Aptugo/BaseDev/templates/templates/ReactNative/elements/Experimental/openAnything.tpl
-keyPath: elements/Experimental/openAnything.tpl
-unique_id: e0dply6G
+type: file
+completePath: elements/Experimental/openAnything.tpl
+unique_id: openAnyting069
+icon: ico-field
+settings:
+  - name: Packages
+    value: '"react-native-openanything": "latest",'
+options:
+  - name: ButtonText
+    display: Button Text to display
+    type: text
+    options: ''
+    settings:
+      default: Button
+  - name: Action
+    display: Action
+    type: dropdown
+    options: Pdf
+  - name: Variable
+    display: Variable to use
+    type: text
+    options: ''
+  - name: className
+    display: ClassName
+    type: text
+    options: ''
+  - name: labelStyle
+    display: ClassName for Label
+    type: text
+    options: ''
+  - name: icon
+    display: Write the name of an icon
+    type: text
+    options: ''
+children: []
 */
-
 {% set bpr %}
 import * as OpenAnything from 'react-native-openanything';
 import { Button } from 'react-native-paper';
