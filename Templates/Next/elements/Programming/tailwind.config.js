@@ -4,6 +4,7 @@ completePath: >-
   C:\Users\Usuario\Aptugo\BaseDev\Templates\Next\elements\Programming\tailwind.config.js
 keyPath: elements\Programming\tailwind.config.js
 unique_id: ucieiQnA
+internalUse: true
 */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -12,7 +13,7 @@ module.exports = {
         './src/components/**/*.{js,ts,jsx,tsx}',
     ],
     theme: {
-        extend: {},
+        {{ element.values.theme }}
     },
     plugins: [],
 }
