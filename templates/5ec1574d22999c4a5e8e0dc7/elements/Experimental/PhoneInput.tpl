@@ -66,6 +66,11 @@ options:
     type: checkbox
     settings:
       default: false
+  - name: isCountryCodeEditable
+    display: is Country Code Editable?
+    type: checkbox
+    settings:
+      default: true
   - name: buttonStyle
     display: Country button styles
     type: text
@@ -105,8 +110,13 @@ import PhoneInput from 'react-phone-input-2'
     {% if element.values.disabled %}
         disabled={ {{element.values.disabled}} }
     {% endif %}
-    {% if element.value.disableDropdown %}
-        disableDropdown={ {{elementva.value.disableDropdown}} }
+    {% if element.values.disableDropdown %}
+        disableDropdown={ {{element.values.disableDropdown}} }
+    {% endif %}
+    {% if element.values.isCountryCodeEditable %}
+        countryCodeEditable={true}
+    {% else %}
+        countryCodeEditable={false}
     {% endif %}
     {% if element.values.onChange %}
       {% if element.values.plainOnChange %}
