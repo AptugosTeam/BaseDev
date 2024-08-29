@@ -19,6 +19,10 @@ options:
   - name: lines
     display: Display lines
     type: text
+  - name: onPress
+    display: On Press
+    type: text
+    options: ''
   - name: expandable
     display: Expandable
     type: checkbox
@@ -64,5 +68,6 @@ export function MoreLessText({ children, numberOfLines }) {
 <{{ tag }}
   {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
   {% if element.values.lines %}numberOfLines={ {{ element.values.lines }} }{% endif %}
+  {% if element.values.onPress %}onPress={ {{ element.values.onPress | functionOrCall }} }{% endif %}
   {% if element.values.adjustsFontSizeToFit %}adjustsFontSizeToFit{% endif %}
 >{{ element.values.Content | raw }}{{ content | raw }}</{{ tag }}>
