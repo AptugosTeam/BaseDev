@@ -34,6 +34,13 @@ options:
     options: ''
     settings:
       value: 'false'
+  - name: onError
+    display: Catch Error
+    type: function
+    options: ''
+    advanced: true
+    settings:
+      default: console.error(error)
 sourceType: javascript
 children: []
 */
@@ -47,4 +54,10 @@ import axios from 'axios'
 {% endif %}
 {% if element.values.await %}await{% endif %} axios.{{ element.values.method|default('get') }}({{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}, {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}).then(result => {
  {{ content | raw }}
+}).catch((error) => {
+  {% if element.values.onError %}
+    {{ element.values.onError }} 
+  {% else %}
+    console.error(error)
+  {% endif %}
 })
