@@ -38,7 +38,7 @@ options:
     type: text
     options: ''
 */
-const text = this.add.text(
+this.add.text(
   +`{{ element.values.posX | default('5') }}`,
   +`{{ element.values.posY | default('5') }}`,
   {% if element.values.textdisplay %}`{{ element.values.textdisplay }}`,{% else %}"",{% endif %}
