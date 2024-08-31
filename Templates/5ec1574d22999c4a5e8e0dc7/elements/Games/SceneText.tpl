@@ -29,5 +29,23 @@ options:
     display: Y
     type: text
     options: ''
+  - name: align
+    display: Align
+    type: dropdown
+    options: return [['left', 'Left'], ['center', 'Center'], ['right', 'Right']]
+  - name: setOrigin
+    display: Set Origin (x,y)
+    type: text
+    options: ''
 */
-this.add.text(+`{{ element.values.posX | default('5')}}`,+`{{ element.values.posY | default('5')}}`,{% if element.values.textdisplay %}`{{ element.values.textdisplay}}`,{% else %}"",{% endif %}{ font: '{{ element.values.size | default('16') }}px {{ element.values.font | default('Arial Black') }}', color: '{{ element.values.color | default('#000000') }}' });
+const text = this.add.text(
+  +`{{ element.values.posX | default('5') }}`,
+  +`{{ element.values.posY | default('5') }}`,
+  {% if element.values.textdisplay %}`{{ element.values.textdisplay }}`,{% else %}"",{% endif %}
+  {
+    font: '{{ element.values.size | default('16') }}px {{ element.values.font | default('Arial Black') }}',
+    color: '{{ element.values.color | default('#000000') }}',
+    align: '{{ element.values.align | default('left') }}'
+  }
+){% if element.values.setOrigin %}.setOrigin({{ element.values.setOrigin }});
+{% endif %}
