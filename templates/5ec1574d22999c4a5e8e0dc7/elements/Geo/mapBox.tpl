@@ -254,6 +254,17 @@ options:
   - name: circleColor
     display: Cluster circle color
     type: text
+  - name: modifyOnLoad
+    display: Modify load field
+    type: checkbox
+    settings:
+      default: false
+  - name: onLoad
+    display: on load field
+    type: code
+    settings:
+      propertyCondition: modifyOnLoad
+      condition: true
 extraFiles:
   - source: 'elements/Geo/MapBox/mapbox.css'
     destination: 'front-end/components/MapBox/mapbox.css'
@@ -350,28 +361,33 @@ export const unclusteredPointLayer: LayerProps = {
     ref={mapRef}
     mapStyle={{ element.values.style |default('mapbox://styles/mapbox/light-v9') | textOrVariable }}
     mapboxAccessToken='{{ element.values.accessToken }}'
-    onLoad={(e) => {
-      if (mapRef.current) {
-        const loadURL = (url) => {
-          return axios.get(url, { responseType: 'arraybuffer' }).then(response => {
-            const imageBlob = new Blob([response.data], { type: 'image/jpeg' })
-            return URL.createObjectURL(imageBlob)
-          })
-        }
-        
-        mapRef.current.on('styleimagemissing', (e) => {
-          loadURL(e.id).then(response => {
-            mapRef.current.loadImage(response, (error, image) => {
-              if (error) return
-              mapRef.current.addImage(e.id, image)
+    {% if element.values.modifyOnLoad %}
+      onLoad={(e) => { {{ element.values.onLoad }} }}
+    {% else %}
+      onLoad={(e) => {
+        if (mapRef.current) {
+          const loadURL = (url) => {
+            return axios.get(url, { responseType: 'arraybuffer' }).then(response => {
+              const imageBlob = new Blob([response.data], { type: 'image/jpeg' })
+              return URL.createObjectURL(imageBlob)
+            })
+          }
+          
+          mapRef.current.on('styleimagemissing', (e) => {
+            loadURL(e.id).then(response => {
+              mapRef.current.loadImage(response, (error, image) => {
+                if (error) return
+                mapRef.current.addImage(e.id, image)
+              })
             })
           })
-        })
-      }
-    }}
+        }
+      }}
+    {% endif %}
+    
     {% if element.values.maxBounds %}maxBounds={ {{ element.values.maxBounds }} }{% endif %}
     onIdle={onMapIdle}
-    {% if onPressArray %}
+    {% if onPressArray and not element.values.onClick  %}
       onClick={async(pressedShape) => { {{ onPressArray | join | raw }} }}
     {% endif %}
 {% if element.values.onClick %}onClick={ {{ element.values.onClick | functionOrCall }} }{% endif %}
