@@ -43,6 +43,7 @@ import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import 'dayjs/locale/es';
+import dayjs from 'dayjs';
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
