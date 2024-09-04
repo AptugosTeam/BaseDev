@@ -51,7 +51,7 @@ settings:
 [
   "@rnmapbox/maps",
   {
-    "RNMapboxMapsVersion": "10.16.2",
+    "RNMapboxMapsVersion": "11.3.0",
     "RNMapboxMapsDownloadToken": "{{ element.values.accessToken }}"
   }],
   [
