@@ -58,7 +58,11 @@ unique_id: i1kD8rN4
     "extra": {
       "react": {
         "transformer": "react-native-sass-transformer"
+      },
+      "eas": {
+        "projectId": "1234"
       }
-    }
+    },
+    "owner": "aptugo"
   }
 }
