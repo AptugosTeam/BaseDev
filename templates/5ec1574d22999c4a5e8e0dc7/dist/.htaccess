@@ -7,5 +7,5 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
-
+{{ insert_setting('htaccessFile', HTAF) }}
 RewriteRule ^ index.html [L]
