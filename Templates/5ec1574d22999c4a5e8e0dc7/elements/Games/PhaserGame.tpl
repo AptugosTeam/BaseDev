@@ -50,8 +50,8 @@ options:
     display: Friction
     type: text
     options: ''
-
 */
+
 {% set scenes = [] %}
 {% for child in element.children %}
   {% set scenes = scenes|merge([child.values.name|default(child.unique_id) | friendly | capitalize ]) %}
@@ -67,7 +67,7 @@ options:
   {% endfor %}
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{% set bpr %}
+{% set ph %}
 const config_{{ element.unique_id }}: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   parent: '{{ id }}',
@@ -97,7 +97,7 @@ const config_{{ element.unique_id }}: Phaser.Types.Core.GameConfig = {
   {% endif %}
 }
 {% endset %}
-{{ save_delayed('bpr',bpr) }}
+{{ save_delayed('ph',ph) }}
 {% set ph %}
 React.useEffect(() => {
   new Phaser.Game(config_{{ element.unique_id }})
