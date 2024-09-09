@@ -8,7 +8,7 @@ options:
     display: Title
     type: text
     options: ''
-  - name: chaset
+  - name: charset
     display: Meta charSet
     type: text
     options: ''
@@ -27,7 +27,7 @@ import { Helmet } from "react-helmet"
         <title>{{element.values.title}}</title>
     {% endif %}
     {% if element.values.title %}
-        <meta charSet="{{element.values.charSet}}" />
+        <meta charSet="{{element.values.charset}}" />
     {% endif %}
 {{ content | raw }}
 </Helmet>
