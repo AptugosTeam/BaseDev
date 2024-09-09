@@ -33,6 +33,7 @@ unique_id: Zw2zePwz
       "@components/*": ["./src/components/*"],
       "@api-lib/*": ["./src/api-lib/*"],
       "@lib/*": ["./src/lib/*"],
+      "@store/*": ["./src/store/*"],
       "@/*": ["./src/*"],
       "public": ["public"]
     }
