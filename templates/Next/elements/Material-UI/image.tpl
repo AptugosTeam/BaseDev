@@ -61,13 +61,22 @@ options:
     type: checkbox
     options: ''
     advanced: true
+  - name: priority
+    display: Priority?
+    type: checkbox
+    options: ''
+    advanced: true
 */
+{% set bpr %}
+import Image from 'next/image'
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
 {% set tag = 'picture' %}
 {% if element.values.background %}{%set tag = 'div' %}{% endif %}
 {% set path = element.values.path %}
 {% set webppath = element.values.webppath %}
-{% set width = element.values.width|default(null) %}
-{% set height = element.values.height|default(null) %}
+{% set width = element.values.width|default(800) %}
+{% set height = element.values.height|default(400) %}
 {% if element.values.useAsset and element.values.useAsset != 'none' %}
   {% set asset = element.values.useAsset|assetData %}
   {% if width == null %}
@@ -85,21 +94,15 @@ options:
     {% endfor %}
   {% endif %}
 {% endif %}
-<{{ tag }}
-  {% if element.values.className %}className={ {{element.values.className}} }{% endif %}
->
   {% if webppath %}
   <source type="image/webp" srcSet="{{ webppath }}" />
   {% endif %}
-  <img
+  <Image
     src={{ path|textOrVariable }}
     alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
-    {% if width %}
-      width={{ width|textOrVariable }}
-    {% endif %}
-    {% if height %}
-      height={{ height|textOrVariable }}
-    {% endif %}
+    width={ {{ width }} }
+    height={ {{ height }} }
+    {% if element.values.className %}className={ {{element.values.className}} }{% endif %}
     {% if element.values.onLoad %}
       onLoad={ {{ element.values.onLoad }} }
     {% endif %}
@@ -109,6 +112,8 @@ options:
     {% if element.values.draggable %}
       draggable={false}
     {% endif %}
+    {% if element.values.priority %}
+      priority
+    {% endif %}
   />
   {{ content | raw }}
-</{{ tag }}>
