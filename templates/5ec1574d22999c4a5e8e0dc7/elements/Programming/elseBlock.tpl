@@ -24,7 +24,7 @@ helpText: Define el bloque de código para el else
 children: []
 */
 {% if element.values.checkboxElseIf %}
-  } else if ({{ element.values.condition }}){
+  else if ({{ element.values.condition }}){
 {% else %}
   } else {
 {% endif %}
