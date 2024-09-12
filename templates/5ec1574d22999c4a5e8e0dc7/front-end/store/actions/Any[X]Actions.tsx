@@ -35,6 +35,11 @@ export enum {{ table.name | friendly | capitalize }}ActionTypes {
   EDITING_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/editing',
   EDITED_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/edited',
   EDITING_{{ table.name | friendly | upper }}_FAILED = '{{ table.name | friendly | lower }}/editing_failed'
+
+  VIEW_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/view',
+  VIEWING_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/viewing',
+  VIEWED_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/viewed',
+  VIEWING_{{ table.name | friendly | upper }}_FAILED = '{{ table.name | friendly | lower }}/viewing_failed'
 }
 
 export function search{{ table.name | friendly | capitalize }}(searchOptions: TSearchOptions | string, keep?: boolean): ISearch{{ table.name | friendly | capitalize }}Action {
@@ -175,6 +180,32 @@ export function editing{{ table.name | friendly | capitalize }}Failed(): IEditin
   return {
     type: {{ table.name | friendly | capitalize }}ActionTypes.EDITING_{{ table.name | friendly | upper }}_FAILED,
   }
+
+export function view{{ table.name | friendly | capitalize }}({{ table.singleName | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item): IView{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.VIEW_{{ table.name | friendly | upper }},
+    payload: {{ table.singleName | friendly | lower }}
+  }
+}
+
+export function viewing{{ table.name | friendly | capitalize }}(): IViewing{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.VIEWING_{{ table.name | friendly | upper }},
+  }
+}
+
+export function viewed{{ table.name | friendly | capitalize }}({{ table.name | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item): IViewed{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.VIEWED_{{ table.name | friendly | upper }},
+    payload: {{ table.name | friendly | lower }}
+  }
+}
+
+export function viewing{{ table.name | friendly | capitalize }}Failed(): IViewing{{ table.name | friendly | capitalize }}FailedAction {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.VIEWING_{{ table.name | friendly | upper }}_FAILED,
+  }
+}
 }
 
 type TSearchOptions = {
@@ -290,6 +321,24 @@ export interface IEditing{{ table.name | friendly | capitalize }}FailedAction {
   type: {{ table.name | friendly | capitalize }}ActionTypes.EDITING_{{ table.name | friendly | upper }}_FAILED
 }
 
+export interface IView{{ table.name | friendly | capitalize }}Action {
+  type: {{ table.name | friendly | capitalize }}ActionTypes.VIEW_{{ table.name | friendly | upper }}
+  payload: I{{ table.name | friendly | capitalize }}Item
+}
+
+export interface IViewing{{ table.name | friendly | capitalize }}Action {
+  type: {{ table.name | friendly | capitalize }}ActionTypes.VIEWING_{{ table.name | friendly | upper }}
+}
+
+export interface IViewed{{ table.name | friendly | capitalize }}Action {
+  type: {{ table.name | friendly | capitalize }}ActionTypes.VIEWED_{{ table.name | friendly | upper }}
+  payload: I{{ table.name | friendly | capitalize }}Item
+}
+
+export interface IViewing{{ table.name | friendly | capitalize }}FailedAction {
+  type: {{ table.name | friendly | capitalize }}ActionTypes.VIEWING_{{ table.name | friendly | upper }}_FAILED
+}
+
 export type {{ table.name | friendly | capitalize }}Action = 
   | ISearch{{ table.name | friendly | capitalize }}Action
   | ISearching{{ table.name | friendly | capitalize }}Action
@@ -311,3 +360,7 @@ export type {{ table.name | friendly | capitalize }}Action =
   | IEditing{{ table.name | friendly | capitalize }}Action
   | IEdited{{ table.name | friendly | capitalize }}Action
   | IEditing{{ table.name | friendly | capitalize }}FailedAction
+  | IView{{ table.name | friendly | capitalize }}Action
+  | IViewing{{ table.name | friendly | capitalize }}Action
+  | IViewed{{ table.name | friendly | capitalize }}Action
+  | IViewing{{ table.name | friendly | capitalize }}FailedAction

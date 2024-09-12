@@ -61,6 +61,14 @@ options:
     display: Edit - Button Text
     type: text
     options: ''
+  - name: viewTitle
+    display: View - Title
+    type: text
+    options: ''
+  - name: viewIntroText
+    display: View - Intro Text
+    type: text
+    options: ''
   - name: deleteTitle
     display: Delete - Title
     type: text
@@ -115,6 +123,9 @@ import { add{{ friendlyTableName }} } from '@store/actions/{{ table.name | frien
 {% set bpr %}
 import { edit{{ friendlyTableName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
+{% set bpr %}
+import { view{{ friendlyTableName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
+{% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
 import { remove{{ friendlySingleName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
@@ -125,7 +136,7 @@ import AddDialog from '../components/Dialog/Dialog'
 {% endset %}
 {{ save_delayed('bpr', bpr2 ) }}
 {% set ph %}
-  const [{{ dialogVariable }}, set{{ dialogVariable }}] = React.useState<'add' | 'edit' | 'delete' | "">('')
+  const [{{ dialogVariable }}, set{{ dialogVariable }}] = React.useState<'add' | 'edit' | 'view' | 'delete' | "">('')
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% set ph %}
@@ -144,6 +155,7 @@ import AddDialog from '../components/Dialog/Dialog'
   action={ {{ dialogVariable }} }
   addOptions={ { title: '{{ element.values.title }}', text: '{{ element.values.introText }}', button: '{{ element.values.button }}' } }
   editOptions={ { title: '{{ element.values.editTitle }}', text: '{{ element.values.editIntroText }}', button: '{{ element.values.editButton }}' } }
+  viewOptions={ { title: '{{ element.values.viewTitle }}', text: '{{ element.values.viewIntroText }}' } }
   removeOptions={ { title: '{{ element.values.deleteTitle }}', text: '{{ element.values.deleteIntroText }}', button: '{{ element.values.deleteButton }}' } }
   saveDataHandler={ (data: I{{ table.name | friendly | capitalize }}Item ) => {
     {% if element.values.addProcedure == 'Internal' %}
@@ -163,6 +175,7 @@ import AddDialog from '../components/Dialog/Dialog'
   initialData={initialData{{ table.name | friendly }}}
   setData={set{{ table.name | friendly }}data}
   allowMultipleSubmit={ {{ dialogVariable }} === 'add'}
+  disabledFields={ {{ dialogVariable }} === 'view'}
 >
 {% if not element.values.notRenderFields %}
 {% for field in fields %}

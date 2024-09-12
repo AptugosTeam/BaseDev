@@ -21,14 +21,20 @@ interface subOptions {
   button: string
 }
 
+interface subOptionsView {
+  title: string
+  text: string
+}
+
 interface addDialogProps {
   isOpen: boolean
   onOpen: VoidFunction
   onSave?: VoidFunction
   onClose?: VoidFunction
-  action: 'add' | 'edit' | 'delete' | ''
+  action: 'add' | 'edit' | 'view' | 'delete' | ''
   addOptions: subOptions
   editOptions: subOptions
+  viewOptions: subOptionsView
   removeOptions: subOptions
   saveDataHandler: Function
   color: 'primary' | 'inherit' | 'secondary' | 'default'
@@ -39,11 +45,13 @@ interface addDialogProps {
   hideButton?: boolean
   children?: ReactElement<any, any>[]
   className?: any
+  disabledFields?: boolean
 }
 
 const AddDialog: FunctionComponent<addDialogProps> = (props) => {
-  const { isOpen, onOpen, onSave, onClose, action, saveDataHandler, color, data, initialData, setData, allowMultipleSubmit, hideButton } = props
+  const { isOpen, onOpen, onSave, onClose, action, saveDataHandler, color, data, initialData, setData, allowMultipleSubmit, hideButton, disabledFields } = props
   const [options, setOptions] = useState({ title: '', text: '', button: ''})
+  const [viewOptions, setviewOptions] = useState({ title: '', text: '' })
   const [switchState, setSwitchState] = useState({ addMultiple: false })
 
   const handleSwitchChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +84,9 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
       case 'edit':
         setOptions(props.editOptions)
         break
+      case 'view':
+        setviewOptions(props.viewOptions)
+        break
       case 'delete':
         setOptions(props.removeOptions)
         break
@@ -86,20 +97,20 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
   return (
     <React.Fragment>
       {!hideButton && (
-        <Tooltip title={options.title}>
-          <Fab aria-label={options.title} color={color} onClick={onOpen}>
+        <Tooltip title={action === 'view' ? viewOptions.title : options.title}>
+          <Fab aria-label={action === 'view' ? viewOptions.title : options.title} color={color} onClick={onOpen}>
             <AddIcon />
           </Fab>
         </Tooltip>
       )}
       <Dialog disableEnforceFocus open={isOpen} onClose={handleClose} aria-labelledby="form-dialog-title" className={props.className}>
-        <DialogTitle id="form-dialog-title">{options.title}</DialogTitle>
+        <DialogTitle id="form-dialog-title">{action === 'view' ? viewOptions.title : options.title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>{options.text}</DialogContentText>
-          {action !== 'delete' && <div>{props.children}</div>}
+          <DialogContentText>{action === 'view' ? viewOptions.text : options.text}</DialogContentText>
+          {action !== 'delete' && <div>{React.Children.map(props.children, child => React.cloneElement(child, { disabled: disabledFields }))}</div>}
         </DialogContent>
         <DialogActions>
-          {allowMultipleSubmit && (
+          {allowMultipleSubmit && action !== 'view' && (
             <Tooltip title="Add multiple">
               <Switch
                 checked={switchState.addMultiple}
@@ -109,12 +120,14 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
               />
             </Tooltip>
           )}
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit} color="primary">
-            {options.button}
-          </Button>
+            <Button onClick={handleClose} color="primary">
+              {action === 'view' ? 'Close' : 'Cancel'}
+            </Button>
+            {action !== 'view' && (
+            <Button onClick={handleSubmit} color="primary">
+              {options.button}
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
     </React.Fragment>

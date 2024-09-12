@@ -72,6 +72,12 @@ options:
     settings:
       default: true
       condition: ''
+  - name: allowView
+    display: Allow View
+    type: checkbox
+    settings:
+      default: false
+      condition: ''
   - name: editionTable
     display: Table used in Edits (or deletes)
     type: dropdown
@@ -200,6 +206,7 @@ children: []
 */
 {% set editProc = element.values.editProcedure|default('No') %}
 {% set allowEdit = element.values.allowEdit|default(true) %}
+{% set allowView = element.values.allowView|default(false) %}
 {% set allowDeletion = element.values.allowDeletion|default(true) %}
 {% set tableFields = [] %}
 {% if element.values.table == 'useVar' or element.values.table == 'var' %}
@@ -243,7 +250,7 @@ children: []
   {% endif %}
   {% set tableData = '(' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ '.length ? ' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ ' : ' ~ table.name|friendly|lower ~ 'Data.' ~ table.name|friendly|lower ~ ' as any)' %}
   {% set bpr %}
-  import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
+  import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }}, view{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
   {% endset %}
   {{ save_delayed('bpr', bpr ) }}
 {% endif %}
@@ -251,6 +258,7 @@ children: []
 {% set bpr %}
   import Table from '../components/Table/Table'
   import EditIcon from '@mui/icons-material/Edit'
+  import VisibilityIcon from '@mui/icons-material/Visibility'
   import DeleteIcon from '@mui/icons-material/Delete'
   import IconButton from '@mui/material/IconButton'
   import {{ element.values.icon | default('More') }}Icon from '@mui/icons-material/{{ element.values.icon | default('More') }}'
@@ -261,7 +269,7 @@ children: []
       {% if element.values.headerVariable %}
         {{element.values.headerVariable}}
       {% else %}
-        [{% for field in tableFields %}"{{ field }}",{% endfor %}{% if editProc != 'No' or allowEdit or allowDeletion %}"Actions"{% endif %}]
+        [{% for field in tableFields %}"{{ field }}",{% endfor %}{% if editProc != 'No' or allowEdit or allowView or allowDeletion %}"Actions"{% endif %}]
       {% endif %}
     }
     tableData={ {{ tableData }} }
@@ -298,6 +306,26 @@ children: []
       } }
     >
       <{{element.values.icon | default('More')}}Icon fontSize="small" />
+    </IconButton>
+    {% endif %}
+    {% if allowView %}
+    <IconButton
+      aria-label="View"
+      color="primary"
+      onClickCapture={(e: any) => { 
+        {% if editProc == 'Internal' %}
+          {{ setEditDataFunctionName }}(e.element)
+          setdialog{{ tableName | capitalize }}Action('view')
+          {% elseif element.values.customUrl %}
+          const url = `{{ element.values.customUrl }}`
+          props.history.push(url)
+        {% else %}
+          const url = '{{ (editProc | elementData ).path }}'.replace(':id', e.element._id)
+          props.history.push(url)
+        {% endif %}
+      } }
+    >
+      <VisibilityIcon fontSize="small" />
     </IconButton>
     {% endif %}
     {% if allowEdit %}
