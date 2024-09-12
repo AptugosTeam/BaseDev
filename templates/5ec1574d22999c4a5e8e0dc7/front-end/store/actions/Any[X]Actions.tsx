@@ -34,7 +34,7 @@ export enum {{ table.name | friendly | capitalize }}ActionTypes {
   EDIT_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/edit',
   EDITING_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/editing',
   EDITED_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/edited',
-  EDITING_{{ table.name | friendly | upper }}_FAILED = '{{ table.name | friendly | lower }}/editing_failed'
+  EDITING_{{ table.name | friendly | upper }}_FAILED = '{{ table.name | friendly | lower }}/editing_failed',
 
   VIEW_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/view',
   VIEWING_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/viewing',
@@ -180,7 +180,7 @@ export function editing{{ table.name | friendly | capitalize }}Failed(): IEditin
   return {
     type: {{ table.name | friendly | capitalize }}ActionTypes.EDITING_{{ table.name | friendly | upper }}_FAILED,
   }
-
+}
 export function view{{ table.name | friendly | capitalize }}({{ table.singleName | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item): IView{{ table.name | friendly | capitalize }}Action {
   return {
     type: {{ table.name | friendly | capitalize }}ActionTypes.VIEW_{{ table.name | friendly | upper }},
@@ -206,7 +206,7 @@ export function viewing{{ table.name | friendly | capitalize }}Failed(): IViewin
     type: {{ table.name | friendly | capitalize }}ActionTypes.VIEWING_{{ table.name | friendly | upper }}_FAILED,
   }
 }
-}
+
 
 type TSearchOptions = {
   searchString?: string
@@ -340,11 +340,11 @@ export interface IViewing{{ table.name | friendly | capitalize }}FailedAction {
 }
 
 export type {{ table.name | friendly | capitalize }}Action = 
-  | ISearch{{ table.name | friendly | capitalize }}Action
+  | ISearch{{ table.name | friendly | capitalize }}Action
   | ISearching{{ table.name | friendly | capitalize }}Action
   | IFound{{ table.name | friendly | capitalize }}Action
   | ISearching{{ table.name | friendly | capitalize }}FailedAction
-  | ILoad{{ table.name | friendly | capitalize }}Action
+  | ILoad{{ table.name | friendly | capitalize }}Action
   | ILoading{{ table.name | friendly | capitalize }}Action
   | ILoaded{{ table.name | friendly | capitalize }}Action
   | ILoading{{ table.name | friendly | capitalize }}FailedAction
