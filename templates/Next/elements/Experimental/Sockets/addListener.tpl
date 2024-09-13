@@ -14,9 +14,6 @@ options:
     type: text
     options: ''
 */
-{% set theconstructor %}
-socket.on('{{ element.values.listener }}', ({{ element.values.parameters }}) => {
+socketRef.current.on('{{ element.values.listener }}', ({{ element.values.parameters }}) => {
   {{ content | raw }}
 })
-{% endset %}
-{{ save_delayed('theconstructor',theconstructor) }}
