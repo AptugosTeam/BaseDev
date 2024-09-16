@@ -123,6 +123,7 @@ import { add{{ friendlyTableName }} } from '@store/actions/{{ table.name | frien
 {% set bpr %}
 import { edit{{ friendlyTableName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
+{{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
 import { view{{ friendlyTableName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
