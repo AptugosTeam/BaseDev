@@ -163,7 +163,7 @@ import AddDialog from '../components/Dialog/Dialog'
         dispatch(remove{{ friendlySingleName }}(data))
       } else {
         const cleanData:any = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== null && v !== '' && (v.length !== 0 || v.length === undefined)));
-        {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(cleanData)) : dispatch(edit{{ table.name | friendly | capitalize }}(cleanData))
+        {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(cleanData)) : dispatch(edit{{ table.name | friendly | capitalize }}(cleanData))
       }
     {% endif %}
     {% if element.values.addProcedure == 'Custom' %}
