@@ -38,6 +38,12 @@ options:
     advanced: true
     settings:
       default: console.error(error)
+  - name: await
+    display: Await?
+    type: checkbox
+    options: ''
+    settings:
+      value: 'false'
 sourceType: javascript
 children: []
 */
@@ -49,7 +55,7 @@ import { fetcher } from '@lib/fetch'
 {% if element.values.urlFULL %}
 {% set url = settings.apiURL ~ element.values.url %}
 {% endif %}
-fetcher({{ url | textOrVariableInCode }}, { method: '{{ element.values.method|default('GET') }}'}).then({{ element.values.resultVar|default('result') }} => {
+{% if element.values.await %}await{% endif %} fetcher({{ url | textOrVariableInCode }}, { method: '{{ element.values.method|default('GET') }}' {% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %} , {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %} }).then({{ element.values.resultVar|default('result') }} => {
  {{ content | raw }}
 }).catch((error) => {
   {% if element.values.onError %}
