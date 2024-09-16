@@ -53,6 +53,10 @@ options:
     display: Extra Theme options
     type: code
     advanced: true
+  - name: variableName
+    display: Custom Variable Name
+    type: text
+    advanced: true
 sourceType: javascript
 children: []
 */
@@ -78,7 +82,11 @@ children: []
 {% endif %}
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}
+{% if  element.values.variableName %}
+const {{ element.values.variableName }} = { {%if element.values.primaryColor %}...colors_{{ element.values.primaryColor }}, {% endif %}...baseClasses, ...{{ theme }} }
+{% else %}
 const theme = { {%if element.values.primaryColor %}...colors_{{ element.values.primaryColor }}, {% endif %}...baseClasses, ...{{ theme }} }
+{% endif %}
 {% endset %}
 {{ save_delayed('ph',ph, 1) }}
 {% if element.values.primaryColor or element.values.extraThemeOptions %}
