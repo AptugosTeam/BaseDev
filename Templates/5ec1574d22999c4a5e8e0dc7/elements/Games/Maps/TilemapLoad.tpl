@@ -7,10 +7,6 @@ options:
   - name: name
     display: Descriptive Name Image
     type: text
-  - name: path
-    display: Image Path
-    type: text
-    options: ''
   - name: useAsset
     display: Use an asset
     type: dropdown
@@ -24,12 +20,19 @@ options:
     display: Image Path Map
     type: text
     options: ''
+  - name: path
+    display: Image Path
+    type: text
+    options: ''
+    advanced: true
   - name: useOther
     display: Use other files (not images)
     type: checkbox
+    advanced: true
   - name: useOtherAsset
     display: Use other asset
     type: dropdown
+    advanced: true
     options: >-
       return [['none', 'None'],
       ...aptugo.assetUtils.other().map(image => [image.id, image.name])]
