@@ -59,7 +59,12 @@ options:
     advanced: true
     settings:
       condition: true
-      propertyCondition: playlist   
+      propertyCondition: playlist
+  - name: onReady
+    display: Action to trigger when component is loaded
+    type: function
+    options: ''
+    advanced: true
 children: []
 settings:
   - name: Packages
@@ -100,6 +105,9 @@ import ReactPlayer from 'react-player'
     {% endif %}
     {% if element.values.height %}
       height='{{ element.values.height }}' 
+    {% endif %}
+    {% if element.values.onReady %}
+      onReady={ {{element.values.onReady}} }
     {% endif %}
   />
 </div>
