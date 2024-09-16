@@ -17,7 +17,9 @@ export const ValidateProps = {
       {% elseif fieldWithData.options.frontEndType %}{% set type = fieldWithData.options.frontEndType %}
       {% elseif fieldWithData.extraOptions.frontEndType %}{% set type = fieldWithData.extraOptions.frontEndType %}
       {% endif %}
-      {{ field.column_name | friendly | lower }}: { type: "{{ type }}" },
+      {% if fieldWithData.data_type == 'Datetime' %}{% set type = "string" %}{% set format = "date-time" %}{% endif %}
+      {% if fieldWithData.data_type == 'Date' %}{% set type = "string" %}{% set format = "date" %}{% endif %}
+      {{ field.column_name | friendly | lower }}: { type: "{{ type }}" {% if format %},format: "{{ format }}" {% endif %} },
     {% endfor %}
   },
   {% endfor %}
