@@ -36,6 +36,9 @@ options:
   - name: scaleBarPosition
     display: ScaleBar Position
     type: text
+  - name: styleURL
+    display: styleURL
+    type: text
   - name: ref
     display: Use Reference
     type: text
@@ -76,6 +79,7 @@ setAccessToken('{{ element.values.accessToken }}')
   scaleBarEnabled={ {{element.values.scaleBarEnabled|default(true)}}}
   {% if element.values.scaleBarEnabled %}scaleBarPosition={ {{element.values.scaleBarPosition|default('{ bottom: 8, left: 8}')}} }{% endif %}
   {% if element.values.className %}style={ {{ element.values.className}} }{% endif %}
+  {% if element.values.styleURL %}styleURL={ {{ element.values.styleURL}} }{% endif %}
   {% if element.values.onMapIdle %}
     onMapIdle={ {{ element.values.onMapIdle |functionOrCall }} }
   {% endif %}
