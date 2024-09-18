@@ -278,7 +278,7 @@ settings:
 */
 {% set bpr %}
   import '@components/MapBox/mapbox.css'
-  import Map, { Layer, Source, NavigationControl, ScaleControl, MapRef} from 'react-map-gl'
+  import Map, { Popup, Layer, Source, NavigationControl, ScaleControl, MapRef} from 'react-map-gl'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% if element.values.navigationControl %}
