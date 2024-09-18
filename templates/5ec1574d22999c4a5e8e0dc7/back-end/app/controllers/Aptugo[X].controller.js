@@ -9,7 +9,7 @@ subtype: Aptugo
 children: []
 */
 
-
+{% set friendlyTableName = table.name | friendly %}
 const {{ table.name | friendly }} = require('../models/{{ table.name | friendly | lower }}.model.js')
 const fs = require('fs')
 const paginate = require('../paginate')
@@ -262,4 +262,6 @@ exports.delete = (options) => {
       })
   })
 }
+
+{{ insert_setting('controller' ~ friendlyTableName) | raw }}
 

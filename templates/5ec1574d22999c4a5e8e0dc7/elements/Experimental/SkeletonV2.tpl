@@ -1,24 +1,25 @@
 /*
-path: Skeleton.tpl
+path: SkeletonV2.tpl
+display: Skeleton
 type: file
-unique_id: skeleton666
+unique_id: skeletonv26
+completePath: elements/Experimental/SkeletonV2.tpl
 icon: f:Skeleton.svg
 helpText: Display a placeholder preview of your content before the data gets loaded to reduce load-time frustration.
-internalUse: true
 children: []
 options:
   - name: variant
     display: Variant
     type: dropdown
-    options: text;rectangular;circular 
+    options: return [['text', 'Text'], ['rectangular', 'Rectangular'], ['circular', 'Circular']]
     settings:
-      default: text
+      default: 'text'
   - name: animation
     display: Animation
     type: dropdown
-    options: pulse;wave;false 
+    options:  return [['pulse', 'Pulse'], ['wave', 'Wave'], ['false', 'False']]
     settings:
-      default: pulse
+      default: 'pulse'
   - name: width
     display: Width
     type: text
@@ -49,8 +50,8 @@ import Skeleton from '@mui/material/Skeleton'
 <Skeleton
     {% if element.values.variant %}variant='{{ element.values.variant }}'{% endif %}
     {% if element.values.animation %}animation='{{ element.values.animation }}'{% endif %}
-    {% if element.values.width %}width='{{ element.values.width }}px'{% endif %}
-    {% if element.values.height %}height={ {{ element.values.height }} } {% endif %}
+    {% if element.values.width %}width={ '{{ element.values.width }}' } {% endif %}
+    {% if element.values.height %}height={ '{{ element.values.height }}' } {% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     {% if element.values.bgcolor %}sx={ { bgcolor: '{{ element.values.bgcolor }}' } }{% endif %}
     {% if element.values.extraStyle %}style={ { {{element.values.extraStyle}} } }{% endif %}
