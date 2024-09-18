@@ -46,10 +46,16 @@ options:
     display: GravityY
     type: text
     options: ''
+  - name: EditUseEffect
+    display: Edit useEffect
+    type: code
+    options: ''
+    advanced: true
   - name: Friction
     display: Friction
     type: text
     options: ''
+    advanced: true
 */
 
 {% set scenes = [] %}
@@ -95,17 +101,26 @@ const config_{{ element.unique_id }}: Phaser.Types.Core.GameConfig = {
     createContainer: true,
   },
   {% endif %}
+
 }
 {% endset %}
 {{ save_delayed('ph',ph) }}
 {% set ph %}
 React.useEffect(() => {
+  {% if element.values.EditUseEffect  %}
+  const game = new Phaser.Game(config_{{ element.unique_id }})
+  {{ element.values.EditUseEffect|default('') }}
+  return () => {
+    game.destroy(true) 
+  }
+{% endif %}
+{% if not element.values.EditUseEffect  %}
   new Phaser.Game(config_{{ element.unique_id }})
-},[])
+{% endif %}
+}, [])
 {% endset %}
-{{ save_delayed('ph',ph)}}
+{{ save_delayed('ph', ph)}}
 <div
   id="{{ id }}"
   {% if element.values.class %}className={ {{element.values.class}} }{% endif %}>
 </div>
-
