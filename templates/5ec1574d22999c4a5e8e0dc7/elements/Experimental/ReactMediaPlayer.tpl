@@ -25,6 +25,13 @@ options:
     settings:
       default: false
     options: ''
+  - name: playsinline
+    display: playsinline 
+    type: checkbox
+    settings:
+      default: false
+    options: ''
+    advanced: true
   - name: loop
     display: Loop the Video
     type: checkbox
@@ -90,6 +97,9 @@ import ReactPlayer from 'react-player'
   {% endif %}
     {% if element.values.controls %}
       controls={true} 
+    {% endif %}
+    {% if element.values.playsinline %}
+      playsinline 
     {% endif %}
     {% if element.values.playing %}
       playing 
