@@ -10,6 +10,10 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: key
+    display: Key
+    type: text
+    options: ''
   - name: minimumTouchDrag
     display: Distance to swipe to the next slide
     type: text
@@ -246,6 +250,9 @@ import "react-multi-carousel/lib/styles.css";
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Carousel
+{% if element.values.key %}
+  key={ {{ element.values.key }} }
+{% endif %}
 {% if element.values.className %}
   className={ {{ element.values.className }} }
 {% endif %}
