@@ -106,6 +106,10 @@ options:
     display: Search String
     type: text
     options: ''
+  - name: rowClassName
+    display: ClassName for the row
+    type: styles
+    options: ''
   - name: usePagination
     display: Use Pagination
     type: checkbox
@@ -273,6 +277,9 @@ children: []
       {% endif %}
     }
     tableData={ {{ tableData }} }
+    {% if element.values.rowClassName %}
+      rowClassName={ {{element.values.rowClassName}} }
+    {% endif %}
     {% if element.values.table != 'useVar' and element.values.table != 'var' %}
       orderBy={ {{ innervarname }}loadoptions.sort.field }
       order={ {{ innervarname }}loadoptions.sort.method }
