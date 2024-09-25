@@ -12,6 +12,7 @@ unique_id: 0i8AxGw6
   "main": "index.js",
   "scripts": {
     "build": "webpack --config=config/webpack.prod.js",
+    "postinstall": "cd back-end && npm install",
     "clean-dist": "rimraf build/*",
     "lint": "eslint './src/**/*.{js,ts,tsx}' --quiet",
     "start": "concurrently \"pnpm run dev:api\" \"pnpm run dev:client\"",

@@ -363,7 +363,7 @@ Application.pages = [{
 		}
 	],
 	"path": "",
-	"parent": false,
+	"parent": null,
 	"collapseStatus": "expand"
 }]
 

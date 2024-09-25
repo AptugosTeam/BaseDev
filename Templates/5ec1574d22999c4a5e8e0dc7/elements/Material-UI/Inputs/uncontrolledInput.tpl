@@ -6,10 +6,13 @@ icon: ico-uncontrolled-input
 sourceType: javascript
 order: 50
 options:
-  - name: label
-    display: Label
-    type: text
-    options: ''
+  - name: type
+    display: Type
+    type: dropdown
+    options: text;password;date;datetime-local;number;textarea;numeric
+    settings:
+      default: text
+      active: true
   - name: value
     display: Value
     type: text
@@ -18,15 +21,23 @@ options:
     display: On Change
     type: function
     options: ''
+  - name: label
+    display: Label
+    type: text
+    options: ''
+  - name: placeholder
+    display: Placeholder
+    type: text
+    options: ''
+  - name: className
+    display: ClassName
+    type: styles
+    options: ''
   - name: onBlur
     display: On Focus Lost
     type: function
     options: ''
     advanced: true
-  - name: placeholder
-    display: Placeholder
-    type: text
-    options: ''
   - name: variant
     display: Variant
     type: dropdown
@@ -39,10 +50,6 @@ options:
     display: Margin
     type: dropdown
     options: normal;dense;none
-  - name: className
-    display: ClassName
-    type: styles
-    options: ''
   - name: fieldname
     display: fieldname
     type: text
@@ -53,13 +60,6 @@ options:
   - name: fullWidth
     display: Use full width?
     type: checkbox
-  - name: type
-    display: Type
-    type: dropdown
-    options: text;password;date;datetime-local;number;textarea;numeric
-    settings:
-      default: text
-      active: true
   - name: minNum
     display: Min Number
     type: text

@@ -9,8 +9,7 @@ if (State.usersReducer) {
   }
 } else if (State.apps) {
   if (State.apps.find(app => app.settings.name === Parameters.Name)) {
-    const error = 'Application with the same name exists'
-    return { error }
+    Parameters.name = Parameters.name + '_' + aptugo.generateID()
   }
 }
 
@@ -30,6 +29,7 @@ const dbusername = username + appname
 Application.createdAt = Date.now(),
 Application.settings = {
     name: Parameters.Name || 'Untitled Application',
+    icon: Parameters.icon || null,
     lastSaved: null,
     lastBuild: null,
     development: {

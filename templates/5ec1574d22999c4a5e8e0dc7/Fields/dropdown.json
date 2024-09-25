@@ -12,6 +12,11 @@ unique_id: 8H1LaeTw
     "frontEndType": "string",
     "extra": [
       {
+        "display": "Options",
+        "value": "options",
+        "type": "text"
+      },
+      {
         "display": "Display",
         "value": "displaytype",
         "type": "select",

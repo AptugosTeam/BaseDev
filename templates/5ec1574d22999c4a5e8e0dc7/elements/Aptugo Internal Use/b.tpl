@@ -16,10 +16,10 @@ options:
     type: text    
 */
 {% if element.values.className is defined and element.values.className is iterable and element.values.className|length > 1 %}
-{% set bpr %}
+  {% set bpr %}
 import clsx from 'clsx'
-{% endset %}
-{{ save_delayed('bpr',bpr) }}
+  {% endset %}
+  {{ save_delayed('bpr',bpr) }}
   {% set class = 'clsx(' ~ element.values.className|join(',') ~ ')' %}
 {% else %}
   {% set class = element.values.className|default('classes.mainPanel') %}

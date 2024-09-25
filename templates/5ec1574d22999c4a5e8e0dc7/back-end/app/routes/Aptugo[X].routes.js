@@ -9,9 +9,8 @@ subtype: Aptugo
 children: []
 */
 module.exports = (app) => {
-  const {{ table.name | friendly | lower }} = require('../controllers/{{ table.name | friendly | lower }}.controller.js')
+  const {{ table.name | friendly | lower }} = require('../controllers/{{ table.name | friendly | lower }}.controller.js')
   {% if table.extraModules %}{{ table.extraModules }}{% endif %}
-
   {% for route in table.definedRoutes %}
     {% if route.route_active %}
       // {{ route.route_name }}
