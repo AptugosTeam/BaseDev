@@ -99,9 +99,12 @@ export default function {{ tableNameLow }}Reducer(state: I{{ tableNameCap }}Stat
         draft.loadingStatus = ApiStatus.NOTLOADED
         draft.addingStatus = ApiStatus.LOADING
         draft.searchingStatus = ApiStatus.NOTLOADED
-        draft.{{ tableNameLow }}[draft.{{ tableNameLow }}.findIndex(
-          ({{ table.singleName | friendly | lower }}) => {{ table.singleName | friendly | lower }}._id === action.payload._id)] = action.payload
         break
+
+      case {{ tableNameCap }}ActionTypes.EDITING_{{ tableNameUp }}:
+        draft.loadingStatus = ApiStatus.LOADING;
+        draft.addingStatus = ApiStatus.LOADING;
+        break;
         
       case {{ tableNameCap }}ActionTypes.EDITED_{{ tableNameUp }}:
         draft.addingStatus = ApiStatus.LOADED
@@ -110,6 +113,13 @@ export default function {{ tableNameLow }}Reducer(state: I{{ tableNameCap }}Stat
         draft.found{{ tableNameLow }}[draft.found{{ tableNameLow }}.findIndex(
           ({{ table.singleName | friendly | lower }}) => {{ table.singleName | friendly | lower }}._id === action.payload._id)] = action.payload
         break
+
+      case {{ tableNameCap }}ActionTypes.EDITING_{{ tableNameUp }}_FAILED:
+        draft.addingStatus = ApiStatus.FAILED;
+        draft.errMessage = action.message;
+        draft.errStatus = action.status;
+        draft.errField = action.field;
+        break;
     }
   })
 }

@@ -136,7 +136,7 @@ const edit{{ table.name | friendly | capitalize }}Epic: Epic<{{ table.name | fr
       return from(axios.put(`{{ settings.apiURL }}/api/{{ table.name | friendly | lower }}/${action.payload._id}`, data, config)).pipe(
         map((response) => edited{{ table.name | friendly | capitalize }}(response.data)),
         startWith(editing{{ table.name | friendly | capitalize }}()),
-        catchError(() => of(editing{{ table.name | friendly | capitalize }}Failed()))
+        catchError((err) => of(editing{{ table.name | friendly | capitalize }}Failed(err.response)))
       )
     })
   )

@@ -176,9 +176,12 @@ export function edited{{ table.name | friendly | capitalize }}({{ table.name | f
   }
 }
 
-export function editing{{ table.name | friendly | capitalize }}Failed(): IEditing{{ table.name | friendly | capitalize }}FailedAction {
+export function editing{{ table.name | friendly | capitalize }}Failed(errData: { data: { message: string, field?: string }, status: number }): IEditing{{ table.name | friendly | capitalize }}FailedAction {
   return {
     type: {{ table.name | friendly | capitalize }}ActionTypes.EDITING_{{ table.name | friendly | upper }}_FAILED,
+    message: errData.data.message,
+    status: errData.status,
+    field: errData.data.field,
   }
 }
 export function view{{ table.name | friendly | capitalize }}({{ table.singleName | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item): IView{{ table.name | friendly | capitalize }}Action {
@@ -319,6 +322,9 @@ export interface IEdited{{ table.name | friendly | capitalize }}Action {
 
 export interface IEditing{{ table.name | friendly | capitalize }}FailedAction {
   type: {{ table.name | friendly | capitalize }}ActionTypes.EDITING_{{ table.name | friendly | upper }}_FAILED
+  message: string;
+  status: number;
+  field?: string;
 }
 
 export interface IView{{ table.name | friendly | capitalize }}Action {
