@@ -16,6 +16,7 @@ interface tableProps extends React.PropsWithChildren {
   addProcedure?: Function
   addTitle?: string
   addText?: string
+  rowClassName?: string
   tableData: Array<Array<string>> | Array<any>
   tableHead: string[]
   orderBy?: string
@@ -96,8 +97,9 @@ const AptugoTable: FunctionComponent<tableProps> = (props) => {
         <TableBody>
           {props.tableData?.map((row, key) => {
             const fields = Object.values(row)
+            const rowClass = typeof props.rowClassName === 'function' ? props.rowClassName(row) : props.rowClassName
             return (
-              <TableRow key={key} className={styles.tableBodyRow}>
+              <TableRow key={key} className={rowClass || styles.tableBodyRow}>
                 {Array.isArray(props.children)
                   ? RenderCells({...row, key})
                   : fields.map((field:React.ReactNode, subkey) => (
