@@ -26,7 +26,9 @@ export default function Asynchronous(props) {
     const newValue = e.target.value
     if (newValue) {
       const inputValue = newValue.replace(/\W /g, '')
-      return inputValue
+      props.onType(inputValue).then((result) => {
+        setOptions(result)
+      })
     }
   }
 
