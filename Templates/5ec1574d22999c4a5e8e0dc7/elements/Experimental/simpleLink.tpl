@@ -70,16 +70,22 @@ import { NavLink } from 'react-router-dom'
   {% if element.values.target %}target="{{element.values.target|default('_self')}}"{% endif %}
   {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
   {% if element.values.customizedClassName %}
-  {% if element.values.className %}className="{{element.values.className }}"{% endif %}
+    {% if element.values.className %}className="{{element.values.className }}"{% endif %}
   {% else %}
-  {% if element.values.className %}className={ {{element.values.className }} }{% endif %}
+    {% if element.values.className %}className={ {{element.values.className }} }{% endif %}
   {% endif %}
-  href={{ element.values.destination | textOrVariable }}   {% if element.values.draggable %} draggable={false} {% endif %}>{{ content | raw }}</a>
+  href={{ element.values.destination | textOrVariable }} 
+  {% if element.values.Action %}onClick={ {{ element.values.Action | functionOrCall }} }{% endif %}
+  {% if element.values.draggable %} draggable={false} {% endif %}>
+  {{ content | raw }}
+</a>
 {% else %}
-<NavLink {% if element.values.style %}style={ {{element.values.style}} }{% endif %} {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-  to={{ dest | textOrVariable }} {% if element.values.Action %}onClickCapture={ {{ element.values.Action | functionOrCall}} }{% endif %}
-  {% if element.values.draggable %}
-    draggable={false}
-  {% endif %}>
-{{ content | raw }}</NavLink>
+<NavLink 
+  {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
+  {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
+  to={{ dest | textOrVariable }} 
+  {% if element.values.Action %}onClickCapture={ {{ element.values.Action | functionOrCall }} }{% endif %}
+  {% if element.values.draggable %} draggable={false} {% endif %}>
+  {{ content | raw }}
+</NavLink>
 {% endif %}
