@@ -28,7 +28,6 @@ export default function App() {
 
 {{ insert_setting('AppPH') | raw }}
 
-
   return (
     <StateProvider store={store}>
       <GestureHandlerRootView style={ { flex: 1 }}>
@@ -51,7 +50,8 @@ export default function App() {
             }}
           >
             <Stack.Navigator screenOptions={ { headerShown: false } } initialRouteName="/">
-            {% if not AppB %}
+            {% set AppBody = insert_setting('AppB') %}
+            {% if AppBody %}
             {{ insert_setting('AppB') | raw }}
             {% else %}
             {% for page in application.pages | plain('type','page') %}
