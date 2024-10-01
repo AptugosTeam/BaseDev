@@ -1,9 +1,9 @@
 if (!Parameters.pageTemplate) {
   const newPage = {
-    unique_id: Parameters.unique_id || aptugo.generateID(),
-    name: Parameters.name || 'Untitled',
-    path: Parameters.path || '',
-    filename: Parameters.filename || 'untitled.tsx',
+    unique_id: Parameters.unique_id || aptugo.generateID(),
+    name: Parameters.name || 'Untitled',
+    path: Parameters.path || '',
+    filename: Parameters.filename || 'untitled.tsx',
     type: 'page',
     children: [
       {
@@ -45,8 +45,8 @@ if (!Parameters.pageTemplate) {
     ]
   }
 
-  if (Parameters.parentPage) {
-    const container = aptugo.findPageInTree(Application.pages, Parameters.parentPage)
+  if (Parameters.parentPage || Parameters.parent) {
+    const container = aptugo.findPageInTree(Application.pages, Parameters.parentPage || Parameters.parent)
     container.children.push(newPage)
   } else {
     Application.pages.push(newPage)

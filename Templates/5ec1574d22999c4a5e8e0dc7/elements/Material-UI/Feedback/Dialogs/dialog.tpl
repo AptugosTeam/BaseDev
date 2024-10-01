@@ -92,9 +92,9 @@ options:
       default: false
 children: []
 */
-{% set table = element.values.table | tableData %}
-{% set friendlyTableName = table.name | friendly | capitalize %}
-{% set friendlySingleName = table.singleName | friendly | capitalize %}
+{% set table = element.values.table | tableData %}
+{% set friendlyTableName = table.name | friendly | capitalize %}
+{% set friendlySingleName = table.singleName | friendly | capitalize %}
 {% set dialogVariable = 'dialog' ~ friendlyTableName ~ 'Action' %}
 {% if element.children %}
 {% else %}
@@ -170,5 +170,5 @@ import AddDialog from '../components/Dialog/Dialog'
  {% include includeTemplate('field.tpl') with subvalues %}
 {% endfor %}
 {% endif %}
-{{ content | raw }}
+{{ content | raw }}
 </LocalAddDialog>
