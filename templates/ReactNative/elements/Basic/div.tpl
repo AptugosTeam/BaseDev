@@ -2,6 +2,7 @@
 path: div.tpl
 completePath: elements/Basic/div.tpl
 type: file
+display: View
 unique_id: y8fra7Zo
 icon: ico-div
 sourceType: javascript

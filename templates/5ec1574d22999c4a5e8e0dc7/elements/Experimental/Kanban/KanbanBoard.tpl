@@ -55,8 +55,6 @@ settings:
       "react-dnd-html5-backend": "11.1.3",
 children: []
 */
-
-
 {% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
 {% if element.values.addRecords %}
 {% set bpr %}
