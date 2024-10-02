@@ -1,5 +1,5 @@
 let newAsset = {
-  type: Parameters.type,
+  type: (Parameters.type == "nothing") ? "other" : Parameters.type,
   id: aptugo.generateID(),
   name: Parameters.name
 }
