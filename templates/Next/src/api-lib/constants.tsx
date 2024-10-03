@@ -13,7 +13,7 @@ export const ValidateProps = {
     {% for field in table.fields %}
       {% set type = field.data_type | lower %}
       {% set fieldWithData = field|fieldData %}
-      {% if fieldWithData.data_type == 'Autocomplete' %}{% set type = "string" %}
+      {% if fieldWithData.data_type == 'Autocomplete' %}{% set type = "object" %}
       {% elseif fieldWithData.options.frontEndType %}{% set type = fieldWithData.options.frontEndType %}
       {% elseif fieldWithData.extraOptions.frontEndType %}{% set type = fieldWithData.extraOptions.frontEndType %}
       {% endif %}

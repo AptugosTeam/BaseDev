@@ -129,9 +129,9 @@ import TextField from '@mui/material/TextField';
     multiple
   {% endif %}
   {% if element.values.getOptionLabel %}
-    getOptionLabel={ (option) => {
+    getOptionLabel={ (option) => 
         {{ element.values.getOptionLabel }} 
-    }}
+    }
   {% endif %}
   {% if element.values.onInputChange %}
     onInputChange={ (e, newInputValue) => { 

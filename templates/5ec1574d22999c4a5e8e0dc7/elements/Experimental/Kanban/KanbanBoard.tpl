@@ -30,10 +30,10 @@ options:
     options: >-
       return aptugo.store.getState().application.tables.map(({ unique_id, name
       }) => [unique_id, name])
-  - name: addRecords
-    display: Add Records
-    type: text
-    options: ''
+#  - name: addRecords
+#    display: Add Records
+#    type: text
+#    options: ''
   - name: columnHeaderColor
     display: Column Header Color
     type: text
