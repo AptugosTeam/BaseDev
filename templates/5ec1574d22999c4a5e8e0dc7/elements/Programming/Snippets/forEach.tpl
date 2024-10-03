@@ -27,6 +27,11 @@ options:
     type: text
     settings:
       default: 'item'
+  - name: indexname
+    display: Variable name for the index
+    type: text
+    settings:
+      default: 'index'
   - name: filtersource
     display: Condition to filter source values
     type: text
@@ -41,7 +46,7 @@ children: []
 {% if element.values.filtersource %}
 {% set addExtra = '.filter(tmp => tmp.' ~ element.values.filtersource ~ ')' %}
 {% endif %}
-{{ element.values.variable }}{{ addExtra }}.forEach(({{ element.values.variablename | default('item') }},index) => {
+{{ element.values.variable }}{{ addExtra }}.forEach(({{ element.values.variablename | default('item') }},{{ element.values.indexname | default('index') }}) => {
 {% if element.values.code %}
   {{ element.values.code }}
 {% endif %}
