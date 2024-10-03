@@ -36,6 +36,10 @@ a {
   text-decoration: none;
 }
 
+[class*='MuiLinearProgress-root'] {
+  width: 20rem;
+}
+
 .pages {
   & .mainarea {
     margin-left: 15rem;
