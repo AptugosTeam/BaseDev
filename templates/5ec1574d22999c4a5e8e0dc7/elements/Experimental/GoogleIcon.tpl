@@ -50,6 +50,13 @@ options:
     options: ''
     settings:
       default: '24'
+  - name: fontWeight
+    display: Weight
+    type: dropdown
+    options: 
+      return [['100', '100'],['200', '200'],['300', '300'],['400', '400'],['500', '500'],['600', '600'],['700', '700']]
+    settings:
+      default: '300'
   - name: color
     display: Color
     type: text
@@ -67,4 +74,4 @@ options:
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 {% endset %}
 {{ add_setting('IndexBodyAdd', GF) }}
-<span className={`material-symbols-{{element.values.style|default('outlined')}}{% if element.values.className %} ${ {{ element.values.className }} }{% endif %}`}style={ {userSelect: 'none', fontVariationSettings: "'FILL' {{element.values.filled|default('0')}}, 'GRAD' {{element.values.grade|default('0')}}, 'opsz' {{element.values.opticalSize|default('24')}}"{% if element.values.fontSize %}, fontSize: {{element.values.fontSize}}{% endif %}{% if element.values.backgroundColor %}, backgroundColor: "{{element.values.backgroundColor}}"{% endif %}{% if element.values.color %}, color: "{{element.values.color}}"{% endif %} } }>{{element.values.icon|default('Home')}}</span>
+<span className={`material-symbols-{{element.values.style|default('outlined')}}{% if element.values.className %} ${ {{ element.values.className }} }{% endif %}`}style={ {userSelect: 'none', fontVariationSettings: "'FILL' {{element.values.filled|default('0')}}, 'GRAD' {{element.values.grade|default('0')}}, 'opsz' {{element.values.opticalSize|default('24')}}"{% if element.values.fontSize %}, fontSize: {{element.values.fontSize}}{% endif %}{% if element.values.fontWeight %}, fontWeight: {{element.values.fontWeight}}{% endif %}{% if element.values.backgroundColor %}, backgroundColor: "{{element.values.backgroundColor}}"{% endif %}{% if element.values.color %}, color: "{{element.values.color}}"{% endif %} } }>{{element.values.icon|default('Home')}}</span>
