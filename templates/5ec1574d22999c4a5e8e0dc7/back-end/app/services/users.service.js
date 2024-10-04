@@ -142,7 +142,6 @@ async function authenticate ({ email, password, model, passwordField, populate, 
       }
 
       if (!user[passwordField]) reject({ message: errorMessages[lang].notPassword, user: user })
-      if (validate && !user.Verified) reject({ message: errorMessages[lang].unverified, user: user })
       else {
         bcrypt.compare(password, user[passwordField]).then((isMatch) => {
           if (isMatch) {
@@ -154,6 +153,7 @@ async function authenticate ({ email, password, model, passwordField, populate, 
                 userID[fieldName] = userWithoutPassword[fieldName]
               })
             }
+            if (validate && !user.Verified) reject({ message: errorMessages[lang].unverified, user: { Email: user.Email, Verified: user.Verified } })
             const token = jwt.sign(fullUser ? userWithoutPassword : userID, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
             resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
           } else {

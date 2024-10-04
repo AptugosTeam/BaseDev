@@ -51,7 +51,7 @@ import LinearProgress from '@mui/material/LinearProgress';
       variant="{{element.values.variant|default('indeterminate')}}"
     {% endif %}
     {% if element.values.valueBuffer %}
-      valueBuffer={{ element.values.valueBuffer | textOrVariable }}
+      valueBuffer={ {{ element.values.value | raw }}{{ value | raw }} }
     {% endif %}
     {% if element.values.sx %}
       sx={ { {{ element.values.sx }} } }
