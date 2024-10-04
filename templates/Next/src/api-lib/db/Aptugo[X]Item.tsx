@@ -34,8 +34,8 @@ export async function find{{ singleName }}ById(db, _id) {
 export async function find{{ tableName }}(db, query, skip, limit) {
   const matchQuery = {}
 
-  if (query) {
-    if (query.searchString && query.searchField) matchQuery[query.searchField] =new RegExp(query.searchString, 'i')
+  if (query && query.searchString && query.searchField) {
+    matchQuery[query.searchField] =new RegExp(query.searchString, 'i')
   }
 
   return db

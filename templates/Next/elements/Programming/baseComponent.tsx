@@ -13,7 +13,7 @@ import { useRouter } from 'next/router'
 {% endfor %}
 
 const AptugoComponent: FunctionComponent<any> = (props) => {
-  const router = useRouter()
+  // const router = useRouter()
   {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props.properties{% endif %}
   {% for child in element.children %}
     {% if child.value == 'componentHeader' %} 

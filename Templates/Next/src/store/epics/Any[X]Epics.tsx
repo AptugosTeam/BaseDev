@@ -7,6 +7,9 @@ sourceType: typescript
 modelRelated: true
 subtype: Any
 children: []
+settings:
+  - name: Packages
+    value: '"axios": "1.7.7",'
 */
 import { combineEpics, Epic } from "redux-observable";
 import { switchMap, map, startWith, catchError, filter, mergeMap } from "rxjs/operators";

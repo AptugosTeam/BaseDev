@@ -6,7 +6,7 @@ icon: f:ContentEditor.svg
 children: []
 settings:
   - name: Packages
-    value: '"ContentTools": "latest","image-size": "^1.1.1","prismjs": "^1.29.0",'
+    value: '"ContentTools": "latest","image-size": "^1.1.1","prismjs": "^1.29.0","axios": "1.7.7",'
 extraFiles:
   - source: 'elements/Programming/Snippets/extraFiles/989_contentEditor.tsx'
     destination: '/src/components/ContentEdit/index.tsx'
