@@ -73,7 +73,7 @@ async function recoverPassword (req) {
 
       try {
         const emailResponse = await req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
-        resolve(user)
+        resolve({ user, emailResponse })
       } catch (error) {
         reject({ message: errorMessages[lang].failed })
       }
