@@ -93,7 +93,7 @@ options:
     settings:
       default: true
   - name: dragRotate
-    display: Drag Pan
+    display: Drag Rotate
     type: checkbox
     settings:
       default: true
@@ -140,7 +140,7 @@ options:
     settings:
       default: 'bottom-left'
   - name: maxBounds
-    display: MAx Bounds
+    display: Max Bounds
     type: text
   - name: maxPitch
     display: Max Pitch
@@ -246,11 +246,6 @@ options:
   - name: zoom
     display: Zoom
     type: text
-  - name: maxBounds
-    display: Max bounds
-    type: text
-    settings:
-      default: 0
   - name: circleColor
     display: Cluster circle color
     type: text
