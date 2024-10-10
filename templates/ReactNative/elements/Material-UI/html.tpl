@@ -9,6 +9,10 @@ options:
     display: Content
     type: text
     options: ''
+  - name: renderers
+    display: Renderers
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"react-native-render-html": "^6.3.4",'
@@ -26,4 +30,6 @@ const { width } = useWindowDimensions()
 <RenderHtml
   contentWidth={width}
   source={ {{ element.values.html | raw }} }
+  {% if element.values.renderers %}renderers={ {{ element.values.renderers}} }{% endif %}
+
 />
