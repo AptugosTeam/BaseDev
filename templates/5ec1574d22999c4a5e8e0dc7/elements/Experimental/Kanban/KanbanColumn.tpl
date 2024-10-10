@@ -22,10 +22,6 @@ options:
     display: Match Condition
     type: code
     options: ''
-  - name: onDrop
-    display: On Drop
-    type: text
-    options: ''
   - name: className
     display: ClassName
     type: styles
