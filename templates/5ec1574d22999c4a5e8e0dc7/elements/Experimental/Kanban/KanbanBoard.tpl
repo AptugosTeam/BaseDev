@@ -8,14 +8,6 @@ options:
     display: Columns
     type: text
     options: ''
-  - name: ColumnName
-    display: Column Name
-    type: text
-    options: ''
-  - name: Subtitle
-    display: Subtitle
-    type: text
-    options: ''
   - name: className
     display: ClassName
     type: styles
@@ -34,10 +26,6 @@ options:
 #    display: Add Records
 #    type: text
 #    options: ''
-  - name: columnHeaderColor
-    display: Column Header Color
-    type: text
-    options: ''
   - name: ref
     display: Use Reference
     type: text
@@ -47,6 +35,10 @@ options:
     display: On Mouse Down
     type: text
     advanced: true
+  - name: code
+    display: Code before render
+    type: function
+    options: ''
 sourceType: javascript
 settings:
   - name: Packages
@@ -128,6 +120,9 @@ const KanbanItem = ({ item, children, ...props }) => {
   {% endif %}
 >
 { {{ element.values.Columns }}.map((columnItem, columnIndex) => {
+      {% if element.values.code %}
+        {{ element.values.code}}
+      {% endif %}
     return ({{ content | raw }})
 })}
 </div>

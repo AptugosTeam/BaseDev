@@ -26,6 +26,13 @@ unique_id: 8H1LaeTw
           }
         ]
       }
+    ],
+    "validations": [
+      {
+        "display": "Only allow specified options",
+        "value": "onlyAllowed",
+        "type": "checkbox"
+      }
     ]
   }
 }
