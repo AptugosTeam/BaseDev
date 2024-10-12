@@ -66,10 +66,11 @@ options:
       propertyCondition: metodoregistry
       condition: inc
 */
+
 {% if element.values.metodoregistry == 'reset' %}
-this.registry.reset();
+this.registry.reset()
 {% elseif element.values.metodoregistry in ['get', 'remove'] %}
-this.registry.{{ element.values.metodoregistry }}('{{ element.values.namekey }}');
+this.registry.{{ element.values.metodoregistry }}('{{ element.values.namekey }}')
 {% elseif element.values.metodoregistry in ['set', 'inc'] %}
-this.registry.{{ element.values.metodoregistry }}('{{ element.values.namekey }}', {{ element.values.valuekey }});
+this.registry.{{ element.values.metodoregistry }}('{{ element.values.namekey }}', {{ element.values.valuekey }})
 {% endif %}
