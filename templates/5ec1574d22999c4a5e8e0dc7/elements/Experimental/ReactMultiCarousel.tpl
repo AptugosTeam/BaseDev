@@ -263,7 +263,9 @@ import "react-multi-carousel/lib/styles.css";
   itemClass={ {{ element.values.itemClass }} }
 {% endif %}
 {% if element.values.arrows %}
-  arrows
+  arrows={true}
+{% else %}
+  arrows={false}
 {% endif %}
 {% if element.values.showDots %}
   showDots={true}
