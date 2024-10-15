@@ -32,6 +32,11 @@ options:
     type: checkbox
     settings:
       default: false
+  - name: export
+    display: Export Function
+    type: checkbox
+    settings:
+      default: false
   - name: comment
     display: Comment for doc
     type: function
@@ -62,14 +67,14 @@ children: []
 {% if not element.values.serverSide %}
   {% if element.values.priority %}
   {% set ph %}
-  const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
+  {% if element.values.export%}export{% endif %} const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
     {{ element.values.functionBody | raw }}
     {{ content | raw }}  
   }
   {% endset %}
   {{ save_delayed('ph',ph,1) }}
   {% else %}
-  const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
+  {% if element.values.export%}export{% endif %} const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
     {{ element.values.functionBody | raw }}
     {{ content | raw }}  
   }
