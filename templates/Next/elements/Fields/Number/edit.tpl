@@ -5,7 +5,7 @@ unique_id: iTMTweVR
 settings:
   - name: Packages
     value: |-
-      "react-number-format": "5.2.0",
+      "react-number-format": "5.4.0",
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
@@ -32,10 +32,10 @@ import { NumericFormat } from 'react-number-format'
 {% endset %}
 {{ save_delayed('ph',ph) }}
 <NumericFormat 
-    value={ {{ tableName }}data.{{ field.column_name | friendly | lower }} || 0 }
+    value={ {{ tableName }}data.{{ field.column_name | friendly }} || 0 }
     label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     fullWidth
-    className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly | lower }}'{% endif %}}
+    className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
     {% if field.decimalScale %}
       decimalScale={ {{ field.decimalScale }} }
     {% endif %}
@@ -50,7 +50,7 @@ import { NumericFormat } from 'react-number-format'
     {% endif %}
     customInput={TextField}
     onValueChange={(values, sourceInfo) => {
-      handle{{ tableName }}Change("{{ field.column_name | friendly | lower }}")(values.floatValue || 0)
+      handle{{ tableName }}Change("{{ field.column_name | friendly }}")(values.floatValue || 0)
     }}
     {...{{ field.column_name | friendly }}TextFieldProps}
 />

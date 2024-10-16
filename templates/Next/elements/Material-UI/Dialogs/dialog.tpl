@@ -136,25 +136,19 @@ import AddDialog from '@components/Dialog/Dialog'
   removeOptions={ { title: '{{ element.values.deleteTitle }}', text: '{{ element.values.deleteIntroText }}', button: '{{ element.values.deleteButton }}' } }
   saveDataHandler={ async (data) => {
     {% if element.values.addProcedure == 'Internal' %}
-      
-        try {
-          if (data.profilepic) {
-                        const formData = new FormData();
-                        formData.append("_id", data._id)
-                        formData.append("file", data.profilepic);
-                        const response = await fetcher('/api/users', {
-                          method: 'PUT',
-                          body: formData
-                        })
-                        data.profilepic = response.filename
-                      } 
-
-          await fetcher(`/api/{{ table.name | friendly | lower }}${ {{ dialogVariable }} !== "add" ? '/' + data._id : ''}`, {
-            method: {{ dialogVariable }} === "add" ? "POST" : "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-          });
-          mutate('/api/{{ table.name | friendly | lower }}?page=1');
+      {% set bpr %}
+      import serializeData from '@lib/serializeData'
+      {% endset %}
+      {{ save_delayed('bpr',bpr) }}
+    
+      try {
+        const formData = serializeData(data)
+        fetcher(`/api/{{ table.name | friendly | lower }}${ {{ dialogVariable }} !== 'add' ? '/' + data._id : ''}`, {
+          method: {{ dialogVariable }} === 'add' ? 'POST' : 'PUT',
+          body: formData,
+        }).then(() => {
+          mutate('/api/{{ table.name | friendly | lower }}?page=1')
+        })
         } catch (e) {
           console.log('catch', e)
         }
@@ -169,6 +163,7 @@ import AddDialog from '@components/Dialog/Dialog'
   initialData={initialData{{ table.name | friendly }}}
   setData={set{{ table.name | friendly }}data}
   allowMultipleSubmit={ {{ dialogVariable }} === 'add'}
+  addClassName={theme.fabButton}
 >
 {% for field in fields %}
  {% set subvalues = { element: { values: { Field: field.unique_id, Type: 'edit' } }  } %}

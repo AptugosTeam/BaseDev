@@ -1,6 +1,5 @@
 /*
 path: productCardActions.tpl
-completePath: elements/Layouts/ProductCards/productCardActions.tpl
 unique_id: 7MX9RUSn
 icon: f:productCardActions.svg
 options:

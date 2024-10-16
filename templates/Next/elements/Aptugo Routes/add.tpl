@@ -13,14 +13,16 @@ validateBody({
   type: "object",
   properties: {
     {% for field in table.fields %}
-    {{ field.column_name | friendly | lower }}: ValidateProps.{{ singleName}}.{{ field.column_name | friendly | lower }},
+    {{ field.column_name | friendly }}: ValidateProps.{{ singleName }}.{{ field.column_name | friendly }},
     {% endfor %}
   },
 }),
 async (req, res) => {
+  {% set settingName =  singleName ~ '_Pre_Add' %}
+  {{ insert_setting(settingName) | raw }}
   const {{ singleName }} = await insert{{ singleName }}(req.db, {
     {% for field in table.fields %}
-      {{ field.column_name | friendly | lower }}: req.body.{{ field.column_name | friendly | lower }},
+      {{ field.column_name | friendly }}: req.body.{{ field.column_name | friendly }},
     {% endfor %}
   })
   return res.json({ {{ singleName }} })

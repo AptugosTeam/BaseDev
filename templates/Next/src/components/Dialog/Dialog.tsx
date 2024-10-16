@@ -39,6 +39,7 @@ interface addDialogProps {
   hideButton?: boolean
   children?: ReactElement<any, any>[]
   className?: any
+  addClassName?: any
 }
 
 const AddDialog: FunctionComponent<addDialogProps> = (props) => {
@@ -87,9 +88,9 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
     <React.Fragment>
       {!hideButton && (
         <Tooltip title={options.title}>
-          <Fab aria-label={options.title} color={color} onClick={onOpen}>
+          <div className={props.addClassName} onClick={onOpen}>
             <AddIcon />
-          </Fab>
+          </div>
         </Tooltip>
       )}
       <Dialog disableEnforceFocus open={isOpen} onClose={handleClose} aria-labelledby="form-dialog-title" className={props.className}>

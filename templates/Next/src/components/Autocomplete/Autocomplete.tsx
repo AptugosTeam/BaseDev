@@ -1,12 +1,14 @@
 /*
 path: Autocomplete.tsx
-completePath: front-end/components/Autocomplete/Autocomplete.tsx
-unique_id: wpHBmu7F
+completePath: >-
+  /Users/Shared/Dev/BaseDev/Templates/Next/src/components/Autocomplete/Autocomplete.tsx
+keyPath: src/components/Autocomplete/Autocomplete.tsx
+unique_id: nd2fxWPD
 */
-import * as React from 'react'
-import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import CircularProgress from '@mui/material/CircularProgress'
+import TextField from '@mui/material/TextField'
+import * as React from 'react'
 
 function debounce(fn, delay) {
   let timeoutId
@@ -40,7 +42,7 @@ export default function Asynchronous(props) {
     if (!open) {
       setOptions([])
     } else {
-      props.onType('').then(result => {
+      props.onType('').then((result) => {
         setOptions(result)
       })
     }
@@ -48,9 +50,10 @@ export default function Asynchronous(props) {
 
   return (
     <Autocomplete
+      multiple={props.chips}
       fullWidth
       onInputChange={debouncedFunction}
-      value={props.value?.title}
+      value={props.value}
       onChange={(_event: any, newValue: string | null) => {
         onChange(newValue)
       }}
@@ -61,8 +64,8 @@ export default function Asynchronous(props) {
       onClose={() => {
         setOpen(false)
       }}
-      isOptionEqualToValue={(option, value) => option?.title === value?.title}
-      getOptionLabel={(option) => option.title || option || ''}
+      isOptionEqualToValue={(option, value) => option?.label === value}
+      getOptionLabel={(option) => option?.label || option || ''}
       options={options}
       loading={loading}
       renderInput={(params) => (

@@ -8,75 +8,178 @@ unique_id: sd4A39xT
   "value": "Image",
   "dataType": "String",
   "initialValue": "",
-  "options": {
+  "extraOptions": {
     "frontEndType": "string",
     "extra": [
       {
-        "display": "Store in Google Cloud",
-        "value": "gcloud",
+        "display": "Storage",
+        "value": "storage",
         "type": "select",
+        "settings": {
+          "default": "Local"
+        },
         "options": [
           {
-            "label": "Yes",
-            "value": "1"
+            "label": "Local",
+            "value": "Local",
+            "default": true
           },
           {
-            "label": "No",
-            "value": "0"
+            "label": "Amazon S3",
+            "value": "s3"
+          },
+          {
+            "label": "Google Storage",
+            "value": "gs"
           }
         ]
+      },
+      {
+        "display": "S3 Bucket Name",
+        "value": "s3Bucket",
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "s3"
+        }
       },{
+        "display": "S3 Region",
+        "value": "s3Region",
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "s3"
+        }
+      },{
+        "display": "S3 Access Key ID",
+        "value": "s3AccessKeyID",
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "s3"
+        }
+      },{
+        "display": "S3 Access Key Secret",
+        "value": "s3AccessKeySecret",
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "s3"
+        }
+      },
+      {
         "display": "Google Cloud Type",
         "value": "gcloud_type",
-        "type": "text"
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "gs"
+        }
       },{
         "display": "Project ID",
         "value": "gcloud_projectID",
-        "type": "text"
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "gs"
+        }
       },{
         "display": "Folder Name",
         "value": "gcloud_folder",
-        "type": "text"
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "gs"
+        }
       },{
         "display": "Private Key ID",
         "value": "gcloud_privateKeyID",
-        "type": "text"
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "gs"
+        }
       },{
         "display": "Private Key",
         "value": "gcloud_privateKey",
-        "type": "text"
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "gs"
+        }
       },{
         "display": "Client Email",
         "value": "gcloud_clientEmail",
-        "type": "text"
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "gs"
+        }
       },{
         "display": "Client ID",
         "value": "gcloud_clientID",
-        "type": "text"
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "gs"
+        }
       },{
         "display": "Auth URI",
         "value": "gcloud_authUri",
-        "type": "text"
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "gs"
+        }
       },{
         "display": "Token URI",
         "value": "gcloud_tokenUri",
-        "type": "text"
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "gs"
+        }
       },{
         "display": "Auth Provider X509 URL",
         "value": "gcloud_authx509url",
-        "type": "text"
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "gs"
+        }
       },{
         "display": "Client X509 URL",
         "value": "gcloud_x509url",
-        "type": "text"
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "gs"
+        }
       },{
         "display": "Universe Domain",
         "value": "gcloud_universeDomain",
-        "type": "text"
-      }, {
-        "display": "Resize Width Before Upload (optional)",
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "gs"
+        }
+      },{
+        "display": "Resize Width Before Upload",
         "value": "resizeWidth",
         "type": "text"
+      },{
+        "display": "Auto Generate Thumbnail",
+        "value": "autogeneratethumbnail",
+        "type": "checkbox"
+      },{
+        "display": "Store Thumbnail URL in",
+        "value": "thumbnailField",
+        "type": "select",
+        "options": "aptugoUtils.getAllFields().map(field => { return { label: field[1], value: field[0] } })",
+        "settings": {
+          "propertyCondition": "autogeneratethumbnail",
+          "condition": true
+        }
       }
     ]
   }

@@ -6,4 +6,4 @@ unique_id: 1a0ACEEE
 {% if not field %}
 {% set field = element.values.Field | fieldData %}
 {% endif %}
-{ id: '{{ field.column_name | friendly | lower }}', header: '{{ field.displaylabel|default(field.column_name) }}', type: 'string', size: 300, renderValue: (cell) => { return cell.getValue() || '---'} },
+{ id: '{{ field.column_name | friendly }}', header: '{{ field.displaylabel|default(field.column_name) }}', type: 'string', size: 300, renderValue: (cell) => { return cell.getValue() || '---'} },

@@ -8,7 +8,7 @@ sourceType: javascript
 subtype: Aptugo
 children: []
 */
-{% macro prepareRoute(routePath, tableName) %}
+{% macro prepareRoute(routePath, tableName, singleName) %}
   {% set parts = routePath|split('/api/' ~ tableName ~ '/')|last %}
   {% set folderStructure = parts|split('/') %}
   {% set outFolder = [] %}
@@ -25,8 +25,8 @@ children: []
 
 {# Definitions #}
 {% import _self as macros %}
-{% set tableName = table.name | friendly | lower %}
-{% set singleName = table.singleName | friendly | lower %}
+{% set tableName = table.name | friendly | lower %}
+{% set singleName = table.singleName | friendly | lower %}
 {% set mainRouteCode = '' %}
 {% set externalRouteFiles = [] %}
 
@@ -37,7 +37,7 @@ children: []
     {% set routeCode %} 
       // {{ route.route_name }}
       {% if route.route_template != 'source' %}
-        handler.{{ route.route_method }}({% include includeTemplate('Aptugo Routes' ~ route.route_template ~ '.tpl') %})
+        handler.{{ route.route_method }}({% include includeTemplate('Aptugo Routes' ~ route.route_template ~ '.tpl') %})
       {% else %}
         handler.{{ route.route_method }}(
           {{ route.route_code | raw }}
@@ -45,7 +45,8 @@ children: []
       {% endif %}
     {% endset %}
     {% if routePath != '/api/' ~ tableName %}
-      {% set path = macros.prepareRoute(routePath, tableName)|trim %}
+      {% set path = macros.prepareRoute(routePath, tableName, singleName)|trim %}
+      {{ fakeRoutePath(path) }}
       {% set externalRouteFile = { path: path, content: routeCode } %}
       {% set nrf = externalRouteFiles %}
       {% set notFound = true %}
@@ -67,17 +68,19 @@ children: []
 {% block baseRoute %}
 import { ValidateProps } from "@api-lib/constants"
 import {
-  find{{ tableName }},
-  count{{ tableName }},
-  insert{{ singleName }},
-  update{{ singleName }}ById,
-  find{{ singleName }}ById,
-  delete{{ singleName }}ById,
+  find{{ tableName }},
+  count{{ tableName }},
+  insert{{ singleName }},
+  update{{ singleName }}ById,
+  find{{ singleName }}ById,
+  delete{{ singleName }}ById,
 } from "@api-lib/db"
 import { database, validateBody, parseBody } from "@api-lib/middlewares"
 import { ncOpts } from "@api-lib/nc"
 import nc from "next-connect"
 import multer from 'multer'
+import parseBodyMiddleware from '@lib/parseBodyMiddleware'
+{{ insert_setting(singleName ~ '_File_Start') |raw }}
 
 export const config = {
   api: {
@@ -85,29 +88,22 @@ export const config = {
   },
 }
 
-const upload = multer({ 
-  storage: multer.diskStorage({
-    filename: (_req, file, callback) => {
-      const uniqueFileName = Date.now() + '-' + file.originalname;
-      callback(null, uniqueFileName)
-    },
-    destination: (_req, _file, callback) => {
-      callback(null, './public/img')
-    }
-  }),
+const upload = multer({
+  storage: multer.memoryStorage(),
   limits: {
-    fileSize: 5 * 1024 * 1024
-  }
+    fileSize: 5 * 1024 * 1024 * 1024, // limit file size to 5GB
+  },
 })
 
 const handler = nc(ncOpts)
 handler.use(database)
-handler.use(upload.single('file'))
+handler.use(upload.any())
 handler.use(parseBody)
+handler.use(parseBodyMiddleware)
 {{ mainRouteCode }}
 export default handler
 {% endblock %}
-{# ADD EXTRA FILES FROM ROUTE #}
+{# ADD EXTRA FILES FROM ROUTE #}
 {% for externalRouteFile in externalRouteFiles %}
   {% set mainRouteCode = externalRouteFile.content %}
   {{ addExtraFile(externalRouteFile.path, block("baseRoute")) }}

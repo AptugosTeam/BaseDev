@@ -3,4 +3,10 @@ path: update.tpl
 completePath: elements/Fields/Autocomplete/update.tpl
 unique_id: zd6mrTlU
 */
-if(typeof fields.{{ field.column_name | friendly | lower }} !== 'undefined') {{ singleName }}.{{ field.column_name | friendly | lower }} = new ObjectId(fields.{{ field.column_name | friendly | lower }}._id)
+{% set referencedField = field.reference | fieldData %}
+{% set fieldInfo = field | fieldData %}
+{% if field.relationshipType == 'm:1' %}
+{% elseif field.relationshipType == '1:1' %}
+{% else %}
+  {% include includeTemplate('update_1m.tpl') %}
+{% endif %}

@@ -1,6 +1,5 @@
 /*
 path: productCardHeader.tpl
-completePath: elements/Layouts/ProductCards/productCardHeader.tpl
 unique_id: aMXRUSTB
 icon: f:productCardHeader.svg
 helpText: >-

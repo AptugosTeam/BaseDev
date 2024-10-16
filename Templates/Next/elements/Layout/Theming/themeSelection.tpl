@@ -1,6 +1,5 @@
 /*
 path: themeSelection.tpl
-completePath: elements/Experimental/themeSelection.tpl
 type: file
 unique_id: rtGqPUwH
 icon: ico-theme-selection

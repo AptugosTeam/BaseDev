@@ -1,6 +1,5 @@
 /*
 path: productCardContent.tpl
-completePath: elements/Layouts/ProductCards/productCardContent.tpl
 unique_id: M6RUSMX3
 icon: f:productCardContent.svg
 helpText: Insert simple text anywhere. Can hold variables, code, and anything of your choice

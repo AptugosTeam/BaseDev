@@ -8,7 +8,7 @@ unique_id: 6IVx7DRZ
   "value": "Autocomplete",
   "dataType": "mongoose.Schema.Types.ObjectId",
   "initialValue": "",
-  "options": {
+  "extraOptions": {
     "extra": [
       {
         "display": "Relationship Type",

@@ -26,9 +26,9 @@ import TextField from '@mui/material/TextField'
     {% endif %}
     type="text"
     fullWidth
-    className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly | lower }}'{% endif %}}
+    className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
     variant="{{ element.values.variant|default('standard') }}"
-    value={ {{ tableName }}data.{{ field.column_name | friendly | lower }} || '' }
-    onChange={handle{{ tableName }}Change("{{ field.column_name | friendly | lower }}")}
+    value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
+    onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
     {% if element.values.onBlur %}onBlur={ {{ element.values.onBlur | functionOrCall }} }{% endif %}
 />

@@ -7,7 +7,7 @@ settings:
   - name: Packages
     value: |-
       "mui-datatables": "latest",
-      "react-number-format": "latest",
+      "react-number-format": "5.4.0",
 children: []
 */
 {% set bpr %}

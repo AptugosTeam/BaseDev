@@ -11,19 +11,22 @@ validateBody({
   type: "object",
   properties: {
     {% for field in table.fields %}
-    {{ field.column_name | friendly | lower }}: ValidateProps.{{ singleName}}.{{ field.column_name | friendly | lower }},
+    {{ field.column_name | friendly }}: ValidateProps.{{ singleName }}.{{ field.column_name | friendly }},
     {% endfor %}
   },
 }),
 async (req, res) => {
+  {% set settingName = singleName ~ '_Pre_Update' %}
+  {{ insert_setting(settingName) | raw }}
+
   const {
     {% for field in table.fields %}
-      {{ field.column_name | friendly | lower }},
+      {{ field.column_name | friendly }},
     {% endfor %}
   } = req.body
-  const {{ tableName }} = await update{{ singleName }}ById(req.db, req.query.ID, {
+  const {{ tableName }} = await update{{ singleName }}ById(req.db, req.query.ID, {
     {% for field in table.fields %}
-      {{ field.column_name | friendly | lower }},
+      {{ field.column_name | friendly }},
     {% endfor %}
   })
 

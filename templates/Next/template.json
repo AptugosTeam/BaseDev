@@ -3,7 +3,7 @@
   "name": "React/Typescript Server Side Rendering",
   "renderingFolder": "/src/Pages",
   "namingSchema": "{% if pageDefinition.path == '/' %}index{% else %}{{ pageDefinition.path }}{% endif %}.tsx",
-  "templateCommandsAfterDeploy": "npm i && npm run build",
+  "templateCommandsAfterDeploy": "pnpm i && pnpm run build",
   "deployScript": "templatescripts/deploy.js",
   "assetsFolder": "/public",
   "tableTypes": [

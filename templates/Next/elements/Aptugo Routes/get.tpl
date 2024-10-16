@@ -4,7 +4,7 @@ completePath: elements/Aptugo Routes/get.tpl
 unique_id: AlPg3QRE
 */
 async (req, res) => {
-  const ITEMS_PER_PAGE = 6
+  const ITEMS_PER_PAGE = Number(req.query.limit) || 10
   const page = req.query.page || 1
   const skip = (page - 1) * ITEMS_PER_PAGE
   const {{ singleName }}InfoAll = await count{{ tableName }}(
@@ -20,7 +20,7 @@ async (req, res) => {
     req.query.before ? new Date(req.query.before) : undefined,
     req.query.by,
     req.query.skip ? req.query.skip : skip,
-    req.query.limit ? +req.query.limit : ITEMS_PER_PAGE
+    ITEMS_PER_PAGE
   )
   const [count, items] = await Promise.all([countPromise, {{ singleName }}Info])
   const pageCount = Math.ceil(countPromise / ITEMS_PER_PAGE)

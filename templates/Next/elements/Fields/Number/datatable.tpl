@@ -13,7 +13,7 @@ settings:
 import { NumericFormat } from 'react-number-format'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-{ id: '{{ field.column_name | friendly | lower }}', header: '{{ field.displaylabel|default(field.column_name) }}', type: 'string', size: 300, renderValue: (cell) => { 
+{ id: '{{ field.column_name | friendly }}', header: '{{ field.displaylabel|default(field.column_name) }}', type: 'string', size: 300, renderValue: (cell) => { 
   return cell.getValue() ? <NumericFormat 
     value= { cell.getValue() }
     displayType="text"

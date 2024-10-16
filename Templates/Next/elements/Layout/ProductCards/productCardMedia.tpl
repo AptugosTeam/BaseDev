@@ -1,6 +1,5 @@
 /*
 path: productCardMedia.tpl
-completePath: elements/Layouts/ProductCards/productCardMedia.tpl
 unique_id: vcZRUSMX
 icon: f:productCardMedia.svg
 helpText: Easily use images from Assets

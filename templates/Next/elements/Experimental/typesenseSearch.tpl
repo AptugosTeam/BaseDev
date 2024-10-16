@@ -78,7 +78,7 @@ export async function setupTypesense_{{ tableName }}(typesenseClient, db) {
       {% for field in table.fields %}
         {% if element.values['typesense_' ~ (field.column_name | friendly)] %}
         {
-          name: '{{ field.column_name | friendly | lower }}',
+          name: '{{ field.column_name | friendly }}',
           type: 'string',
           facet: {{ element.values['typesense_facet_' ~ (field.column_name | friendly)]|default(false) }},
         },
@@ -118,7 +118,7 @@ export async function setupTypesense_{{ tableName }}(typesenseClient, db) {
       ],
       cacheSearchResultsForSeconds: 2 * 60, // Cache search results from server. Defaults to 2 minutes. Set to 0 to disable caching.
     },additionalSearchParameters: {
-    query_by: '{% for field in table.fields %}{% if field.data_type == 'String' or field.data_type == 'Wysiwyg' %}{{ field.column_name | friendly | lower }}, {% endif %}{% endfor %}'
+    query_by: '{% for field in table.fields %}{% if field.data_type == 'String' or field.data_type == 'Wysiwyg' %}{{ field.column_name | friendly }}, {% endif %}{% endfor %}'
   }})
   const searchClient = typesenseInstantsearchAdapter.searchClient;
 {% endset %}

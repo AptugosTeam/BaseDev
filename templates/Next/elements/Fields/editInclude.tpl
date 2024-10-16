@@ -31,7 +31,7 @@ const initialData{{ tableInfo.table.name | friendly }} = {
       {% set fieldValue = "null" %}
     {% endif %}
   {% endif %}
-  {{ field.column_name | friendly | lower }}: {{ fieldValue }},
+  {{ field.column_name | friendly }}: {{ fieldValue }},
 {% endfor %}
 }
 const [{{ tableInfo.table.name | friendly }}data, set{{ tableInfo.table.name | friendly }}data] = React.useState<any>(initialData{{ tableInfo.table.name | friendly }})

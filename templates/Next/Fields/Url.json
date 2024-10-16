@@ -8,7 +8,7 @@ unique_id: hTWaRbOr
   "value": "Url",
   "dataType": "String",
   "initialValue": "",
-  "options": {
+  "extraOptions": {
     "frontEndType": "string",
     "extra": [
       {

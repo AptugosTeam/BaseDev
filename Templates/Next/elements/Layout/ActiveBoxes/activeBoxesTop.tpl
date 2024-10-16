@@ -1,6 +1,5 @@
 /*
 path: activeBoxesTop.tpl
-completePath: elements/Layouts/ActiveBoxes/activeBoxesTop.tpl
 unique_id: rqa1TS3P
 icon: f:activeBoxesTop.svg
 */

@@ -4,6 +4,9 @@ completePath: elements/Basic/div.tpl
 type: file
 unique_id: y8fra7Zo
 icon: ico-div
+double: true
+color: rgb(0,230,230)
+backColor: rgba(6, 201, 210, 0.25)
 sourceType: javascript
 options:
   - name: class

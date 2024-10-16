@@ -16,8 +16,8 @@ import FileUpload from '@components/FileUpload'
     {% if field.placeholder %}
         placeholder={{ field.placeholder | textOrVariable }}
     {% endif %}
-    value={ {{ tableName }}data.{{ field.column_name | friendly | lower }}}
-    onChange={handle{{ tableName }}Change("{{ field.column_name | friendly | lower }}")}
+    value={ {{ tableName }}data.{{ field.column_name | friendly }}}
+    onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
     variant="{{ element.values.variant|default('standard') }}"
     {% if field.resizeWidth %}
         resizeWidth={ Number( {{field.resizeWidth|default(800)}} ) }

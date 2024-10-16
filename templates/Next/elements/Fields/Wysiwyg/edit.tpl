@@ -49,8 +49,8 @@ import Input from '@mui/material/Input'
     <QuillEditor
       modules={quillModules}
       placeholder="{{ field.placeholder|default(field.prompt)|default(field.column_name) }}"
-      value={ {{ tableName }}data.{{ field.column_name | friendly | lower }} || ''} 
-      onChange={e => handle{{ tableName }}Change('{{ field.column_name | friendly | lower }}')(e)}
+      value={ {{ tableName }}data.{{ field.column_name | friendly }} || ''} 
+      onChange={e => handle{{ tableName }}Change('{{ field.column_name | friendly }}')(e)}
       theme="snow"
     />
   </FormControl>
