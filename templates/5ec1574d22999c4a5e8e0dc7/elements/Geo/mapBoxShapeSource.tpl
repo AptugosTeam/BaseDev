@@ -10,6 +10,10 @@ options:
   - name: clusterProperties
     display: Cluster Properties
     type: text
+  - name: clusterActive
+    display: Active Cluster
+    type: checkbox
+    options: ''
   - name: onPress
     display: On Press
     type: function
@@ -18,9 +22,11 @@ options:
   id="{{ element.unique_id }}"
   type="geojson"
   data={ {{ element.values.shape }} }
+  {% if element.values.clusterActive %}
   cluster={true}
   clusterMaxZoom={14}
   clusterRadius={50}
+  {% endif %}
   {% if element.values.clusterProperties %}clusterProperties={ {{ element.values.clusterProperties }} }{% endif %}
 >
   {{ content | raw }}
