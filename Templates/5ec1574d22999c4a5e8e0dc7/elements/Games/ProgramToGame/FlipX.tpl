@@ -21,7 +21,7 @@ options:
     options: ''
     advanced: true
 */
-    {% set variablePrefix = element.values.withoutThis ? '' : 'this.' %}
+    {% set variablePrefix = element.values.withoutThis == true ? '' : 'this.' %}
 
     if ({{ variablePrefix }}{{ element.values.variableName }}.flipX) {
         // Verifica si flipX es true, entonces ajusta la posición del jugador
