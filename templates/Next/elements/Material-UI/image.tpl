@@ -16,12 +16,20 @@ options:
     display: Image Path
     type: text
     options: ''
+    settings: {
+      "propertyCondition": "useAsset",
+      "condition": "none"
+    }
   - name: webppath
     display: Image Path (WebP)
     type: text
     options: >-
       return aptugo.assetUtils.grabCssSelectors(
       aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
+    settings: {
+      "propertyCondition": "useAsset",
+      "condition": "none"
+    }
   - name: className
     display: ClassName
     type: styles
@@ -62,7 +70,6 @@ options:
     options: ''
     advanced: true
 */
-{% set tag = 'picture' %}
 {% if element.values.background %}{%set tag = 'div' %}{% endif %}
 {% set path = element.values.path %}
 {% set webppath = element.values.webppath %}
@@ -85,30 +92,36 @@ options:
     {% endfor %}
   {% endif %}
 {% endif %}
-<{{ tag }}
-  {% if element.values.className %}className={ {{element.values.className}} }{% endif %}
->
-  {% if webppath %}
-  <source type="image/webp" srcSet="{{ webppath }}" />
-  {% endif %}
-  <img
-    src={{ path|textOrVariable }}
-    alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
-    {% if width %}
-      width={{ width|textOrVariable }}
+{% if width and height %}
+  {% set bpr %}import Image from 'next/image'{% endset %}{{ save_delayed('bpr', bpr ) }}
+  <Image width={ {{width}} } height={ {{height}} } src={{ path|textOrVariable }} alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }} />
+{% else %}
+  {% set tag = 'picture' %}
+  <{{ tag }}
+    {% if element.values.className %}className={ {{element.values.className}} }{% endif %}
+  >
+    {% if webppath %}
+    <source type="image/webp" srcSet="{{ webppath }}" />
     {% endif %}
-    {% if height %}
-      height={{ height|textOrVariable }}
-    {% endif %}
-    {% if element.values.onLoad %}
-      onLoad={ {{ element.values.onLoad }} }
-    {% endif %}
-    {% if element.values.onError %}
-      onError={ {{ element.values.onError }} }
-    {% endif %}
-    {% if element.values.draggable %}
-      draggable={false}
-    {% endif %}
-  />
-  {{ content | raw }}
-</{{ tag }}>
+    <img
+      src={{ path|textOrVariable }}
+      alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
+      {% if width %}
+        width={{ width|textOrVariable }}
+      {% endif %}
+      {% if height %}
+        height={{ height|textOrVariable }}
+      {% endif %}
+      {% if element.values.onLoad %}
+        onLoad={ {{ element.values.onLoad }} }
+      {% endif %}
+      {% if element.values.onError %}
+        onError={ {{ element.values.onError }} }
+      {% endif %}
+      {% if element.values.draggable %}
+        draggable={false}
+      {% endif %}
+    />
+    {{ content | raw }}
+  </{{ tag }}>
+{% endif %}

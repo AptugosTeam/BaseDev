@@ -5,6 +5,10 @@ unique_id: D10wnZ8z
 prevent_delete: true
 icon: ico-field
 */
+{% set bpr %}
+import Head from 'next/head'
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
 {% if element.values.localStyles %}
 {% set bpr %}
 import { mergeClasses } from '@services/utils'
@@ -12,6 +16,7 @@ import { mergeClasses } from '@services/utils'
 {{ save_delayed('bpr',bpr) }}
   const localStyles = { {{ element.values.localStyles | raw }} }
 {% endif %}
+
 const {{ page.name | friendly }}: FunctionComponent = (props: any) => {
   const {
     history: navigation,
@@ -23,3 +28,6 @@ const {{ page.name | friendly }}: FunctionComponent = (props: any) => {
 
   {{ content|raw }}
   return (<React.Fragment>
+  <Head>
+    <title>{{page.name}}</title>
+  </Head>
