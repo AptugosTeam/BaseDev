@@ -10,6 +10,10 @@ options:
   - name: clusterProperties
     display: Cluster Properties
     type: text
+  - name: clusterActive
+    display: Active Cluster
+    type: checkbox
+    options: ''
   - name: onPress
     display: On Press
     type: function
@@ -28,9 +32,11 @@ const shapeSourceRef{{ element.unique_id }} = React.useRef<ShapeSource>(null)
     {{ element.values.onPress | raw }}
   }}
   ref={shapeSourceRef{{ element.unique_id }}}
-  cluster
-  clusterRadius={50}
+  {% if element.values.clusterActive %}
+  cluster={true}
   clusterMaxZoomLevel={14}
+  clusterRadius={50}
+  {% endif %}
   {% if element.values.clusterProperties %}clusterProperties={ {{ element.values.clusterProperties }} }{% endif %}
   shape={ {{ element.values.shape }} }
 >
