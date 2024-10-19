@@ -124,6 +124,10 @@ options:
     display: On Key Down
     type: code
     advanced: true
+  - name: inputRef
+    display: Input Reference
+    type: code
+    advanced: true
 children: []
 */
 {% if element.values.fullWidth %}{% set fullWidth = true %}{% endif %}
@@ -202,4 +206,5 @@ import InputAdornment from '@mui/material/InputAdornment'
         endAdornment: <InputAdornment position="end">{{ content | raw }}</InputAdornment>
       } }
     {% endif %}
+    {% if element.values.inputRef %}inputRef={ {{ element.values.inputRef }} }{% endif %}
 />
