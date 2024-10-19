@@ -24,6 +24,10 @@ options:
   - name: className
     display: className
     type: styles
+  - name: TransitionProps
+    display: Transition Props from MUI
+    type: code
+    advanced: true
 sourceType: javascript
 childs:
   - name: Title
@@ -46,6 +50,7 @@ import Dialog from '@mui/material/Dialog'
   {% if element.values.className %}
     className={ {{element.values.className}} }
   {% endif %}
+  {% if element.values.TransitionProps %} TransitionProps={ {{element.values.TransitionProps}} } {% endif %}
 >
 {{ content | raw }}
 </Dialog>
