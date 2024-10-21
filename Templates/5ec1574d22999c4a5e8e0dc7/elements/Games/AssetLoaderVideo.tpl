@@ -35,6 +35,6 @@ options:
   {% endif %}
 {% endif %}
 {% if element.values.useVideo %}
-  {% set path = '/img/' ~ asset.name %}
+  {% set path = '/' ~ asset.name %}
   this.load.video('{{ element.values.name | friendly }}', {{ path | textOrVariableInCode }}, {{ element.values.autoplay | default(true) }})
 {% endif %}
