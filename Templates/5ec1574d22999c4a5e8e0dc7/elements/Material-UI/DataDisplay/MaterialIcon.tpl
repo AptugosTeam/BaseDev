@@ -33,6 +33,10 @@ options:
     display: viewBox size
     type: text
     advanced: true
+  - name: extrastyles
+    display: Extra Styles
+    type: text
+    options: ''
 */
 {% set bpr %}
 import { {{ element.values.icon|default('HelpOutline') }} } from '@mui/icons-material';
@@ -51,5 +55,6 @@ import { {{ element.values.icon|default('HelpOutline') }} } from '@mui/icons-mat
   sx={ {
     {% if element.values.fontSize %}fontSize: {{ element.values.fontSize }},{% endif %}
     {% if element.values.color == 'custom' %}color: "{{ element.values.custom }}"{% endif %}
+    {% if element.values.extrastyles %}{{ element.values.extrastyles }}{% endif %}
   } }
 />
