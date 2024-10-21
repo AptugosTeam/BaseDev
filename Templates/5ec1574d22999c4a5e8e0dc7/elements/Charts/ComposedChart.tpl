@@ -28,7 +28,7 @@ options:
     display: XAxis Properties
     type: separator
   - name: Index
-    display: XAxis Variable
+    display: XAxis Variable (Index)
     type: dropdown
     options: return [['useVar','Use a Variable'], ...aptugo.tableUtils.getAllFields()]
   - name: indexVariable
@@ -72,12 +72,12 @@ options:
     display: Legend Properties
     type: separator
   - name: layout
-    display: Legend
+    display: Legend layout
     type: dropdown
     options:
       horizontal;vertical
   - name: verticalAlign
-    display: Legend
+    display: Legend verticalAlign
     type: dropdown
     options:
       top;middle;bottom
