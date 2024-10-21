@@ -12,5 +12,10 @@ options:
     display: New Value
     type: text
     options: ''
+  - name: withoutThis
+    display: Not Use This
+    type: checkbox
 */
-this.{{ element.values.variableName }}={{ element.values.newValue }}
+{% set variablePrefix = element.values.withoutThis == true ? '' : 'this.' %}
+
+{{ variablePrefix }}{{ element.values.variableName }}={{ element.values.newValue }}
