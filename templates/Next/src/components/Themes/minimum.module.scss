@@ -282,6 +282,23 @@ a:hover:before,
         justify-content: center;
       }
     }
+
+    & .cards {
+      & .cardsHolder {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        & .card {
+          & h3 {
+            font-size: 1rem;
+          }
+
+          & h5 {
+            font-size: .75rem;
+          }
+        }
+      }
+    }
   }
 }
 

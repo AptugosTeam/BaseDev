@@ -6,7 +6,7 @@ options:
   - name: font
     display: Font
     type: dropdown
-    options: ['Fira_Sans','Merriweather']
+    options: ['Fira_Sans','Merriweather','Inter']
 */
 {% set IBA %}
 import { {{ element.values.font }} } from 'next/font/google'

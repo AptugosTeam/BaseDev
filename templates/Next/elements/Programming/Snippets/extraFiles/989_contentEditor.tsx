@@ -3,7 +3,6 @@ path: 989_contentEditor.tsx
 keyPath: elements/Programming/Snippets/extraFiles/989_contentEditor.tsx
 unique_id: fh45AsTw
 */
-import axios from 'axios'
 import ContentTools from 'ContentTools'
 import 'ContentTools/build/content-tools.min.css'
 import React, { FunctionComponent } from 'react'
@@ -96,13 +95,11 @@ const ContEditor: FunctionComponent = (props: any) => {
       var formData = new FormData()
       formData.append('image', file)
 
-      axios
-        .post(`{{ settings.apiURL }}/${props.uploadPath}`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then((res) => {
+      fetcher(`{{ settings.apiURL }}/${props.uploadPath}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'multipart/form-data' },
+        body: formData,
+      }).then((res) => {
           imagePath = '/img/' + res.data.filename
           imageSize = [res.data.dimensions.width, res.data.dimensions.height]
           _dialog.progress(100)

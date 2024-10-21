@@ -24,6 +24,7 @@ options:
     type: text
     options: ''
 children: []
+order: 5
 */
 {% if element.values.className or element.values.ClassName or type == 'DevelopmentDebug' %}
   <span {% if type == 'DevelopmentDebug' %}data-aptugo="{{ element.unique_id }}"{% endif %} 

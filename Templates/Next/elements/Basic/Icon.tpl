@@ -1,11 +1,12 @@
 /*
-path: YesIcon.tpl
-completePath: elements/Experimental/YesIcon.tpl
+path: Icon.tpl
+completePath: elements/Basic/Icon.tpl
 type: file
-unique_id: UiCt6AJV
-icon: f:YesIcon.svg
+unique_id: TTit6AJV
+icon: ico-icon
 sourceType: javascript
 children: []
+order: 20
 options:
   - name: icon
     display: Icon

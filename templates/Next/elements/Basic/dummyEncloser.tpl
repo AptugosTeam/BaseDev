@@ -10,6 +10,7 @@ options:
     type: checkbox
     options: ''
 children: []
+order: 30
 */
 {% if element.values.titleAsComment %}// {{ element.name }}{% endif %}
 {{ content | raw }}

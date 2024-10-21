@@ -4,6 +4,7 @@ unique_id: hmTuTaFz
 children: []
 icon: ico-typography
 helpText: Renders different typographic html elements
+order: 10
 renderTag: (elem) => { return elem.values.tag }
 calculatedName: >-
   function (ele) { 

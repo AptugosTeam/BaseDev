@@ -2,7 +2,7 @@
 path: Tooltip.tpl
 type: file
 unique_id: tooltip9481
-icon: f:Tooltip.svg
+icon: ico-tooltip
 helpText: Display informative text when users hover over, focus on, or tap an element.
 children: []
 options:

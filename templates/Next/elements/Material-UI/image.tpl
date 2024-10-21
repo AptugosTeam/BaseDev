@@ -105,13 +105,9 @@ options:
     {% endif %}
     <img
       src={{ path|textOrVariable }}
-      alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
-      {% if width %}
-        width={{ width|textOrVariable }}
-      {% endif %}
-      {% if height %}
-        height={{ height|textOrVariable }}
-      {% endif %}
+      alt={{ element.values.alt|default(path)|textOrVariable }}
+      {% if width %} width={{ width|textOrVariable }}{% endif %}
+      {% if height %} height={{ height|textOrVariable }}{% endif %}
       {% if element.values.onLoad %}
         onLoad={ {{ element.values.onLoad }} }
       {% endif %}

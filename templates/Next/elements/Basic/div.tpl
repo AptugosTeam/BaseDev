@@ -8,6 +8,7 @@ double: true
 color: rgb(0,230,230)
 backColor: rgba(6, 201, 210, 0.25)
 sourceType: javascript
+order: 1
 options:
   - name: class
     display: ClassName

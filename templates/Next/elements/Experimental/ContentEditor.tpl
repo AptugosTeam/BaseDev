@@ -26,7 +26,7 @@ options:
     type: text
   - name: onSave
     display: On Save
-    type: text
+    type: code
   - name: uploadPath
     display: Upload Path (back-end)
     type: text
