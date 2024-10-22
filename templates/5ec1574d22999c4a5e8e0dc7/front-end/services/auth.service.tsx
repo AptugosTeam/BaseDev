@@ -5,7 +5,7 @@ unique_id: dDixye51
 */
 import axios from 'axios'
 
-const API_URL = '{{ settings.apiURL }}/api/users/'
+const API_URL = '{{ settings.apiURL }}/api/'
 
 interface LoginOptions {
   remember?: boolean;
@@ -25,10 +25,20 @@ interface RecoverOptions {
 }
 
 class AuthService {
+  private apiUrl: string;
+
+  constructor(endpoint: string = 'users') {
+    this.apiUrl = API_URL + endpoint + '/';
+  }
+
+  public setEndpoint(endpoint: string) {
+    this.apiUrl = API_URL + endpoint + '/';
+  }
+
   login(email, password, options: LoginOptions = {}) {
     const { remember = true} = options
     return axios
-      .post(API_URL + 'authenticate', {
+      .post(this.apiUrl + 'authenticate', {
         email,
         password,
         options,
@@ -55,7 +65,7 @@ class AuthService {
 
   loginWithSession(email, password, fullUser = true, fieldsToRetrieve = [], lang = 'en') {
     return axios
-      .post(API_URL + 'authenticate', {
+      .post(this.apiUrl + 'authenticate', {
         email,
         password,
         fullUser,
