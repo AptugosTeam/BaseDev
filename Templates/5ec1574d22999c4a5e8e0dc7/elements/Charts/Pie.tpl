@@ -110,6 +110,7 @@ options:
     options: 0.0;0.1;0.2;0.3;0.4;0.5;0.6;0.7;0.8;0.9;1
     advanced: true
   - name: tooltip
+    display: Tooltip
     type: text
     advanced: true
 settings:
@@ -141,7 +142,7 @@ const colors{{ element._unique_id }} = ['#0088FE', '#00C49F', '#FFBB28', '#FF804
         {% if element.values.Xcoordinate %}cx={ {{ element.values.Xcoordinate }} }{% else %}cx= '50%'{% endif %}
         {% if element.values.Ycoordinate %}cy={ {{ element.values.Ycoordinate }} }{% else %}cy= '50%'{% endif %}
         {% if element.values.innerRadiusValue %}innerRadius={ {{ element.values.innerRadiusValue }} }{% else %}innerRadius= '0'{% endif %}
-        {% if element.values.outerRadiusValue %}outerRadius={ {{ element.values.outerRadiusValue }} }{% else %}outerRadius= '80'{% endif %}
+        {% if element.values.outerRadiusValue %}outerRadius="{{ element.values.outerRadiusValue }}"{% else %}outerRadius="80%" {% endif %}
         {% if element.values.LabelPie %}label={ {{ element.values.LabelPie }} }{% else %}label={false}{% endif %}
         {% if element.values.LabelsLine %}labelLine={ {{ element.values.LabelsLine }} }{% else %}labelLine={false}{% endif %}
         {% if element.values.dataKeyPie %}dataKey="{{ element.values.dataKeyPie }}"{% endif %}
