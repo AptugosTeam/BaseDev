@@ -1,6 +1,6 @@
 let newAsset = {
   type: Parameters.type,
-  id: aptugo.generateID(),
+  id: Parameters.id || aptugo.generateID(),
   name: Parameters.name
 }
 

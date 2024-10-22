@@ -5,7 +5,7 @@ Parameters.Name = aptugo.friendly(Parameters.Name).toLowerCase();
 for (var file of Parameters.uploadFiles) {
   let newAsset = {
     type: 'image',
-    id: aptugo.generateID(),
+    id: Parameters.id || aptugo.generateID(),
     name: file.name
   }
 

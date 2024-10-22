@@ -33,7 +33,7 @@ order: 5
     style={ {{element.values.extraStyles}} }
   {% endif %} >
 {% endif %}
-  {{ element.values.Content | raw }}
+  {{ element.values.Content }}
   {{ content | raw }}
 {% if element.values.className or element.values.ClassName or type == 'DevelopmentDebug' %}
   </span>

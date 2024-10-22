@@ -283,6 +283,19 @@ a:hover:before,
       }
     }
 
+    & .hozGridSection {
+      @extend .gridSection;
+      & .content {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 1rem;
+
+        & .leftSection {
+          text-align: left;
+        }
+      }
+    }
+
     & .cards {
       & .cardsHolder {
         display: flex;

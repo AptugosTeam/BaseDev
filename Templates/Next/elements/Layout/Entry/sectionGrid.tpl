@@ -22,7 +22,10 @@ options:
     type: media
 */
 {% set className = element.values.class|default('theme.gridSection') %}
-<section className={ {{ className }} }>
+{% if element.values.backgroundColor %}
+  {% set stylesAdd = 'style={ { backgroundColor: "' ~ element.values.backgroundColor ~ '"} }' %}
+{% endif %}
+<section className={ {{ className }} } {{stylesAdd}}>
   <div className={theme.background}>
     {% if element.values.backgroundMedia %}
       {% if element.values.backgroundMedia.type == 'video' %}

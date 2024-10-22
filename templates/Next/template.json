@@ -2,6 +2,7 @@
   "_id": "Next",
   "name": "React/Typescript Server Side Rendering",
   "renderingFolder": "/src/Pages",
+  "default": "true",
   "namingSchema": "{% if pageDefinition.path == '/' %}index{% else %}{{ pageDefinition.path }}{% endif %}.tsx",
   "templateCommandsAfterDeploy": "pnpm i && pnpm run build",
   "deployScript": "templatescripts/deploy.js",

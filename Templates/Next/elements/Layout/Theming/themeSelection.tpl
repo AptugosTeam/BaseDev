@@ -59,8 +59,10 @@ children: []
   {% set theme = element.values.theme ~ ', ...' ~ asset.name|friendly %}
 {% elseif useAsset %}
   {% set bpr %}import {{ asset.name|friendly }} from 'public/css/{{ asset.name }}'{% endset %}
+  {% set theme = asset.name|friendly %}
 {% elseif useTheme %}
   {% set bpr %}import {{ element.values.theme }} from '../components/Themes/{{ element.values.theme }}.module.scss'{% endset %}
+  {% set theme = element.values.theme %}
 {% endif %}
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}
