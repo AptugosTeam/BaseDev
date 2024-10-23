@@ -76,7 +76,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}
-const KanbanColumn = ({ channel, children, ...props }) => {
+const KanbanColumn = React.memo(({ channel, children, ...props }) => {
     const ref = React.useRef(null)
     const [{ isOver }, drop] = useDrop({
       accept: 'card',
@@ -89,9 +89,9 @@ const KanbanColumn = ({ channel, children, ...props }) => {
     })
     drop(ref)
     return <div ref={ref} {...props} >{children}</div>
-  }
+  })
 
-const KanbanItem = ({ item, children, ...props }) => {
+const KanbanItem = React.memo(({ item, children, ...props }) => {
     const ref = React.useRef(null)
     const [{ isDragging }, drag] = useDrag({
       item: { type: 'card', item },
@@ -107,7 +107,7 @@ const KanbanItem = ({ item, children, ...props }) => {
         {children}
       </div>
     )
-  }
+  })
 {% endset %}
 {{ save_delayed('ph',ph) }}
 <DndProvider backend={HTML5Backend}>       

@@ -53,13 +53,17 @@ options:
       {% if element.values.code %}
         {{ element.values.code}}
       {% endif %}
+      {% if element.values.matchCondition %}
       if ({{ element.values.matchCondition }}) {
+      {% endif %}
         return (
           <KanbanItem key={rowIndex} item={rowItem}>
             {{ content | raw }}
           </KanbanItem>
         )
+      {% if element.values.matchCondition %}
       }
+      {% endif %}
     })}
     {% if element.values.addRecords %}
     <Button onClickCapture={() => { {{ element.values.addRecords }} }}>

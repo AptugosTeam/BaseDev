@@ -37,6 +37,17 @@ options:
     type: checkbox
     settings:
       default: false
+  - name: debounce
+    display: Debounce (only front)
+    type: checkbox
+    settings:
+      default: false
+  - name: debounceTime
+    display: Debounce Time
+    type: text
+    settings:
+      propertyCondition: debounce
+      condition: true
   - name: comment
     display: Comment for doc
     type: function
@@ -56,8 +67,19 @@ settings:
         {{ content | raw }}  
       }
       {% endif %}
+  - name: Packages
+    value: |-
+      {% if element.values.debounce %}
+      "lodash.debounce": "^4.0.8",
+      {% endif %}
 children: []
 */
+  {% set bpr %}
+    {% if element.values.debounce %}
+    import debounce from 'lodash.debounce'
+    {% endif %}
+  {% endset %}
+{{ save_delayed('bpr',bpr) }}
 {% if element.values.comment %}
   /**
   {{ element.values.comment }}
@@ -67,16 +89,16 @@ children: []
 {% if not element.values.serverSide %}
   {% if element.values.priority %}
   {% set ph %}
-  {% if element.values.export%}export{% endif %} const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
+  {% if element.values.export%}export{% endif %} const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} {% if element.values.debounce %}debounce({% endif %}({{ element.values.functionParameters }}) => {
     {{ element.values.functionBody | raw }}
     {{ content | raw }}  
-  }
+  }{% if element.values.debounce %}, {{element.values.debounceTime|default('300')}}){% endif %}
   {% endset %}
   {{ save_delayed('ph',ph,1) }}
   {% else %}
-  {% if element.values.export%}export{% endif %} const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
+  {% if element.values.export%}export{% endif %} const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} {% if element.values.debounce %}debounce({% endif %}({{ element.values.functionParameters }}) => {
     {{ element.values.functionBody | raw }}
     {{ content | raw }}  
-  }
+  }{% if element.values.debounce %}, {{element.values.debounceTime|default('300')}}){% endif %}
   {% endif %}
 {% endif %}
