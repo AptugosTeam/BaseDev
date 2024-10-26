@@ -27,10 +27,10 @@ options:
     options: return [['en','English (US)'],['es','Spanish'],['pt','Portuguese']]
     settings:
       default: 'en'
-  - name: ref
-    display: Ref (optional)
-    type: text
-    options: ''
+#  - name: ref
+#    display: Ref (optional)
+#    type: text
+#    options: ''
   - name: size
     display: Size
     type: dropdown
