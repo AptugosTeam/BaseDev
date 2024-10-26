@@ -162,7 +162,7 @@ class AuthService {
 
   recoverPassword({ email, subject, message, name, model = '', lang = 'en', username = '' }) {
     return axios
-      .post(API_URL + 'recoverpassword', {
+      .post(this.apiUrl + 'recoverpassword', {
         email,
         subject,
         message,
@@ -178,7 +178,7 @@ class AuthService {
 
   checkNonce(nonce, email) {
     return axios
-      .post(API_URL + 'checknonce', {
+      .post(this.apiUrl + 'checknonce', {
         nonce,
         email,
       })

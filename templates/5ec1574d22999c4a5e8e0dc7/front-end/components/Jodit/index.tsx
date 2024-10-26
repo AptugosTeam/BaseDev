@@ -19,13 +19,16 @@ export default function JoditSetup(props) {
   } = props;
 
   let config = {
-    enableDragAndDropFileToEditor: false,
+    enableDragAndDropFileToEditor: true,
     readonly: readOnly,
     iframe: false,
     theme: darkMode ? "dark" : undefined,
     showPlaceholder: false,
     image: { openOnDblClick: false },
     toolbarButtonSize: "small",
+    uploader: {
+      insertImageAsBase64URI: true,
+    },
     minWidth: "100%",
     tabIndex: 0,
     allowResizeY: false,
