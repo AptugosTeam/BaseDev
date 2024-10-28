@@ -16,15 +16,19 @@ options:
     display: Set Bounds Width
     type: text
     options: ''
+    required: true
   - name: setBoundsHeight
     display: Set Bounds Height
     type: text
     options: ''
+    required: true
 */
-{% if element.values.setBoundsX is defined and element.values.setBoundsY is defined 
-    and element.values.setBoundsWidth is defined and element.values.setBoundsHeight is defined%}
+
+{% set setBoundsX = element.values.setBoundsX | default('0') %}
+{% set setBoundsY = element.values.setBoundsY | default('0') %}
+
+{% if element.values.setBoundsWidth is defined and element.values.setBoundsHeight is defined%}
 
 // Establecer límites para la cámara principal en la precarga
-this.cameras.main.setBounds({{ element.values.setBoundsX }},{{ element.values.setBoundsY }},{{ element.values.setBoundsWidth }},{{ element.values.setBoundsHeight }});
-
+this.cameras.main.setBounds({{ setBoundsX }}, {{ setBoundsY }}, {{ element.values.setBoundsWidth }}, {{ element.values.setBoundsHeight }});
 {% endif %}
