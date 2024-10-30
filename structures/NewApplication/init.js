@@ -33,6 +33,7 @@ Application.settings = {
     name: Parameters.Name || 'Untitled Application',
     lastSaved: null,
     lastBuild: null,
+    language: "en",
     development: {
       apiURL: `http://127.0.0.1:4567`,
       type: 'Local',
