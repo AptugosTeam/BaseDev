@@ -84,7 +84,7 @@ class AuthService {
   socialLogin(data){
     console.log("Authservice",data)
     return axios
-      .post(API_URL + 'socialauthenticate', {
+      .post(this.apiUrl + 'socialauthenticate', {
         data
       })
       .then((response) => {
@@ -119,7 +119,7 @@ class AuthService {
     };
 
     return axios
-      .post(API_URL, data)
+      .post(this.apiUrl, data)
       .then((_result) => {
         if (validate) {
           if (
@@ -147,7 +147,7 @@ class AuthService {
 
   registerWithSession(data) {
     const { fullUser = true , fieldsToRetrieve = [] } = data
-    return axios.post(API_URL, data).then((_result) => {
+    return axios.post(this.apiUrl, data).then((_result) => {
         return this.loginWithSession(data.Email, data.Password, fullUser, fieldsToRetrieve).then((afterLogin) => { return afterLogin})
       }).catch(e => { throw e })
   }
