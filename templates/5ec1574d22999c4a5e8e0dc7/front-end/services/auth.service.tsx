@@ -117,9 +117,12 @@ class AuthService {
         invalidEmailSettings: 'Configuración inválida para la verificación por email',
       },
     };
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' },
+    }
 
     return axios
-      .post(this.apiUrl, data)
+      .post(this.apiUrl, data, config)
       .then((_result) => {
         if (validate) {
           if (
