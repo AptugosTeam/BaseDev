@@ -44,7 +44,7 @@ settings:
   - name: BackendImports
     value: |-
       {% if element.values.serverSide %}
-      const {{ element.values.moduleName }} = require('{{ element.values.modulePath }}')
+      const {{ element.values.moduleName }} = require(`{{ element.values.modulePath }}`)
       {% endif %}
 children: []
 */
