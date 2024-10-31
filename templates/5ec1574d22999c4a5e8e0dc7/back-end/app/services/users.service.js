@@ -154,7 +154,8 @@ async function authenticate ({ email, password, model, passwordField, populate, 
               })
             }
             if (validate && !user.Verified) reject({ message: errorMessages[lang].unverified, user: { Email: user.Email, Verified: user.Verified } })
-            const token = jwt.sign(fullUser ? userWithoutPassword : userID, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+            const secretKey = process.env.PASSPORT_SECRET || 'thisisthesecretandshouldbeconfigurable'
+            const token = jwt.sign(fullUser ? userWithoutPassword : userID, secretKey, { expiresIn: '7d' })
             resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
           } else {
             reject({ message: errorMessages[lang].wrongPassword })
@@ -219,7 +220,8 @@ function jwtVerify (token) {
   if (token) {
     const justTheToken = token.substr(token.indexOf(' ') + 1)
     try {
-      const decoded = jwt.verify(justTheToken, 'thisisthesecretandshouldbeconfigurable')
+      const secretKey = process.env.PASSPORT_SECRET || 'thisisthesecretandshouldbeconfigurable'
+      const decoded = jwt.verify(justTheToken, secretKey)
       return decoded
     } catch (e) {
       return { error: e.message }

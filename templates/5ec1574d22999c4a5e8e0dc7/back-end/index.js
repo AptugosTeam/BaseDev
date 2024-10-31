@@ -5,7 +5,7 @@ unique_id: QOxu9q3o
 children: []
 */
 const dotenv = require('dotenv')
-dotenv.config({ path: './config/.env.development' })
+dotenv.config({ path: `${__dirname}/config/.env.development` })
 const fs = require('fs')
 const express = require('express')
 const bodyParser = require('body-parser')
