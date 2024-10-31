@@ -33,16 +33,9 @@ settings:
     value: |-
       const passport = require('passport')
       const JwtStrategy = require('passport-jwt').Strategy;
+      const { ExtractJwt } = require('passport-jwt');
 
-      const getJwtFromReq = (req) => {
-        try {
-          return req.headers.authorization
-        } catch (error) {
-          return null
-        }
-      }
-
-      passport.use(new JwtStrategy({ secretOrKey: {{ element.values.secret | default("'thisisthesecretandshouldbeconfigurable'") }}, jwtFromRequest: getJwtFromReq }, async (jwt_payload, done) => {
+      passport.use(new JwtStrategy({ secretOrKey: {{ element.values.secret | default("'thisisthesecretandshouldbeconfigurable'") }}, jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken() }, async (jwt_payload, done) => {
         done(null,jwt_payload)
       }))
 
