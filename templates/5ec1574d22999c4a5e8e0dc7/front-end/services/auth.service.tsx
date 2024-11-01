@@ -5,7 +5,14 @@ unique_id: dDixye51
 */
 import axios from 'axios'
 
-const API_URL = '{{ settings.apiURL }}/api/'
+{% set url = settings.apiURL ~ '/api/' %}
+{% set customUrl = insert_setting('customApiUrl') %}
+{% if customUrl %}
+const API_URL = `{{ customUrl }}`
+{% else %}
+const API_URL = '{{ url }}'
+{% endif %}
+
 
 interface LoginOptions {
   remember?: boolean;
