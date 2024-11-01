@@ -8,7 +8,7 @@ import axios from 'axios'
 {% set url = settings.apiURL ~ '/api/' %}
 {% set customUrl = insert_setting('customApiUrl') %}
 {% if customUrl %}
-const API_URL = `{{ customUrl }}`
+const API_URL = `{{ customUrl }}/api/`
 {% else %}
 const API_URL = '{{ url }}'
 {% endif %}
