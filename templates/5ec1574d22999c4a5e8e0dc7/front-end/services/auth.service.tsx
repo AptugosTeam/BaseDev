@@ -105,7 +105,7 @@ class AuthService {
     sessionStorage.removeItem('tokenSession');
   }
 
-  register(data, options: LoginOptions = {}) {
+  register(data, options: LoginOptions = {}, url = this.apiUrl) {
     const { validate = false, lang = 'en' } = options;
     const messages = {
       en: {
@@ -122,7 +122,7 @@ class AuthService {
     }
 
     return axios
-      .post(this.apiUrl, data, config)
+      .post(url, data, config)
       .then((_result) => {
         if (validate) {
           if (
