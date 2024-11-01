@@ -101,7 +101,8 @@ async function checkNonce (req) {
         const { Password, ...userWithoutPassword } = user._doc
         bcrypt.compare(JSON.stringify(userWithoutPassword), ascii).then((isMatch) => {
           if (isMatch) {
-            const token = jwt.sign(userWithoutPassword, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
+            const secretKey = process.env.PASSPORT_SECRET || 'thisisthesecretandshouldbeconfigurable'
+            const token = jwt.sign(userWithoutPassword, secretKey, { expiresIn: '7d' })
             resolve({ accessToken: token, data: userWithoutPassword })
           } else {
             reject({ message: 'Bad bad nonce' })
