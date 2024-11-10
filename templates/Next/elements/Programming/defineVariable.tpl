@@ -56,4 +56,7 @@ settings:
 sourceType: javascript
 children: []
 */
-{% if not element.values.serverSide %}{% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }}{% if element.values.type %}:{{ element.values.type }}{% endif %} = {{ element.values.variableValue|default(content | raw)}}{% endif %}
+{% if not element.values.serverSide %}
+  {% if element.values.willbeModified %}let{% else %}const{% endif %}
+  {{ element.values.variableName }}{% if element.values.type %}:{{ element.values.type }}{% endif %} = {{ element.values.variableValue|default(content | raw)}}
+{% endif %}

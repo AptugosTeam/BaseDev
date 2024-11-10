@@ -2,7 +2,7 @@
 path: for.tpl
 type: file
 unique_id: forforfor
-icon: ico-loop
+icon: ico-each
 sourceType: javascript
 helpText: Allows you to loop N times
 options:

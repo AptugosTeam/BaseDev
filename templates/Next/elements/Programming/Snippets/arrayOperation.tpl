@@ -14,13 +14,21 @@ options:
   - name: operation
     display: Operation to perform
     type: dropdown
-    options: 'Filter matching values'
+    options: 'Filter matching values;Shuffle'
   - name: helperVariable
     display: Helper Variable
     type: text
     options: ''
 children: []
 */
-{{ element.values.variableName }} = {{ element.values.variableName }}.filter(function (el) {
-  return !{{ element.values.helperVariable }}.includes(el)
-})
+{% if element.values.operation == 'Shuffle' %}
+  {{ element.values.variableName }}.sort(() => Math.random() - 0.5)
+{% else %}
+  {{ element.values.variableName }} = {{ element.values.variableName }}.filter(function (el) {
+    return !{{ element.values.helperVariable }}.includes(el)
+  })
+{% endif %}
+
+
+
+
