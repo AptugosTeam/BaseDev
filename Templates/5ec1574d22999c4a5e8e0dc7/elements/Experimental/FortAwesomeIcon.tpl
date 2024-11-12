@@ -31,11 +31,9 @@ options:
   - name: className
     display: className
     type: styles
-    options: ''
   - name: fontSize
     display: Size (rem, em, px)
     type: text
-    options: ''
 unique_id: MzMqVMi7
 settings:
   - name: Packages
@@ -43,20 +41,11 @@ settings:
 */
 {% set bpr %}
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { {{ element.values.icon }} } from '@fortawesome/free-solid-svg-icons';
+import { useFontAwesomeIconPack } from '@components/IconPicker/useFontAwesomeIconPack'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<FontAwesomeIcon 
-  icon={ {{ element.values.icon }} }
-  color={ 
-    {% if element.values.color == 'custom' %}
-      {{ element.values.custom|default("#000") }}
-    {% else %}
-      {{ element.values.color|default("inherit") }}
-    {% endif %}
-  }
-  {% if element.values.className %}
-    className={ {{ element.values.className }} }
-  {% endif %}
-  fontSize= '{{ element.values.fontSize|default("1rem") }}'
-/>
+{% set ph %}
+useFontAwesomeIconPack()
+{% endset %}
+{{ save_delayed('ph',ph) }}
+<FontAwesomeIcon icon={['fas', {{ element.values.icon|textOrVariableInCode}}]} />
