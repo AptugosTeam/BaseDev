@@ -3,7 +3,6 @@ path: SocialMediaEmbed.tpl
 completePath: elements\Experimental\SocialMediaEmbed.tpl
 keyPath: elements\Experimental\SocialMediaEmbed.tpl
 unique_id: KkmDtkUx
-icon: ico-social-sharing
 options:
   - name: socialNetwork
     display: Social Network
