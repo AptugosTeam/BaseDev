@@ -32,14 +32,33 @@ options:
     type: function
     options: ''
     advanced: true
+  - name: async
+    display: Async function
+    type: checkbox
+    options: ''
+    advanced: true
+  - name: useCustomCode
+    display: Use custom code?
+    type: checkbox
+    options: ''
+    advanced: true
+  - name: customCode
+    display: Custom Code
+    type: code
+    settings:
+      propertyCondition: useCustomCode
+      condition: true
+    options: ''
 children: []
 */
 
 {% set ph %}
-const sendStripeForm = (price = null, extraData = null) => {
+const sendStripeForm = {% if element.values.async %}async {% endif %}(price = null, extraData = null) => {
   const url = `{{ settings.apiURL  ~'/create-checkout-session/' ~ element.values.clientReferenceID | default(1) ~ '/' }}{{ type == 'Development' ? element.values.devPriceItem : element.values.priceItem }}` || ''
 
-
+  {% if element.values.useCustomCode %}
+  {{ element.values.customCode }}
+  {% else %}
   const form = document.createElement('form')
   form.method = 'POST'
   form.action = url
@@ -80,6 +99,7 @@ const sendStripeForm = (price = null, extraData = null) => {
 
   document.body.appendChild(form)
   form.submit()
+{% endif %}
 }
 {% endset %}
 {{ save_delayed('ph',ph,1) }}

@@ -52,7 +52,12 @@ options:
     settings:
       propertyCondition: amount
       condition: true
-
+  - name: returnRedirectUrl
+    display: Return Redirect Url?
+    type: checkbox
+    options: ''
+    settings:
+      default: false
 settings:
   - name: BackendPackages
     value: '"stripe": "^8.201.0",'
@@ -96,7 +101,11 @@ settings:
           success_url: successURL,
           cancel_url: cancelURL,
         }).then(session => {
+          {% if element.values.returnRedirectUrl %}
+          res.json({ url: session.url });
+          {% else %}
           res.redirect(303, session.url);
+          {% endif %}
         }).catch(err => {
           res.send(err)
         })
