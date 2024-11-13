@@ -49,7 +49,7 @@ import Shape from 'react-clip-path';
     {% if element.values.styles %}styles={ {{element.values.styles}} }{% endif %}
     name="{{element.values.name}}"
     id="{{element.values.id}}"
-    formula="{{element.values.formula}}"
+    formula={{element.values.formula}}
     width="{{element.values.width|default('300px')}}"
     height="{{element.values.height|default('300px')}}"
     {% if element.values.showLabel %}showLabel={ {{element.values.showLabel}} }{% endif %}
