@@ -27,24 +27,52 @@ import { FacebookEmbed, InstagramEmbed, LinkedInEmbed, PinterestEmbed, TikTokEmb
 {{ save_delayed('bpr', bpr) }}
 <div style={ { display: 'flex', justifyContent: 'center' } }>
   {% if element.values.socialNetwork == "facebook" %}
-    <FacebookEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("550") }} } />
+    {% if "http" in element.values.url %}
+      <FacebookEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("550") }} } />
+    {% else %}
+      <FacebookEmbed url= {{ element.values.url }} width={ {{ element.values.width|default("550") }} } /> 
+    {% endif %}
   {% endif %}
   {% if element.values.socialNetwork == "instagram" %}
-    <InstagramEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("328") }} } />
-  {% endif %}    
+    {% if "http" in element.values.url %}
+        <InstagramEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("328") }} } />
+    {% else %}
+        <InstagramEmbed url= {{ element.values.url }} width={ {{ element.values.width|default("328") }} }/>
+    {% endif %}
+  {% endif %} 
   {% if element.values.socialNetwork == "linkedIn" %}
-    <LinkedInEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("325") }} } />
-  {% endif %}    
+    {% if "http" in element.values.url %}
+        <LinkedInEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("328") }} } />
+    {% else %}
+        <LinkedInEmbed url= {{ element.values.url }} width={ {{ element.values.width|default("328") }} }/>
+    {% endif %}
+  {% endif %}   
   {% if element.values.socialNetwork == "pinterest" %}
-    <PinterestEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("345") }} } />
-  {% endif %}    
+    {% if "http" in element.values.url %}
+        <PinterestEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("328") }} } />
+    {% else %}
+        <PinterestEmbed url= {{ element.values.url }} width={ {{ element.values.width|default("328") }} }/>
+    {% endif %}
+  {% endif %}   
   {% if element.values.socialNetwork == "tikTok" %}
-    <TikTokEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("325") }} } />
-  {% endif %}    
+    {% if "http" in element.values.url %}
+        <TikTokEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("328") }} } />
+    {% else %}
+        <TikTokEmbed url= {{ element.values.url }} width={ {{ element.values.width|default("328") }} }/>
+    {% endif %}
+  {% endif %}   
   {% if element.values.socialNetwork == "twitter" %}
-    <XEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("325") }} } />
-  {% endif %}    
+    {% if "http" in element.values.url %}
+        <XEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("328") }} } />
+    {% else %}
+        <XEmbed url= {{ element.values.url }} width={ {{ element.values.width|default("328") }} }/>
+    {% endif %}
+  {% endif %}   
   {% if element.values.socialNetwork == "youTube" %}
-    <YouTubeEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("325") }} } />
+    {% if "http" in element.values.url %}
+        <YouTubeEmbed url={ "{{ element.values.url }}" } width={ {{ element.values.width|default("328") }} } />
+    {% else %}
+        <YouTubeEmbed url= {{ element.values.url }} width={ {{ element.values.width|default("328") }} }/>
+    {% endif %}
   {% endif %}    
 </div>
