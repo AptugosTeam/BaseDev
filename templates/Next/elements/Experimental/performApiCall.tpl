@@ -44,6 +44,21 @@ options:
     options: ''
     settings:
       value: 'false'
+  - name: variableStore
+    display: store in variable?
+    type: checkbox
+    options: ''
+    advanced: true
+    settings:
+      value: 'false'
+  - name: variableStoreName
+    display: Variable name
+    type: text
+    options: ''
+    advanced: true
+    settings:
+      propertyCondition: variableStore
+      condition: true
 sourceType: javascript
 children: []
 */
@@ -55,9 +70,14 @@ import { fetcher } from '@lib/fetch'
 {% if element.values.urlFULL %}
 {% set url = settings.apiURL ~ element.values.url %}
 {% endif %}
-{% if element.values.await %}await{% endif %} fetcher({{ url | textOrVariableInCode }}, { method: '{{ element.values.method|default('GET') }}' {% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %} , {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %} }).then({{ element.values.resultVar|default('result') }} => {
+{% set storeName = element.values.variableStoreName %}
+{% set dataVariable = element.values.dataVariable %}
+{% set extraOptions = element.values.extraOptions | raw %}
+
+{%if element.values.variableStore %}const {{ storeName }} ={% endif %} {% if element.values.await %}await{% endif %} fetcher({{ url | textOrVariableInCode }}, { method: '{{ element.values.method|default('GET') }}', {% if element.values.dataVariable %} {{ dataVariable }},{% endif %} {% if element.values.extraOptions %}{{ extraOptions }}{% endif %} })
+{% if not element.values.variableStore %}.then({{ element.values.resultVar|default('result') }} => {
  {{ content | raw }}
-}).catch((error) => {
+}){% endif %}.catch((error) => {
   {% if element.values.onError %}
     {{ element.values.onError }} 
   {% else %}
