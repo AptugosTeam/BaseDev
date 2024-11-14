@@ -12,12 +12,18 @@ import { useRouter } from 'next/router'
 {% endfor %}
 {% endfor %}
 
-export const AptugoHook = ({{ element.values.parameters }}) => {
-  {% for child in element.children %}
-  {% if child.value == 'hookHeader' %} 
-    {{ child.rendered }}
+
+
+{% for child in element.children %}
+  {% if child.value == 'hookHeader' %}
+    {% set macucas = child.rendered %}
+    {{ add_setting('macucas', macucas) }}
   {% endif %}
-  {% endfor %}
+{% endfor %}
+
+export const {{ insert_setting('hookName') | raw }} = ({{ insert_setting('hookParameters') }}) => {
+
+  {{ insert_setting('macucas') | raw }}
 
   {% for child in element.children %}
   {% if child.value == 'hookBody' %}
