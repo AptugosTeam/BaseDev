@@ -13,6 +13,10 @@ options:
     display: Value
     type: text
     options: ''
+  - name: defaultValue
+    display: Default value
+    type: text
+    options: ''
   - name: onChange
     display: On Change
     type: text
@@ -45,7 +49,8 @@ import TextareaAutosize from '@mui/material/TextareaAutosize'
   {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
   {% if element.values.label %}aria-label="{{ element.values.label }}"{% endif %}
   {% if element.values.placeholder %}placeholder="{{ element.values.placeholder }}"{% endif %}
-  {% if element.values.value %}defaultValue={{ element.values.value | textOrVariable}}{% endif %}
+  {% if element.values.value %}value={{ element.values.value | textOrVariable}}{% endif %}
+  {% if element.values.defaultValue %}defaultValue={{ element.values.defaultValue | textOrVariable}}{% endif %}
   {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
