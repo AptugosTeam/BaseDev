@@ -18,4 +18,7 @@ const bb = async (req, res, next) => {
     next(err)
   }
 }
+
+{{ insert_setting('serverCode') | raw }}
+
 module.exports = bb
