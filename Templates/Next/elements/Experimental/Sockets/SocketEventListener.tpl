@@ -30,7 +30,7 @@ options:
       default: false
 children: []
 */
-{{element.values.socketListener |default('socketRef.current')}}.on('{{element.values.event}}', {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
+{{element.values.socketListener |default('socketRef.current')}}.on('{{element.values.event}}', {% if element.values.async%}async{% endif %} ({{ element.values.parameters }}) => {
     {{ element.values.code | raw }}
     {{ content | raw }}
 })
