@@ -11,6 +11,9 @@ options:
   - name: serverurl
     display: Server URL
     type: text
+  - name: transports
+    display: Transports
+    type: text
 extraFiles:
   - source: 'elements/Experimental/Sockets/999_sockets.js'
     destination: 'back-end/app/services/sockets.js'
@@ -39,10 +42,12 @@ import io from 'socket.io-client'
 {{ save_delayed('bpr',bpr)}}
 {% set ph %}
 const socketRef = React.useRef(null)
-const socket = socketRef.current
 React.useEffect(() => {
-  socketRef.current = io('{{ element.values.serverurl }}')
-  return () => socketRef.current.disconnect();
+  socketRef.current = io('{{ element.values.serverurl }}'{%if element.values.transports %}, {
+    transports: [{{element.values.transports}}],
+  }{% endif %})
+  {{ content | raw }}
+  return () => socketRef.current.disconnect()
 }, [])
 {% endset %}
 {{ save_delayed('ph',ph)}}
