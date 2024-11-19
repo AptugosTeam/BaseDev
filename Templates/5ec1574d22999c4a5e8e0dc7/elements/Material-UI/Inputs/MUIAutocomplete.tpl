@@ -20,6 +20,10 @@ options:
   - name: label
     display: Label
     type: text
+  - name: placeholder
+    display: Placeholder
+    type: text
+    advanced: true  
   - name: className
     display: ClassName
     type: styles
@@ -149,7 +153,7 @@ import TextField from '@mui/material/TextField';
     isOptionEqualToValue={ (option, value) => {{ element.values.isOptionEqualToValue }} }
   {% endif %} 
   renderInput={(params) => (
-    <TextField {...params} label="{{ element.values.label|default('') }}" />
+    <TextField {...params} label="{{ element.values.label|default('') }}" placeholder="{{ element.values.placeholder | default('') }}" />
   )}
   {% if element.values.noOptionsText %}
     noOptionsText={{ element.values.noOptionsText | textOrVariable }}
