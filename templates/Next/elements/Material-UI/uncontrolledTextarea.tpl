@@ -37,6 +37,9 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: maxLength
+    display: Max chars
+    type: text
   - name: ref
     display: Use Reference
     type: text
@@ -60,4 +63,5 @@ import TextareaAutosize from '@mui/material/TextareaAutosize'
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
   {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
+  {% if element.values.maxLength %}maxLength={ {{ element.values.maxLength }}}{% endif %}
 />
