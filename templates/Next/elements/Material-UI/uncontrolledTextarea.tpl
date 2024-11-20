@@ -37,6 +37,11 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: ref
+    display: Use Reference
+    type: text
+    options: ''
+    advanced: true
 children: []
 */
 {% set bpr %}
@@ -54,4 +59,5 @@ import TextareaAutosize from '@mui/material/TextareaAutosize'
   {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
+  {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
 />
