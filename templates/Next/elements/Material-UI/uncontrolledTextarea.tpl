@@ -45,6 +45,11 @@ options:
     type: text
     options: ''
     advanced: true
+  - name: onScroll
+    display: On Scroll
+    type: text
+    options: ''
+    advanced: true
 children: []
 */
 {% set bpr %}
@@ -64,4 +69,5 @@ import TextareaAutosize from '@mui/material/TextareaAutosize'
   {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
   {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
   {% if element.values.maxLength %}maxLength={ {{ element.values.maxLength }}}{% endif %}
+  {% if element.values.onScroll %}onScroll={ {{ element.values.onScroll }}}{% endif %}
 />
