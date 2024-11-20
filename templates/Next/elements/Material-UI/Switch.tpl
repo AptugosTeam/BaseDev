@@ -29,6 +29,14 @@ options:
     options: small;medium
     settings:
       default: medium
+  - name: icon
+    display: Icon (iconify)
+    type: text
+    options: ''
+  - name: checkedIcon
+    display: Checked Icon (iconify)
+    type: text
+    options: ''
   - name: disabled
     display: Disabled
     type: variable
@@ -44,9 +52,13 @@ options:
       default: true
 sourceType: javascript
 children: []
+settings:
+  - name: Packages
+    value: '"@iconify/react": "^4.1.1", "iconify": "^1.4.0",'
 */
 {% set bpr %}
     import Switch from '@mui/material/Switch'
+    import { Icon } from '@iconify/react'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% if element.values.label %}
@@ -67,6 +79,12 @@ children: []
   {% endif %}
   {% if element.values.style %}
     style={ {{element.values.style}} }
+  {% endif %}
+  {% if element.values.icon %} 
+    icon={<Icon icon={{ element.values.icon | textOrVariable }} />} 
+  {% endif %}
+  {% if element.values.checkedIcon %} 
+    checkedIcon={<Icon icon={{ element.values.checkedIcon | textOrVariable}} /> } 
   {% endif %}
   {% if element.values.size %} 
     size={ "{{element.values.size}}" } 
