@@ -2,7 +2,7 @@
 path: bpr.tpl
 type: file
 unique_id: 9NRSTvDR
-icon: ico-field
+icon: ico-before
 sourceType: javascript
 internalUse: true
 prevent_delete: true

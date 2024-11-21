@@ -9,6 +9,7 @@ unique_id: 5wQBTBBB
   "dataType": "Number",
   "initialValue": "",
   "options": {
+    "frontEndType": "number",
     "extra": [
       {
         "display": "Default Value",

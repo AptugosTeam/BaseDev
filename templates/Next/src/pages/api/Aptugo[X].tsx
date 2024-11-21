@@ -39,9 +39,9 @@ children: []
       {% if route.route_template != 'source' %}
         handler.{{ route.route_method }}({% include includeTemplate('Aptugo Routes' ~ route.route_template ~ '.tpl') %})
       {% else %}
-        handler.{{ route.route_method }}(
+        handler.{{ route.route_method }}( async (req, res) => {
           {{ route.route_code | raw }}
-        )
+        } )
       {% endif %}
     {% endset %}
     {% if routePath != '/api/' ~ tableName %}

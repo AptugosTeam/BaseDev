@@ -18,6 +18,25 @@ import { ObjectId } from "mongodb"
   {% include includeTemplate(['Fields' ~ field.data_type ~'updateImports.tpl', 'FieldsupdateImports.tpl']) %}
 {% endfor %}
 
+const buildAggregation = (query) => {
+  const { before, after, filter, sort, skip, limit } = query || {}
+  const aggregate = []
+
+  if (skip) aggregate.push({ $skip: skip })
+  if (limit) aggregate.push({ $limit: limit })
+  if (sort) aggregate.push({ $sort: { [sort.field]: [sort.desc] ? -1 : 1 } })
+  if (before) aggregate.push({ $match: { ...(before && { createdAt: { $lt: before } }) } })
+  if (after) aggregate.push({ $match: { ...(after && { createdAt: { $gt: after } }) } })
+  if (filter) {
+    for (var filt of Object.keys(filter)) {
+      aggregate.push({
+        $match: { [filt]: filter[filt]}
+      })
+    }
+  }
+  return aggregate
+}
+
 export async function find{{ singleName }}ById(db, _id) {
   const {{ tableName }} = await db
     .collection("{{ tableName }}")
@@ -31,37 +50,17 @@ export async function find{{ singleName }}ById(db, _id) {
   return {{ tableName }}[0];
 }
 
-export async function find{{ tableName }}(db, before, by, skip, limit) {
+export async function find{{ tableName }}(db, query) {
   return db
   .collection('{{ tableName }}')
-  .aggregate([
-    {
-      $match: {
-        ...(before && { createdAt: { $lt: before } }),
-      },
-    },
-    { $sort: { _id: -1 } },
-    { $skip: skip },
-    { $limit: limit },
-    {% for field in table.fields %}
-      {% set fieldWithData = field|fieldData %}
-      {% include includeTemplate(['Fields' ~ field.data_type ~'find.tpl', 'Fieldsfind.tpl']) %}
-    {% endfor %}
-  ])
+  .aggregate(buildAggregation(query))
   .toArray()
 }
 
-export function count{{tableName }}(db, before, by) {
+export function count{{tableName }}(db, query) {
   return db
     .collection("{{ tableName }}")
-    .aggregate([
-      {
-        $match: {
-          ...(by && { creatorId: new ObjectId(by) }),
-          ...(before && { createdAt: { $lt: before } }),
-        },
-      },
-    ])
+    .aggregate(buildAggregation(query))
     .toArray();
 }
 

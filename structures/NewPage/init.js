@@ -1,6 +1,7 @@
 if (!Parameters.pageTemplate) {
+  const unique = Parameters.unique_id || aptugo.generateID()
   const newPage = {
-    unique_id: Parameters.unique_id || aptugo.generateID(),
+    unique_id: unique,
     name: Parameters.name || 'Untitled',
     path: Parameters.path || '',
     filename: Parameters.filename || 'untitled.tsx',
@@ -12,35 +13,40 @@ if (!Parameters.pageTemplate) {
         "value": "bpr",
         "prevent_delete": true,
         "cascades": false,
-        "children": []
+        "children": [],
+        "unique_id": unique + 'BPR'
       }, {
         "name": "Page Header",
         "type": "element",
         "value": "ph",
         "prevent_delete": true,
         "children": [],
-        "cascades": false
+        "cascades": false,
+        "unique_id": unique + 'PH'
       }, {
         "name": "Body",
         "type": "element",
         "value": "b",
         "prevent_delete": true,
         "cascades": false,
-        "children": []
+        "children": [],
+        "unique_id": unique + 'B'
       }, {
         "name": "Page Footer",
         "type": "element",
         "value": "pf",
         "prevent_delete": true,
         "cascades": false,
-        "children": []
+        "children": [],
+        "unique_id": unique + 'PF'
       }, {
         "name": "After Page Render",
         "type": "element",
         "value": "apr",
         "prevent_delete": true,
         "cascades": false,
-        "children": []
+        "children": [],
+        "unique_id": unique + 'APR'
       }
     ]
   }

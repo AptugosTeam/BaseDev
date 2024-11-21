@@ -3,7 +3,7 @@ path: b.tpl
 completePath: elements/Aptugo Internal Use/b.tpl
 type: file
 unique_id: evkkxPDn
-icon: ico-field
+icon: ico-body
 sourceType: javascript
 internalUse: true
 children: []

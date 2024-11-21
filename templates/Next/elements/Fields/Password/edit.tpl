@@ -2,6 +2,10 @@
 path: edit.tpl
 completePath: elements/Fields/Password/edit.tpl
 unique_id: zlxp4g5o
+settings:
+  - name: Packages
+    value: '"bcryptjs": "^2.4.3",'
+
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}

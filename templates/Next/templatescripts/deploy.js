@@ -3,7 +3,8 @@ const deploy = (parameters) => {
     folders: ['.'],
     ignoreFolders: ['node_modules'],
     url: parameters.settings.url.substring(8).toLowerCase(),
-    uploadURL: 'https://appuploader.next.aptugo.app/upload?type=fe'
+    uploadURL: 'https://appcontroller.next.aptugo.app/api/apps/upload?type=fe'
+    // uploadURL: 'http://localhost:8012/api/apps/upload?type=fe'
   }]
 }
 module.exports = deploy
