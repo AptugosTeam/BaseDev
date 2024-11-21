@@ -3,8 +3,8 @@ path: componentHeader.tpl
 keyPath: elements/Programming/componentHeader.tpl
 unique_id: OsPh329x
 usesDelays: [ph]
-icon: header
-order: 16
+icon: ico-header
+order: 13
 */
 {{ add_setting('capturedImportsBPR', capturedImportsBPR)}}
 {% set capturedImportsPH %}

@@ -40,6 +40,6 @@ import { Icon } from '@iconify/react'
     className={ {{element.values.className}} }
   {% endif %}
   {% if element.values.fontSize or element.values.color %}
-    style={ { {% if element.values.fontSize %} fontSize: '{{element.values.fontSize}}', {% endif %} {% if element.values.color %} color: {{element.values.color}} {% endif %} } }
+    style={ { {% if element.values.fontSize %} fontSize: '{{element.values.fontSize}}', {% endif %} {% if element.values.color %} color: {{element.values.color | textOrVariableInCode}} {% endif %} } }
   {% endif %}
 />

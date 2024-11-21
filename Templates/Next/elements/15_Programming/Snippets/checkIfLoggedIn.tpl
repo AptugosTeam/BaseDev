@@ -48,7 +48,6 @@ children: []
   {% endif %}
 {% endif %}
 {% set bpr %}
-import authHeaders from '@services/auth-header'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 authHeaders().then(result => {

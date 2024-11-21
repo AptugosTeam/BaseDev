@@ -1,8 +1,8 @@
 /*
 path: 991_sessionMiddleware.tsx
 completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/Programming/Snippets/extraFiles/991_sessionMiddleware.tsx
-keyPath: elements/Programming/Snippets/extraFiles/991_sessionMiddleware.tsx
+  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/99_ExtraFiles/991_sessionMiddleware.tsx
+keyPath: elements/99_ExtraFiles/991_sessionMiddleware.tsx
 unique_id: WgkyKZao
 */
 import MongoStore from 'connect-mongo'

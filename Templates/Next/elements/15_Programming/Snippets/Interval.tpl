@@ -7,7 +7,7 @@ options:
     display: Interval in MS
     type: text
 extraFiles:
-  - source: 'elements/Programming/Snippets/extraFiles/999_interval.tsx'
+  - source: 'elements/99_ExtraFiles/999_interval.tsx'
     destination: 'front-end/Components/Interval/index.tsx'
 */
 {% set bpr %}

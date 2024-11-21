@@ -1,8 +1,8 @@
 /*
 path: 997_userHook.tsx
 completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/Programming/Snippets/extraFiles/997_userHook.tsx
-keyPath: elements/Programming/Snippets/extraFiles/997_userHook.tsx
+  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/99_ExtraFiles/997_userHook.tsx
+keyPath: elements/99_ExtraFiles/997_userHook.tsx
 unique_id: pBciOdsa
 */
 import useSWR from 'swr'

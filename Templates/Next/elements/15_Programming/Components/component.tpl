@@ -29,7 +29,7 @@ options:
     display: Also use it
     type: checkbox
 extraFiles:
-  - source: 'elements/Programming/Components/baseComponent.tsx'
+  - source: 'elements/99_ExtraFiles/baseComponent.tsx'
     destination: 'src/components/{{ element.values.name | friendly }}/{{ element.values.name | friendly }}.tsx'
 childs:
   - name:  componentHeader

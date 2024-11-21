@@ -1,6 +1,6 @@
 /*
 path: 992_authMiddleware.tsx
-keyPath: elements/Programming/Snippets/extraFiles/992_authMiddleware.tsx
+keyPath: elements/99_ExtraFiles/992_authMiddleware.tsx
 unique_id: Fxxw1Aln
 */
 import { passport } from '../auth'

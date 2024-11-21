@@ -1,8 +1,8 @@
 /*
 path: 988_fileUpload.tsx
 completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/Programming/Snippets/extraFiles/988_fileUpload.tsx
-keyPath: elements/Programming/Snippets/extraFiles/988_fileUpload.tsx
+  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/99_ExtraFiles/988_fileUpload.tsx
+keyPath: elements/99_ExtraFiles/988_fileUpload.tsx
 unique_id: OenclTMc
 */
 import { auths, database } from '@api-lib/middlewares'

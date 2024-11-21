@@ -27,9 +27,16 @@ options:
       return aptugo.store.getState().application.tables.map(({ unique_id, name
       }) => [unique_id, name])
 children: []
+extraFiles:
+  - source: 'elements/99_ExtraFiles/Pagination/index.tsx'
+    destination: 'src/components/Pagination/index.tsx'
+  - source: 'elements/99_ExtraFiles/Pagination/pagination.module.scss'
+    destination: 'src/components/Pagination/pagination.module.scss'
+  - source: 'elements/99_ExtraFiles/Pagination/pagination.tsx'
+    destination: 'src/components/Pagination/pagination.tsx'
 */
 {% set bpr %}
-import Pagination from '../components/Pagination'
+import Pagination from '@components/Pagination'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Pagination

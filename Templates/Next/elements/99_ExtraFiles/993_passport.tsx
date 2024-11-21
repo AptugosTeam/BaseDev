@@ -1,6 +1,6 @@
 /*
 path: 993_passport.tsx
-keyPath: elements/Programming/Snippets/extraFiles/993_passport.tsx
+keyPath: elements/99_ExtraFiles/993_passport.tsx
 unique_id: qyKlQDbZ
 */
 import { findUserForAuth, findUserWithEmailAndPassword } from '@api-lib/db'

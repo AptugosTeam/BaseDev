@@ -1,8 +1,8 @@
 /*
 path: 998_timeout.tsx
 completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/elements/Programming/Snippets/extraFiles/998_timeout.tsx
-keyPath: elements/Programming/Snippets/extraFiles/998_timeout.tsx
+  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/elements/99_ExtraFiles/998_timeout.tsx
+keyPath: elements/99_ExtraFiles/998_timeout.tsx
 unique_id: 4Cz8NRRE
 */
 import React from 'react'

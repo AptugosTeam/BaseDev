@@ -1,6 +1,6 @@
 /*
 path: 995_userApi.tsx
-keyPath: elements/Programming/Snippets/extraFiles/995_userApi.tsx
+keyPath: elements/99_ExtraFiles/995_userApi.tsx
 unique_id: iB9N9QTq
 */
 import { auths, database } from '@api-lib/middlewares'

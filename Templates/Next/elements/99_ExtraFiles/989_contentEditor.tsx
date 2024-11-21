@@ -1,6 +1,6 @@
 /*
 path: 989_contentEditor.tsx
-keyPath: elements/Programming/Snippets/extraFiles/989_contentEditor.tsx
+keyPath: elements/99_ExtraFiles/989_contentEditor.tsx
 unique_id: fh45AsTw
 */
 import ContentTools from 'ContentTools'

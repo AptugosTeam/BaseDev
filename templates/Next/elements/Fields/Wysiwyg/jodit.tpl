@@ -8,10 +8,13 @@ settings:
   - name: Packages
     value: >-
       "jodit-react": "latest",
+extraFiles:
+  - source: 'elements/99_ExtraFiles/Jodit/index.tsx'
+    destination: 'src/components/Jodit/index.tsx'
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
-import HTMLEditor from "../components/Jodit"
+import HTMLEditor from "@components/Jodit"
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <FormControl margin="dense" fullWidth>

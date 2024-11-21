@@ -14,9 +14,9 @@ options:
     type: text
     options: ''
 extraFiles:
-  - source: 'elements/Layout/Sidebar/Sidebar.tsx'
+  - source: 'elements/99_ExtraFiles/Sidebar.tsx'
     destination: 'src/components/Sidebar/Sidebar.tsx'
-  - source: 'elements/Layout/Sidebar/sidebar.module.scss'
+  - source: 'elements/99_ExtraFiles/sidebar.module.scss'
     destination: 'src/components/Sidebar/sidebar.module.scss'
 children: []
 */
