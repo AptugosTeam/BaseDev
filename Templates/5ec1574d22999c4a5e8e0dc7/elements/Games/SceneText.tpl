@@ -32,7 +32,7 @@ options:
   - name: align
     display: Align
     type: dropdown
-    options: return [['left', 'Left'], ['center', 'Center'], ['right', 'Right']]
+    options: return [['left', 'Left'], ['center', 'Center'], ['right', 'Right'], ['justify', 'Justify']]
   - name: setOrigin
     display: Set Origin (x,y)
     type: text
@@ -43,9 +43,10 @@ this.add.text(
   +`{{ element.values.posY | default('5') }}`,
   {% if element.values.textdisplay %}`{{ element.values.textdisplay }}`,{% else %}"",{% endif %}
   {
-    font: '{{ element.values.size | default('16') }}px {{ element.values.font | default('Arial Black') }}',
+    fontSize: '{{ element.values.size | default('16') }}px',
+    fontFamily: '{{ element.values.font | default('Arial Black') }}',
     color: '{{ element.values.color | default('#000000') }}',
-    align: '{{ element.values.align | default('left') }}'
+    align: '{{ element.values.align | default('left') }}',
   }
 ){% if element.values.setOrigin %}.setOrigin({{ element.values.setOrigin }});
 {% endif %}
