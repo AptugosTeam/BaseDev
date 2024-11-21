@@ -9,6 +9,13 @@ options:
     display: Variable Name (Open Progress)
     type: text
     options: ''
+  - name: variableStart
+    display: Variable start on
+    type: dropdown
+    settings:
+      default: 'false'
+    options: 
+      return [['true', 'True'],['false', 'False']]
   - name: CircularProgress
     display: Use circular progress
     type: checkbox
@@ -47,7 +54,7 @@ import Box from '@mui/material/Box'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set ph %}
-const [{{ element.values.varName }}, set{{ element.values.varName }}] = React.useState(false)
+const [{{ element.values.varName }}, set{{ element.values.varName }}] = React.useState({{ element.values.variableStart | default(false) }})
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 <Backdrop
