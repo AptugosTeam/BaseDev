@@ -131,6 +131,7 @@ children: []
   {% set table = element.values.data | tableData %}
 {% endif %}
 {% set tableName = table.name | friendly | lower %}
+{% set singleName = table.singleName | friendly | lower %}
 {% set innervarname = table.name | friendly %}
 {% if element.name != 'loadFromDatabase' %}
   {% set innervarname = element.name | friendly %}
@@ -151,7 +152,7 @@ children: []
   {{ save_delayed('bpr', bpr)}}
   {% set ph %}
     const [{{ tableName }}Page, set{{ tableName }}Page] = React.useState(1)
-    const { data, isLoading, isError } = use{{ tableName }}Pages({{ tableName }}Page)
+    const { {{ singleName }}data, {{ singleName }}isLoading, {{ singleName }}isError } = use{{ tableName }}Pages({{ tableName }}Page)
     const [{{ innervarname }}loadoptions, set{{ innervarname }}loadoptions] = React.useState<any>({ 
     page: {{ element.values.defaultPage | default(1) }},
     populate: {% if element.values.donotpopulate %}false{% else %}true{% endif %},

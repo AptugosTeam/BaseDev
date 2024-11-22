@@ -90,13 +90,14 @@ options:
 {% set innervarname = 'table' %}
 {% set tableName = table.name | friendly %}
 {% set tableSingleName = table.singleName | friendly | capitalize %}
+{% set tableSingleNameLower = table.singleName | friendly | lower %}
 {% set setEditDataFunctionName = 'set' ~ tableName ~ 'data' %}
 {% set fields = table.fields %}
 {% if element.values.table == 'useVar' %}
   {% set tableData = element.values.variableToUse %}
   {% set totalDocs = tableData ~ '.length' %}
 {% else %}
-  {% set tableData = 'data?.' ~ (tableName|lower) ~ ' || []' %}
+  {% set tableData = tableSingleNameLower ~ 'data?.' ~ (tableName|lower) ~ ' || []' %}
   {% set eleWithoutChilds = element %}
   {% set eleWithoutChilds = eleWithoutChilds|merge({'children': null,'name':'table'}) %}
   {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage } %}
@@ -125,7 +126,7 @@ import DataTable from '@components/DataTable/dataTable'
     className={ {{element.values.className}} }
   {% endif %}
   tableData={ {{ tableData }} }
-  pages={data?.pagination.pageCount}
+  pages={ {{ tableSingleNameLower }}data?.pagination.pageCount}
   columnInfo={
     {% if element.values.columnInfo %}
       {{ element.values.columnInfo }}
