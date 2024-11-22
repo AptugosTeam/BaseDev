@@ -66,6 +66,11 @@ options:
     type: checkbox
     options: ''
     advanced: true
+  - name: sourceChilds
+    display: Enable source childs
+    type: checkbox
+    options: ''
+    advanced: true
 */
 {% set tag = 'picture' %}
 {% if element.values.background %}{%set tag = 'div' %}{% endif %}
@@ -96,9 +101,17 @@ options:
   {% if webppath %}
   <source type="image/webp" srcSet="{{ webppath }}" />
   {% endif %}
+  {% if element.values.sourceChilds %}
+  {{ content | raw }}
+  {% endif %}
   <img
+    {% if path %}
     src={{ path|textOrVariable }}
     alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
+    {% endif %}
+    {% if not path and element.values.alt%}
+    alt={{ element.values.alt|textOrVariable }}
+    {% endif %}
     {% if width %}
       width={{ width|textOrVariable }}
     {% endif %}
@@ -118,5 +131,5 @@ options:
       draggable={false}
     {% endif %}
   />
-  {{ content | raw }}
+  {% if not element.values.sourceChilds %}{{ content | raw }}{% endif %}
 </{{ tag }}>
