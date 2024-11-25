@@ -30,6 +30,11 @@ options:
     display: ClassName (for items)
     type: styles
     options: ''
+  - name: ref
+    display: Use Reference
+    type: text
+    options: ''
+    advanced: true
   - name: extraStylesToKanbanHeaderFather
     display: Extra Styles To Kanban Header Father
     type: styles
@@ -48,7 +53,9 @@ options:
     </div>
     <svg width="10" height="56"><path d="M1 0l8 28-8 28"></path></svg>
   </div>
-  <div className={ {% if element.values.classNameList %}{{ element.values.classNameList }}{% else %}classes.list{% endif %} }>
+  <div className={ {% if element.values.classNameList %}{{ element.values.classNameList }}{% else %}classes.list{% endif %} }
+  {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
+  >
     { {{ element.values.RowData }}.map((rowItem, rowIndex) => {
       {% if element.values.code %}
         {{ element.values.code}}
