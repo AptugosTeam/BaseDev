@@ -11,7 +11,14 @@ options:
     display: Event Name
     type: text
   - name: parameters
-    display: Data
+    display: Handler Parameters
     type: text
+  - name: async
+    display: Async
+    type: checkbox
+    settings:
+      default: false
 */
-socketRef.current?.emit('{{ element.values.event }}'{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %})
+socketRef.current?.emit('{{ element.values.event }}',{% if element.values.parameters %} {{ element.values.parameters }},{% endif %} {% if element.values.async%}async{% endif %} (response) => {
+  {{ content|raw }}
+})
