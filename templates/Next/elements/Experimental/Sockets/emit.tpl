@@ -18,7 +18,15 @@ options:
     type: checkbox
     settings:
       default: false
+  - name: emitBody
+    display: Body Event
+    type: code
+  - name: resultVar
+    display: Result Variable Name
+    type: text
+    advanced: true
 */
-socketRef.current?.emit('{{ element.values.event }}',{% if element.values.parameters %} {{ element.values.parameters }},{% endif %} {% if element.values.async%}async{% endif %} (response) => {
+socketRef.current?.emit('{{ element.values.event }}',{% if element.values.parameters %} {{ element.values.parameters }},{% endif %} {% if element.values.async%}async{% endif %} ({{ element.values.resultVar|default('response') }}) => {
+  {{ element.values.emitBody | raw }}
   {{ content|raw }}
 })
