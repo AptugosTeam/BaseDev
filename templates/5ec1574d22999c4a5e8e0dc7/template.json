@@ -5,7 +5,6 @@
   "name": "React/Typescript Front-End / NodeJS Mongoose",
   "desc": "This template allows you to create full web applications",
   "default": "true",
-  "deployScript": "templatescripts/deploy.js",
   "templateCommandsAfter": "",
   "templateCommandsAfterDeploy": "",
   "renderingFolder": "/front-end/Pages",
