@@ -18,4 +18,4 @@ options:
 */
 {% set variablePrefix = element.values.withoutThis == true ? '' : 'this.' %}
 
-{{ variablePrefix }}{{ element.values.variableName }}={{ element.values.newValue }}
+{{ variablePrefix }}{{ element.values.variableName }}={{ element.values.newValue }}{{ content | raw }}
