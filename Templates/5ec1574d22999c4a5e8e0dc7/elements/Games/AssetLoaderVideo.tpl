@@ -7,34 +7,39 @@ options:
   - name: name
     display: Descriptive Name
     type: text
+    required: true
   - name: useVideo
-    display: Use Video
+    display: Use External Video
     type: checkbox
-  - name: autoplay
-    display: Autoplay
-    type: text
     options: ''
+    settings:
+      default: 'false'
+  - name: useOtherAsset
+    display: Use Local Video
+    type: dropdown
+    required: true
+    options: >-
+      return [['none', 'None'],
+      ...aptugo.assetUtils.other().map(image => [image.id, image.name])]
+    settings: 
+      propertyCondition: useVideo
+      conditionNegate: true
+      condition: true
+  - name: videourl
+    display: Video Url
+    type: text
     required: true
     settings: 
       propertyCondition: useVideo
       condition: true
-  - name: useOther
-    display: Use other files (not images)
+  - name: noAudio
+    display: Audio Not Loading
     type: checkbox
-  - name: useOtherAsset
-    display: Use other asset
-    type: dropdown
-    options: >-
-      return [['none', 'None'],
-      ...aptugo.assetUtils.other().map(image => [image.id, image.name])]
+    settings:
+      default: 'false'
 */
-{% set path = element.values.path %}
-{% if element.values.useOtherAsset and element.values.useOtherAsset != 'none' %}
-  {% if element.values.useOther %}
-    {% set asset = element.values.useOtherAsset|assetData %}
-  {% endif %}
-{% endif %}
-{% if element.values.useVideo %}
-  {% set path = '/' ~ asset.name %}
-  this.load.video('{{ element.values.name | friendly }}', {{ path | textOrVariableInCode }}, {{ element.values.autoplay | default(true) }})
-{% endif %}
+{% set variablenoAudio = element.values.noAudio | default(false) %}
+{% set variableUseVideo = element.values.useVideo | default(false) %}
+{% set asset = element.values.useOtherAsset|assetData %}
+{% set variableVideo = variableUseVideo == true ? element.values.videourl : '/' ~ asset.name %}
+this.load.video('{{ element.values.name | friendly }}', '{{variableVideo}}', {{variablenoAudio | default(false)}})
