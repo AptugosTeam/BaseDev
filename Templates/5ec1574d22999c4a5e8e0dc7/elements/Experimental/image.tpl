@@ -66,6 +66,11 @@ options:
     type: checkbox
     options: ''
     advanced: true
+  - name: lazyLoading
+    display: Enable lazy loading
+    type: checkbox
+    options: ''
+    advanced: true
   - name: sourceChilds
     display: Enable source childs
     type: checkbox
@@ -105,6 +110,9 @@ options:
   {{ content | raw }}
   {% endif %}
   <img
+    {% if element.values.lazyLoading %}
+      loading="lazy"
+    {% endif %}
     {% if path %}
     src={{ path|textOrVariable }}
     alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }}
