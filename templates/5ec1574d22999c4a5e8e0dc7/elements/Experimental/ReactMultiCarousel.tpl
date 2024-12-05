@@ -14,6 +14,10 @@ options:
     display: Key
     type: text
     options: ''
+  - name: ref
+    display: Use ref
+    type: text
+    options: ''
   - name: minimumTouchDrag
     display: Distance to swipe to the next slide
     type: text
@@ -252,6 +256,9 @@ import "react-multi-carousel/lib/styles.css";
 <Carousel
 {% if element.values.key %}
   key={ {{ element.values.key }} }
+{% endif %}
+{% if element.values.ref %}
+  ref={ {{ element.values.ref }} }
 {% endif %}
 {% if element.values.className %}
   className={ {{ element.values.className }} }
