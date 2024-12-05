@@ -30,6 +30,8 @@ const {{ friendlyTableName }}Schema = mongoose.Schema({
     {% if output.extraPlugins %}{% set extraPlugins = extraPlugins ~ output.extraPlugins %}{% endif %}
     {{ output.rawString ?? data }}
   {% endfor %}
+  isDeleted: { type: Boolean, default: false },
+  deletedAt: { type: Date, default: null },
 }, {
     timestamps: true,
     toJSON: { virtuals: true },

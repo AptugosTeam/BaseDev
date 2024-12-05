@@ -263,5 +263,24 @@ exports.delete = (options) => {
   })
 }
 
+// Soft Delete a {{ table.singleName | friendly | lower }} with the specified ID in the request
+exports.softDelete = (options) => {
+  return new Promise((resolve, reject) => {
+    const params = options.req ? options.req.params : options
+    let theFilter = { _id: params.ID }
+
+    if (options.queryString && options.queryField) {
+      theFilter = { [options.queryField]: options.queryString }
+    }
+    {{ table.name | friendly }}.updateMany(theFilter, { isDeleted: true, deletedAt: new Date() })
+      .then((result) => {
+        resolve({ message: 'Record(s) deleted', result })
+      })
+      .catch((e) => {
+        reject(e)
+      })
+  })
+}
+
 {{ insert_setting('controller' ~ friendlyTableName) | raw }}
 
