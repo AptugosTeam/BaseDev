@@ -2,7 +2,7 @@
 path: createHitbox.tpl
 keyPath: elements/ProgramToGame/createHitbox.tpl
 unique_id: 8Hzl6CNG
-icon: f:flip.svg
+icon: f:Create_Hitbox.svg
 options:
   - name: variableName
     display: Variable Name
