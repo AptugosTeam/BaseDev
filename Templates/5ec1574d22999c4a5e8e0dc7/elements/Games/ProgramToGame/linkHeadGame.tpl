@@ -2,7 +2,7 @@
 path: linkHeadGame.tpl
 keyPath: elements/ProgramToGame/linkHeadGame.tpl
 unique_id: LinkHeadXYZ
-icon: f:link.svg
+icon: f:linkheadgame_Icon.svg
 options:
   - name: constName
     display: Constant Name
