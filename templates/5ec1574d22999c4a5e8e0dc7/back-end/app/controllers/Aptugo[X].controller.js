@@ -267,14 +267,14 @@ exports.delete = (options) => {
 exports.softDelete = (options) => {
   return new Promise((resolve, reject) => {
     const params = options.req ? options.req.params : options
-    let theFilter = { _id: params.ID }
+    const id = params.ID
 
-    if (options.queryString && options.queryField) {
-      theFilter = { [options.queryField]: options.queryString }
-    }
-    {{ table.name | friendly }}.updateMany(theFilter, { isDeleted: true, deletedAt: new Date() })
+    {{ table.name | friendly }}.findByIdAndUpdate(id, { isDeleted: true, deletedAt: new Date() }, { new: true })
       .then((result) => {
-        resolve({ message: 'Record(s) deleted', result })
+        if(!result) {
+          return reject({ message: 'Record not found', status: 404 })
+        }
+        resolve({ message: 'Record deleted', record: result })
       })
       .catch((e) => {
         reject(e)

@@ -25,6 +25,9 @@ import {
   removed{{ table.singleName | friendly | capitalize }},
   removing{{ table.singleName | friendly | capitalize }},
   removing{{ table.singleName | friendly | capitalize }}Failed,
+  softRemoved{{ table.name | friendly | capitalize }},
+  softRemoving{{ table.name | friendly | capitalize }},
+  softRemoving{{ table.name | friendly | capitalize }}Failed,
   edited{{ table.name | friendly | capitalize }},
   editing{{ table.name | friendly | capitalize }},
   editing{{ table.name | friendly | capitalize }}Failed,
@@ -124,6 +127,20 @@ const remove{{ table.name | friendly | capitalize }}Epic: Epic<{{ table.name | 
     )
   )
   
+const softRemove{{ table.name | friendly | capitalize }}Epic: Epic<{{ table.name | friendly | capitalize }}Action, {{ table.name | friendly | capitalize }}Action, IState> = (
+  action$,
+  state$
+) =>
+  action$.pipe(
+    filter(isOfType({{ table.name | friendly | capitalize }}ActionTypes.SOFT_REMOVE_{{ table.name | friendly | upper }})),
+    mergeMap((action) => from(axios.delete(`${API_URL}/api/{{ table.name | friendly | lower }}/soft/${action.payload._id}`)).pipe(
+        map((response) => softRemoved{{ table.name | friendly | capitalize }}(response.data.record)),
+        startWith(softRemoving{{ table.name | friendly | capitalize }}()),
+        catchError((err) => of(softRemoving{{ table.name | friendly | capitalize }}Failed(err.response)))
+      )
+    )
+  )
+
 const edit{{ table.name | friendly | capitalize }}Epic: Epic<{{ table.name | friendly | capitalize }}Action, {{ table.name | friendly | capitalize }}Action, IState> = (
   action$,
   state$
@@ -149,4 +166,4 @@ const edit{{ table.name | friendly | capitalize }}Epic: Epic<{{ table.name | fr
     })
   )
 
-export default combineEpics(search{{ table.name | friendly | capitalize }}Epic, load{{ table.name | friendly | capitalize }}Epic, add{{ table.name | friendly | capitalize }}Epic, remove{{ table.name | friendly | capitalize }}Epic, edit{{ table.name | friendly | capitalize }}Epic);
+export default combineEpics(search{{ table.name | friendly | capitalize }}Epic, load{{ table.name | friendly | capitalize }}Epic, add{{ table.name | friendly | capitalize }}Epic, remove{{ table.name | friendly | capitalize }}Epic, softRemove{{ table.name | friendly | capitalize }}Epic, edit{{ table.name | friendly | capitalize }}Epic);

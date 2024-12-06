@@ -95,6 +95,28 @@ export default function {{ tableNameLow }}Reducer(state: I{{ tableNameCap }}Stat
         draft.{{ tableNameLow }}.splice(draft.{{ tableNameLow }}.findIndex({{ table.singleName | friendly | lower }} => {{ table.singleName | friendly | lower }}._id === action.payload._id), 1)
         break
         
+      case {{ tableNameCap }}ActionTypes.SOFT_REMOVE_{{ tableNameUp }}:
+        draft.loadingStatus = ApiStatus.NOTLOADED
+        draft.addingStatus = ApiStatus.LOADING
+        break
+
+      case {{ tableNameCap }}ActionTypes.SOFT_REMOVING_{{ tableNameUp }}:
+        draft.loadingStatus = ApiStatus.LOADING;
+        draft.addingStatus = ApiStatus.LOADING;
+        break;
+        
+      case {{ tableNameCap }}ActionTypes.SOFT_REMOVED_{{ tableNameUp }}:
+        draft.addingStatus = ApiStatus.LOADED
+        draft.{{ tableNameLow }}.splice(draft.{{ tableNameLow }}.findIndex({{ table.singleName | friendly | lower }} => {{ table.singleName | friendly | lower }}._id === action.payload._id), 1)
+        break
+
+      case {{ tableNameCap }}ActionTypes.SOFT_REMOVING_{{ tableNameUp }}_FAILED:
+        draft.addingStatus = ApiStatus.FAILED;
+        draft.errMessage = action.message;
+        draft.errStatus = action.status;
+        draft.errField = action.field;
+        break;
+
       case {{ tableNameCap }}ActionTypes.EDIT_{{ tableNameUp }}:
         draft.loadingStatus = ApiStatus.NOTLOADED
         draft.addingStatus = ApiStatus.LOADING
