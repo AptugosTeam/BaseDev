@@ -2,7 +2,7 @@
 path: checkCollision.tpl
 keyPath: elements/Games/Sprites/checkCollision.tpl
 unique_id: uok3pJey
-icon: f:destruction.svg
+icon: ico-collision
 options:
   - name: objectA
     display: Object A

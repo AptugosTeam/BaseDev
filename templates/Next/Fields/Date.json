@@ -8,7 +8,8 @@ unique_id: ZTzT7Tvf
   "value": "Date",
   "dataType": "Date",
   "initialValue": "",
-  "options": {
+  "extraOptions": {
+    "frontEndType": "number",
     "validations": [
       {
         "display": "Requires a value",

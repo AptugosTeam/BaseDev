@@ -3,7 +3,7 @@ path: SimplePagination.tpl
 completePath: elements/Experimental/SimplePagination.tpl
 type: file
 unique_id: Ip36BC3c
-icon: f:SimplePagination.svg
+icon: ico-pagination
 options:
   - name: itemsPerPage
     display: Items per Page
@@ -40,8 +40,8 @@ import Pagination from '@components/Pagination'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Pagination
-    itemsPerPage={tableloadoptions.limit}
-    currentPage={tableloadoptions.page}
-    setPage={(page) => { settableloadoptions({ ...tableloadoptions, page: page })}}
-    totalItems={ {{ element.values.variableToUse }}.totalDocs}
+  itemsPerPage={tableloadoptions.limit}
+  currentPage={tableloadoptions.page}
+  setPage={(page) => { settableloadoptions({ ...tableloadoptions, page: page })}}
+  totalItems={{ element.values.totalItems | textOrVariable }}
 />

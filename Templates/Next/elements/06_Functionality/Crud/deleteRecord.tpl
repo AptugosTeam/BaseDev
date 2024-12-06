@@ -4,7 +4,7 @@ completePath: elements/Programming/Crud/deleteRecord.tpl
 display: Delete a Record
 type: file
 unique_id: OOQu8gg7
-icon: f:deleteRecord.svg
+icon: ico-delete-record
 sourceType: javascript
 options:
   - name: table

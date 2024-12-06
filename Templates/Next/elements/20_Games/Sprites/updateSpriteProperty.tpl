@@ -11,7 +11,7 @@ options:
   - name: property
     display: Property to Update
     type: dropdown
-    options: return [['other', 'Other'],['VelocityX', 'VelocityX'],['VelocityY', 'VelocityY']]
+    options: return [['other', 'Other'],['Velocity', 'Velocity'],['VelocityX', 'VelocityX'],['VelocityY', 'VelocityY']]
   - name: otherproperty
     display: Property
     type: text

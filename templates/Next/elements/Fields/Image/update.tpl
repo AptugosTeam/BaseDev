@@ -70,17 +70,13 @@ unique_id: hILFvubz
   {{ add_setting(tableSingleName ~ '_Pre_Add', preAddInsert) }}
 {% else %}
   {{ add_setting(tableSingleName ~ '_File_Start', 'import { writeFileSync } from "fs"')}}
-  {% set preAddInsert %}
-    const tmp{{ fieldName }} = req.files?.find(f => f.fieldname === '{{ fieldName }}')
-    if ( tmp{{ fieldName }} ) {
-      const uniqueFileName = Date.now() + '_' + tmp{{ fieldName }}.originalname
-      writeFileSync(`./public/img/${uniqueFileName}`, tmp{{ fieldName }}.buffer)
-      req.body['{{ fieldName }}'] = `/img/${uniqueFileName}`
+  const tmp{{ fieldName }} = req.files?.find(f => f.fieldname === '{{ fieldName }}')
+  if ( tmp{{ fieldName }} ) {
+    const uniqueFileName = Date.now() + '_' + tmp{{ fieldName }}.originalname
+    writeFileSync(`./public/img/${uniqueFileName}`, tmp{{ fieldName }}.buffer)
+    req.body.{{ fieldName }} = `/img/${uniqueFileName}`
 
-      {% if field.autogeneratethumbnail %}{{ thumbnailGeneration }}{% endif %}
-    }
-  {% endset %}
-  {{ add_setting(tableSingleName ~ '_Pre_Update', preAddInsert) }}
-  {{ add_setting(tableSingleName ~ '_Pre_Add', preAddInsert) }}
+    {% if field.autogeneratethumbnail %}{{ thumbnailGeneration }}{% endif %}
+  }
+  const {{ fieldName }} = typeof req.body.{{ fieldName }} !== 'undefined' ? req.body.{{ fieldName }} : null 
 {% endif %}
-if(typeof fields.{{ fieldName }} !== 'undefined') {{ singleName }}.{{ fieldName }} = fields.{{ fieldName }}

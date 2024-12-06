@@ -13,7 +13,6 @@ import { mergeClasses } from '@services/utils'
   const localStyles = { {{ element.values.localStyles | raw }} }
 {% endif %}
 {% set bpr %}
-// Importing head
 import Head from 'next/head'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}

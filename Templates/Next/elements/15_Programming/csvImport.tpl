@@ -2,7 +2,7 @@
 path: csvImport.tpl
 type: file
 unique_id: csvGBni9
-icon: f:csvImport.svg
+icon: ico-csv
 helpText: Uploads CSV data to an array of elements
 options:
   - name: data

@@ -23,7 +23,7 @@ const buildAggregation = (query) => {
   const aggregate = []
 
   if (skip) aggregate.push({ $skip: skip })
-  if (limit) aggregate.push({ $limit: limit })
+  if (limit) aggregate.push({ $limit: Number(limit) })
   if (sort) aggregate.push({ $sort: { [sort.field]: [sort.desc] ? -1 : 1 } })
   if (before) aggregate.push({ $match: { ...(before && { createdAt: { $lt: before } }) } })
   if (after) aggregate.push({ $match: { ...(after && { createdAt: { $gt: after } }) } })
@@ -58,9 +58,11 @@ export async function find{{ tableName }}(db, query) {
 }
 
 export function count{{tableName }}(db, query) {
+  const queryWithoutLimit = { ...query }
+  delete queryWithoutLimit.limit
   return db
     .collection("{{ tableName }}")
-    .aggregate(buildAggregation(query))
+    .aggregate(buildAggregation(queryWithoutLimit))
     .toArray();
 }
 

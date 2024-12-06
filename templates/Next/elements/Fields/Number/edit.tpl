@@ -13,24 +13,6 @@ import TextField from '@mui/material/TextField'
 import { NumericFormat } from 'react-number-format'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-{% set ph %}
-  const {{ field.column_name | friendly }}TextFieldProps = {
-    id: "filled-multiline-flexible",
-    {% if element.values.DisableUnderline %}
-        InputProps: { disableUnderline: true },
-    {% endif %}
-    {% if element.values.Autofocus %}autoFocus,{% endif %}
-    {% if element.values.DisableVariable %}disabled: {{ element.values.DisableVariable | raw }} ,{% endif %}
-    {% if field.placeholder %}placeholder: {{ field.placeholder | textOrVariable }},{% endif %}
-    margin: '{{ element.values.margin|default("dense") }}',
-    size: '{{ element.values.size|default("medium") }}',
-    type: "number",
-    multiline: true,
-    maxRows: 4,
-    variant: "{{ element.values.variant|default('standard') }}",
-  };
-{% endset %}
-{{ save_delayed('ph',ph) }}
 <NumericFormat 
     value={ {{ tableName }}data.{{ field.column_name | friendly }} || 0 }
     label={{ field.prompt|default(field.column_name)  | textOrVariable }}
@@ -52,5 +34,14 @@ import { NumericFormat } from 'react-number-format'
     onValueChange={(values, sourceInfo) => {
       handle{{ tableName }}Change("{{ field.column_name | friendly }}")(values.floatValue || 0)
     }}
-    {...{{ field.column_name | friendly }}TextFieldProps}
+    {% if element.values.DisableUnderline %}InputProps={ { disableUnderline: true } }{% endif %}
+    {% if element.values.Autofocus %}autoFocus{% endif %}
+    {% if element.values.DisableVariable %}disabled={{ element.values.DisableVariable | raw }} {% endif %}
+    {% if field.placeholder %}placeholder: {{ field.placeholder | textOrVariable }}{% endif %}
+    margin='{{ element.values.margin|default("dense") }}'
+    size='{{ element.values.size|default("medium") }}'
+    type="text"
+    multiline
+    maxRows={4}
+    variant="{{ element.values.variant|default('standard') }}"
 />

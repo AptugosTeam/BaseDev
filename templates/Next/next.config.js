@@ -16,6 +16,7 @@ const regexEqual = (x, y) => {
 }
 
 module.exports = {
+  transpilePackages: ['mui-file-input'],
   typescript: {
     ignoreBuildErrors: true,
   },

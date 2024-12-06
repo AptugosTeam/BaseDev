@@ -2,7 +2,6 @@
 path: particleImage.tpl
 type: file
 unique_id: SLLIbhlu
-icon: f:particleImage.svg
 children: []
 helpText: Converts my logo into particles
 settings:

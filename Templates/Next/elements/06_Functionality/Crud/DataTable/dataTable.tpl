@@ -2,7 +2,7 @@
 name: Data Table
 path: dataTable.tpl
 unique_id: DJAy2q4b
-icon: f:dataTable.svg
+icon: ico-datatable
 helpText: Data table
 sourceType: javascript
 extraFiles:
@@ -97,7 +97,7 @@ options:
   {% set tableData = element.values.variableToUse %}
   {% set totalDocs = tableData ~ '.length' %}
 {% else %}
-  {% set tableData = tableSingleNameLower ~ 'data?.' ~ (tableName|lower) ~ ' || []' %}
+  {% set tableData = tableSingleNameLower ~ 'data?.data.docs || []' %}
   {% set eleWithoutChilds = element %}
   {% set eleWithoutChilds = eleWithoutChilds|merge({'children': null,'name':'table'}) %}
   {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage } %}
@@ -108,7 +108,7 @@ import DataTable from '@components/DataTable/dataTable'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <DataTable
-  {% if allowSorting %}allowSorting{% endif %}
+  {# {% if allowSorting %}allowSorting{% endif %} #}
   {% if not allowPagination %}pagination={ {{allowPagination}} }{% endif %}
   {% if element.values.onRequestUpdate %}
   onRequestUpdate={ {{ element.values.onRequestUpdate | functionOrCall }} }
@@ -126,7 +126,7 @@ import DataTable from '@components/DataTable/dataTable'
     className={ {{element.values.className}} }
   {% endif %}
   tableData={ {{ tableData }} }
-  pages={ {{ tableSingleNameLower }}data?.pagination.pageCount}
+  pages={ {{ tableSingleNameLower }}data?.totalPages}
   columnInfo={
     {% if element.values.columnInfo %}
       {{ element.values.columnInfo }}
@@ -145,7 +145,10 @@ import DataTable from '@components/DataTable/dataTable'
     {% endif %}
   }
   onRequestPaginate={(options) => {
-    set{{ tableName | lower }}Page(options.page)
+    set{{ innervarname }}loadoptions({
+      ...{{ innervarname }}loadoptions,
+      page: options.page
+    })
   }}
   {% if allowEdit %}
   onRequestEdit={row => {
@@ -166,7 +169,8 @@ import DataTable from '@components/DataTable/dataTable'
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(row),
       })
-      mutate('/api/{{ tableName | lower }}?page=1')
+      const urlSearchParams = new URLSearchParams(tableloadoptions)
+      mutate(`/api/{{ tableName | lower }}?${urlSearchParams.toString()}`)
     } catch (e) {
       console.log('catch', e)
     }

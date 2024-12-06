@@ -2,7 +2,7 @@
 path: mercadoPago.tpl
 completePath: elements/Experimental/mercadoPago.tpl
 unique_id: cvFUP89I
-icon: f:mercadoPago.svg
+icon: ico-mercadopago
 helpText: 'Use Mercado Pago Checkout API for payments'
 sourceType: javascript
 children: []

@@ -31,15 +31,6 @@ children: []
   {% endset %}
   {{ save_delayed('bpr',bpr) }}
   {% set ph %}
-  const typeInSearch{{ field.column_name | friendly }}{{ referencedTable }} = async (typedIn) => {
-    const {{ columnName }}Options = await fetcher('/api/{{ referencedTable | lower }}').then(arc => {
-        return arc.{{ referencedTable | lower }}.map(ac => { return { value: ac._id, label: ac.{{ referencedField.column_name | friendly }} }})
-      })
-      return {{ columnName }}Options
-  }
-  {% endset %}
-  {{ save_delayed('ph',ph) }}
-  {% set ph %}
     const [{{ columnName }}Value, set{{ columnName }}Value] = React.useState(null)
     React.useEffect(() => {
       if (!{{ tableName }}data.{{ columnName }}) return undefined
@@ -53,12 +44,10 @@ children: []
 {{ save_delayed('ph',ph) }}
   <Autocomplete
     value={ {{ columnName }}Value }
-    onType={ typeInSearch{{ field.column_name | friendly }}{{ referencedTable }} }
     onChange={(newValue) => {
       if (!newValue) handle{{ tableName }}Change('{{ columnName }}')(null)
-      else handle{{ tableName }}Change('{{ columnName }}')(newValue?.length ? newValue.map(item => ({ _id: item.value !== 'new' ? item.value : null, {{ referencedField.column_name | friendly }}: item.label })) : [])
+      else handle{{ tableName }}Change('{{ columnName }}')(newValue)
     }}
-    loading={true}
     label="{{ field.column_name }}"
     fullWidth
     variant="{{ element.values.variant|default('standard') }}"
@@ -66,5 +55,6 @@ children: []
     size='{{ element.values.size|default("medium") }}'
     add={ {{ field.add|default('true') }} }
     {% if field.displaytype == 'chips' %}chips{% endif %}
+    labelProperty='{{ referencedField.column_name | friendly }}'
   />
 {% endif %}

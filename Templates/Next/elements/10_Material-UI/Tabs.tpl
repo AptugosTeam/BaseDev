@@ -3,7 +3,7 @@ path: Tabs.tpl
 completePath: elements/Experimental/Tabs.tpl
 type: file
 unique_id: oKJIl4tab
-icon: f:Swiper.svg
+icon: ico-field
 sourceType: javascript
 options:
   - name: ClassName

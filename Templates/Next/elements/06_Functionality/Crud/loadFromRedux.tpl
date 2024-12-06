@@ -130,13 +130,11 @@ children: []
 {% else %}
   {% set table = element.values.data | tableData %}
 {% endif %}
-{% set tableName = table.name | friendly | lower %}
+{% set tableName = table.name | friendly | lower %}
 {% set singleName = table.singleName | friendly | lower %}
 {% set innervarname = table.name | friendly %}
-{% if element.name != 'loadFromDatabase' %}
-  {% set innervarname = element.name | friendly %}
-{% endif %}
-{% set varName = element.values.variableName|default(table.name | friendly | lower ~ 'Data') %}
+{% if element.name != 'loadFromDatabase' %}{% set innervarname = element.name | friendly %}{% endif %}
+{% set varName = element.values.variableName %}
 {% if element.values.loadWhenSiteLoads %}
   {# Special method to load on page load #}
   {% set goesToIndex %}
@@ -151,19 +149,19 @@ children: []
   {% endset %}
   {{ save_delayed('bpr', bpr)}}
   {% set ph %}
-    const [{{ tableName }}Page, set{{ tableName }}Page] = React.useState(1)
-    const { {{ singleName }}data, {{ singleName }}isLoading, {{ singleName }}isError } = use{{ tableName }}Pages({{ tableName }}Page)
     const [{{ innervarname }}loadoptions, set{{ innervarname }}loadoptions] = React.useState<any>({ 
-    page: {{ element.values.defaultPage | default(1) }},
-    populate: {% if element.values.donotpopulate %}false{% else %}true{% endif %},
-    {% if element.values.elementsLimit %}limit: {{element.values.elementsLimit}}{% else %}limit: 25{% endif %},
-    sort: { field: {{ element.values.sortColumn | default('null') }}, method: '{{ element.values.sortMethod | default('DESC') }}' },
-    {% if element.values.fieldToSearch %}
-      searchField: {{ element.values.fieldToSearch | textOrVariableInCode }},
-    {% endif %}
-    totalItems: 0,
-    sortLanguage: '{{ element.values.sortLanguage|default('en') }}',
-  })
+      page: {{ element.values.defaultPage | default(1) }},
+      populate: {% if element.values.donotpopulate %}false{% else %}true{% endif %},
+      {% if element.values.elementsLimit %}limit: {{element.values.elementsLimit}}{% else %}limit: 25{% endif %},
+      sort: { field: {{ element.values.sortColumn | default('null') }}, method: '{{ element.values.sortMethod | default('DESC') }}' },
+      {% if element.values.fieldToSearch %}
+        searchField: {{ element.values.fieldToSearch | textOrVariableInCode }},
+      {% endif %}
+      totalItems: 0,
+      sortLanguage: '{{ element.values.sortLanguage|default('en') }}',
+    })
+
+    const { {{ singleName }}data{% if varName %}: {{ varName }}{% endif %}, {{ singleName }}isLoading, {{ singleName }}isError } = use{{ tableName }}Pages({{ innervarname }}loadoptions)
   {% endset %}
   {{ save_delayed('ph', ph)}}
 {% if element.values.onload or element.children %}

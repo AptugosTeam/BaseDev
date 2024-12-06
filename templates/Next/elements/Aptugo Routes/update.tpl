@@ -3,32 +3,26 @@ path: update.tpl
 completePath: elements/Aptugo Routes/update.tpl
 unique_id: h3MzGmRq
 */
-async (req, res, next) => {
-  {% if table.beforeUpdate %}{{ table.beforeUpdate }}{% endif %}
-  next()
-},
-validateBody({
-  type: "object",
-  properties: {
-    {% for field in table.fields %}
-    {{ field.column_name | friendly }}: ValidateProps.{{ singleName }}.{{ field.column_name | friendly }},
-    {% endfor %}
+{% if table.beforeUpdate %}
+  (req, _res, next) => {
+    {{ table.beforeUpdate }}
+    next()
   },
-}),
+{% endif %}
 async (req, res) => {
-  {% set settingName = singleName ~ '_Pre_Update' %}
-  {{ insert_setting(settingName) | raw }}
+  try {
+    {{ insert_setting(singleName ~ '_Pre_Update') | raw }}
 
-  const {
     {% for field in table.fields %}
-      {{ field.column_name | friendly }},
+      {% set fieldWithData = field | fieldData %}
+      {% include includeTemplate(['Fields' ~ field.data_type ~'update.tpl', 'Fieldsupdate.tpl']) %}
     {% endfor %}
-  } = req.body
-  const {{ tableName }} = await update{{ singleName }}ById(req.db, req.query.ID, {
-    {% for field in table.fields %}
-      {{ field.column_name | friendly }},
-    {% endfor %}
-  })
 
-  res.json({ {{ tableName }} })
+    const result = await {{ tableName }}Model.findOneAndUpdate({ _id: req.query.ID }, { {% for field in table.fields %}{{ field.column_name | friendly }},{% endfor %} }, {
+      new: true
+    })
+    res.status(201).json({ success: true, data: result })
+  } catch(error) {
+    res.status(400).json({ success: false, error: error.toString() })
+  }
 }

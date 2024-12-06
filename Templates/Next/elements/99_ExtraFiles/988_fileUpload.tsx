@@ -1,7 +1,5 @@
 /*
 path: 988_fileUpload.tsx
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/99_ExtraFiles/988_fileUpload.tsx
 keyPath: elements/99_ExtraFiles/988_fileUpload.tsx
 unique_id: OenclTMc
 */

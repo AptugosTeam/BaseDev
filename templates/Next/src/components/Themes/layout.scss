@@ -3,7 +3,6 @@ path: layout.scss
 keyPath: src/components/Themes/layout.scss
 unique_id: iaLnUTdx
 */
-
 html {
   overflow-y: scroll;
 }
@@ -15,7 +14,9 @@ html {
   }
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 
@@ -32,7 +33,7 @@ body {
   font-family: var(--font-family-sans);
   font-weight: 700;
   line-height: 1.2;
-  margin: 0 0 .5em;
+  margin: 0 0 0.5em;
 }
 
 h1 {
@@ -68,13 +69,14 @@ h6 {
   font-size: 1.2em;
 }
 
-p, ul, ol {
-  font-size: 1.3rem;
-  line-height: 1.75em;
-  margin: 1.2em 0;
+p,
+ul,
+ol {
+  font-size: 1rem;
 }
 
-ol, ul {
+ol,
+ul {
   padding-left: 2rem;
   -webkit-padding-start: 5%;
   -webkit-padding-end: 5%;
@@ -85,13 +87,13 @@ li {
 }
 
 li p {
-  margin-bottom: .5rem;
-  margin-top: .5rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 a {
   color: inherit;
-  transition: color linear .15s;
+  transition: color linear 0.15s;
 }
 
 a:hover {
@@ -100,9 +102,13 @@ a:hover {
 
 p a {
   text-decoration: none;
-  box-shadow: inset 0 -.12em 0 var(--primary-color);
-  -webkit-transition: box-shadow .2s ease-in-out, color .2s ease-in-out;
-  transition: box-shadow .2s ease-in-out, color .2s ease-in-out;
+  box-shadow: inset 0 -0.12em 0 var(--primary-color);
+  -webkit-transition:
+    box-shadow 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+  transition:
+    box-shadow 0.2s ease-in-out,
+    color 0.2s ease-in-out;
 }
 
 p a:hover {
@@ -119,10 +125,14 @@ hr {
 }
 
 code {
-  font-family: SF Mono, menlo, inconsolata, monospace;
+  font-family:
+    SF Mono,
+    menlo,
+    inconsolata,
+    monospace;
   font-size: calc(1em - 2px);
   color: #555;
-  padding: .2em .4em;
+  padding: 0.2em 0.4em;
   border-radius: 2px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -176,11 +186,11 @@ table {
 
 th {
   border-bottom: 2px solid #cccccc;
-  padding: .4em .8em;
+  padding: 0.4em 0.8em;
   word-break: break-word;
 }
 
 td {
-  padding: .4em .8em;
+  padding: 0.4em 0.8em;
   word-break: break-word;
 }

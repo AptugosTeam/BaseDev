@@ -2,7 +2,7 @@
 path: registryEventGlobalGaming.tpl
 keyPath: elements/Games/ProgramToGame/registryEventGlobalGaming.tpl
 unique_id: IcPCNGGC
-icon: f:laps.svg
+icon: ico-user-event
 options:
   - name: eventName
     display: Event Name

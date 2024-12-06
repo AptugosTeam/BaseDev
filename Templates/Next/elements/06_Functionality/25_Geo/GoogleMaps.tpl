@@ -2,7 +2,7 @@
 path: GoogleMaps.tpl
 type: file
 unique_id: egrlpGq3
-icon: f:GoogleMaps.svg
+icon: ico-googlemaps
 children: []
 settings:
   - name: Packages
@@ -52,7 +52,6 @@ React.useEffect(() => {
     googleMapScript.async = true;
     window.document.body.appendChild(googleMapScript);
     googleMapScript.addEventListener('load', () => {
-      console.log('loaded', window.google)
       setshowMap(true)
     });
 },[])

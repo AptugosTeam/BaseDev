@@ -2,7 +2,7 @@
 path: registryGlobalGaming.tpl
 keyPath: elements/Games/ProgramToGame/registryGlobalGaming.tpl
 unique_id: IcPGCcnG
-icon: f:laps.svg
+icon: ico-user-event
 options:
   - name: metodoregistry
     display: Metodo Registry

@@ -2,7 +2,7 @@
 path: searchField.tpl
 type: file
 unique_id: i13FZRpA
-icon: f:searchField.svg
+icon: ico-search
 helpText: Adds a search field and performs searches on a specific table when changed
 children: []
 options:

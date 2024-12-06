@@ -2,7 +2,7 @@
 path: CreateGroup.tpl
 keyPath: elements/Games/Snippets/CreateGroup.tpl
 unique_id: edDctODG
-icon: f:group.svg
+icon: ico-group
 options:
   - name: groupName
     display: Group Name

@@ -8,7 +8,7 @@ unique_id: RkF1LGZf
   "value": "Wysiwyg",
   "dataType": "String",
   "initialValue": "",
-  "options": {
+  "extraOptions": {
     "frontEndType": "string",
     "extra": [
       {
@@ -17,16 +17,16 @@ unique_id: RkF1LGZf
         "type": "select",
         "options": [
           {
-            "label": "Standard (react-quill)",
-            "value": "standard"
+            "label": "Jodit",
+            "value": "jodit"
+          },
+          {
+            "label": "React Quill",
+            "value": "quill"
           },
           {
             "label": "CKEditor",
             "value": "ckeditor"
-          },
-          {
-            "label": "Jodit",
-            "value": "jodit"
           }
         ]
       }

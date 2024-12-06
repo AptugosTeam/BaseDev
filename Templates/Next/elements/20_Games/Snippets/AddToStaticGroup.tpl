@@ -2,7 +2,7 @@
 path: AddToStaticGroup.tpl
 keyPath: elements/Games/Snippets/AddToStaticGroup.tpl
 unique_id: edDct24M
-icon: f:group_add.svg
+icon: ico-group-add
 options:
   - name: variableNameGroup
     display: Variable Name Group

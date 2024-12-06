@@ -31,7 +31,7 @@ interface addDialogProps {
   editOptions: subOptions
   removeOptions: subOptions
   saveDataHandler: Function
-  color: 'primary' | 'inherit' | 'secondary' | 'default'
+  color: 'primary' | 'inherit' | 'secondary' | 'default' | 'danger'
   data: any
   initialData: any
   setData: Function
@@ -97,7 +97,7 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
         <DialogTitle id="form-dialog-title">{options.title}</DialogTitle>
         <DialogContent>
           <DialogContentText>{options.text}</DialogContentText>
-          {action !== 'delete' && <div>{props.children}</div>}
+          {action !== 'delete' && <div className='fieldsHolder'>{props.children}</div>}
         </DialogContent>
         <DialogActions>
           {allowMultipleSubmit && (

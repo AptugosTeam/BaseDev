@@ -3,7 +3,7 @@ path: ReactMultiCarousel.tpl
 completePath: elements/Experimental/ReactMultiCarousel.tpl
 type: file
 unique_id: RymX77gg
-icon: f:Swiper.svg
+icon: ico-field
 sourceType: javascript
 options:
   - name: className

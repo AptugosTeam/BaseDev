@@ -9,6 +9,7 @@ unique_id: 6IVx7DRZ
   "dataType": "mongoose.Schema.Types.ObjectId",
   "initialValue": "",
   "extraOptions": {
+    "frontEndType": "{}",
     "extra": [
       {
         "display": "Relationship Type",

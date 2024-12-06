@@ -2,7 +2,7 @@
 path: LoopGame.tpl
 keyPath: elements/ProgramToGame/LoopGame.tpl
 unique_id: 8Hzl16JL
-icon: f:laps.svg
+icon: ico-iterate
 options:
   - name: variableName
     display: Variable Name

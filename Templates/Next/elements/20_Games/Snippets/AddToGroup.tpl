@@ -2,7 +2,7 @@
 path: AddToGroup.tpl
 keyPath: elements/Games/Snippets/AddToGroup.tpl
 unique_id: 8Hzk6UJt
-icon: f:diversity_3.svg
+icon: ico-group-add
 options:
   - name: groupName
     display: Group Name

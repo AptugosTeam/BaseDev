@@ -4,9 +4,12 @@ type: file
 unique_id: s392rWmh
 icon: ico-field
 */
-import React from "react";
-import JoditEditor from "jodit-react";
-import "jodit";
+import "jodit"
+import dynamic from 'next/dynamic'
+
+const JoditEditor = dynamic(() => import("jodit-react"), {
+  ssr: false,
+})
 
 export default function JoditSetup(props) {
   let {

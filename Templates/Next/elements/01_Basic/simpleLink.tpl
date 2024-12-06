@@ -2,8 +2,9 @@
 path: simpleLink.tpl
 type: file
 unique_id: BG7vdEr8
-icon: f:simpleLink.svg
-renderTag: a
+icon: ico-link
+name: Link
+order: 50
 options:
   - name: destination
     display: Destination

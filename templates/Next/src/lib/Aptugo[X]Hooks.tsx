@@ -35,8 +35,9 @@ export function use{{ singleName }}({ {{ singleName }}Id }) {
   };
 }
 
-export function use{{ tableName }}Pages(index) {
-  const { data, error } = useSWR(`/api/{{ tableName }}?page=${index}`, fetcher)
+export function use{{ tableName }}Pages(options) {
+  const urlSearchParams = new URLSearchParams(options)
+  const { data, error } = useSWR(`/api/{{ tableName }}?${urlSearchParams.toString()}`, fetcher)
   return {
     {{ singleName }}data: data,
     {{ singleName }}isLoading: !error && !data,

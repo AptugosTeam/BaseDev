@@ -6,8 +6,12 @@ icon: ico-field
 children: []
 */
 async (req, res) => {
-  const _id = req.query.ID
   {% if table.beforeDelete %}{{ table.beforeDelete }}{% endif %}
-  const {{ singleName }} = await delete{{ singleName }}ById(req.db, _id)
-  res.json({ {{ singleName }} })
+  try {
+    const _id = req.query.ID
+    await {{ tableName }}Model.deleteOne({ _id: req.query.ID })
+    res.status(201).json({ success: true })
+  } catch (error) {
+    res.status(400).json({ success: false, error: error.toString() })
+  }
 }

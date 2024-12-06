@@ -3,7 +3,7 @@ path: UploadMultipleImages.tpl
 completePath: elements/Experimental/UploadMultipleImages.tpl
 type: file
 unique_id: AcXumHAq
-icon: f:UploadMultipleImages.svg
+icon: ico-upload-multiple
 helpText: Allows you to upload multiple image files by selection or drag and drop
 options:
   - name: classname

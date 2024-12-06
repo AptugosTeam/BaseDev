@@ -3,7 +3,7 @@ path: Swiper.tpl
 completePath: elements/Experimental/Swiper.tpl
 type: file
 unique_id: oKJIl4pk
-icon: f:Swiper.svg
+icon: ico-field
 sourceType: javascript
 options:
   - name: ClassName

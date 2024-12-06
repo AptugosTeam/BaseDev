@@ -3,29 +3,40 @@ path: get.tpl
 completePath: elements/Aptugo Routes/get.tpl
 unique_id: AlPg3QRE
 */
-async (req, res) => {
-  if (!req.query) req.query = {}
-  const ITEMS_PER_PAGE = Number(req.query.limit) || 10
-  req.query.skip = ((req.query.page || 1) - 1) * ITEMS_PER_PAGE
-  const {{ singleName }}InfoAll = await count{{ tableName }}(
-    req.db,
-    req.query
-  )
-  const countPromise = {{ singleName }}InfoAll.length
-  
-  {% if table.beforeRetrieve %}{{ table.beforeRetrieve }}{% endif %}
-  const {{ singleName }}Info = await find{{ tableName }}(
-    req.db,
-    req.query
-  )
-  const [count, items] = await Promise.all([countPromise, {{ singleName }}Info])
-  const pageCount = Math.ceil(countPromise / ITEMS_PER_PAGE)
+(req, _res, next) => {
+  const { before, after, filter, sort, skip, limit, page } = req.query || {}
+  const options = {
+    page: Number(page) || 1,
+    limit: Number(limit) || 10,
+    populate: []
+  }
 
-  return res.json({
-    pagination: {
-      count,
-      pageCount,
-    },
-    {{ tableName }}: items,
-  })
+  {% for field in table.fields %}
+    {% set fieldWithData = field | fieldData %}
+    {% include includeTemplate(['Fields' ~ field.data_type ~ 'find.tpl', 'Fieldsfind.tpl']) %}
+  {% endfor %}
+
+  const aggregate = []
+
+  if (skip) aggregate.push({ $skip: skip })
+  if (sort) aggregate.push({ $sort: { [sort.field]: [sort.desc] ? -1 : 1 } })
+  if (before) aggregate.push({ $match: { ...(before && { createdAt: { $lt: before } }) } })
+  if (after) aggregate.push({ $match: { ...(after && { createdAt: { $gt: after } }) } })
+  if (filter) {
+    for (var filt of Object.keys(filter)) {
+      aggregate.push({
+        $match: { [filt]: filter[filt] },
+      })
+    }
+  }
+  req.options = options
+  next()
+},
+async (req, res) => {
+  try {
+    const results = await {{ tableName }}Model.paginate({}, req.options)
+    res.status(200).json({ success: true, data: results })
+  } catch(error) {
+    res.status(400).json({ success: false, error: error.toString() })
+  }
 }

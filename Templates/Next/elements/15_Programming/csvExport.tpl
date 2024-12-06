@@ -2,7 +2,7 @@
 path: csvExport.tpl
 type: file
 unique_id: 6XnGBni9
-icon: f:csvExport.svg
+icon: ico-export-csv
 helpText: Downloads CSV data from an array of elements
 options:
   - name: data

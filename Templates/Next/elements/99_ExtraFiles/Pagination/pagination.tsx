@@ -16,12 +16,12 @@ interface paginationProps {
   setPage: Function
   totalItems: number
   itemsPerPage: number
-  alwaysActivePrevButton: boolean
-  alwaysActiveNextButton: boolean
-  disabledPrevButton: boolean
-  disabledNextButton: boolean
-  textInsidePrevButton: string
-  textInsideNextButton: string
+  alwaysActivePrevButton?: boolean
+  alwaysActiveNextButton?: boolean
+  disabledPrevButton?: boolean
+  disabledNextButton?: boolean
+  textInsidePrevButton?: string
+  textInsideNextButton?: string
 }
 
 const Pagination: FunctionComponent<paginationProps> = (props) => {

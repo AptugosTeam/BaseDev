@@ -2,6 +2,12 @@
 path: edit.tpl
 completePath: elements/Fields/Image/edit.tpl
 unique_id: 1NX62QJ2
+settings:
+  - name: Packages
+    value: '"mui-file-input": "6.0.0",'
+extraFiles:
+  - source: 'elements/99_ExtraFiles/001_FileUploadComponent.tsx'
+    destination: '/src/components/FileUpload/index.tsx'
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}

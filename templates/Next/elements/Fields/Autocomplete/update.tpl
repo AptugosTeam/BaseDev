@@ -10,3 +10,4 @@ unique_id: zd6mrTlU
 {% else %}
   {% include includeTemplate('update_1m.tpl') %}
 {% endif %}
+if( typeof req.body.{{ field.column_name | friendly }} !== 'undefined' && req.body.{{ field.column_name | friendly }}.value )  var {{ field.column_name | friendly }} = req.body.{{ field.column_name | friendly }}.value

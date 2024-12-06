@@ -10,10 +10,7 @@ children: []
 */
 import React, { FunctionComponent } from 'react'
 import { useRouter } from 'next/router'
-// Rendering BPR
 {% for delay in delayed %}
   {{ delay }}
 {% endfor %}
-
-// Rendering BPR CONTENT
 {{ content | raw }}

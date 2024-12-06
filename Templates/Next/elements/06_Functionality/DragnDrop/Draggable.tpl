@@ -2,7 +2,7 @@
 path: Draggable.tpl
 type: file
 unique_id: drg161tuk
-icon: f:draggableIcon.svg
+icon: ico-drag-drop
 sourceType: javascript
 settings:
   - name: Packages

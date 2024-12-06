@@ -2,7 +2,7 @@
 path: mercadoPagoOauth.tpl
 completePath: elements/Experimental/mercadoPagoOauth.tpl
 unique_id: mercadoPagoOauth
-icon: f:mercadoPagoOauth.svg
+icon: ico-mercadopago
 helpText: 'Oauth mechanism for Mercado Pago Payment Gateway'
 sourceType: javascript
 children: []

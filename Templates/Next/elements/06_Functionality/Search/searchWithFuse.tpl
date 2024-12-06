@@ -2,7 +2,7 @@
 path: searchWithFuse.tpl
 type: file
 unique_id: EEdcmaxrq
-icon: f:searchField.svg
+icon: ico-search
 helpText: Search engine that allows you to search within a variable
 sourceType: javascript
 options:

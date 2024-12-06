@@ -2,7 +2,7 @@
 path: CountUp.tpl
 type: file
 unique_id: countup666
-icon: f:Skeleton.svg
+icon: ico-field
 children: []
 options:
   - name: start

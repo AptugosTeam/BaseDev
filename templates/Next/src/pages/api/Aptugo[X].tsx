@@ -25,13 +25,14 @@ children: []
 
 {# Definitions #}
 {% import _self as macros %}
-{% set tableName = table.name | friendly | lower %}
+{% set tableName = table.name | friendly %}
 {% set singleName = table.singleName | friendly | lower %}
 {% set mainRouteCode = '' %}
 {% set externalRouteFiles = [] %}
 
 {# Create Routes #}
 {% for route in table.definedRoutes %}
+  {% set mainLoopIndex = loop.index %}
   {% if route.route_active %}
     {% set routePath = parse(route.route_path, { route: route, table: table }) %}
     {% set routeCode %} 
@@ -44,16 +45,17 @@ children: []
         } )
       {% endif %}
     {% endset %}
-    {% if routePath != '/api/' ~ tableName %}
-      {% set path = macros.prepareRoute(routePath, tableName, singleName)|trim %}
+    {% if routePath != '/api/' ~ (tableName|lower) %}
+      {% set path = macros.prepareRoute(routePath, tableName|lower, singleName)|trim %}
       {{ fakeRoutePath(path) }}
       {% set externalRouteFile = { path: path, content: routeCode } %}
-      {% set nrf = externalRouteFiles %}
+      {% set nrf = [] %}
       {% set notFound = true %}
       {% for erf in externalRouteFiles %}
         {% if erf.path == path %}
-          {% set notFound = false %}
           {% set nrf = nrf|merge([{ path: erf.path, content: erf.content ~ routeCode }]) %}
+          {% set notFound = false %}
+          
         {% endif %}
       {% endfor %}
       {% if notFound %}
@@ -67,17 +69,12 @@ children: []
 {% endfor %}
 {% block baseRoute %}
 import { ValidateProps } from "@api-lib/constants"
-import {
-  find{{ tableName }},
-  count{{ tableName }},
-  insert{{ singleName }},
-  update{{ singleName }}ById,
-  find{{ singleName }}ById,
-  delete{{ singleName }}ById,
-} from "@api-lib/db"
+
+import { {{ tableName }}Model } from '@/models'
 import { database, validateBody, parseBody } from "@api-lib/middlewares"
 import { ncOpts } from "@api-lib/nc"
 import nc from "next-connect"
+import mongoose from 'mongoose'
 import multer from 'multer'
 import parseBodyMiddleware from '@lib/parseBodyMiddleware'
 {{ insert_setting(singleName ~ '_File_Start') |raw }}

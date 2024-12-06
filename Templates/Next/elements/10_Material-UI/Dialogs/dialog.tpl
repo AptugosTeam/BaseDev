@@ -147,7 +147,8 @@ import AddDialog from '@components/Dialog/Dialog'
           method: {{ dialogVariable }} === 'add' ? 'POST' : 'PUT',
           body: formData,
         }).then(() => {
-          mutate('/api/{{ table.name | friendly | lower }}?page=1')
+          const urlSearchParams = new URLSearchParams(tableloadoptions)
+          mutate(`/api/{{ table.name | friendly | lower }}?${urlSearchParams.toString()}`)
         })
         } catch (e) {
           console.log('catch', e)
@@ -166,7 +167,7 @@ import AddDialog from '@components/Dialog/Dialog'
   addClassName={theme.fabButton}
 >
 {% for field in fields %}
- {% set subvalues = { element: { values: { Field: field.unique_id, Type: 'edit' } }  } %}
+ {% set subvalues = { element: { values: { Field: field.unique_id, Type: 'edit', variant: 'outlined' } }  } %}
  {% include includeTemplate('field.tpl') with subvalues %}
 {% endfor %}
 {{ content | raw }}

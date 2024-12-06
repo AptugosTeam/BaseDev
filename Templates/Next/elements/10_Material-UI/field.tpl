@@ -147,5 +147,8 @@ extraFiles:
   {{ theField.rendered }}
 {% else %}
   {% if element.values.Type == 'edit' %}{% include includeTemplate('Fields' ~ theField.data_type ~ 'edit.tpl') with theField %}
+  {% elseif element.values.Type == 'raw' %}{% include includeTemplate(['Fields' ~ theField.data_type ~ 'raw.tpl', 'Fieldsraw.tpl']) with theField %}
   {% else %}{% include includeTemplate('Fields' ~ theField.data_type ~ 'show.tpl') with theField %}{% endif %}
 {% endif %}
+
+

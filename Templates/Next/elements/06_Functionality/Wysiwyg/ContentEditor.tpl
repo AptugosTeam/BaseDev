@@ -2,7 +2,7 @@
 path: ContentEditor.tpl
 type: file
 unique_id: 0FrlinoH
-icon: f:ContentEditor.svg
+icon: ico-content-edit
 children: []
 settings:
   - name: Packages

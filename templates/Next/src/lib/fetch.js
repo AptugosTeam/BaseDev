@@ -6,7 +6,7 @@ unique_id: yo7llWoT
 */
 export const fetcher = (...args) => {
   return fetch(...args).then(async (res) => {
-    if (res.status !== 200 && res.status !== 204) {
+    if (res.status > 299) {
       const error = new Error(res.statusText)
       error.info = res
       error.status = res.status

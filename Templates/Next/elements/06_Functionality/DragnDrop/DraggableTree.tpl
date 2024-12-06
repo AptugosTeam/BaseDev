@@ -1,6 +1,6 @@
 /*
 path: DraggableTree.tpl
-icon: f:draggableIcon.svg
+icon: ico-drag-drop
 keyPath: elements/Experimental/DraggableTree.tpl
 unique_id: BmQXdTbm
 options:
