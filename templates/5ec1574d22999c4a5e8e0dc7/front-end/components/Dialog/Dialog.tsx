@@ -103,33 +103,37 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
           </Fab>
         </Tooltip>
       )}
-      <Dialog disableEnforceFocus open={isOpen} onClose={handleClose} aria-labelledby="form-dialog-title" className={props.className}>
-        <DialogTitle id="form-dialog-title">{action === 'view' ? viewOptions.title : options.title}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>{action === 'view' ? viewOptions.text : options.text}</DialogContentText>
-          {action !== 'delete' && <div>{React.Children.map(props.children, child => React.cloneElement(child, { disabled: disabledFields }))}</div>}
-        </DialogContent>
-        <DialogActions>
-          {allowMultipleSubmit && action !== 'view' && (
-            <Tooltip title="Add multiple">
-              <Switch
-                checked={switchState.addMultiple}
-                onChange={handleSwitchChange('addMultiple')}
-                value="addMultiple"
-                inputProps={ { 'aria-label': 'add multiple' } }
-              />
-            </Tooltip>
-          )}
-            <Button onClick={handleClose} color="primary">
-              {action === 'view' ? 'Close' : 'Cancel'}
-            </Button>
-            {action !== 'view' && (
-            <Button onClick={handleSubmit} color="primary">
-              {options.button}
-            </Button>
-          )}
-        </DialogActions>
-      </Dialog>
+      { isOpen && (
+        <>
+          <Dialog disableEnforceFocus open={isOpen} onClose={handleClose} aria-labelledby="form-dialog-title" className={props.className}>
+            <DialogTitle id="form-dialog-title">{action === 'view' ? viewOptions.title : options.title}</DialogTitle>
+            <DialogContent>
+              <DialogContentText>{action === 'view' ? viewOptions.text : options.text}</DialogContentText>
+              {action !== 'delete' && <div>{React.Children.map(props.children, child => React.cloneElement(child, { disabled: disabledFields }))}</div>}
+            </DialogContent>
+            <DialogActions>
+              {allowMultipleSubmit && action !== 'view' && (
+                <Tooltip title="Add multiple">
+                  <Switch
+                    checked={switchState.addMultiple}
+                    onChange={handleSwitchChange('addMultiple')}
+                    value="addMultiple"
+                    inputProps={ { 'aria-label': 'add multiple' } }
+                  />
+                </Tooltip>
+              )}
+                <Button onClick={handleClose} color="primary">
+                  {action === 'view' ? 'Close' : 'Cancel'}
+                </Button>
+                {action !== 'view' && (
+                <Button onClick={handleSubmit} color="primary">
+                  {options.button}
+                </Button>
+              )}
+            </DialogActions>
+          </Dialog>
+        </>
+      )}
     </React.Fragment>
   )
 }
