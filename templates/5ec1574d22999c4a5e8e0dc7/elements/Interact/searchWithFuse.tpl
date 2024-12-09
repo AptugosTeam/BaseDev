@@ -104,6 +104,10 @@ options:
     display: Child is end adornment
     type: checkbox
     advanced: true
+  - name: inputRef
+    display: Input Reference
+    type: code
+    advanced: true
 settings:
   - name: BackendPackages
     value: '"fuse.js": "latest",'
@@ -180,4 +184,5 @@ import InputAdornment from '@mui/material/InputAdornment'
         endAdornment: <InputAdornment position="end">{{ content | raw }}</InputAdornment>
       } }
     {% endif %}
+    {% if element.values.inputRef %}inputRef={ {{ element.values.inputRef }} }{% endif %}
 />
