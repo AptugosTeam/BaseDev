@@ -45,6 +45,13 @@ options:
     type: styles
     options: ''
     advanced: true
+  - name: disabledReturn
+    display: Disable Return with KanbanItem
+    type: checkbox
+    options: ''
+    advanced: true
+    settings: 
+      default: false
 */
 <KanbanColumn channel={columnItem} key={columnIndex} {% if element.values.className %}className={{ element.values.className | textOrVariable }}{% endif %}>
   <div {% if element.values.extraStylesToKanbanHeaderFather %}style={ {{element.values.extraStylesToKanbanHeaderFather}} } {% endif %}>
@@ -56,6 +63,7 @@ options:
   <div className={ {% if element.values.classNameList %}{{ element.values.classNameList }}{% else %}classes.list{% endif %} }
   {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
   >
+    {% if not element.values.disabledReturn %}
     { {{ element.values.RowData }}.map((rowItem, rowIndex) => {
       {% if element.values.code %}
         {{ element.values.code}}
@@ -72,6 +80,10 @@ options:
       }
       {% endif %}
     })}
+    {% endif %}
+      {% if element.values.disabledReturn %}
+          {{ content | raw }}
+      {% endif %}
     {% if element.values.addRecords %}
     <Button onClickCapture={() => { {{ element.values.addRecords }} }}>
       <AddIcon />
