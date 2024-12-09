@@ -31,7 +31,7 @@ interface addDialogProps {
   onOpen: VoidFunction
   onSave?: VoidFunction
   onClose?: VoidFunction
-  action: 'add' | 'edit' | 'view' | 'delete' | ''
+  action: 'add' | 'edit' | 'view' | 'softDelete' | 'delete' | ''
   addOptions: subOptions
   editOptions: subOptions
   viewOptions: subOptionsView
@@ -87,6 +87,7 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
       case 'view':
         setviewOptions(props.viewOptions)
         break
+      case 'softDelete':
       case 'delete':
         setOptions(props.removeOptions)
         break
@@ -109,7 +110,7 @@ const AddDialog: FunctionComponent<addDialogProps> = (props) => {
             <DialogTitle id="form-dialog-title">{action === 'view' ? viewOptions.title : options.title}</DialogTitle>
             <DialogContent>
               <DialogContentText>{action === 'view' ? viewOptions.text : options.text}</DialogContentText>
-              {action !== 'delete' && <div>{React.Children.map(props.children, child => React.cloneElement(child, { disabled: disabledFields }))}</div>}
+              {action !== 'delete' && action !== 'softDelete' && <div>{React.Children.map(props.children, child => React.cloneElement(child, { disabled: disabledFields }))}</div>}
             </DialogContent>
             <DialogActions>
               {allowMultipleSubmit && action !== 'view' && (

@@ -129,6 +129,10 @@ import { view{{ friendlyTableName }} } from '@store/actions/{{ table.name | frie
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
+import { softRemove{{ friendlyTableName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
+{% set bpr %}
 import { remove{{ friendlySingleName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
@@ -137,7 +141,7 @@ import AddDialog from '../components/Dialog/Dialog'
 {% endset %}
 {{ save_delayed('bpr', bpr2 ) }}
 {% set ph %}
-  const [{{ dialogVariable }}, set{{ dialogVariable }}] = React.useState<'add' | 'edit' | 'view' | 'delete' | "">('')
+  const [{{ dialogVariable }}, set{{ dialogVariable }}] = React.useState<'add' | 'edit' | 'view' | 'softDelete' | 'delete' | "">('')
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% set ph %}
@@ -162,6 +166,8 @@ import AddDialog from '../components/Dialog/Dialog'
     {% if element.values.addProcedure == 'Internal' %}
       if ({{ dialogVariable }} === 'delete') {
         dispatch(remove{{ friendlySingleName }}(data))
+      } else if ({{ dialogVariable }} === 'softDelete') {
+        dispatch(softRemove{{ table.name | friendly | capitalize }}(data))
       } else {
         const cleanData:any = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== null && v !== '' && (v.length !== 0 || v.length === undefined)));
         {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(cleanData)) : dispatch(edit{{ table.name | friendly | capitalize }}(cleanData))

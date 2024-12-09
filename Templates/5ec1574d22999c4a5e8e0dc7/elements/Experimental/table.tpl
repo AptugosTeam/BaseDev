@@ -89,6 +89,12 @@ options:
     settings:
       default: true
       condition: ''
+  - name: useSoftDelete
+    display: Use Soft Delete
+    type: checkbox
+    settings:
+      default: false
+      condition: ''
   - name: detailsURL
     display: Details Page
     type: dropdown
@@ -212,6 +218,7 @@ children: []
 {% set allowEdit = element.values.allowEdit|default(true) %}
 {% set allowView = element.values.allowView|default(false) %}
 {% set allowDeletion = element.values.allowDeletion|default(true) %}
+{% set useSoftDelete = element.values.useSoftDelete|default(false) %}
 {% set tableFields = [] %}
 {% if element.values.table == 'useVar' or element.values.table == 'var' %}
   {% set table = element.values.editionTable | tableData %}
@@ -254,7 +261,7 @@ children: []
   {% endif %}
   {% set tableData = '(' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ '.length ? ' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ ' : ' ~ table.name|friendly|lower ~ 'Data.' ~ table.name|friendly|lower ~ ' as any)' %}
   {% set bpr %}
-  import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }}, view{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
+  import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }},{% if useSoftDelete %} softRemove{{ table.name | friendly | capitalize }},{% endif %} edit{{ table.name | friendly | capitalize }}, view{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
   {% endset %}
   {{ save_delayed('bpr', bpr ) }}
 {% endif %}
@@ -359,9 +366,9 @@ children: []
     <IconButton aria-label="delete" color="primary" onClickCapture={(e: any) => {
       {% if element.values.confirmDeletes %}
         {{ setEditDataFunctionName }}(e.element)
-        setdialog{{ tableName | capitalize }}Action('delete')
+        setdialog{{ tableName | capitalize }}Action({% if useSoftDelete %}'softDelete'{% else %}'delete'{% endif %})
       {% else %}
-        dispatch(remove{{ tableSingleName }} (e.element))
+        dispatch({% if useSoftDelete %}softRemove{{ tableName | capitalize }}{% else %}remove{{ tableSingleName }}{% endif %} (e.element))
       {% endif %}
     }}>
       <DeleteIcon fontSize="small" />
