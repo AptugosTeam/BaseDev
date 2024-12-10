@@ -46,6 +46,10 @@ export default function JoditSetup(props) {
       },
     },
     events: { paste: onPaste, drop: onDrop },
+    askBeforePasteHTML: false,
+    askBeforePasteFromWord: false,
+    processPasteHTML: true,
+    processPasteFromWord: true,
     ...overrides,
   };
 
