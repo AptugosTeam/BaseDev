@@ -43,6 +43,7 @@ const {{ friendlyTableName }}Schema = mongoose.Schema({
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate-v2')
 {{ extraImports }}
+const { applySoftDeleteMiddleware } = require('./schemaUtils');
 {{ modelDefinition }}
 
 {% for relatedField in builder.plainFields %}
@@ -68,13 +69,17 @@ const mongoosePaginate = require('mongoose-paginate-v2')
 {% endfor %}
 
 {{ extraPlugins }}
+
+applySoftDeleteMiddleware({{ friendlyTableName }}Schema)
+
 {{ insert_setting('schema' ~ friendlyTableName) | raw }}
 {{ friendlyTableName }}Schema.plugin(mongoosePaginate)
 {{ friendlyTableName }}Schema.index(
   {
   {% for field in table.fields %}
     {{ field.column_name | friendly }}: 'text',
-  {% endfor %} 
+  {% endfor %}
+    isDeleted: 1,
   }
 );
 
