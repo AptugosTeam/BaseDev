@@ -30,6 +30,10 @@ options:
   - name: maxBounds
     display: Variable with max Bounds
     type: text
+  - name: defaultSettings
+    display: Code for default Settings
+    type: function
+    advanced: true
 */
 {% set bpr %}
 import { Camera } from '@rnmapbox/maps'
@@ -41,14 +45,25 @@ const cameraRef{{ element.unique_id }} = React.useRef<Camera>(null)
 {{ save_delayed('ph',ph)}}
 <Camera
   ref={cameraRef{{ element.unique_id }}}
+   {% if element.values.centerCoordinate %}
+    centerCoordinate={ {{ element.values.centerCoordinate }}}
+  {% endif %}
    {% if element.values.maxZoomLevel %}
     maxZoomLevel={  {{ element.values.maxZoomLevel }}  }
   {% endif %}
-  minZoomLevel={ {{ element.values.minZoomLevel|default(1) }} }
-  centerCoordinate={ {{ element.values.centerCoordinate|default('[50, 0]') }}}
-  zoomLevel={ {{ element.values.zoomLevel|default(6) }} }
-  followZoomLevel={ {{ element.values.followZoomLevel|default(12) }} }
+     {% if element.values.minZoomLevel %}
+  minZoomLevel={ {{ element.values.minZoomLevel }} }  
+  {% endif %}
+  {% if element.values.zoomLevel %}
+    zoomLevel={ {{ element.values.zoomLevel }} }
+  {% endif %}
+    {% if element.values.followZoomLevel %}
+    followZoomLevel={ {{ element.values.followZoomLevel }} }
+  {% endif %}
   {% if element.values.maxBounds %}
     maxBounds={  {{ element.values.maxBounds }}  }
+  {% endif %}
+    {% if element.values.defaultZoom %}
+  defaultSettings={ {{ element.values.defaultSettings }} }
   {% endif %}
 />
