@@ -40,6 +40,11 @@ options:
       propertyCondition: resize
       condition: true
       active: true
+  - name: accept
+    display: Accept all types of files?
+    type: checkbox
+    settings:
+      default: false
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
@@ -55,5 +60,8 @@ import FileUpload from '../components/FileUpload/FileUpload'
     variant="{{ element.values.variant| default('standard') }}"
     {% if element.values.resize and element.values.resizeWidth %}
         resizeWidth={ Number( {{ element.values.resizeWidth | default(800) }}) }
+    {% endif %}
+    {% if element.values.accept %}
+        accept={ "*" }
     {% endif %}
 />
