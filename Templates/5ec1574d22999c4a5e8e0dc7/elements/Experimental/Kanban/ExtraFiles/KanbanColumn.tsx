@@ -16,7 +16,8 @@ function Column({
     theme,
     columnIndex,
     children,
-    className
+    className,
+    cardCount
 }) {
     const [{ isOver }, drop] = useDrop({
         accept: 'card',
@@ -32,7 +33,7 @@ function Column({
 
     return (
         <div ref={drop} className={className ? className : clsx(theme[columnItem.Color], columnIndex % 2 === 0 ? theme.odd: theme.even)}>
-            {children({ columnItem, columnIndex, filteredItems })}
+            {children({ columnItem, columnIndex, filteredItems, cardCount })}
         </div>
     );
 }
@@ -54,7 +55,8 @@ const AptugoComponent: FunctionComponent<kanbanProps> = React.memo((props) => {
             <div ref={ref}>
                 {columnInfo?.map((columnItem, columnIndex) => {
                     {{ insert_setting('skibidiMacucas') | raw }}
-
+                    const filteredItems = filteredItemsByColumn[columnIndex]
+                    const cardCount = filteredItems?.length
                     return (
                         <Column
                             key={columnIndex}
@@ -64,6 +66,7 @@ const AptugoComponent: FunctionComponent<kanbanProps> = React.memo((props) => {
                             theme={theme}
                             columnIndex={columnIndex}
                             className={className}
+                            cardCount={cardCount}
                         >
                             {props.children}
                         </Column>

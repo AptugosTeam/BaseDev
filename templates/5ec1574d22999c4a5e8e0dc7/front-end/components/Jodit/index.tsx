@@ -18,7 +18,7 @@ export default function JoditSetup(props) {
     overrides,
   } = props;
 
-  let config = {
+  const config = React.useMemo(() => ({
     enableDragAndDropFileToEditor: true,
     readonly: readOnly,
     iframe: false,
@@ -51,7 +51,7 @@ export default function JoditSetup(props) {
     processPasteHTML: true,
     processPasteFromWord: true,
     ...overrides,
-  };
+  }), [darkMode, readOnly, overrides])
 
   function executeToggle(e) {
     e.toggleFullSize();
