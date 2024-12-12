@@ -8,7 +8,15 @@ function applySoftDeleteMiddleware (schema) {
 
   function applyFilter () {
     if (!this.options.skipDeletedFilter) {
-      this.where(softDeletefilter)
+      const query = this.getQuery();
+      if (query.$or) {
+        query.$or = query.$or.map((clause) => ({
+          ...clause,
+          ...softDeletefilter
+        }))
+      } else {
+        this.where(softDeletefilter)
+      }
     }
   }
 
