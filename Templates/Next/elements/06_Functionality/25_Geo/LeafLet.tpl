@@ -4,6 +4,7 @@ type: file
 unique_id: KshBgLpQ
 icon: ico-leaflet
 children: []
+order: 1
 options:
   - name: position
     display: Map Position

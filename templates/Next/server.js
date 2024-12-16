@@ -1,6 +1,5 @@
 /*
 path: server.js
-completePath: /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/server.js
 keyPath: server.js
 unique_id: mPxPIh6x
 */

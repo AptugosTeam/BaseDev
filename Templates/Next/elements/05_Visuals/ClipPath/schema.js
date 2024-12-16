@@ -1,7 +1,5 @@
 /*
 path: schema.js
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/Experimental/ClipPath/schema.js
 keyPath: elements/Experimental/ClipPath/schema.js
 unique_id: nxirmNGu
 */

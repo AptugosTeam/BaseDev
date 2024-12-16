@@ -25,11 +25,11 @@ unique_id: 5wQBTRfF
             "value": "none"
           },
           {
-            "label": "Thousand separator '.'; Decimal separator ','",
+            "label": "1.000,00",
             "value": "dotComma"
           },
           {
-            "label": "Thousand separator ','; Decimal separator '.'",
+            "label": "1,000.00",
             "value": "commaDot"
           }
         ]

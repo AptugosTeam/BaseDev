@@ -29,7 +29,7 @@ export function use{{ singleName }}({ {{ singleName }}Id }) {
   const { data, error } = useSWR(`/api/{{ tableName }}/${{{ singleName }}Id}`, fetcher);
 
   return {
-    {{ singleName }}data,
+    {{ singleName }}data: data?.data.docs,
     {{ singleName }}isLoading: !error && !data,
     {{ singleName }}isError: error,
   };
@@ -39,7 +39,7 @@ export function use{{ tableName }}Pages(options) {
   const urlSearchParams = new URLSearchParams(options)
   const { data, error } = useSWR(`/api/{{ tableName }}?${urlSearchParams.toString()}`, fetcher)
   return {
-    {{ singleName }}data: data,
+    {{ singleName }}data: data?.data.docs,
     {{ singleName }}isLoading: !error && !data,
     {{ singleName }}isError: error,
   }

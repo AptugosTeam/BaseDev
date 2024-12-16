@@ -37,7 +37,7 @@ export default function AptugoAutocomplete(props) {
   const debouncedFunction = debounce(handleInputChange, 1000)
 
   const typeInSearch = async (typedIn) => {
-    const authorOptions = await fetcher('/api/users').then((arc) => {
+    const authorOptions = await fetcher(props.endpointLocation).then((arc) => {
       return arc?.data?.docs?.map((ac) => {
         return { value: ac._id, label: ac[props.labelProperty] }
       })

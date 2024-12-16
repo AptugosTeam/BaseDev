@@ -16,6 +16,7 @@ if (State.usersReducer) {
 // Backwards compatibility
 let defaultTemplate
 
+console.log('THIS IS THE STATE', State)
 if (State.templatesReducer) {
   defaultTemplate = State.templatesReducer.templates.filter(template => template.default )
   State.templatesReducer.loadedTemplate = defaultTemplate[0]

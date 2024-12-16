@@ -2,8 +2,9 @@
 path: mapBox.tpl
 keyPath: elements/Geo/mapBox.tpl
 unique_id: z2fTET0T
-icon: ico-leaflet
+icon: ico-mapbox
 internalUse: false
+order: 20
 options:
   - name: accessToken
     display: Access Token
@@ -252,12 +253,14 @@ options:
     settings:
       default: 0
 extraFiles:
-  - source: 'elements/Geo/MapBox/mapbox.css'
+  - source: 'elements/99_ExtraFiles/MapBox/mapbox.css'
     destination: 'front-end/components/MapBox/mapbox.css'
-  - source: 'elements/Geo/MapBox/Marker.tsx'
+  - source: 'elements/99_ExtraFiles/MapBox/Marker.tsx'
     destination: 'front-end/components/MapBox/Marker.tsx'
-  - source: 'elements/Geo/MapBox/index.tsx'
+  - source: 'elements/99_ExtraFiles/MapBox/index.tsx'
     destination: 'front-end/components/MapBox/index.tsx'
+  - source: 'elements/99_ExtraFiles/MapBox/MapBox.tsx'
+    destination: 'front-end/components/MapBox/MapBox.tsx'
 settings:
   - name: Packages
     value: '"mapbox-gl": "2.13.0","react-map-gl": "^7.1.3",'

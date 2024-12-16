@@ -3,7 +3,7 @@ path: StripeOrderDetails.tpl
 completePath: elements/Experimental/Stripe/StripeOrderDetails.tpl
 type: file
 unique_id: stripeod
-icon: f:StripeOrderDetails.svg
+icon: ico-stripe-two
 helpText: Retrieve Order Details from SessionID
 children: []
 options:

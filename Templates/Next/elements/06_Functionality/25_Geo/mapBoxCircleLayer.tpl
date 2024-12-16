@@ -2,6 +2,10 @@
 path: mapBoxCircleLayer.tpl
 keyPath: elements/Geo/mapBoxCircleLayer.tpl
 unique_id: ur91ifX4
+internalUse: true
+deprecated: true
+deprecatedText: This element will not be maintained, switch over to MapBoxLayer
+order: 22
 options:
   - name: filter
     display: Filter

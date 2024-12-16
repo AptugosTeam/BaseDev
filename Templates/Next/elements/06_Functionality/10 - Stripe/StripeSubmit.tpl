@@ -3,7 +3,7 @@ path: StripeSubmit.tpl
 completePath: elements/Experimental/Stripe/StripeSubmit.tpl
 type: file
 unique_id: stripesubmit
-icon: f:StripeSubmit.svg
+icon: ico-stripe-three
 helpText: Redirect to stripe payment screen
 children: []
 options:

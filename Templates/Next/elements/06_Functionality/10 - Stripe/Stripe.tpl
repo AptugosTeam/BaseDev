@@ -3,7 +3,7 @@ path: Stripe.tpl
 completePath: elements/Experimental/Stripe/Stripe.tpl
 type: file
 unique_id: stripe
-icon: f:Stripe.svg
+icon: ico-stripe
 helpText: Use Stripe Payments
 children: []
 options:

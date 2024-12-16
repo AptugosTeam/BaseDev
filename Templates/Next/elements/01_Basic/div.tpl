@@ -24,7 +24,7 @@ options:
     options: ''
   - name: style
     display: Extra Styles
-    type: text
+    type: style
     options: ''
   - name: ref
     display: Use Reference
@@ -105,6 +105,9 @@ helpText: Basic HTML Div element
   {% endif %}
   {% if element.values.ref %}
     ref={ {{element.values.ref}} }
+    {% include includeTemplate('useRef.tpl') with {
+      element: { values: { variableName: element.values.ref, defaultValue: 'null' } }
+    } %}
   {% endif %}
   {% if element.values.onclick %}
     onClick={(e) => {{element.values.onclick}} }

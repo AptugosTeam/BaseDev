@@ -1,0 +1,8 @@
+path: MercadoPago
+completePath: elements/Experimental/MercadoPago
+type: folder
+unique_id: mercadoPagoFolder
+open: true
+order: 20
+name: Payments - Mercado Pago
+

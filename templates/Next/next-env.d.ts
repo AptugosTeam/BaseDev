@@ -1,6 +1,5 @@
 /*
 path: next-env.d.ts
-completePath: /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/next-env.d.ts
 keyPath: next-env.d.ts
 unique_id: vXQh0Zhz
 */

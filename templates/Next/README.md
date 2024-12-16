@@ -1,6 +1,5 @@
 /*
 path: README.md
-completePath: /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/README.md
 keyPath: README.md
 unique_id: DostzyuT
 */

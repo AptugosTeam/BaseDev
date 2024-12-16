@@ -9,7 +9,7 @@ options:
   - name: font
     display: Font
     type: dropdown
-    options: ['Fira_Sans','Merriweather','Inter']
+    options: ['Fira_Sans','Merriweather','Inter','Outfit']
 */
 {% set IBA %}
 import { {{ element.values.font }} } from 'next/font/google'

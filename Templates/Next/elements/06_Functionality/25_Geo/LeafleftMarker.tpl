@@ -3,7 +3,9 @@ path: Marker.tpl
 type: file
 unique_id: hKE82qnH
 icon: ico-marker
+display: Leaflet Marker
 children: []
+order: 2
 options:
   - name: Position
     display: Position

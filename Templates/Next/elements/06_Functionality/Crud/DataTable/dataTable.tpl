@@ -97,7 +97,7 @@ options:
   {% set tableData = element.values.variableToUse %}
   {% set totalDocs = tableData ~ '.length' %}
 {% else %}
-  {% set tableData = tableSingleNameLower ~ 'data?.data.docs || []' %}
+  {% set tableData = tableSingleNameLower ~ 'data || []' %}
   {% set eleWithoutChilds = element %}
   {% set eleWithoutChilds = eleWithoutChilds|merge({'children': null,'name':'table'}) %}
   {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage } %}

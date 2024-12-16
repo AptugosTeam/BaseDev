@@ -1,0 +1,9 @@
+{
+  "type": "structure",
+  "parameters": "",
+  "afterRun": "",
+  "_id": "aptugoloaddataintodb",
+  "name": "Load Data Into DB",
+  "Created_date": "2024-03-28T14:56:50.076Z",
+  "__v": 0
+}

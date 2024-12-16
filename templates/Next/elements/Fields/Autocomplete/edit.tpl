@@ -48,6 +48,7 @@ children: []
       if (!newValue) handle{{ tableName }}Change('{{ columnName }}')(null)
       else handle{{ tableName }}Change('{{ columnName }}')(newValue)
     }}
+    endpointLocation='/api/{{ referencedTable | lower }}/search'
     label="{{ field.column_name }}"
     fullWidth
     variant="{{ element.values.variant|default('standard') }}"

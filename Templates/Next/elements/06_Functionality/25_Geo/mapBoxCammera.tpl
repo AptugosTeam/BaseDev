@@ -2,7 +2,9 @@
 path: mapBoxCammera.tpl
 keyPath: elements/Geo/mapBoxCammera.tpl
 unique_id: zzUJNLV2
-icon: ico-leaflet
+icon: ico-mapbox
+display: MapBox Camera
+order: 21
 options:
   - name: centerCoordinate
     display: Center Coordinate

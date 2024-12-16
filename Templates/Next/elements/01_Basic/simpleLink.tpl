@@ -3,7 +3,7 @@ path: simpleLink.tpl
 type: file
 unique_id: BG7vdEr8
 icon: ico-link
-name: Link
+display: Link
 order: 50
 options:
   - name: destination
