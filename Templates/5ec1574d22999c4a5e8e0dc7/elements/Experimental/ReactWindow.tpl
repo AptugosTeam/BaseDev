@@ -43,6 +43,16 @@ options:
     display: Code before render
     type: function
     options: ''
+  - name: key
+    display: Key
+    type: text
+    options: ''
+    advanced: true
+  - name: ref
+    display: Use Reference
+    type: text
+    options: ''
+    advanced: true
 settings:
   - name: Packages
     value: '"react-window": "^1.8.10",'
@@ -72,6 +82,12 @@ import AutoSizer from "react-virtualized-auto-sizer"
   {({ width, height }) => (
 {% endif %}
     <{{ importType }}
+      {% if element.values.key %}
+      key={ {{ element.values.key }} }
+      {% endif %}
+      {% if element.values.ref %}
+        ref={ {{element.values.ref}} }
+      {% endif %}
       height={ {{ element.values.height | default(element.values.AutoSizer ? 'height' : '400') }} }
       width={ {{ element.values.width | default(element.values.AutoSizer ? 'width' : '300') }} }
       itemCount={ {{ element.values.itemCount | default('50') }} }

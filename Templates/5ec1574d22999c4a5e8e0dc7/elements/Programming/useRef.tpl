@@ -35,7 +35,11 @@ options:
         const element = arguments[1];
         const page = arguments[2];
         if ( element.values.variableName ) aptugo.variables.setPageVariable(page, element.unique_id, { [element.values.variableName]: value });
-      active: true    
+      active: true
+  - name: type
+    display: Type Definition
+    type: text
+    advanced: true
 children: []
 */
 {% set bpr %}
@@ -43,6 +47,6 @@ import { useRef } from 'react'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set ph %}
-const {{ element.values.variableName }} = useRef({{ element.values.defaultValue }})
+const {{ element.values.variableName }} = useRef{% if element.values.type %}<{{ element.values.type }}{% endif %}>({{ element.values.defaultValue }})
 {% endset %}
 {{ save_delayed('ph',ph,1) }}

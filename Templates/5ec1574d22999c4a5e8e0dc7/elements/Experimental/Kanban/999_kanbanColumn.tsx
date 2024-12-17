@@ -73,9 +73,7 @@ const AptugoKanbanColumn: FunctionComponent<kanbanProps> = React.memo((props) =>
     )
 },
     (prevProps, nextProps) => {
-        return (
-            JSON.stringify(prevProps?.properties) === JSON.stringify(nextProps?.properties)
-        )
+        return prevProps?.properties === nextProps?.properties
     })
 
 
