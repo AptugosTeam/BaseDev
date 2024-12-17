@@ -18,11 +18,11 @@ interface LoginOptions {
   remember?: boolean;
   validate?: boolean;
   lang?: string;
-  validationEmail?: RecoverOptions;
+  validationDNI?: RecoverOptions;
 }
 
 interface RecoverOptions {
-  email: string;
+  DNI: string;
   subject: string;
   message: string;
   name: string;
@@ -42,11 +42,11 @@ class AuthService {
     this.apiUrl = API_URL + endpoint + '/';
   }
 
-  login(email, password, options: LoginOptions = {}) {
+  login(DNI, password, options: LoginOptions = {}) {
     const { remember = true} = options
     return axios
       .post(this.apiUrl + 'authenticate', {
-        email,
+        DNI,
         password,
         options,
       })
@@ -70,10 +70,10 @@ class AuthService {
       });
   }
 
-  loginWithSession(email, password, fullUser = true, fieldsToRetrieve = [], lang = 'en') {
+  loginWithSession(DNI, password, fullUser = true, fieldsToRetrieve = [], lang = 'en') {
     return axios
       .post(this.apiUrl + 'authenticate', {
-        email,
+        DNI,
         password,
         fullUser,
         fieldsToRetrieve,
@@ -116,12 +116,12 @@ class AuthService {
     const { validate = false, lang = 'en' } = options;
     const messages = {
       en: {
-        success: 'Successful registration, check your email to validate your account',
-        invalidEmailSettings: 'Invalid settings for validation email',
+        success: 'Successful registration, check your DNI to validate your account',
+        invalidDNISettings: 'Invalid settings for validation DNI',
       },
       es: {
         success: 'Registro exitoso, revisa tu correo electrónico para validar tu cuenta',
-        invalidEmailSettings: 'Configuración inválida para la verificación por email',
+        invalidDNISettings: 'Configuración inválida para la verificación por DNI',
       },
     };
     const config = {
@@ -133,11 +133,11 @@ class AuthService {
       .then((_result) => {
         if (validate) {
           if (
-            !options.validationEmail ||
-            Object.keys(options.validationEmail).length === 0
+            !options.validationDNI ||
+            Object.keys(options.validationDNI).length === 0
           )
-            throw messages[lang].invalidEmailSettings;
-          return this.recoverPassword(options.validationEmail)
+            throw messages[lang].invalidDNISettings;
+          return this.recoverPassword(options.validationDNI)
             .then((_result) => {
               return {
                 message: messages[lang].success,
@@ -145,7 +145,7 @@ class AuthService {
             })
             .catch((e) => { throw e });
         } else {
-          return this.login(data.Email, data.Password, options).then(
+          return this.login(data.DNI, data.Password, options).then(
             (afterLogin) => {
               return afterLogin;
             }
@@ -158,7 +158,7 @@ class AuthService {
   registerWithSession(data) {
     const { fullUser = true , fieldsToRetrieve = [] } = data
     return axios.post(this.apiUrl, data).then((_result) => {
-        return this.loginWithSession(data.Email, data.Password, fullUser, fieldsToRetrieve).then((afterLogin) => { return afterLogin})
+        return this.loginWithSession(data.DNI, data.Password, fullUser, fieldsToRetrieve).then((afterLogin) => { return afterLogin})
       }).catch(e => { throw e })
   }
 
@@ -170,10 +170,10 @@ class AuthService {
     return user ? JSON.parse(user) : {}
   }
 
-  recoverPassword({ email, subject, message, name, model = '', lang = 'en', username = '' }) {
+  recoverPassword({ DNI, subject, message, name, model = '', lang = 'en', username = '' }) {
     return axios
       .post(this.apiUrl + 'recoverpassword', {
-        email,
+        DNI,
         subject,
         message,
         name,
@@ -186,11 +186,11 @@ class AuthService {
       })
   }
 
-  checkNonce(nonce, email) {
+  checkNonce(nonce, DNI) {
     return axios
       .post(this.apiUrl + 'checknonce', {
         nonce,
-        email,
+        DNI,
       })
       .then((response) => {
         localStorage.setItem('token', response.data.accessToken)

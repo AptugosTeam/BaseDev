@@ -21,7 +21,7 @@ module.exports = {
 const errorMessages = {
   en: {
     wrong: "Wrong parameters sent",
-    email: "Email not found",
+    DNI: " not found",
     badNonce: "Bad bad nonce",
     notPassword: "User does not have a password",
     wrongPassword: "Password incorrect",
@@ -29,11 +29,11 @@ const errorMessages = {
     token: "Error, token could not be generated",
     unauthorized: "Unauthorized",
     failed: 'Something failed',
-    unverified: 'Account not validated. Please check your email to validate your account'
+    unverified: 'Account not validated. Please check your DNI to validate your account'
   },
   es: {
     wrong: "La información enviada no es válida",
-    email: "Email no encontrado",
+    DNI: "DNI no encontrado",
     badNonce: "Código incorrecto",
     notPassword: "El usuario no tiene contraseña",
     wrongPassword: "Contraseña incorrecta",
@@ -46,7 +46,7 @@ const errorMessages = {
 };
 
 async function recoverPassword (req) {
-  let { name, email, message, subject, model, lang = "en", username } = req.body;
+  let { name, DNI, message, subject, model, lang = "en", username } = req.body;
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -56,8 +56,8 @@ async function recoverPassword (req) {
   }
 
   return new Promise(function (resolve, reject) {
-    if (!email) reject({ message: errorMessages[lang].wrong })
-    const query = model.findOne({ Email: email })
+    if (!DNI) reject({ message: errorMessages[lang].wrong })
+    const query = model.findOne({ DNI: email })
     const promise = query.exec()
 
     promise.then(async (user) => {
@@ -83,7 +83,7 @@ async function recoverPassword (req) {
 
 async function checkNonce (req) {
   return new Promise(function (resolve, reject) {
-    let { nonce, email, model } = req.body
+    let { nonce, DNI, model } = req.body
     if (!model) {
       const Users = require('../models/users.model.js')
       model = Users
@@ -92,9 +92,9 @@ async function checkNonce (req) {
       model = Users
     }
 
-    const asciiEMail = Buffer.from(email, 'base64').toString('ascii')
+    const asciiDNI = Buffer.from(DNI, 'base64').toString('ascii')
     const ascii = Buffer.from(nonce, 'base64').toString('ascii')
-    const query = model.findOne({ Email: asciiEMail })
+    const query = model.findOne({ DNI: asciiDNI })
     const promise = query.exec()
     promise.then((user) => {
       if (user) {
@@ -118,7 +118,7 @@ async function checkNonce (req) {
   })
 }
 
-async function authenticate ({ email, password, model, passwordField, populate, options = {} }) {
+async function authenticate ({ DNI, password, model, passwordField, populate, options = {} }) {
   const { fullUser = true, fieldsToRetrieve = [], lang = 'en', validate = false } = options
   if (!model) {
     const Users = require('../models/users.model.js')
@@ -132,14 +132,14 @@ async function authenticate ({ email, password, model, passwordField, populate, 
     passwordField = 'Password'
   }
   return new Promise(function (resolve, reject) {
-    if (!email || !password) reject({ message: errorMessages[lang].wrong })
-    const query = model.findOne({ Email: new RegExp('^' + email.toLowerCase(), 'i') })
+    if (!DNI || !password) reject({ message: errorMessages[lang].wrong })
+    const query = model.findOne({ DNI: new RegExp('^' + DNI.toLowerCase(), 'i') })
     if (populate) query.populate(populate)
     const promise = query.exec()
 
     promise.then((user) => {
       if (!user) {
-        return reject({ message: errorMessages[lang].email })
+        return reject({ message: errorMessages[lang].DNI })
       }
 
       if (!user[passwordField]) reject({ message: errorMessages[lang].notPassword, user: user })
@@ -154,7 +154,7 @@ async function authenticate ({ email, password, model, passwordField, populate, 
                 userID[fieldName] = userWithoutPassword[fieldName]
               })
             }
-            if (validate && !user.Verified) reject({ message: errorMessages[lang].unverified, user: { Email: user.Email, Verified: user.Verified } })
+            if (validate && !user.Verified) reject({ message: errorMessages[lang].unverified, user: { DNI: user.DNI, Verified: user.Verified } })
             const secretKey = process.env.PASSPORT_SECRET || 'thisisthesecretandshouldbeconfigurable'
             const token = jwt.sign(fullUser ? userWithoutPassword : userID, secretKey, { expiresIn: '7d' })
             resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
@@ -168,26 +168,26 @@ async function authenticate ({ email, password, model, passwordField, populate, 
   })
 }
 
-async function socialAuthenticate ({ Name, ProfilePic, Email, Role }) {
+async function socialAuthenticate ({ Name, ProfilePic, DNI, Role }) {
   const Users = require('../models/users.model.js')
   return new Promise(function (resolve, reject) {
-    if (!Email) {
+    if (!DNI) {
       reject({ message: 'There was an error' })
     }
-    const query = Users.findOne({ Email: new RegExp('^' + Email.toLowerCase(), 'i') })
+    const query = Users.findOne({ DNI: new RegExp('^' + DNI.toLowerCase(), 'i') })
     const promise = query.exec()
     promise.then((user) => {
       if (!user) {
         const data = {
-          Email,
+          DNI,
           Password: 123,
           Role,
         }
         const User = new Users(data)
         User.save()
           .then((result) => {
-            const { Email, Role, _id } = result._doc
-            const cleanUser = { Email, Role, _id }
+            const { DNI, Role, _id } = result._doc
+            const cleanUser = { DNI, Role, _id }
             const token = jwt.sign(cleanUser, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
             if (token) {
               resolve({ accessToken: token, data: cleanUser })
@@ -199,8 +199,8 @@ async function socialAuthenticate ({ Name, ProfilePic, Email, Role }) {
             reject(errors.prepareError(err))
           })
       } else {
-        const { Email, Role, _id } = user._doc
-        const cleanUser = { Email, Role, _id }
+        const { DNI, Role, _id } = user._doc
+        const cleanUser = { DNI, Role, _id }
         const token = jwt.sign(cleanUser, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
         if (token) {
           resolve({ accessToken: token, data: cleanUser })
