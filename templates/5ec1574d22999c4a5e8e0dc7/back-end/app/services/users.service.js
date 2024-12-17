@@ -21,7 +21,7 @@ module.exports = {
 const errorMessages = {
   en: {
     wrong: "Wrong parameters sent",
-    email: "Email not found",
+    DNI: " not found",
     badNonce: "Bad bad nonce",
     notPassword: "User does not have a password",
     wrongPassword: "Password incorrect",
@@ -29,11 +29,11 @@ const errorMessages = {
     token: "Error, token could not be generated",
     unauthorized: "Unauthorized",
     failed: 'Something failed',
-    unverified: 'Account not validated. Please check your email to validate your account'
+    unverified: 'Account not validated. Please check your DNI to validate your account'
   },
   es: {
     wrong: "La información enviada no es válida",
-    email: "Email no encontrado",
+    DNI: "DNI no encontrado",
     badNonce: "Código incorrecto",
     notPassword: "El usuario no tiene contraseña",
     wrongPassword: "Contraseña incorrecta",
@@ -45,8 +45,8 @@ const errorMessages = {
   },
 };
 
-async function recoverPassword(req) {
-  let { name, email, message, subject, model, lang = "en", username } = req.body;
+async function recoverPassword (req) {
+  let { name, DNI, message, subject, model, lang = "en", username } = req.body;
   if (!model) {
     const Users = require('../models/users.model.js')
     model = Users
@@ -55,46 +55,35 @@ async function recoverPassword(req) {
     model = Users
   }
 
-  return new Promise(async function (resolve, reject) {
-    if (!email) reject({ message: errorMessages[lang].wrong })
+  return new Promise(function (resolve, reject) {
+    if (!DNI) reject({ message: errorMessages[lang].wrong })
+    const query = model.findOne({ DNI: email })
+    const promise = query.exec()
 
-    email = email.toLowerCase();
-
-    let user = await model.findOne({ Email: email });
-
-    if (!user) {
-      // Si no encuentra el usuario, probar con la versión original del email
-      user = await model.findOne({ Email: req.body.email });
-
-      if (user) {
-        // Si el usuario existía con mayúsculas, actualizarlo a minúsculas
-        user.Email = email;
-        await user.save();
+    promise.then(async (user) => {
+      if (!user) {
+        reject({ message: errorMessages[lang].email })
+        return
       }
-    }
+      const { Password, ...userWithoutPassword } = user._doc
+      const nonce = Buffer.from(bcrypt.hashSync(JSON.stringify(userWithoutPassword), Password)).toString('base64')
+      let parsedmessage = message.replace('**nonce**', nonce)
+      parsedmessage = parsedmessage.replace('**email**', Buffer.from(userWithoutPassword.Email).toString('base64'))
+      if (username) parsedmessage = parsedmessage.replace('**username**', userWithoutPassword[username])
 
-    if (!user) {
-      reject({ message: errorMessages[lang].email })
-      return
-    }
-    const { Password, ...userWithoutPassword } = user._doc
-    const nonce = Buffer.from(bcrypt.hashSync(JSON.stringify(userWithoutPassword), Password)).toString('base64')
-    let parsedmessage = message.replace('**nonce**', nonce)
-    parsedmessage = parsedmessage.replace('**email**', Buffer.from(userWithoutPassword.Email).toString('base64'))
-    if (username) parsedmessage = parsedmessage.replace('**username**', userWithoutPassword[username])
-
-    try {
-      const emailResponse = await req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
-      resolve({ user, emailResponse })
-    } catch (error) {
-      reject({ message: errorMessages[lang].failed })
-    }
+      try {
+        const emailResponse = await req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
+        resolve({ user, emailResponse })
+      } catch (error) {
+        reject({ message: errorMessages[lang].failed })
+      }
+    })
   })
 }
 
-async function checkNonce(req) {
+async function checkNonce (req) {
   return new Promise(function (resolve, reject) {
-    let { nonce, email, model } = req.body
+    let { nonce, DNI, model } = req.body
     if (!model) {
       const Users = require('../models/users.model.js')
       model = Users
@@ -103,9 +92,9 @@ async function checkNonce(req) {
       model = Users
     }
 
-    const asciiEMail = Buffer.from(email, 'base64').toString('ascii')
+    const asciiDNI = Buffer.from(DNI, 'base64').toString('ascii')
     const ascii = Buffer.from(nonce, 'base64').toString('ascii')
-    const query = model.findOne({ Email: asciiEMail })
+    const query = model.findOne({ DNI: asciiDNI })
     const promise = query.exec()
     promise.then((user) => {
       if (user) {
@@ -129,7 +118,7 @@ async function checkNonce(req) {
   })
 }
 
-async function authenticate({ email, password, model, passwordField, populate, options = {} }) {
+async function authenticate ({ DNI, password, model, passwordField, populate, options = {} }) {
   const { fullUser = true, fieldsToRetrieve = [], lang = 'en', validate = false } = options
   if (!model) {
     const Users = require('../models/users.model.js')
@@ -142,83 +131,63 @@ async function authenticate({ email, password, model, passwordField, populate, o
   if (!passwordField) {
     passwordField = 'Password'
   }
-  return new Promise(async function (resolve, reject) {
-    if (!email || !password) reject({ message: errorMessages[lang].wrong })
+  return new Promise(function (resolve, reject) {
+    if (!DNI || !password) reject({ message: errorMessages[lang].wrong })
+    const query = model.findOne({ DNI: new RegExp('^' + DNI.toLowerCase(), 'i') })
+    if (populate) query.populate(populate)
+    const promise = query.exec()
 
-    email = email.toLowerCase();
-
-    let user = await model.findOne({ Email: email })
-
-    if (!user) {
-      // <-- Cambio: Si no encontramos con minúsculas, buscamos con la versión original (compatibilidad con datos antiguos)
-      const userWithOriginalEmail = await model.findOne({ Email: { $regex: `^${email}$`, $options: 'i' } });
-
-      if (userWithOriginalEmail) {
-        // <-- Cambio: Si el usuario existe con mayúsculas, lo actualizamos en la base de datos a minúsculas
-        await model.updateOne(
-          { _id: userWithOriginalEmail._id },
-          { $set: { Email: email } }
-        );
-        user = userWithOriginalEmail; // Asignamos el usuario encontrado
+    promise.then((user) => {
+      if (!user) {
+        return reject({ message: errorMessages[lang].DNI })
       }
-    }
 
-    if (!user) {
-      return reject({ message: errorMessages[lang].email })
-    }
-
-    if (!user[passwordField]) reject({ message: errorMessages[lang].notPassword, user: user })
-    else {
-      bcrypt.compare(password, user[passwordField]).then((isMatch) => {
-        if (isMatch) {
-          const { Password, ...userWithoutPassword } = user._doc
-          const { _id } = userWithoutPassword
-          const userID = { id: _id, _id }
-          if (!fullUser) {
-            fieldsToRetrieve.map((fieldName) => {
-              userID[fieldName] = userWithoutPassword[fieldName]
-            })
+      if (!user[passwordField]) reject({ message: errorMessages[lang].notPassword, user: user })
+      else {
+        bcrypt.compare(password, user[passwordField]).then((isMatch) => {
+          if (isMatch) {
+            const { Password, ...userWithoutPassword } = user._doc
+            const { _id } = userWithoutPassword
+            const userID = { id: _id, _id }
+            if (!fullUser) {
+              fieldsToRetrieve.map((fieldName) => {
+                userID[fieldName] = userWithoutPassword[fieldName]
+              })
+            }
+            if (validate && !user.Verified) reject({ message: errorMessages[lang].unverified, user: { DNI: user.DNI, Verified: user.Verified } })
+            const secretKey = process.env.PASSPORT_SECRET || 'thisisthesecretandshouldbeconfigurable'
+            const token = jwt.sign(fullUser ? userWithoutPassword : userID, secretKey, { expiresIn: '7d' })
+            resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
+          } else {
+            reject({ message: errorMessages[lang].wrongPassword })
           }
-          if (validate && !user.Verified) reject({ message: errorMessages[lang].unverified, user: { Email: user.Email, Verified: user.Verified } })
-          const secretKey = process.env.PASSPORT_SECRET || 'thisisthesecretandshouldbeconfigurable'
-          const token = jwt.sign(fullUser ? userWithoutPassword : userID, secretKey, { expiresIn: '7d' })
-          resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
-        } else {
-          reject({ message: errorMessages[lang].wrongPassword })
-        }
 
-      })
-    }
+        })
+      }
+    })
   })
 }
 
-async function socialAuthenticate({ Name, ProfilePic, Email, Role, Model }) {
-
-    if (!Model) {
-    const Users = require('../models/users.model.js')
-    Model = Users
-  } else if (typeof Model === 'string') {
-    const Users = require('../models/' + Model + '.model.js')
-    Model = Users
-  }
+async function socialAuthenticate ({ Name, ProfilePic, DNI, Role }) {
+  const Users = require('../models/users.model.js')
   return new Promise(function (resolve, reject) {
-    if (!Email) {
+    if (!DNI) {
       reject({ message: 'There was an error' })
     }
-    const query = Model.findOne({ Email: new RegExp('^' + Email.toLowerCase(), 'i') })
+    const query = Users.findOne({ DNI: new RegExp('^' + DNI.toLowerCase(), 'i') })
     const promise = query.exec()
     promise.then((user) => {
       if (!user) {
         const data = {
-          Email,
+          DNI,
           Password: 123,
           Role,
         }
-        const User = new Model(data)
+        const User = new Users(data)
         User.save()
           .then((result) => {
-            const { Email, Role, _id } = result._doc
-            const cleanUser = { Email, Role, _id }
+            const { DNI, Role, _id } = result._doc
+            const cleanUser = { DNI, Role, _id }
             const token = jwt.sign(cleanUser, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
             if (token) {
               resolve({ accessToken: token, data: cleanUser })
@@ -230,8 +199,8 @@ async function socialAuthenticate({ Name, ProfilePic, Email, Role, Model }) {
             reject(errors.prepareError(err))
           })
       } else {
-        const { Email, Role, _id } = user._doc
-        const cleanUser = { Email, Role, _id }
+        const { DNI, Role, _id } = user._doc
+        const cleanUser = { DNI, Role, _id }
         const token = jwt.sign(cleanUser, 'thisisthesecretandshouldbeconfigurable', { expiresIn: '7d' })
         if (token) {
           resolve({ accessToken: token, data: cleanUser })
@@ -243,12 +212,12 @@ async function socialAuthenticate({ Name, ProfilePic, Email, Role, Model }) {
   })
 }
 
-function cryptPassword(password) {
+function cryptPassword (password) {
   const hash = bcrypt.hashSync(password, 10)
   return hash
 }
 
-function jwtVerify(token) {
+function jwtVerify (token) {
   if (token) {
     const justTheToken = token.substr(token.indexOf(' ') + 1)
     try {
@@ -281,7 +250,7 @@ function jwtVerify(token) {
  * const decryptedData = dataEncryption(encryptedData, 'decrypt', 'my secret key');
  * console.log(decryptedData);
  */
-function dataEncryption(data, type = 'encrypt', secret = 'my secret key') {
+function dataEncryption (data, type = 'encrypt', secret = 'my secret key') {
   try {
     const algorithm = 'aes-256-cbc';
     const key = crypto.scryptSync(secret, 'salt', 32);
