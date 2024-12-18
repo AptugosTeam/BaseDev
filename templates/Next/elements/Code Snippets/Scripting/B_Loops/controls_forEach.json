@@ -1,0 +1,39 @@
+/*
+path: controls_forEach.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/B_Loops/controls_forEach.json
+keyPath: elements/Code Snippets/Scripting/B_Loops/controls_forEach.json
+unique_id: rbvUiqV1
+name: controls_forEach
+fullload: true
+*/
+{
+  "type": "controls_forEach",
+  "message0": "%{BKY_CONTROLS_FOREACH_TITLE}",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": null
+    },
+    {
+      "type": "input_value",
+      "name": "LIST",
+      "check": "Array"
+    }
+  ],
+  "message1": "%{BKY_CONTROLS_REPEAT_INPUT_DO} %1",
+  "args1": [{
+    "type": "input_statement",
+    "name": "DO"
+  }],
+  "previousStatement": null,
+  "nextStatement": null,
+  "style": "loop_blocks",
+  "helpUrl": "%{BKY_CONTROLS_FOREACH_HELPURL}",
+  "extensions": [
+    "contextMenu_newGetVariableBlock",
+    "controls_forEach_tooltip"
+  ]
+}

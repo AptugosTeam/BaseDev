@@ -11,6 +11,16 @@ options:
   - name: onChange
     display: On Change
     type: text
+  - name: onMonthChange
+    display: On Change Month
+    type: function
+    options: ''
+  - name: iconDays
+    display: Icon for Days
+    type: text
+  - name: selectDays
+    display: Select Days
+    type: text
 settings:
   - name: Packages
     value: '"@mui/x-date-pickers": "latest","dayjs":"1.11.5",'
@@ -21,9 +31,16 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
+{% set ph %}
+const [{{ element.values.selectDays }}, set{{ element.values.selectDays }}] = React.useState([])
+{% endset %}
+{{ save_delayed('ph', ph ) }}
 <LocalizationProvider dateAdapter={AdapterDayjs}>
   <DateCalendar
     {% if element.values.value %}value={{ element.values.value|textOrVariable }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
+    {% if element.values.onMonthChange %}onMonthChange={ {{ element.values.onMonthChange | functionOrCall }} }{% endif %}
+    {% if element.values.iconDays %}slots={ { day: {{ element.values.iconDays }} } }{% endif %}
+    {% if element.values.selectDays %}slotProps={ { day: { {{ element.values.selectDays }} } as any } }{% endif %}
   />
 </LocalizationProvider>

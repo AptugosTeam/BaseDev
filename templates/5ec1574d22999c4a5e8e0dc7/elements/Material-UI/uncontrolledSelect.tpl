@@ -51,6 +51,12 @@ options:
   - name: DisableVariable
     display: Variable to disable input
     type: text
+  - name: disabled
+    display: Disabled
+    type: variable
+    options: ''
+    settings:
+      active: true
 children: []
 */
 
@@ -67,6 +73,7 @@ import MenuItem from '@mui/material/MenuItem'
     {% if not element.values.shrink %}
       InputLabelProps={ { shrink: false, } }
     {% endif %}
+    {% if element.values.disabled %}disabled={ {{element.values.disabled}} }{% endif %}
     margin='{{ element.values.margin|default("dense") }}'
     size='{{ element.values.size|default("medium") }}'
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
@@ -77,6 +84,6 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
     {% if element.values.defaultValue %}defaultValue={{ element.values.defaultValue }}{% endif %}
 >
-{% if element.values.showall %}<MenuItem value=""><em>All</em></MenuItem>{% endif %}
-{ {{ element.values.options }}.map((item: { value: any, name: string } | any, index: number) => <MenuItem value={item.value ? item.value : item} key={index}>{item.name ? item.name : item}</MenuItem> )}
+{% if element.values.showall %}<MenuItem value="all"><em>All</em></MenuItem>{% endif %}
+{ {{ element.values.options }}.map((item: { value: any, name: string } | any, index: number) => <MenuItem value={item?.value ? item.value : item} key={index}>{item?.name ? item.name : item}</MenuItem> )}
 </TextField>

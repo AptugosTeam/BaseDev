@@ -69,11 +69,12 @@ unique_id: 0i8AxGw6
     "webpack-dev-server": "4.9.3",
     "webpack-merge": "5.8.0",
     "workbox-webpack-plugin": "6.2.4",
+    "assert": "2.1.0",
     {{ insert_setting('DevPackages') | raw }}
   },
   "dependencies": {
     "@mui/icons-material": "5.11.9",
-    "@mui/material": "5.11.10",
+    "@mui/material": "5.15.0",
     "@emotion/styled": "11.3.0",
     "@emotion/react": "11.10.4",
     "html2canvas": "1.4.1",

@@ -26,6 +26,12 @@ options:
     type: text
     settings:
       default: 'item'
+  - name: indexName
+    display: Alternative index name
+    type: text
+    settings:
+      default: 'index'
+    advanced: true
   - name: filtersource
     display: Condition to filter source values
     type: text
@@ -37,8 +43,13 @@ options:
     advanced: true
   - name: code
     display: Code
-    type: text
+    type: function
     options: ''
+  - name: usefragment
+    display: Do Not Use Fragment
+    type: checkbox
+    options: ''
+    advanced: true
   
 children: []
 */
@@ -48,7 +59,7 @@ children: []
 {% if not element.values.filtersource and element.values.filterFunction%}
 {% set addExtra = '.filter(tmp => ' ~ element.values.filterFunction ~ ')' %}
 {% endif %}
-{ {{ element.values.variable }}{{ addExtra }}.map(({{ element.values.variablename | default('item') }},index) => {
+{ {{ element.values.variable }}{{ addExtra }}.map(({{ element.values.variablename | default('item') }},{{ element.values.indexName | default('index') }}) => {
 {% if element.values.code %}{{ element.values.code }}{% endif %}
-    return <React.Fragment key={ '{{ element.unique_id }}_' + index}>{{ content | raw }}</React.Fragment>
+    return ({% if not element.values.usefragment %}<React.Fragment key={ '{{ element.unique_id }}_' + {{ element.values.indexName | default('index') }}}>{% endif %}{{ content | raw }}{% if not element.values.usefragment %}</React.Fragment>{% endif %})
 })}

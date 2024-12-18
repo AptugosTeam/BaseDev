@@ -44,18 +44,59 @@ options:
     display: Title Property
     type: text
     advanced: true
+  - name: enableTooltip
+    display: Enable Tooltip
+    type: checkbox
+    settings:
+      default: false
+    advanced: true
+  - name: dataAttribute
+    display: Add Data Attribute
+    type: checkbox
+    settings:
+      default: false
+    advanced: true
+  - name: nameAttribute
+    display: Name of Data Attribute
+    type: text
+    advanced: true
+    settings:
+      condition: true
+      propertyCondition: dataAttribute
+  - name: valueAttribute
+    display: Value of Data Attribute
+    type: text
+    advanced: true
+    settings:
+      condition: true
+      propertyCondition: dataAttribute
+  - name: key
+    display: Key
+    type: text
+    advanced: true
 children: []
 helpText: Basic HTML Div element
 */
 {% set tag = element.values.tag|default('div') %}
 <{{tag}}
   {% if type == 'DevelopmentDebug' %}data-aptugo="{{ element.unique_id }}"{% endif %}
-  {% if element.values.title %}
-    title={{ element.values.title | textOrVariable }}
-    data-title={{ element.values.title | textOrVariable }}
+  {% if element.values.enableTooltip %}
+    {% if element.values.title %}
+      title={{ element.values.title | textOrVariable }}
+      data-title={{ element.values.title | textOrVariable }}
+    {% else %}
+      title="{{ element.name }}"
+      data-title="{{ element.name }}"
+    {% endif %}
   {% else %}
-    title="{{ element.name }}"
-    data-title="{{ element.name }}"
+    {% if element.values.title %}
+      data-title={{ element.values.title | textOrVariable }}
+    {% else %}
+      data-title="{{ element.name }}"
+    {% endif %}
+  {% endif %}
+  {% if element.values.dataAttribute and element.values.nameAttribute and element.values.valueAttribute %}
+    data-{{ element.values.nameAttribute }}={ {{ element.values.valueAttribute }} }
   {% endif %}
   {% if element.values.useid %}
     id="{{ element.unique_id }}"
@@ -73,6 +114,9 @@ helpText: Basic HTML Div element
   {% endif %}
   {% if element.values.onclick %}
     onClick={(e) => {{element.values.onclick}} }
+  {% endif %}
+  {% if element.values.key %}
+    key={ {{element.values.key}} }
   {% endif %}
 >
 {{ content | raw }}

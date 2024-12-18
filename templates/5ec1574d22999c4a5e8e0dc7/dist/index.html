@@ -75,6 +75,7 @@ children: []
     {% endif %}
   </head>
   <body>
+    {{ insert_setting('IndexPageAdd') }}
     <div id="app"></div>
     <!-- Dependencies -->
     <% if (webpackConfig.mode == 'production') { %>

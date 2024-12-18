@@ -16,12 +16,17 @@ import TextField from '@mui/material/TextField'
     {% if element.values.DisableUnderline %}
         InputProps={ { disableUnderline: true } }
     {% endif %}
+    {% if element.values.maxLength %}
+        inputProps={ { maxLength: {{ element.values.maxLength }}, } }
+    {% endif %}
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}
     margin='{{ element.values.margin|default("dense") }}'
     size='{{ element.values.size|default("medium") }}'
-    label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    {% if not element.values.disableLabel %}
+        label={{ element.values.inputLabel | default(field.column_name) | textOrVariable }}
+    {% endif %}
     type="text"
     fullWidth
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
@@ -29,6 +34,6 @@ import TextField from '@mui/material/TextField'
     value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
     {% if element.values.onBlur %}onBlur={ {{ element.values.onBlur | functionOrCall }} }{% endif %}
-    error={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}'}
-    helperText={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}' && {{ tableName | lower }}Data.errMessage}
+    error={ {{ tableName}}data?.errField === '{{ field.column_name | friendly }}'}
+    helperText={ {{ tableName }}data?.errField === '{{ field.column_name | friendly }}' && {{ tableName}}data.errMessage}
 />

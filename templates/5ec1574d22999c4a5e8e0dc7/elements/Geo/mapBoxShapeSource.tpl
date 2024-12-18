@@ -26,6 +26,7 @@ options:
   {% if element.values.cluster %}cluster={ {{ element.values.cluster }} }{% endif %}
   clusterMaxZoom={14}
   clusterRadius={50}
+  {% endif %}
   {% if element.values.clusterProperties %}clusterProperties={ {{ element.values.clusterProperties }} }{% endif %}
 >
   {{ content | raw }}

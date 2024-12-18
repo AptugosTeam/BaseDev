@@ -1,0 +1,16 @@
+/*
+path: binaryExpression.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Basic/binaryExpression.source
+keyPath: elements/Code Snippets/Basic/binaryExpression.source
+unique_id: mk0k03FT
+name: js_binary_expression
+fullload: true
+*/
+var theLeft = Blockly.JavaScript.valueToCode(Block, 'LEFT', Blockly.JavaScript.ORDER_NONE) || '0'
+var theOperator = Block.getFieldValue('OPERATOR')
+var theRight = Blockly.JavaScript.valueToCode(Block, 'RIGHT', Blockly.JavaScript.ORDER_NONE) || '0'
+
+var code = `${theLeft} ${theOperator} ${theRight}\n`
+return [code, Blockly.JavaScript.ORDER_NONE]

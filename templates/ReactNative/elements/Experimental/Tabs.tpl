@@ -39,7 +39,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-pager-view": "6.1.2","react-native-tab-view": "^3.5.1",'
+    value: '"react-native-pager-view": "6.2.0","react-native-tab-view": "^3.5.1",'
 children: []
 extraFiles:
   - source: 'elements/Experimental/Tabs/index.tsx'

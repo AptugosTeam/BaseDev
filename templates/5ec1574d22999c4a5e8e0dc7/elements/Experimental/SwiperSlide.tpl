@@ -14,15 +14,18 @@ options:
     display: Key Addenum
     type: text 
     options: ''
+  - name: style
+    display: Extra Styles
+    type: text
+    options: ''
 children: []
-*/
-{% set bpr %}
-import { SwiperSlide } from "swiper/react";
-{% endset %}
-{{ save_delayed('bpr', bpr) }}    
+*/  
   <SwiperSlide key={ '{{ element.unique_id }}_' {% if element.values.keyAdd %} + {{ element.values.keyAdd }}{% endif %} }
     {% if element.values.ClassName %}
       className={ {{ element.values.ClassName }} } 
+    {% endif %}
+    {% if element.values.style %}
+      style={ {{element.values.style}} }
     {% endif %}
   >
     {{ content | raw }}

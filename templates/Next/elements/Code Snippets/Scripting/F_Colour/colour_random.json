@@ -1,0 +1,18 @@
+/*
+path: colour_random.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/F_Colour/colour_random.json
+keyPath: elements/Code Snippets/Scripting/F_Colour/colour_random.json
+unique_id: l9Q7XGOk
+name: colour_random
+fullload: true
+*/
+{
+  "type": "colour_random",
+  "message0": "%{BKY_COLOUR_RANDOM_TITLE}",
+  "output": "Colour",
+  "helpUrl": "%{BKY_COLOUR_RANDOM_HELPURL}",
+  "style": "colour_blocks",
+  "tooltip": "%{BKY_COLOUR_RANDOM_TOOLTIP}"
+}

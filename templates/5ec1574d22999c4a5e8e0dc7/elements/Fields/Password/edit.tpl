@@ -17,7 +17,9 @@ import TextField from '@mui/material/TextField'
     {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}
     margin='{{ element.values.margin|default("dense") }}'
     size='{{ element.values.size|default("medium") }}'
-    label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    {% if not element.values.disableLabel %}
+        label={{ field.prompt|default(field.column_name)  | textOrVariable }}
+    {% endif %}
     type="password"
     fullWidth
     {% if element.values.autocomplete %}

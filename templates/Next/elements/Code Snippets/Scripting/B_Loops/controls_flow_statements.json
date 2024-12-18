@@ -1,0 +1,29 @@
+/*
+path: controls_flow_statements.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/B_Loops/controls_flow_statements.json
+keyPath: elements/Code Snippets/Scripting/B_Loops/controls_flow_statements.json
+unique_id: 5GTgXUxL
+name: controls_flow_statements
+fullload: true
+*/
+{
+  "type": "controls_flow_statements",
+  "message0": "%1",
+  "args0": [{
+    "type": "field_dropdown",
+    "name": "FLOW",
+    "options": [
+      ["%{BKY_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK}", "BREAK"],
+      ["%{BKY_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE}", "CONTINUE"]
+    ]
+  }],
+  "previousStatement": null,
+  "style": "loop_blocks",
+  "helpUrl": "%{BKY_CONTROLS_FLOW_STATEMENTS_HELPURL}",
+  "extensions": [
+    "controls_flow_tooltip",
+    "controls_flow_in_loop_check"
+  ]
+}

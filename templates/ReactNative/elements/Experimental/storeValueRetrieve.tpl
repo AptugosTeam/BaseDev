@@ -6,7 +6,7 @@ icon: ico-field
 helpText: Retrieves a stored value
 settings:
   - name: Packages
-    value: '"@react-native-async-storage/async-storage": "^1.17.6",'
+    value: '"@react-native-async-storage/async-storage": "1.18.2",'
 options:
   - name: variableName
     display: Name
@@ -40,10 +40,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
   const {{ element.values.valueToVar }} ={% if element.values.Parse %}JSON.parse({% endif %}await AsyncStorage.getItem('{{ element.values.variableName }}'){% if element.values.Parse %}){% endif %}
 {% else %}
   AsyncStorage.getItem('{{ element.values.variableName }}').then(res => {
-    {{ element.values.onLoad }}(
-      {% if element.values.makeItBoolean %}Boolean({% endif %}
-      {% if element.values.Parse %}JSON.parse({% endif %}res {% if element.values.default %}|| '{{ element.values.default }}'{% endif %}{% if element.values.Parse %}){% endif %}
-      {% if element.values.makeItBoolean %}){% endif %}
-    )
+    {% if element.values.onLoad %}
+      {{ element.values.onLoad }}(
+        {% if element.values.makeItBoolean %}Boolean({% endif %}
+        {% if element.values.Parse %}JSON.parse({% endif %}res {% if element.values.default %}|| '{{ element.values.default }}'{% endif %}{% if element.values.Parse %}){% endif %}
+        {% if element.values.makeItBoolean %}){% endif %}
+      )
+    {% endif %}
+    {{ content|raw }}
   })
 {% endif %}

@@ -1,7 +1,5 @@
 /*
 path: youtubeVideo.tpl
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/ReactNative/elements/Interact/youtubeVideo.tpl
 keyPath: elements/Interact/youtubeVideo.tpl
 unique_id: mDZain0m
 options:
@@ -15,7 +13,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-webview": "11.26.0",'
+    value: '"react-native-webview": "13.6.4",'
 */
 {% set bpr %}
 import WebView from 'react-native-webview'

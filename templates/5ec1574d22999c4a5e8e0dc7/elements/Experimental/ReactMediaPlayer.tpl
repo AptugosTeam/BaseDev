@@ -9,6 +9,10 @@ options:
     display: Video URL to play
     type: text
     options: ''
+  - name: playVideoDB
+    display: Video database URL to play
+    type: text
+    options: ''
   - name: controls
     display: Show Video controls
     type: checkbox
@@ -55,7 +59,11 @@ import ReactPlayer from 'react-player'
 {{ save_delayed('ph',ph) }}
 <div className="media-player">
   <ReactPlayer 
+  {% if element.values.playVideoDB %}
+    url={ {{ element.values.playVideoDB }} }
+  {% else %}
     url='{{ element.values.playVideo }}'
+  {% endif %}
     {% if element.values.controls %}
       controls={true} 
     {% endif %}

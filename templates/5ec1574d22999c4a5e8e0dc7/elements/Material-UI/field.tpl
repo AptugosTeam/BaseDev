@@ -36,6 +36,10 @@ options:
       propertyCondition: Field
       condition: useVar
       active: true
+  - name: disableLabel
+    display: Disable Label
+    type: checkbox
+    options: ''
   - name: Type
     display: Type
     type: dropdown
@@ -59,6 +63,10 @@ options:
   - name: DisableUnderline
     display: Disable Underline
     type: checkbox
+    options: ''
+  - name: maxLength
+    display: Max Characters Length
+    type: text
     options: ''
   - name: margin
     display: margin
@@ -88,7 +96,15 @@ options:
     display: Autofilling Input
     type: text
   - name: fieldname
-    display: fieldname
+    display: Field Name
+    type: text
+    options: ''
+  - name: inputLabel
+    display: Input Label
+    type: text
+    options: ''
+  - name: placeholder
+    display: Placeholder
     type: text
     options: ''
   - name: onBlur
@@ -112,6 +128,14 @@ options:
     options: 
       return [['en', 'English'],['es', 'Spanish']]
     advanced: true
+  - name: InputProps
+    display: Input Props (allows min and max date)
+    type: text
+    options: ''
+    advanced: true
+    settings:
+      propertyCondition: Type
+      condition: edit
 children: []
 */
 {% set bpr %}

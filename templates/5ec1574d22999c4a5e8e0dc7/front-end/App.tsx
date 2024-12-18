@@ -45,6 +45,7 @@ const App: React.FunctionComponent = (props: any) => {
 
   return (
     <React.Fragment>
+      {{ insert_setting('SiteWideBeforeStart') | raw }}
       <React.Suspense fallback={ {{ insert_setting('FallBack')|default('<span style={ { display: "flex", alignItems: "center", justifyContent: "center", height: "100%" } }>Loading</span>') }} }>
         {{ insert_setting('SiteWideWrapStart') | raw }}
         <React.Fragment>

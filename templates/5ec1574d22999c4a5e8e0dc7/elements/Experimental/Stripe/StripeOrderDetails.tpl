@@ -11,6 +11,11 @@ options:
     display: Variable containing the SessionID
     type: text
     options: ''
+  - name: backendRoute
+    display: Only Server Route
+    type: checkbox
+    settings:
+      default: false
 settings:
   - name: BackendPackages
     value: '"stripe": "^8.201.0",'
@@ -21,6 +26,8 @@ settings:
         res.send(session)
       })
 */
-axios.get(`{{ settings.apiURL }}/stripe-order-details/${ {{ element.values.sessionID }} }`).then(res => {
-  {{ content | raw }}
-})
+{% if not element.values.backendRoute %}
+  axios.get(`{{ settings.apiURL }}/stripe-order-details/${ {{ element.values.sessionID }} }`).then(res => {
+    {{ content | raw }}
+  })
+{% endif %}

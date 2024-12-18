@@ -72,6 +72,17 @@ options:
     display: Should use an exact match?
     type: checkbox
     options: ''
+  - name: customEffect
+    display: Customize actions on search?
+    type: checkbox
+    options: ''
+  - name: effectOnSearch
+    display: Custom actions on search
+    type: function
+    options: ''
+    settings:
+      condition: true
+      propertyCondition: customEffect
   - name: fieldToSearch
     display: Field To Search
     type: text
@@ -106,6 +117,12 @@ options:
     advanced: true
     settings:
       default: '1'
+  - name: loadWhenSiteLoads
+    display: Load when Site Loads
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
 children: []
 */
 {% if data %}
@@ -117,8 +134,16 @@ children: []
 {% if element.name != 'loadFromDatabase' %}
   {% set innervarname = element.name | friendly %}
 {% endif %}
-
 {% set varName = element.values.variableName|default(table.name | friendly | lower ~ 'Data') %}
+{% if element.values.loadWhenSiteLoads %}
+  {# Special method to load on page load #}
+  {% set goesToIndex %}
+    import { load{{ table.name | friendly | capitalize }} } from './store/actions/{{ table.name | friendly | lower }}Actions'
+    store.dispatch(load{{ table.name | friendly | capitalize }}({ limit: 500 }))
+  {% endset %}
+  {{ add_setting('IndexPreAdd', goesToIndex)}}
+{% else %}
+  {# Standard usage #}
 {% set bpr %}
 import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
@@ -180,6 +205,9 @@ const perform{{ innervarname }}load = (options) => {
 {{ save_delayed('ph',ph)}}
 {% set ph %}
 React.useEffect(() => {
+{% if element.values.searchString and element.values.customEffect and element.values.effectOnSearch %}
+  {{ element.values.effectOnSearch | raw }}
+{% else %}
   perform{{ innervarname }}load({
     ...{{ innervarname }}loadoptions
     {% if element.values.fixedSearchField %}, fixedSearch: { field: {{ element.values.fixedSearchField}}, value: {{ element.values.fixedSearchString }} }{% endif %}
@@ -187,6 +215,7 @@ React.useEffect(() => {
     {% if element.values.searchString %}, searchString: {{ element.values.searchString }}{% endif %}
     {% if element.values.useExactMatch %}, exactMatch: {{ element.values.useExactMatch }}{% endif %}
   })
+{% endif %}
 },[{{ innervarname }}loadoptions{% if element.values.searchString %}, {{ element.values.searchString }}{% endif %}])
 {% endset %}
 {{ save_delayed('ph',ph)}}
@@ -203,4 +232,4 @@ React.useEffect(() => {
   }
 }, [{{ table.name | friendly | lower }}Data.{{ functionCall }}])
 {% endif %}
-
+{% endif %}

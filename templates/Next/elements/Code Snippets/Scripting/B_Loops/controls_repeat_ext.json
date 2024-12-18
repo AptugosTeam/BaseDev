@@ -1,0 +1,29 @@
+/*
+path: controls_repeat_ext.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/B_Loops/controls_repeat_ext.json
+keyPath: elements/Code Snippets/Scripting/B_Loops/controls_repeat_ext.json
+unique_id: oNp78bDn
+name: controls_repeat_ext
+fullload: true
+*/
+{
+  "type": "controls_repeat_ext",
+  "message0": "%{BKY_CONTROLS_REPEAT_TITLE}",
+  "args0": [{
+    "type": "input_value",
+    "name": "TIMES",
+    "check": "Number"
+  }],
+  "message1": "%{BKY_CONTROLS_REPEAT_INPUT_DO} %1",
+  "args1": [{
+    "type": "input_statement",
+    "name": "DO"
+  }],
+  "previousStatement": null,
+  "nextStatement": null,
+  "style": "loop_blocks",
+  "tooltip": "%{BKY_CONTROLS_REPEAT_TOOLTIP}",
+  "helpUrl": "%{BKY_CONTROLS_REPEAT_HELPURL}"
+}

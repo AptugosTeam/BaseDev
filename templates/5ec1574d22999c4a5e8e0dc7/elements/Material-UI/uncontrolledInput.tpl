@@ -17,6 +17,11 @@ options:
     display: On Change
     type: function
     options: ''
+  - name: onBlur
+    display: On Focus Lost
+    type: function
+    options: ''
+    advanced: true
   - name: placeholder
     display: Placeholder
     type: text
@@ -41,6 +46,9 @@ options:
     display: fieldname
     type: text
     options: ''
+  - name: readOnly
+    display: Read Only?
+    type: checkbox
   - name: fullWidth
     display: Use full width?
     type: checkbox
@@ -50,7 +58,7 @@ options:
   - name: type
     display: Type
     type: dropdown
-    options: text;password;date;number;textarea;numeric
+    options: text;password;date;datetime-local;number;textarea;numeric
     settings:
       default: text
       active: true
@@ -106,15 +114,28 @@ options:
   - name: DisableVariable
     display: Variable to disable input
     type: text
+  - name: endAdornment
+    display: Child is end adornment
+    type: checkbox
+    advanced: true
 children: []
 */
 {% if element.values.fullWidth %}{% set fullWidth = true %}{% endif %}
-{% if element.values.select %}{% set select = true %}{% endif %}
+{% if element.values.readOnly %}
+  {% set readOnly = true %}
+{% endif %}
 {% set bpr %}
 import TextField from '@mui/material/TextField'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
+{% if element.values.endAdornment %}
+{% set bpr %}
+import InputAdornment from '@mui/material/InputAdornment'
+{% endset %}
+{{ save_delayed('bpr', bpr) }}
+{% endif %}
 <TextField
+    {% if element.values.id %}id="{{ element.values.id }}"{% endif %}
     variant="{{ element.values.variant|default('standard') }}"
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.placeholder %}placeholder={{ element.values.placeholder | textOrVariable }}{% endif %}
@@ -126,6 +147,11 @@ import TextField from '@mui/material/TextField'
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
+    {% if readOnly %}
+      inputProps={ {
+        readOnly: true,
+      } }
+    {% endif %}
     {% if element.values.type == 'number' %}
       {% if element.values.minNum or element.values.maxNum %}
         inputProps={ {
@@ -163,6 +189,10 @@ import TextField from '@mui/material/TextField'
     {% if select %}select{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
->
-{{ content | raw }}
-</TextField>
+    {% if element.values.onBlur %}onBlur={ {{ element.values.onBlur | functionOrCall }} }{% endif %}
+    {% if element.values.endAdornment %}
+      InputProps={ {
+        endAdornment: <InputAdornment position="end">{{ content | raw }}</InputAdornment>
+      } }
+    {% endif %}
+/>

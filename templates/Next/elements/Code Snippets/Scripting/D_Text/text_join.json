@@ -1,0 +1,19 @@
+/*
+path: text_join.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/D_Text/text_join.json
+keyPath: elements/Code Snippets/Scripting/D_Text/text_join.json
+unique_id: lt7TvStX
+name: text_join
+fullload: true
+*/
+{
+  "type": "text_join",
+  "message0": "",
+  "output": "String",
+  "style": "text_blocks",
+  "helpUrl": "%{BKY_TEXT_JOIN_HELPURL}",
+  "tooltip": "%{BKY_TEXT_JOIN_TOOLTIP}",
+  "mutator": "text_join_mutator"
+}

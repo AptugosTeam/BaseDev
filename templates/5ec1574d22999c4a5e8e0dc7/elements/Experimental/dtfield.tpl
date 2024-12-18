@@ -69,10 +69,13 @@ options:
   - name: autosave
     display: Autosave on Change
     type: checkbox
+  - name: renderChild
+    display: Render Child as value
+    type: checkbox
 children: []
 */
 {% if element.values.Field == "useVar" %}
-  { id: '{{ element.values.fieldVariable }}', header: '{{ element.values.columnName }}', type: 'string', size: 300, renderValue: (cell) => { {{ content | raw}}; return cell.getValue() || '---'} },
+  { id: '{{ element.values.fieldVariable }}', header: '{{ element.values.columnName }}', type: 'string', size: 300, {% if not element.values.renderChild %} renderValue: (cell) => { {{ content | raw}}; return cell.getValue() || '---'} }, {% endif %} {% if element.values.renderChild %} renderValue: (cell) => { return ({{ content | raw}}) } }, {% endif %} 
 {% else %}
   {% if not field %}
     {% set field = element.values.Field | fieldData %}

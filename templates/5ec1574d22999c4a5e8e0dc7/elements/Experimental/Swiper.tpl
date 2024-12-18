@@ -40,6 +40,17 @@ options:
     display: Delete Pagination
     type: checkbox
     options: ''
+  - name: autoplay
+    display: Autoplay
+    type: checkbox
+    options: ''
+  - name: delay
+    display: Delay (ms)
+    type: text
+    options: ''
+    settings:
+      propertyCondition: autoplay
+      condition: true
   - name: useSwiperSlide
     display: Use SwiperSlide?
     type: checkbox
@@ -57,14 +68,28 @@ options:
     display: Effect - Cards
     type: checkbox
     advanced: true
+  - name: onSlideNextTransitionStart
+    display: On Slide Next Transition Start
+    type: function
+    advanced: true
+    settings:
+      propertyCondition: navigation
+      condition: false
+  - name: onSlidePrevTransitionStart
+    display: On Slide Previous Transition Start
+    type: function
+    advanced: true
+    settings:
+      propertyCondition: navigation
+      condition: false
 settings:
   - name: Packages
-    value: '"swiper": "^8.0.0",'
+    value: '"swiper": "^10.0.0",'
 children: []
 */
 {% set bpr %}
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination as SwiperPagination, Navigation } from "swiper";
+import { Pagination as SwiperPagination, Navigation, Autoplay } from "swiper/modules";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import "swiper/css/bundle";
@@ -113,7 +138,23 @@ import { EffectCards } from 'swiper'
     {% if element.values.onChange %}
       onActiveIndexChange={ {{ element.values.onChange }} } 
     {% endif %}
-    modules={[SwiperPagination, Navigation{%if element.values.effectCards %}, EffectCards{% endif %}]}
+    {% if element.values.autoplay %}
+      autoplay={ { 
+        delay: {{ element.values.delay | default(2500) }},
+        disableOnInteraction: false
+      } }
+    {% endif %}
+    {% if element.values.onSlideNextTransitionStart %}
+       onSlideNextTransitionStart={() => {
+        {{element.values.onSlideNextTransitionStart}}
+       }}
+    {% endif %}
+    {% if element.values.onSlidePrevTransitionStart %}
+      onSlidePrevTransitionStart={() => {
+        {{element.values.onSlidePrevTransitionStart}}
+      }}
+    {% endif %}
+    modules={[SwiperPagination, Navigation{%if element.values.effectCards %}, EffectCards{% endif %}, Autoplay]}
   >
 {% if element.values.useSwiperSlide %}
   {% for unchild in element.children %}

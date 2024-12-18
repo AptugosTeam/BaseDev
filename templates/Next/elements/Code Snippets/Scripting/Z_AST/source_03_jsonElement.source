@@ -1,0 +1,14 @@
+/*
+path: source_03_jsonElement.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/source_03_jsonElement.source
+keyPath: elements/Code Snippets/Scripting/Z_AST/source_03_jsonElement.source
+unique_id: HHZ4LNkQ
+name: js_json_element
+fullload: true
+*/
+var key = Blockly.JavaScript.valueToCode(Block, 'KEY', Blockly.JavaScript.ORDER_ATOMIC)
+var value = Blockly.JavaScript.valueToCode(Block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC)
+var code =  key + ': ' + value + ',\n'
+return code

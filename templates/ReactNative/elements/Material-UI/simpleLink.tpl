@@ -15,7 +15,8 @@ options:
   - name: tagToUse
     display: Use Tag
     type: dropdown
-    options: NavLink;A
+    options: >-
+      return [['navigate', 'Navigate'], ['push', 'Push'], ['A', 'External']]
   - name: className
     display: ClassName
     type: text
@@ -24,10 +25,6 @@ options:
     display: Extra Styles
     type: text
     options: ''
-  - name: target
-    display: Link Target
-    type: dropdown
-    options: _self;_blank;_parent;_top
 sourceType: javascript
 children: []
 */
@@ -40,7 +37,7 @@ import { TouchableOpacity, Linking } from "react-native"
   {% if element.values.tagToUse == "A" %}
   onPress={() => Linking.openURL( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
   {% else %}
-  onPress={() => navigation.push( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
+  onPress={() => navigation.{{ element.values.tagToUse|default('push') }}( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
   {% endif %}
   key='{{ element.unique_id }}'
 >

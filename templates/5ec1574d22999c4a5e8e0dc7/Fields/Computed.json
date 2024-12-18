@@ -12,6 +12,11 @@ unique_id: uXS2fFGc
     "frontEndType": "string",
     "extra": [
       {
+        "display": "Default Value",
+        "value": "defaultValue",
+        "type": "text"
+      },
+      {
         "display": "Data Type",
         "value": "datatype",
         "type": "select",

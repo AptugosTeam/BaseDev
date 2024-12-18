@@ -36,6 +36,9 @@ options:
   - name: scaleBarPosition
     display: ScaleBar Position
     type: text
+  - name: styleURL
+    display: styleURL
+    type: text
   - name: ref
     display: Use Reference
     type: text
@@ -45,8 +48,23 @@ options:
     type: function
 settings:
   - name: Packages
-    value: '"expo-dev-client": "~2.2.1","@rnmapbox/maps": "github:rnmapbox/maps#main",'
+    value: '"expo-dev-client": "~2.4.13","@rnmapbox/maps": "github:rnmapbox/maps#main",'
 */
+{% set AppJsonPlugins %}
+[
+  "@rnmapbox/maps",
+  {
+    "RNMapboxMapsVersion": "11.3.0",
+    "RNMapboxMapsDownloadToken": "{{ element.values.accessToken }}"
+  }],
+  [
+    "expo-build-properties",
+    {
+      "MAPBOX_DOWNLOADS_TOKEN": "{{ element.values.accessToken }}"
+    }
+],
+{% endset %}
+{{ add_setting('AppJsonPlugins', AppJsonPlugins)}}
 {% set bpr %}
 import { MapView, setAccessToken } from '@rnmapbox/maps'
 setAccessToken('{{ element.values.accessToken }}')
@@ -61,6 +79,7 @@ setAccessToken('{{ element.values.accessToken }}')
   scaleBarEnabled={ {{element.values.scaleBarEnabled|default(true)}}}
   {% if element.values.scaleBarEnabled %}scaleBarPosition={ {{element.values.scaleBarPosition|default('{ bottom: 8, left: 8}')}} }{% endif %}
   {% if element.values.className %}style={ {{ element.values.className}} }{% endif %}
+  {% if element.values.styleURL %}styleURL={ {{ element.values.styleURL}} }{% endif %}
   {% if element.values.onMapIdle %}
     onMapIdle={ {{ element.values.onMapIdle |functionOrCall }} }
   {% endif %}

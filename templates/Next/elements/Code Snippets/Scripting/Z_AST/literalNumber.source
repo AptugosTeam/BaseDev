@@ -1,0 +1,15 @@
+/*
+path: literalNumber.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Basic/literalNumber.source
+keyPath: elements/Code Snippets/Basic/literalNumber.source
+unique_id: EOfLlB3G
+name: js_literal_number
+fullload: true
+*/
+if (Block.outputConnection) {
+  return [Block.getFieldValue('NUMBER'), Blockly.JavaScript.ORDER_ATOMIC]
+} else {
+  return Block.getFieldValue('NUMBER')
+}

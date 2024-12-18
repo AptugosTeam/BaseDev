@@ -3,18 +3,16 @@ path: FileUpload.tsx
 completePath: front-end/components/FileUpload/FileUpload.tsx
 unique_id: QZm2nTtL
 */
-import { faFilePdf } from '@fortawesome/free-solid-svg-icons'
+import PublishIcon from '@mui/icons-material/Publish'
+import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import IconButton from '@mui/material/IconButton'
 import Input from '@mui/material/Input'
-import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
-import PublishIcon from '@mui/icons-material/Publish'
 
-import SearchIcon from '@mui/icons-material/Search'
 import PictureAsPdf from '@mui/icons-material/PictureAsPdf'
-import clsx from 'clsx'
-import React, { FunctionComponent } from 'react'
+import SearchIcon from '@mui/icons-material/Search'
+import React, { FunctionComponent, ReactEventHandler } from 'react'
 
 const useStyles = {
   root: {
@@ -36,7 +34,7 @@ const useStyles = {
     right: 0,
     top: '-8px',
   },
-  altVisual: {}
+  altVisual: {},
 }
 
 const altStyles = {
@@ -59,6 +57,7 @@ const altStyles = {
   media: {
     maxHeight: '48px',
   },
+  media: {},
   input: {
     display: 'none',
   },
@@ -98,6 +97,14 @@ const altStyles = {
   },
 }
 
+function FileListItem(a) {
+  a = [].slice.call(Array.isArray(a) ? a : arguments)
+  for (var c, b = c = a.length, d = !0; b-- && d;) d = a[b] instanceof File
+  if (!d) throw new TypeError("expected argument to FileList is File or array of File objects")
+  for (b = (new ClipboardEvent("")).clipboardData || new DataTransfer; c--;) b.items.add(a[c])
+  return b.files
+}
+
 const AptugoImageUpload: FunctionComponent<any> = (props) => {
   const classes = props.visual === 'standard' ? useStyles : altStyles
 
@@ -112,18 +119,45 @@ const AptugoImageUpload: FunctionComponent<any> = (props) => {
 
   const handleUploadClick = (event) => {
     event.persist()
-    const file = event.target.files[0]
+
+    const inputElement = event.target as HTMLInputElement
+    const origfileList:FileList = inputElement.files
+    const file = origfileList[0]
     const reader = new FileReader()
 
-    reader.onloadend = function (e) {
+    reader.onloadend = async function (e) {
+      let selectedFile = [reader.result]
+      if (resizeWidth && typeof resizeWidth === 'number') {
+        const canvas = document.createElement('canvas')
+        const ctx = canvas.getContext('2d')
+        const img = await createImageBitmap(file)
+          
+        const ratio = resizeWidth / img.width
+        const width = img.width * ratio + .5 | 0
+        const height = img.height * ratio + .5 | 0
+      
+        canvas.width = width
+        canvas.height = height
+        ctx.drawImage(img, 0, 0, width, height)
+          
+        const blob:BlobPart = await new Promise(rs => canvas.toBlob(rs))
+        const resizedFile = new File([blob], file.name, file)
+        
+        const fileList = FileListItem([resizedFile])
+        
+        event.target.onchange = null
+        event.target.files = fileList
+        event.target.onchange = handleUploadClick
+      }
+
       setState({
         ...state,
         file: file,
         fileName: file.name,
         uploading: false,
-        selectedFile: [reader.result],
+        selectedFile: [selectedFile],
       })
-
+      
       props.onChange(event)
     }
 

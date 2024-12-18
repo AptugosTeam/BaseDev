@@ -13,6 +13,7 @@ options:
     options: ''
     settings:
       aptugoOnLoad: |-
+        console.log('shooting onload')
         const allVariables = aptugo.variables.variables
         const element = arguments[0];
         const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;

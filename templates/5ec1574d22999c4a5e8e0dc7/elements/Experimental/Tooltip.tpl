@@ -66,7 +66,7 @@ import Tooltip from '@mui/material/Tooltip'
 {{ save_delayed('bpr',bpr) }}
 
 {% set arrow = element.values.arrow|default(false) %}
-{% set disableInteractive = element.values.interactive|default(false) %}
+{% set disableInteractive = element.values.disableInteractive|default(false) %}
 {% set followCursor = element.values.followCursor|default(false) %}
 
 <Tooltip

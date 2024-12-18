@@ -54,7 +54,7 @@ const handle{{ tableInfo.table.name | friendly }}Change = (name: string) => (eve
       }
       {% endif %}
     }
-    resolve()
+    resolve(value)
   })
   }
 {% endset %}
