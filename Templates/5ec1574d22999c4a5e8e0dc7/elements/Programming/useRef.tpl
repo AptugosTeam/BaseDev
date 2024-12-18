@@ -47,6 +47,6 @@ import { useRef } from 'react'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% set ph %}
-const {{ element.values.variableName }} = useRef{% if element.values.type %}<{{ element.values.type }}{% endif %}>({{ element.values.defaultValue }})
+const {{ element.values.variableName }} = React.useRef{% if element.values.type %}<{{ element.values.type }}>{% endif %}({{ element.values.defaultValue }})
 {% endset %}
 {{ save_delayed('ph',ph,1) }}
