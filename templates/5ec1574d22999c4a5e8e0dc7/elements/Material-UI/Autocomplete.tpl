@@ -59,7 +59,7 @@ helpText: >-
 icon: ico-field
 */
 {% set bpr %}
-import Autocomplete from '@mui/material/Autocomplete';
+import Autocomplete from '@components/Autocomplete'
 import TextField from '@mui/material/TextField'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
