@@ -82,7 +82,7 @@ import Tooltip from '@mui/material/Tooltip'
     {% if element.values.transition == "Fade" %}TransitionComponent={ {{ element.values.transition }} } TransitionProps={ { timeout: {{element.values.transitionDuration}} } }{% endif %}
     {% if element.values.enterDelay %}enterDelay={ {{ element.values.enterDelay }} }{% endif %}
     {% if element.values.leaveDelay %}leaveDelay={ {{ element.values.leaveDelay }} }{% endif %}
-    {% if followCursor %}followCursor={ {{element.values.followCursor}} }{% endif %}
-    {% if element.values.open%}open={ {{ element.values.open }} }{% endif %}>
+    {% if followCursor %}followCursor={ {{ element.values.followCursor }} }{% endif %}
+    {% if element.values.open %}open={ {{ element.values.open }} }{% endif %}>
 {{ content | raw }} 
 </Tooltip>
