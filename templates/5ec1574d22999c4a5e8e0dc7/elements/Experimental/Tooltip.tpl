@@ -9,6 +9,10 @@ options:
   - name: content
     display: Content
     type: text
+    options: ''
+  - name: tooltipClassName
+    display: Tooltip Popper Class Name
+    type: text
     options: ''  
   - name: placement
     display: Placement
@@ -83,6 +87,8 @@ import Tooltip from '@mui/material/Tooltip'
     {% if element.values.enterDelay %}enterDelay={ {{ element.values.enterDelay }} }{% endif %}
     {% if element.values.leaveDelay %}leaveDelay={ {{ element.values.leaveDelay }} }{% endif %}
     {% if followCursor %}followCursor={ {{ element.values.followCursor }} }{% endif %}
-    {% if element.values.open %}open={ {{ element.values.open }} }{% endif %}>
+    {% if element.values.open %}open={ {{ element.values.open }} }{% endif %}
+    slotProps={ { popper: { className: '{{ element.values.tooltipClassName }}' } } }
+    >
 {{ content | raw }} 
 </Tooltip>
