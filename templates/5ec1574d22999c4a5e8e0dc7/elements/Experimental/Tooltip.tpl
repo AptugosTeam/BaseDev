@@ -88,7 +88,7 @@ import Tooltip from '@mui/material/Tooltip'
     {% if element.values.leaveDelay %}leaveDelay={ {{ element.values.leaveDelay }} }{% endif %}
     {% if followCursor %}followCursor={ {{ element.values.followCursor }} }{% endif %}
     {% if element.values.open %}open={ {{ element.values.open }} }{% endif %}
-    slotProps={ { popper: { className: '{{ element.values.tooltipClassName }}' } } }
+    {% if element.values.tooltipClassName %}slotProps={ { popper: { className: '{{ element.values.tooltipClassName }}' } } }{% endif %}
     >
 {{ content | raw }} 
 </Tooltip>
