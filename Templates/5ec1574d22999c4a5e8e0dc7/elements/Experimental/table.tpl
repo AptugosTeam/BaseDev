@@ -125,6 +125,9 @@ options:
   - name: startSeparatorPagination
     display: Start Pagination Properties
     type: separator
+    settings:
+      propertyCondition: usePagination
+      condition: true
   - name: elementsLimit
     display: Elements Per Page
     type: text
@@ -191,6 +194,9 @@ options:
   - name: endSeparatorPagination
     display: End Pagination Properties
     type: separator
+    settings:
+      propertyCondition: usePagination
+      condition: true
   - name: confirmDeletes
     display: Show a confirmation before deleting
     type: checkbox
