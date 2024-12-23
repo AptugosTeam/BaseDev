@@ -136,6 +136,18 @@ options:
     settings:
       propertyCondition: Type
       condition: edit
+  - name: textFieldPropsNumeric
+    display: Text Field Props (Numeric Format)
+    type: text
+    advanced: true
+  - name: allowError
+    display: Display Field Error (Type edit)
+    type: checkbox
+    advanced: true
+  - name: allowHelperText
+    display: Display Helper Text (Type edit)
+    type: checkbox
+    advanced: true
 children: []
 */
 {% set bpr %}
