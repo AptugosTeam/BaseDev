@@ -12,6 +12,9 @@ const compileContract = (fileName = '', folderPath = 'contracts') => {
   const contractFilePath = `${__dirname}/${folderPath}/${fileName}.sol`
   const contractName = fileName
   try {
+    if (!fs.existsSync(contractFilePath)) {
+      throw new Error(`Contract file not found: ${contractFilePath}`);
+    }
     const sourceCode = fs.readFileSync(contractFilePath, 'utf8')
 
     function findImports(importPath) {
@@ -44,6 +47,11 @@ const compileContract = (fileName = '', folderPath = 'contracts') => {
     }
 
     const compiledCode = JSON.parse(solc.compile(JSON.stringify(input), { import: findImports }))
+
+    if (!compiledCode.contracts || !compiledCode.contracts[fileName]) {
+      throw new Error(`Compilation failed: ${JSON.stringify(compiledCode.errors || 'Unknown error')}`);
+    }
+    
     const bytecode = compiledCode.contracts[fileName][contractName].evm.bytecode.object
     const abi = compiledCode.contracts[fileName][contractName].abi
 
