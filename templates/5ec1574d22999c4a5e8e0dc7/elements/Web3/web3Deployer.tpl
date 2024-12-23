@@ -37,7 +37,7 @@ const deployContract = async (
       from: address,
       data: deploy.encodeABI(),
       nonce: web3.utils.toHex(nonce),
-      gas: web3.utils.toHex(Math.ceil(Number(gas) * 1.2)),
+      gas: web3.utils.toHex(Math.ceil(Number(estimatedGas) * 1.2)),
       maxFeePerGas: web3.utils.toWei(maxFee.toString(), 'gwei'),
       maxPriorityFeePerGas: web3.utils.toWei(maxPriorityFee.toString(), 'gwei'),
     };
