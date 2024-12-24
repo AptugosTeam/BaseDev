@@ -78,6 +78,8 @@ import { database, validateBody, parseBody } from "@api-lib/middlewares"
 import { ncOpts } from "@api-lib/nc"
 import nc from "next-connect"
 import multer from 'multer'
+{% if table.extraModules %}{{ table.extraModules }}
+{% endif %}
 
 export const config = {
   api: {
