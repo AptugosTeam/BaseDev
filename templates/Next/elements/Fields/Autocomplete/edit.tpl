@@ -36,7 +36,7 @@ children: []
       if (!{{ tableName }}data.{{ columnName }}) return undefined
       const asArray = Array.isArray({{ tableName }}data.{{ columnName }}) ? {{ tableName }}data.{{ columnName }} : [{{ tableName }}data.{{ columnName }}]
       set{{ columnName }}Value(
-        asArray.map(item => ({ label: item.{{ referencedField.column_name | friendly }}, value: item._id }))
+        asArray.map(item => ({ label:  item.label || item.{{ referencedField.column_name | friendly }}, value: item.value || item._id }))
       )
     }, [{{ tableName }}data.{{ columnName }}])
 

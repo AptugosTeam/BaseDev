@@ -16,6 +16,6 @@ options:
 import { AdvancedMarker } from '@vis.gl/react-google-maps'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<AdvancedMarker position={ {{element.values.Position }} }>
+<AdvancedMarker position={{element.values.Position | textOrVariable }}>
   {{ content | raw }}
 </AdvancedMarker>

@@ -3,10 +3,10 @@ path: Autocomplete.tsx
 keyPath: src/components/Autocomplete/Autocomplete.tsx
 unique_id: nd2fxWPD
 */
-import * as React from 'react'
 import { fetcher } from '@lib/fetch'
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete'
 import TextField from '@mui/material/TextField'
+import * as React from 'react'
 
 interface OptionType {
   inputValue?: string
@@ -51,12 +51,18 @@ export default function AptugoAutocomplete(props) {
 
   return (
     <Autocomplete
-      value={value}
-      onChange={(event, newValue) => {
+      multiple={props.chips}
+      value={props.value}
+      onChange={(_event, newValue) => {
         let theValue = newValue
+        if (!Array.isArray(theValue)) theValue = [theValue]
 
-        if (typeof newValue === 'string') theValue = { label: newValue }
-        else if (theValue && theValue.inputValue) theValue = { label: newValue.inputValue }
+        theValue = theValue.map(value => {
+          if (typeof value === 'string') return { label: newValue }
+          else if (value && value.inputValue) return { label: newValue.inputValue }
+          return value
+        })
+        
         setValue(theValue)
         props.onChange(theValue)
       }}
@@ -79,8 +85,8 @@ export default function AptugoAutocomplete(props) {
       options={options}
       getOptionLabel={(option) => {
         if (typeof option === 'string') return option
-        if (option.inputValue) return option.inputValue
-        return option.label
+        if (option?.inputValue) return option.inputValue
+        return option?.label || ''
       }}
       renderOption={(props, option) => {
         const { key, ...optionProps } = props

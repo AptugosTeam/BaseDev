@@ -63,37 +63,39 @@ String.prototype.csvToArray = function (o) {
     a.pop();
   }
   return a;
-};
-
-var contents = Parameters.csv.toString();
-var finalData = [];
-var lines = contents.split('\n');
-lines.shift();
-lines.forEach((line) => {
-  var linedata = line.csvToArray()[0];
-  var finalDataRow = {};
-  linedata.forEach((dataCell, index) => {
-    finalDataRow[Parameters.fields[index]] = dataCell;
-  });
-  finalData.push(finalDataRow);
-});
-
-const connectionString = Application.settings.development.dbconnectstring;
-const connection = await aptugo.db.connect(connectionString);
-
-async function addRows(data) {
-  let doContinue = false;
-  let insertData = [];
-  if (data.length > 10) {
-    insertData = data.splice(0, 10);
-    doContinue = true;
-  } else {
-    insertData = data;
-  }
-  await aptugo.db.insertRows(connection, Parameters.Name, insertData);
-  if (doContinue) addRows(data);
 }
 
-await addRows(finalData);
+var contents = Parameters.contents
+var finalData = []
+var lines = contents.split('\n')
+lines.shift()
+lines.forEach((line) => {
+  var linedata = line.csvToArray()[0]
+  var finalDataRow = {}
+  linedata.forEach((dataCell, index) => {
+    finalDataRow[Parameters.fields[index]] = dataCell
+  })
+  finalData.push(finalDataRow)
+})
+
+const connectionString = Application.settings.development.dbconnectstring
+
+const connection = await aptugo.db.connect(connectionString)
+
+
+async function addRows(data) {
+  let doContinue = false
+  let insertData = []
+  if (data.length > 10) {
+    insertData = data.splice(0, 10)
+    doContinue = true
+  } else {
+    insertData = data
+  }
+  const result = await aptugo.db.insertRows(connection, Parameters.Name, insertData)
+  if (doContinue) addRows(data)
+}
+
+await addRows(finalData)
 // aptugo.db.close()
-return Application;
+return Application

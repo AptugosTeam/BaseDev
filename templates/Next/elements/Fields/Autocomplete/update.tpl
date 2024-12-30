@@ -5,9 +5,9 @@ unique_id: zd6mrTlU
 */
 {% set referencedField = field.reference | fieldData %}
 {% set fieldInfo = field | fieldData %}
-{% if field.relationshipType == 'm:1' %}
-{% elseif field.relationshipType == '1:1' %}
+
+{% if field.relationshipType == '1:m' %}
+  if( typeof req.body.{{ field.column_name | friendly }} !== 'undefined' && req.body.{{ field.column_name | friendly }}.length )  var {{ field.column_name | friendly }} = req.body.{{ field.column_name | friendly }}.map(item => item.value)
 {% else %}
-  {% include includeTemplate('update_1m.tpl') %}
+  if( typeof req.body.{{ field.column_name | friendly }} !== 'undefined' && req.body.{{ field.column_name | friendly }}.value )  var {{ field.column_name | friendly }} = req.body.{{ field.column_name | friendly }}.value
 {% endif %}
-if( typeof req.body.{{ field.column_name | friendly }} !== 'undefined' && req.body.{{ field.column_name | friendly }}.value )  var {{ field.column_name | friendly }} = req.body.{{ field.column_name | friendly }}.value

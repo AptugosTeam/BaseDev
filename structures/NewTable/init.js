@@ -2,7 +2,9 @@ Parameters.unique_id = Parameters.unique_id || aptugo.generateID()
 if (!Application.tables) Application.tables = []
 const untitledTables = Application.tables.filter(table => table.name.substr(0,8) === 'Untitled').length
 const name = Parameters.name || `Untitled ${untitledTables > 0 ? untitledTables : ''}`
-const singleName = Parameters.singleName || `Single ${name}`
+let singleName = Parameters.singleName || `Single ${name}`
+if (singleName === name) singleName = `Single ${name}`
+
 const fields = Parameters.fields || [{
 	CHARACTER_MAXIMUM_LENGTH: "11",
 	column_name: "ID",
