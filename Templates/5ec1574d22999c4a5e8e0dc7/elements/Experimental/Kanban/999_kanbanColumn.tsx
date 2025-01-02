@@ -1,9 +1,8 @@
 /*
-path: KanbanColumn.tsx
-completePath: >-
-  C:\Users\Usuario\Aptugo\BaseDev\Templates\5ec1574d22999c4a5e8e0dc7\elements\Experimental\Kanban\ExtraFiles\KanbanColumn.tsx
-keyPath: elements\Experimental\Kanban\ExtraFiles\KanbanColumn.tsx
+path: 999_kanbanColumn.js
+keyPath: elements/Experimental/Kanban/999_kanbanColumn.js
 unique_id: 0Pg5OUMF
+internalUse: true
 */
 import React, { FunctionComponent } from 'react'
 import { useDrop } from 'react-dnd'
@@ -11,13 +10,12 @@ import clsx from 'clsx'
 
 function Column({
     columnItem,
-    filteredItems,
     onDrop,
     theme,
     columnIndex,
     children,
     className,
-    cardCount
+    {{ element.values.returnProps }}
 }) {
     const [{ isOver }, drop] = useDrop({
         accept: 'card',
@@ -32,10 +30,10 @@ function Column({
     })
 
     return (
-        <div ref={drop} className={className ? className : clsx(theme[columnItem.Color], columnIndex % 2 === 0 ? theme.odd: theme.even)}>
-            {children({ columnItem, columnIndex, filteredItems, cardCount })}
+        <div ref={drop} className={className ? className : clsx(theme[columnItem.Color], columnIndex % 2 === 0 ? theme.odd : theme.even)}>
+            {children({ columnItem, columnIndex, {{ element.values.returnProps }} })}
         </div>
-    );
+    )
 }
 
 interface kanbanProps {
@@ -43,10 +41,10 @@ interface kanbanProps {
     onDrop?: Function
     theme: any
     className?: any
-  }
+}
 
-const AptugoComponent: FunctionComponent<kanbanProps> = React.memo((props) => {
-    const { columnInfo = [], theme, onDrop, filteredItemsByColumn, className } = props?.properties || {}
+const AptugoKanbanColumn: FunctionComponent<kanbanProps> = React.memo((props) => {
+    const { columnInfo = [], theme, onDrop, className, {{ element.values.additionalProps }} } = props?.properties || {}
 
     const ref = React.useRef(null)
 
@@ -54,19 +52,17 @@ const AptugoComponent: FunctionComponent<kanbanProps> = React.memo((props) => {
         <React.Fragment>
             <div ref={ref}>
                 {columnInfo?.map((columnItem, columnIndex) => {
-                    {{ insert_setting('skibidiMacucas') | raw }}
-                    const filteredItems = filteredItemsByColumn[columnIndex]
-                    const cardCount = filteredItems?.length
+                    {{ element.values.componentCode | raw }}
+                    
                     return (
                         <Column
                             key={columnIndex}
                             columnItem={columnItem}
-                            filteredItems={filteredItems}
                             onDrop={onDrop}
                             theme={theme}
                             columnIndex={columnIndex}
                             className={className}
-                            cardCount={cardCount}
+                            {{ element.values.propsColumn | raw}}
                         >
                             {props.children}
                         </Column>
@@ -75,13 +71,10 @@ const AptugoComponent: FunctionComponent<kanbanProps> = React.memo((props) => {
             </div>
         </React.Fragment>
     )
-
 },
     (prevProps, nextProps) => {
-        return (
-            JSON.stringify(prevProps?.properties) === JSON.stringify(nextProps?.properties)
-        )
+        return JSON.stringify(prevProps?.properties) === JSON.stringify(nextProps?.properties)
     })
 
 
-export default AptugoComponent
+export default AptugoKanbanColumn

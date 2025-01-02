@@ -46,8 +46,13 @@ options:
     type: text
     options: ''
     advanced: true
+  - name: propsColumn
+    display: Send props value to column component
+    type: code
+    options: ''
+    advanced: true
   - name: componentCode
-    display: Code before render in the Component
+    display: Code before render in the component
     type: function
     options: ''
     advanced: true
@@ -57,7 +62,7 @@ options:
     options: ''
     advanced: true
 extraFiles:
-  - source: 'elements/Experimental/Kanban/Extrafiles/KanbanColumn.tsx'
+  - source: 'elements/Experimental/Kanban/999_kanbanColumn.tsx'
     destination: 'front-end/components/KanbanColumn/index.tsx'
 */
 {% set bpr %}
@@ -65,9 +70,8 @@ import KanbanColumn from '@components/KanbanColumn'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 
-{% set skibidiMacucas = 'sandia' %}
-
-{{ add_setting('skibidiMacucas', skibidiMacucas) }}
+{% set skibidiMacucas %}{{ element.values.componentCode }}{% endset %}
+{{ add_setting('macanudo', skibidiMacucas) }}
 
 <KanbanColumn properties={ {
   columnInfo: {{ element.values.RowData }},

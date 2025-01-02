@@ -60,14 +60,16 @@ options:
     options: ''
     settings:
       propertyCondition: disabledPrevButton
-      condition: false
+      conditionNegate: true
+      condition: true
   - name: disabledNextButtonFunction
     display: Disabled Next Button Function
     type: function
     options: ''
     settings:
       propertyCondition: disabledNextButton
-      condition: false
+      conditionNegate: true
+      condition: true
   - name: textInsidePrevButton
     display: Text Inside the Previous Button
     type: text
