@@ -218,6 +218,12 @@ options:
     display: Sort Method
     type: dropdown
     options: desc;asc
+  - name: onRowClick
+    display: On Row Click
+    type: text
+    options: ''
+    settings:
+      default: ''  
 children: []
 */
 {% set editProc = element.values.editProcedure|default('No') %}
@@ -306,6 +312,13 @@ children: []
         })
       }}
     {% endif %}
+    onRowClick={(rowData) => {
+    {% if element.values.onRowClick and element.values.onRowClick != '' %}
+      {{ element.values.onRowClick }}
+    {% else %}
+      return;
+    {% endif %}
+    }}
 >{% if element.children %}
   {{ content | raw }}
 {% else %}
