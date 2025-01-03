@@ -28,6 +28,27 @@ options:
   - name: extraOptions
     display: Extra options
     type: text
+  - name: await
+    display: Await?
+    type: checkbox
+    options: ''
+    settings:
+      value: 'false'
+  - name: variableStore
+    display: store in variable?
+    type: checkbox
+    options: ''
+    advanced: true
+    settings:
+      value: 'false'
+  - name: variableStoreName
+    display: Variable name
+    type: text
+    options: ''
+    advanced: true
+    settings:
+      propertyCondition: variableStore
+      condition: true
 sourceType: javascript
 children: []
 */
@@ -39,6 +60,8 @@ import axios from 'axios'
 {% if element.values.urlFULL %}
 {% set url = settings.apiURL ~ element.values.url %}
 {% endif %}
-axios.{{ element.values.method|default('get') }}({{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}, {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}).then(result => {
+{% set storeName = element.values.variableStoreName %}
+
+{%if element.values.variableStore %}const {{ storeName }} ={% endif %} {% if element.values.await %}await{% endif %} axios.{{ element.values.method|default('get') }}({{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}, {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}){% if not element.values.variableStore %}.then(result => {
  {{ content | raw }}
-})
+}){% endif %}

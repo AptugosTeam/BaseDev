@@ -7,7 +7,7 @@ sourceType: javascript
 options:
   - name: code
     display: Code
-    type: text
+    type: code
     options: ''
 children: []
 */
