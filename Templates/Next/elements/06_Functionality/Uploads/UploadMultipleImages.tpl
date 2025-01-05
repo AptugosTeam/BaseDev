@@ -59,6 +59,11 @@ settings:
   - name: Packages
     value: '"react-dropzone": "^11.4.2",'
 children: []
+extraFiles:
+  - source: 'elements/99_ExtraFiles/MultipleFileUpload/index.tsx'
+    destination: 'src/components/MultipleFileUpload/index.tsx'
+  - source: 'elements/99_ExtraFiles/MultipleFileUpload/MultipleFileUpload.tsx'
+    destination: 'src/components/MultipleFileUpload/MultipleFileUpload.tsx'
 */
 {% set bpr %}
 import MultipleFileUpload from '@components/MultipleFileUpload'

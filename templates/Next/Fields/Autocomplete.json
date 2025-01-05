@@ -32,21 +32,6 @@ unique_id: 6IVx7DRZ
         "options": "[{ label: 'Standard Key', value: '_id' }, ...aptugoUtils.getAllFields().map(field => { return { label: field[1], value: field[0] } })]"
       },
       {
-        "display": "Display",
-        "value": "displaytype",
-        "type": "select",
-        "options": [
-          {
-            "label": "Standard",
-            "value": "standard"
-          },
-          {
-            "label": "Chips / Tags",
-            "value": "chips"
-          }
-        ]
-      },
-      {
         "display": "Allow Add",
         "value": "add",
         "type": "select",

@@ -29,20 +29,16 @@ for (var file of Parameters.uploadFiles) {
     })
   })
 
-  const newTable = {
-    type: 'table',
+  Application = await aptugo.structures.run('New Table', {
     unique_id: Parameters.unique_id,
-    name: Parameters.Name || 'Untitl',
+    name: Parameters.Name || 'UntitledImport',
     singleName: singleName,
-    subtype: 'Aptugo',
-    children: [],
     fields: finalFields,
-  }
+    state: { ...State, app: Application } } )
+
+  const newTable = Application.tables.find(tlb => tlb.unique_id === Parameters.unique_id)
 
   Parameters.contents = contents
-
-  if (!Application.tables) Application.tables = []
-  Application.tables.push(newTable)
 }
 
 return Application

@@ -372,8 +372,6 @@ Application = await aptugo.structures.run('importImage', {
 	}]
 })
 
-console.log('application after asset', Application)
-
 Application.pages[0].children.push(Dashboard)
 
 

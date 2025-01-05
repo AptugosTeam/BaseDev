@@ -25,16 +25,32 @@ function debounce(fn, delay) {
 const filter = createFilterOptions<OptionType>()
 
 export default function AptugoAutocomplete(props) {
-  const [value, setValue] = React.useState<OptionType | null>(null)
+  const [value, setValue] = React.useState<any>(props.chips ? [] : {})
   const [options, setOptions] = React.useState([])
 
   const handleInputChange = (e) => {
-    typeInSearch(e.target?.value || '').then((result) => {
-      setOptions(result)
-    })
+    if (e) {
+      typeInSearch(e.target?.value || '').then((result) => {
+        setOptions(result)
+      })
+    }
   }
 
-  const debouncedFunction = debounce(handleInputChange, 1000)
+  React.useEffect(() => {
+    let newValue: any = { value: props.value._id, label: props.value[props.labelProperty] }
+    if (props.chips) {
+      if (props.value.length) {
+        newValue = props.value.map((v) => {
+          return { value: v._id, label: v[props.labelProperty] }
+        })
+      } else {
+        newValue = []
+      }
+    }
+    setValue(newValue)
+  }, [props.value])
+
+  const debouncedFunction = debounce(handleInputChange, 250)
 
   const typeInSearch = async (typedIn) => {
     const authorOptions = await fetcher(props.endpointLocation).then((arc) => {
@@ -52,19 +68,28 @@ export default function AptugoAutocomplete(props) {
   return (
     <Autocomplete
       multiple={props.chips}
-      value={props.value}
+      value={value}
       onChange={(_event, newValue) => {
         let theValue = newValue
-        if (!Array.isArray(theValue)) theValue = [theValue]
+        if (props.chips) {
+          if (!Array.isArray(theValue)) theValue = [theValue]
 
-        theValue = theValue.map(value => {
-          if (typeof value === 'string') return { label: newValue }
-          else if (value && value.inputValue) return { label: newValue.inputValue }
-          return value
-        })
-        
+          theValue = theValue.map((value) => {
+            if (typeof value === 'string') return { label: newValue }
+            else if (value && value.inputValue) return { value: null, label: value.inputValue }
+            return value
+          })
+          let formatedValue = theValue.map((v) => {
+            if (v.inputValue) return { _id: null, [props.labelProperty]: v.inputValue }
+            return { _id: v.value, [props.labelProperty]: v.label }
+          })
+          props.onChange(formatedValue)
+        } else {
+          let formatedValue = theValue?.value ? { _id: theValue.value, [props.labelProperty]: theValue.label } : null
+          if (theValue && theValue.inputValue) formatedValue = { _id: null, [props.labelProperty]: theValue.inputValue }
+          props.onChange(formatedValue)
+        }
         setValue(theValue)
-        props.onChange(theValue)
       }}
       filterOptions={(options, params) => {
         const filtered = filter(options, params)
@@ -98,7 +123,10 @@ export default function AptugoAutocomplete(props) {
       }}
       freeSolo
       onInputChange={debouncedFunction}
-      renderInput={(params) => <TextField {...params} label={props.label} />}
+      renderInput={(params) => {
+        params.inputProps.autoComplete = 'do-not-autofill'
+        return <TextField {...params} label={props.label} />
+      }}
     />
   )
 }

@@ -101,6 +101,7 @@ handler.use(parseBodyMiddleware)
 export default handler
 {% endblock %}
 {# ADD EXTRA FILES FROM ROUTE #}
+
 {% for externalRouteFile in externalRouteFiles %}
   {% set mainRouteCode = externalRouteFile.content %}
   {{ addExtraFile(externalRouteFile.path, block("baseRoute")) }}

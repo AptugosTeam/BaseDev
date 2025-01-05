@@ -11,7 +11,7 @@ children: []
 */
 {% set fieldTable = (field | fieldData).table %}
 {% if fieldTable.subtype == 'Firebase' %}
-  {% include includeTemplate('Fields' ~ field.data_type ~'editFireBase.tpl') %}
+  {% include includeTemplate('Fields' ~ field.data_type ~'editFireBase.tpl') %}
 {% else %}
   {% set tableName = fieldTable.name | friendly %}
   {% set referencedField = field.reference | fieldData %}
@@ -22,30 +22,18 @@ children: []
   {% endif %}
   {% set referencedTable = referencedField.table.name | friendly | capitalize %}
   {% set columnName = field.column_name | friendly %}
-  {% set odc %}
-  set{{ columnName }}Value(null)
-  {% endset %}
-  {{ add_setting('OnDialogClose', odc) }}
   {% set bpr %}
   import Autocomplete from '@components/Autocomplete'
   {% endset %}
   {{ save_delayed('bpr',bpr) }}
-  {% set ph %}
-    const [{{ columnName }}Value, set{{ columnName }}Value] = React.useState(null)
-    React.useEffect(() => {
-      if (!{{ tableName }}data.{{ columnName }}) return undefined
-      const asArray = Array.isArray({{ tableName }}data.{{ columnName }}) ? {{ tableName }}data.{{ columnName }} : [{{ tableName }}data.{{ columnName }}]
-      set{{ columnName }}Value(
-        asArray.map(item => ({ label:  item.label || item.{{ referencedField.column_name | friendly }}, value: item.value || item._id }))
-      )
-    }, [{{ tableName }}data.{{ columnName }}])
-
-{% endset %}
-{{ save_delayed('ph',ph) }}
   <Autocomplete
-    value={ {{ columnName }}Value }
+    value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
     onChange={(newValue) => {
-      if (!newValue) handle{{ tableName }}Change('{{ columnName }}')(null)
+      {% if field.relationshipType == '1:m' %}
+        if (!newValue || !newValue.length) handleUsersChange('Company')([])
+      {% else %}
+        if (!newValue) handle{{ tableName }}Change('{{ columnName }}')(null)
+      {% endif %}
       else handle{{ tableName }}Change('{{ columnName }}')(newValue)
     }}
     endpointLocation='/api/{{ referencedTable | lower }}/search'
@@ -55,7 +43,7 @@ children: []
     margin='{{ element.values.margin|default("dense") }}'
     size='{{ element.values.size|default("medium") }}'
     add={ {{ field.add|default('true') }} }
-    {% if field.displaytype == 'chips' %}chips{% endif %}
+    {% if field.relationshipType == '1:m' %}chips{% endif %}
     labelProperty='{{ referencedField.column_name | friendly }}'
   />
 {% endif %}

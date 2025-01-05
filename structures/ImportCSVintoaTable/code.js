@@ -79,9 +79,9 @@ lines.forEach((line) => {
 })
 
 const connectionString = Application.settings.development.dbconnectstring
-
+console.log('1 - CSV IMPORT', connectionString)
 const connection = await aptugo.db.connect(connectionString)
-
+console.log('2 - CSV IMPORT', connection)
 
 async function addRows(data) {
   let doContinue = false
@@ -93,6 +93,7 @@ async function addRows(data) {
     insertData = data
   }
   const result = await aptugo.db.insertRows(connection, Parameters.Name, insertData)
+  console.log('3 - CSV IMPORT', result)
   if (doContinue) addRows(data)
 }
 

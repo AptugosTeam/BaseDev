@@ -6,7 +6,6 @@ icon: ico-field
 sourceType: javascript
 children: []
 */
-
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import TextField from '@mui/material/TextField'

@@ -25,7 +25,7 @@ import paginate from 'mongoose-paginate-v2'
       {% if fieldWithData.options.frontEndType %}{% set type = fieldWithData.options.frontEndType %}
       {% elseif fieldWithData.extraOptions.frontEndType %}{% set type = fieldWithData.extraOptions.frontEndType %}
       {% endif %}
-      {{ field.column_name }}: {{ type }}
+      {{ field.column_name | friendly }}: {{ type }}
     {% endfor %}
   }
 
