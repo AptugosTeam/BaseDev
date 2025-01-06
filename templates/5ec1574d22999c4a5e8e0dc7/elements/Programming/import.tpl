@@ -32,7 +32,6 @@ options:
     advanced: true
     settings:
       default: false
-
 settings:
   - name: Packages
     value: '{{ element.values.dependencies }}'
