@@ -89,12 +89,6 @@ options:
     settings:
       default: true
       condition: ''
-  - name: useSoftDelete
-    display: Use Soft Delete
-    type: checkbox
-    settings:
-      default: false
-      condition: ''
   - name: detailsURL
     display: Details Page
     type: dropdown
@@ -212,13 +206,27 @@ options:
     display: Sort Method
     type: dropdown
     options: desc;asc
+  - name: useCustomTableData
+    display: Use custom Table data
+    type: checkbox
+    settings:
+      default: false
+      condition: ''
+  - name: customTableData
+    display: Custom Table Data
+    type: text
+    options: ''
+    settings:
+      default: ''
+      propertyCondition: useCustomTableData
+      condition: '"true"'
+      active: true
 children: []
 */
 {% set editProc = element.values.editProcedure|default('No') %}
 {% set allowEdit = element.values.allowEdit|default(true) %}
 {% set allowView = element.values.allowView|default(false) %}
 {% set allowDeletion = element.values.allowDeletion|default(true) %}
-{% set useSoftDelete = element.values.useSoftDelete|default(false) %}
 {% set tableFields = [] %}
 {% if element.values.table == 'useVar' or element.values.table == 'var' %}
   {% set table = element.values.editionTable | tableData %}
@@ -261,7 +269,7 @@ children: []
   {% endif %}
   {% set tableData = '(' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ '.length ? ' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ ' : ' ~ table.name|friendly|lower ~ 'Data.' ~ table.name|friendly|lower ~ ' as any)' %}
   {% set bpr %}
-  import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }},{% if useSoftDelete %} softRemove{{ table.name | friendly | capitalize }},{% endif %} edit{{ table.name | friendly | capitalize }}, view{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
+  import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }}, view{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
   {% endset %}
   {{ save_delayed('bpr', bpr ) }}
 {% endif %}
@@ -283,7 +291,7 @@ children: []
         [{% for field in tableFields %}"{{ field }}",{% endfor %}{% if editProc != 'No' or allowEdit or allowView or allowDeletion %}"Actions"{% endif %}]
       {% endif %}
     }
-    tableData={ {{ tableData }} }
+    tableData={ {% if element.values.useCustomTableData %} {{element.values.customTableData}} {% endif %}{{ tableData }}}
     {% if element.values.rowClassName %}
       rowClassName={ {{element.values.rowClassName}} }
     {% endif %}
@@ -366,9 +374,9 @@ children: []
     <IconButton aria-label="delete" color="primary" onClickCapture={(e: any) => {
       {% if element.values.confirmDeletes %}
         {{ setEditDataFunctionName }}(e.element)
-        setdialog{{ tableName | capitalize }}Action({% if useSoftDelete %}'softDelete'{% else %}'delete'{% endif %})
+        setdialog{{ tableName | capitalize }}Action('delete')
       {% else %}
-        dispatch({% if useSoftDelete %}softRemove{{ tableName | capitalize }}{% else %}remove{{ tableSingleName }}{% endif %} (e.element))
+        dispatch(remove{{ tableSingleName }} (e.element))
       {% endif %}
     }}>
       <DeleteIcon fontSize="small" />
