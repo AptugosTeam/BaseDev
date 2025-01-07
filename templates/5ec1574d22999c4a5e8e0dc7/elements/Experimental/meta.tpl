@@ -28,6 +28,10 @@ options:
     display: OG:URL
     type: text
     options: ''
+  - name: customContent
+    display: Custom Content
+    type: function
+    options: ''
 sourceType: javascript
 settings:
   - name: DevPackages
@@ -45,4 +49,6 @@ import {Helmet} from 'react-helmet'
 {% if element.values.ogtitle %}<meta name="title" property="og:title" content={{ element.values.ogtitle | textOrVariable }} />{% endif %}
 {% if element.values.ogimage %}<meta name="image" property="og:image" content={{ element.values.ogimage | textOrVariable }}></meta>{% endif %}
 {% if element.values.ogurl %}<meta name="og:url" content={{ element.values.ogurl | textOrVariable }} />{% endif %}
+{% if element.values.customContent %}{{ element.values.customContent | raw }}{% endif %}
+
 </Helmet>
