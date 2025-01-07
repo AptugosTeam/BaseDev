@@ -206,6 +206,21 @@ options:
     display: Sort Method
     type: dropdown
     options: desc;asc
+  - name: useCustomTableData
+    display: Use custom Table data
+    type: checkbox
+    settings:
+      default: false
+      condition: ''
+  - name: customTableData
+    display: Custom Table Data
+    type: text
+    options: ''
+    settings:
+      default: ''
+      propertyCondition: useCustomTableData
+      condition: '"true"'
+      active: true
 children: []
 */
 {% set editProc = element.values.editProcedure|default('No') %}
@@ -276,7 +291,7 @@ children: []
         [{% for field in tableFields %}"{{ field }}",{% endfor %}{% if editProc != 'No' or allowEdit or allowView or allowDeletion %}"Actions"{% endif %}]
       {% endif %}
     }
-    tableData={ {{ tableData }} }
+    tableData={ {% if element.values.useCustomTableData %} {{element.values.customTableData}} {% endif %}{{ tableData }}}
     {% if element.values.rowClassName %}
       rowClassName={ {{element.values.rowClassName}} }
     {% endif %}

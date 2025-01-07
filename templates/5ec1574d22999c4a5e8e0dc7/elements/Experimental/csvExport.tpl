@@ -26,6 +26,17 @@ options:
     type: dropdown
     options: 
       return [[';', 'Semicolon'],[',', 'Comma']]
+  - name: onclick
+    display: On Click
+    type: function
+    options: ''
+    advanced: true
+  - name: asyncOnClick
+    display: Async On Click?
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
 settings:
   - name: Packages
     value: '"react-csv": "^2.0.3",'
@@ -48,5 +59,11 @@ import { CSVLink } from "react-csv"
   {% endif %}
   {% if element.values.separator %}
   separator={"{{element.values.separator}}"}
+  {% endif %}
+  {% if element.values.onclick %}
+    onClick={ {{element.values.onclick}} }
+  {% endif %}
+  {% if element.values.asyncOnClick %}
+    asyncOnClick={true}
   {% endif %}
 >{{ content|raw }}</CSVLink>
