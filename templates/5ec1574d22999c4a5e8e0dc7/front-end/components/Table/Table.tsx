@@ -22,6 +22,7 @@ interface tableProps extends React.PropsWithChildren {
   orderBy?: string
   order?: 'asc' | 'desc'
   onRequestSort?: Function
+  onRowClick?: (rowData: any) => void;
 }
 
 const TableHeader = (tableProps) => {
@@ -99,7 +100,7 @@ const AptugoTable: FunctionComponent<tableProps> = (props) => {
             const fields = Object.values(row)
             const rowClass = typeof props.rowClassName === 'function' ? props.rowClassName(row) : props.rowClassName
             return (
-              <TableRow key={key} className={rowClass || styles.tableBodyRow}>
+              <TableRow key={key} className={rowClass || styles.tableBodyRow} onClick={() => props.onRowClick && props.onRowClick(row)} >
                 {Array.isArray(props.children)
                   ? RenderCells({...row, key})
                   : fields.map((field:React.ReactNode, subkey) => (

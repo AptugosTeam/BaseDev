@@ -37,19 +37,19 @@ import { styled } from '@mui/material/styles'
     <div data-section="contentPrices">
       {% if element.values.discount %}
         <div data-section="discount">
-          <span>$ { Number(`${{ element.values.discount }}`) }% Off</span>
+          <span>$ { Number(`{{ element.values.discount }}`) }% Off</span>
         </div>
         <div data-section="prices">
           <div data-section="grossPrice">
-            <span>$ { Number(`${{ element.values.price }}`).toFixed(2) }</span>
+            <span>$ { Number(`{{ element.values.price }}`).toFixed(2) }</span>
           </div>
           <div data-section="netPrice">
-            <span>$ { ((Number(`${{ element.values.price }}`) / 100) * (100 - Number(`${{ element.values.discount }}`))).toFixed(2) }</span>
+            <span>$ { ((Number(`{{ element.values.price }}`) / 100) * (100 - Number(`{{ element.values.discount }}`))).toFixed(2) }</span>
           </div>
         </div>
       {% else %}
       <div data-section="priceWithoutDiscount">
-        <span>$ { Number(`${{ element.values.price }}`).toFixed(2) } </span>
+        <span>$ { Number(`{{ element.values.price }}`).toFixed(2) } </span>
       </div>
       {% endif %}
     </div>
