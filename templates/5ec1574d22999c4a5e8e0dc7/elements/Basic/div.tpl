@@ -74,6 +74,19 @@ options:
     settings:
       condition: true
       propertyCondition: dataAttribute
+  - name: ariaLabel
+    display: Add ARIA Label
+    type: checkbox
+    settings:
+      default: false
+    advanced: true
+  - name: ariaLabelValue
+    display: Value of ARIA Label
+    type: text
+    advanced: true
+    settings:
+      condition: true
+      propertyCondition: ariaLabel
   - name: key
     display: Key
     type: text
@@ -117,6 +130,9 @@ helpText: Basic HTML Div element
   {% endif %}
   {% if element.values.dataAttribute and element.values.nameAttribute and element.values.valueAttribute %}
     data-{{ element.values.nameAttribute }}={ {{ element.values.valueAttribute }} }
+  {% endif %}
+  {% if element.values.ariaLabel and element.values.ariaLabelValue %}
+    aria-label={ {{ element.values.ariaLabelValue }} }
   {% endif %}
   {% if element.values.useid %}
     id="{{ element.unique_id }}"
