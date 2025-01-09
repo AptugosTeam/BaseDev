@@ -18,6 +18,11 @@ options:
     display: On Change
     type: function
     options: ''
+  - name: onFocus
+    display: On Focus
+    type: function
+    options: ''
+    advanced: true
   - name: onBlur
     display: On Focus Lost
     type: function
@@ -199,6 +204,7 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if fullWidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
+    {% if element.values.onFocus %}onFocus={ {{ element.values.onFocus | functionOrCall }} }{% endif %}
     {% if element.values.onBlur %}onBlur={ {{ element.values.onBlur | functionOrCall }} }{% endif %}
     {% if element.values.onKeyDown %}onKeyDown={ {{element.values.onKeyDown}} }{% endif %} 
     {% if element.values.endAdornment %}
