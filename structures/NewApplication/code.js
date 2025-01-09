@@ -361,7 +361,7 @@ const Dashboard = {
 	]
 }
 
-const file = aptugo.readFile('/Users/gaston/Aptugo/templates/Next/public/HaltugoBLocks001.png')
+const file = aptugo.readFile('./HaltugoBLocks001.png')
 
 Application = await aptugo.structures.run('importImage', {
 	app: Application,
