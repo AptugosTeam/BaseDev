@@ -31,18 +31,18 @@ settings:
     value: '"recharts": "^2.1.13",'
 children: []
 */
-   {% set ph %}
-    {% set valuesName = element.values.valuesVariable %}
-    {% set name = element.values.valuesVariable %}
+{% set ph %}
+  {% set valuesName = element.values.valuesVariable %}
+  {% set name = element.values.valuesVariable %}
   {% if element.values.values != 'useVar' %}
     {% set values = element.values.values|fieldData %}
     {% set valuesName = values.column_name %}
   {% endif %}
-  {% endset %}
-  {{ save_delayed('ph',ph) }}
-    <Bar 
-      dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" 
-      legendType="{{element.values.legendType|default('line')}}" 
-      barSize={ {{element.values.barSize|default(20)}} } 
-      fill="#{{element.values.colors|default('000')}}" 
-    />
+{% endset %}
+{{ save_delayed('ph',ph) }}
+<Bar 
+  dataKey="{% if values.column_name %}{{ values.column_name }}{% else %}{{ element.values.valuesVariable }}{% endif %}" 
+  legendType="{{element.values.legendType|default('line')}}" 
+  barSize={ {{element.values.barSize|default(20)}} } 
+  fill="#{{element.values.colors|default('000')}}" 
+/>

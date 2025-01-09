@@ -54,7 +54,11 @@ import { fetcher } from '@lib/fetch'
 {% if element.values.urlFULL %}
 {% set url = settings.apiURL ~ element.values.url %}
 {% endif %}
-fetcher({{ url | textOrVariableInCode }}, { method: '{{ element.values.method|default('GET') }}'}).then({{ element.values.resultVar|default('result') }} => {
+fetcher({{ url | textOrVariableInCode }}, { 
+  method: '{{ element.values.method|default('GET') }}'
+  {% if element.values.dataVariable %}, body: {{ element.values.dataVariable }}{% endif %}
+  {% if element.values.extraOptions %}, {{ element.values.extraOptions | raw }}{% endif %}
+}).then({{ element.values.resultVar|default('result') }} => {
  {{ content | raw }}
 }).catch((error) => {
   {% if element.values.onError %}

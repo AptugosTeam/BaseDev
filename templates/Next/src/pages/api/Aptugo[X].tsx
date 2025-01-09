@@ -70,7 +70,11 @@ children: []
 {% block baseRoute %}
 import { ValidateProps } from "@api-lib/constants"
 
-import { {{ tableName }}Model } from '@/models'
+import {
+  {% for subtable in application.tables %}
+    {{ subtable.name | friendly }}Model,
+  {% endfor %}
+} from '@/models'
 import { database, validateBody, parseBody } from "@api-lib/middlewares"
 import { ncOpts } from "@api-lib/nc"
 import nc from "next-connect"

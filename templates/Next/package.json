@@ -10,7 +10,7 @@ unique_id: siFqPBQK
   "scripts": {
     "dev": "next dev --port {{ insert_setting('port')|default('8012') }}",
     "build": "next build",
-    "start": "next start --port 3002",
+    "start": "next start --port {{ insert_setting('port')|default('3002') }}",
     "lint": "next lint"
     {% set npmScripts = insert_setting('npmScripts') %}
     {% if npmScripts %},{{ npmScripts | raw }}{% endif %}

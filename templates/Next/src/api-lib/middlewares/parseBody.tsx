@@ -1,12 +1,22 @@
 /*
 path: parseBody.tsx
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/src/api-lib/middlewares/parseBody.tsx
 keyPath: src/api-lib/middlewares/parseBody.tsx
 unique_id: UVJd8Kuq
 */
 export async function parseBody(req, res, next) {
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    res.status(200).send('ok')
+    return
+  }
+
   if (req.headers["content-type"] === "application/json") {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+
     const readable = req.read()
     const buffer = await Buffer.from(readable)
     try {
@@ -17,7 +27,6 @@ export async function parseBody(req, res, next) {
       return res.status(400).end();
     }
   } else if (req.file) {
-    console.log( req.headers["content-type"] )
     if (req.file) {
       res.json({ filename: req.file.filename })
       next(false)

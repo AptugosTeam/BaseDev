@@ -2,13 +2,9 @@
 path: uncontrolledTextarea.tpl
 type: file
 unique_id: txareaOrrq
-icon: f:uncontrolledTextArea.svg
+icon: ico-textarea
 sourceType: javascript
 options:
-  - name: label
-    display: Label
-    type: text
-    options: ''
   - name: value
     display: Value
     type: text
@@ -43,10 +39,9 @@ import TextareaAutosize from '@mui/material/TextareaAutosize'
   {% if element.values.minRows %}minRows="{{ element.values.minRows }}"{% endif %}
   {% if element.values.maxRows %}maxRows="{{ element.values.maxRows }}"{% endif %}
   {% if element.values.label %}label="{{ element.values.label }}"{% endif %}
-  {% if element.values.label %}aria-label="{{ element.values.label }}"{% endif %}
   {% if element.values.placeholder %}placeholder="{{ element.values.placeholder }}"{% endif %}
   {% if element.values.value %}defaultValue={{ element.values.value }}{% endif %}
   {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-  {% if element.values.onChange %}onChange={ {{ element.values.onChange }} }{% endif %}
+  {% if element.values.onChange %}onChange={(e) => {{element.values.onChange}} }{% endif %}
 />
