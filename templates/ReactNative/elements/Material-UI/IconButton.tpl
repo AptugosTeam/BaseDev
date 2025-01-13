@@ -117,7 +117,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 {% endif %}
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-<{{ tag }} name={ '{{element.values.FontAwesomeIcon|default("square-o")|dashCase}}' } size={ {{element.values.FontAwesomeSize|default(20)}} } {% if element.values.FontAwesomeColor %}color={ '{{element.values.FontAwesomeColor}}' }{% endif %} 
+<{{ tag }} name={{element.values.FontAwesomeIcon|default("square-o")|dashCase | textOrVariable}} size={ {{element.values.FontAwesomeSize|default(20)}} } {% if element.values.FontAwesomeColor %}color={{element.values.FontAwesomeColor | textOrVariable}}{% endif %} 
 {% if element.values.Action %}onPress={ {{ element.values.Action | functionOrCall }} }{% endif %}
 {% if element.values.FontAwesomeStyle %}{{ element.values.FontAwesomeStyle }}{% endif %}
 >
