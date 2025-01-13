@@ -4,6 +4,7 @@ type: file
 unique_id: EECbOrrq
 icon: ico-uncontrolled-input
 sourceType: javascript
+order: 50
 options:
   - name: label
     display: Label
@@ -17,6 +18,11 @@ options:
     display: On Change
     type: function
     options: ''
+  - name: onFocus
+    display: On Focus
+    type: function
+    options: ''
+    advanced: true
   - name: onBlur
     display: On Focus Lost
     type: function
@@ -33,7 +39,7 @@ options:
   - name: size
     display: Size
     type: dropdown
-    options: normal;small;medium
+    options: normal;small
   - name: margin
     display: Margin
     type: dropdown
@@ -118,9 +124,22 @@ options:
     display: Child is end adornment
     type: checkbox
     advanced: true
+  - name: inputProps
+    display: Enter your inputProps
+    type: code
+    advanced: true
+  - name: onKeyDown
+    display: On Key Down
+    type: code
+    advanced: true
+  - name: inputRef
+    display: Input Reference
+    type: code
+    advanced: true
 children: []
 */
 {% if element.values.fullWidth %}{% set fullWidth = true %}{% endif %}
+{% if element.values.select %}{% set select = true %}{% endif %}
 {% if element.values.readOnly %}
   {% set readOnly = true %}
 {% endif %}
@@ -147,9 +166,10 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
-    {% if readOnly %}
+    {% if readOnly or element.values.inputProps %}
       inputProps={ {
-        readOnly: true,
+        {% if readOnly %}readOnly: true,{% endif %}
+        {{element.values.inputProps}}
       } }
     {% endif %}
     {% if element.values.type == 'number' %}
@@ -189,10 +209,15 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if select %}select{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
+    {% if element.values.onFocus %}onFocus={ {{ element.values.onFocus | functionOrCall }} }{% endif %}
     {% if element.values.onBlur %}onBlur={ {{ element.values.onBlur | functionOrCall }} }{% endif %}
+    {% if element.values.onKeyDown %}onKeyDown={ {{element.values.onKeyDown}} }{% endif %} 
     {% if element.values.endAdornment %}
       InputProps={ {
         endAdornment: <InputAdornment position="end">{{ content | raw }}</InputAdornment>
       } }
     {% endif %}
-/>
+    {% if element.values.inputRef %}inputRef={ {{ element.values.inputRef }} }{% endif %}
+    >
+    {{ content | raw }}
+    </TextField>
