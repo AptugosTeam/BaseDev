@@ -361,20 +361,21 @@ const Dashboard = {
 	]
 }
 
-const file = aptugo.readFile('./HaltugoBLocks001.png')
+try {
+	const file = aptugo.readFile( Parameters.structure.fullFolder +  '/HaltugoBLocks001.png')
+	Application = await aptugo.structures.run('importImage', {
+		app: Application,
+		id: assetID,
+		uploadFiles: [{
+			name: 'HaltugoBLocks001.png',
+			contents: file
+		}]
+	})
+} catch(e) {
+	console.log('caught file', e)
+}
 
-Application = await aptugo.structures.run('importImage', {
-	app: Application,
-	id: assetID,
-	uploadFiles: [{
-		name: 'HaltugoBLocks001.png',
-		contents: file
-	}]
-})
 
 Application.pages[0].children.push(Dashboard)
-
-
-
 
 return Application
