@@ -116,11 +116,11 @@ class AuthService {
     const { validate = false, lang = 'en' } = options;
     const messages = {
       en: {
-        success: 'Successful registration, check your email to validate your account',
+        success: 'Registration successful. Check your inbox or spam folder to confirm your account',
         invalidEmailSettings: 'Invalid settings for validation email',
       },
       es: {
-        success: 'Registro exitoso, revisa tu correo electrónico para validar tu cuenta',
+        success: 'Registro realizado con éxito. Revisa tu bandeja de entrada o spam para confirmar tu cuenta',
         invalidEmailSettings: 'Configuración inválida para la verificación por email',
       },
     };
