@@ -225,6 +225,12 @@ options:
     options: ''
     settings:
       default: false
+  - name: centerModeVariable
+    display: Use a variable for Center mode
+    type: text
+    settings:
+      condition: true
+      propertyCondition: centerMode
   - name: infinite
     display: Enable Infinite mode
     type: checkbox
@@ -289,7 +295,11 @@ import "react-multi-carousel/lib/styles.css";
   draggable={false}
 {% endif %}
 {% if element.values.centerMode %}
-  centerMode={true}
+  {% if element.values.centerModeVariable %}
+    centerMode={ {{ element.values.centerModeVariable }} }
+  {% else %}
+    centerMode={true}
+  {% endif %}
 {% endif %}
 {% if element.values.infinite %}
   infinite={true}
