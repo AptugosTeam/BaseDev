@@ -5,14 +5,17 @@ unique_id: mPxPIh6x
 */
 const next = require("next") 
 
-const dev = process.env.NODE_ENV === "production" 
 const app = next({ 
   dir: '/var/www/wildcards/{{ settings.url | replace({"http://": "", "https://": ""}) }}'
 })
 const handle = app.getRequestHandler() 
 
 const bb = async (req, res, next) => {
-  await app.prepare()
-  handle(req, res).catch(next)
+  try {
+    await app.prepare()
+    await handle(req, res)
+  } catch(e) {
+    next(e)
+  }
 }
 module.exports = bb

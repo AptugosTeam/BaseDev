@@ -12,25 +12,33 @@ export async function parseBody(req, res, next) {
     return
   }
 
-  if (req.headers["content-type"] === "application/json") {
+  if (req.headers['content-type'] === 'application/json') {
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
 
-    const readable = req.read()
-    const buffer = await Buffer.from(readable)
-    try {
-      const data = JSON.parse(buffer.toString());
-      req.body = data
-      next()
-    } catch (e) {
-      return res.status(400).end();
-    }
+    let body = ''
+    req.on('data', (chunk) => {
+      body += chunk
+    })
+
+    req.on('end', () => {
+      try {
+        req.body = JSON.parse(body)
+        next()
+      } catch (e) {
+        console.error('Invalid JSON:', e.message)
+        res.status(400).send({ error: 'Invalid JSON' })
+      }
+    })
+
+    req.on('error', (err) => {
+      console.error('Error reading request body:', err.message)
+      res.status(500).send({ error: 'Error reading request body' })
+    })
   } else if (req.file) {
-    if (req.file) {
-      res.json({ filename: req.file.filename })
-      next(false)
-    }
+    res.json({ filename: req.file.filename })
+    next(false)
   } else {
     next()
   }
