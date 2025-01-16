@@ -4,7 +4,7 @@
   "renderingFolder": "/src/Pages",
   "default": "true",
   "namingSchema": "{% if pageDefinition.path == '/' %}index{% else %}{{ pageDefinition.path }}{% endif %}.tsx",
-  "templateCommandsAfterDeploy": "pnpm i && pnpm run build",
+  "templateCommandsAfterDeploy": "$(which pnpm) i && $(which pnpm) run build",
   "deployScript": "templatescripts/deploy.js",
   "assetsFolder": "/public",
   "tableTypes": [
