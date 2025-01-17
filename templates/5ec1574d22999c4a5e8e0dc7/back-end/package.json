@@ -30,7 +30,8 @@ children: []
     "node_hash": "latest",
     "mongoose-paginate-v2": "latest",
     "mongodb": "latest",
-    "sharp": "^0.32.6"
+    "sharp": "^0.32.6",
+    "haversine": "^1.1.1",
 {% set BackendPackages = insert_setting('BackendPackages') %}
 {% if BackendPackages %},{{ insert_setting('BackendPackages') | raw }}{% endif %}
   }
