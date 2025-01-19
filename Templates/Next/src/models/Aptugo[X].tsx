@@ -11,7 +11,7 @@ children: []
 {% set tableName = table.name | friendly %}
 {% set singleName = table.singleName | friendly %}
 import mongoose from "mongoose"
-import paginate from 'mongoose-paginate-v2'
+import paginate from 'mongoose-aggregate-paginate-v2'
 {{ insert_setting('modelAddenumHead') | raw }}
 
 {% set extraImports = '' %}
@@ -73,4 +73,4 @@ import paginate from 'mongoose-paginate-v2'
   {% endif %}
 {% endfor %}
 
-export default mongoose.models.{{ tableName }} as mongoose.PaginateModel<{{ tableName }}> || mongoose.model<{{ tableName }}, mongoose.PaginateModel<{{ tableName }}>>('{{ tableName }}', {{ singleName }}Schema)
+export default mongoose.models.{{ tableName }} as mongoose.AggregatePaginateModel<{{ tableName }}> || mongoose.model<{{ tableName }}, mongoose.AggregatePaginateModel<{{ tableName }}>>('{{ tableName }}', {{ singleName }}Schema)

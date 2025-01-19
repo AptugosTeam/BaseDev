@@ -1,4 +1,5 @@
 
+if (typeof Parameters.values === 'string') Parameters.values = JSON.parse(Parameters.values)
 const unique = Parameters.unique_id || aptugo.generateID()
 const newElement = {
   unique_id: unique,
@@ -8,6 +9,8 @@ const newElement = {
   value: Parameters.element,
   values: Parameters.values || {}
 }
+
+console.log('this is the new element', JSON.stringify(newElement, null, 2))
 
 const container = aptugo.findPageInTree(Application.pages, Parameters.parent)
 

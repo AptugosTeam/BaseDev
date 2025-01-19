@@ -161,7 +161,7 @@ children: []
       sortLanguage: '{{ element.values.sortLanguage|default('en') }}',
     })
 
-    const { {{ singleName }}data{% if varName %}: {{ varName }}{% endif %}, {{ singleName }}isLoading, {{ singleName }}isError } = use{{ tableName }}Pages({{ innervarname }}loadoptions)
+    const { {{ singleName }}data{% if varName %}: {{ varName }}{% endif %}, {{ singleName }}isLoading, {{ singleName }}isError, {{ singleName }}pages } = use{{ tableName }}Pages({{ innervarname }}loadoptions)
   {% endset %}
   {{ save_delayed('ph', ph)}}
 {% if element.values.onload or element.children %}

@@ -90,6 +90,7 @@ $fontSize: 100%;
           text-align: left;
           position: relative;
           display: flex;
+          justify-content: space-between;
 
           & > svg {
             height: 0.5625rem;

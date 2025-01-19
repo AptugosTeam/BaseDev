@@ -4,7 +4,7 @@ completePath: elements/Aptugo Routes/get.tpl
 unique_id: AlPg3QRE
 */
 (req, _res, next) => {
-  const { before, after, filter, sort, skip, limit, page } = req.query || {}
+  const { before, after, filter, sortField, sortMethod, skip, limit, page } = req.query || {}
   const options = {
     page: Number(page) || 1,
     limit: Number(limit) || 10,
@@ -19,7 +19,7 @@ unique_id: AlPg3QRE
   const aggregate = []
 
   if (skip) aggregate.push({ $skip: skip })
-  if (sort) aggregate.push({ $sort: { [sort.field]: [sort.desc] ? -1 : 1 } })
+  if (sortField && sortMethod) aggregate.push({ $sort: { [sortField]: sortMethod === 'desc' ? -1 : 1 } })
   if (before) aggregate.push({ $match: { ...(before && { createdAt: { $lt: before } }) } })
   if (after) aggregate.push({ $match: { ...(after && { createdAt: { $gt: after } }) } })
   if (filter) {
@@ -30,11 +30,12 @@ unique_id: AlPg3QRE
     }
   }
   req.options = options
+  req.aggregate = aggregate
   next()
 },
 async (req, res) => {
   try {
-    const results = await {{ tableName }}Model.paginate({}, req.options)
+    const results = await {{ tableName }}Model.aggregatePaginate(req.aggregate, req.options)
     res.status(200).json({ success: true, data: results })
   } catch(error) {
     res.status(400).json({ success: false, error: error.toString() })

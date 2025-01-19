@@ -23,7 +23,7 @@ const AptugoDataTableTH: FunctionComponent<any> = (props) => {
     setisEditing(false)
   }
 
-  const allowSorting = false
+  const allowSorting = !!props.onRequestSort
   const sortingObject = {
     asc: (
       <svg width="1em" height="1em" viewBox="0 0 10 14" xmlns="http://www.w3.org/2000/svg">

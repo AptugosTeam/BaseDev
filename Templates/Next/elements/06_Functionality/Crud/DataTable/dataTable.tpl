@@ -126,7 +126,7 @@ import DataTable from '@components/DataTable/dataTable'
     className={ {{element.values.className}} }
   {% endif %}
   tableData={ {{ tableData }} }
-  pages={ {{ tableSingleNameLower }}data?.totalPages}
+  pages={ {{ tableSingleNameLower }}pages }
   columnInfo={
     {% if element.values.columnInfo %}
       {{ element.values.columnInfo }}
@@ -179,10 +179,8 @@ import DataTable from '@components/DataTable/dataTable'
   onRequestSort={property => {
     set{{ innervarname }}loadoptions({
       ...{{ innervarname }}loadoptions,
-      sort: {
-        field: property,
-        method: {{ innervarname }}loadoptions.sort.field === property ? ({{ innervarname }}loadoptions.sort.method === 'asc' ? 'desc' : 'asc') : 'asc',
-      }
+      sortField: property,
+      sortMethod: {{ innervarname }}loadoptions.sortField === property ? ({{ innervarname }}loadoptions.sortMethod === 'asc' ? 'desc' : 'asc') : 'asc',
     })
   }}
 />

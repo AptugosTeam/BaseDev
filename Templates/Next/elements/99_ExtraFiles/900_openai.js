@@ -4,6 +4,7 @@ keyPath: elements/99_ExtraFiles/900_openai.js
 unique_id: BUqPR6sD
 */
 const callAI = (ia, functions, options, callHistory = []) => {
+  // console.log('  >> got this options', JSON.stringify(options.messages, null, 2))
   return new Promise((resolve, reject) => {
     ia.chat.completions
       .create(options)
@@ -15,14 +16,15 @@ const callAI = (ia, functions, options, callHistory = []) => {
             try {
               const params = JSON.parse(toolCall.function.arguments)
               const functName = toolCall.function.name
-  
+
               callHistory.push(functName)
-  
+
               let funct = functions[functName]
+              // console.log('  >> calling function: ', functName)
               functResult = await funct(params)
             } catch (e) {
-              console.info('tried to call funct, didnt work:', toolCall.function.arguments, toolCall.function.name)
-              console.error('function calling error', e)
+              console.info(' >> ERROR: tried to call funct, didnt work:', toolCall.function.arguments, toolCall.function.name)
+              console.error('  >> Function calling error:', e)
             }
           }
 

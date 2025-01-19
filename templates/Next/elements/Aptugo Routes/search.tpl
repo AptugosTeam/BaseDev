@@ -38,7 +38,7 @@ children: []
 },
 async (req, res) => {
   try {
-    const results = await {{ tableName }}Model.paginate(req.queryFilter, req.options)
+    const results = await {{ tableName }}Model.aggregatePaginate(req.queryFilter, req.options)
     res.status(200).json({ success: true, data: results })
   } catch(error) {
     res.status(400).json({ success: false, error: error.toString() })

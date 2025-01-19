@@ -42,5 +42,6 @@ export function use{{ tableName }}Pages(options) {
     {{ singleName }}data: data?.data.docs,
     {{ singleName }}isLoading: !error && !data,
     {{ singleName }}isError: error,
+    {{ singleName }}pages: data?.data.totalPages,
   }
 }
