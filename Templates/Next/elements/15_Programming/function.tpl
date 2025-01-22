@@ -19,10 +19,16 @@ options:
     display: Body
     type: function
     options: ''
-  - name: priority
-    display: Priiority
+  - name: renderElsewhere
+    display: Render Elsewhere
     type: dropdown
-    options: Normal;High;Low
+    options: >-
+      return [ ['inPlace','Render in place'],
+      ...aptugo.store.getState().application.tables.map(({ unique_id, singleName }) => [
+      aptugo.pageUtils.friendly(singleName).toLowerCase() + '_File_Start',
+      'Begining of endpoints for ' + singleName
+      ]) ]
+    advanced: true
   - name: async
     display: Async
     type: checkbox
@@ -31,19 +37,15 @@ options:
       default: false
 children: []
 */
-
-{% if element.values.priority %}
-{% set ph %}
-const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
-  {{ element.values.functionBody | raw }}
-  {{ content | raw }}  
-}
+{% set functionContent %}
+  const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
+    {{ element.values.functionBody | raw }}
+    {{ content | raw }}  
+  }
 {% endset %}
-{{ save_delayed('ph',ph,1) }}
+{% if element.values.renderElsewhere and element.values.renderElsewhere != 'inPlace' %}
+  {{ add_setting(element.values.renderElsewhere, functionContent) }}
 {% else %}
-const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
-  {{ element.values.functionBody | raw }}
-  {{ content | raw }}  
-}
+  {{ functionContent }}
 {% endif %}
 

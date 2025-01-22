@@ -44,6 +44,16 @@ options:
   - name: serverSide
     display: Back-End Variable
     type: checkbox
+  - name: renderElsewhere
+    display: Render Elsewhere
+    type: dropdown
+    options: >-
+      return [ ['inPlace','Render in place'],
+      ...aptugo.store.getState().application.tables.map(({ unique_id, singleName }) => [
+      aptugo.pageUtils.friendly(singleName).toLowerCase() + '_File_Start',
+      'Begining of endpoints for ' + singleName
+      ]) ]
+    advanced: true
   - name: type
     display: Type Definition
     type: text
@@ -62,14 +72,21 @@ sourceType: javascript
 children: []
 */
 {% if not element.values.serverSide %}
-  {% set prev = 'const ' %}
-  {% if element.values.objectProperty %}
-    {% set prev = 'this.' %}
-    {% set variableDeclarations %}
-      {{ element.values.variableName }}:{{ element.values.type|default('any') }}
-    {% endset %}
-    {{ save_delayed('variableDeclarations', variableDeclarations) }}
-  {% elseif element.values.willbeModified %}{% set prev = 'let ' %}
+  {% set variableContent %}
+    {% set prev = 'const ' %}
+    {% if element.values.objectProperty %}
+      {% set prev = 'this.' %}
+      {% set variableDeclarations %}
+        {{ element.values.variableName }}:{{ element.values.type|default('any') }}
+      {% endset %}
+      {{ save_delayed('variableDeclarations', variableDeclarations) }}
+    {% elseif element.values.willbeModified %}{% set prev = 'let ' %}
+    {% endif %}
+    {{prev}}{{ element.values.variableName }}{% if element.values.type %}:{{ element.values.type }}{% endif %} = {{ element.values.variableValue|default(content | raw)}}
+  {% endset %}
+  {% if element.values.renderElsewhere and element.values.renderElsewhere != 'inPlace' %}
+    {{ add_setting(element.values.renderElsewhere, variableContent) }}
+  {% else %}
+    {{ variableContent }}
   {% endif %}
-  {{prev}}{{ element.values.variableName }}{% if element.values.type %}:{{ element.values.type }}{% endif %} = {{ element.values.variableValue|default(content | raw)}}
 {% endif %}
