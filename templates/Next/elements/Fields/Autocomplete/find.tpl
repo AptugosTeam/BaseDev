@@ -7,5 +7,10 @@ unique_id: t9Bzg4Oy
 {% if field.relationshipType == 'm:1' %}
   options.populate.push({ path: '{{ field.column_name | friendly }}' })
 {% elseif field.relationshipType == '1:m' %}
-  options.populate.push({ path: '{{ field.column_name | friendly }}' })
+  aggregate.push({ $lookup: {
+    from: '{{ referencedField.table.name | friendly | lower }}',
+    localField: '{{ field.column_name | friendly }}',
+    foreignField: '_id',
+    as: '{{ field.column_name | friendly }}'
+  } })
 {% endif %}

@@ -29,6 +29,13 @@ $breakpointMid: 800px;
   --primary-40: #314b51;
 }
 
+:global(#__next) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
 .container {
   margin: 0 auto;
   max-width: 42em;
@@ -157,7 +164,6 @@ body {
 }
 
 .pages {
-  height: 100vh;
   display: flex;
   flex-direction: column;
 

@@ -16,12 +16,19 @@ if (State.usersReducer) {
 // Backwards compatibility
 let defaultTemplate
 
-if (State.templatesReducer) {
-  defaultTemplate = State.templatesReducer.templates.filter(template => template.default )
-  State.templatesReducer.loadedTemplate = defaultTemplate[0]
-} else {
-  defaultTemplate = State.templates.filter(template => template.default)
+try {
+  if (State.templatesReducer) {
+    defaultTemplate = State.templatesReducer.templates.filter(template => template.default )
+    State.templatesReducer.loadedTemplate = defaultTemplate[0]
+  } else {
+    defaultTemplate = State.templates.filter(template => template.default)
+  }
+} catch(e) {
+  console.log('Erorr when definining template', e)
+  const error = 'Something wrong with the templates'
+  Store.dispatch({ type: "SET_ERROR", error: error })
 }
+
 
 const username = aptugo.friendly(State.auth.user.name)
 const dbpassword = aptugo.generateID() + aptugo.generateID()

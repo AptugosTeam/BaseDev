@@ -11,12 +11,14 @@ unique_id: AlPg3QRE
     populate: []
   }
 
+  const aggregate = []
+  
   {% for field in table.fields %}
     {% set fieldWithData = field | fieldData %}
     {% include includeTemplate(['Fields' ~ field.data_type ~ 'find.tpl', 'Fieldsfind.tpl']) %}
   {% endfor %}
 
-  const aggregate = []
+  
 
   if (skip) aggregate.push({ $skip: skip })
   if (sortField && sortMethod) aggregate.push({ $sort: { [sortField]: sortMethod === 'desc' ? -1 : 1 } })

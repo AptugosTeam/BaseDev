@@ -30,7 +30,7 @@ children: []
     value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
     onChange={(newValue) => {
       {% if field.relationshipType == '1:m' %}
-        if (!newValue || !newValue.length) handleUsersChange('Company')([])
+        if (!newValue || !newValue.length) handle{{ tableName }}Change('{{ columnName }}')([])
       {% else %}
         if (!newValue) handle{{ tableName }}Change('{{ columnName }}')(null)
       {% endif %}

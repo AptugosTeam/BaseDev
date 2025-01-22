@@ -13,6 +13,7 @@ if (typeof Parameters.values === 'string') Parameters.values = JSON.parse(Parame
 
 if (Parameters.children) Parameters.children = fixValues(Parameters.children)
 
+const elementOriginalID = Parameters.original_id
 const unique = Parameters.unique_id || aptugo.generateID()
 const newElement = {
   unique_id: unique,
@@ -24,13 +25,16 @@ const newElement = {
   children: Parameters.children
 }
 
-console.log('this is the new element', JSON.stringify(newElement, null, 2))
-
 const container = aptugo.findPageInTree(Application.pages, Parameters.parent)
 
 if (container) {
   if (!container.children) container.children = []
-  container.children.push(newElement)
+
+  const elementToReplace = container.children.findIndex(e => e.unique_id === elementOriginalID)
+
+  container.children[elementToReplace] = newElement
 }
 
+console.log('THESE ARE THE PARAMETERS', JSON.stringify(Parameters,null,2))
+console.log('IM THE STRUCTURE AND THIS IS THE NEW ELEMENT', JSON.stringify(container,null,2))
 return Application

@@ -159,24 +159,10 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
 
   const table = useReactTable(tableOptions)
 
-  const desdePagina = pageIndex - 2 < 0 ? 0 : pageIndex - 2
-  const hastaPagina = pageIndex + 2 < props.pages ? desdePagina + 5 : props.pages
-  const cuantasPaginas = hastaPagina - desdePagina
-  const paginasAmostrar: any = Array.from({ length: cuantasPaginas }, (_, i) => i + desdePagina + 1)
-  if (desdePagina > 1) {
-    paginasAmostrar.unshift('...')
-  }
-  if (desdePagina > 0) {
-    paginasAmostrar.unshift('1')
-  }
-
-  if (hastaPagina < props.pages - 1) {
-    paginasAmostrar.push('...')
-  }
-  if (hastaPagina < props.pages) {
-    paginasAmostrar.push(props.pages)
-  }
-
+  const startPage = Math.max(0, pageIndex - 2)
+  const endPage = Math.min(startPage + 5, props.pages)
+  const paginationArray = Array.from({ length: endPage - startPage }, (_, i) => startPage + 1 + i)
+  
   return (
     <div className={props.className ? props.className : styles.tableHolder}>
       <table className="table">
@@ -209,7 +195,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
                   <div
                     className="button"
                     onClick={() => {
-                      props.onRequestEdit(props.tableData[rowIndex])
+                      props.onRequestEdit(row.original)
                     }}
                   >
                     <svg width="1em" height="1em" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
@@ -276,7 +262,7 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
                             <path d="M2.333 7l3.5-4-.583-.667L1.167 7l4.083 4.667.583-.667z"></path>
                           </svg>
                         </div>
-                        {paginasAmostrar.map((page) => {
+                        {paginationArray.map((page) => {
                           return (
                             <div
                               key={`${page}_page`}
