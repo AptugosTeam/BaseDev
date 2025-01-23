@@ -87,6 +87,13 @@ options:
     settings:
       condition: Custom
       propertyCondition: addProcedure
+  - name: async
+    display: Async
+    type: checkbox
+    settings:
+      default: false
+      condition: Custom
+      propertyCondition: addProcedure
   - name: customSaveHandler
     display: Custom Save Handler
     type: code
@@ -162,7 +169,7 @@ import AddDialog from '../components/Dialog/Dialog'
   editOptions={ { title: '{{ element.values.editTitle }}', text: '{{ element.values.editIntroText }}', button: '{{ element.values.editButton }}' } }
   viewOptions={ { title: '{{ element.values.viewTitle }}', text: '{{ element.values.viewIntroText }}' } }
   removeOptions={ { title: '{{ element.values.deleteTitle }}', text: '{{ element.values.deleteIntroText }}', button: '{{ element.values.deleteButton }}' } }
-  saveDataHandler={ (data: I{{ table.name | friendly | capitalize }}Item ) => {
+  saveDataHandler={ {% if element.values.async%}async {% endif %} (data: I{{ table.name | friendly | capitalize }}Item ) => {
     {% if element.values.addProcedure == 'Internal' %}
       if ({{ dialogVariable }} === 'delete') {
         dispatch(remove{{ friendlySingleName }}(data))
