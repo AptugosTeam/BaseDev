@@ -24,6 +24,9 @@ options:
   - name: parameters
     display: Parameters 
     type: text
+  - name: return
+    display: Return Value 
+    type: text
 extraFiles:
   - source: 'elements/Programming/baseHook.tsx'
     destination: 'front-end/hooks/{{ element.values.folderName | default(element.values.name) | friendly }}/{{ element.values.name | friendly }}.tsx'
