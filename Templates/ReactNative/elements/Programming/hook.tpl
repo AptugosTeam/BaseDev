@@ -21,6 +21,10 @@ options:
     display: Folder name for the hook
     type: text
     options: ''
+  - name: fileName
+    display: File name for the hook
+    type: text
+    options: ''
   - name: parameters
     display: Parameters 
     type: text
@@ -29,7 +33,7 @@ options:
     type: text
 extraFiles:
   - source: 'elements/Programming/baseHook.tsx'
-    destination: 'front-end/hooks/{{ element.values.folderName | default(element.values.name) | friendly }}/{{ element.values.name | friendly }}.tsx'
+    destination: 'front-end/hooks/{{ element.values.folderName | default(element.values.name) | friendly }}/{{ element.values.fileName | default("index") | friendly }}.tsx'
 childs:
   - name:  hookHeader
     element: hookHeader
