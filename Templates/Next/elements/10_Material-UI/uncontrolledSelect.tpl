@@ -2,7 +2,7 @@
 path: uncontrolledSelect.tpl
 type: file
 unique_id: KZo70Wel
-icon: ico-uncontrolled-select
+icon: ico-dropdown
 sourceType: javascript
 options:
   - name: label
@@ -53,14 +53,11 @@ options:
     type: text
 children: []
 */
-
-
 {% set bpr %}
 import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-
 <TextField
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
@@ -74,7 +71,10 @@ import MenuItem from '@mui/material/MenuItem'
     select
     {% if element.values.fullwidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
-    {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
+    {% if element.values.onChange or content %}onChange={({ target: { value }} ) => {
+      {{ element.values.onChange }}
+      {{ content | raw }} 
+    } }{% endif %}
     {% if element.values.defaultValue %}defaultValue={{ element.values.defaultValue }}{% endif %}
 >
 {% if element.values.showall %}<MenuItem value="all"><em>All</em></MenuItem>{% endif %}

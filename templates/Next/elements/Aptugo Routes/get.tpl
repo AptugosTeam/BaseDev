@@ -18,8 +18,6 @@ unique_id: AlPg3QRE
     {% include includeTemplate(['Fields' ~ field.data_type ~ 'find.tpl', 'Fieldsfind.tpl']) %}
   {% endfor %}
 
-  
-
   if (skip) aggregate.push({ $skip: skip })
   if (sortField && sortMethod) aggregate.push({ $sort: { [sortField]: sortMethod === 'desc' ? -1 : 1 } })
   if (before) aggregate.push({ $match: { ...(before && { createdAt: { $lt: before } }) } })

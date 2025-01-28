@@ -36,7 +36,7 @@ children: []
           $match: {
             $or: [
               {% for field in table.fields %}
-                { {{ field.column_name}}: { $regex: filter, $options: "i"} },
+                { {{ field.column_name | friendly }}: { $regex: filter, $options: "i"} },
               {% endfor %}
             ]
           }

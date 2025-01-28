@@ -1,8 +1,8 @@
 /*
-path: CheckboxV2.tpl
+path: Checkbox.tpl
 type: file
 unique_id: rCl7agO4
-icon: ico-check-box
+icon: ico-checkbox
 options:
   - name: Checked
     display: Checked Variable

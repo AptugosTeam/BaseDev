@@ -18,9 +18,6 @@ options:
           aptugo.variables.setPageFunction(page, 'f' + element.unique_id, `set${element.values.variableName}` );
         }
       aptugoOnChange: >-
-        const value = arguments[0];
-        const element = arguments[1];
-        const page = arguments[2];
         if (element.values?.variableName) {
           aptugo.variables.setPageVariable(page, element.unique_id, { [value]: element.values ? element.values.defaultValue : null });
           aptugo.variables.setPageFunction(page, 'f' + element.unique_id, `set${element.values.variableName}` );

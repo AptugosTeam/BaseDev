@@ -24,6 +24,13 @@ options:
       return aptugo.store.getState().application.tables.map(({ unique_id, name
       }) => [unique_id, name])
     settings:
+      aptugoOnChange: |-
+        const tableInfo = aptugo.tableUtils.getTable(value);
+        const fields = aptugo.tableUtils.getAllFields(value).reduce((acc, field) => {
+          acc[field.column_name] = 'String'; 
+          return acc;
+        }, {});
+        aptugo.variables.setPageVariable(page, element.unique_id, { [tableInfo.name]: fields });
       aptugoOnLoad: |-
         const element = arguments[0];
         if ( element.values.data ) {
@@ -138,8 +145,8 @@ children: []
 {% if element.values.loadWhenSiteLoads %}
   {# Special method to load on page load #}
   {% set goesToIndex %}
-    import { load{{ table.name | friendly | capitalize }} } from './store/actions/{{ table.name | friendly | lower }}Actions'
-    store.dispatch(load{{ table.name | friendly | capitalize }}({ limit: 500 }))
+    import { load{{ table.name | friendly | capitalize }} } from './store/actions/{{ table.name | friendly | lower }}Actions'
+    store.dispatch(load{{ table.name | friendly | capitalize }}({ limit: 500 }))
   {% endset %}
   {{ add_setting('IndexPreAdd', goesToIndex)}}
 {% else %}
@@ -164,17 +171,17 @@ children: []
     const { {{ singleName }}data{% if varName %}: {{ varName }}{% endif %}, {{ singleName }}isLoading, {{ singleName }}isError, {{ singleName }}pages } = use{{ tableName }}Pages({{ innervarname }}loadoptions)
   {% endset %}
   {{ save_delayed('ph', ph)}}
-{% if element.values.onload or element.children %}
-{% if element.values.searchString %}
-  {% set functionCall = 'searchingStatus' %}
-{% else %}
-  {% set functionCall = 'loadingStatus' %}
-{% endif %}
+  {% if element.values.onload or element.children %}
+    {% if element.values.searchString %}
+      {% set functionCall = 'searchingStatus' %}
+    {% else %}
+      {% set functionCall = 'loadingStatus' %}
+    {% endif %}
 React.useEffect(() => {
-  if ({{ table.name | friendly | lower }}Data.{{ functionCall }} === 'loaded') {
+  if ({{ varName }}) {
     {{ element.values.onload }}
     {% if element.children %}{{ content | raw }}{% endif %}
   }
-}, [{{ table.name | friendly | lower }}Data.{{ functionCall }}])
-{% endif %}
+}, [{{ varName }}])
+  {% endif %}
 {% endif %}

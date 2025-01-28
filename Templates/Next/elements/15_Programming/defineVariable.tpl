@@ -19,9 +19,6 @@ options:
           aptugo.variables.setPageVariable(page, element.unique_id, { [element.values.variableName]: element.values ? element.values.variableValue : null });
         }
       aptugoOnChange: >-
-        const value = arguments[0];
-        const element = arguments[1];
-        const page = arguments[2];
         if (element.values?.variableName) {
           aptugo.variables.setPageVariable(page, element.unique_id, { [value]: element.values ? element.values.variableValue : null });
         }
@@ -32,9 +29,6 @@ options:
     options: ''
     settings:
       aptugoOnChange: >-
-        const value = arguments[0];
-        const element = arguments[1];
-        const page = arguments[2];
         if ( element.values.variableName ) aptugo.variables.setPageVariable(page, element.unique_id, { [element.values.variableName]: value });
       active: true
   - name: willbeModified

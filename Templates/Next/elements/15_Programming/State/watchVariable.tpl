@@ -2,7 +2,7 @@
 path: watchVariable.tpl
 type: file
 unique_id: UqzrPt4d
-icon: ico-watch-variable
+icon: ico-watch
 options:
   - name: watchVariable
     display: Variable to Watch
@@ -11,8 +11,6 @@ options:
 helpText: Watch a variable for changes
 children: []
 */
-
-
 React.useEffect(() => {
-    {{ content | raw }}
+  {{ content | raw }}
 },[{{ element.values.watchVariable }}])
