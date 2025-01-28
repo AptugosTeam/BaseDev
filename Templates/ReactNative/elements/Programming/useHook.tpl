@@ -17,7 +17,7 @@ options:
     options: ''
 */
 {% set bpr %}
-import { use{{ element.values.name | friendly }} } from '../hooks/{{ element.values.name | friendly }}'
+import { use{{ element.values.name | friendly }} } from '@hooks/{{ element.values.name | friendly }}'
 {% endset %}
 {{ save_delayed('bpr', bpr)}}
 
