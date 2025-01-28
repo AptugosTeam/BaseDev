@@ -39,7 +39,7 @@ options:
   - name: size
     display: Size
     type: dropdown
-    options: normal;small
+    options: medium;small
   - name: margin
     display: Margin
     type: dropdown

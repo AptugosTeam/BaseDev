@@ -136,6 +136,14 @@ options:
     settings:
       propertyCondition: Type
       condition: edit
+  - name: inputRef
+    display: Input Ref
+    type: text
+    options: ''
+    advanced: true
+    settings:
+      propertyCondition: Type
+      condition: edit
   - name: textFieldPropsNumeric
     display: Text Field Props (Numeric Format)
     type: text
