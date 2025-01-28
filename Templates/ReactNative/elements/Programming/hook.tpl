@@ -41,9 +41,6 @@ childs:
     element: hookBody
 */
 
-{% set hookName = element.values.name %}
-{{ add_setting('hookName', hookName) }}
-
 {% set hookParameters %}
 {{element.values.parameters}}
 {% endset %}

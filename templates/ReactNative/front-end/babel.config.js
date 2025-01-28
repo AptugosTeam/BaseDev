@@ -20,6 +20,7 @@ module.exports = function(api) {
       extensions: ['.js', '.ts', '.tsx', '.json'],
       alias: {
         '@assets': './assets',
+        '@hooks': './hooks',
       },
     },
 ])
