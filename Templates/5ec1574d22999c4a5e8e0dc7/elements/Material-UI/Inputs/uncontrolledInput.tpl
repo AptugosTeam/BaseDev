@@ -107,6 +107,14 @@ options:
       propertyCondition: type
       condition: textarea
       active: true
+  - name: nameTA
+    display: Name for Textarea
+    type: text
+    settings:
+      propertyCondition: type
+      condition: textarea
+      active: true
+    options: ''          
   - name: error
     display: Error
     type: variable
@@ -197,6 +205,7 @@ import InputAdornment from '@mui/material/InputAdornment'
       type="text"
       {% if element.values.minRows %}minRows={{ element.values.minRows | textOrVariable}} {% endif %}
       {% if element.values.maxRows %}maxRows={{ element.values.maxRows | textOrVariable}} {% endif %}
+      {% if element.values.nameTA %}name={{ element.values.nameTA | textOrVariable }}{% endif %}
     {% endif %}
     {% if element.values.type != 'textarea' and element.values.type != 'numeric' %}
       type="{{ element.values.type|default('text') }}"
