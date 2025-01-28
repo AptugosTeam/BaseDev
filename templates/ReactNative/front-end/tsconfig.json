@@ -10,9 +10,8 @@ unique_id: alNzyRKN
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@assets/*": [
-        "assets/*"
-      ]
+      "@assets/*": ["assets/*"],
+      "@hooks/*": ["hooks/*"]
     }
   }
 }
