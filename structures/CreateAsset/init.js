@@ -11,29 +11,10 @@ if (!Parameters.empty && Parameters.path) {
   file = Parameters.file
 }
 
-const parms = { _: ['assets', 'setfile'], binary: true, app: Application._id, filename: newAsset.name, id: newAsset.id }
-if (Parameters.state.writeFolder) {
-  parms.auth = Parameters.state.writeFolder
-}
-aptugo.run(parms, { file: file })
+const buffer = Buffer.from(new Uint8Array(file))
+aptugo.writeFile(aptugo.join(aptugo.apps._getAppDropsFolder(Parameters.app),`${newAsset.id}_${Parameters.path}`), buffer, { pretify: false })
+
+if (!Application.assets) Application.assets = []
 Application.assets.push(newAsset)
-
-// Store [Object: null prototype] {
-//   folders: {
-//     applications: 
-
-// const fileSource = aptugo.readFile(Parameters.path)
-// if (fileSource) {
-//   if ( window && window.sendAptugoCommand ) {
-//     window.sendAptugoCommand({
-//       section: 'assets',
-//       command: 'setfile',
-//       options: `--app ${Application.settings.name} --id '${newAsset._id}' --filename '${newAsset.name}'`,
-//       file: fileSource
-//     }).then(res => {
-//       console.log('Asset created')
-//     })
-//   }
-// }
 
 return Application
