@@ -76,6 +76,13 @@ options:
   - name: helperText
     display: Helper Text
     type: text
+  - name: alternativeOptions
+    display: alternative Options
+    type: checkbox
+    advanced: true
+    settings: 
+      default: false
+
 children: []
 */
 {% set bpr %}
@@ -112,5 +119,9 @@ import MenuItem from '@mui/material/MenuItem'
   {{element.values.displayEmptyText}}
 </MenuItem>
 {% endif %}
+{% if element.values.alternativeOptions %}
+{ {{ element.values.options }} }
+{% else %}
 { {{ element.values.options }}.map((item: { value: any, name: string } | any, index: number) => <MenuItem value={item?.value ? item.value : item} key={index}>{item?.name ? item.name : item}</MenuItem> )}
+{% endif %}
 </TextField>
