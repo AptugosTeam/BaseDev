@@ -21,7 +21,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 {{ save_delayed('bpr',bpr) }}
 <AccordionSummary sx={ {
   {% if element.values.backgroundColor %}
-    backgroundColor: {{ element.values.backgroundColor|default('transparent') }},
+    backgroundColor:'{{ element.values.backgroundColor|default('transparent') }}',
   {% endif %}
   
   {% if element.values.color %}
