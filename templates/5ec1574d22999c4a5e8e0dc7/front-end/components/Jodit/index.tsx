@@ -45,7 +45,16 @@ export default function JoditSetup(props) {
         tooltip: "Attach Files",
       },
     },
-    events: { paste: onPaste, drop: onDrop },
+    events: {
+      click: (event) => {
+        if (event.target.tagName === "A") {
+          window.open(event.target.href, "_blank");
+          event.preventDefault();
+        }
+      },
+      paste: onPaste,
+      drop: onDrop
+    },
     askBeforePasteHTML: false,
     askBeforePasteFromWord: false,
     processPasteHTML: true,
