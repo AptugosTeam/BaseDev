@@ -59,7 +59,7 @@ module.exports = {
               localIdentName: "[path][name]__[local]--[hash:base64:5]",
             },
           }
-        }, { loader: 'sass-loader', options: { sourceMap: true } }]
+        }, { loader: 'sass-loader', options: { api: "modern", sourceMap: true } }]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
