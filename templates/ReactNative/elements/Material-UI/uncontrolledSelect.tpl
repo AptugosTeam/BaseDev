@@ -9,6 +9,10 @@ options:
     display: Value
     type: text
     options: ''
+  - name: buttonText
+    display: Text when no item is selected 
+    type: text
+    options: ''
   - name: onChange
     display: On Change
     type: text
