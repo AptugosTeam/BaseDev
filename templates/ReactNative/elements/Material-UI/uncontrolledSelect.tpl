@@ -5,10 +5,6 @@ unique_id: KZo70Wel
 icon: ico-uncontrolled-select
 sourceType: javascript
 options:
-  - name: label
-    display: Label
-    type: text
-    options: ''
   - name: value
     display: Value
     type: text
@@ -25,18 +21,20 @@ options:
     display: Options
     type: text
     options: ''
-  - name: showall
-    display: Show "All" for empty
-    type: checkbox
-  - name: margin
-    display: Margin
-    type: dropdown
-    options: none;normal;dense
-  - name: fullwidth
-    display: Use full width?
-    type: checkbox
-  - name: className
-    display: ClassName
+  - name: dropdownStyle
+    display: Dropdown Style
+    type: text
+    options: ''
+  - name: dropdownOverlayColor
+    display: Dropdown Overlay Color
+    type: text
+    options: ''
+  - name: rowStyle
+    display: Row Style
+    type: text
+    options: ''
+  - name: rowTextStyle
+    display: Row Text Style
     type: text
     options: ''
 children: []
@@ -49,10 +47,14 @@ import SelectDropdown from 'react-native-select-dropdown'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <SelectDropdown
-  {% if element.values.value %}defaultValue={{ element.values.value }}{% endif %}
-  {% if element.values.buttonText %}defaultButtonText="{{ element.values.buttonText }}"{% endif %}
+  {% if element.values.value %}defaultValue={{ element.values.value | textOrVariable }}{% endif %}
+  {% if element.values.buttonText %}defaultButtonText={{ element.values.buttonText | textOrVariable }}{% endif %}
   data={ {{ element.values.options }} }
   buttonStyle={theme.inputSelector}
   buttonTextStyle={theme.inputSelectorText}
   {% if element.values.onChange %}onSelect={ {{ element.values.onChange }} }{% endif %}
+  {% if element.values.dropdownStyle %}dropdownStyle={ {{ element.values.dropdownStyle }} }{% endif %}
+  {% if element.values.dropdownOverlayColor %}dropdownOverlayColor={{ element.values.dropdownOverlayColor | textOrVariable }}{% endif %}
+  {% if element.values.rowStyle %}rowStyle={ {{ element.values.rowStyle }} }{% endif %}
+  {% if element.values.rowTextStyle %}rowTextStyle={ {{ element.values.rowTextStyle }} }{% endif %}
 />
