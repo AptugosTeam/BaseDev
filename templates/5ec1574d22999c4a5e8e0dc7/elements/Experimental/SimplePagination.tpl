@@ -13,10 +13,6 @@ options:
     display: Current Page
     type: text
     options: ''
-  - name: totalItems
-    display: Total Items
-    type: text
-    options: ''
   - name: setPage
     display: On Change Page
     type: function
@@ -123,7 +119,7 @@ import Pagination from '../components/Pagination'
         {% if element.values.useVariable %}
          {{ element.values.disabledNextButtonFunction }}
         {% else %}
-         {{ element.values.variableToUse }}.totalDocs < tableloadoptions.page * tableloadoptions.limit
+         {{ element.values.variableToUse }}.totalDocs < {{ element.values.variableToUse }}.page * {{ element.values.variableToUse }}.limit
         {% endif %} 
         }
     {% endif %}
