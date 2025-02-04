@@ -17,6 +17,9 @@ options:
   - name: onPress
     display: On Press
     type: function
+  - name: key
+    display: key
+    type: text
 */
 {% set bpr %}
 import { ShapeSource, CircleLayer, SymbolLayer } from '@rnmapbox/maps'
@@ -36,6 +39,9 @@ const shapeSourceRef{{ element.unique_id }} = React.useRef<ShapeSource>(null)
   cluster={true}
   clusterMaxZoomLevel={14}
   clusterRadius={50}
+  {% endif %}
+  {% if element.values.key %}
+ key={ {{ element.values.key }} }
   {% endif %}
   {% if element.values.clusterProperties %}clusterProperties={ {{ element.values.clusterProperties }} }{% endif %}
   shape={ {{ element.values.shape }} }
