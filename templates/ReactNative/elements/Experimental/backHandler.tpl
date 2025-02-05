@@ -17,6 +17,6 @@ settings:
 {% set ph %}
  useAndroidBackHandler(() => {
     return true
-  });
+  })
 {% endset %}
 {{ save_delayed('ph',ph) }}

@@ -20,9 +20,17 @@ import { Animated } from 'react-native'
 import { Easing } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
+{% set bpr %}
+import { StyleSheet } from 'react-native'
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
+
+{% set ph %}
+ const [{{ element.values.var }}, set{{ element.values.var }}] = React.useState<any>(false)
+{% endset %}
+{{ save_delayed('ph', ph, 1) }}
 {% set ph %}
  const animation = React.useRef(new Animated.Value(0)).current
- const [{{ element.values.var }}, set{{ element.values.var }}] = React.useState<any>(false)
 
   const line1Transform = animation.interpolate({
     inputRange: [0, 0.5, 1],
