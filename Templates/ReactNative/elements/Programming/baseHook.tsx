@@ -12,22 +12,13 @@ import { Platform } from 'react-native'
 {% endfor %}
 {% endfor %}
 
-
-
-{% for child in element.children %}
-{% if child.value == 'hookHeader' %}
-{{ child.rendered }}
-{% endif %}
-{% endfor %}
-
 export const use{{ element.values.name }} = ({{ insert_setting('hookParameters') }}) => {
-  {% for child in element.children %}
-  {% if child.value == 'hookHeader' %}
-  {{ child.rendered }}
-  {% endif %}
-  {% endfor %}
 
-  {{ insert_setting('macucas') | raw }}
+  {% for delay in delayed %}
+    {% for specificDelay in delay.ph %}
+      {{ specificDelay }}
+    {% endfor %}
+  {% endfor %}
 
   {% for child in element.children %}
   {% if child.value == 'hookBody' %}
