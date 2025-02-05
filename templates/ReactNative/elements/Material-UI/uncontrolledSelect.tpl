@@ -15,7 +15,7 @@ options:
     options: ''
   - name: onChange
     display: On Change
-    type: text
+    type: code
     options: ''
   - name: options
     display: Options
@@ -52,7 +52,11 @@ import SelectDropdown from 'react-native-select-dropdown'
   data={ {{ element.values.options }} }
   buttonStyle={theme.inputSelector}
   buttonTextStyle={theme.inputSelectorText}
-  {% if element.values.onChange %}onSelect={ {{ element.values.onChange }} }{% endif %}
+  {% if element.values.onChange %}
+  onSelect={(selectedItem) => {
+    {{ element.values.onChange }}
+  } }
+  {% endif %}
   {% if element.values.dropdownStyle %}dropdownStyle={ {{ element.values.dropdownStyle }} }{% endif %}
   {% if element.values.dropdownOverlayColor %}dropdownOverlayColor={{ element.values.dropdownOverlayColor | textOrVariable }}{% endif %}
   {% if element.values.rowStyle %}rowStyle={ {{ element.values.rowStyle }} }{% endif %}
