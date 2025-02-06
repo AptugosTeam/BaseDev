@@ -2,7 +2,7 @@
 path: hook.tpl
 keyPath: elements/Programming/hook.tpl
 unique_id: HokApoto
-usesDelays: [bpr]
+usesDelays: [bpr,ph]
 delayContext: true
 options:
   - name: name

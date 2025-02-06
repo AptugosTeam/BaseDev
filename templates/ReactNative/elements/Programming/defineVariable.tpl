@@ -20,4 +20,7 @@ options:
 sourceType: javascript
 children: []
 */
+{% set ph %}
 {% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }} = {{ element.values.variableValue }}
+{% endset %}
+{{ save_delayed('ph',ph) }}
