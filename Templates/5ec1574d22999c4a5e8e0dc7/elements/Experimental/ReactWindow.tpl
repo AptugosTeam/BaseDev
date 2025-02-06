@@ -105,7 +105,7 @@ import AutoSizer from "react-virtualized-auto-sizer"
         {{element.values.code}}
 
       return (
-         <div style={style}>
+         <div style={ { ...style, position: 'relative', top: 'unset', height: 'unset'} }>
          {{ content|raw }}
          </div>
       )
