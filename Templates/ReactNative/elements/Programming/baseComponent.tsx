@@ -15,11 +15,45 @@ import baseClasses from '@components/Themes/layout.module.scss'
 const AptugoComponent: FunctionComponent<any> = (props) => {
   {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props.properties{% endif %}
 
+  {% set combinedContent = [] %}
+  {% set seenLines = {} %}
+  
+  {% set tempCombined = combinedContent %}
+  {% set tempSeen = seenLines %}
+  {% for child in element.children %}
+    {% if child.value == 'componentHeader' %}
+      {% set lines = child.rendered|split("\n") %}
+      {% for line in lines %}
+        {% set trimmedLine = line|trim %}
+        {% if trimmedLine != "" and (trimmedLine not in tempSeen) %}
+          {% set tempCombined = tempCombined|merge([trimmedLine]) %}
+          {% set tempSeen = tempSeen|merge({ (trimmedLine): true }) %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  {% set combinedContent = tempCombined %}
+  {% set seenLines = tempSeen %}
+
+  {% set tempCombined = combinedContent %}
+  {% set tempSeen = seenLines %}
   {% for delay in delayed %}
     {% for specificDelay in delay.ph %}
-      {{ specificDelay }}
+      {% set lines = specificDelay|split("\n") %}
+      {% for line in lines %}
+        {% set trimmedLine = line|trim %}
+        {% if trimmedLine != "" and (trimmedLine not in tempSeen) %}
+          {% set tempCombined = tempCombined|merge([trimmedLine]) %}
+          {% set tempSeen = tempSeen|merge({ (trimmedLine): true }) %}
+        {% endif %}
+      {% endfor %}
     {% endfor %}
   {% endfor %}
+  {% set combinedContent = tempCombined %}
+  {% set seenLines = tempSeen %}
+  
+  {{ combinedContent|join("\n")|raw }}
+  
 
   return (<React.Fragment>
     {% for child in element.children %}
