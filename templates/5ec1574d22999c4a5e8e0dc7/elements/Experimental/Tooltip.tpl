@@ -61,6 +61,10 @@ options:
     display: Control Open State
     type: variable
     options: ''
+  - name: extraStyles
+    display: Extra Styles
+    type: text
+    options: ''
 childs:
   - name: Button
     element: button
@@ -89,6 +93,9 @@ import Tooltip from '@mui/material/Tooltip'
     {% if followCursor %}followCursor={ {{ element.values.followCursor }} }{% endif %}
     {% if element.values.open %}open={ {{ element.values.open }} }{% endif %}
     {% if element.values.tooltipClassName %}slotProps={ { popper: { className: '{{ element.values.tooltipClassName }}' } } }{% endif %}
+    {% if element.values.extraStyles %}
+    slotProps={ { tooltip: { sx: { {{ element.values.extraStyles }} } }, } }
+    {% endif %}
     >
 {{ content | raw }} 
 </Tooltip>

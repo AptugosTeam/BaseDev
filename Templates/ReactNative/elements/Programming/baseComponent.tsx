@@ -14,16 +14,17 @@ import baseClasses from '@components/Themes/layout.module.scss'
 
 const AptugoComponent: FunctionComponent<any> = (props) => {
   {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props.properties{% endif %}
-  {% for child in element.children %}
-    {% if child.value == 'componentHeader' %} 
-      {{ child.rendered }}
-    {% endif %}
+
+  {% for delay in delayed %}
+    {% for specificDelay in delay.ph %}
+      {{ specificDelay }}
+    {% endfor %}
   {% endfor %}
 
   return (<React.Fragment>
     {% for child in element.children %}
     {% if child.value == 'componentBody' %} 
-      {{ child.rendered }}
+      {{ child.rendered }}  
     {% endif %}
   {% endfor %}
   </React.Fragment>)

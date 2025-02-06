@@ -2,7 +2,7 @@
 path: component.tpl
 keyPath: elements/Programming/component.tpl
 unique_id: zHZJ3XKp
-usesDelays: [bpr]
+usesDelays: [bpr,ph]
 delayContext: true
 options:
   - name: name
