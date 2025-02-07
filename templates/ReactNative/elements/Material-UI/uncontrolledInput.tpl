@@ -15,7 +15,7 @@ options:
     options: ''
   - name: onChange
     display: On Change
-    type: text
+    type: code
     options: ''
   - name: placeholder
     display: Placeholder
@@ -155,7 +155,10 @@ children: []
       activeOutlineColor={ {{ element.values.activeOutlineColor|default('#3A528A') | textOrVariable }}}
       {% if element.values.textColor %}textColor={ {{ element.values.textColor | textOrVariable }}}{% endif %}
       {% if element.values.value %}value={{ element.values.value }}{% endif %}
-      {% if element.values.onChange %}onChangeText={ {{ element.values.onChange | replace({ '.target.value': '' }) | functionOrCall }} }{% endif %}
+      {% if element.values.onChange %}onChangeText={(text) => {
+        {{ element.values.onChange | replace({ '.target.value': '' }) }} }
+      } 
+      {% endif %}
       {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
       {% if element.values.activeUnderlineColor %}activeUnderlineColor={{ element.values.activeUnderlineColor | textOrVariable }}{% endif %}
       {% if element.values.placeholderTextColor %}placeholderTextColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif %}
