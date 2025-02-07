@@ -29,7 +29,11 @@ options:
     type: text
     options: ''
   - name: pagingEnabled
-    display: Paging Enabled?
+    display: Enable Paging?
+    type: checkbox
+    options: ''
+  - name: snapEnabled
+    display: Enable Snap?
     type: checkbox
     options: ''
   - name: loop
@@ -74,6 +78,9 @@ import Carousel from 'react-native-reanimated-carousel'
     {% endif %}
     {% if element.values.pagingEnabled %}
       pagingEnabled
+    {% endif %}
+    {% if element.values.snapEnabled %}
+      snapEnabled
     {% endif %}
     {% if element.values.loop %}
       loop={false}
