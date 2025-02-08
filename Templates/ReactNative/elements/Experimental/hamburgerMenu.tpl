@@ -9,7 +9,10 @@ options:
     display: Name Variable
     type: text
     options: ''
-    
+  - name: background
+    display: Background Color for the line
+    type: text
+    options: ''
 children: []
 */
 {% set bpr %}
@@ -68,13 +71,15 @@ import { StyleSheet } from 'react-native'
 
 const stylesHamburgerMenu = StyleSheet.create({
   menuHamburguesaContainer: {
-    width: 30,
+    width: 24,
+    height: 24,
     justifyContent: "center",
     alignItems: "center",
   },
   menuHamburguesaLine: {
-    width: 25,
+    width: 24,
     height: 2,
+    backgroundColor: '{{element.values.background | default('#FFFFFF')}}',
     position: "absolute",
     borderRadius: 2,
   },
