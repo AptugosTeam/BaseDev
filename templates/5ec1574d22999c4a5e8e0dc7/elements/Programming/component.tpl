@@ -23,13 +23,12 @@ options:
   - name: keyprops
     display: Prop Keys (optional) 
     type: text
-  - name: useIt
-    display: Also use it
-    type: checkbox
   - name: interface
     display: Interface (optional) 
     type: text
-    advanced: true
+  - name: useIt
+    display: Also use it
+    type: checkbox
 extraFiles:
   - source: 'elements/Programming/baseComponent.tsx'
     destination: 'front-end/components/{{ element.values.name | friendly }}/index.tsx'
