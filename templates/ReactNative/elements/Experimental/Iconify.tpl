@@ -33,7 +33,7 @@ import { Iconify } from 'react-native-iconify'
 {{ save_delayed('bpr',bpr)}}
 
 {% if element.values.icon %}
-  <Iconify icon="{{element.values.icon}}" {% if element.values.size %}size={ {{element.values.size}} } {% endif %} {% if element.values.color %}color="{{element.values.color}}" {% endif %} 
+  <Iconify icon="{{element.values.icon}}" {% if element.values.size %}size={ {{element.values.size}} } {% endif %} {% if element.values.color %}color={{element.values.color | textOrVariable}} {% endif %} 
   {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
   />
 {% endif %}
