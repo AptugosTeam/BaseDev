@@ -14,7 +14,7 @@ options:
     type: text
     options: ''
   - name: onChange
-    display: On Change
+    display: On Change (text)
     type: function
     options: ''
   - name: placeholder
@@ -161,5 +161,7 @@ settings:
       {% if element.values.onBlur %}onBlur={() => {{element.values.onBlur}} }{% endif %}
       {% if element.values.textColor %}textColor={ {{ element.values.textColor | textOrVariable }}}{% endif %}
       {% if element.values.value %}value={{ element.values.value | textOrVariable }}{% endif %}
-      {% if element.values.onChange %}onChangeText={ {{ element.values.onChange | replace({ '.target.value': '' }) | functionOrCall }} }{% endif %}
+      {% if element.values.onChange %}onChangeText={(text) =>
+       {{ element.values.onChange }} }
+       {% endif %}
   />
