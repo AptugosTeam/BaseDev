@@ -9,6 +9,9 @@ options:
     display: Position
     type: text
     options: ''
+  - name: action
+    display: action
+    type: checkbox
 */
 {% set bpr %}
   import { Marker } from '../components/LeafLet'
@@ -20,6 +23,10 @@ options:
   {% else %}
     position={leafLetPosition}
   {% endif %}
+  {% if element.values.action %}
+    onMarkerDrag={handleMarkerDrag}
+  {% endif %}
+
 >
 
 {{ content | raw }}
