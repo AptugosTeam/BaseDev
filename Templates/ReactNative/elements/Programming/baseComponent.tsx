@@ -13,7 +13,7 @@ import baseClasses from '@components/Themes/layout.module.scss'
 {% endfor %}
 
 const AptugoComponent: FunctionComponent<any> = (props) => {
-  {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props.properties{% endif %}
+  {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props?.properties || {}{% endif %}
 
   {% set combinedContent = [] %}
   {% set seenLines = {} %}
