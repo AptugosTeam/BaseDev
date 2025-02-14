@@ -12,21 +12,42 @@ import axios from 'axios'
 
 const API_URL = '{{ settings.apiURL }}/api/users/'
 
+interface LoginOptions {
+  remember?: boolean
+  validate?: boolean
+  lang?: string
+  validationEmail?: RecoverOptions
+}
+interface RecoverOptions {
+  email: string
+  subject: string
+  message: string
+  name: string
+  model?: string
+  lang?: string
+  username?: string
+}
+
 class AuthService {
-  login(email, password) {
+  login(email, password, options: LoginOptions = {}) {
+    const { remember = true } = options
     return axios
       .post(API_URL + 'authenticate', {
         email,
         password,
+        options,
       })
       .then((response) => {
-        if (response.data.stsTokenManager) {
-          AsyncStorage.setItem('token', JSON.stringify(response.data.stsTokenManager.accessToken))
-          AsyncStorage.setItem('user', JSON.stringify(response.data))
+        if (response.data.accessToken || response.data.stsTokenManager) {
+          if (remember) {
+            AsyncStorage.setItem('token', response.data.accessToken || response.data.stsTokenManager)
+            AsyncStorage.setItem('user', JSON.stringify(response.data.data || response.data))
+          } else {
+            AsyncStorage.setItem('token', response.data.accessToken || response.data.stsTokenManager)
+            AsyncStorage.setItem('user', JSON.stringify(response.data.data || response.data))
+          }
         }
         return response.data
-      }).catch((error) => {
-        throw error.response.data
       })
   }
 
@@ -37,7 +58,7 @@ class AuthService {
 
   register(data) {
     return axios
-      .post(API_URL + 'register', data)
+      .post(API_URL, data)
       .then((_result) => {
         return this.login(data.Email, data.Password).then((afterLogin) => {
           return afterLogin
@@ -49,17 +70,20 @@ class AuthService {
   }
 
   async getCurrentUser() {
-    const user = await AsyncStorage.getItem('user')
+    const user = (await AsyncStorage.getItem('user')) || (await AsyncStorage.getItem('userSession')) || (await AsyncStorage.getItem('user'))
     return user ? JSON.parse(user) : {}
   }
 
-  recoverPassword({ email, subject, message, name }) {
+  recoverPassword({ email, subject, message, name, model = '', lang = 'en', username = '' }) {
     return axios
       .post(API_URL + 'recoverpassword', {
         email,
         subject,
         message,
         name,
+        model,
+        lang,
+        username,
       })
       .then((response) => {
         return response.data
@@ -73,13 +97,14 @@ class AuthService {
         email,
       })
       .then((response) => {
-        // localStorage.setItem('token', response.data.accessToken)
-        // localStorage.setItem('user', JSON.stringify(response.data.data))
+        localStorage.setItem('token', response.data.accessToken)
+        localStorage.setItem('user', JSON.stringify(response.data.data))
         return response.data.data._id
       })
+      .catch((e) => {
+        throw e
+      })
   }
-
-  {{ insert_setting('AuthServiceAddenum') | raw }}
 }
 
 export default new AuthService()
