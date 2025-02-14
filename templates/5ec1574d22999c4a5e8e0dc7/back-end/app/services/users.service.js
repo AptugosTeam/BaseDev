@@ -133,7 +133,7 @@ async function authenticate ({ email, password, model, passwordField, populate, 
   }
   return new Promise(function (resolve, reject) {
     if (!email || !password) reject({ message: errorMessages[lang].wrong })
-    const query = model.findOne({ Email: new RegExp('^' + email.toLowerCase(), 'i') })
+      const query = model.findOne({ Email: { $regex: `^${email}$`, $options: 'i' } })
     if (populate) query.populate(populate)
     const promise = query.exec()
 
