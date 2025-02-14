@@ -20,4 +20,13 @@ options:
 sourceType: javascript
 children: []
 */
-{% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }} = {{ element.values.variableValue }}
+
+{% set varName = element.values.variableName | default('defaultVariable') %}
+{% set varValue = element.values.variableValue | default('') %}
+{% set isLet = element.values.willbeModified %}
+
+{% if isLet and varValue == '' %}
+    let {{ varName }}
+{% else %}
+    {% if isLet %}let{% else %}const{% endif %} {{ varName }} = {{ varValue }}
+{% endif %}
