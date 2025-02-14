@@ -41,6 +41,14 @@ options:
     advanced: true
     settings:
       value: 'false'
+  - name: variableStoreType
+    display: Variable Type
+    type: dropdown
+    options: const;let;existing let
+    advanced: true
+    settings:
+      propertyCondition: variableStore
+      condition: true
   - name: variableStoreName
     display: Variable name
     type: text
@@ -70,13 +78,21 @@ import axios from 'axios'
 {% endif %}
 
 {% set storeName = element.values.variableStoreName %}
+{% set storeType = element.values.variableStoreType | default('const') %}
 {% set onError = element.values.onError | default('console.error(error)') %}
 
 {% if element.values.variableStore %}
-  const {{ storeName }} = {% if element.values.await %}await{% endif %} axios.{{ element.values.method|default('get') }}(
-    {{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %},
-    {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}
-  )
+  {% if storeType == 'existing let' %}
+    {{ storeName }} = {% if element.values.await %}await{% endif %} axios.{{ element.values.method|default('get') }}(
+      {{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %},
+      {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}
+    )
+  {% else %}
+    {{ storeType }} {{ storeName }} = {% if element.values.await %}await{% endif %} axios.{{ element.values.method|default('get') }}(
+      {{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %},
+      {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}
+    )
+  {% endif %}
 {% else %}
   axios.{{ element.values.method|default('get') }}(
     {{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %},
