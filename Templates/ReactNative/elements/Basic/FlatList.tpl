@@ -10,6 +10,10 @@ options:
     display: Style
     type: text
     options: ''
+  - name: contentContainerStyles
+    display: Content Container Styles
+    type: text
+    options: ''
   - name: data
     display: Data
     type: text
@@ -30,6 +34,10 @@ options:
     display: Item Layout Control
     type: code
     options: ''
+  - name: renderItemCode
+    display: Render Item Code
+    type: code
+    options: ''
   - name: initialScrollIndex
     display: Initial Scroll index
     type: text
@@ -43,6 +51,10 @@ options:
     display: Is horizontal?
     type: checkbox
     options: ''  
+  - name: showsHorizontalScrollIndicator
+    display: Disabled horizontal scroll indicators?
+    type: checkbox
+
 children: []
 helpText: Basic HTML Div element
 */
@@ -56,7 +68,17 @@ import { FlatList } from 'react-native'
   {% if element.values.nestedScrollEnabled %}nestedScrollEnabled{% endif %}
   {% if element.values.horizontal %}horizontal{% endif %}
   {% if element.values.data %}data={ {{element.values.data}} }{% endif %}
-  {% if element.children %}renderItem={({{element.values.parameter | default('item')}}) => {% for child in element.children %}{{ child.rendered | raw }}{% endfor %} }
+  {% if element.values.showsHorizontalScrollIndicator %}showsHorizontalScrollIndicator={false} {% endif %}
+  {% if element.children %}renderItem={({{element.values.parameter | default('item')}}) => {
+    {% if element.values.renderItemCode %}
+      {{ element.values.renderItemCode | raw }}
+    {% endif %}
+    return (
+    {% for child in element.children %}
+      {{ child.rendered | raw }}
+    {% endfor %}
+    )
+  }}
   {% elseif element.values.renderItem %}renderItem={ {{element.values.renderItem | functionOrCall }} }{% endif %}
   {% if element.values.keyExtractor %}keyExtractor={ {{element.values.keyExtractor}} }{% endif %}
   {% if element.values.getItemLayout %}getItemLayout={(data:any, index:number) => ({{ element.values.getItemLayout }})}{% endif %}
