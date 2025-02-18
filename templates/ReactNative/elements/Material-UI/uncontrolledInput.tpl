@@ -17,6 +17,10 @@ options:
     display: On Change
     type: code
     options: ''
+  - name: onSubmitEdit
+    display: On Submit Editing
+    type: code
+    options: ''
   - name: placeholder
     display: Placeholder
     type: text
@@ -194,17 +198,18 @@ children: []
       {% if element.values.value %}value={{ element.values.value }}{% endif %}
       {% if element.values.onChange %}onChangeText={(text) => {
         {{ element.values.onChange | replace({ '.target.value': '' }) }} }
-      } 
+      }
       {% endif %}
+      {% if element.values.onSubmitEdit %}onSubmitEditing={() => {{ element.values.onSubmitEdit }} }{% endif %}
       {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
       {% if element.values.activeUnderlineColor %}activeUnderlineColor={ {{ element.values.activeUnderlineColor | textOrVariable }}}{% endif %}
       {% if element.values.placeholderTextColor %}placeholderTextColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif %}
       {% if element.values.selectionColor %}selectionColor={ {{ element.values.selectionColor | textOrVariable }} }{% endif %}
       {% if element.values.leftIcon and element.values.leftIcon != 'none' %}
-      left={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %}icon='{{element.values.leftIcon}}' />}{% endif %}
+      left={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %} {% if element.values.className %}style={ {{ element.values.className ~ 'LeftIcon' }} }{% endif %} icon='{{element.values.leftIcon}}' />}{% endif %}
       {% if element.values.rightIcon and element.values.rightIcon != 'none' %}
       right={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%}
-       {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %}
+       {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %} {% if element.values.className %}style={ {{ element.values.className ~ 'RightIcon' }} }{% endif %}
       icon={% if element.values.rightIcon != 'Use a variable' %}'{{element.values.rightIcon}}' {% else %} {{element.values.variableToUseIcon | textOrVariable}} {% endif %} />}{% endif %}
   />
     {% if useHelperText %}
