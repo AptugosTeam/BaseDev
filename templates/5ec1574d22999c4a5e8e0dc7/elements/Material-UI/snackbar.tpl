@@ -25,7 +25,11 @@ options:
   - name: className
     display: className
     type: styles 
-    options: ''   
+    options: ''  
+  - name: onClose
+    display: On Close
+    type: text
+    options: '' 
 children: []
 */
 {% set bpr %}
@@ -41,7 +45,15 @@ const [{{ element.values.varName }}, set{{ element.values.varName }}] = React.us
   open={ {{ element.values.varName }} }
   {% if element.values.message %}message={{ element.values.message | textOrVariable }}{% endif %}
   {% if element.values.autohide %}autoHideDuration={ {{ element.values.autohide }} }{% endif %}
-  onClose={() => { set{{ element.values.varName }}(false) } }
+  {% if element.values.onClose %}
+    onClose={() => { {{ element.values.onClose }} } }
+  {% else %}
+    onClose={() => { set{{ element.values.varName }}(false) } }
+  {% endif %}
   anchorOrigin={ { vertical: '{{splited[0]|lower}}', horizontal: '{{splited[1]|lower}}' } }
   {% if element.values.className %} className={ {{ element.values.className }} } {% endif %}
 >{{ content | raw }}</Snackbar>
+
+
+
+   
