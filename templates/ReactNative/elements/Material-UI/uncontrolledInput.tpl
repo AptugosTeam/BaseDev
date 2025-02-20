@@ -48,6 +48,13 @@ options:
     display: Type
     type: dropdown
     options: text;password;date;number;textarea
+  - name: keyboardType
+    display: Keyboard Type
+    type: text
+    options: ''
+    settings: 
+      propertyCondition: type
+      condition: text
   - name: secureTextEntry
     display: Show Password variable
     type: text
@@ -97,6 +104,9 @@ options:
     display: PlaceHolder Text Color
     type: text
   - name: selectionColor
+    display: Selection Color
+    type: text
+  - name: cursorColor
     display: Cursor Color
     type: text
   - name: onFocus
@@ -194,10 +204,12 @@ children: []
       }
       {% endif %}
       {% if element.values.onSubmitEdit %}onSubmitEditing={() => {{ element.values.onSubmitEdit }} }{% endif %}
+      {% if element.values.keyboardType %}keyboardType={{ element.values.keyboardType | textOrVariable }}{% endif %}
       {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
       {% if element.values.activeUnderlineColor %}activeUnderlineColor={ {{ element.values.activeUnderlineColor | textOrVariable }}}{% endif %}
       {% if element.values.placeholderTextColor %}placeholderTextColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif %}
       {% if element.values.selectionColor %}selectionColor={ {{ element.values.selectionColor | textOrVariable }} }{% endif %}
+      {% if element.values.cursorColor %}cursorColor={ {{ element.values.cursorColor | textOrVariable }} }{% endif %}
       {% if element.values.leftIcon and element.values.leftIcon != 'none' %}
       left={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %} {% if element.values.className %}style={ {{ element.values.className ~ 'LeftIcon' }} }{% endif %} icon='{{element.values.leftIcon}}' />}{% endif %}
       {% if element.values.rightIcon and element.values.rightIcon != 'none' %}
