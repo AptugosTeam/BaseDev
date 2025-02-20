@@ -89,10 +89,6 @@ options:
     display: Multiple Selections
     type: checkbox
     advanced: true
-  - name: inputProps
-    display: Enter your inputProps (key: value,)
-    type: code
-    advanced: true    
 children: []
 */
 {% set bpr %}
@@ -157,17 +153,7 @@ import TextField from '@mui/material/TextField';
     isOptionEqualToValue={ (option, value) => {{ element.values.isOptionEqualToValue }} }
   {% endif %} 
   renderInput={(params) => (
-    <TextField
-      {...params}
-      label="{{ element.values.label|default('') }}"
-      placeholder="{{ element.values.placeholder | default('') }}"
-      {% if element.values.inputProps %}
-        inputProps={ {
-          ...params.inputProps,
-          {{element.values.inputProps}}
-        } }
-      {% endif %}
-      />
+    <TextField {...params} label="{{ element.values.label|default('') }}" placeholder="{{ element.values.placeholder | default('') }}" />
   )}
   {% if element.values.noOptionsText %}
     noOptionsText={{ element.values.noOptionsText | textOrVariable }}
