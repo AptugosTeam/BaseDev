@@ -74,22 +74,35 @@ class AuthService {
     return user ? JSON.parse(user) : {}
   }
 
-  recoverPassword({ email, subject, message, name, model = '', lang = 'en', username = '' }) {
-    return axios
-      .post(API_URL + 'recoverpassword', {
+  async recoverPassword({
+    email,
+    subject,
+    message,
+    name,
+    model = '',
+    lang = 'en',
+    username = ''
+  }: RecoverOptions): Promise<{ success: boolean; data?: any; error?: string }> {
+    try {
+      const response = await axios.post(`${API_URL}recoverpassword`, {
         email,
         subject,
         message,
         name,
         model,
         lang,
-        username,
+        username
       })
-      .then((response) => {
-        return response.data
-      })
-  }
 
+      return { success: true, data: response.data }
+    } catch (error) {
+      console.log(error)
+      const errorMessage = error.response?.data?.message || 'An error occurred while recovering the password';
+      console.error('Error while recovering password:', errorMessage)
+      return { success: false, error: errorMessage }
+    }
+  }
+  
   checkNonce(nonce, email) {
     return axios
       .post(API_URL + 'checknonce', {
