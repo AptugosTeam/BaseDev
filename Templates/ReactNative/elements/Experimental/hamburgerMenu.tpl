@@ -9,8 +9,28 @@ options:
     display: Name Variable
     type: text
     options: ''
+  - name: classNameTouchable
+    display: ClassName TouchableOpacity
+    type: styles
+    options: ''
   - name: background
     display: Background Color for the line
+    type: text
+    options: ''
+  - name: classNameContainer
+    display: ClassName Container
+    type: styles
+    options: ''
+  - name: classNameLine
+    display: ClassName Lines
+    type: styles
+    options: ''
+  - name: positionLineTop
+    display: Position for the top line
+    type: text
+    options: ''
+  - name: positionLineBottom
+    display: Position for the bottom line
     type: text
     options: ''
 children: []
@@ -52,12 +72,12 @@ import { StyleSheet } from 'react-native'
 
   const line1Y = animation.interpolate({
     inputRange: [0, 0.5, 1],
-    outputRange: [-8, -8, 0], 
+    outputRange: [{{element.values.positionLineTop | default(-8)}}, {{element.values.positionLineTop | default(-8)}}, 0], 
   })
 
   const line3Y = animation.interpolate({
     inputRange: [0, 0.5, 1],
-    outputRange: [8, 8, 0], 
+    outputRange: [{{element.values.positionLineBottom | default(8)}}, {{element.values.positionLineBottom | default(8)}}, 0],  
   })
 
    React.useEffect(() => {
@@ -86,11 +106,12 @@ const stylesHamburgerMenu = StyleSheet.create({
 })
 {% endset %}
 {{ save_delayed('ph', ph ) }}
-  <TouchableOpacity activeOpacity={1} onPress={() => set{{ element.values.var }}(!{{ element.values.var }})}>
-    <View style={stylesHamburgerMenu.menuHamburguesaContainer}>
+  <TouchableOpacity activeOpacity={1} onPress={() => set{{ element.values.var }}(!{{ element.values.var }})} {% if element.values.classNameTouchable%}style={ {{ element.values.classNameTouchable|default(element.values.ClassName) }} }{% endif %}>
+    <View style={[stylesHamburgerMenu.menuHamburguesaContainer{% if element.values.classNameContainer%}, {{ element.values.classNameContainer|default(element.values.ClassName) }} {% endif %}]}>
       <Animated.View
         style={[
           stylesHamburgerMenu.menuHamburguesaLine,
+          {% if element.values.classNameLine%} {{ element.values.classNameLine|default(element.values.ClassName) }} ,{% endif %}
           {
             transform: [{ translateY: line1Y }, { rotate: line1Transform }],
           },
@@ -99,12 +120,14 @@ const stylesHamburgerMenu = StyleSheet.create({
       <Animated.View
         style={[
           stylesHamburgerMenu.menuHamburguesaLine,
+          {% if element.values.classNameLine%} {{ element.values.classNameLine|default(element.values.ClassName) }} ,{% endif %}
           { opacity: line2Opacity },
         ]}
       />
       <Animated.View
         style={[
           stylesHamburgerMenu.menuHamburguesaLine,
+          {% if element.values.classNameLine%} {{ element.values.classNameLine|default(element.values.ClassName) }} ,{% endif %}
           {
             transform: [{ translateY: line3Y }, { rotate: line3Transform }],
           },
