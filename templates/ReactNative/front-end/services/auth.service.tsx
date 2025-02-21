@@ -118,6 +118,7 @@ class AuthService {
         throw e
       })
   }
+{{ insert_setting('auth.service') | raw}}
 }
 
 export default new AuthService()
