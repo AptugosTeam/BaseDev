@@ -107,6 +107,21 @@ options:
     display: On Scroll
     type: text
     advanced: true
+  - name: onTouchStart
+    display: On Touch Start
+    type: text
+    options: ''
+    advanced: true
+  - name: onTouchMove
+    display: On Touch Move
+    type: text
+    options: ''
+    advanced: true
+  - name: onTouchEnd
+    display: On Touch End
+    type: text
+    options: ''
+    advanced: true
 children: []
 helpText: Basic HTML Div element
 */
@@ -165,6 +180,15 @@ helpText: Basic HTML Div element
   {% endif %}
   {% if element.values.onScroll %}
     onScroll={(e) => {{element.values.onScroll}} }
+  {% endif %}
+  {% if element.values.onTouchStart %}
+    onTouchStart={(e) => {{element.values.onTouchStart}} }
+  {% endif %}
+  {% if element.values.onTouchMove %}
+    onTouchMove={(e) => {{element.values.onTouchMove}} }
+  {% endif %}
+  {% if element.values.onTouchEnd %}
+    onTouchEnd={(e) => {{element.values.onTouchEnd}} }
   {% endif %}
 >
 {{ content | raw }}
