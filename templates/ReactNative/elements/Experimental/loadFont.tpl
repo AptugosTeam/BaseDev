@@ -33,20 +33,17 @@ settings:
 ],
 {% endset %}
 {{ add_setting('AppJsonPlugins', AppJsonPlugins)}}
-{% 
-  set fontNames = {
-    'fontawesome-webfont_solid.ttf': 'fontAwesome',
-    'Roboto-Medium.ttf': 'Roboto',
-    'Quicksand-Bold.ttf': 'Quicksand-Bold'
-  }
-%}
+
 {% set bpr %}
 import { useFonts } from 'expo-font'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% set ph %}
 useFonts({
-  '{{ fontNames[element.values.font] }}': require('@assets/{{ element.values.font | default('fontawesome-webfont_solid.ttf') }}'),
+  {% set fontArray = element.values.font|split(',') %}
+  {% for font in fontArray %}
+    '{{- font|trim|split('.')|first -}}': require('@assets/{{ font|trim }}'){% if not loop.last %},{% endif %}
+  {% endfor %}
 })
 {% endset %}
 {{ save_delayed('ph',ph)}}
