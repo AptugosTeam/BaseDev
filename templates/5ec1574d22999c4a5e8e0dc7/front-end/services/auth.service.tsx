@@ -5,6 +5,8 @@ unique_id: dDixye51
 */
 import axios from 'axios'
 
+
+
 {% set url = settings.apiURL ~ '/api/' %}
 {% set customUrl = insert_setting('customApiUrl') %}
 {% if customUrl %}
@@ -201,6 +203,7 @@ class AuthService {
         throw e;
       });
   }
+{{ insert_setting('auth.service') | raw}}
 }
 
 export default new AuthService()
