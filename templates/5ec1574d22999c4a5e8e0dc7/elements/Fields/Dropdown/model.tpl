@@ -11,5 +11,5 @@ icon: ico-field
 {{ friendlyColumnName }}: {
   type: {{ datatype }},
   {% if onlyAllowed %}enum: [ {% for item in fieldInfo.options|split(';') %}'{{ item }}',{% endfor %}],{% endif %}
-  {% if defaultValue %}default: '{{ defaultValue }}',{% endif %}
+  {% if defaultValue %}default: {{ defaultValue }},{% endif %}
 },
