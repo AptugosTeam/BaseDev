@@ -45,7 +45,7 @@ const errorMessages = {
   },
 };
 
-async function recoverPassword (req) {
+async function recoverPassword(req) {
   let { name, email, message, subject, model, lang = "en", username } = req.body;
   if (!model) {
     const Users = require('../models/users.model.js')
@@ -55,33 +55,44 @@ async function recoverPassword (req) {
     model = Users
   }
 
-  return new Promise(function (resolve, reject) {
+  return new Promise(async function (resolve, reject) {
     if (!email) reject({ message: errorMessages[lang].wrong })
-    const query = model.findOne({ Email: email })
-    const promise = query.exec()
 
-    promise.then(async (user) => {
-      if (!user) {
-        reject({ message: errorMessages[lang].email })
-        return
-      }
-      const { Password, ...userWithoutPassword } = user._doc
-      const nonce = Buffer.from(bcrypt.hashSync(JSON.stringify(userWithoutPassword), Password)).toString('base64')
-      let parsedmessage = message.replace('**nonce**', nonce)
-      parsedmessage = parsedmessage.replace('**email**', Buffer.from(userWithoutPassword.Email).toString('base64'))
-      if (username) parsedmessage = parsedmessage.replace('**username**', userWithoutPassword[username])
+    email = email.toLowerCase();
 
-      try {
-        const emailResponse = await req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
-        resolve({ user, emailResponse })
-      } catch (error) {
-        reject({ message: errorMessages[lang].failed })
+    let user = await model.findOne({ Email: email });
+
+    if (!user) {
+      // Si no encuentra el usuario, probar con la versión original del email
+      user = await model.findOne({ Email: req.body.email });
+
+      if (user) {
+        // Si el usuario existía con mayúsculas, actualizarlo a minúsculas
+        user.Email = email;
+        await user.save();
       }
-    })
+    }
+
+    if (!user) {
+      reject({ message: errorMessages[lang].email })
+      return
+    }
+    const { Password, ...userWithoutPassword } = user._doc
+    const nonce = Buffer.from(bcrypt.hashSync(JSON.stringify(userWithoutPassword), Password)).toString('base64')
+    let parsedmessage = message.replace('**nonce**', nonce)
+    parsedmessage = parsedmessage.replace('**email**', Buffer.from(userWithoutPassword.Email).toString('base64'))
+    if (username) parsedmessage = parsedmessage.replace('**username**', userWithoutPassword[username])
+
+    try {
+      const emailResponse = await req.app.get('sendEmail')({ name, email, message: parsedmessage, subject })
+      resolve({ user, emailResponse })
+    } catch (error) {
+      reject({ message: errorMessages[lang].failed })
+    }
   })
 }
 
-async function checkNonce (req) {
+async function checkNonce(req) {
   return new Promise(function (resolve, reject) {
     let { nonce, email, model } = req.body
     if (!model) {
@@ -118,7 +129,7 @@ async function checkNonce (req) {
   })
 }
 
-async function authenticate ({ email, password, model, passwordField, populate, options = {} }) {
+async function authenticate({ email, password, model, passwordField, populate, options = {} }) {
   const { fullUser = true, fieldsToRetrieve = [], lang = 'en', validate = false } = options
   if (!model) {
     const Users = require('../models/users.model.js')
@@ -131,44 +142,57 @@ async function authenticate ({ email, password, model, passwordField, populate, 
   if (!passwordField) {
     passwordField = 'Password'
   }
-  return new Promise(function (resolve, reject) {
+  return new Promise(async function (resolve, reject) {
     if (!email || !password) reject({ message: errorMessages[lang].wrong })
-      const query = model.findOne({ Email: { $regex: `^${email}$`, $options: 'i' } })
-    if (populate) query.populate(populate)
-    const promise = query.exec()
 
-    promise.then((user) => {
-      if (!user) {
-        return reject({ message: errorMessages[lang].email })
+    email = email.toLowerCase();
+
+    let user = await model.findOne({ Email: email })
+
+    if (!user) {
+      // <-- Cambio: Si no encontramos con minúsculas, buscamos con la versión original (compatibilidad con datos antiguos)
+      const userWithOriginalEmail = await model.findOne({ Email: { $regex: `^${email}$`, $options: 'i' } });
+
+      if (userWithOriginalEmail) {
+        // <-- Cambio: Si el usuario existe con mayúsculas, lo actualizamos en la base de datos a minúsculas
+        await model.updateOne(
+          { _id: userWithOriginalEmail._id },
+          { $set: { Email: email } }
+        );
+        user = userWithOriginalEmail; // Asignamos el usuario encontrado
       }
+    }
 
-      if (!user[passwordField]) reject({ message: errorMessages[lang].notPassword, user: user })
-      else {
-        bcrypt.compare(password, user[passwordField]).then((isMatch) => {
-          if (isMatch) {
-            const { Password, ...userWithoutPassword } = user._doc
-            const { _id } = userWithoutPassword
-            const userID = { id: _id, _id }
-            if (!fullUser) {
-              fieldsToRetrieve.map((fieldName) => {
-                userID[fieldName] = userWithoutPassword[fieldName]
-              })
-            }
-            if (validate && !user.Verified) reject({ message: errorMessages[lang].unverified, user: { Email: user.Email, Verified: user.Verified } })
-            const secretKey = process.env.PASSPORT_SECRET || 'thisisthesecretandshouldbeconfigurable'
-            const token = jwt.sign(fullUser ? userWithoutPassword : userID, secretKey, { expiresIn: '7d' })
-            resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
-          } else {
-            reject({ message: errorMessages[lang].wrongPassword })
+    if (!user) {
+      return reject({ message: errorMessages[lang].email })
+    }
+
+    if (!user[passwordField]) reject({ message: errorMessages[lang].notPassword, user: user })
+    else {
+      bcrypt.compare(password, user[passwordField]).then((isMatch) => {
+        if (isMatch) {
+          const { Password, ...userWithoutPassword } = user._doc
+          const { _id } = userWithoutPassword
+          const userID = { id: _id, _id }
+          if (!fullUser) {
+            fieldsToRetrieve.map((fieldName) => {
+              userID[fieldName] = userWithoutPassword[fieldName]
+            })
           }
+          if (validate && !user.Verified) reject({ message: errorMessages[lang].unverified, user: { Email: user.Email, Verified: user.Verified } })
+          const secretKey = process.env.PASSPORT_SECRET || 'thisisthesecretandshouldbeconfigurable'
+          const token = jwt.sign(fullUser ? userWithoutPassword : userID, secretKey, { expiresIn: '7d' })
+          resolve({ accessToken: token, data: fullUser ? userWithoutPassword : userID })
+        } else {
+          reject({ message: errorMessages[lang].wrongPassword })
+        }
 
-        })
-      }
-    })
+      })
+    }
   })
 }
 
-async function socialAuthenticate ({ Name, ProfilePic, Email, Role }) {
+async function socialAuthenticate({ Name, ProfilePic, Email, Role }) {
   const Users = require('../models/users.model.js')
   return new Promise(function (resolve, reject) {
     if (!Email) {
@@ -212,12 +236,12 @@ async function socialAuthenticate ({ Name, ProfilePic, Email, Role }) {
   })
 }
 
-function cryptPassword (password) {
+function cryptPassword(password) {
   const hash = bcrypt.hashSync(password, 10)
   return hash
 }
 
-function jwtVerify (token) {
+function jwtVerify(token) {
   if (token) {
     const justTheToken = token.substr(token.indexOf(' ') + 1)
     try {
@@ -250,7 +274,7 @@ function jwtVerify (token) {
  * const decryptedData = dataEncryption(encryptedData, 'decrypt', 'my secret key');
  * console.log(decryptedData);
  */
-function dataEncryption (data, type = 'encrypt', secret = 'my secret key') {
+function dataEncryption(data, type = 'encrypt', secret = 'my secret key') {
   try {
     const algorithm = 'aes-256-cbc';
     const key = crypto.scryptSync(secret, 'salt', 32);
