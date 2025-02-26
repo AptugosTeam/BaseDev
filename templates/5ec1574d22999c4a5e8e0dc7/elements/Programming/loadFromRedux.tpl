@@ -87,6 +87,10 @@ options:
     display: Field To Search
     type: text
     options: ''
+  - name: variableToCheck
+    display: Variable to check before fetching
+    type: text
+    options: ''  
   - name: sortColumn
     display: Sort Column
     type: text
@@ -208,6 +212,9 @@ React.useEffect(() => {
 {% if element.values.searchString and element.values.customEffect and element.values.effectOnSearch %}
   {{ element.values.effectOnSearch | raw }}
 {% else %}
+  {% if element.values.variableToCheck %}
+  if( {{ element.values.variableToCheck }} ) {
+  {% endif %}
   perform{{ innervarname }}load({
     ...{{ innervarname }}loadoptions
     {% if element.values.fixedSearchField %}, fixedSearch: { field: {{ element.values.fixedSearchField}}, value: {{ element.values.fixedSearchString }} }{% endif %}
@@ -215,8 +222,14 @@ React.useEffect(() => {
     {% if element.values.searchString %}, searchString: {{ element.values.searchString }}{% endif %}
     {% if element.values.useExactMatch %}, exactMatch: {{ element.values.useExactMatch }}{% endif %}
   })
+{% if element.values.variableToCheck %}
+}
 {% endif %}
-},[{{ innervarname }}loadoptions{% if element.values.searchString %}, {{ element.values.searchString }}{% endif %}])
+
+{% endif %}
+
+
+},[{{ innervarname }}loadoptions{% if element.values.searchString %}, {{ element.values.searchString }}{% endif %}{% if element.values.variableToCheck %}, {{ element.values.variableToCheck }} {% endif %}])
 {% endset %}
 {{ save_delayed('ph',ph)}}
 {% if element.values.onload or element.children %}

@@ -39,6 +39,10 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: variableToCheck
+    display: Variable to check before fetching
+    type: text
+    options: ''
   - name: onRequestUpdate
     display: On Update
     type: function
@@ -100,7 +104,7 @@ options:
   {% set tableData = '(' ~ tableName|lower ~ 'Data.found' ~ tableName|lower ~ '.length ? ' ~ tableName|lower ~ 'Data.found' ~ tableName|lower ~ ' : ' ~ tableName|lower ~ 'Data.' ~ tableName|lower ~ ' as any)' %}
   {% set eleWithoutChilds = element %}
   {% set eleWithoutChilds = eleWithoutChilds|merge({'children': null,'name':'table'}) %}
-  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage } %}
+  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage, 'variableToCheck': element.values.variableToCheck } %}
   {% set totalDocs = (tableName|lower) ~ 'Data.totalDocs' %}
 {% endif %}
 {% set bpr %}
