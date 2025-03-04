@@ -32,13 +32,20 @@ options:
     type: text
     settings:
       default: 'index'
+      active: true
+  - name: disableDefaultVariable
+    display: Disable Default Variable
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
   - name: filtersource
     display: Condition to filter source values
     type: text
     advanced: true
   - name: code
     display: Code
-    type: text
+    type: code
     options: ''
   
 children: []
@@ -46,7 +53,7 @@ children: []
 {% if element.values.filtersource %}
 {% set addExtra = '.filter(tmp => tmp.' ~ element.values.filtersource ~ ')' %}
 {% endif %}
-{{ element.values.variable }}{{ addExtra }}.forEach(({{ element.values.variablename | default('item') }},{{ element.values.indexname | default('index') }}) => {
+{{ element.values.variable }}{{ addExtra }}.forEach(({{ element.values.variablename | default('item') }},{% if not element.values.disableDefaultVariable %}{{ element.values.indexname | default('index') }}{% endif %}) => {
 {% if element.values.code %}
   {{ element.values.code }}
 {% endif %}
