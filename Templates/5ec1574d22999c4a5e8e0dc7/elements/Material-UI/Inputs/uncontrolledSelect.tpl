@@ -45,6 +45,10 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: extraStyles
+    display: Extra Styles
+    type: styles
+    options: ''
   - name: shrink
     display: Shrink Label?
     type: checkbox
@@ -102,6 +106,7 @@ import MenuItem from '@mui/material/MenuItem'
     size='{{ element.values.size|default("medium") }}'
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
+    {% if element.values.extraStyles %}style={ {{ element.values.extraStyles }} }{% endif %}
     select
     {% if element.values.fullwidth %}fullWidth{% endif %}
     {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
@@ -121,6 +126,7 @@ import MenuItem from '@mui/material/MenuItem'
 {% endif %}
 {% if element.values.alternativeOptions %}
 { {{ element.values.options }} }
+{{ content|raw }}
 {% else %}
 { {{ element.values.options }}.map((item: { value: any, name: string } | any, index: number) => <MenuItem value={item?.value ? item.value : item} key={index}>{item?.name ? item.name : item}</MenuItem> )}
 {% endif %}
