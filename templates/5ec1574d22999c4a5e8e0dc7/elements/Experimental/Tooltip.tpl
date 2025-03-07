@@ -61,6 +61,10 @@ options:
     display: Control Open State
     type: variable
     options: ''
+  - name: onClose
+    display: Control Close State
+    type: variable
+    options: ''
   - name: extraStyles
     display: Extra Styles
     type: text
@@ -92,6 +96,7 @@ import Tooltip from '@mui/material/Tooltip'
     {% if element.values.leaveDelay %}leaveDelay={ {{ element.values.leaveDelay }} }{% endif %}
     {% if followCursor %}followCursor={ {{ element.values.followCursor }} }{% endif %}
     {% if element.values.open %}open={ {{ element.values.open }} }{% endif %}
+    {% if element.values.onClose %}onClose={ () => { {{ element.values.onClose }} } }{% endif %}
     {% if element.values.tooltipClassName %}slotProps={ { popper: { className: '{{ element.values.tooltipClassName }}' } } }{% endif %}
     {% if element.values.extraStyles %}
     slotProps={ { tooltip: { sx: { {{ element.values.extraStyles }} } }, } }
