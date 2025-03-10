@@ -17,6 +17,10 @@ options:
     display: On Change 
     type: function
     required: true
+  - name: accept
+    display: File extensions accepted
+    type: text
+    options: ''
   - name: Variant
     display: Variant
     type: dropdown
@@ -89,5 +93,6 @@ const VisuallyHiddenInput = styled('input')({
   onChange={ {{element.values.onChange | functionOrCall }} }
 >
   {{ element.values.buttonText }}{{ content | raw }}
-  <VisuallyHiddenInput type="file" />
+  <VisuallyHiddenInput type="file" {% if element.values.accept %}accept=" {{element.values.accept}} "{% endif %}
+/>
 </Button>
