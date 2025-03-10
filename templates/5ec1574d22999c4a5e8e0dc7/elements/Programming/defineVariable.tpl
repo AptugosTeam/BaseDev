@@ -61,13 +61,17 @@ settings:
 sourceType: javascript
 children: []
 */
+
 {% if not element.values.serverSide %}
-  {% if element.values.priority %}
-{% set ph %}
-{% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }}{% if element.values.type %}:{{ element.values.type }}{% endif %} = {{ element.values.variableValue|default(content | raw)}}
-{% endset %}
-{{ save_delayed('ph',ph,1) }}
+  {% if element.values.willbeModified %}
+    {% set variableDeclaration %}let {{ element.values.variableName }}{% if element.values.type %}:{{ element.values.type }}{% endif %}{% if element.values.variableValue %} = {{ element.values.variableValue|default(content | raw)}}{% endif %}{% endset %}
   {% else %}
-{% if element.values.willbeModified %}let{% else %}const{% endif %} {{ element.values.variableName }}{% if element.values.type %}:{{ element.values.type }}{% endif %} = {{ element.values.variableValue|default(content | raw)}}
-{% endif %}
+    {% set variableDeclaration %}const {{ element.values.variableName }}{% if element.values.type %}:{{ element.values.type }}{% endif %} = {{ element.values.variableValue|default(content | raw)}}{% endset %}
+  {% endif %}
+
+  {% if element.values.priority %}
+    {{ save_delayed('ph', variableDeclaration, 1) }}
+  {% else %}
+    {{ variableDeclaration }}
+  {% endif %}
 {% endif %}

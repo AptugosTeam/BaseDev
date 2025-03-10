@@ -71,7 +71,14 @@ options:
       default: 'transparent'
 */
 {% set GF %}
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="preload"
+  as="style"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Material+Symbols+Outlined&display=swap"
+  onload="this.onload=null;this.rel='stylesheet'"
+/>
 {% endset %}
 {{ add_setting('IndexBodyAdd', GF) }}
 <span className={`material-symbols-{{element.values.style|default('outlined')}}{% if element.values.className %} ${ {{ element.values.className }} }{% endif %}`}style={ {userSelect: 'none', fontVariationSettings: "'FILL' {{element.values.filled|default('0')}}, 'GRAD' {{element.values.grade|default('0')}}, 'opsz' {{element.values.opticalSize|default('24')}}"{% if element.values.fontSize %}, fontSize: {{element.values.fontSize}}{% endif %}{% if element.values.fontWeight %}, fontWeight: {{element.values.fontWeight}}{% endif %}{% if element.values.backgroundColor %}, backgroundColor: "{{element.values.backgroundColor}}"{% endif %}{% if element.values.color %}, color: "{{element.values.color}}"{% endif %} } }>{{element.values.icon|default('Home')}}</span>

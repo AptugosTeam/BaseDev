@@ -46,6 +46,7 @@ import AuthService from '../services/auth.service'
 {% if element.values.variableStore %}
 const {{ storeName }} = {% if element.values.await %}await{% endif %} AuthService.register({{ element.values.Data }})
     if (response) {
+      {{ content | raw }}
       navigation.replace('{{ (element.values.OnSuccess | elementData).path }}')
     }
 {% else %}
