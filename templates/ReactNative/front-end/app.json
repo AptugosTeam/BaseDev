@@ -42,6 +42,7 @@ unique_id: i1kD8rN4
       "config": "metro.config.js",
       "sourceExts": ["js", "jsx", "scss", "sass"]
     },
+    "scheme": "{{ insert_setting('androidPackage')|default(application.settings.name | lower | friendly) }}",
     "plugins": [
       {{ insert_setting('AppJsonPlugins') | raw }}
       [
