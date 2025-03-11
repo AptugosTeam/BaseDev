@@ -17,7 +17,7 @@ calculatedName: >-
     }
   }
 options:
-  - name: data
+  - name: tableOrData
     display: Data
     type: dropdown
     options: >-
@@ -33,10 +33,10 @@ options:
         aptugo.variables.setPageVariable(page, element.unique_id, { [tableInfo.name]: fields });
       aptugoOnLoad: |-
         const element = arguments[0];
-        if ( element.values.data ) {
+        if ( element.values.tableOrData ) {
           const varsToAdd = {};
           const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;
-          const tableInfo = aptugo.store.getState().application.tables.find(table => table.unique_id === element.values.data )
+          const tableInfo = aptugo.store.getState().application.tables.find(table => table.unique_id === element.values.tableOrData )
           const tableFields = tableInfo.fields;
           tableFields.forEach(tableField => { varsToAdd[tableField.column_name] = 'String' });
           const finalVarsToAdd = {
@@ -135,8 +135,13 @@ children: []
 {% if data %}
   {% set table = data | tableData %}
 {% else %}
-  {% set table = element.values.data | tableData %}
+  {% if element.values.tableOrData is not empty %}
+    {% set table = element.values.tableOrData | tableData %}
+  {% elseif element.values.data is not empty %}
+    {% set table = element.values.data | tableData %}
+  {% endif %}
 {% endif %}
+
 {% set tableName = table.name | friendly | lower %}
 {% set singleName = table.singleName | friendly | lower %}
 {% set innervarname = table.name | friendly %}
@@ -160,7 +165,8 @@ children: []
       page: {{ element.values.defaultPage | default(1) }},
       populate: {% if element.values.donotpopulate %}false{% else %}true{% endif %},
       {% if element.values.elementsLimit %}limit: {{element.values.elementsLimit}}{% else %}limit: 25{% endif %},
-      sort: { field: {{ element.values.sortColumn | default('null') }}, method: '{{ element.values.sortMethod | default('DESC') }}' },
+      {% if element.values.sortColumn %}sortField: '{{element.values.sortColumn}}',{% endif %}
+      {% if element.values.sortMethod %}sortMethod: '{{element.values.sortMethod}}',{% endif %}
       {% if element.values.fieldToSearch %}
         searchField: {{ element.values.fieldToSearch | textOrVariableInCode }},
       {% endif %}

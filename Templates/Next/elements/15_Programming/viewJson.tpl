@@ -14,7 +14,8 @@ options:
     type: text
 */
 {% set bpr %}
-import ReactJson from 'react-json-view'
+import { lazy } from "react"
+const LazyReactJson = lazy(() => import("react-json-view"))
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-<ReactJson src={{ element.values.jsonObject | textOrVariable }} />
+<LazyReactJson src={{ element.values.jsonObject | textOrVariable }} />

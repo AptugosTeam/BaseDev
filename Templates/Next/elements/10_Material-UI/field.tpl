@@ -12,11 +12,8 @@ options:
     options: return [['useVar','Use a Variable'], ...aptugo.tableUtils.getAllFields()]
     settings:
       aptugoOnChange: >-
-        const value = arguments[0];
-        const element = arguments[1];
-        const page = arguments[2];
         if (value !== 'useVar') {
-          const tableName = aptugoUtils.helpers.friendly(aptugoUtils.findContainerTable(value).name);
+          const tableName = aptugoUtils.helpers.friendly(aptugoUtils.tableUtils.findContainerTable(value).name);
           aptugo.variables.setPageVariable(page, 'id' + element.unique_id, { [`initialData${tableName}`]: null });
           aptugo.variables.setPageVariable(page, element.unique_id, { [`${tableName}data`]: null });
           aptugo.variables.setPageFunction(page, 'f' + element.unique_id, `set${tableName}data` );
@@ -116,6 +113,12 @@ options:
     options: 
       return [['en', 'English'],['es', 'Spanish']]
     advanced: true
+  - name: alternativeValue
+    display: Use Alternative value
+    type: text
+  - name: alternativeSaveMethod
+    display: Use Alternative saving
+    type: code
 children: []
 extraFiles:
   - source: 'elements/99_ExtraFiles/Table/Field.tsx'

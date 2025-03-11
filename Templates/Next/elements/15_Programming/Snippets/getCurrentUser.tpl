@@ -31,6 +31,11 @@ options:
       condition: true
       active: true
       default: login
+  - name: table
+    display: Table
+    type: dropdown
+    options: >-
+      return aptugo.store.getState().application.tables.map(({ unique_id,name }) => [unique_id, name])
 children: []
 settings:
   - name: Packages
@@ -53,6 +58,9 @@ extraFiles:
   - source: 'elements/99_ExtraFiles/990_dbAdded.tsx'
     destination: '/src/api-lib/db/auth.tsx'
 */
+{% set table = element.values.table | tableData %}
+{% set userControlModel = (table.name | friendly) ~ 'Model' %}
+{{ add_setting('userControlModel', userControlModel) }}
 {% set addedMiddleWare %}
 export { default as auths } from './auth'
 {% endset %}

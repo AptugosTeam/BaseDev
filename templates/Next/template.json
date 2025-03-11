@@ -1,7 +1,7 @@
 {
   "_id": "Next",
   "name": "React/Typescript Server Side Rendering",
-  "renderingFolder": "/src/Pages",
+  "renderingFolder": "/src/pages",
   "default": "true",
   "namingSchema": "{% if pageDefinition.path == '/' %}index{% else %}{{ pageDefinition.path }}{% endif %}.tsx",
   "templateCommandsAfter": "$(which pnpm) i",

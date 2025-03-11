@@ -10,7 +10,7 @@ backColor: rgba(6, 201, 210, 0.25)
 sourceType: javascript
 order: 1
 options:
-  - name: class
+  - name: className
     display: ClassName
     type: styles
     options: ''
@@ -119,8 +119,8 @@ helpText: Basic HTML Div element
   {% elseif element.values.id %}
     id={{ element.values.id | textOrVariable }}
   {% endif %}
-  {% if element.values.class %}
-    className={ {{element.values.class|raw}} }
+  {% if element.values.className %}
+    className={ {{element.values.className|raw}} }
   {% endif %}
   {% if element.values.style %}
     style={ {{element.values.style}} }

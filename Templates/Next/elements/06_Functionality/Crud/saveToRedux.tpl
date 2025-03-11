@@ -23,20 +23,35 @@ options:
       default: 'data'
 children: []
 */
-{% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
+{% set bpr %}
+import serializeData from '@lib/serializeData'
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
+{% set bpr %}
+import { fetcher } from "@lib/fetch"
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
+{% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
 {% if element.children %}
 new Promise((resolve) => {
 {% endif %}
 {% if element.values.condition %}if ({{ element.values.condition }}) { {% endif %}
-if ({{ element.values.variablename | default('data') }}._id) {
-  dispatch(edit{{ table.name | friendly | capitalize }}({{ element.values.variablename | default('data') }} as any))
-} else {
-  dispatch(add{{ table.name | friendly | capitalize }}({{ element.values.variablename | default('data') }} as any))
+let method = 'POST'
+if ({{ element.values.variablename | default('data') }}._id) method = 'PUT'
+try {
+  const formData = serializeData({{ element.values.variablename | default('data') }})
+  fetcher(`/api/{{ table.name | friendly | lower }}${method === 'PUT' ? '/' + {{ element.values.variablename | default('data') }}._id : ''}`, {
+    method: method,
+    body: formData,
+  }).then(() => {
+    {% if element.children %}
+      resolve('ok')
+    }).then(result => {
+      {{ content | raw }}
+    {% endif %}
+  })
+} catch (e) {
+  console.log('catch', e)
 }
-{% if element.values.condition %}}{% endif %}
-{% if element.children %}
-  resolve('ok')
-}).then(result => {
-  {{ content | raw }}
+{% if element.values.condition %}if ({{ element.values.condition }}) } {% endif %}
 })
-{% endif %}

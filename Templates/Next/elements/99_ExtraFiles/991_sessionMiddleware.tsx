@@ -1,17 +1,14 @@
 /*
 path: 991_sessionMiddleware.tsx
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Next/elements/99_ExtraFiles/991_sessionMiddleware.tsx
 keyPath: elements/99_ExtraFiles/991_sessionMiddleware.tsx
 unique_id: WgkyKZao
 */
-import MongoStore from 'connect-mongo'
 import nextSession from 'next-session'
 import { promisifyStore } from 'next-session/lib/compat'
-import { getMongoClient } from './database'
+import MongoStore from 'connect-mongo'
 
 const mongoStore = MongoStore.create({
-  clientPromise: getMongoClient(),
+  mongoUrl: process.env.MONGODB_URI,
   stringify: false,
 })
 

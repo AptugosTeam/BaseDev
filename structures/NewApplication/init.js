@@ -15,12 +15,13 @@ if (State.usersReducer) {
 
 // Backwards compatibility
 let defaultTemplate
-
+console.log('STATE', State)
 try {
   if (State.templatesReducer) {
     defaultTemplate = State.templatesReducer.templates.filter(template => template.default )
     State.templatesReducer.loadedTemplate = defaultTemplate[0]
   } else {
+    
     defaultTemplate = State.templates.filter(template => template.default)
   }
 } catch(e) {
@@ -67,6 +68,6 @@ Application.settings = {
 }
 
 // aptugo.createdbuser({ dbName: username, user: dbusername, pwd: dbpassword })
-
+console.log('This is the result of new app:', Application)
 Application._id = aptugo.generateID(16)
 return Application

@@ -27,10 +27,23 @@ import MenuItem from '@mui/material/MenuItem'
     label={{ field.prompt|default(field.column_name)  | textOrVariable }}
     type="text"
     fullWidth
+    {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
     variant="{{ element.values.variant|default('standard') }}"
-    value={ {{ tableName }}data.{{ field.column_name | friendly }}}
-    onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
+    value={ 
+        {% if element.values.alternativeValue %}
+            {{ element.values.alternativeValue }}
+        {% else %}
+            {{ tableName }}data.{{ field.column_name | friendly }} 
+        {% endif %}
+    }
+    onChange={
+        {% if element.values.alternativeSaveMethod %}
+            {{ element.values.alternativeSaveMethod | functionOrCall }}
+        {% else %}
+            handle{{ tableName }}Change("{{ field.column_name | friendly }}")
+        {% endif %}
+    }
 >
 {% if field.placeholder %}
 <MenuItem value="" disabled>{{ field.placeholder }}</MenuItem>

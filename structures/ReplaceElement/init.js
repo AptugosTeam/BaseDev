@@ -35,6 +35,6 @@ if (container) {
   container.children[elementToReplace] = newElement
 }
 
-console.log('THESE ARE THE PARAMETERS', JSON.stringify(Parameters,null,2))
-console.log('IM THE STRUCTURE AND THIS IS THE NEW ELEMENT', JSON.stringify(container,null,2))
+// console.log('THESE ARE THE PARAMETERS', JSON.stringify(Parameters.values,null,2))
+// console.log('IM THE STRUCTURE AND THIS IS THE NEW ELEMENT', JSON.stringify(container,null,2))
 return Application
