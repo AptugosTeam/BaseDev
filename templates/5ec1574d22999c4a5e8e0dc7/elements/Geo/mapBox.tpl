@@ -14,6 +14,9 @@ options:
   - name: onMapIdle
     display: On Map Idle
     type: function
+  - name: onMoveEnd
+    display: On Map Move (e)
+    type: function
   - name: onClick
     display: On Click
     type: function
@@ -379,7 +382,9 @@ export const unclusteredPointLayer: LayerProps = {
         }
       }}
     {% endif %}
-    
+    {% if element.values.onMoveEnd %}
+      onMoveEnd={(e) => { {{ element.values.onMoveEnd }} }}
+    {% endif %}
     {% if element.values.maxBounds %}maxBounds={ {{ element.values.maxBounds }} }{% endif %}
     onIdle={onMapIdle}
     {% if onPressArray and not element.values.onClick  %}
