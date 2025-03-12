@@ -6,7 +6,7 @@ icon: ico-field
 sourceType: javascript
 settings:
   - name: Packages
-    value: '"@shopify/react-native-skia": "latest",'
+    value: '"@shopify/react-native-skia": "^0.1.196",'
 options:
   - name: xValue
     display: X Value
