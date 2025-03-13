@@ -20,6 +20,10 @@ import { Animated } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
+import { TouchableOpacity } from 'react-native'
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
+{% set bpr %}
 import { Easing } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
