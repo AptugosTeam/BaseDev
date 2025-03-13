@@ -29,22 +29,23 @@ interface RecoverOptions {
 }
 
 class AuthService {
-  login(email, password, options: LoginOptions = {}) {
-    const { remember = true } = options
+  login(email, password, model: string | null = null, options: LoginOptions = {}) {
+    const { remember = false } = options
     return axios
       .post(API_URL + 'authenticate', {
         email,
         password,
+        model,
         options,
       })
       .then((response) => {
         if (response.data.accessToken || response.data.stsTokenManager) {
+          const token = response.data.accessToken || response.data.stsTokenManager
+          const userData = JSON.stringify(response.data.data || response.data)
+          
           if (remember) {
-            AsyncStorage.setItem('token', response.data.accessToken || response.data.stsTokenManager)
-            AsyncStorage.setItem('user', JSON.stringify(response.data.data || response.data))
-          } else {
-            AsyncStorage.setItem('token', response.data.accessToken || response.data.stsTokenManager)
-            AsyncStorage.setItem('user', JSON.stringify(response.data.data || response.data))
+            AsyncStorage.setItem('token', token)
+            AsyncStorage.setItem('user', userData)
           }
         }
         return response.data
