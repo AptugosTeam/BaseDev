@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
 {{ insert_setting('AuthServiceImports') | raw }}
 
-const API_URL = '{{ settings.apiURL }}/api/users/'
+const BASE_API_URL = '{{ settings.apiURL }}/api/'
 
 interface LoginOptions {
   remember?: boolean
@@ -29,10 +29,14 @@ interface RecoverOptions {
 }
 
 class AuthService {
+  getModelPath(model: string | null = null) {
+    return `${BASE_API_URL}${model || 'users'}`
+  }
+
   login(email, password, model: string | null = null, options: LoginOptions = {}) {
     const { remember = false } = options
     return axios
-      .post(API_URL + 'authenticate', {
+      .post(`${this.getModelPath('users')}/authenticate`, {
         email,
         password,
         model,
@@ -57,11 +61,11 @@ class AuthService {
     AsyncStorage.removeItem('token')
   }
 
-  register(data) {
+  register(data, model: string | null = null) {
     return axios
-      .post(API_URL, data)
+      .post(this.getModelPath(model), data)
       .then((_result) => {
-        return this.login(data.Email, data.Password).then((afterLogin) => {
+        return this.login(data.Email, data.Password, model).then((afterLogin) => {
           return afterLogin
         })
       })
@@ -85,7 +89,7 @@ class AuthService {
     username = ''
   }: RecoverOptions): Promise<{ success: boolean; data?: any; error?: string }> {
     try {
-      const response = await axios.post(`${API_URL}recoverpassword`, {
+      const response = await axios.post(`${this.getModelPath(model)}/recoverpassword`, {
         email,
         subject,
         message,
@@ -98,28 +102,28 @@ class AuthService {
       return { success: true, data: response.data }
     } catch (error) {
       console.log(error)
-      const errorMessage = error.response?.data?.message || 'An error occurred while recovering the password';
+      const errorMessage = error.response?.data?.message || 'An error occurred while recovering the password'
       console.error('Error while recovering password:', errorMessage)
       return { success: false, error: errorMessage }
     }
   }
   
-  checkNonce(nonce, email) {
+  checkNonce(nonce, email, model: string | null = null) {
     return axios
-      .post(API_URL + 'checknonce', {
+      .post(`${this.getModelPath(model)}/checknonce`, {
         nonce,
         email,
       })
       .then((response) => {
-        localStorage.setItem('token', response.data.accessToken)
-        localStorage.setItem('user', JSON.stringify(response.data.data))
+        AsyncStorage.setItem('token', response.data.accessToken)
+        AsyncStorage.setItem('user', JSON.stringify(response.data.data))
         return response.data.data._id
       })
       .catch((e) => {
         throw e
       })
   }
-{{ insert_setting('auth.service') | raw}}
+{{ insert_setting('auth.service') | raw }}
 }
 
 export default new AuthService()
