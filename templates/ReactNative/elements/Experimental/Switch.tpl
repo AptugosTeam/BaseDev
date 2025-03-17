@@ -36,8 +36,8 @@ children: []
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Switch
-  trackColor={ { false: '{{ element.values.trackColor|default("#767577") }}', true: '{{ element.values.trackColor|default("#dfdfdf") }}'}}
-  thumbColor={ {{ element.values.Checked }} ? '{{ element.values.thumbColorOn|default("#f5dd4b") }}' : '{{ element.values.trackColor|default("#f4f3f4") }}'}
+  trackColor={ { false: '{{ element.values.trackColor|default("#767577") }}', true: '{{ element.values.trackColorOn|default("#dfdfdf") }}'}}
+  thumbColor={ {{ element.values.Checked }} ? '{{ element.values.thumbColorOn|default("#f5dd4b") }}' : '{{ element.values.thumbColor|default("#f4f3f4") }}'}
   {% if element.values.OnClick %}
     onChange={ (e)=> { {{ element.values.OnClick }} } }
   {% endif %}
