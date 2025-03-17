@@ -179,7 +179,7 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if element.values.type == 'number' %}
       {% if element.values.minNum or element.values.maxNum %}
         inputProps={ {
-            {% if element.values.minNum %}
+            {% if element.values.minNum is not none %}
               min: {{ element.values.minNum }},
             {% endif %}
             {% if element.values.maxNum %}
