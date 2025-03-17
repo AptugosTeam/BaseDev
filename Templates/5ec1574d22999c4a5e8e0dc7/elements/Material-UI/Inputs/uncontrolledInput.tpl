@@ -61,10 +61,22 @@ options:
   - name: type
     display: Type
     type: dropdown
-    options: text;password;date;datetime-local;number;textarea;numeric
+    options: text;password;date;datetime-local;number;textarea;numeric;file
     settings:
       default: text
       active: true
+  - name: accept
+    display: Accept
+    type: text
+    settings:
+      propertyCondition: type
+      condition: file
+      active: true
+  - name: ref
+    display: Referencia (ref)
+    type: variable
+    options: ''
+    advanced: true
   - name: minNum
     display: Min Number
     type: text
@@ -157,7 +169,22 @@ import InputAdornment from '@mui/material/InputAdornment'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 {% endif %}
-<TextField
+
+{% if element.values.type == 'file' %}
+  {# Renderizar un input nativo para el tipo file #}
+  <input
+    type="file"
+    {% if element.values.id %}id="{{ element.values.id }}"{% endif %}
+    {% if element.values.fieldname %}name="{{ element.values.fieldname }}"{% endif %}
+    {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
+    {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
+    {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
+    {% if element.values.accept %}accept="{{ element.values.accept }}"{% endif %}
+    {% if element.values.ref %}ref={ {{ element.values.ref }} }{% endif %} {# Agregar el atributo ref #}
+  />
+{% else %}
+  {# Renderizar TextField para otros tipos #}
+  <TextField
     {% if element.values.id %}id="{{ element.values.id }}"{% endif %}
     variant="{{ element.values.variant|default('standard') }}"
     {% if element.values.Autofocus %}autoFocus{% endif %}
@@ -218,8 +245,10 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if element.values.onKeyDown %}onKeyDown={ {{element.values.onKeyDown}} }{% endif %} 
     {% if element.values.endAdornment %}
       InputProps={ {
-        endAdornment: <InputAdornment position="end">{{ content | raw }}</InputAdornment>
+        endAdornment: <InputAdornment position="end">{{ content | raw }}</InputAdornment>
       } }
     {% endif %}
     {% if element.values.inputRef %}inputRef={ {{ element.values.inputRef }} }{% endif %}
-/>
+    {% if element.values.ref %}ref={ {{ element.values.ref }} }{% endif %} {# Agregar el atributo ref #}
+  />
+{% endif %}
