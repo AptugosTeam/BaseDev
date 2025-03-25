@@ -32,6 +32,7 @@ settings:
         }
       })
       sockets(io)
+      app.set('socketio', io);
 */
 {% set bpr %}
 import io from 'socket.io-client'
