@@ -192,13 +192,20 @@ async function authenticate({ email, password, model, passwordField, populate, o
   })
 }
 
-async function socialAuthenticate({ Name, ProfilePic, Email, Role }) {
-  const Users = require('../models/users.model.js')
+async function socialAuthenticate({ Name, ProfilePic, Email, Role, Model }) {
+
+    if (!Model) {
+    const Users = require('../models/users.model.js')
+    Model = Users
+  } else if (typeof Model === 'string') {
+    const Users = require('../models/' + Model + '.model.js')
+    Model = Users
+  }
   return new Promise(function (resolve, reject) {
     if (!Email) {
       reject({ message: 'There was an error' })
     }
-    const query = Users.findOne({ Email: new RegExp('^' + Email.toLowerCase(), 'i') })
+    const query = Model.findOne({ Email: new RegExp('^' + Email.toLowerCase(), 'i') })
     const promise = query.exec()
     promise.then((user) => {
       if (!user) {
@@ -207,7 +214,7 @@ async function socialAuthenticate({ Name, ProfilePic, Email, Role }) {
           Password: 123,
           Role,
         }
-        const User = new Users(data)
+        const User = new Model(data)
         User.save()
           .then((result) => {
             const { Email, Role, _id } = result._doc

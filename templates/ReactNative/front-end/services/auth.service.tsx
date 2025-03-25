@@ -47,10 +47,8 @@ class AuthService {
           const token = response.data.accessToken || response.data.stsTokenManager
           const userData = JSON.stringify(response.data.data || response.data)
           
-          if (remember) {
             AsyncStorage.setItem('token', token)
             AsyncStorage.setItem('user', userData)
-          }
         }
         return response.data
       })
@@ -124,6 +122,7 @@ class AuthService {
       })
   }
 {{ insert_setting('auth.service') | raw }}
+{{ insert_setting('AuthServiceAddenum') | raw }}
 }
 
 export default new AuthService()

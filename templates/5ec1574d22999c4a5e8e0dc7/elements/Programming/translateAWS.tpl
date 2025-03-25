@@ -23,6 +23,8 @@ settings:
     value: '"@aws-sdk/client-s3": "^3.592.0",'
   - name: Packages
     value: '"@aws-sdk/lib-storage": "^3.592.0",'
+  - name: Packages
+    value: '"aws-sdk": "^2.1692.0",'
   - name: ServerRoute
     value: |
       const AWS = require('aws-sdk')

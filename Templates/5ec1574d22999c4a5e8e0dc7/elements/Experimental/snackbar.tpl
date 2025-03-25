@@ -30,6 +30,7 @@ options:
     display: Use Existing Variable
     type: checkbox 
     options: ''
+    advanced: true
   - name: onClose
     display: On Close (optional)
     type: code
