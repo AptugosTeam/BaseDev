@@ -11,7 +11,9 @@ unique_id: alNzyRKN
     "baseUrl": ".",
     "paths": {
       "@assets/*": ["assets/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@components/*": ["components/*"],
+      "@services/*": ["services/*"],
     }
   }
 }

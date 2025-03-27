@@ -24,7 +24,7 @@ options:
 {% if element.values.changePath %}
 import {{ element.values.name | friendly }} from '../{{ element.values.name | friendly }}'
 {% else %}
-import {{ element.values.name | friendly }} from '../components/{{ element.values.name | friendly }}'
+import {{ element.values.name | friendly }} from '@components/{{ element.values.name | friendly }}'
 {% endif %}
 {% endset %}
 {{ save_delayed('bpr', bpr)}}

@@ -113,6 +113,10 @@ options:
     display: On Focus
     type: function
     options: ''
+  - name: editable
+    display: Disable Input (false to disable)
+    type: text
+    options: ''
   - name: error
     display: Error
     type: variable
@@ -181,6 +185,7 @@ children: []
       {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
       {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
       {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
+      {% if element.values.editable %}editable={ {{ element.values.editable }} }{% endif %}
       {% if element.values.theme %}theme={ {{ element.values.theme }} }{% endif %}
       {% if element.values.onFocus %}onFocus={() => {{element.values.onFocus}} }{% endif %}
       {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}

@@ -37,7 +37,7 @@ options:
 children: []
 */
 {% set bpr %}
-import AuthService from '../services/auth.service'
+import AuthService from '@services/auth.service'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 
