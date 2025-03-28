@@ -22,4 +22,7 @@ import FileUpload from '../components/FileUpload/FileUpload'
     {% if field.resizeWidth %}
         resizeWidth={ Number( {{field.resizeWidth|default(800)}} ) }
     {% endif %}
+    borderColor="{{ element.values.borderColor|default('#ffffff') }}"
+    labelColor="{{ element.values.labelColor|default('#ffffff') }}"
+    iconColor="{{ element.values.iconColor|default('#ffffff') }}"
 />

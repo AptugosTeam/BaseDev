@@ -107,6 +107,18 @@ options:
     display: Placeholder
     type: text
     options: ''
+  - name: labelColor
+    display: Label Color #
+    type: text
+    options: ''
+  - name: borderColor
+    display: Border Color #
+    type: text
+    options: ''
+  - name: iconColor
+    display: Icon Color #
+    type: text
+    options: ''
   - name: onBlur
     display: On Focus Lost
     type: function

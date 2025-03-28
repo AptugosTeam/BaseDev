@@ -1,3 +1,10 @@
+/*
+path: FileUpload.tsx
+completePath: >-
+  /Users/ari/Aptugo/BaseDev/Templates/5ec1574d22999c4a5e8e0dc7/front-end/components/FileUpload/FileUpload.tsx
+keyPath: front-end/components/FileUpload/FileUpload.tsx
+unique_id: 5tKTDLUI
+*/
 import PublishIcon from '@mui/icons-material/Publish'
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
@@ -8,107 +15,118 @@ import PictureAsPdf from '@mui/icons-material/PictureAsPdf'
 import React, { FunctionComponent } from 'react'
 
 const useStyles = {
-  root: {
+  container: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: '6px',
+    padding: '10px',
+    cursor: 'pointer',
     position: 'relative',
+    margin: '13px 0px',
   },
   image: {
-    maxHeight: '40px', // Tamaño de la miniatura
-    marginRight: '10px', // Espacio entre la imagen y el texto
-  },
-  media: {
     maxHeight: '40px',
-    width: '40px', // Tamaño de la imagen
-    objectFit: 'cover', // Asegura que la imagen se recorte correctamente
-    borderRadius: '4px', // Bordes redondeados
+    maxWidth: '40px',
+    objectFit: 'cover',
+    borderRadius: '4px',
+    marginRight: '10px',
   },
-  input: {
+  label: {
+    flex: 1,
+    fontSize: '16px',
+  },
+  hiddenInput: {
     display: 'none',
   },
   button: {
-    position: 'absolute',
-    right: 0,
-    top: '50%',
-    transform: 'translateY(-50%)', // Centrado verticalmente
+    backgroundColor: 'transparent',
   },
 }
 
 const AptugoImageUpload: FunctionComponent<any> = (props) => {
-  const classes = useStyles
-  const [state, setState] = React.useState({
-    uploading: false,
-    file: null,
-    selectedFile: null,
-    fileName: props.value,
-    accept: props.accept || 'image/*',
-    visual: props.variant || 'standard',
-  })
+  const classes = useStyles;
+  const [file, setFile] = React.useState<File | null>(null);
+  const [preview, setPreview] = React.useState<string | null>(null);
 
-  const handleUploadClick = (event) => {
-    event.persist()
+  // Extraemos los props antes del return
+  const { value, onChange, borderColor, labelColor, label, iconColor } = props;
 
-    const inputElement = event.target as HTMLInputElement
-    const origfileList: FileList = inputElement.files
-    const file = origfileList[0]
-    const reader = new FileReader()
-
-    reader.onloadend = function (e) {
-      let selectedFile = [reader.result]
-      setState({
-        ...state,
-        file: file,
-        fileName: file.name,
-        uploading: false,
-        selectedFile: selectedFile,
-      })
-
-      props.onChange(event)
+  React.useEffect(() => {
+    if (value) {
+      setPreview(value.startsWith("http") ? value : `/img/${value}`);
     }
+  }, [value]);
 
-    setState({
-      ...state,
-      uploading: true,
-    })
+  const handleUploadClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files || event.target.files.length === 0) return;
+  
+    const selectedFile = event.target.files[0];
+    console.log("Archivo seleccionado:", selectedFile);
+  
+    const reader = new FileReader();
+  
+    reader.onload = () => {
+      const result = reader.result;
+      
+      console.log("Contenido de reader.result:", result);
+      
+      if (!result || typeof result !== "string") {
+        console.error("Error: reader.result es inválido", result);
+        return;
+      }
+    
+      console.log("Actualizando preview...");
+      setFile(selectedFile);
+      setPreview(result);
+    };
+    
+    
+  
+    reader.onerror = (error) => console.error("Error al leer el archivo:", error);
+  
+    reader.readAsDataURL(selectedFile);
+  };
+  
 
-    reader.readAsDataURL(file)
-  }
-
-  const renderUploadedState = () => {
-    if (!state.selectedFile && !state.fileName && !props.value) return null
-    if (state.file && state.file.type === 'application/pdf') return <PictureAsPdf sx={classes.image} />
-    var src = state.selectedFile || `/img/${state.fileName}`
-    if (!state.selectedFile && !state.fileName) {
-      if (Object.keys(props.value).length === 0) return
-      src = `/img/${props.value}`
-    }
-    return (
-      <Box sx={classes.image}>
-        <img style={classes.media} src={src} />
-      </Box>
-    )
-  }
+  // Generamos los estilos dinámicos antes del return
+  const dynamicStyles = {
+    container: {
+      ...classes.container,
+      border: `1px solid ${borderColor || 'rgb(147, 147, 147)'}`,
+    },
+    label: {
+      ...classes.label,
+      color: labelColor || 'rgb(147, 147, 147)',
+    },
+    icon: {
+      color: iconColor || 'rgb(147, 147, 147)', // Azul por defecto
+    },
+  };
 
   return (
-    <FormControl margin="normal" fullWidth variant="outlined">
-      <Input
-        sx={classes.altVisual}
-        value={state.fileName || ''}
-        id="component-upload-alternate"
-        placeholder={props.placeholder || null}
-        startAdornment={
-          <label>
-            <input accept={state.accept} style={classes.input} multiple type="file" onChange={handleUploadClick} />
-            <IconButton component="span" sx={classes.button} aria-label="Search">
-              <PublishIcon color="primary" />
-            </IconButton>
-            <p>{props.label}</p>
-          </label>
-        }
-        endAdornment={renderUploadedState()}
-      />
-    </FormControl>
-  )
-}
+    <Box sx={dynamicStyles.container} onClick={() => document.getElementById("file-input")?.click()}>
+      {typeof preview === "string" && preview.length > 0 && (
+  <img src={preview} alt="Preview" style={classes.image} />
+)}
 
-export default AptugoImageUpload
+
+      <span style={dynamicStyles.label}>{label || "Selecciona un archivo"}</span>
+
+      <IconButton component="span" sx={classes.button}>
+        <PublishIcon sx={dynamicStyles.icon} />
+      </IconButton>
+
+      <input
+        type="file"
+        id="file-input"
+        style={classes.hiddenInput}
+        accept="image/*"
+        onChange={handleUploadClick}
+      />
+    </Box>
+  );
+};
+
+export default AptugoImageUpload;
+
