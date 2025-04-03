@@ -95,6 +95,10 @@ options:
     settings:
       default: false
       condition: ''
+  - name: variableToCheck
+    display: Variable to check before fetching
+    type: text
+    options: ''
   - name: detailsURL
     display: Details Page
     type: dropdown
@@ -255,7 +259,7 @@ children: []
   {% set innervarname = element.name | friendly %}
   {% set eleWithoutChilds = element %}
   {% set eleWithoutChilds = eleWithoutChilds|merge({'children': null}) %}
-  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage, 'sortColumn':element.values.sortColumn, sortMethod: element.values.sortMethod, 'fixedSearchField': element.values.fixedSearchField, 'fixedSearchString': element.values.fixedSearchString } %}
+  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage, 'sortColumn':element.values.sortColumn, sortMethod: element.values.sortMethod, 'fixedSearchField': element.values.fixedSearchField, 'fixedSearchString': element.values.fixedSearchString, 'variableToCheck': element.values.variableToCheck } %}
   {% if element.children %}
       {% for field in element.children %}
         {% if field.values.Field == 'useVar' %}
