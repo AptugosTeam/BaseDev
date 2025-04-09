@@ -24,6 +24,8 @@ children: []
 try {
   {{ content | raw }}
 } catch (e) {
-  {% if element.values.messageError %}console.{{ element.values.debugType|default('log') }}('{{ element.values.messageError }}', e){% endif %}
+  {% if element.values.messageError %}
+  console.{{ element.values.debugType|default('log') }}('{{ element.values.messageError }}', e)
+  {% endif %}
   {{ element.values.catchContent | raw }}
 }
