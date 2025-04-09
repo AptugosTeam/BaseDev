@@ -9,10 +9,21 @@ options:
     display: Message error
     type: text
     options: ''
+  - name: debugType
+    display: Debug Type
+    type: dropdown
+    options: log;warn;error;info;debug
+    settings:
+      default: log
+  - name: catchContent
+    display: Catch Content
+    type: code
+    options: ''
 children: []
 */
 try {
-  {{ content | raw }}
+  {{ content | raw }}
 } catch (e) {
-  console.log({% if element.values.messageError %} '{{ element.values.messageError }}', {% endif %} e)
+  {% if element.values.messageError %}console.{{ element.values.debugType|default('log') }}('{{ element.values.messageError }}', e){% endif %}
+  {{ element.values.catchContent | raw }}
 }
