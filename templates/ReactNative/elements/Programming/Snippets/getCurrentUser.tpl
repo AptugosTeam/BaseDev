@@ -19,8 +19,10 @@ settings:
 import AuthService from '@services/auth.service'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-React.useEffect(() => {
+useFocusEffect(
+    React.useCallback(() => {
     AuthService.getCurrentUser().then(result => {
         set{{ (element.values.variableName | elementData).values.variableName }}(result)
     })
-}, [])
+    }, [])
+)
