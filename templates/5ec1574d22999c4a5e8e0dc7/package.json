@@ -12,11 +12,13 @@ unique_id: 0i8AxGw6
   "main": "index.js",
   "scripts": {
     "build": "webpack --config=config/webpack.prod.js",
+    "build-and-serve": "npm run build && npm run dev:prod",
     "clean-dist": "rimraf build/*",
     "lint": "eslint './src/**/*.{js,ts,tsx}' --quiet",
     "start": "concurrently \"npm run dev:api\" \"npm run dev:client\"",
     "dev:client": "webpack serve --config=config/webpack.dev.js",
     "dev:api": "nodemon --signal SIGTERM  --delay 5 --exec babel-node back-end/index.js",
+    "dev:prod": "npx serve -s build -l 8080",
     "postinstall": "cd back-end && npm install"
 {% set npmScripts = insert_setting('npmScripts') %}
 {% if npmScripts %},{{ insert_setting('npmScripts') | raw }}{% endif %}
