@@ -62,69 +62,22 @@ options:
     type: text
     options: ''
     required: true
+  - name: emailLogs
+    display: Save email logs
+    type: dropdown
+    options: >-
+      return [['none','None'],
+      ...aptugo.store.getState().application.tables.map(({ unique_id, name }) => [unique_id, name])]
+extraFiles:
+  - source: 'elements/Interact/email/001_emails.tsx'
+    destination: 'src/api-lib/db/emails.tsx'
+  - source: 'elements/Interact/email/002_index.tsx'
+    destination: 'src/pages/api/email/index.tsx'
 settings:
   - name: Packages
     value: '"axios": "1.6.8",'
-  - name: BackendPackages
-    value: '"nodemailer": "^6.4.11",'
-  - name: ServerRoute
-    value: |
-      const nodemailer = require("nodemailer");
-      {% if element.values.service != 'MailGun' %}
-        var transport = {
-          host: "{{ element.values.smpthost|default("smtp.gmail.com") }}",
-          port: "{{ element.values.smptport|default("465") }}",
-          auth: {
-            user: "{{ element.values.smptuser }}",
-            pass: "{{ element.values.smptpass }}",
-          },
-        };
-      {% else %}
-        var transport = {
-          service: 'Mailgun',
-          auth: {
-            user: "{{ element.values.smptuser }}",
-            pass: "{{ element.values.smptpass }}",
-          }
-        }
-      {% endif %}
-
-      var transporter = nodemailer.createTransport(transport);
-      transporter.verify((error, success) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("All works fine, congratz!");
-        }
-      });
-      app.use(express.json());
-      app.set('sendEmail', async function(emailDetails, extra) {
-        var mail = {
-          from: emailDetails.name,
-          to: emailDetails.email,
-          subject: emailDetails.subject,
-          html: emailDetails.message,
-        }
-
-        if (typeof addICal === "function" && extra && extra.sendWithIcal) {
-          addICal(mail, extra)
-        }
-        
-        transporter.sendMail(mail, (err, data) => {
-          if (err) {
-            return { msg: 'fail' }
-          } else {
-            return { msg: 'success' }
-          }
-        })
-      })
-      app.post("/api/sendEmail", (req, res, next) => {
-        const name = req.body.name
-        const email = req.body.email
-        const message = req.body.messageHtml
-        const subject = req.body.subject
-        res.json( app.get('sendEmail')( { name, email, message, subject }, req.body.extra) )
-      });
+  - name: Packages
+    value: '"nodemailer": "^6.10.1",'
 childs:
   - name: Email Content
     element: emailContent
@@ -146,15 +99,15 @@ const {{ functionName }} = (to, extra:any = {}) => {
     const subject = extra.subject || {{ element.values.subject|default(" ") }}
     const messageHtml = {{ element.values.internalfunctionName|default('InlineLink') }}({{ element.values.parameters }})
     axios({
-      method: "POST", 
-      url:"{{ settings.apiURL | raw }}/api/sendEmail",
+      method: 'POST', 
+      url:"/api/email",
       data: {
-        name: from,
-        email: to,
-        messageHtml: messageHtml,
-        extra: extra,
-        subject: subject
-      }
+        to: to,
+        from: from,
+        subject: subject,
+        text: JSON.stringify(extra),
+        html: messageHtml,
+      },
     }).then((response)=>{
       if (response.data.msg === 'success'){
         console.log("Email sent, awesome!");
