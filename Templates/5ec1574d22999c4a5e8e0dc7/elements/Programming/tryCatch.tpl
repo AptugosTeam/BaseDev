@@ -17,11 +17,25 @@ options:
     display: Code in Catch
     type: code
     options: ''
+  - name: addFinally
+    display: Add Finally Block
+    type: checkbox
+    default: false
+    advanced: true
+  - name: codeFinally
+    display: Code in Finally
+    type: code
+    options: ''
+    advanced: true
+    showIf:
+      addFinally: true
 children: []
 */
 try {
-  {{ content | raw }}
+  {{ content | raw }}
 } catch (e) {
   console.{{element.values.debuggingType|default('log')}}({% if element.values.messageError %} '{{ element.values.messageError }}', {% endif %} e)
   {{element.values.codeCatch | raw}}
-}
+}{% if element.values.addFinally %} finally {
+  {{element.values.codeFinally | raw}}
+}{% endif %}
