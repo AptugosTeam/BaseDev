@@ -205,7 +205,15 @@ options:
   - name: sortMethod
     display: Sort Method
     type: dropdown
-    options: desc;asc
+    options: desc;asc;custom
+  - name: customSortMethod
+    display: Custom Sort Method
+    type: text
+    options: ''
+    settings:
+      default: ''
+      propertyCondition: useCustomTableData
+      condition: '"custom"'
   - name: useCustomTableData
     display: Use custom Table data
     type: checkbox
