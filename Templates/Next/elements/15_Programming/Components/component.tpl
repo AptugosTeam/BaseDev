@@ -14,9 +14,9 @@ options:
     settings:
       aptugoOnLoad: >-
         const element = arguments[0];
-        const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;
+        const page = aptugo.pageUtils.findContainerPage(element.unique_id);
         if (element.values.name) {
-          aptugo.variables.setComponent(element.values.name, `Defined in ${aptugo.plain[page].name}`)
+          aptugo.variables.setComponent(element.values.name, `Defined in ${page.name}`);
         }
       active: true
   - name: props

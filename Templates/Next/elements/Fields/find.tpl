@@ -31,8 +31,9 @@ unique_id: generalfind
         {% endfor %}
       {% endif %}
     {% endfor %}
+    // sub
     aggregate.push({ $lookup: {
-      from: '{{ ffd.table.name | friendly | lower }}',
+      from: '{{ ffd.table.name | friendly }}',
       localField: '_id',
       foreignField: '{{ ffd.column_name }}',
       as: '{{ ffd.table.name | friendly }}',

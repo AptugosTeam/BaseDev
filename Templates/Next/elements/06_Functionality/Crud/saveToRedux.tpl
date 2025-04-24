@@ -54,4 +54,6 @@ try {
   console.log('catch', e)
 }
 {% if element.values.condition %}if ({{ element.values.condition }}) } {% endif %}
+{% if element.children %}
 })
+{% endif %}

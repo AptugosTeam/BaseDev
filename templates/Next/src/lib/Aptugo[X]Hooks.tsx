@@ -10,8 +10,9 @@ children: []
 */
 {% set tableName = table.name | friendly | lower %}
 {% set singleName = table.singleName | friendly | lower %}
-import { fetcher } from "../fetch";
-import useSWR from "swr";
+import { fetcher } from "../fetch"
+import useSWR from "swr"
+import { useRouter } from 'next/router'
 
 export function use{{ tableName }}(limit = undefined) {
   const { data, error } = useSWR(
@@ -26,7 +27,7 @@ export function use{{ tableName }}(limit = undefined) {
 }
 
 export function use{{ singleName }}({ {{ singleName }}Id }) {
-  const { data, error } = useSWR(`/api/{{ tableName }}/${{{ singleName }}Id}`, fetcher);
+  const { data, error } = useSWR(`/api/{{ tableName }}/${ {{ singleName }}Id}`, fetcher);
 
   return {
     {{ singleName }}data: data?.data.docs,
@@ -37,7 +38,11 @@ export function use{{ singleName }}({ {{ singleName }}Id }) {
 
 export function use{{ tableName }}Pages(options) {
   const urlSearchParams = new URLSearchParams(options)
-  const { data, error } = useSWR(`/api/{{ tableName }}?${urlSearchParams.toString()}`, fetcher)
+  const shouldFetch = options.isReady
+    ? `/api/{{ tableName }}?${urlSearchParams.toString()}`
+    : null
+
+  const { data, error } = useSWR(shouldFetch, fetcher)
   return {
     {{ singleName }}data: data?.data.docs,
     {{ singleName }}isLoading: !error && !data,

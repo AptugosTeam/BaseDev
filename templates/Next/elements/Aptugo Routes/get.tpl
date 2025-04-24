@@ -23,10 +23,30 @@ unique_id: AlPg3QRE
   if (before) aggregate.push({ $match: { ...(before && { createdAt: { $lt: before } }) } })
   if (after) aggregate.push({ $match: { ...(after && { createdAt: { $gt: after } }) } })
   if (filter) {
-    for (var filt of Object.keys(filter)) {
-      aggregate.push({
-        $match: { [filt]: filter[filt] },
-      })
+    const parsedFilter = typeof filter === 'string' ? JSON.parse(filter) : filter
+    for (const filt of Object.keys(parsedFilter)) {
+      const filterValue = parsedFilter[filt]
+  
+      if (Array.isArray(filterValue) && filterValue.length === 2) {
+        let lowerBound = Number(filterValue[0])
+        let upperBound = Number(filterValue[1])
+  
+        const filter:any = {}
+        if (lowerBound) filter.$gte = lowerBound
+        if (upperBound) filter.$lte = upperBound
+  
+        if (lowerBound || upperBound) {
+          aggregate.push({
+            $match: {
+              [filt]: filter,
+            },
+          });
+        }
+      } else {
+        aggregate.push({
+          $match: { [filt]: filterValue },
+        });
+      }
     }
   }
   req.options = options

@@ -4,6 +4,7 @@
   "renderingFolder": "/src/pages",
   "default": "true",
   "namingSchema": "{% if pageDefinition.path == '/' %}index{% else %}{{ pageDefinition.path }}{% endif %}.tsx",
+  "namingSchemaParameter": "[]",
   "templateCommandsAfter": "$(which pnpm) i",
   "templateCommandsAfterWIN": "npm i",
   "templateCommandsAfterDeploy": "$(which pnpm) i && $(which pnpm) run build",

@@ -2,7 +2,7 @@
 path: meta.tpl
 type: file
 unique_id: s7x9rTv3
-icon: ico-meta
+icon: ico-seo
 options:
   - name: title
     display: Title
@@ -31,16 +31,16 @@ options:
 sourceType: javascript
 children: []
 */
-
 {% set bpr %}
 import Head from 'next/head'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<Head>
+{% set headContent %}
 {% if element.values.title %}<title>{{ element.values.title }}</title>{% endif %}
 {% if element.values.description %}<meta name="description" content={{ element.values.description | textOrVariable }} />{% endif %}
 {% if element.values.ogtitle %}<meta name="title" property="og:title" content={{ element.values.ogtitle | textOrVariable }} />{% endif %}
 {% if element.values.ogimage %}<meta name="image" property="og:image" content={{ element.values.ogimage | textOrVariable }}></meta>{% endif %}
 {% if element.values.ogurl %}<meta name="og:url" content={{ element.values.ogurl | textOrVariable }} />{% endif %}
 <link rel="icon" href="/img/favicon.png" />
-</Head>
+{% endset %}
+{{ add_setting('HeadContent', headContent) }}

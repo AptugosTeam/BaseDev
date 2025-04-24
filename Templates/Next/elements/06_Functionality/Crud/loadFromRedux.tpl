@@ -170,8 +170,12 @@ children: []
       {% if element.values.fieldToSearch %}
         searchField: {{ element.values.fieldToSearch | textOrVariableInCode }},
       {% endif %}
+      {% if element.values.searchString %}
+        filter: JSON.stringify({ {{ element.values.fieldToSearch | textOrVariableInCode }}: {{ element.values.searchString }} }),
+      {% endif %}
       totalItems: 0,
       sortLanguage: '{{ element.values.sortLanguage|default('en') }}',
+      isReady: {% if element.values.searchString %}!!{{ element.values.searchString }}{% else %}true{% endif %}
     })
 
     const { {{ singleName }}data{% if varName %}: {{ varName }}{% endif %}, {{ singleName }}isLoading, {{ singleName }}isError, {{ singleName }}pages } = use{{ tableName }}Pages({{ innervarname }}loadoptions)

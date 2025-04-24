@@ -12,6 +12,8 @@ extraFiles:
     destination: '/src/components/DataTable/table.module.scss'
   - source: 'elements/99_ExtraFiles/thHeader.tsx'
     destination: '/src/components/DataTable/thHeader.tsx'
+  - source: 'elements/99_ExtraFiles/debouncedInput.tsx'
+    destination: '/src/components/DebouncedInput/index.tsx'
 settings:
   - name: Packages
     value: '"@tanstack/react-table": "8.7.9",'
@@ -63,6 +65,11 @@ options:
     type: code
     options: ''
     advanced: true
+  - name: sideScrolling
+    display: Allow Hoz Scrolling
+    type: checkbox
+    settings:
+      default: false
   - name: allowSorting
     display: Allow Sorting by Column
     type: checkbox
@@ -75,6 +82,9 @@ options:
     settings:
       default: true
       condition: ''
+  - name: columnsFiltering
+    display: Allow Filtering Columns
+    type: checkbox
   - name: allowPagination
     display: Allow Pagination
     type: checkbox
@@ -108,6 +118,7 @@ import DataTable from '@components/DataTable/dataTable'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <DataTable
+  {% if element.values.sideScrolling %}sideScrolling{% endif %}
   {# {% if allowSorting %}allowSorting{% endif %} #}
   {% if not allowPagination %}pagination={ {{allowPagination}} }{% endif %}
   {% if element.values.onRequestUpdate %}
@@ -164,17 +175,29 @@ import DataTable from '@components/DataTable/dataTable'
   {% if allowEdit %}
   onRequestRemove={async (row) => {
     try {
-      await fetcher(`/api/{{ tableName | lower }}/${row._id}`, {
+      await fetcher(`/api/{{ tableName | lower }}/${row._id}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(row),
       })
       const urlSearchParams = new URLSearchParams(tableloadoptions)
-      mutate(`/api/{{ tableName | lower }}?${urlSearchParams.toString()}`)
+      mutate(`/api/{{ tableName | lower }}?${urlSearchParams.toString()}`)
     } catch (e) {
       console.log('catch', e)
     }
   }}
+  {% endif %}
+  {% if element.values.columnsFiltering %}
+    onRequestFilter={(filters) => {
+      const parsedFilters = filters.reduce((acc, filter) => {
+        acc[filter.id] = filter.value
+        return acc
+      }, {})
+      set{{ innervarname }}loadoptions({
+        ...{{ innervarname }}loadoptions,
+        filter: JSON.stringify(parsedFilters),
+      })
+    }}
   {% endif %}
   onRequestSort={property => {
     set{{ innervarname }}loadoptions({

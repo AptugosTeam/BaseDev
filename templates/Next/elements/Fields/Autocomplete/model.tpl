@@ -10,9 +10,9 @@ icon: ico-field
   {% set datatype = 'String' %}
   {% set rawString = friendlyColumnName ~ ': ' ~  datatype  ~ ',' %}
 {% else %}
-  {{ add_setting('BackendPackages', '"mongoose-autopopulate" : "latest",') }}
-  {% set extraPlugins = friendlyTableName ~ "Schema.plugin(mongooseAutoPopulate)" %}
-  {% set extraImports = "const mongooseAutoPopulate = require('mongoose-autopopulate')\n" %}
+  {{ add_setting('Packages', '"mongoose-autopopulate" : "^1.1.0",') }}
+  {% set extraPlugins = singleName ~ "Schema.plugin(mongooseAutoPopulate)\n" %}
+  {% set extraImports = "import mongooseAutoPopulate from 'mongoose-autopopulate'\n" %}
   {% set relatedFieldInfo = fieldInfo.reference | fieldData %}
   {% set datatype = fieldInfo.dataType %}
   {% if fieldInfo.relationshipType == '1:1' %}
@@ -26,5 +26,7 @@ icon: ico-field
 {% endif %}
 {% set output = output.merge({
   rawString: rawString,
+  extraPlugins: extraPlugins,
+  extraImports: extraImports
 }) %}
 {{output|json_encode()}}

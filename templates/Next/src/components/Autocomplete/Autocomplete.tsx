@@ -53,12 +53,13 @@ export default function AptugoAutocomplete(props) {
   const debouncedFunction = debounce(handleInputChange, 250)
 
   const typeInSearch = async (typedIn) => {
-    const authorOptions = await fetcher(props.endpointLocation).then((arc) => {
+    const urlSearchParams = new URLSearchParams({ filter: typedIn })
+    const searchOptions = await fetcher(`${props.endpointLocation}?${urlSearchParams.toString()}`).then((arc) => {
       return arc?.data?.docs?.map((ac) => {
         return { value: ac._id, label: ac[props.labelProperty] }
       })
     })
-    return authorOptions
+    return searchOptions
   }
 
   React.useEffect(() => {

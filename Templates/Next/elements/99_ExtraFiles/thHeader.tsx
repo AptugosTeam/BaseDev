@@ -6,14 +6,21 @@ unique_id: N4ewiTpp
 import { flexRender } from '@tanstack/react-table'
 import React, { FunctionComponent } from 'react'
 import styles from './table.module.scss'
+import DebouncedInput from '@components/DebouncedInput'
 
 const AptugoDataTableTH: FunctionComponent<any> = (props) => {
   const { header, onRequestSort } = props
+  const secondHeaderRowRef = React.useRef(null)
   const [currentColumn, setcurrentColumn] = React.useState(props.columnInfo[header.index])
   const [isEditing, setisEditing] = React.useState(false)
+  const [isFiltering, setisFiltering] = React.useState(false)
 
   const switchEdition = () => {
     setisEditing(!isEditing)
+  }
+
+  const switchFilterDisplay = () => {
+    setisFiltering(!isFiltering)
   }
 
   const onBlur = (e) => {
@@ -47,63 +54,88 @@ const AptugoDataTableTH: FunctionComponent<any> = (props) => {
     ),
   }
 
+  React.useEffect(() => {
+    function handleClickOutside(event) {
+      if (secondHeaderRowRef.current && !secondHeaderRowRef.current.contains(event.target)) {
+        setisFiltering(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    };
+  }, [secondHeaderRowRef])
+
   return (
     <th key={header.id} colSpan={header.colSpan} style={ { width: header.getSize() } }>
-      {!!allowSorting && (sortingObject[header.column.getIsSorted() as string] ?? '')}
-      {!header.isPlaceholder && (
-        <div>
-          {!!currentColumn.allowRenaming && (
-            <>
-              {isEditing ? (
-                <input
-                  className="editableInput"
-                  onBlur={onBlur}
-                  onChange={(e) => {
-                    setcurrentColumn({ ...currentColumn, header: e.target.value })
-                  }}
-                  value={currentColumn.header}
-                ></input>
-              ) : (
-                <div onClick={switchEdition}>{flexRender(header.column.columnDef.header, header.getContext())}</div>
-              )}
-            </>
-          )}
-          {!currentColumn.allowRenaming && <>{flexRender(header.column.columnDef.header, header.getContext())}</>}
-        </div>
-      )}
-      {!!allowSorting && <div
-        className={styles.actionContainer}
-        onClick={(e) => {
-          onRequestSort(header.column.id)
-          header.column.getToggleSortingHandler()(e)
-        }}
-      >
-        <div className={styles.button}>
-          <svg width="1em" height="1em" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path opacity="0.01" fill="#fff" fillOpacity="0.2" d="M0 0h14v14H0z"></path>
-            <path fillRule="evenodd" clipRule="evenodd" d="m7 10.5-5.5-6h11l-5.5 6Z" fill="#666"></path>
-          </svg>
-        </div>
+      <div className={styles.firstHeaderRow}>
+        {!header.isPlaceholder && (
+          <div>
+            {!!allowSorting && (sortingObject[header.column.getIsSorted() as string] ?? '')}
+            <>{flexRender(header.column.columnDef.header, header.getContext())}</>
+          </div>
+        )}
+        {!!allowSorting && <div
+          className={styles.actionContainer}
+          onClick={(e) => {
+            onRequestSort(header.column.id)
+            header.column.getToggleSortingHandler()(e)
+          }}
+        >
+          <div className={styles.button}>
+            <svg width="1em" height="1em" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.01" fill="#fff" fillOpacity="0.2" d="M0 0h14v14H0z"></path>
+              <path fillRule="evenodd" clipRule="evenodd" d="m7 10.5-5.5-6h11l-5.5 6Z" fill="#666"></path>
+            </svg>
+          </div>
+        </div>}
+        <div
+            className={styles.actionContainer}
+            onClick={switchFilterDisplay}
+          >
+            <div className={styles.button}>
+              <svg width="1em" height="1em" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="7" cy="2" r="1.5" fill="#666" />
+                <circle cx="7" cy="7" r="1.5" fill="#666" />
+                <circle cx="7" cy="12" r="1.5" fill="#666" />
+              </svg>
+            </div>
+          </div>
+        <div
+          {...{
+            onMouseDown: header.getResizeHandler(),
+            onTouchStart: header.getResizeHandler(),
+            className: `${styles.resizer} ${header.column.getIsResizing() ? styles.isResizing : ''}`,
+          }}
+        ></div>
+      </div>
+      {isFiltering && <div className={styles.secondHeaderRow} onClick={(e) => e.stopPropagation()} ref={secondHeaderRowRef}>
+        <DebouncedInput
+          type="number"
+          value={(header.column.getFilterValue() as [number, number])?.[0] ?? ''}
+          onChange={value => {
+            const oldValue = (header.column.getFilterValue() as [number, number])?.[0] ?? '';
+            if (value !== oldValue) {
+              // header.column.setFilterValue((old: [number, number]) => [value, old?.[1]])
+              props.onFilter([value, header.column.getFilterValue()?.[1] ?? ''])
+            }
+          }}
+          placeholder={`Min`}
+        />
+        <DebouncedInput
+          type="number"
+          value={(header.column.getFilterValue() as [number, number])?.[1] ?? ''}
+          onChange={value => {
+            const oldValue = (header.column.getFilterValue() as [number, number])?.[1] ?? '';
+            if (value !== oldValue) {
+              // header.column.setFilterValue((old: [number, number]) => [old?.[0], value])
+              props.onFilter([header.column.getFilterValue()?.[0] ?? '', value])
+            }
+          }}
+          placeholder={`Max`}
+        />
       </div>}
-      {!!currentColumn.allowDeletion && (
-        <div className={styles.columnDeletion} onClick={(e) => props.onColumnRemoval(e, header.column)}>
-          <svg width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg" className="svg-md valign-middle mg-r-5">
-            <g fill="none" fillRule="evenodd">
-              <path fillOpacity=".01" fill="#FFF" opacity=".01" d="M-1 0h14v14H-1z"></path>
-              <g stroke="#000" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M.042 3.1H11.742M10.442 3.1v9.1a1.3 1.3 0 0 1-1.3 1.3h-6.5a1.3 1.3 0 0 1-1.3-1.3V3.1M3.292 3.1V1.8a1.3 1.3 0 0 1 1.3-1.3h2.6a1.3 1.3 0 0 1 1.3 1.3v1.3M4.592 6.35v3.9M7.192 6.35v3.9"></path>
-              </g>
-            </g>
-          </svg>
-        </div>
-      )}
-      <div
-        {...{
-          onMouseDown: header.getResizeHandler(),
-          onTouchStart: header.getResizeHandler(),
-          className: `${styles.resizer} ${header.column.getIsResizing() ? styles.isResizing : ''}`,
-        }}
-      ></div>
     </th>
   )
 }

@@ -15,6 +15,7 @@ import {
   PaginationState,
   RowData,
   SortingState,
+  ColumnFiltersState,
   useReactTable,
 } from '@tanstack/react-table'
 import React, { FunctionComponent } from 'react'
@@ -53,16 +54,19 @@ interface tableProps {
   onRequestEdit?: Function
   onRequestRemove?: Function
   onRequestSort: Function
+  onRequestFilter?: Function
   onRequestPaginate: Function
   onRequestUpdate?: Function
   onColumnRemoval?: Function
   onColumnRename?: Function
   className?: any
   pagination?: Boolean
+  sideScrolling?: Boolean
 }
 
 const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
   const [sorting, setSorting] = React.useState<SortingState>([])
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const columnHelper = createColumnHelper()
 
   function useSkipper() {
@@ -128,16 +132,21 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
       sorting,
       pagination,
       expanded,
+      columnFilters
     },
     onPaginationChange: setPagination,
+    onColumnsFilterChange: setColumnFilters,
     columns,
     columnResizeMode,
+    manualSorting: true,
     manualPagination: true,
+    manualFiltering: true,
     getSubRows: (row: any) => row.subRows,
     onExpandedChange: setExpanded,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
+    
     getSortedRowModel: getSortedRowModel(),
     meta: {
       addRow: (row: any) => {
@@ -164,13 +173,20 @@ const AptugoDataTable: FunctionComponent<tableProps> = (props) => {
   const paginationArray = Array.from({ length: endPage - startPage }, (_, i) => startPage + 1 + i)
   
   return (
-    <div className={props.className ? props.className : styles.tableHolder}>
+    <div className={props.className ? props.className : props.sideScrolling ? styles.tableHolderScrolling : styles.tableHolder}>
       <table className="table">
         <thead className="tableHead">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id} className="tableHeadTR">
               {headerGroup.headers.map((header) => (
-                <AptugoDataTableTH key={`__${header.id}`} header={header} {...props} />
+                <AptugoDataTableTH key={`__${header.id}`} header={header} {...props} onFilter={(e) => {
+                  setColumnFilters((prev) => {
+                    const newFilters = prev.filter((filter) => filter.id !== header.id)
+                    if (e) newFilters.push({ id: header.id, value: e })
+                    props.onRequestFilter(newFilters)
+                    return newFilters
+                  })
+                }}/>
               ))}
             </tr>
           ))}

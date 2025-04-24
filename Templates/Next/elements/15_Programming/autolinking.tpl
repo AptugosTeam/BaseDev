@@ -20,7 +20,7 @@ children: []
 {% for item in pageFrom.children %}
 	{% if (item.type == 'page') %}
     {% if (item.path) %}
-      {% set innerParams = { 'element': { 'unique_id': item.unique_id, values: { 'destination': item.path, 'linkText': item.name } } } %}
+      {% set innerParams = { 'element': { 'unique_id': item.unique_id, values: { 'destination': '/' ~ item.path|friendlyPath, 'linkText': item.name } } } %}
       {% include includeTemplate('navLink.tpl') with innerParams %}
     {% endif %}
   {% endif %}

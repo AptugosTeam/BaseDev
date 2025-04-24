@@ -17,9 +17,6 @@ options:
     settings:
       default: '50'
       active: true
-  - name: separatorSlides
-    display: Slides properties
-    type: separator
   - name: slidesDesktop
     display: How many slides to Show in desktop (Breakpoint 5000px to 1025px)
     type: text
@@ -68,9 +65,6 @@ options:
     display: CSS class for carousel item (Optional)
     type: styles
     options: ''
-  - name: separator
-    display: Autoplay properties
-    type: separator
   - name: autoPlay
     display: Enable Autoplay
     type: checkbox
@@ -131,9 +125,6 @@ options:
       condition: true
       default: false
       active: true
-  - name: separatorDots
-    display: Dots properties
-    type: separator
   - name: showDots
     display: Show defaults dots
     type: checkbox
@@ -157,9 +148,6 @@ options:
       condition: true
       default: false
       active: true
-  - name: separator
-    display: Checkbox
-    type: separator
   - name: arrows
     display: Show defaults arrows
     type: checkbox
@@ -218,6 +206,8 @@ import "react-multi-carousel/lib/styles.css";
 {% endif %}
 {% if element.values.arrows %}
   arrows
+{% else %}
+  arrows={false}
 {% endif %}
 {% if element.values.showDots %}
   showDots={true}

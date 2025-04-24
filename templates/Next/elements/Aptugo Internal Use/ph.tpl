@@ -30,5 +30,10 @@ const {{ page.name | friendly }}: FunctionComponent = (props: any) => {
   
   return (<React.Fragment>
   <Head>
-    <title>{{page.name}}</title>
+    {% set hc = insert_setting('HeadContent') %}
+    {% if hc %}
+      {{ hc | raw }}
+    {% else %}
+      <title>{{page.name}}</title>
+    {% endif %}
   </Head>

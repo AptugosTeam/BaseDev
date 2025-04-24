@@ -27,13 +27,6 @@ options:
     display: Default Value
     type: text
     options: ''
-    settings:
-      aptugoOnChange: >-
-        const value = arguments[0];
-        const element = arguments[1];
-        const page = arguments[2];
-        if ( element.values.variableName ) aptugo.variables.setPageVariable(page, element.unique_id, { [element.values.variableName]: value });
-      active: true
   - name: renderInPlace
     display: Render In Place
     type: checkbox

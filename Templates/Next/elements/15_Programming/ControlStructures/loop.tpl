@@ -34,6 +34,10 @@ options:
     settings:
       default: 'index'
     advanced: true
+  - name: sortsource
+    display: Sort source values (a,b)
+    type: code
+    advanced: true
   - name: filtersource
     display: Condition to filter source values
     type: text
@@ -55,11 +59,15 @@ options:
   
 children: []
 */
+{% set addExtra = '' %}
 {% if element.values.filtersource %}
 {% set addExtra = '.filter(tmp => tmp.' ~ element.values.filtersource ~ ')' %}
 {% endif %}
 {% if not element.values.filtersource and element.values.filterFunction%}
 {% set addExtra = '.filter(tmp => ' ~ element.values.filterFunction ~ ')' %}
+{% endif %}
+{% if element.values.sortsource %}
+{% set addExtra = addExtra ~ '.sort((a,b) => ' ~ element.values.sortsource ~ ')' %}
 {% endif %}
 { {{ element.values.variable }}{{ addExtra }}?.map(({{ element.values.variablename | default('item') }},{{ element.values.indexName | default('index') }}) => {
 {% if element.values.code %}{{ element.values.code }}{% endif %}

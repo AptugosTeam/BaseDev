@@ -12,6 +12,10 @@ options:
   - name: className
     display: ClassName
     type: styles
+  - name: packeVersion
+    display: Version
+    type: dropdown
+    options: version1;version2
   - name: center
     display: Center
     type: text

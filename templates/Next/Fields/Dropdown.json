@@ -17,6 +17,11 @@ unique_id: 8H1LaeTw
         "type": "text"
       },
       {
+        "display": "Default Value",
+        "value": "defaultValue",
+        "type": "text"
+      },
+      {
         "display": "Display",
         "value": "displaytype",
         "type": "select",

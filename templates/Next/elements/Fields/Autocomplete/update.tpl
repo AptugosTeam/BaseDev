@@ -18,6 +18,8 @@ unique_id: zd6mrTlU
         delete c._id
         c = new {{ referencedField.table.name | friendly }}Model(c)
         c.save()
+      } else {
+        c = c._id
       }
       return c
     })

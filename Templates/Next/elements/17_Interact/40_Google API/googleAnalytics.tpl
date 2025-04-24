@@ -15,7 +15,6 @@ settings:
     value: '"@next/third-parties": "^14.1.0",'
 */
 {% set IBA %}
-// ADD THIS HERE
 import { GoogleAnalytics } from '@next/third-parties/google'
 {% endset %}
 {{ add_setting('SiteWideBeforePageRenderAddenum', IBA) }}

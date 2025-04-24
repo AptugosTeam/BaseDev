@@ -40,8 +40,13 @@ import paginate from 'mongoose-aggregate-paginate-v2'
       }%}
       {% set data %}{% include includeTemplate(['Fields' ~ field.data_type ~ 'model.tpl', 'Fieldsmodel.tpl']) %}{% endset %}
       {% set output = (data|json_decode) ?? data %}
-      {% if output.extraImports %}{% set extraImports = extraImports ~ output.extraImports %}{% endif %}
-      {% if output.extraPlugins %}{% set extraPlugins = extraPlugins ~ output.extraPlugins %}{% endif %}
+
+      {% if output.extraImports and output.extraImports not in extraImports %}
+        {% set extraImports = extraImports ~ output.extraImports %}
+      {% endif %}
+      {% if output.extraPlugins and output.extraPlugins not in extraPlugins %}
+        {% set extraPlugins = extraPlugins ~ output.extraPlugins %}
+      {% endif %}
       {{ output.rawString ?? data }}
     {% endfor %}
   }, {
@@ -55,6 +60,7 @@ import paginate from 'mongoose-aggregate-paginate-v2'
 {{ modelDefinition }}
 
 {{ singleName }}Schema.plugin(paginate)
+{{ extraPlugins }}
 
 {% for relatedField in builder.plainFields %}
   {% if relatedField.reference %}
@@ -73,4 +79,4 @@ import paginate from 'mongoose-aggregate-paginate-v2'
   {% endif %}
 {% endfor %}
 
-export default mongoose.models.{{ tableName }} as mongoose.AggregatePaginateModel<{{ tableName }}> || mongoose.model<{{ tableName }}, mongoose.AggregatePaginateModel<{{ tableName }}>>('{{ tableName }}', {{ singleName }}Schema)
+export default mongoose.models.{{ tableName }} as mongoose.AggregatePaginateModel<{{ tableName }}> || mongoose.model<{{ tableName }}, mongoose.AggregatePaginateModel<{{ tableName }}>>('{{ tableName }}', {{ singleName }}Schema, '{{ tableName }}')
