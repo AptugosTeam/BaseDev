@@ -25,6 +25,8 @@ settings:
   - name: Packages
     value: '"react-native-svg": "13.9.0","react-native-iconify": "^1.0.0",'
   - name: BabelAdd
+    value: 'plugins.push("babel-plugin-macros")'
+  - name: BabelAdd
     value: 'plugins.push("react-native-iconify/plugin")'
 */
 {% set bpr %}
