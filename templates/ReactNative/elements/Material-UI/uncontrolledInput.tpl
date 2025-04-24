@@ -77,6 +77,10 @@ options:
     settings:
       condition: Use a variable
       propertyCondition: rightIcon
+  - name: iconColor
+    display: Icon Color
+    type: text
+    options: ''
   - name: useonChangeIcon
     display: Use on press when click the icon?
     type: checkbox
@@ -216,9 +220,10 @@ children: []
       {% if element.values.selectionColor %}selectionColor={ {{ element.values.selectionColor | textOrVariable }} }{% endif %}
       {% if element.values.cursorColor %}cursorColor={ {{ element.values.cursorColor | textOrVariable }} }{% endif %}
       {% if element.values.leftIcon and element.values.leftIcon != 'none' %}
-      left={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%} {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %} {% if element.values.className %}style={ {{ element.values.className ~ 'LeftIcon' }} }{% endif %} icon='{{element.values.leftIcon}}' />}{% endif %}
+      left={<TextInput.Icon {% if element.values.iconColor %}iconColor={{ element.values.iconColor | textOrVariable }} {% elseif element.values.placeholderTextColor %}iconColor={{ element.values.placeholderTextColor | textOrVariable }}{% endif%}
+      {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %} {% if element.values.className %}style={ {{ element.values.className ~ 'LeftIcon' }} }{% endif %} icon='{{element.values.leftIcon}}' />}{% endif %}
       {% if element.values.rightIcon and element.values.rightIcon != 'none' %}
-      right={<TextInput.Icon {% if element.values.placeholderTextColor %}iconColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif%}
+      right={<TextInput.Icon {% if element.values.iconColor %}iconColor={{ element.values.iconColor | textOrVariable }} {% elseif element.values.placeholderTextColor %}iconColor={{ element.values.placeholderTextColor | textOrVariable }}{% endif%}
        {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %} {% if element.values.className %}style={ {{ element.values.className ~ 'RightIcon' }} }{% endif %}
       icon={% if element.values.rightIcon != 'Use a variable' %}'{{element.values.rightIcon}}' {% else %} {{element.values.variableToUseIcon | textOrVariable}} {% endif %} />}{% endif %}
   />
