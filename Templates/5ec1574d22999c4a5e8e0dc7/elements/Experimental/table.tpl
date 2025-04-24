@@ -208,11 +208,11 @@ options:
     options: desc;asc;custom
   - name: customSortMethod
     display: Custom Sort Method
-    type: text
+    type: function
     options: ''
     settings:
       default: ''
-      propertyCondition: useCustomTableData
+      propertyCondition: sortMethod
       condition: '"custom"'
   - name: useCustomTableData
     display: Use custom Table data
