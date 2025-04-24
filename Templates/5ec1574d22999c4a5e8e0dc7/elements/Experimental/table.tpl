@@ -213,7 +213,7 @@ options:
     settings:
       default: ''
       propertyCondition: sortMethod
-      condition: '"custom"'
+      condition: 'custom'
   - name: useCustomTableData
     display: Use custom Table data
     type: checkbox
