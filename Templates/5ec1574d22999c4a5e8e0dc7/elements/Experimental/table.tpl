@@ -306,7 +306,10 @@ children: []
     {% if element.values.table != 'useVar' and element.values.table != 'var' %}
       orderBy={ {{ innervarname }}loadoptions.sort.field }
       order={ {{ innervarname }}loadoptions.sort.method }
+    {% if element.values.customSortMethod %}
       onRequestSort={(event, property) => {
+        {{element.values.customSortMethod}}
+        {% else %}
         set{{ innervarname }}loadoptions({
           ...{{ innervarname }}loadoptions,
           sort: {
@@ -315,6 +318,8 @@ children: []
           }
         })
       }}
+    {% endif %}
+      
     {% endif %}
 >{% if element.children %}
   {{ content | raw }}
