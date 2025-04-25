@@ -1,0 +1,76 @@
+{
+  "_id": "SpringBoot",
+  "Created_date": "2020-05-17T15:25:01.701Z",
+  "__v": 0,
+  "name": "SpringBoot",
+  "desc": "This template allows you to create full web applications",
+  "default": "true",
+  "templateCommandsAfter": "",
+  "templateCommandsAfterDeploy": "",
+  "renderingFolder": "/front-end/Pages",
+  "tableTypes": [
+    { "key": "Aptugo", "name": "Aptugo Table" },
+    {
+      "key": "Api",
+      "name": "API Connection",
+      "extraProperties": [
+        {
+          "key": "source",
+          "label": "Data Source",
+          "helperText": "Set the endpoint to retrieve data from"
+        },
+        {
+          "key": "pathToData",
+          "label": "Path to Data",
+          "helperText": "From the returned object, set the path to retrieve the data"
+        },
+        {
+          "key": "headerparameters",
+          "label": "Header Parameters",
+          "helperText": "one per line (key:value)",
+          "multiline": true
+        }
+        
+      ]
+    },
+    {
+      "key": "Firebase",
+      "name": "Firebase DB",
+      "extraProperties": [
+        {
+          "key": "projectId",
+          "label": "Project ID",
+          "helperText": "Copy the value for project_id at serviceAccount.json"
+        },
+        {
+          "key": "clientEmail",
+          "label": "Client Email",
+          "helperText": "Copy the value for client_email at serviceAccount.json"
+        },
+        {
+          "key": "privateKey",
+          "label": "Private Key",
+          "multiline": true,
+          "helperText": "Copy the value for private_key at serviceAccount.json"
+        }  
+      ],
+      "extraActions": [
+        {
+          "key": "collections",
+          "text": "Select Collection",
+          "type": "select",
+          "title": "Select collection to Import",
+          "propertyToUpdate": "collection",
+          "selectAction": "fields"
+        },
+        {
+          "key": "fields",
+          "text": "Select Fields",
+          "type": "allToFields",
+          "title": "Select fields to Import",
+          "propertyToUpdate": "fields"
+        }
+      ]
+    }
+  ]
+}
