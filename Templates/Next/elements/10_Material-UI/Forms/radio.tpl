@@ -18,10 +18,6 @@ options:
     display: On Change
     type: function
     options: ''
-  - name: separator
-    display: Advanced Properties
-    type: separator
-    advanced: true
   - name: checked
     display: Checked
     type: function

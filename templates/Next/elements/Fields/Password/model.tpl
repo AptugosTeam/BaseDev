@@ -8,8 +8,9 @@ icon: ico-field
 {% set datatype = fieldInfo.dataType %}
 {% set friendlyColumnName = field.column_name | friendly  %}
 {% set friendlyTableName = table.name | friendly  %}
+{% set singleName = table.singleName | friendly %}
 {% set extraPlugins %}
-{{ friendlyTableName }}Schema.methods.toJSON = function () {
+{{ singleName }}Schema.methods.toJSON = function () {
   const { __v, {{ friendlyColumnName }}, ...data } = this.toObject()
   return data
 }

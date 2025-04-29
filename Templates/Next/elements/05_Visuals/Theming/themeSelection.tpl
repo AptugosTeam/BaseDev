@@ -12,7 +12,7 @@ options:
   - name: theme
     display: Theme
     type: dropdown
-    options: website;whatsapp;layout;fantasyx;crm;minimum;prototyping;lite
+    options: website;whatsapp;layout;crm;minimum;newMinimum;prototyping;lite
   - name: useAsset
     display: Use an Asset
     type: dropdown

@@ -2,7 +2,7 @@
 path: Container.tpl
 type: file
 unique_id: 3NDAATVX
-icon: f:Container.svg
+icon: ico-container
 helpText: >-
   The container centers your content horizontally. It's the most basic layout
   element.

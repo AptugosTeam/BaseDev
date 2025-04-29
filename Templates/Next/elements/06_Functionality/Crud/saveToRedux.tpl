@@ -43,17 +43,16 @@ try {
   fetcher(`/api/{{ table.name | friendly | lower }}${method === 'PUT' ? '/' + {{ element.values.variablename | default('data') }}._id : ''}`, {
     method: method,
     body: formData,
-  }).then(() => {
-    {% if element.children %}
-      resolve('ok')
-    }).then(result => {
-      {{ content | raw }}
-    {% endif %}
   })
+  {% if element.children %}
+    .then((result) => {
+      {{ content | raw }}
+    })
+  {% endif %}
 } catch (e) {
   console.log('catch', e)
 }
-{% if element.values.condition %}if ({{ element.values.condition }}) } {% endif %}
+{% if element.values.condition %} } {% endif %}
 {% if element.children %}
 })
 {% endif %}

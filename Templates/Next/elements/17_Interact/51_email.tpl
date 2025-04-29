@@ -66,76 +66,43 @@ options:
     required: true
 settings:
   - name: Packages
-    value: '"axios": "1.6.8",'
-  - name: BackendPackages
-    value: '"nodemailer": "^6.4.11",'
-  - name: ServerRoute
-    value: |
-      const nodemailer = require("nodemailer");
-      {% if element.values.service != 'MailGun' %}
-        var transport = {
-          host: "{{ element.values.smpthost|default("smtp.gmail.com") }}",
-          port: "{{ element.values.smptport|default("465") }}",
-          auth: {
-            user: "{{ element.values.smptuser }}",
-            pass: "{{ element.values.smptpass }}",
-          },
-        };
-      {% else %}
-        var transport = {
-          service: 'Mailgun',
-          auth: {
-            user: "{{ element.values.smptuser }}",
-            pass: "{{ element.values.smptpass }}",
-          }
-        }
-      {% endif %}
-
-      var transporter = nodemailer.createTransport(transport);
-      transporter.verify((error, success) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("All works fine, congratz!");
-        }
-      });
-      app.use(express.json());
-      app.set('sendEmail', async function(emailDetails, extra) {
-        var mail = {
-          from: emailDetails.name,
-          to: emailDetails.email,
-          subject: emailDetails.subject,
-          html: emailDetails.message,
-        }
-
-        if (typeof addICal === "function" && extra && extra.sendWithIcal) {
-          addICal(mail, extra)
-        }
-        
-        transporter.sendMail(mail, (err, data) => {
-          if (err) {
-            return { msg: 'fail' }
-          } else {
-            return { msg: 'success' }
-          }
-        })
-      })
-      app.post("/api/sendEmail", (req, res, next) => {
-        const name = req.body.name
-        const email = req.body.email
-        const message = req.body.messageHtml
-        const subject = req.body.subject
-        res.json( app.get('sendEmail')( { name, email, message, subject }, req.body.extra) )
-      });
+    value: '"mailgun.js": "12.0.1",'
 childs:
   - name: Email Content
     element: emailContent
 children: []
 */
-{% set bpr %}
-import axios from 'axios'
+{% set emailEndpoint %}
+import nc from 'next-connect'
+import { ncOpts } from '@api-lib/nc'
+import Mailgun from 'mailgun.js'
+
+const handler = nc(ncOpts)
+
+handler.post((req, res, next) => {
+  console.log(req.body)
+  const mail = new Mailgun(FormData)
+  
+  const mg = mail.client({ username: '{{ element.values.smptuser }}', key: '{{ element.values.smptpass }}' })
+  
+  mg.messages.create('www.aptugo.com', {
+    from: req.body.name,
+    to: [req.body.email],
+    subject: req.body.subject,
+    html: req.body.messageHtml,
+    text: 'some text'
+  }).then(result => {
+    console.log('mg 2', result.toString())
+    res.send({ message: 'Email sent successfully' })
+    next()
+  }).catch(err => console.error('error', err)); // logs any error
+
+  
+})
+
+export default handler
 {% endset %}
-{{ save_delayed('bpr',bpr) }}
+{{ addExtraFile('/src/pages/api/sendEmail/index.tsx', emailEndpoint) }}
 {% set bpr %}
 {% if element.values.functionName %}
 {% set functionName = element.values.functionName %}
@@ -147,22 +114,21 @@ const {{ functionName }} = (to, extra:any = {}) => {
     const from = extra.from || '{{ element.values.from }}'
     const subject = extra.subject || {{ element.values.subject|default(" ") }}
     const messageHtml = {{ element.values.internalfunctionName|default('InlineLink') }}({{ element.values.parameters }})
-    axios({
-      method: "POST", 
-      url:"{{ settings.apiURL | raw }}/api/sendEmail",
-      data: {
+
+    fetch('/api/sendEmail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         name: from,
         email: to,
         messageHtml: messageHtml,
         extra: extra,
-        subject: subject
-      }
+        subject: subject,
+      }),
     }).then((response)=>{
-      if (response.data.msg === 'success'){
-        console.log("Email sent, awesome!");
-      } else if(response.data.msg === 'fail'){
-        console.log('error', response)
-      }
+      console.log('response', response)
     })
   }
 {% endset %}
