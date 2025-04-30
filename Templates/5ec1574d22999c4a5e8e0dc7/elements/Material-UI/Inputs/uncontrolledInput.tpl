@@ -149,6 +149,10 @@ options:
     display: On Key Down
     type: code
     advanced: true
+  - name: multiple
+    display: Multiple Selections
+    type: checkbox
+    advanced: true
   - name: inputRef
     display: Input Reference
     type: code
@@ -174,6 +178,7 @@ import InputAdornment from '@mui/material/InputAdornment'
   {# Renderizar un input nativo para el tipo file #}
   <input
     type="file"
+    {% if element.values.multiple %} multiple {% endif %}
     {% if element.values.id %}id="{{ element.values.id }}"{% endif %}
     {% if element.values.fieldname %}name="{{ element.values.fieldname }}"{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
