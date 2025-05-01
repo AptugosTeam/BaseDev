@@ -58,7 +58,7 @@ import Link from 'next/link'
   href={{ element.values.destination | textOrVariable }}   {% if element.values.draggable %} draggable={false} {% endif %}>{{ content | raw }}</a>
 {% else %}
 <Link {% if element.values.style %}style={ {{element.values.style}} }{% endif %} {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-  href={{ dest | textOrVariable }} {% if element.values.Action %}onClickCapture={ {{ element.values.Action }} }{% endif %}
+  href={{ dest | textOrVariable }} {% if element.values.Action %}onClickCapture={ {{ element.values.Action | functionOrCall }} }{% endif %}
   {% if element.values.draggable %}
     draggable={false}
   {% endif %}>

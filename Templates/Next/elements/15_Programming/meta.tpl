@@ -43,4 +43,4 @@ import Head from 'next/head'
 {% if element.values.ogurl %}<meta name="og:url" content={{ element.values.ogurl | textOrVariable }} />{% endif %}
 <link rel="icon" href="/img/favicon.png" />
 {% endset %}
-{{ add_setting('HeadContent', headContent) }}
+{{ set_setting('HeadContent', headContent) }}
