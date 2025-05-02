@@ -122,6 +122,11 @@ options:
     type: text
     options: ''
     advanced: true
+  - name: onTransitionEnd
+    display: On Transition End
+    type: text
+    options: ''
+    advanced: true
 children: []
 helpText: Basic HTML Div element
 */
@@ -189,6 +194,9 @@ helpText: Basic HTML Div element
   {% endif %}
   {% if element.values.onTouchEnd %}
     onTouchEnd={(e) => {{element.values.onTouchEnd}} }
+  {% endif %}
+  {% if element.values.onTransitionEnd %}
+    onTransitionEnd={(e) => {{element.values.onTransitionEnd}} }
   {% endif %}
 >
 {{ content | raw }}
