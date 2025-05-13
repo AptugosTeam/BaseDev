@@ -14,6 +14,7 @@ interface InfiniteLooperProps extends React.PropsWithChildren {
   speed: number
   direction: 'right' | 'left'
   children: React.ReactNode
+  finalGap: number
 }
 
 const InfiniteLooper: FunctionComponent<InfiniteLooperProps> = (props) => {
@@ -67,7 +68,7 @@ const InfiniteLooper: FunctionComponent<InfiniteLooperProps> = (props) => {
 
   return (
     <div className={classes.looper} ref={outerRef}>
-      <div className={classes.looper__innerList} ref={innerRef} data-animate="true">
+      <div className={classes.looper__innerList} ref={innerRef} data-animate="true" style={ { ['--gap' as any]: `${props.finalGap}rem` } }>
         {[...Array(looperInstances)].map((_, ind) => (
           <div
             key={ind}

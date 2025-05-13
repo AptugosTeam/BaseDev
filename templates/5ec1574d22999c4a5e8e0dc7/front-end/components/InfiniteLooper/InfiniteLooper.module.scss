@@ -23,7 +23,7 @@ unique_id: STinfrgp
   display: flex;
   justify-content: center;
   width: fit-content;
-  gap: 1rem;
+  gap: var(--gap);
 }
 
 .looper__innerList[data-animate="true"] .looper__listInstance {
