@@ -18,6 +18,12 @@ options:
     display: Use ref
     type: text
     options: ''
+  - name: niceArrows
+    display: Show nice arrows
+    type: checkbox
+    options: ''
+    settings:
+      default: false
   - name: minimumTouchDrag
     display: Distance to swipe to the next slide
     type: text
@@ -280,6 +286,26 @@ import "react-multi-carousel/lib/styles.css";
 {% else %}
   arrows={false}
 {% endif %}
+{% if element.values.niceArrows %}
+            customLeftArrow={
+            <button className={theme.arrowLeft}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24">
+                <path d="M15 6l-6 6 6 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          }
+              customRightArrow={
+              <button className={theme.arrowRight}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24">
+                  <path d="M9 6l6 6-6 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            }
+{% endif %}
+
+
+
+
 {% if element.values.showDots %}
   showDots={true}
 {% endif %}
