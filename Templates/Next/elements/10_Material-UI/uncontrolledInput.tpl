@@ -140,8 +140,8 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if element.values.size %}size="{{ element.values.size }}"{% endif %}
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-    {% if not element.values.shrink %}
-      InputLabelProps={ { shrink: false, } }
+    {% if element.values.shrink %}
+      InputLabelProps={ { shrink: true } }
     {% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
     {% if readOnly %}

@@ -51,6 +51,12 @@ options:
   - name: DisableVariable
     display: Variable to disable input
     type: text
+  - name: DisplayIcon
+    display: Change default Icon for select
+    type: text
+    settings:
+      default: 'ArrowDropDownIcon'
+    advanced: true
 children: []
 */
 {% set bpr %}
@@ -58,6 +64,12 @@ import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
+{% if element.values.DisplayIcon %}
+  {% set bpr %}
+    import {{ element.values.DisplayIcon }} from '@mui/icons-material/{{ element.values.DisplayIcon }}'
+  {% endset %}
+  {{ save_delayed('bpr', bpr) }}
+{% endif %}
 <TextField
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
@@ -66,6 +78,11 @@ import MenuItem from '@mui/material/MenuItem'
     {% endif %}
     margin='{{ element.values.margin|default("dense") }}'
     size='{{ element.values.size|default("medium") }}'
+    {% if element.values.DisplayIcon %}
+    SelectProps={ {
+      IconComponent: {{ element.values.DisplayIcon }}
+    } }
+    {% endif %}
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     select
