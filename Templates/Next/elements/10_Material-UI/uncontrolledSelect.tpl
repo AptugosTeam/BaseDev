@@ -78,7 +78,7 @@ import MenuItem from '@mui/material/MenuItem'
     {% endif %}
     margin='{{ element.values.margin|default("dense") }}'
     size='{{ element.values.size|default("medium") }}'
-    {% if element.values.DisplayIcon %}
+    {% if element.values.DisplayIcon and element.values.DisplayIcon != 'ArrowDropDownIcon' %}
     SelectProps={ {
       IconComponent: {{ element.values.DisplayIcon }}
     } }
