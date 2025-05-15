@@ -54,7 +54,7 @@ Application.pages = [{
 					"type": "element",
 					"value": "themeSelection",
 					"values": {
-						"theme": "minimum",
+						"theme": "newMinimum",
 						"merge": false
 					}
 				}

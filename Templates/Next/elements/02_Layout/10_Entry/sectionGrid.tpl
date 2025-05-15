@@ -3,7 +3,6 @@ path: sectionGrid.tpl
 type: file
 unique_id: sectionGrid
 styledIcon: f:../../z-images/sectionGrid.jpg
-icon: ico-div
 double: true
 color: rgb(0,230,230)
 backColor: rgba(6, 201, 210, 0.25)
@@ -20,6 +19,23 @@ options:
   - name: backgroundMedia
     display: Background Media
     type: media
+childs:
+  - name: Title
+    element: typography
+    values: {
+      tag: 'h1'
+    }
+    childs:
+      - name: Text
+        element: text
+        values: {
+          Content: 'Title'
+        }
+  - name: SubTitle
+    element: typography
+    values: {
+      tag: 'h2'
+    }  
 */
 {% set className = element.values.class|default('theme.gridSection') %}
 {% if element.values.backgroundColor %}
