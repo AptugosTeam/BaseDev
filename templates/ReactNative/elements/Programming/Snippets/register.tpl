@@ -9,11 +9,21 @@ options:
     display: Data variable
     type: text
     required: true
+  - name: disableRedirect
+    display: Disable Redirect
+    type: checkbox
+    options: ''
+    settings:
+      value: false
   - name: OnSuccess
     display: On Successful login
     type: dropdown
     options: return aptugo.pageUtils.getAllPages()
     required: true
+    settings:
+      propertyCondition: disableRedirect
+      conditionNegate: true
+      condition: true
   - name: variableStore
     display: store in variable?
     type: checkbox
@@ -47,11 +57,16 @@ import AuthService from '@services/auth.service'
 const {{ storeName }} = {% if element.values.await %}await{% endif %} AuthService.register({{ element.values.Data }})
     if (response) {
       {{ content | raw }}
+      {% if not element.values.disableRedirect %}
       navigation.replace('{{ (element.values.OnSuccess | elementData).path }}')
+      {% endif %}
     }
 {% else %}
 {% if element.values.await %}await{% endif %} AuthService.register({{ element.values.Data }}).then(result => {
+    {{ content | raw }}
+    {% if not element.values.disableRedirect %}
     navigation.replace('{{ (element.values.OnSuccess | elementData).path }}')
+    {% endif %}
 }).catch(error => {
     {{ element.values.CustomError | raw }}
 })
