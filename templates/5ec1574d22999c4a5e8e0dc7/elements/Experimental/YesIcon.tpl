@@ -23,6 +23,12 @@ options:
     display: Color (in hexadecimal)
     type: text
     options: ''
+  - name: useVariableColor
+    display: Use variable for color
+    type: checkbox
+    options: ''
+    settings:
+      default: false
 settings:
   - name: Packages
     value: '"@iconify/react": "^4.1.1",'
@@ -39,6 +45,10 @@ import { Icon as YesIcon} from '@iconify/react'
     className={ {{ element.values.className }} }
   {% endif %}
   {% if element.values.fontSize or element.values.color %}
-    style={ { {% if element.values.fontSize %} fontSize: '{{element.values.fontSize}}', {% endif %} {% if element.values.color %} color: `{{element.values.color}}` {% endif %} } }
+    style={ { 
+      {% if element.values.fontSize %} fontSize: '{{element.values.fontSize}}', {% endif %} 
+      {% if element.values.color and not element.values.useVariableColor %} color: `{{element.values.color}}` {% endif %}
+      {% if element.values.color and  element.values.useVariableColor %} color: {{element.values.color}} {% endif %} 
+    } }
   {% endif %}
 />
