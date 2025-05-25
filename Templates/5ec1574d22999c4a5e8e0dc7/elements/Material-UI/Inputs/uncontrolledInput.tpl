@@ -14,6 +14,10 @@ options:
     display: Value
     type: text
     options: ''
+  - name: defaultValue
+    display: Default Value
+    type: text
+    options: ''
   - name: onChange
     display: On Change
     type: function
@@ -244,6 +248,7 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% endif %}
     {% if fullWidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
+    {% if element.values.defaultValue %}defaultValue={{ element.values.defaultValue }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
     {% if element.values.onFocus %}onFocus={ {{ element.values.onFocus | functionOrCall }} }{% endif %}
     {% if element.values.onBlur %}onBlur={ {{ element.values.onBlur | functionOrCall }} }{% endif %}
