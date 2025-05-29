@@ -46,6 +46,9 @@ options:
   - name: dataKeyPie
     display: value of each sector (dataKeyPie)
     type: text
+  - name: nameKeyPie
+    display: name of each sector (nameKeyPie)
+    type: text  
   - name: Xcoordinate
     display: The x-coordinate of center (cx)
     type: text
@@ -113,13 +116,17 @@ options:
     display: Tooltip
     type: text
     advanced: true
+  - name: tooltipFormatter
+    display: Tooltip formatter (JS code)
+    type: text
+    advanced: true  
 settings:
   - name: Packages
     value: '"recharts": "^2.1.13",'
 children: []
 */
 {% set bpr %}
-import { PieChart, Pie, Sector, Cell, Tooltip, ResponsiveContainer } from 'recharts'
+import { PieChart, Pie, Sector, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}
@@ -146,11 +153,29 @@ const colors{{ element._unique_id }} = ['#0088FE', '#00C49F', '#FFBB28', '#FF804
         {% if element.values.LabelPie %}label={ {{ element.values.LabelPie }} }{% else %}label={false}{% endif %}
         {% if element.values.LabelsLine %}labelLine={ {{ element.values.LabelsLine }} }{% else %}labelLine={false}{% endif %}
         {% if element.values.dataKeyPie %}dataKey="{{ element.values.dataKeyPie }}"{% endif %}
+        {% if element.values.nameKeyPie %}nameKey="{{ element.values.nameKeyPie }}"{% endif %}
       >
         { {{ element.values.Variable }}.map((entry, index) => (
           <Cell key={`cell-${index}`} {% if element.values.CellColors %}fill={ {{ element.values.CellColors }} }{% else %}fill={colors{{ element._unique_id }}[index % colors{{ element._unique_id }}.length]}{% endif %} />
         ))}
       </Pie>
-      <Tooltip {% if element.values.tooltip %}content={({payload}) => {{ element.values.tooltip }} }{% endif %} />
+      <Tooltip
+        {% if element.values.tooltip %}
+          content={({ payload }) => {{ element.values.tooltip }} }
+        {% endif %}
+        {% if element.values.tooltipFormatter %}
+          formatter={ {{ element.values.tooltipFormatter }} }
+        {% else %}
+          formatter={(value, name) => [`$${value.toLocaleString()}`, name]}
+        {% endif %}
+      />
+      <Legend
+        {% if element.values.legendType and element.values.legendType != 'none' %}
+        iconType="{{ element.values.legendType }}"
+        {% endif %}
+        layout="vertical"
+        align="right"
+        verticalAlign="middle"
+      />
 </PieChart>
 {% if element.values.responsive %}</ResponsiveContainer>{% endif %}

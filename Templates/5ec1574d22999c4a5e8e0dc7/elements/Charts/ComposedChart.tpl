@@ -50,6 +50,9 @@ options:
   - name: tickFormatter
     display: The formatter function of tick
     type: text
+  - name: orientationX
+    display: Orientation of the X axis
+    type: text  
   - name: startSeparatorCartesianGrid
     display: CartesianGrid Properties
     type: separator
@@ -201,8 +204,8 @@ import { Area, Bar, CartesianGrid, Cell, ComposedChart, BarChart, Legend, Line, 
   >
     {% if not element.values.hideGrid %}
     <CartesianGrid
-    {% if element.values.strokeDasharray %}strokeDasharray="{{element.values.strokeDasharray}}"{% endif %}
-    {% if element.values.stroke %}stroke="{{element.values.stroke}}"{% else %}stroke="#f5f5f5"{% endif %}
+    {% if element.values.strokeDasharray %}strokeDasharray="{{element.values.strokeDasharray | default('3 3')}}"{% endif %}
+    {% if element.values.stroke %}stroke="{{element.values.stroke}}"{% else %}stroke="{{element.values.stroke | default('#f5f5f5')}}"{% endif %}
     {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
     {% if element.values.horizontalGridLines %}horizontal={ {{element.values.horizontalGridLines}} }{% endif %}
     {% if element.values.verticalGridLines %}vertical={ {{element.values.verticalGridLines}} }{% endif %}
@@ -212,13 +215,13 @@ import { Area, Bar, CartesianGrid, Cell, ComposedChart, BarChart, Legend, Line, 
       {% if indexBy.column_name or element.values.indexVariable%}
       dataKey="{% if indexBy.column_name %}{{ indexBy.column_name }}{% else %}{{ element.values.indexVariable }}{% endif %}"
       {% endif %}
-      {% if element.values.topX %}orientation="top"{% endif %}
       {% if element.values.hideX %}hide={true}{% endif %}
       {% if element.values.tickLX %}tickLine={false}{% endif %}
       {% if element.values.typeX %}type="number"{% endif %}
       {% if element.values.domainX %}domain={ {{element.values.domainX}} }{% endif %}
       {% if element.values.ticksX %}ticks={ {{element.values.ticksX}} }{% endif %}
       {% if element.values.axisLineXAxis %}axisLine={ {{ element.values.axisLineXAxis }} }{% endif %}
+      {% if element.values.orientationX %}orientation="{{element.values.orientationX}}"{% endif %}
     />
     <YAxis 
       {% if element.values.hideY %}hide={true}{% endif %} 

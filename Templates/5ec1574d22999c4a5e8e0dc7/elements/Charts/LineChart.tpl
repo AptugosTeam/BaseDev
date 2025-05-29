@@ -27,9 +27,14 @@ options:
     display: Legend Type
     type: dropdown
     options: line;plainline;square;rect;circle;cross;diamond;star;triangle;wye;none
+  - name: lineType
+    display: Line Type
+    type: dropdown
+    options: monotone;linear;step;stepBefore;stepAfter  
   - name: strokeColor
     display: Line Color
     type: text
+    helpText: Include # for hex, rgb, rgba, hsl, color name
   - name: height
     display: Chart Height
     type: text
@@ -62,13 +67,11 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
     <YAxis />
     <Tooltip />
     <Legend />
-    <Line 
-      type="monotone"
+   <Line 
+      type="{{ element.values.lineType | default('monotone') }}"
       dataKey="{{ element.values.dataKey | default('valor') }}"
-      stroke="#{{ strokeColor }}"
+      stroke="{{ strokeColor | default('#000000') }}"
       legendType="{{ legendType }}"
-    />
+/>
   </LineChart>
 </ResponsiveContainer>
-
-
