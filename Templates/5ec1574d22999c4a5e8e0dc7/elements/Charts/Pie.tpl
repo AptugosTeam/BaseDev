@@ -165,8 +165,6 @@ const colors{{ element._unique_id }} = ['#0088FE', '#00C49F', '#FFBB28', '#FF804
         {% endif %}
         {% if element.values.tooltipFormatter %}
           formatter={ {{ element.values.tooltipFormatter }} }
-        {% else %}
-          formatter={(value, name) => [`$${value.toLocaleString()}`, name]}
         {% endif %}
       />
       <Legend
@@ -177,5 +175,5 @@ const colors{{ element._unique_id }} = ['#0088FE', '#00C49F', '#FFBB28', '#FF804
         align="right"
         verticalAlign="middle"
       />
-</PieChart>
-{% if element.values.responsive %}</ResponsiveContainer>{% endif %}
+      </PieChart>
+        {% if element.values.responsive %}</ResponsiveContainer>{% endif %}

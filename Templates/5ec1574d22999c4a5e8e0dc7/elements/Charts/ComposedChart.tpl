@@ -94,6 +94,12 @@ options:
     type: function
     options: ''
     advanced: true
+  - name: startSeparatorTooltip
+    display: Tooltip Properties
+    type: separator  
+  - name: tooltipFormatter
+    display: Tooltip formatter (JS code)
+    type: text
   - name: startSeparatorResponsive
     display: Responsive Properties
     type: separator
@@ -231,7 +237,11 @@ import { Area, Bar, CartesianGrid, Cell, ComposedChart, BarChart, Legend, Line, 
       {% if element.values.tickFormatter %}tickFormatter={ {{element.values.tickFormatter}} }{% endif %}
       {% if element.values.axisLineYAxis %}axisLine={ {{ element.values.axisLineYAxis }} }{% endif %}
     />
-    <Tooltip />
+    <Tooltip 
+      {% if element.values.tooltipFormatter %} 
+        formatter={ {{element.values.tooltipFormatter}} }
+      {% endif %}
+    />
     <Legend 
     layout="{{element.values.layout|default('horizontal')}}" 
     align="{{element.values.align|default('center')}}" 
