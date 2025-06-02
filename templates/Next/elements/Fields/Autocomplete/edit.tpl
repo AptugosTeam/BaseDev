@@ -10,10 +10,28 @@ settings:
 children: []
 */
 {% set fieldTable = (field | fieldData).table %}
+{% set tableName = fieldTable.name | friendly %}
+{% set fieldValue = tableName ~ 'data.' ~ theField.column_name | friendly %}
+{% if element.values.alternativeValue %}
+  {% set fieldValue = element.values.alternativeValue %}
+{% endif %}
+{% set saveValue %}
+(newValue) => {
+  {% if field.relationshipType == '1:m' %}
+    if (!newValue || !newValue.length) handle{{ tableName }}Change('{{ columnName }}')([])
+  {% else %}
+    if (!newValue) handle{{ tableName }}Change('{{ columnName }}')(null)
+  {% endif %}
+    else handle{{ tableName }}Change('{{ columnName }}')(newValue)
+}
+{% endset %}
+{% if element.values.alternativeSaveMethod %}
+  {% set saveValue = element.values.alternativeSaveMethod | functionOrCall %}
+{% endif %}
 {% if fieldTable.subtype == 'Firebase' %}
   {% include includeTemplate('Fields' ~ field.data_type ~'editFireBase.tpl') %}
 {% else %}
-  {% set tableName = fieldTable.name | friendly %}
+  
   {% set referencedField = field.reference | fieldData %}
   {% if field.referencekey %}
     {% set referencekey = (field.referencekey | fieldData).column_name %}
@@ -27,15 +45,8 @@ children: []
   {% endset %}
   {{ save_delayed('bpr',bpr) }}
   <Autocomplete
-    value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
-    onChange={(newValue) => {
-      {% if field.relationshipType == '1:m' %}
-        if (!newValue || !newValue.length) handle{{ tableName }}Change('{{ columnName }}')([])
-      {% else %}
-        if (!newValue) handle{{ tableName }}Change('{{ columnName }}')(null)
-      {% endif %}
-      else handle{{ tableName }}Change('{{ columnName }}')(newValue)
-    }}
+    value={ {{ fieldValue }} || '' }
+    onChange={ {{ saveValue }} }
     endpointLocation='/api/{{ referencedTable | lower }}/search'
     label="{{ field.column_name }}"
     fullWidth

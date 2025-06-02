@@ -30,7 +30,7 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
     className={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
     variant="{{ element.values.variant|default('standard') }}"
-    value={ 
+    value={
         {% if element.values.alternativeValue %}
             {{ element.values.alternativeValue }}
         {% else %}

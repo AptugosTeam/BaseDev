@@ -2,6 +2,7 @@ Parameters.unique_id = aptugo.generateID();
 Parameters.fields = [];
 Parameters.Name = aptugo.friendly(Parameters.Name).toLowerCase();
 
+console.log('IM IMPORT IMAGE AND THIS IS THE APP', Application)
 for (var file of Parameters.uploadFiles) {
   let newAsset = {
     type: 'image',
@@ -17,4 +18,5 @@ for (var file of Parameters.uploadFiles) {
   Application.assets.push(newAsset)
 }
 
+console.log('I WAS IMPORT IMAGE AND THIS IS THE APP', Application)
 return Application

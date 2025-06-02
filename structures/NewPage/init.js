@@ -54,7 +54,8 @@ if (!Parameters.pageTemplate) {
 
   if (Parameters.parentPage || Parameters.parent) {
     const container = aptugo.findPageInTree(Application.pages, Parameters.parentPage || Parameters.parent)
-    container.children.push(newPage)
+    if (container) container.children.push(newPage)
+    else Application.pages.push(newPage)
   } else {
     Application.pages.push(newPage)
   }

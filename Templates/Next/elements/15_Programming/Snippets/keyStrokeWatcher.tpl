@@ -10,7 +10,7 @@ options:
     display: Key to Watch
     type: dropdown
     options: 
-      return [['Escape', 'Escape Key'], ['ArrowUp', 'Arrow Key UP'], ['ArrowDown', 'Arrow Key DOWN'], ['ArrowRight', 'Arrow Key RIGHT'], ['ArrowLeft', 'Arrow Key LEFT']]
+      return [['Enter', 'Enter Key'], ['Escape', 'Escape Key'], ['ArrowUp', 'Arrow Key UP'], ['ArrowDown', 'Arrow Key DOWN'], ['ArrowRight', 'Arrow Key RIGHT'], ['ArrowLeft', 'Arrow Key LEFT']]
 children: []
 extraFiles:
   - source: 'elements/99_ExtraFiles/useKeyDown.tsx'

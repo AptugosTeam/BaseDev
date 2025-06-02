@@ -363,6 +363,7 @@ const Dashboard = {
 
 try {
 	const file = aptugo.readFile( Parameters.structure.fullFolder +  '/HaltugoBLocks001.png')
+	console.log('RUNNING IMPORT IMAGE')
 	Application = await aptugo.structures.run('importImage', {
 		app: Application,
 		id: assetID,
@@ -371,6 +372,7 @@ try {
 			contents: file
 		}]
 	})
+	console.log('RAN IMPORT IMAGE')
 } catch(e) {
 	console.log('caught file', e)
 }
@@ -378,4 +380,5 @@ try {
 
 Application.pages[0].children.push(Dashboard)
 
+console.log('IM RETUIRNING THIS', Application)
 return Application

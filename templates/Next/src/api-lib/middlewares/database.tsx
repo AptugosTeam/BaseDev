@@ -8,7 +8,7 @@ import mongoose from 'mongoose'
 {{ insert_setting('OnImportsDatabase') | raw }}
 
 export default async function database(req, res, next) {
-  req.db = mongoose.connect(process.env.MONGODB_URI, {
+  req.db = mongoose.connect('{{ settings.dbconnectstring | raw }}', {
     autoIndex: true
   })
 

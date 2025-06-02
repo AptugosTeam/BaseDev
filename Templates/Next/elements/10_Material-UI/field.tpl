@@ -132,7 +132,7 @@ extraFiles:
   import Field from '@components/Table/Field'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-{% if (element.values.Field) and (element.values.Field != 'useVar') %}
+{% if (element.values.Field) and (element.values.Field != 'useVar') and not (element.values.alternativeValue) %}
   {% set ph %}
   {% include includeTemplate('FieldseditInclude.tpl') with { 'tableInfo': element.values.Field | fieldData } %}
   {% endset %}
@@ -153,5 +153,3 @@ extraFiles:
   {% elseif element.values.Type == 'raw' %}{% include includeTemplate(['Fields' ~ theField.data_type ~ 'raw.tpl', 'Fieldsraw.tpl']) with theField %}
   {% else %}{% include includeTemplate('Fields' ~ theField.data_type ~ 'show.tpl') with theField %}{% endif %}
 {% endif %}
-
-

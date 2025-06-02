@@ -8,7 +8,7 @@ import { promisifyStore } from 'next-session/lib/compat'
 import MongoStore from 'connect-mongo'
 
 const mongoStore = MongoStore.create({
-  mongoUrl: process.env.MONGODB_URI,
+  mongoUrl: '{{ settings.dbconnectstring | raw }}',
   stringify: false,
 })
 

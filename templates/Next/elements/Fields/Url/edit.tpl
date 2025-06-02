@@ -6,8 +6,17 @@ icon: ico-field
 children: []
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
+{% set fieldValue = tableName ~ 'data.' ~ theField.column_name | friendly %}
+  {% if element.values.alternativeValue %}
+    {% set fieldValue = element.values.alternativeValue %}
+  {% endif %}
+  {% set saveValue = 'handle' ~ tableName ~ 'Change("' ~ theField.column_name | friendly ~ '")' %}
+  {% if element.values.alternativeSaveMethod %}
+    {% set saveValue = element.values.alternativeSaveMethod | functionOrCall %}
+  {% endif %}
 {% set bpr %}
-import TextField from '@mui/material/TextField'
+import TravelExploreIcon from '@mui/icons-material/TravelExplore'
+import { IconButton, InputAdornment, TextField } from '@mui/material'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <TextField
@@ -23,6 +32,19 @@ import TextField from '@mui/material/TextField'
     type="text"
     fullWidth
     variant="{{ element.values.variant|default('standard') }}"
-    value={ {{ tableName }}data.{{ field.column_name | friendly }}}
-    onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
+    InputProps={ {
+        endAdornment: (
+        <InputAdornment position="end">
+            <IconButton
+            aria-label="Visit URL"
+            onClick={() => { window.open( {{ fieldValue }},'_blank').focus() }}
+            edge="end"
+            >
+            <TravelExploreIcon />
+            </IconButton>
+        </InputAdornment>
+        )
+    }}
+    value={ {{ fieldValue }}}
+    onChange={ {{ saveValue }}}
 />
