@@ -32,11 +32,13 @@ childs:
   - name: Text Content
     element: text
 */
+{% set extraStyles = '' %}
 {% set tag = element.values.tag|default('p') %}
-{% if tag == 'subtitle1' %}{% set tag = 'h3' %}{% endif %}
+{% if tag == 'subtitle1' or tag == 'subtitle2' %}{% set tag = 'h6' %}{% endif %}
 {% if tag == 'body1' or tag == 'body2' %}{% set tag = 'p' %}{% endif %}
+{% if tag == 'overline' %}{% set extraStyles = 'MuiTypography-root MuiTypography-overline' %}{% set tag = 'span' %}{% endif %}
 <{{tag}}
-  {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
+  {% if element.values.className or extraStyles != '' %}className={`{{extraStyles}} {% if element.values.className %}${ {{ element.values.className }} }{% endif %}`}{% endif %}
   {% if element.values.onclick %}
     onClick={(e) => {{element.values.onclick}} }
   {% endif %}
