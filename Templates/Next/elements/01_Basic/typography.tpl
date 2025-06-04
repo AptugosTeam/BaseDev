@@ -34,7 +34,7 @@ childs:
 */
 {% set tag = element.values.tag|default('p') %}
 {% if tag == 'subtitle1' %}{% set tag = 'h3' %}{% endif %}
-{% if tag == 'body1' %}{% set tag = 'p' %}{% endif %}
+{% if tag == 'body1' or tag == 'body2' %}{% set tag = 'p' %}{% endif %}
 <{{tag}}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   {% if element.values.onclick %}

@@ -29,12 +29,16 @@ options:
     type: checkbox
 children: []
 */
+{% set bprMax %}
+"use client";
+{% endset %}
+{{ save_delayed('bprMax',bprMax,1)}}
 {% if element.values.valueToVar %}
-  const {{ element.values.valueToVar }} = {% if element.values.Parse %}JSON.parse({% endif %}localStorage.getItem('{{ element.values.variableName }}'){% if element.values.Parse %}){% endif %}
+  const {{ element.values.valueToVar }} = {% if element.values.Parse %}JSON.parse({% endif %}localStorage?.getItem('{{ element.values.variableName }}'){% if element.values.Parse %}){% endif %}
 {% else %}
   {{ element.values.onLoad }}(
     {% if element.values.makeItBoolean %}Boolean({% endif %}
-    {% if element.values.Parse %}JSON.parse({% endif %}localStorage.getItem('{{ element.values.variableName }}') {% if element.values.default %}|| '{{ element.values.default }}'{% endif %}{% if element.values.Parse %}){% endif %}
+    {% if element.values.Parse %}JSON.parse({% endif %}localStorage?.getItem('{{ element.values.variableName }}') {% if element.values.default %}|| '{{ element.values.default }}'{% endif %}{% if element.values.Parse %}){% endif %}
     {% if element.values.makeItBoolean %}){% endif %}
   )
 {% endif %}

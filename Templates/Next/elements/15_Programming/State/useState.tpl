@@ -38,7 +38,7 @@ options:
 children: []
 */
 {% set ph %}
-const [{{ element.values.variableName }}, set{{ element.values.variableName }}] = React.useState<{{ element.values.type|default('any') }}>({{ element.values.defaultValue }})
+const [{{ element.values.variableName }}, set{{ element.values.variableName }}] = React.useState<{{ element.values.type|default('any') }}>({% if element.children %}{{ content | raw }}{% else %}{{ element.values.defaultValue }}{% endif %})
 {% endset %}
 {% if element.values.renderInPlace %}
   {{ ph }}

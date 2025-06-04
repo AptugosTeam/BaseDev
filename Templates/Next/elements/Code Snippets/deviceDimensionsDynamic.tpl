@@ -3,6 +3,8 @@ path: deviceDimensionsDynamic.tpl
 type: file
 unique_id: deviceDimensionsDynamic
 icon: f:MdiMonitorCellphone.svg
+deprecated: true
+deprecatedText: This element will not be maintained, switch over to deviceDimensions
 sourceType: javascript
 options:
   - name: variableName
