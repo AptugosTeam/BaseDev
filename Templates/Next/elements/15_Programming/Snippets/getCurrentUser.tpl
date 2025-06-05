@@ -70,7 +70,31 @@ export * from './auth'
 {% endset %}
 {{ add_setting('addedModel', addedModel) }}
 {% set bpr %}
-import { useCurrentUser } from '@lib/user'
+import { GetServerSideProps } from 'next'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-const {{ element.values.variableName }} = useCurrentUser().data
+{% if element.values.variableName %}
+  const {{ element.values.variableName }} = props.currentUser
+{% endif %}
+{% set apr %}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { req, res } = context
+
+  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http'
+  const host = req.headers.host
+
+  const response = await fetch(`${protocol}://${host}/api/user`, { headers: { cookie: req.headers.cookie || '' } })
+  const data = await response.json()
+
+  {{ insert_setting('UserAuthServer') | raw }}
+  
+  return {
+    props: {
+      currentUser: data.user
+    }
+  }
+}
+
+{% endset %}
+{{ save_delayed('apr',apr)}}

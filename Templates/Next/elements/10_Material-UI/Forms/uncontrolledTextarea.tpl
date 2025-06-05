@@ -43,5 +43,5 @@ import TextareaAutosize from '@mui/material/TextareaAutosize'
   {% if element.values.value %}value={{ element.values.value }}{% endif %}
   {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-  {% if element.values.onChange %}onChange={(e) => {{element.values.onChange}} }{% endif %}
+  {% if element.values.onChange %}onChange={ {{element.values.onChange | functionOrCall }} }{% endif %}
 />

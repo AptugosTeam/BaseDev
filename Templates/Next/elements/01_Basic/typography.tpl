@@ -36,6 +36,7 @@ childs:
 {% set tag = element.values.tag|default('p') %}
 {% if tag == 'subtitle1' or tag == 'subtitle2' %}{% set tag = 'h6' %}{% endif %}
 {% if tag == 'body1' or tag == 'body2' %}{% set tag = 'p' %}{% endif %}
+{% if tag == 'caption' %}{% set extraStyles = 'MuiTypography-root MuiTypography-caption' %}{% set tag = 'span' %}{% endif %}
 {% if tag == 'overline' %}{% set extraStyles = 'MuiTypography-root MuiTypography-overline' %}{% set tag = 'span' %}{% endif %}
 <{{tag}}
   {% if element.values.className or extraStyles != '' %}className={`{{extraStyles}} {% if element.values.className %}${ {{ element.values.className }} }{% endif %}`}{% endif %}

@@ -47,18 +47,26 @@ children: []
     {% set dest = (element.values.loginScreen | elementData).path %}
   {% endif %}
 {% endif %}
-{% set bpr %}
+{% set returning %}
+{% if element.values.loginScreenNot != 'none' and element.values.loginScreenNot is defined %}
+  if (!data.user) {
+    return {
+      redirect: {
+        destination: '{{ destNot }}',
+        permanent: false,
+      },
+    }
+  }
+{% endif %}
+{% if element.values.loginScreen != 'none' and element.values.loginScreen is defined %}
+  if (data.user) {
+    return {
+      redirect: {
+        destination: '{{ dest }}',
+        permanent: false,
+      },
+    }
+  }
+{% endif %}
 {% endset %}
-{{ save_delayed('bpr',bpr)}}
-authHeaders().then(result => {
-    {% if element.values.loginScreenNot != 'none' and element.values.loginScreenNot is defined %}
-      if (!result) {
-        navigation.push( {{ destNot | textOrVariable }} )
-      }
-    {% endif %}
-    {% if element.values.loginScreen != 'none' and element.values.loginScreen is defined %}
-      if (result) {
-        navigation.push( {{ dest | textOrVariable }} )
-      }
-    {% endif %}
-  })
+{{ add_setting('UserAuthServer', returning)}}
