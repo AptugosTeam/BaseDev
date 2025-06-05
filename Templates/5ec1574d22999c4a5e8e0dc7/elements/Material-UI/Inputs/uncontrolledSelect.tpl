@@ -64,6 +64,10 @@ options:
     settings:
       condition: true
       propertyCondition: displayEmpty
+  - name: endAdornment
+    display: Child is end adornment
+    type: checkbox
+    advanced: true    
   - name: DisableVariable
     display: Variable to disable input
     type: text
@@ -94,6 +98,12 @@ import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
+{% if element.values.endAdornment %}
+{% set bpr %}
+import InputAdornment from '@mui/material/InputAdornment'
+{% endset %}
+{{ save_delayed('bpr', bpr) }}
+{% endif %}
 
 <TextField
     {% if element.values.Autofocus %}autoFocus{% endif %}
@@ -117,6 +127,11 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.displayEmpty %}SelectProps={ {
       displayEmpty: true
     } }{% endif %}
+    {% if element.values.endAdornment %}
+      InputProps={ {
+        endAdornment: <InputAdornment position="end">{{ content | raw }}</InputAdornment>
+      } }
+    {% endif %}
 >
 {% if element.values.showall %}<MenuItem value="all"><em>All</em></MenuItem>{% endif %}
 {% if element.values.displayEmptyText %}
