@@ -36,6 +36,11 @@ options:
     options: ''
     settings:
       active: true
+  - name: ariaHidden
+    display: Hide from Screen Readers
+    type: checkbox
+    options: ''
+    advanced: true
   - name: fullWidth
     display: Full Width
     type: checkbox
@@ -69,6 +74,7 @@ import Button from '@mui/material/Button'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <Button 
+  {% if element.values.ariaHidden %}tabIndex={-1} aria-hidden="true"{% endif %}
   {% if element.values.buttonType %}type='submit'{% endif %}
   {% if element.values.Variant %}variant='{{ element.values.Variant }}'{% endif %}
   {% if element.values.Color %}color='{% if element.values.Color == 'default' %}inherit{% else %}{{ element.values.Color }}{% endif %}'{% endif %}

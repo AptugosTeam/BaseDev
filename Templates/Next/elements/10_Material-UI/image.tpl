@@ -64,6 +64,11 @@ options:
     type: checkbox
     options: ''
     advanced: true
+  - name: priority
+    display: Prioritize image loading
+    type: checkbox
+    options: ''
+    advanced: true
   - name: draggable
     display: Disable image drag
     type: checkbox
@@ -78,10 +83,10 @@ options:
 {% if element.values.useAsset and element.values.useAsset != 'none' %}
   {% set asset = element.values.useAsset|assetData %}
   {% if width == null %}
-    {% set width = asset.width %}
+    {% set width = asset.info.width %}
   {% endif %}
   {% if height == null %}
-    {% set height = asset.height %}
+    {% set height = asset.info.height %}
   {% endif %}
   {% set path = '/img/' ~ asset.name %}
   {% if asset.versions %}
@@ -94,7 +99,7 @@ options:
 {% endif %}
 {% if width and height %}
   {% set bpr %}import Image from 'next/image'{% endset %}{{ save_delayed('bpr', bpr ) }}
-  <Image width={ {{width}} } height={ {{height}} } src={{ path|textOrVariable }} alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }} />
+  <Image {% if element.values.priority %}priority={ {{ element.values.priority }} }{% endif %} {% if element.values.className %}className={ {{element.values.className}} }{% endif %} width={ {{width}} } height={ {{height}} } src={{ path|textOrVariable }} alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }} />
 {% else %}
   {% set tag = 'picture' %}
   <{{ tag }}

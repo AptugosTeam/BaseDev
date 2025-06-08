@@ -3,7 +3,9 @@ path: simpleLink.tpl
 type: file
 unique_id: BG7vdEr8
 icon: ico-link
-display: Link
+deprecated: true
+deprecatedText: This element will not be maintained, switch over to Link
+display: Simple Link
 order: 50
 options:
   - name: destination
