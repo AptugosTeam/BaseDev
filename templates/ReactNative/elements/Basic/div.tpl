@@ -44,11 +44,24 @@ options:
   - name: autoAdjust
     display: Automatically Adjust when keyboard insets
     type: checkbox
+  - name: onScroll
+    display: On Scroll
+    type: code
+    options: ''
+    settings:
+      propertyCondition: scrollable
+      condition: true
+  - name: scrollEventThrottle
+    display: Scroll Event Throttle
+    type: text
+    advanced: true
+    settings:
+      propertyCondition: scrollable
+      condition: true
   - name: contentContainerStyle
     display: Content Container Style
     type: text
     advanced: true
-
 children: []
 helpText: Basic HTML Div element
 */
@@ -73,6 +86,16 @@ import { ScrollView} from 'react-native'
   {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
   {% if element.values.nestedScrollEnabled %}nestedScrollEnabled{% endif %}
   {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
+  {% if element.values.scrollable %}
+    {% if element.values.onScroll %}
+      onScroll={(event) => {
+        {{ element.values.onScroll }}
+      }}
+    {% endif %}
+  {% endif %}
+  {% if element.values.scrollable %}
+    {% if element.values.scrollEventThrottle %}scrollEventThrottle={ {{ element.values.scrollEventThrottle }} }{% endif %}
+  {% endif %}
   {% if element.values.contentContainerStyle %}contentContainerStyle={ {{ element.values.contentContainerStyle }} }{% endif %}
   {% if element.values.autoAdjust %}automaticallyAdjustKeyboardInsets={true}{% endif %}
 >
