@@ -2,6 +2,7 @@
 path: loadFont.tpl
 keyPath: elements/Experimental/loadFont.tpl
 unique_id: nX9yXneu
+icon: ico-typography
 options:
   - name: variableName
     display: Variable Name (Boolean Loaded Fonts)
