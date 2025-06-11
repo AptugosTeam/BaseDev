@@ -22,6 +22,11 @@ options:
   - name: shouldDisableDate
     display: shouldDisableDate
     type: function
+  - name: onClose
+    display: onClose
+    type: function
+    options: ''
+    advanced: true 
   - name: disablePreviousMonths
     display: Disable Previous Months?
     type: checkbox
@@ -57,5 +62,7 @@ import dayjs from 'dayjs';
             shouldDisableDate={ {{ element.values.shouldDisableDate | functionOrCall }} }
         {% endif %}
         {% if element.values.disablePreviousMonths %}disablePast{% endif %}
+        {% if element.values.onClose %}
+          onClose={ () => { {{ element.values.onClose }} } }{% endif %}
       />
     </LocalizationProvider>
