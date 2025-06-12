@@ -4,5 +4,8 @@ unique_id: WV1D3zGS
 settings:
   - name: Packages
     value: '"pluspagos-aes-encryption": "^1.0.0",'
+    settings:
+  - name: Packages
+    value: '"exceljs": "latest",'
 children: []
 */
