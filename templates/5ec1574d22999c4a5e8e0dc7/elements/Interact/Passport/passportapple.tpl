@@ -35,21 +35,26 @@ options:
     display: Custom Code
     type: code
     options: ''
+  - name: importPassport
+    display: Import passportjs?
+    type: checkbox
+    options: ''
 settings:
   - name: BackendPackages
-    value: '"passport": "^0.7.0", "passport-apple": "^2.0.2",'
+    value: '{%  if element.values.importPassport%}"passport": "^0.7.0", {% endif %}"passport-apple": "^2.0.2",'
+  - name: BackendImports
+    value: |-
+      {%  if element.values.importPassport%}const passport = require('passport');{% endif %}
+      const AppleStrategy = require('passport-apple');
   - name: ServerAddenum
     value: |-
-      const passport = require('passport')
-      const AppleStrategy = require('passport-apple');
-
       passport.use(new AppleStrategy({
-        clientID: process.env.APPLE_CLIENT_ID,
-        teamID: process.env.APPLE_TEAM_ID,
-        keyID: process.env.APPLE_KEY_ID,
-        privateKeyLocation: process.env.APPLE_PRIVATE_KEY_PATH,
-        callbackURL: "/auth/apple/callback",
-        scope: {{ element.values.customCode | default('['name', 'email']') }}
+        clientID: {{ element.values.clientID | default('process.env.APPLE_CLIENT_ID') }},
+        teamID: {{ element.values.teamID | default('process.env.APPLE_TEAM_ID') }},
+        keyID: {{ element.values.keyID | default('process.env.APPLE_KEY_ID') }},
+        privateKeyLocation: {{ element.values.privateKeyLocation | default('process.env.APPLE_PRIVATE_KEY_PATH') }},
+        callbackURL: {{ element.values.callbackURL | default("'/auth/apple/callback'") }},
+        scope: {{ element.values.scope | default("['name', 'email']") }}
       }, async (accessToken, refreshToken, idToken, profile, done) => {
           try {
             {{ element.values.customCode }}

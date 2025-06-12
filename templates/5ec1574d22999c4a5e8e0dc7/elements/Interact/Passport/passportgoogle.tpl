@@ -23,18 +23,23 @@ options:
     display: Custom Code
     type: code
     options: ''
+  - name: importPassport
+    display: Import passportjs?
+    type: checkbox
+    options: ''
 settings:
   - name: BackendPackages
-    value: '"passport": "^0.7.0", "passport-google-oauth20": "^2.0.0",'
+    value: '{%  if element.values.importPassport%}"passport": "^0.7.0", {% endif %}"passport-google-oauth20": "^2.0.0",'
+  - name: BackendImports
+    value: |-
+      {%  if element.values.importPassport%}const passport = require('passport');{% endif %}
+      const GoogleStrategy = require('passport-google-oauth20').Strategy;
   - name: ServerAddenum
     value: |-
-      const passport = require('passport')
-      const GoogleStrategy = require('passport-google-oauth20').Strategy;
-
       passport.use(new GoogleStrategy({ 
-        clientID: {{ element.values.clientID}}, 
-        clientSecret: {{ element.values.clientSecret}},
-        callbackURL: {{ element.values.callbackURL}}
+        clientID: {{ element.values.clientID | default('process.env.GOOGLE_CLIENT_ID')}}, 
+        clientSecret: {{ element.values.clientSecret | default('process.env.GOOGLE_CLIENT_SECRET')}},
+        callbackURL: {{ element.values.callbackURL | default("'/auth/google/callback'")}}
       }, async (accessToken, refreshToken, profile, done) => {
           try {
             {{ element.values.customCode }}

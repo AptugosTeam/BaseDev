@@ -29,11 +29,13 @@ options:
 settings:
   - name: BackendPackages
     value: '"passport": "^0.7.0", "passport-jwt": "^4.0.1",'
-  - name: ServerAddenum
+  - name: BackendImports
     value: |-
-      const passport = require('passport')
+      const passport = require('passport');
       const JwtStrategy = require('passport-jwt').Strategy;
       const { ExtractJwt } = require('passport-jwt');
+  - name: ServerAddenum
+    value: |-
 
       passport.use(new JwtStrategy({ secretOrKey: {{ element.values.secret | default("'thisisthesecretandshouldbeconfigurable'") }}, jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken() }, async (jwt_payload, done) => {
         done(null,jwt_payload)
