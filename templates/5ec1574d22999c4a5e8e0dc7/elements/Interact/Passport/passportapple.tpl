@@ -56,31 +56,6 @@ settings:
         callbackURL: {{ element.values.callbackURL | default("'/auth/apple/callback'") }},
         scope: {{ element.values.scope | default("['name', 'email']") }}
       }, async (accessToken, refreshToken, idToken, profile, done) => {
-          try {
-            {{ element.values.customCode }}
-            let user = await User.findOne({ email: profile.email });
-            
-            if (user) {
-              if (!user.appleId) {
-                user.appleId = profile.id;
-                user.provider = user.provider ? user.provider : 'apple';
-                await user.save();
-              }
-              return done(null, user);
-            }
-            
-            user = new User({
-              appleId: profile.id,
-              name: profile.name ? `${profile.name.firstName} ${profile.name.lastName}` : 'Apple User',
-              email: profile.email,
-              provider: 'apple',
-              isVerified: true
-            });
-            
-            await user.save();
-            done(null, user);
-          } catch (error) {
-            done(error, null);
-          }
+          {{ element.values.customCode }}
       }))
 */
