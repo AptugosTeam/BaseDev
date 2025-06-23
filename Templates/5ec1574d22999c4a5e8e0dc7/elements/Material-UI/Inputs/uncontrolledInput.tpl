@@ -213,16 +213,14 @@ import InputAdornment from '@mui/material/InputAdornment'
       } }
     {% endif %}
     {% if element.values.type == 'number' %}
-      {% if element.values.minNum or element.values.maxNum %}
         inputProps={ {
-            {% if element.values.minNum is not none %}
+            {% if element.values.minNum is defined and element.values.minNum != '' %}
               min: {{ element.values.minNum }},
             {% endif %}
-            {% if element.values.maxNum %}
+            {% if element.values.maxNum is defined and element.values.maxNum != '' %}
               max: {{ element.values.maxNum }}
             {% endif %}
           } }
-      {% endif %}
     {% endif %}
     {% if element.values.type == 'numeric' %}
         inputProps={ {
