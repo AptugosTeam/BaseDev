@@ -31,6 +31,13 @@ options:
     settings:
       propertyCondition: align
       condition: true
+  - name: topOffset
+    display: topOffset
+    type: text
+    options: ''
+    settings:
+      propertyCondition: align
+      condition: true
 settings:
   - name: Packages
     value: '"scroll-into-view": "^1.16.2",'
@@ -47,7 +54,8 @@ const element = document.querySelector('#{{element.values.document}}');
         {% if element.values.align %}
             align:{ 
               top: {{ element.values.top | default(0.5) }},
-              left: {{ element.value.left | default(0.5) }},     
+              left: {{ element.value.left | default(0.5) }},
+              topOffset: {{ element.values.topOffset | default(0) }},     
             }
         {% endif %} 
         }) 
