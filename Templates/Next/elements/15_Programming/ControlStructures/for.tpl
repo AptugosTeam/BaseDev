@@ -29,6 +29,13 @@ options:
     type: text
     settings:
       default: 'item'
+      aptugoOnLoad: |-
+        const element = arguments[0];
+        const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;
+        const usesVariable = element.values.variablename;
+        const newLocalVarName = element.values.variablename || 'item';
+        aptugo.variables.setElementVariable(element.unique_id, newLocalVarName);
+      active: true
 children: []
 */
 for (var {{ element.values.variablename | default('item') }} = {{ element.values.from | default(0) }}; {{ element.values.variablename | default('item') }} {{ element.values.until }}; {{ element.values.variablename | default('item') }}++) {

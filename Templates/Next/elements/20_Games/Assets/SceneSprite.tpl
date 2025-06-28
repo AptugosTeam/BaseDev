@@ -25,6 +25,9 @@ options:
   - name: Physics
     display: Use Physics?
     type: checkbox
+  - name: tilesprite
+    display: Is Tiled?
+    type: checkbox
   - name: immovable
     display: Is Immovable?
     type: checkbox
@@ -61,7 +64,7 @@ options:
     advanced: true
   
 */
-this.{% if element.values.Physics %} physics.{% endif %}add.sprite({{ element.values.posX }}, {{ element.values.posY }}, '{{ element.values.asset }}')
+this.{% if element.values.Physics %} physics.{% endif %}add.{% if element.values.tilesprite %}tileSprite{% else %}sprite{% endif %}({{ element.values.posX }}, {{ element.values.posY }}, '{{ element.values.asset }}')
 {% if element.values.collide %}.setCollideWorldBounds(true){% endif %}
 {% if element.values.isCircle %}.setCircle({{ element.values.isCircle }}){% endif %}
 {% if element.values.immovable %}.setImmovable(true){% endif %}

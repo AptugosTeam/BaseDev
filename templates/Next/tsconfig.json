@@ -30,6 +30,7 @@ unique_id: Zw2zePwz
     "baseUrl": "./",
     "paths": {
       "@components/*": ["./src/components/*"],
+      "@classes/*": ["./src/classes/*"],
       "@api-lib/*": ["./src/api-lib/*"],
       "@lib/*": ["./src/lib/*"],
       "@/*": ["./src/*"],

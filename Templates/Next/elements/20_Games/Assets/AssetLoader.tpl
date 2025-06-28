@@ -13,7 +13,7 @@ options:
   - name: assetType
     display: Asset Type
     type: dropdown
-    options: return [['image','Image'],['video','Video'],['sound','Sound'],['spritesheet','Spritesheet'],['tilemap','Tilemap']]
+    options: return [['image','Image'],['video','Video'],['sound','Sound'],['spritesheet','Spritesheet'],['tilemap','Tilemap'],['bitmapFont','Bitmap Font']]
     settings:
       default: image
   - name: useAsset
@@ -32,7 +32,7 @@ options:
     options: return [...aptugo.assetUtils.other().map(image => [image.id, image.name])]
     settings: 
       propertyCondition: assetType
-      condition: video
+      condition: video,bitmapFont
   - name: useAssetSpritesheet
     display: Asset to use
     displayes: Recurso a utilizar
@@ -58,7 +58,7 @@ options:
     options: return [...aptugo.assetUtils.other().map(image => [image.id, image.name])]
     settings: 
       propertyCondition: assetType
-      condition: sound
+      condition: sound,bitmapFont
   - name: autoplay
     display: Autoplay
     displayes: Inicio automático
@@ -86,7 +86,7 @@ options:
     type: text
     settings: 
       propertyCondition: assetType
-      condition: tilemap
+      condition: tilemap,bitmapFont
   - name: pathmap
     display: Json Path Map
     type: dropdown
@@ -120,4 +120,10 @@ options:
     {% set path = '/' ~ asset.name %}
     this.load.tilemapTiledJSON('{{ element.values.nameMap | friendly }}', {{ path | textOrVariableInCode }})
   {% endif %}
+{% elseif element.values.assetType == 'bitmapFont' %}
+  {% set asset = element.values.useAssetVideo|assetData %}
+  {% set path = '/' ~ asset.name %}
+  {% set assetB = element.values.useAssetSound|assetData %}
+  {% set pathB = '/' ~ assetB.name %}
+  this.load.bitmapFont('{{ element.values.name | friendly }}', {{ path | textOrVariableInCode }}, {{ pathB | textOrVariableInCode }})
 {% endif %}

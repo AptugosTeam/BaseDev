@@ -3,8 +3,9 @@ path: PhaserScene.tpl
 keyPath: elements/Games/PhaserScene.tpl
 unique_id: xdlC7Hpo
 icon: ico-movie
+holder: true
 order: 2
-usesDelays: [variableDeclarations]
+usesDelays: [bpr,variableDeclarations]
 delayContext: true
 options:
   - name: name
@@ -31,6 +32,11 @@ childs:
 {% set sceneName = element.values.name|default(element.unique_id) | friendly | capitalize %}
 {% block baseScene %}
 import Phaser from 'phaser'
+{% for delay in delayed %}
+  {% for specificDelay in delay.bpr %}
+    {{ specificDelay }}
+  {% endfor %}
+{% endfor %}
 
 export default class {{ sceneName }} extends Phaser.Scene {
   {% for delay in delayed %}
