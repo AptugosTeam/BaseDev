@@ -12,7 +12,7 @@ unique_id: i1kD8rN4
     "icon": "./assets/img/icon.png",
     "splash": {
       "image": "./assets/img/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "{{ insert_setting('resizeMode')|default('contain') }}",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -42,6 +42,7 @@ unique_id: i1kD8rN4
       "config": "metro.config.js",
       "sourceExts": ["js", "jsx", "scss", "sass"]
     },
+    "scheme": "{{ insert_setting('androidPackage')|default(application.settings.name | lower | friendly) }}",
     "plugins": [
       {{ insert_setting('AppJsonPlugins') | raw }}
       [

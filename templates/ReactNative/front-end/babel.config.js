@@ -12,7 +12,21 @@ module.exports = function(api) {
   {{ insert_setting('BabelAdd') | raw }}
 
   plugins.push('react-native-reanimated/plugin')
+  
+  plugins.push([
+    'module-resolver',
+    {
+      root: ['.'],
+      extensions: ['.js', '.ts', '.tsx', '.json'],
+      alias: {
+        '@assets': './assets',
+        '@hooks': './hooks',
+        '@components': './components',
+        '@services': './services',
+      },
+    },
+])
   return {
     presets, plugins
-  };
-};
+  }
+}

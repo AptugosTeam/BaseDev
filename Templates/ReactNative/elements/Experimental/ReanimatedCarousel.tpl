@@ -29,7 +29,11 @@ options:
     type: text
     options: ''
   - name: pagingEnabled
-    display: Paging Enabled?
+    display: Enable Paging?
+    type: checkbox
+    options: ''
+  - name: snapEnabled
+    display: Enable Snap?
     type: checkbox
     options: ''
   - name: loop
@@ -38,6 +42,12 @@ options:
     options: ''
     settings:
       default: 'false'
+  - name: autoplay
+    display: Enable Autoplay?
+    type: checkbox
+    options: ''
+    settings:
+      default: false
   - name: onSnapToItem
     display: On Snap To Item
     type: function
@@ -50,6 +60,10 @@ options:
     display: Code
     type: function
     options: ''
+  - name: ref
+    display: Use Reference
+    type: text
+    options: ''
 children: []
 */
 {% set bpr %}
@@ -61,6 +75,9 @@ import Carousel from 'react-native-reanimated-carousel'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Carousel
+    {% if element.values.ref %}
+    ref={ {{ element.values.ref }} }
+    {% endif %}
     width={ {{element.values.width }} }
     height={ {{element.values.height | default('width' / 2) }} }
     {% if element.values.style %}
@@ -75,8 +92,14 @@ import Carousel from 'react-native-reanimated-carousel'
     {% if element.values.pagingEnabled %}
       pagingEnabled
     {% endif %}
+    {% if element.values.snapEnabled %}
+      snapEnabled
+    {% endif %}
     {% if element.values.loop %}
       loop={false}
+    {% endif %}
+    {% if element.values.autoplay %}
+      autoPlay
     {% endif %}
     {% if element.values.onSnapToItem %}
       onSnapToItem={(index) => {{ element.values.onSnapToItem }}}

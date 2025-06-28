@@ -22,10 +22,13 @@ options:
     options: ''
     settings:
       value: 'false'
+  - name: asJson
+    display: Store as JSON?
+    type: checkbox
 children: []
 */
 {% set bpr %}
 import AsyncStorage from '@react-native-async-storage/async-storage'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{% if element.values.await %}await{% endif %} AsyncStorage.setItem('{{ element.values.variableName }}', {{ element.values.variableValue }})
+{% if element.values.await %}await{% endif %} AsyncStorage.setItem('{{ element.values.variableName }}', {% if element.values.asJson %}JSON.stringify({% endif %}{{ element.values.variableValue }}{% if element.values.asJson %}){% endif %})

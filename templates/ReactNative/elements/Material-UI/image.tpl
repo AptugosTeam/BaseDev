@@ -12,8 +12,15 @@ options:
     options: return aptugo.assetUtils.images().map(image => [image.id, image.name])
   - name: path
     display: Image Path
-    type: text
+    type: url
     options: ''
+    settings:
+      aptugoOnLoad: |-
+        const element = arguments[0];
+        let finalVarsToAdd = { result: { data: '' }}
+        console.log(finalVarsToAdd, 'macucas')
+        aptugo.variables.setElementVariable(element.unique_id, finalVarsToAdd);
+      active: true
   - name: webppath
     display: Image Path (WebP)
     type: text
@@ -71,6 +78,9 @@ import { {{tag}} } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% set path = element.values.path %}
+{% if element.values.pathFULL %}
+{% set path = settings.url ~ element.values.path %}
+{% endif %}
 {% set webppath = element.values.webppath %}
 {% set width = element.values.width|default(null) %}
 {% set height = element.values.height|default(null) %}

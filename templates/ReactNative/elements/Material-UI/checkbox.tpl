@@ -29,6 +29,10 @@ options:
     display: ClassName
     type: text
     options: ''
+  - name: activeOpacity
+    display: Opacity
+    type: text
+    options: ''
 sourceType: javascript
 children: []
 */
@@ -45,7 +49,11 @@ import { TouchableOpacity } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% if element.values.OnClick %}
-<TouchableOpacity onPress={{ element.values.OnClick }} {% if element.values.ClassName %}style={ {{ element.values.ClassName }} }{% endif %}>
+<TouchableOpacity 
+  onPress={() => {{ element.values.OnClick }} } 
+  {% if element.values.ClassName %}style={ {{ element.values.ClassName }} }{% endif %}
+  {% if element.values.activeOpacity %}activeOpacity={ {{ element.values.activeOpacity}} }{% endif %}
+>
 {% endif %}
   <View style={ { flexDirection: 'row', alignItems: 'center' } } {% if element.values.ClassName and not element.values.OnClick %}style={ {{ element.values.ClassName }} }{% endif %}>
     <MaterialIcons size={20} name={ {{ element.values.Checked }} ? 'check-box' : 'check-box-outline-blank'} {% if element.values.ClassName %}style={ {{ element.values.ClassName ~ 'icon' }} }{% endif %} />

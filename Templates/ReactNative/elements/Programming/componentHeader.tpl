@@ -5,12 +5,4 @@ unique_id: OsPh4fAx
 usesDelays: [ph]
 */
 {{ add_setting('capturedImportsBPR', capturedImportsBPR)}}
-{% set capturedImportsPH %}
-{% for delay in delayed %}
-  {% for specificDelay in delay.ph %}
-    {{ specificDelay }}
-  {% endfor %}
-{% endfor %}
-{% endset %}
-{{ capturedImportsPH }}
 {{ content | raw }}

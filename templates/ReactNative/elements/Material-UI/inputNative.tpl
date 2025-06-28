@@ -49,6 +49,12 @@ options:
     display: Container Style
     type: text
     options: ''
+  - name: underlineColor
+    display: Underline Color
+    type: text
+  - name: activeUnderlineColor
+    display: Underline Color (Active)
+    type: text
 children: []
 */
 {% set bpr %}
@@ -66,6 +72,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
  {% if element.values.value %} value={{ element.values.value }} {% endif %}
  {% if element.values.placeholder %} placeholder= "{{ element.values.placeholder }}" {% endif %}
  {% if element.values.secureTextEntry %} secureTextEntry={{ element.values.secureTextEntry }} {% endif %}
+ {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
+ {% if element.values.activeUnderlineColor %}activeUnderlineColor={{ element.values.activeUnderlineColor | textOrVariable }}{% endif %}
   />
   <TouchableOpacity 
   {% if element.values.onPress %} onPress={{ element.values.onPress }} {% endif %}
