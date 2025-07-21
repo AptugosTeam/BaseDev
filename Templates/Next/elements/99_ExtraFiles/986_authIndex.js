@@ -1,12 +1,10 @@
 /*
 path: index.js
-completePath: >-
-  /Users/carlosdanielolivera/Documents/GitHub/BaseDev/templates/Next/src/pages/api/auth/index.js
 keyPath: src/pages/api/auth/index.js
 unique_id: ZfwgpkSE
 */
-import nextConnect from 'next-connect';
-import passport from 'passport';
+import nextConnect from 'next-connect'
+import passport from 'passport'
 import { auths, database } from '@api-lib/middlewares'
 
 const handler = nextConnect();

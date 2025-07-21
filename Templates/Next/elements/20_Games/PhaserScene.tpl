@@ -12,6 +12,11 @@ options:
     display: Scene Name
     type: text
     options: ''
+  - name: ExtraProperties
+    display: Extra Properties
+    type: text
+    options: ''
+    advanced: true
 childs:
   - name: Preload
     element: PhaserSceneFunction
@@ -39,13 +44,19 @@ import Phaser from 'phaser'
 {% endfor %}
 
 export default class {{ sceneName }} extends Phaser.Scene {
+  {% if element.values.ExtraProperties %}
+    {{ element.values.ExtraProperties }}:any
+  {% endif %}
   {% for delay in delayed %}
     {% for specificDelay in delay.variableDeclarations %}
       {{ specificDelay }}
     {% endfor %}
   {% endfor %}
-  constructor() {
+  constructor({% if element.values.ExtraProperties %}{{ element.values.ExtraProperties }}{% endif %}) {
     super({ key: '{{ sceneName }}' })
+    {% if element.values.ExtraProperties %}
+      this.{{ element.values.ExtraProperties }} = {{ element.values.ExtraProperties }}
+    {% endif %}
   }
 	{{ content | raw }}
 }

@@ -21,6 +21,7 @@ options:
         ['Scale','Scale'],
         ['ScrollFactor','Scroll Factor'],
         ['Size','Size'],
+        ['Rotation','Rotation'],
         ['Text','Text'],
         ['TintFill','Tint Fill'],
         ['removeFromDisplayList','Remove From Display List']
@@ -56,7 +57,7 @@ options:
     type: text
     settings:
       propertyCondition: objectType
-      condition: Depth,Scale,Alpha,Text
+      condition: Depth,Scale,Alpha,Rotation,Text
   - name: color
     display: Color
     type: text

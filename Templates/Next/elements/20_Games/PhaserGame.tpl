@@ -47,8 +47,8 @@ options:
     display: GravityY
     type: text
     options: ''
-  - name: EditUseEffect
-    display: Edit useEffect
+  - name: ExtraProperties
+    display: Extra Properties
     type: code
     options: ''
     advanced: true
@@ -66,7 +66,10 @@ settings:
 {% set gamePath = '/game/Game_' ~ gameName %}
 {% set scenes = [] %}
 {% for child in element.children %}
-  {% set scenes = scenes|merge([child.values.name|default(child.unique_id) | friendly | capitalize ]) %}
+  {% set scenes = scenes|merge([{
+    name: child.values.name|default(child.unique_id) | friendly | capitalize,
+    props: child.values.ExtraProperties
+  }]) %}
 {% endfor %}
 {% set forget %}
   {% block baseGame %}
@@ -74,10 +77,10 @@ settings:
     import { Game } from 'phaser'
 
     {% for scn in scenes %}
-      import {{ scn }} from './Scenes/{{ scn }}'
+      import {{ scn.name }} from './Scenes/{{ scn.name }}'
     {% endfor %}
 
-    const PhaserPage = () => {
+    const PhaserPage = (props) => {
       const gameContainer = useRef<HTMLDivElement>(null)
 
       useEffect(() => {
@@ -93,7 +96,7 @@ settings:
             {% if element.values.Width %}width: {{ element.values.Width }},{% endif %}
             {% if element.values.Height %}height: {{ element.values.Height }},{% endif %}
             {% if element.values.Zoom %}zoom: {{ element.values.Zoom }},{% endif %}
-            scene: [{% for scene in scenes %}new {{ scene }}(),{% endfor %}],
+            scene: [{% for scene in scenes %}new {{ scene.name }}({{ scene.props }}),{% endfor %}],
             {% if element.values.PhysicsEngine %}
               physics: {
                 default: '{{ element.values.PhysicsEngine }}',
@@ -128,4 +131,4 @@ import dynamic from "next/dynamic"
 const {{ gameName }}WithoutSSR = dynamic(() => import('..{{ gamePath }}'), { ssr: false });
 {% endset %}
 {{ save_delayed('ph',ph) }}
-<{{ gameName }}WithoutSSR />
+<{{ gameName }}WithoutSSR {% if element.values.ExtraProperties %}{{ element.values.ExtraProperties }}{% endif %}/>

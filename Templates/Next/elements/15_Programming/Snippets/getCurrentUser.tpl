@@ -57,6 +57,8 @@ extraFiles:
     destination: '/src/api-lib/middlewares/session.tsx'
   - source: 'elements/99_ExtraFiles/990_dbAdded.tsx'
     destination: '/src/api-lib/db/auth.tsx'
+  - source: 'elements/99_ExtraFiles/986_authIndex.js'
+    destination: '/src/api/auth/index.js'
 */
 {% set table = element.values.table | tableData %}
 {% set userControlModel = (table.name | friendly) ~ 'Model' %}
