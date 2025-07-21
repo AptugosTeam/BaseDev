@@ -1,7 +1,5 @@
 /*
 path: emails.tsx
-completePath: >-
-  C:\Users\Usuario\Aptugo\BaseDev\Templates\Next\elements\Interact\email\emails.tsx
 keyPath: elements\Interact\email\emails.tsx
 unique_id: DtKksKg1
 */
@@ -44,7 +42,7 @@ export async function sendEmail(db, options) {
             html: html || text
         })
 
-        {% if element.values.emailLogs != 'none'}
+        {% if element.values.emailLogs != 'none' %}
             await db.collection('{{ tableName }}').insertOne({
                 to,
                 subject,
@@ -56,7 +54,7 @@ export async function sendEmail(db, options) {
 
         return { success: true, messageId: info.messageId }
     } catch (error) {
-        {% if element.values.emailLogs != 'none'}
+        {% if element.values.emailLogs != 'none' %}
         await db.collection('{{ tableName }}').insertOne({
             to,
             subject,
