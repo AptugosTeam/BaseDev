@@ -1,6 +1,6 @@
 /*
-path: IconsMaterialCommunity.tpl
-completePath: elements/Experimental/IconsMaterialCommunity.tpl
+path: Ionicons.tpl
+completePath: elements/Experimental/Ionicons.tpl
 unique_id: I0CNGO1m
 children: []
 icon: ico-image
@@ -26,12 +26,12 @@ settings:
     value: '"@expo/vector-icons": "13.0.0",'
 */
 {% set bpr %}
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 
 {% if element.values.icon %}
-  <MaterialCommunityIcons name="{{element.values.icon}}" {% if element.values.size %}size={ {{element.values.size}} } {% endif %} {% if element.values.color %}color={{element.values.color | textOrVariable}} {% endif %} 
+  <Ionicons name="{{element.values.icon}}" {% if element.values.size %}size={ {{element.values.size}} } {% endif %} {% if element.values.color %}color={{element.values.color | textOrVariable}} {% endif %} 
   {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
   />
 {% endif %}
