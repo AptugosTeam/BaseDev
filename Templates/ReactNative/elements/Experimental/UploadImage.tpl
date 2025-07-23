@@ -30,9 +30,6 @@ options:
     display: Disable
     type: text
     options: ''
-settings:
-  - name: Packages
-    value: '"expo-image-picker": "~15.0.5",'
 children: []
 */
 {% set AppJsonIos %}
