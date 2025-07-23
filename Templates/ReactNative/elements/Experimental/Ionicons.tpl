@@ -23,7 +23,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"@expo/vector-icons": "13.0.0",'
+    value: '"@expo/vector-icons": "^14.0.3",'
 */
 {% set bpr %}
 import { Ionicons } from '@expo/vector-icons'
@@ -31,7 +31,7 @@ import { Ionicons } from '@expo/vector-icons'
 {{ save_delayed('bpr',bpr)}}
 
 {% if element.values.icon %}
-  <Ionicons name="{{element.values.icon}}" {% if element.values.size %}size={ {{element.values.size}} } {% endif %} {% if element.values.color %}color={{element.values.color | textOrVariable}} {% endif %} 
+  <Ionicons name={{element.values.icon | textOrVariable }} {% if element.values.size %}size={ {{element.values.size}} } {% endif %} {% if element.values.color %}color={{element.values.color | textOrVariable}} {% endif %} 
   {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
   />
 {% endif %}
