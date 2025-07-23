@@ -38,10 +38,6 @@ unique_id: i1kD8rN4
     "web": {
       "favicon": "./assets/img/favicon.png"
     },
-    "packagerOpts": {
-      "config": "metro.config.js",
-      "sourceExts": ["js", "jsx", "scss", "sass"]
-    },
     "scheme": "{{ insert_setting('androidPackage')|default(application.settings.name | lower | friendly) }}",
     "plugins": [
       {{ insert_setting('AppJsonPlugins') | raw }}
@@ -49,7 +45,7 @@ unique_id: i1kD8rN4
         "expo-build-properties",
         {
           "ios": {
-            "deploymentTarget": "13.4"
+            "deploymentTarget": "15.1"
           }
         }
       ],
