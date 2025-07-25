@@ -206,7 +206,7 @@ children: []
       {% endif %}
       outlineColor={ {{ element.values.outlineColor|default('transparent') | textOrVariable }}}
       activeOutlineColor={ {{ element.values.activeOutlineColor|default('#3A528A') | textOrVariable }}}
-      {% if element.values.textColor %}textColor={ {{ element.values.textColor | textOrVariable }}}{% endif %}
+      {% if element.values.textColor %}textColor={{ element.values.textColor | textOrVariable }}{% endif %}
       {% if element.values.value %}value={{ element.values.value }}{% endif %}
       {% if element.values.onChange %}onChangeText={(text) => {
         {{ element.values.onChange | replace({ '.target.value': '' }) }} }
@@ -218,7 +218,7 @@ children: []
       {% if element.values.activeUnderlineColor %}activeUnderlineColor={ {{ element.values.activeUnderlineColor | textOrVariable }}}{% endif %}
       {% if element.values.placeholderTextColor %}placeholderTextColor={{ element.values.placeholderTextColor | textOrVariable }}{% endif %}
       {% if element.values.selectionColor %}selectionColor={ {{ element.values.selectionColor | textOrVariable }} }{% endif %}
-      {% if element.values.cursorColor %}cursorColor={ {{ element.values.cursorColor | textOrVariable }} }{% endif %}
+      {% if element.values.cursorColor %}cursorColor={{ element.values.cursorColor | textOrVariable }}{% endif %}
       {% if element.values.leftIcon and element.values.leftIcon != 'none' %}
       left={<TextInput.Icon {% if element.values.iconColor %}iconColor={{ element.values.iconColor | textOrVariable }} {% elseif element.values.placeholderTextColor %}iconColor={{ element.values.placeholderTextColor | textOrVariable }}{% endif%}
       {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %} {% if element.values.className %}style={ {{ element.values.className ~ 'LeftIcon' }} }{% endif %} icon='{{element.values.leftIcon}}' />}{% endif %}
