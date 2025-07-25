@@ -216,7 +216,7 @@ children: []
       {% if element.values.keyboardType %}keyboardType={{ element.values.keyboardType | textOrVariable }}{% endif %}
       {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
       {% if element.values.activeUnderlineColor %}activeUnderlineColor={ {{ element.values.activeUnderlineColor | textOrVariable }}}{% endif %}
-      {% if element.values.placeholderTextColor %}placeholderTextColor={ {{ element.values.placeholderTextColor | textOrVariable }}}{% endif %}
+      {% if element.values.placeholderTextColor %}placeholderTextColor={{ element.values.placeholderTextColor | textOrVariable }}{% endif %}
       {% if element.values.selectionColor %}selectionColor={ {{ element.values.selectionColor | textOrVariable }} }{% endif %}
       {% if element.values.cursorColor %}cursorColor={ {{ element.values.cursorColor | textOrVariable }} }{% endif %}
       {% if element.values.leftIcon and element.values.leftIcon != 'none' %}
