@@ -242,7 +242,14 @@ import InputAdornment from '@mui/material/InputAdornment'
       {% if element.values.nameTA %}name={{ element.values.nameTA | textOrVariable }}{% endif %}
     {% endif %}
     {% if element.values.type != 'textarea' and element.values.type != 'numeric' %}
-      type="{{ element.values.type|default('text') }}"
+      {% if element.values.type == 'date' 
+       and element.values.placeholder 
+       and element.values.onFocus 
+       and element.values.onBlur %}  
+        type="text"
+      {% else %}
+        type="{{ element.values.type|default('text') }}"
+      {% endif %}
     {% endif %}
     {% if fullWidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
@@ -260,3 +267,4 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if element.values.ref %}ref={ {{ element.values.ref }} }{% endif %} {# Agregar el atributo ref #}
   />
 {% endif %}
+
