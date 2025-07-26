@@ -4,7 +4,7 @@ type: file
 unique_id: qgwpCNG
 settings:
   - name: Packages
-    value: '"@react-native-async-storage/async-storage": "1.18.2", "expo-web-browser": "~12.3.2", "expo-auth-session": "~5.0.2",'
+    value: '"expo-web-browser": "~12.3.2", "expo-auth-session": "~5.0.2",'
 options:
   - name: varUserInfo
     display: Name Variable userInfo

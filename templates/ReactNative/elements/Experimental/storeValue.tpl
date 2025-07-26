@@ -4,9 +4,6 @@ type: file
 unique_id: storevalue
 icon: ico-field
 helpText: Store a value
-settings:
-  - name: Packages
-    value: '"@react-native-async-storage/async-storage": "1.18.2",'
 options:
   - name: variableName
     display: Name
