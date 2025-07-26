@@ -24,6 +24,7 @@ unique_id: GFoENpEW
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
     "@react-native/babel-preset": "^0.79.0",
+    "@react-native-async-storage/async-storage": "2.1.2",
     "@reduxjs/toolkit": "^2.8.2",
     "axios": "^1.7.2",
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
