@@ -55,7 +55,7 @@ import AuthService from '@services/auth.service'
 
 {% if element.values.variableStore %}
 const {{ storeName }} = {% if element.values.await %}await{% endif %} AuthService.register({{ element.values.Data }})
-    if (response) {
+    if ({{ storeName }}) {
       {{ content | raw }}
       {% if not element.values.disableRedirect %}
       navigation.replace('{{ (element.values.OnSuccess | elementData).path }}')
