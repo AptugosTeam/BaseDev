@@ -19,6 +19,10 @@ options:
     display: Catch Content
     type: code
     options: ''
+  - name: finallyContent
+    display: Finally Content
+    type: code
+    options: ''
 children: []
 */
 try {
@@ -28,4 +32,6 @@ try {
   console.{{ element.values.debugType|default('log') }}('{{ element.values.messageError }}', e)
   {% endif %}
   {{ element.values.catchContent | raw }}
-}
+}{% if element.values.finallyContent %} finally {
+  {{ element.values.finallyContent | raw }}
+}{% endif %}
