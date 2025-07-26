@@ -12,47 +12,39 @@ import baseClasses from '@components/Themes/layout.module.scss'
   {% endfor %}
 {% endfor %}
 
+
+{% for child in element.children %}
+  {% if child.value == 'componentBeforeRender' %} 
+    {{ child.rendered }}
+  {% endif %}
+{% endfor %}
+
 const AptugoComponent: FunctionComponent<any> = (props) => {
   {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props?.properties || {}{% endif %}
 
-  {% set combinedContent = [] %}
-  {% set seenLines = {} %}
-  
-  {% set tempCombined = combinedContent %}
-  {% set tempSeen = seenLines %}
+  {% set headerContent = [] %}
   {% for child in element.children %}
     {% if child.value == 'componentHeader' %}
-      {% set lines = child.rendered|split("\n") %}
-      {% for line in lines %}
-        {% set trimmedLine = line|trim %}
-        {% if trimmedLine != "" and (trimmedLine not in tempSeen) %}
-          {% set tempCombined = tempCombined|merge([trimmedLine]) %}
-          {% set tempSeen = tempSeen|merge({ (trimmedLine): true }) %}
-        {% endif %}
-      {% endfor %}
+      {% set trimmedContent = child.rendered|trim %}
+      {% if trimmedContent != "" %}
+        {% set headerContent = headerContent|merge([trimmedContent]) %}
+      {% endif %}
     {% endif %}
   {% endfor %}
-  {% set combinedContent = tempCombined %}
-  {% set seenLines = tempSeen %}
 
-  {% set tempCombined = combinedContent %}
-  {% set tempSeen = seenLines %}
+  {% set delayedContent = [] %}
   {% for delay in delayed %}
     {% for specificDelay in delay.ph %}
-      {% set lines = specificDelay|split("\n") %}
-      {% for line in lines %}
-        {% set trimmedLine = line|trim %}
-        {% if trimmedLine != "" and (trimmedLine not in tempSeen) %}
-          {% set tempCombined = tempCombined|merge([trimmedLine]) %}
-          {% set tempSeen = tempSeen|merge({ (trimmedLine): true }) %}
-        {% endif %}
-      {% endfor %}
+      {% set trimmedContent = specificDelay|trim %}
+      {% if trimmedContent != "" %}
+        {% set delayedContent = delayedContent|merge([trimmedContent]) %}
+      {% endif %}
     {% endfor %}
   {% endfor %}
-  {% set combinedContent = tempCombined %}
-  {% set seenLines = tempSeen %}
+
+  {% set combinedContent = headerContent|merge(delayedContent) %}
   
-  {{ combinedContent|join("\n")|raw }}
+  {{ combinedContent|reverse|join("\n\n")|raw }}
   
 
   return (<React.Fragment>
@@ -63,5 +55,11 @@ const AptugoComponent: FunctionComponent<any> = (props) => {
   {% endfor %}
   </React.Fragment>)
 }
+
+{% for child in element.children %}
+{% if child.value == 'componentAfterRender' %} 
+  {{ child.rendered }}
+{% endif %}
+{% endfor %}
 
 export default AptugoComponent
