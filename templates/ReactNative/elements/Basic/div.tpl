@@ -44,6 +44,10 @@ options:
   - name: autoAdjust
     display: Automatically Adjust when keyboard insets
     type: checkbox
+  - name: useAnimated
+    display: Use Animated
+    type: checkbox
+    options: ''
   - name: onScroll
     display: On Scroll
     type: code
@@ -69,15 +73,26 @@ helpText: Basic HTML Div element
 import { View } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-{% if element.values.scrollable %}
+{% if element.values.scrollable and not element.values.useAnimated %}
+{% set bpr %}
+import { View, ScrollView } from 'react-native'
+{% endset %}
+{{ save_delayed('bpr',bpr)}}
+{% endif %}
+{% if element.values.useAnimated %}
 {% set bpr %}
 import { Animated } from 'react-native'
-import { ScrollView} from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% endif %}
 {% set tag = 'View' %}
-{% if element.values.scrollable %}{% set tag = 'ScrollView' %}{% endif %}
+{% if element.values.scrollable and element.values.useAnimated %}
+  {% set tag = 'Animated.ScrollView' %}
+{% elseif element.values.scrollable %}
+  {% set tag = 'ScrollView' %}
+{% elseif element.values.useAnimated %}
+  {% set tag = 'Animated.View' %}
+{% endif %}
 <{{ tag }}
   {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
   {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
