@@ -29,6 +29,7 @@ children: []
 {% set singleName = table.singleName | friendly | lower %}
 {% set mainRouteCode = '' %}
 {% set externalRouteFiles = [] %}
+{% set mainRouteImports = '' %} 
 
 {# Create Routes #}
 {% for route in table.definedRoutes %}
@@ -37,6 +38,7 @@ children: []
     {% set routePath = parse(route.route_path, { route: route, table: table }) %}
     {% set routeCode %} 
       // {{ route.route_name }}
+      {% if route.route_imports %}{% set mainRouteImports = mainRouteImports ~ route.route_imports ~ '\n' %}{% endif %}
       {% if route.route_template != 'source' %}
         handler.{{ route.route_method }}({% include includeTemplate('Aptugo Routes' ~ route.route_template ~ '.tpl') %})
       {% else %}
@@ -81,6 +83,7 @@ import nc from "next-connect"
 import mongoose from 'mongoose'
 import multer from 'multer'
 import parseBodyMiddleware from '@lib/parseBodyMiddleware'
+{{ mainRouteImports }}
 
 {{ insert_setting(singleName ~ '_File_Start') |raw }}
 
