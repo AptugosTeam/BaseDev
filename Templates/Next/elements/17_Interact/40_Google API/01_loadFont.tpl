@@ -9,7 +9,7 @@ options:
   - name: font
     display: Font
     type: dropdown
-    options: ['Assistant','Fira_Sans','Merriweather','Inria_Serif','Inter','Lobster','Outfit']
+    options: ['Assistant','Fira_Sans','Merriweather','Inria_Serif','Inter','Lobster','Outfit','Lato','Montserrat']
   - name: weight300
     display: Weight - 300
     type: checkbox
