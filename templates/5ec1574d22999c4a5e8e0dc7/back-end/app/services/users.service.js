@@ -143,23 +143,32 @@ async function authenticate({ email, password, model, passwordField, populate, o
     passwordField = 'Password'
   }
   return new Promise(async function (resolve, reject) {
-    if (!email || !password) reject({ message: errorMessages[lang].wrong })
+    if (!email || !password) return reject({ message: errorMessages[lang].wrong })
 
-    email = email.toLowerCase();
+    email = email.toLowerCase()
 
-    let user = await model.findOne({ Email: email })
+    let user = await model.findOne({
+      $or: [
+        { Email: email },
+        { email: email }
+      ]
+    })
 
     if (!user) {
-      // <-- Cambio: Si no encontramos con minúsculas, buscamos con la versión original (compatibilidad con datos antiguos)
-      const userWithOriginalEmail = await model.findOne({ Email: { $regex: `^${email}$`, $options: 'i' } });
+      const userWithOriginalEmail = await model.findOne({
+        $or: [
+          { Email: { $regex: `^${email}$`, $options: 'i' } },
+          { email: { $regex: `^${email}$`, $options: 'i' } }
+        ]
+      })
 
       if (userWithOriginalEmail) {
-        // <-- Cambio: Si el usuario existe con mayúsculas, lo actualizamos en la base de datos a minúsculas
+        const updateField = userWithOriginalEmail.Email !== undefined ? 'Email' : 'email'
         await model.updateOne(
           { _id: userWithOriginalEmail._id },
-          { $set: { Email: email } }
+          { $set: { [updateField]: email } }
         );
-        user = userWithOriginalEmail; // Asignamos el usuario encontrado
+        user = userWithOriginalEmail
       }
     }
 
