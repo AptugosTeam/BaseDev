@@ -33,12 +33,12 @@ settings:
 [
   "expo-font",
   {
-    "fonts": {
+    "fonts": [
         {% set fontArray = element.values.font|split(',') %}
         {% for font in fontArray %}
-        '{{font | removeExtension}}': './assets/{{ font|trim }}'{% if not loop.last %},{% endif %}
+        './assets/{{ font|trim }}'{% if not loop.last %},{% endif %}
         {% endfor %}
-    }
+    ]
   }
 ],
 {% endset %}
