@@ -17,7 +17,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"expo-linear-gradient": "~12.3.0",'
+    value: '"expo-linear-gradient": "~14.1.5",'
 */
 {% set bpr %}
 import { LinearGradient } from 'expo-linear-gradient';
