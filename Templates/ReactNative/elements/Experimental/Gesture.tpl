@@ -43,7 +43,7 @@ import { runOnJS } from 'react-native-reanimated'
 {{ save_delayed('bpr', bpr) }}
 
 {% set bpr %}
-import { GestureDetector, Gesture } from 'react-native-gesture-handler'
+import { Gesture } from 'react-native-gesture-handler'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 
