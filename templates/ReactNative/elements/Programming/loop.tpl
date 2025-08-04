@@ -22,10 +22,19 @@ options:
         aptugo.variables.setElementVariable(element.unique_id, finalVarsToAdd);
       active: true
   - name: variablename
-    display: Variable name in which each item will be put in
+    display: Variable name for each item
     type: text
     settings:
       default: 'item'
+  - name: addReturnWrapper
+    display: Add return and Fragment wrapper
+    type: checkbox
+    settings:
+      default: true
+  - name: code
+    display: Code
+    type: text
+    options: ''
   - name: filtersource
     display: Condition to filter source values
     type: text
@@ -35,21 +44,21 @@ options:
     type: function
     options: ''
     advanced: true
-  - name: code
-    display: Code
-    type: text
-    options: ''
   
 children: []
 */
+{# Logic to prepare the array filtering #}
+{% set addExtra = '' %}
 {% if element.values.filtersource %}
 {% set addExtra = '.filter(tmp => tmp.' ~ element.values.filtersource ~ ')' %}
+{% elseif element.values.filterFunction%}
+{% set addExtra = '.filter(' ~ element.values.filterFunction ~ ')' %}
 {% endif %}
-{% if not element.values.filtersource and element.values.filterFunction%}
-{% set addExtra = '.filter(tmp => ' ~ element.values.filterFunction ~ ')' %}
-{% endif %}
-{ {{ element.values.variable }}{{ addExtra }}.map(({{ element.values.variablename | default('item') }},index) => {
-{% if element.values.code %}{{ element.values.code }}
-{% endif %}
+{ {{ element.values.variable }}{{ addExtra }}.map(({{ element.values.variablename | default('item') }}, index) => {
+    {% if element.values.code %}{{ element.values.code }}{% endif %}
+    {% if element.values.addReturnWrapper is not defined or element.values.addReturnWrapper %}
     return <React.Fragment key={index}>{{ content | raw }}</React.Fragment>
+    {% else %}
+    {{ content | raw }}
+    {% endif %}
 })}
