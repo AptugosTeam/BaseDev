@@ -19,6 +19,10 @@ options:
     display: ID
     type: text
     options: ''
+  - name: key
+    display: Key
+    type: text
+    options: ''
   - name: onclick
     display: On Click
     type: text
@@ -45,7 +49,11 @@ options:
     display: Automatically Adjust when keyboard insets
     type: checkbox
   - name: useAnimated
-    display: Use Animated
+    display: Use Animated (from react-native)
+    type: checkbox
+    options: ''
+  - name: useReanimated
+    display: Use Reanimated Animated
     type: checkbox
     options: ''
   - name: onScroll
@@ -73,29 +81,45 @@ helpText: Basic HTML Div element
 import { View } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-{% if element.values.scrollable and not element.values.useAnimated %}
+{% if element.values.scrollable and not (element.values.useAnimated or element.values.useReanimated) %}
 {% set bpr %}
-import { View, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% endif %}
 {% if element.values.useAnimated %}
 {% set bpr %}
-import { Animated } from 'react-native'
+import { Animated as RNAnimated } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% endif %}
+{% if element.values.useReanimated %}
+{% set bpr %}
+import Reanimated from 'react-native-reanimated'
+{% endset %}
+{{ save_delayed('bpr',bpr)}}
+{% endif %}
+
 {% set tag = 'View' %}
-{% if element.values.scrollable and element.values.useAnimated %}
-  {% set tag = 'Animated.ScrollView' %}
+{% if element.values.useReanimated %}
+  {% if element.values.scrollable %}
+    {% set tag = 'Reanimated.ScrollView' %}
+  {% else %}
+    {% set tag = 'Reanimated.View' %}
+  {% endif %}
+{% elseif element.values.useAnimated %}
+  {% if element.values.scrollable %}
+    {% set tag = 'RNAnimated.ScrollView' %}
+  {% else %}
+    {% set tag = 'RNAnimated.View' %}
+  {% endif %}
 {% elseif element.values.scrollable %}
   {% set tag = 'ScrollView' %}
-{% elseif element.values.useAnimated %}
-  {% set tag = 'Animated.View' %}
 {% endif %}
 <{{ tag }}
   {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
   {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
+  {% if element.values.key %}key={ {{element.values.key}} }{% endif %}
   {% if element.values.class %}style={ {{element.values.class}} }{% endif %}
   {% if element.values.onclick %}onTouchStart={(e) => {{element.values.onclick}} }{% endif %}
   {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
