@@ -55,28 +55,40 @@ import { Gesture } from 'react-native-gesture-handler'
 {% if element.values.priority %}
 {% set ph %}
 const {{ element.values.functionName }} = {{ gestureBase }}
-  .onStart(() => {
-    {{ element.values.onStart | default('// Code to execute when the gesture starts') }}
-  })
-  .onUpdate((event) => {
-    {{ element.values.onUpdate | default('// Code to execute when the gesture updates') }}
-  })
-  .onEnd((event) => {
-    {{ element.values.onEnd | default('// Code to execute when the gesture ends') }}
-  })
+  {% if element.values.onStart %}
+    .onStart(() => {
+      {{ element.values.onStart }}
+    })
+  {% endif %}
+  {% if element.values.onUpdate %}
+    .onUpdate((event) => {
+      {{ element.values.onUpdate }}
+    })
+  {% endif %}
+  {% if element.values.onEnd %}
+    .onEnd((event) => {
+      {{ element.values.onEnd }}
+    })
+  {% endif %}
   {% if enabled %}.enabled({{ enabled }}){% endif %}
 {% endset %}
 {{ save_delayed('ph',ph,1) }}
 {% else %}
 const {{ element.values.functionName }} = {{ gestureBase }}
-  .onStart(() => {
-    {{ element.values.onStart | default('// Code to execute when the gesture starts') }}
-  })
-  .onUpdate((event) => {
-    {{ element.values.onUpdate | default('// Code to execute when the gesture updates') }}
-  })
-  .onEnd((event) => {
-    {{ element.values.onEnd | default('// Code to execute when the gesture ends') }}
-  })
+  {% if element.values.onStart %}
+    .onStart(() => {
+      {{ element.values.onStart }}
+    })
+  {% endif %}
+  {% if element.values.onUpdate %}
+    .onUpdate((event) => {
+      {{ element.values.onUpdate }}
+    })
+  {% endif %}
+  {% if element.values.onEnd %}
+    .onEnd((event) => {
+      {{ element.values.onEnd }}
+    })
+  {% endif %}
   {% if enabled %}.enabled({{ enabled }}){% endif %}
 {% endif %}
