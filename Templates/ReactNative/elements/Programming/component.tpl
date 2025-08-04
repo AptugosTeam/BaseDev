@@ -26,6 +26,11 @@ options:
   - name: useIt
     display: Also use it
     type: checkbox
+  - name: useForwardRef
+    display: Use ForwardRef
+    type: checkbox
+    settings:
+      default: false
 extraFiles:
   - source: 'elements/Programming/baseComponent.tsx'
     destination: 'front-end/components/{{ element.values.name | friendly }}/index.tsx'
