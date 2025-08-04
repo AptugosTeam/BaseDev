@@ -4,9 +4,6 @@ type: file
 unique_id: yZDJR2J2
 icon: ico-field
 sourceType: javascript
-settings:
-  - name: Packages
-    value: '"@react-native-async-storage/async-storage": "1.18.2",'
 options:
   - name: Email
     display: Email variable
