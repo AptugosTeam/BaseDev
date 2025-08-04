@@ -23,11 +23,20 @@ options:
     display: Login Options
     type: text
     advanced: true
+  - name: enableRedirect
+    display: Enable Redirect?
+    type: checkbox
+    settings:
+      default: true
   - name: OnSuccess
     display: On Successful login
     type: dropdown
     options: return aptugo.pageUtils.getAllPages()
     required: true
+    settings:
+      propertyCondition: enableRedirect
+      conditionNegate: true
+      condition: false
   - name: variableStore
     display: store in variable?
     type: checkbox
@@ -56,6 +65,7 @@ import AuthService from '@services/auth.service'
 {{ save_delayed('bpr',bpr)}}
 
 {% set storeName = element.values.variableStoreName %}
+{% set enableRedirect = element.values.enableRedirect != false ? true : false %}
 
 {% if element.values.variableStore %}
 const {{ storeName }} = {% if element.values.await %}await{% endif %} AuthService.login(
@@ -66,7 +76,7 @@ const {{ storeName }} = {% if element.values.await %}await{% endif %} AuthServic
 )
     if ({{ storeName }}) {
       {{ content | raw }}
-      navigation.replace('{{ (element.values.OnSuccess | elementData).path }}')
+      {% if enableRedirect %}navigation.replace('{{ (element.values.OnSuccess | elementData).path }}'){% endif %}
     }
 {% else %}
 {% if element.values.await %}await{% endif %} AuthService.login(
@@ -76,7 +86,7 @@ const {{ storeName }} = {% if element.values.await %}await{% endif %} AuthServic
   {% if element.values.options %}{ {{ element.values.options }} }{% endif %}
 ).then(result => {
     {{ content | raw }}
-    navigation.replace('{{ (element.values.OnSuccess | elementData).path }}')
+    {% if enableRedirect %}navigation.replace('{{ (element.values.OnSuccess | elementData).path }}'){% endif %}
 }).catch(error => {
     {{ element.values.CustomError | raw }}
 })
