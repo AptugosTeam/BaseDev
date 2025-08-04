@@ -49,7 +49,9 @@ import baseClasses from '@components/Themes/layout.module.scss'
 {% if element.values.useForwardRef %}
 
 const AptugoComponent = forwardRef<{{ element.values.refType | default('any') }}, {{ element.values.propsType | default('any') }}>((props, ref) => {
-  {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props?.properties || {}{% endif %}
+  {% if element.values.props %}
+  const { {{ element.values.keyprops|default(element.values.props) }} } = { ...(props.properties || {}), ...props }
+  {% endif %}
   
   {{ combinedContent|reverse|join("\n\n")|raw }}
 
@@ -65,7 +67,9 @@ const AptugoComponent = forwardRef<{{ element.values.refType | default('any') }}
 {% else %}
 
 const AptugoComponent: FunctionComponent<any> = (props) => {
-  {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props?.properties || {}{% endif %}
+  {% if element.values.props %}
+  const { {{ element.values.keyprops|default(element.values.props) }} } = { ...(props.properties || {}), ...props }
+  {% endif %}
   
   {{ combinedContent|reverse|join("\n\n")|raw }}
   

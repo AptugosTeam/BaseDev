@@ -11,7 +11,7 @@ options:
     display: Props 
     type: text
   - name: keyprops
-    display: Prop Keys (optional) 
+    display: Prop Keys (outside properties)
     type: text
   - name: changePath
     display: Change Path (optional) 
@@ -28,4 +28,7 @@ import {{ element.values.name | friendly }} from '@components/{{ element.values
 {% endif %}
 {% endset %}
 {{ save_delayed('bpr', bpr)}}
-<{{ element.values.name | friendly }} {% if element.values.props %}properties={ { {{ element.values.props }} } }{% endif %}/>
+<{{ element.values.name | friendly }}
+  {% if element.values.props %}properties={ { {{ element.values.props }} } }{% endif %}
+  {% if element.values.keyprops %}{{ element.values.keyprops }}{% endif %}
+/>
