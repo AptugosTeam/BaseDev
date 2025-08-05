@@ -64,6 +64,11 @@ options:
     advanced: true
     settings:
       default: console.error(error)
+  - name: finally
+    display: finally
+    type: function
+    options: ''
+    advanced: true
 sourceType: javascript
 children: []
 */
@@ -104,4 +109,10 @@ import axios from 'axios'
   .catch(error => {
     {{ onError | raw }}
   })
+{% if element.values.finally %}
+  .finally(()=> {
+    {{ element.values.finally | raw }}
+  })
+{% endif %}
+
 {% endif %}
