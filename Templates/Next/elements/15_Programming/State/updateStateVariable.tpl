@@ -17,9 +17,7 @@ options:
 children: []
 */
 {% if content %}
-  set{{ element.values.variable }}((oldvalues) => {
-    {{ content | raw }}
-  })
+  set{{ element.values.variable }}({{ content | raw }})
 {% else %}
   set{{ element.values.variable }}({{ element.values.newvalue}})
 {% endif %}

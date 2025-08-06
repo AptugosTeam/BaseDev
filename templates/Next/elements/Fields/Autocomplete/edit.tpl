@@ -9,6 +9,7 @@ settings:
     value: '"react-select": "^5.4.0",'
 children: []
 */
+{% set columnName = field.column_name | friendly %}
 {% set fieldTable = (field | fieldData).table %}
 {% set tableName = fieldTable.name | friendly %}
 {% set fieldValue = tableName ~ 'data.' ~ theField.column_name | friendly %}
@@ -39,7 +40,6 @@ children: []
     {% set referencekey = '_id' %}
   {% endif %}
   {% set referencedTable = referencedField.table.name | friendly | capitalize %}
-  {% set columnName = field.column_name | friendly %}
   {% set bpr %}
   import Autocomplete from '@components/Autocomplete'
   {% endset %}
