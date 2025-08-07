@@ -45,6 +45,15 @@ options:
     type: checkbox
     settings:
       default: false
+  - name: acceptOnlyPDF
+    display: Accept only PDF files?
+    type: checkbox
+    settings:
+      default: false  
+  - name: ref
+    display: Use Reference
+    type: text
+    options: ''
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
@@ -61,7 +70,12 @@ import FileUpload from '../components/FileUpload/FileUpload'
     {% if element.values.resize and element.values.resizeWidth %}
         resizeWidth={ Number( {{ element.values.resizeWidth | default(800) }}) }
     {% endif %}
-    {% if element.values.accept %}
-        accept={ "*" }
+    {% if element.values.acceptOnlyPDF %}
+        accept="application/pdf"
+    {% elseif element.values.accept %}
+        accept="*"
     {% endif %}
+    {% if element.values.ref %}
+      ref={ {{element.values.ref}} }
+  {% endif %}
 />
