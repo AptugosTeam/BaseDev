@@ -54,9 +54,21 @@ options:
   - name: showsHorizontalScrollIndicator
     display: Disabled horizontal scroll indicators?
     type: checkbox
+  - name: pagingEnabled
+    display: Enable paging?
+    type: checkbox
+    options: ''
+  - name: onViewableItemsChanged
+    display: On Viewable Items Changed
+    type: code
+    options: ''
+  - name: viewabilityConfig
+    display: Viewability Config
+    type: code
+    options: ''
 
 children: []
-helpText: Basic HTML Div element
+helpText: Displays a scrollable list of data.
 */
 {% set bpr %}
 import { FlatList } from 'react-native'
@@ -69,6 +81,9 @@ import { FlatList } from 'react-native'
   {% if element.values.horizontal %}horizontal{% endif %}
   {% if element.values.data %}data={ {{element.values.data}} }{% endif %}
   {% if element.values.showsHorizontalScrollIndicator %}showsHorizontalScrollIndicator={false} {% endif %}
+  {% if element.values.pagingEnabled %}pagingEnabled{% endif %}
+  {% if element.values.onViewableItemsChanged %}onViewableItemsChanged={ {{element.values.onViewableItemsChanged | functionOrCall }} }{% endif %}
+  {% if element.values.viewabilityConfig %}viewabilityConfig={ {{element.values.viewabilityConfig}} }{% endif %}
   {% if element.children %}renderItem={({{element.values.parameter | default('item')}}) => {
     {% if element.values.renderItemCode %}
       {{ element.values.renderItemCode | raw }}
