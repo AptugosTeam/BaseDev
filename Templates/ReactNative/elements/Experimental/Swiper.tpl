@@ -14,7 +14,7 @@ options:
     type: checkbox
     options: ''
   - name: loop
-    display: Loop Slides
+    display: Disable Loop Slides
     type: checkbox
     options: ''
   - name: dot
@@ -24,6 +24,10 @@ options:
   - name: activeDot
     display: Active Dot Style Component
     type: code
+    options: ''
+  - name: renderPagination
+    display: Render Pagination
+    type: text
     options: ''
   - name: onIndexChanged
     display: On Index Changed
@@ -55,11 +59,14 @@ settings:
 {{ save_delayed('bpr',bpr) }}
 <Swiper
   {% if element.values.style %}style={ {{ element.values.style }} }{% endif %}
-  {% if element.values.loop %}loop={true}{% endif %}
+  {% if element.values.loop %}loop={false}{% endif %}
   {% if element.values.dot %}dot={ {{ element.values.dot }} }{% else %}dot={<View style={theme.dot} />}{% endif %}
   {% if element.values.activeDot %}activeDot={ {{ element.values.activeDot }} }{% else %}activeDot={<View style={theme.activeDot} />}{% endif %}
+  {% if element.values.renderPagination %}renderPagination={ {{ element.values.renderPagination }} }{% endif %}
   {% if element.values.onIndexChanged %}
-    onIndexChanged={ {{ element.values.onIndexChanged | functionOrCall }} }
+    onIndexChanged={(index) => {
+    {{ element.values.onIndexChanged }}
+    }}
   {% endif %}
   {% if element.values.showsPagination %}showsPagination={true}{% endif %}
   {% if element.values.autoplay %}autoplay={true}{% endif %}
