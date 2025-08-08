@@ -2,7 +2,8 @@
 path: Swiper.tpl
 type: file
 unique_id: rDl8cgP7
-icon: ico-carousel
+icon: f:Swiper.svg
+helpText: Displays a swipeable carousel using react-native-swiper.
 options:
   - name: style
     display: Style
@@ -44,9 +45,9 @@ options:
     display: Horizontal
     type: checkbox
     options: ''
-sourceType: javascript
-children: []
-helpText: Displays a swipeable carousel using react-native-swiper.
+settings:
+  - name: Packages
+    value: '"react-native-swiper": "^1.6.0",'
 */
 {% set bpr %}
   import Swiper from 'react-native-swiper'
