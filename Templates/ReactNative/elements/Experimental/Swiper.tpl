@@ -60,8 +60,10 @@ settings:
 <Swiper
   {% if element.values.style %}style={ {{ element.values.style }} }{% endif %}
   {% if element.values.loop %}loop={false}{% endif %}
-  {% if element.values.dot %}dot={ {{ element.values.dot }} }{% else %}dot={<View style={theme.dot} />}{% endif %}
-  {% if element.values.activeDot %}activeDot={ {{ element.values.activeDot }} }{% else %}activeDot={<View style={theme.activeDot} />}{% endif %}
+  {% if not element.values.renderPagination %}
+    {% if element.values.dot %}dot={ {{ element.values.dot }} }{% else %}dot={<View style={theme.dot} />}{% endif %}
+    {% if element.values.activeDot %}activeDot={ {{ element.values.activeDot }} }{% else %}activeDot={<View style={theme.activeDot} />}{% endif %}
+  {% endif %}
   {% if element.values.renderPagination %}renderPagination={ {{ element.values.renderPagination }} }{% endif %}
   {% if element.values.onIndexChanged %}
     onIndexChanged={(index) => {
