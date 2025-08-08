@@ -26,6 +26,11 @@ options:
     type: text
     settings:
       default: 'item'
+  - name: indexname
+    display: Variable name for index
+    type: text
+    settings:
+      default: 'index'
   - name: addReturnWrapper
     display: Add return and Fragment wrapper
     type: checkbox
@@ -54,10 +59,12 @@ children: []
 {% elseif element.values.filterFunction%}
 {% set addExtra = '.filter(' ~ element.values.filterFunction ~ ')' %}
 {% endif %}
-{ {{ element.values.variable }}{{ addExtra }}.map(({{ element.values.variablename | default('item') }}, index) => {
-    {% if element.values.code %}{{ element.values.code }}{% endif %}
+{ {{ element.values.variable }}{{ addExtra }}.map(({{ element.values.variablename | default('item') }}, {{ element.values.indexname | default('index') }}) => {
+    {% if element.values.code %}
+    {{ element.values.code }}
+    {% endif %}
     {% if element.values.addReturnWrapper is not defined or element.values.addReturnWrapper %}
-    return <React.Fragment key={index}>{{ content | raw }}</React.Fragment>
+    return <React.Fragment key={ {{ element.values.indexname | default('index') }} }>{{ content | raw }}</React.Fragment>
     {% else %}
     {{ content | raw }}
     {% endif %}
