@@ -6,7 +6,7 @@ usesDelays: [bpr,ph]
 delayContext: true
 options:
   - name: name
-    display: ComponentName
+    display: Component Name
     type: text
     options: ''
     settings:
@@ -17,6 +17,14 @@ options:
           aptugo.variables.setComponent(element.values.name, `Defined in ${aptugo.plain[page].name}`)
         }
       active: true
+  - name: folder
+    display: Folder (optional)
+    type: text
+    options: ''
+  - name: filename
+    display: Filename (optional)
+    type: text
+    options: ''
   - name: props
     display: Props 
     type: text
@@ -28,7 +36,8 @@ options:
     type: checkbox
 extraFiles:
   - source: 'elements/Programming/baseComponent.tsx'
-    destination: 'front-end/components/{{ element.values.name | friendly }}/index.tsx'
+    destination: >-
+      front-end/components/{% if element.values.folder %}{{ element.values.folder }}{% else %}{{ element.values.name | friendly }}{% endif %}/{% if element.values.filename %}{{ element.values.filename }}{% else %}index.tsx{% endif %}
 childs:
   - name:  componentHeader
     element: componentHeader
