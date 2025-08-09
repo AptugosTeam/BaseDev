@@ -2,6 +2,7 @@
 path: svg.tpl
 type: file
 unique_id: svg123xyz
+helpText: Renders a customizable SVG component.
 options:
   - name: width
     display: Width
@@ -31,9 +32,9 @@ options:
     display: Preserve Aspect Ratio
     type: text
     options: ''
-sourceType: javascript
-children: []
-helpText: Renders a customizable SVG component.
+settings:
+  - name: Packages
+    value: '"react-native-svg": "13.9.0",'
 */
 {% set bpr %}
   import Svg, { Path } from 'react-native-svg'
