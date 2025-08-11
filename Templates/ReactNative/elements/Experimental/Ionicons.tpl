@@ -23,7 +23,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"@expo/vector-icons": "^14.0.3",'
+    value: '"@expo/vector-icons": "^14.1.0",'
 */
 {% set bpr %}
 import { Ionicons } from '@expo/vector-icons'
