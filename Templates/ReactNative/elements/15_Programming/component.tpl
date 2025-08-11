@@ -40,7 +40,7 @@ options:
     settings:
       default: false
 extraFiles:
-  - source: 'elements/Programming/baseComponent.tsx'
+  - source: 'elements/15_Programming/baseComponent.tsx'
     destination: >-
       front-end/components/{% if element.values.folder %}{{ element.values.folder }}{% else %}{{ element.values.name | friendly }}{% endif %}/{% if element.values.filename %}{{ element.values.filename }}{% else %}index.tsx{% endif %}
 childs:
