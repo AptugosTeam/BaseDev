@@ -21,6 +21,10 @@ options:
     display: Options
     type: text
     options: ''
+  - name: buttonStyle
+    display: Button Style
+    type: text
+    options: ''
   - name: dropdownStyle
     display: Dropdown Style
     type: text
@@ -50,8 +54,10 @@ import SelectDropdown from 'react-native-select-dropdown'
   {% if element.values.value %}defaultValue={{ element.values.value | textOrVariable }}{% endif %}
   {% if element.values.buttonText %}defaultButtonText={{ element.values.buttonText | textOrVariable }}{% endif %}
   data={ {{ element.values.options }} }
-  buttonStyle={theme.inputSelector}
-  buttonTextStyle={theme.inputSelectorText}
+  {% if element.values.buttonStyle %}
+    buttonStyle={ {{ element.values.buttonStyle }} }
+    buttonTextStyle={ {{ element.values.buttonStyle ~ 'Text' }} }
+  {% endif %}
   {% if element.values.onChange %}
   onSelect={(selectedItem) => {
     {{ element.values.onChange }}
