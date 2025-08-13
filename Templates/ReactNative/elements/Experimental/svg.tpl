@@ -34,7 +34,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-svg": "13.9.0",'
+    value: '"react-native-svg": "15.11.2",'
 */
 {% set bpr %}
   import Svg, { Path } from 'react-native-svg'
