@@ -155,6 +155,10 @@ options:
     settings:
       propertyCondition: useHelperText
       condition: true
+  - name: maxLength
+    display: Max Length
+    type: text
+    options: ''
 children: []
 */
 {% if element.values.useHelperText %}{% set useHelperText = true %}{% endif %}
@@ -219,6 +223,7 @@ children: []
       {% if element.values.placeholderTextColor %}placeholderTextColor={{ element.values.placeholderTextColor | textOrVariable }}{% endif %}
       {% if element.values.selectionColor %}selectionColor={ {{ element.values.selectionColor | textOrVariable }} }{% endif %}
       {% if element.values.cursorColor %}cursorColor={{ element.values.cursorColor | textOrVariable }}{% endif %}
+      {% if element.values.maxLength %}maxLength={ {{ element.values.maxLength }} }{% endif %}
       {% if element.values.leftIcon and element.values.leftIcon != 'none' %}
       left={<TextInput.Icon {% if element.values.iconColor %}iconColor={{ element.values.iconColor | textOrVariable }} {% elseif element.values.placeholderTextColor %}iconColor={{ element.values.placeholderTextColor | textOrVariable }}{% endif%}
       {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %} {% if element.values.className %}style={ {{ element.values.className ~ 'LeftIcon' }} }{% endif %} icon='{{element.values.leftIcon}}' />}{% endif %}
