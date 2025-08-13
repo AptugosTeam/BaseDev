@@ -137,7 +137,7 @@ import ReactPlayer from 'react-player'
       height='{{ element.values.height }}' 
     {% endif %}
     {% if element.values.onReady %}
-      onReady={ {{element.values.onReady}} }
+      onReady={() => {{element.values.onReady}} }
     {% endif %}
   />
 </div>
