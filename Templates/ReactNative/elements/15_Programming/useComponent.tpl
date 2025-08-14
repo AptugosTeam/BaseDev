@@ -12,6 +12,12 @@ options:
     type: text
     advanced: true
     options: ''
+  - name: isNamedImport
+    display: Use Named Import { }
+    type: checkbox
+    advanced: true
+    settings: 
+      default: false
   - name: props
     display: Props 
     type: text
@@ -27,11 +33,15 @@ options:
 */
 {% set bpr %}
 {% if element.values.importPath %}
-import {{ element.values.name | friendly }} from '{{ element.values.importPath }}'
+  {% if element.values.isNamedImport %}
+    import { {{ element.values.name | friendly }} } from '{{ element.values.importPath }}'
+  {% else %}
+    import {{ element.values.name | friendly }} from '{{ element.values.importPath }}'
+  {% endif %}
 {% elseif element.values.changePath %}
-import {{ element.values.name | friendly }} from '../{{ element.values.name | friendly }}'
+  import {{ element.values.name | friendly }} from '../{{ element.values.name | friendly }}'
 {% else %}
-import {{ element.values.name | friendly }} from '@components/{{ element.values.name | friendly }}'
+  import {{ element.values.name | friendly }} from '@components/{{ element.values.name | friendly }}'
 {% endif %}
 {% endset %}
 {{ save_delayed('bpr', bpr)}}
