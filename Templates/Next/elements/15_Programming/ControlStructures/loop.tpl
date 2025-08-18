@@ -12,17 +12,6 @@ options:
     display: Source Variable
     type: variable
     options: ''
-    settings:
-      aptugoOnLoad: |-
-        const allVariables = aptugo.variables.variables
-        const element = arguments[0];
-        const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;
-        const usesVariable = element.values.variable
-        const newLocalVarName = element.values.variablename || 'item'
-        const foundVariable = allVariables.find(thevar => thevar.name === usesVariable)
-        finalVarsToAdd = { [newLocalVarName]: foundVariable ? foundVariable.value : ''}
-        aptugo.variables.setElementVariable(element.unique_id, finalVarsToAdd);
-      active: true
   - name: variablename
     display: Variable name in which each item will be put in
     type: text
@@ -64,7 +53,7 @@ children: []
 {% set addExtra = '.filter(tmp => tmp.' ~ element.values.filtersource ~ ')' %}
 {% endif %}
 {% if not element.values.filtersource and element.values.filterFunction%}
-{% set addExtra = '.filter(tmp => ' ~ element.values.filterFunction ~ ')' %}
+  {% set addExtra = '.filter(tmp => ' ~ (element.values.filterFunction|functionOrCall) ~ ')' %}
 {% endif %}
 {% if element.values.sortsource %}
 {% set addExtra = addExtra ~ '.sort((a,b) => ' ~ element.values.sortsource ~ ')' %}

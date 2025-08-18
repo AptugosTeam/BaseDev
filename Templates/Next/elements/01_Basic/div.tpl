@@ -110,7 +110,7 @@ helpText: Basic HTML Div element
     } %}
   {% endif %}
   {% if element.values.onclick %}
-    onClick={(e) => {{element.values.onclick}} }
+    onClick={ {{ element.values.onclick | functionOrCall }} }
   {% endif %}
   {% if element.values.onMouseEnter %}
     onMouseEnter={() => {{element.values.onMouseEnter}} }

@@ -69,14 +69,14 @@ options:
 import { APIProvider, Map } from '@vis.gl/react-google-maps'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-{% include includeTemplate(['useState.tpl']) with { 'element': { 'values': { variableName: variableName, defaultValue: "{ lat: 47.444, lng: -122.176}"} } } %}
+{% include includeTemplate(['useState.tpl']) with { 'element': { 'values': { variableName: variableName, defaultValue: element.values.center} } } %}
 <div 
   {% if element.values.className %}className={ {{ element.values.className}} }{% endif %}
-  style={ { width: '{{ element.values.Width }}px', height: '{{ element.values.Height }}px', position: 'relative' } }
+  style={ { {% if element.values.Width %}width: '{{ element.values.Width }}px',{% endif %} {% if element.values.Height %}height: '{{ element.values.Height }}px', {% endif %}position: 'relative' } }
 >
   <APIProvider apiKey={'{{ element.values.Key }}'}>
     <Map 
-      defaultCenter={ {{ variableName }} }
+      center={ {{ variableName }} }
       defaultZoom={ {{ element.values.Zoom|default(8) }} }
       mapId="map_{{ element.unique_id }}"
     >{{ content | raw }}</Map>

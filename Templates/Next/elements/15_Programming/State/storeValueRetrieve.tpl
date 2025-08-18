@@ -38,7 +38,7 @@ children: []
 {% else %}
   {{ element.values.onLoad }}(
     {% if element.values.makeItBoolean %}Boolean({% endif %}
-    {% if element.values.Parse %}JSON.parse({% endif %}localStorage?.getItem('{{ element.values.variableName }}') {% if element.values.default %}|| '{{ element.values.default }}'{% endif %}{% if element.values.Parse %}){% endif %}
+    {% if element.values.Parse %}JSON.parse({% endif %}localStorage?.getItem('{{ element.values.variableName }}'){% if element.values.Parse %}){% endif %} {% if element.values.default %}|| {{ element.values.default | textOrVariableInCode }}{% endif %}
     {% if element.values.makeItBoolean %}){% endif %}
   )
 {% endif %}

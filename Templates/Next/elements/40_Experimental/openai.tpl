@@ -13,4 +13,5 @@ extraFiles:
   - source: 'elements/99_ExtraFiles/900_openai.js'
     destination: 'src/lib/openai.js'
 */
+{# {{ add_setting('openAIKey', element.values.openAIKey)}} #}
 {# {{ add_setting(tableSingleName ~ '_File_Start', 'import callAI from '@lib/openai')}} #}
