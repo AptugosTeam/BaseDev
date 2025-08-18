@@ -49,7 +49,7 @@ options:
     display: Icon
     type: dropdown
     options: >-
-      None;Add;Home;Link;Send;AllInbox;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;ThumbUp
+      None;Add;Home;Link;Send;AllInbox;Map;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;Settings;ThumbUp
   - name: buttonType
     display: Type Submit
     type: checkbox

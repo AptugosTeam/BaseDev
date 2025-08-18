@@ -76,7 +76,7 @@ import { APIProvider, Map } from '@vis.gl/react-google-maps'
 >
   <APIProvider apiKey={'{{ element.values.Key }}'}>
     <Map 
-      defaultCenter={ {{ variableName }} }
+      center={ {{ variableName }} }
       defaultZoom={ {{ element.values.Zoom|default(8) }} }
       mapId="map_{{ element.unique_id }}"
     >{{ content | raw }}</Map>

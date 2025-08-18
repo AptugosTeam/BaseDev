@@ -38,7 +38,7 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
       </div>
       <aside className="thumbsContainer">
         {files.map((file, index) => {
-          <div
+          return (<div
             className="thumbnail"
             // onClick={() => { setHighlight(file) }}
           >
@@ -55,7 +55,7 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
               onClick={(e) => e.stopPropagation()}
             />
           </div>
-        </div>
+        </div>)
         })}
       </aside>
     </section>
