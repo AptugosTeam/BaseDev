@@ -14,6 +14,10 @@ options:
     display: Color
     type: dropdown
     options: default;primary;secondary;action;disabled
+  - name: size
+    display: Size Icon
+    type: text
+    options: ''
   - name: className
     display: className
     type: text
@@ -27,6 +31,6 @@ import { MaterialIcons } from '@expo/vector-icons'
 <MaterialIcons
   name={{ theIcon | textOrVariable }}
   {% if element.values.color %}color="{{ element.values.color }}"{% endif %}
+  size={ {{ element.values.size | default(32)}} } 
   {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
-  size={32}
 />

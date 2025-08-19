@@ -64,6 +64,18 @@ options:
     display: Use Reference
     type: text
     options: ''
+  - name: mode
+    display: Enable Mode?
+    type: checkbox
+    options: ''
+    advanced: true
+    settings:
+      default: false
+  - name: modeConfig
+    display: modeConfig
+    type: function
+    options: ''
+    advanced: true
 children: []
 */
 {% set bpr %}
@@ -97,6 +109,12 @@ import Carousel from 'react-native-reanimated-carousel'
     {% endif %}
     {% if element.values.loop %}
       loop={false}
+    {% endif %}
+    {% if element.values.mode %}
+      mode="horizontal-stack"
+    {% endif %}
+    {% if element.values.modeConfig %}
+      modeConfig={ {{element.values.modeConfig}} }
     {% endif %}
     {% if element.values.autoplay %}
       autoPlay
