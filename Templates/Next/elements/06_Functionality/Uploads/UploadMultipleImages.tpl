@@ -18,6 +18,14 @@ options:
     display: On Change
     type: text
     options: ''
+  - name: onMount
+    display: On Mount
+    type: text
+    options: ''
+  - name: onCleanQueue
+    display: On Clean Queue
+    type: text
+    options: ''
   - name: innerText
     display: Text for dropzone
     type: text
@@ -96,4 +104,10 @@ import MultipleFileUpload from '@components/MultipleFileUpload'
   {% if height %}height={{ height | textOrVariable }}{% endif %}
   {% if element.values.alt %}alt={{ element.values.alt | textOrVariable }}{% endif %}
   {% if element.values.filesLimit %}maxFiles={ {{ element.values.filesLimit | textOrVariable }} }{% endif %}
+  {% if element.values.onMount %}onMount={
+    {{ element.values.onMount }}
+  }{% endif %}
+  {% if element.values.onCleanQueue %}onCleanQueue={
+    {{ element.values.onCleanQueue }}
+  }{% endif %}
 />
