@@ -35,10 +35,8 @@ import { View } from '@react-pdf/renderer'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <View
-  {% if element.values.wrap %}
-    wrap={ {{ element.values.wrap }} }
-  {% endif %}
-  {% if element.values.style %}
+   wrap={ {{ element.values.wrap | default('false') }} }
+   {% if element.values.style %}
     style={ {{ element.values.style | raw }} }
   {% endif %}
   {% if element.values.debug %}
