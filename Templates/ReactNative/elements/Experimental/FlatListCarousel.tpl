@@ -8,14 +8,6 @@ settings:
   - name: Packages
     value: ''
 options:
-  - name: width
-    display: Width
-    type: text
-    options: ''
-  - name: height
-    display: Height
-    type: text
-    options: ''
   - name: style
     display: Style
     type: text
@@ -54,22 +46,44 @@ options:
     display: Use Reference
     type: text
     options: ''
+  - name: keyExtractor
+    display: Key Extractor
+    type: text
+    options: ''
+  - name: decelerationRate
+    display: Deceleration Rate
+    type: text
+    options: ''
+  - name: itemSeparatorStyle
+    display: Item Separator Style
+    type: text
+    options: ''
+
 children: []
 */
 
 {% set bpr %}
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'  
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 
 <FlatList
+  {% if element.values.style %}
+    style={ {{element.values.style}} }
+  {% endif %}
   {% if element.values.ref %}
     ref={ {{ element.values.ref }} }
   {% endif %}
   {% if element.values.data %}
     data={ {{element.values.data}} }
   {% endif %}
-  keyExtractor={(item, index) => index.toString()}
+
+  {% if element.values.keyExtractor %}
+    keyExtractor={ {{element.values.keyExtractor}} }
+  {% else %}
+    keyExtractor={(item, index) => index.toString()}
+  {% endif %}
+
   {% if element.values.horizontal %}
     horizontal
   {% endif %}
@@ -78,9 +92,17 @@ import { FlatList } from 'react-native'
     pagingEnabled
   {% endif %}
   {% if element.values.snapToInterval %}
-    snapToInterval={ {{ element.values.snapToInterval }} }
+    snapToInterval={ {{element.values.snapToInterval}} }
   {% endif %}
-  decelerationRate="fast"
+  {% if element.values.decelerationRate %}
+    decelerationRate={ {{element.values.decelerationRate}} }
+  {% else %}
+    decelerationRate="fast"
+  {% endif %}
+  {% if element.values.itemSeparatorStyle %}
+    ItemSeparatorComponent={() => <View style={ {{element.values.itemSeparatorStyle}} } />}
+  {% endif %}
+
   renderItem={({ item, index }) => {
     {% if element.values.code %}
       {{element.values.code}}
