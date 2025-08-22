@@ -19,7 +19,7 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
     }
   }, [props.onMount])
 
-  const onDrop = useCallback((acceptedFiles) => {
+  const onDrop = (acceptedFiles) => {
     const newFile = acceptedFiles.map((file) =>
       Object.assign(file, {
         id: `${file.name}-${file.lastModified}`,
@@ -32,7 +32,7 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
       props.onChange([...files, ...newFile])
     }
     // console.log('Files:', [...files, ...newFile])
-  }, [])
+  }
 
   const cleanQueue = () => {
     setFiles([])
