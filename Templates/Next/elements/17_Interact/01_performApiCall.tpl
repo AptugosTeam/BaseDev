@@ -29,6 +29,9 @@ options:
     helpText: This variable will be sent with the request
     type: text
     options: ''
+  - name: serializeData
+    display: Should I Serialize the data?
+    type: checkbox
   - name: extraOptions
     display: Extra options
     type: text
@@ -48,6 +51,7 @@ children: []
 */
 {% set bpr %}
 import { fetcher } from '@lib/fetch'
+{% if element.values.serializeData %}import serializeData from '@lib/serializeData'{% endif %}
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set url = element.values.url %}
@@ -56,7 +60,7 @@ import { fetcher } from '@lib/fetch'
 {% endif %}
 fetcher({{ url | textOrVariableInCode }}, { 
   method: '{{ element.values.method|default('GET') }}'
-  {% if element.values.dataVariable %}, body: {{ element.values.dataVariable }}{% endif %}
+  {% if element.values.dataVariable %}, body: {% if element.values.serializeData %}serializeData({% endif %}{{ element.values.dataVariable }}{% if element.values.serializeData %}){% endif %}{% endif %}
   {% if element.values.extraOptions %}, {{ element.values.extraOptions | raw }}{% endif %}
 }).then({{ element.values.resultVar|default('result') }} => {
  {{ content | raw }}

@@ -61,7 +61,7 @@ children: []
   }
 {% else %}
   {% set functionContent %}
-    const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
+    {% if element.values.functionName %}const {{ element.values.functionName }} = {% endif %}{% if element.values.async%}async{% endif %} ({{ element.values.functionParameters }}) => {
       {{ element.values.functionBody | raw }}
       {{ content | raw }}  
     }

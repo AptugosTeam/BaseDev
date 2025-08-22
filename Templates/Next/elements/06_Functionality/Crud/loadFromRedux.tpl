@@ -178,7 +178,7 @@ children: []
       isReady: {% if element.values.searchString %}!!{{ element.values.searchString }}{% else %}true{% endif %}
     })
 
-    const { {{ singleName }}data{% if varName %}: {{ varName }}{% endif %}, {{ singleName }}isLoading, {{ singleName }}isError, {{ singleName }}pages } = use{{ tableName }}Pages({{ innervarname }}loadoptions)
+    const { {{ singleName }}data{% if varName %}: {{ varName }}{% endif %}, {{ singleName }}isLoading, {{ singleName }}isError, {{ singleName }}pages, {{ singleName }}mutate } = use{{ tableName }}Pages({{ innervarname }}loadoptions)
   {% endset %}
   {{ save_delayed('ph', ph)}}
   {% if element.values.onload or element.children %}

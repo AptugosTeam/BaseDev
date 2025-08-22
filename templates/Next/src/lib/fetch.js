@@ -12,12 +12,17 @@ export const fetcher = (...args) => {
       error.status = res.status
       throw error
     }
-    
+
+    const contentType = res.headers.get('content-type')
+    const isJson = contentType && contentType.includes('application/json')
+
     let payload
-    
+
     if (res.status === 204) return null
-    payload = await res.json()
-    
+
+    if (isJson) payload = await res.json()
+    else payload = await res.text()
+
     if (res.ok) {
       return payload
     } else {

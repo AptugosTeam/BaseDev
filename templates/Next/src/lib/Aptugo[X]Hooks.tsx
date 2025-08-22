@@ -42,11 +42,12 @@ export function use{{ tableName }}Pages(options) {
     ? `/api/{{ tableName }}?${urlSearchParams.toString()}`
     : null
 
-  const { data, error } = useSWR(shouldFetch, fetcher)
+  const { data, error, mutate } = useSWR(shouldFetch, fetcher)
   return {
     {{ singleName }}data: data?.data.docs,
     {{ singleName }}isLoading: !error && !data,
     {{ singleName }}isError: error,
     {{ singleName }}pages: data?.data.totalPages,
+    {{ singleName }}mutate: mutate
   }
 }
