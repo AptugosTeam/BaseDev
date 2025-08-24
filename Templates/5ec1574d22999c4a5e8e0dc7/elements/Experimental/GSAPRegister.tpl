@@ -24,6 +24,9 @@ options:
   - name: Flip
     display: Flip
     type: checkbox
+  - name: useScrollSmoother
+    display: ScrollSmoother
+    type: checkbox  
   - name: useGSAP
     display: useGSAP (React Plugin)
     type: checkbox  
@@ -55,6 +58,7 @@ import gsap from "gsap"
 {% if element.values.useMotionPath %}import { MotionPathPlugin } from "gsap/MotionPathPlugin"{% endif %}
 {% if element.values.useScrollTo %}import { ScrollToPlugin } from "gsap/ScrollToPlugin"{% endif %}
 {% if element.values.useFlip %}import { Flip } from "gsap/Flip"{% endif %}
+{% if element.values.useScrollSmoother %}import { ScrollSmoother } from "gsap/ScrollSmoother"{% endif %}
 {% if element.values.useGSAP %}import { useGSAP } from "@gsap/react"{% endif %}
 {% endset %}
 
@@ -68,6 +72,7 @@ gsap.registerPlugin(
 {% if element.values.useMotionPath %}MotionPathPlugin,{% endif %}
 {% if element.values.useScrollTo %}ScrollToPlugin,{% endif %}
 {% if element.values.useFlip %}Flip,{% endif %}
+{% if element.values.useScrollSmoother %}ScrollSmoother,{% endif %}
 {% if element.values.useGSAP %}useGSAP{% endif %}
 )
 {% endset %}
