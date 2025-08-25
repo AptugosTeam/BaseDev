@@ -32,13 +32,15 @@ unique_id: generalfind
       {% endif %}
     {% endfor %}
     // sub
-    aggregate.push({ $lookup: {
-      from: '{{ ffd.table.name | friendly }}',
-      localField: '_id',
-      foreignField: '{{ ffd.column_name }}',
-      as: '{{ ffd.table.name | friendly }}',
-      {% if subpopulation %}
-      {% endif %}
-    }})
+    {% if ffd.table.name %}
+      aggregate.push({ $lookup: {
+        from: '{{ ffd.table.name | friendly }}',
+        localField: '_id',
+        foreignField: '{{ ffd.column_name }}',
+        as: '{{ ffd.table.name | friendly }}',
+        {% if subpopulation %}
+        {% endif %}
+      }})
+    {% endif %}
   {% endfor %}
 {% endif %}

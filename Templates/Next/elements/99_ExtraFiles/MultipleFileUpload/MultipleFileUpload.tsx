@@ -1,13 +1,10 @@
 /*
 path: MultipleFileUpload.tsx
-completePath: >-
-  /Users/Shared/Dev/BaseDev/Templates/Next/elements/99_ExtraFiles/MultipleFileUpload/MultipleFileUpload.tsx
 keyPath: elements/99_ExtraFiles/MultipleFileUpload/MultipleFileUpload.tsx
 unique_id: ploiIy7s
 */
-
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
-import React, { FunctionComponent, useCallback } from 'react'
+import React, { FunctionComponent, useMemo } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 const MultipleFileUpload: FunctionComponent<any> = (props) => {
@@ -43,6 +40,16 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
+  const thumbnailSource = useMemo(() => {
+    return files.map((file, index) => {
+      if (props.matchFieldName) {
+        return file[props.matchFieldName] ? file[props.matchFieldName] : file.Image ? `/img/${file.Image}` : file.preview
+      } else {
+        return file.Image ? `/img/${file.Image}` : file.preview
+      }
+    })
+  }, [files])
+  
   return (
     <section className={props.className}>
       <div {...getRootProps()}>
@@ -50,7 +57,7 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
         {isDragActive ? <p>Drop the files here ...</p> : <p>{props.innerText || "Drag 'n' drop some files here, or click to select files"}</p>}
       </div>
       <aside className="thumbsContainer">
-        {files.map((file, index) => {
+        {thumbnailSource.map((file, index) => {
           return (
             <div
               className="thumbnail"
@@ -64,7 +71,7 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
                 }}
               />
               <div className="thumbnailImageContainer">
-                <img className="thumbnailImage" src={file.Image ? `/img/${file.Image}` : file.preview} onClick={(e) => e.stopPropagation()} />
+                <img className="thumbnailImage" src={file} onClick={(e) => e.stopPropagation()} />
               </div>
             </div>
           )
