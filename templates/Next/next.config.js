@@ -60,4 +60,5 @@ module.exports = {
 
     return config
   },
+  {{ insert_setting('NextConfig', NXTCONF) }},
 }
