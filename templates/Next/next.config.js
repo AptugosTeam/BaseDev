@@ -4,6 +4,7 @@ keyPath: next.config.js
 unique_id: 43C2E80i
 */
 /** @type {import('next').NextConfig} */
+{% set NextConfig = insert_setting('NextConfig') %}
 const regexEqual = (x, y) => {
   return (
     x instanceof RegExp &&
@@ -60,5 +61,5 @@ module.exports = {
 
     return config
   },
-  {{ insert_setting('NextConfig', NXTCONF) }},
+  {% if NextConfig %},{{ NextConfig | raw }}{% endif %}
 }
