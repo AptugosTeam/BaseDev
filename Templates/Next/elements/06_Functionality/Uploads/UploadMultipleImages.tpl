@@ -63,6 +63,10 @@ options:
     display: Limit of files
     type: text
     options: ''
+  - name: fieldName
+    display: Field Name Matching
+    type: text
+    advanced: true
 settings:
   - name: Packages
     value: '"react-dropzone": "^11.4.2",'
@@ -91,6 +95,7 @@ import MultipleFileUpload from '@components/MultipleFileUpload'
   {% set path = '/img/' ~ asset.name %}
 {% endif %}
 <MultipleFileUpload
+  {% if element.values.fieldName %}matchFieldName="{{ element.values.fieldName }}"{% endif %}
   {% if element.values.value %}files={{ element.values.value | textOrVariable }}{% endif %}
   {% if element.values.innerText %}innerText={{ element.values.innerText | textOrVariable }}{% endif %}
   {% if element.values.classname %}className={ {{ element.values.classname }} }{% endif %}
