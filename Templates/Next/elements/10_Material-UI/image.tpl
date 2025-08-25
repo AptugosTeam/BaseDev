@@ -74,12 +74,35 @@ options:
     type: checkbox
     options: ''
     advanced: true
+  - name: usePlainTag
+    display: Use plain IMG tag
+    type: checkbox
+    options: ''
+    advanced: true
+    settings:
+      default: false
+  - name: srcSet
+    display: Image SrcSet
+    type: code
+    options: ''
+    advanced: true
+    settings:
+      condition: true
+      propertyCondition: usePlainTag
+  - name: sizes
+    display: Image Sizes
+    type: code
+    advanced: true
+    settings:
+      condition: true
+      propertyCondition: usePlainTag
 */
 {% if element.values.background %}{%set tag = 'div' %}{% endif %}
 {% set path = element.values.path %}
 {% set webppath = element.values.webppath %}
 {% set width = element.values.width|default(null) %}
 {% set height = element.values.height|default(null) %}
+{% set usePlainTag = element.values.usePlainTag|default(false) %}
 {% if element.values.useAsset and element.values.useAsset != 'none' %}
   {% set asset = element.values.useAsset|assetData %}
   {% if width == null %}
@@ -97,7 +120,7 @@ options:
     {% endfor %}
   {% endif %}
 {% endif %}
-{% if width and height %}
+{% if width and height and not usePlainTag %}
   {% set bpr %}import Image from 'next/image'{% endset %}{{ save_delayed('bpr', bpr ) }}
   <Image {% if element.values.priority %}priority={ {{ element.values.priority }} }{% endif %} {% if element.values.className %}className={ {{element.values.className}} }{% endif %} width={ {{width}} } height={ {{height}} } src={{ path|textOrVariable }} alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }} />
 {% else %}
@@ -110,6 +133,12 @@ options:
     {% endif %}
     <img
       src={{ path|textOrVariable }}
+      {% if element.values.usePlainTag and element.values.srcSet %}
+        srcSet={ {{ element.values.srcSet }} }
+      {% endif %}
+      {% if element.values.usePlainTag and element.values.sizes %}
+        sizes={ {{ element.values.sizes }} }
+      {% endif %}
       alt={{ element.values.alt|default(path)|textOrVariable }}
       {% if width %} width={{ width|textOrVariable }}{% endif %}
       {% if height %} height={{ height|textOrVariable }}{% endif %}
