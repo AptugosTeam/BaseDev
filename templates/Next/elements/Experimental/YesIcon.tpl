@@ -23,6 +23,12 @@ options:
     display: Color (in hexadecimal)
     type: text
     options: ''
+  - name: usequotes
+    display: Use quotes
+    type: checkbox
+    settings:
+      default: true
+
 settings:
   - name: Packages
     value: '"@iconify/react": "^4.1.1", "iconify": "^1.4.0",'
@@ -33,7 +39,11 @@ import { Icon } from '@iconify/react'
 {{ save_delayed('bpr',bpr) }}
   <Icon 
   {% if element.values.icon %}
-  icon="{{element.values.icon}}" 
+    {% if element.values.usequotes %}
+      icon="{{element.values.icon}}"
+    {% else %}
+      icon={{element.values.icon}}
+  {% endif %}
   {% endif %}
   {% if element.values.className %}
     className={ {{element.values.className}} }
