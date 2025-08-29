@@ -14,7 +14,11 @@ options:
     display: Navigation Type
     type: dropdown
     options: navigate;replace;push;goBack;reset
+  - name: parameters
+    display: Parameters
+    type: text
+    options: ''
 children: []
 */
 {% set pageFrom = element.values.to | elementData %}
-navigation.{{ element.values.navigationType | default('navigate') }}('{{ pageFrom.path }}')
+navigation.{{ element.values.navigationType | default('navigate') }}('{{ pageFrom.path }}'{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %})
