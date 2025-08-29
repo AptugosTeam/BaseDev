@@ -9,10 +9,17 @@ options:
     display: Message error
     type: text
     options: ''
+  - name: catchContent
+    display: Catch content
+    type: function
+    options: ''
 children: []
 */
 try {
   {{ content | raw }}
 } catch (e) {
   console.log({% if element.values.messageError %} '{{ element.values.messageError }}', {% endif %} e)
+  {% if element.values.catchContent %} 
+    {{ element.values.catchContent | raw }}
+  {% endif %}
 }
