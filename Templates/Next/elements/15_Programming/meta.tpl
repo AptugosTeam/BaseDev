@@ -52,6 +52,10 @@ options:
     display: Twitter Meta Image
     type: text
     options: ''
+  - name: extraContent
+    display: Extra Content
+    type: function
+    options: ''
 sourceType: javascript
 children: []
 */
@@ -72,5 +76,6 @@ import Head from 'next/head'
 {% if element.values.ogurl %}<meta name="og:url" content={{ element.values.ogurl | textOrVariable }} />{% endif %}
 {% if element.values.ogimage %}<meta name="image" property="og:image" content={{ element.values.ogimage | textOrVariable }}></meta>{% endif %}
 {% if element.values.favicon %}<link rel="icon" href={{ element.values.favicon | textOrVariable }} />{% else %}<link rel="icon" href="/img/favicon.png" />{% endif %}
+{% if element.values.extraContent %} {{ element.values.extraContent }} {% endif %}
 {% endset %}
 {{ set_setting('HeadContent', headContent) }}
