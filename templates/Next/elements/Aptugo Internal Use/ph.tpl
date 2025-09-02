@@ -18,10 +18,7 @@ import Head from 'next/head'
 {{ save_delayed('bpr',bpr) }}
 const {{ page.name | friendly }}: FunctionComponent = (props: any) => {
   const router = useRouter()
-  const {
-    history: navigation,
-    match: { params = {} } = {},
-  } = props;
+  const { query: params = {} } = router
   {% for delay in delayed %}
     {{ delay }}
   {% endfor %}

@@ -147,6 +147,7 @@ children: []
 {% set innervarname = table.name | friendly %}
 {% if element.name != 'loadFromDatabase' %}{% set innervarname = element.name | friendly %}{% endif %}
 {% set varName = element.values.variableName|default(singleName ~ 'data') %}
+{% if element.values.singleResult %}{% set varName = '[' ~ varName ~ '] = []' %}{% endif %}
 {% if element.values.loadWhenSiteLoads %}
   {# Special method to load on page load #}
   {% set goesToIndex %}

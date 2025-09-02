@@ -24,8 +24,11 @@ unique_id: AlPg3QRE
   if (after) aggregate.push({ $match: { ...(after && { createdAt: { $gt: after } }) } })
   if (filter) {
     const parsedFilter = typeof filter === 'string' ? JSON.parse(filter) : filter
+
     for (const filt of Object.keys(parsedFilter)) {
-      const filterValue = parsedFilter[filt]
+      let filterValue = parsedFilter[filt]
+
+      if ( {{ tableName }}Model.schema.path(filt as any)?.instance === 'ObjectId') filterValue = new mongoose.Types.ObjectId(filterValue)
   
       if (Array.isArray(filterValue) && filterValue.length === 2) {
         let lowerBound = Number(filterValue[0])

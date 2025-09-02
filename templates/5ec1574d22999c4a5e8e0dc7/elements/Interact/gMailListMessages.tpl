@@ -28,7 +28,7 @@ extraFiles:
 import AptugoGmail from '@services/gmail.service'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{% if element.values.filter %}if (!filter) filter = {{ element.values.filter | textOrVariable }}{% endif %}
+{% if element.values.filter %}if (!filter) filter = {{ element.values.filter | textOrVariable }};{% endif %}
 AptugoGmail.listMessages(typeof filter !== 'undefined' ? filter : null{% if element.values.pageVariable %}, {{ element.values.pageVariable }}{% endif %}).then( (result) => {
   const promises = result.messages.map((item, index) => {
     return AptugoGmail.getMessage(item.id).then(res => { 
