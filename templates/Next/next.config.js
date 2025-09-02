@@ -61,5 +61,5 @@ module.exports = {
 
     return config
   },
-  {% if NextConfig %},{{ NextConfig | raw }}{% endif %}
+  {% if NextConfig %}{{ NextConfig | raw }},{% endif %}
 }
