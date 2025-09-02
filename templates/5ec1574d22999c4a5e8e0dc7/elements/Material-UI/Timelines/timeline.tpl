@@ -11,7 +11,7 @@ childs:
 children: []
 settings:
   - name: Packages
-    value: "'@mui/lab' : 'latest',"
+    value: '"@mui/lab": "^5.0.0-alpha.127",'
 options:
   - name: align
     display: Align
