@@ -4,7 +4,7 @@ completePath: elements/Aptugo Routes/get.tpl
 unique_id: AlPg3QRE
 */
 (req, _res, next) => {
-  const { before, after, filter, sortField, sortMethod, skip, limit, page } = req.query || {}
+  const { before, after, filter, sortField, sortMethod, skip, limit, page, populate } = req.query || {}
   const options = {
     page: Number(page) || 1,
     limit: Number(limit) || 10,
@@ -13,10 +13,12 @@ unique_id: AlPg3QRE
 
   const aggregate = []
   
-  {% for field in table.fields %}
-    {% set fieldWithData = field | fieldData %}
-    {% include includeTemplate(['Fields' ~ field.data_type ~ 'find.tpl', 'Fieldsfind.tpl']) %}
-  {% endfor %}
+  if (populate !== 'false') {
+    {% for field in table.fields %}
+      {% set fieldWithData = field | fieldData %}
+      {% include includeTemplate(['Fields' ~ field.data_type ~ 'find.tpl', 'Fieldsfind.tpl']) %}
+    {% endfor %}
+  }
 
   if (skip) aggregate.push({ $skip: skip })
   if (sortField && sortMethod) aggregate.push({ $sort: { [sortField]: sortMethod === 'desc' ? -1 : 1 } })

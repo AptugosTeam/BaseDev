@@ -4,6 +4,15 @@ type: file
 unique_id: glsvuPHA
 icon: ico-kanban-board
 options:
+  - name: data
+    display: Data Source
+    type: dropdown
+    options: >-
+      return aptugo.store.getState().application.tables.map(({ unique_id, name }) => [unique_id, name])
+    settings:
+      aptugoOnChange: >-
+        const tableInfo = aptugo.tableUtils.getTable(value);
+        if (tableInfo.lazy) return false
   - name: Columns
     display: Columns
     type: text
@@ -28,12 +37,6 @@ options:
     display: On Drop
     type: text
     options: ''
-  - name: data
-    display: Data
-    type: dropdown
-    options: >-
-      return aptugo.store.getState().application.tables.map(({ unique_id, name
-      }) => [unique_id, name])
   - name: addRecords
     display: Add Records
     type: text
@@ -50,9 +53,19 @@ settings:
       "react-dnd-html5-backend": "11.1.3",
 children: []
 */
-
-
-{% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
+{% set ph %}
+  {% include includeTemplate(['useState.tpl']) with { 'element': { 'values': { variableName: 'kanbanData', defaultValue: '[]' } } } %}
+  {% set apiCall %}
+    {% include includeTemplate(['performApiCall.tpl']) with { 
+      'element': {'values': { url: '/api/activities/kanbanActivities' }},
+      'content': 'setkanbanData(result)',
+    } %}
+  {% endset %}
+  {% include includeTemplate(['onPageLoad.tpl']) with {
+    'content': apiCall
+  } %}
+{% endset %}
+{{ save_delayed('ph',ph) }}
 {% if element.values.addRecords %}
 {% set bpr %}
 import Button from '@mui/material/Button'
@@ -63,14 +76,6 @@ import AddIcon from '@mui/icons-material/Add'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% endif %}
-{% set bpr %}
-import { useDispatch } from 'react-redux'
-{% endset %}
-{{ save_delayed('bpr', bpr ) }}
-{% set bpr %}
-import { edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
-{% endset %}
-{{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
 import clsx from 'clsx'
 {% endset %}
@@ -116,9 +121,9 @@ const KanbanItem = ({ item, children, ...props }) => {
 {% endset %}
 {{ save_delayed('ph',ph) }}
 <DndProvider backend={HTML5Backend}>       
-<div className={clsx(classes.kanban {% if element.values.className %}, {{ element.values.className }}{% endif %})}>
-{ {{ element.values.Columns }}.map((columnItem, columnIndex) => {
-    return ({{ content | raw }})
-})}
-</div>
+  <div className={clsx(classes.kanban {% if element.values.className %}, {{ element.values.className }}{% endif %})}>
+  { {{ element.values.Columns }}.map((columnItem, columnIndex) => {
+    return ({{ content | raw }})
+  })}
+  </div>
 </DndProvider>

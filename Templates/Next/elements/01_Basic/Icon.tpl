@@ -34,7 +34,7 @@ import { Icon } from '@iconify/react'
 {{ save_delayed('bpr',bpr) }}
   <Icon 
   {% if element.values.icon %}
-  icon="{{element.values.icon}}" 
+  icon={{element.values.icon | textOrVariable }}
   {% endif %}
   {% if element.values.className %}
     className={ {{element.values.className}} }

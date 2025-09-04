@@ -9,11 +9,6 @@ children: []
 */
 {% set bpr %}
 import TimelineSeparator from '@mui/lab/TimelineSeparator'
-import TimelineConnector from '@mui/lab/TimelineConnector'
-import TimelineDot from '@mui/lab/TimelineDot'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<TimelineSeparator>
-    <TimelineDot />
-    <TimelineConnector />
-</TimelineSeparator>
+<TimelineSeparator>{{ content | raw }}</TimelineSeparator>

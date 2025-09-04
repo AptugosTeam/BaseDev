@@ -113,10 +113,10 @@ helpText: Basic HTML Div element
     onClick={ {{ element.values.onclick | functionOrCall }} }
   {% endif %}
   {% if element.values.onMouseEnter %}
-    onMouseEnter={() => {{element.values.onMouseEnter}} }
+    onMouseEnter={ {{ element.values.onMouseEnter | functionOrCall }} }
   {% endif %}
   {% if element.values.onMouseLeave %}
-    onMouseLeave={() => {{element.values.onMouseLeave}} }
+    onMouseLeave={ {{ element.values.onMouseLeave | functionOrCall }} }
   {% endif %}
 >
 {{ content | raw }}

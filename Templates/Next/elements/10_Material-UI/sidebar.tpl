@@ -13,6 +13,10 @@ options:
     display: Open/Close handler
     type: text
     options: ''
+  - name: className
+    display: ClassName
+    type: styles
+    options: ''
 extraFiles:
   - source: 'elements/99_ExtraFiles/Sidebar.tsx'
     destination: 'src/components/Sidebar/Sidebar.tsx'
@@ -26,6 +30,7 @@ import Sidebar from '@components/Sidebar/Sidebar'
 {{ save_delayed('bpr', bpr ) }}
 <Sidebar
   {% if element.values.handleOpen %}handleDrawerToggle={ {{ element.values.handleOpen }} }{% endif %}
+  {% if element.values.className %}className={ {{element.values.className|raw}} }{% endif %}
   open={ {{ element.values.open }} }
 >
 {{ content | raw }}
