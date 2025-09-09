@@ -78,14 +78,18 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-curved-bottom-bar": "3.2.7", "@react-navigation/bottom-tabs": "^6.5.20",'
+    value: '"react-native-curved-bottom-bar": "3.5.1", "@react-navigation/bottom-tabs": "^7.4.7",'
 children: []
 */
+{% set bpr %}
+import { CurvedBottomBar } from 'react-native-curved-bottom-bar'
+{% endset %}
+{{ save_delayed('bpr', bpr )}}
 {% if element.values.addStackScreen %}
 <Stack.Screen name="{{element.values.stackScreenName | default('mainApp')}}">
 {() => (
 {% endif %}
-  <CurvedBottomBarExpo.Navigator
+  <CurvedBottomBar.Navigator
   type="{{element.values.type | default('DOWN')}}"
   {% if element.values.style %}
   style={ {{element.values.style}} }
@@ -140,7 +144,7 @@ children: []
      {% endif %}
     {% endfor %}
   {% endif %}
-</CurvedBottomBarExpo.Navigator>
+</CurvedBottomBar.Navigator>
 {% if element.values.addStackScreen %}
 )}
 </Stack.Screen>
