@@ -31,6 +31,15 @@ options:
     display: Function that returns a React element to display as the center tab item
     type: text
     options: ''
+  - name: useRenderCircleFunction
+    display: Use renderCircle function instead of children
+    type: checkbox
+    options: ''
+  - name: additionalContent
+    display: Additional content before screens
+    type: code
+    options: ''
+    advanced: true
   - name: circleWidth
     display: Circle Width (50 to 60)
     type: text
@@ -91,7 +100,7 @@ children: []
   circleWidth={ {{element.values.circleWidth}} }
   {% endif %}
   {% if element.values.bgColor %}
-  bgColor={ {{element.values.bgColor | textOrVariable}} }
+  bgColor={{ element.values.bgColor | textOrVariable }} 
   {% endif %}
   initialRouteName={{element.values.initialRouteName | textOrVariable | default('/')}}
   {% if element.values.borderTopLeftRight %}
@@ -102,11 +111,14 @@ children: []
     {{element.values.screenOptions}}
   } }
   {% endif %}
+  {% if element.values.useRenderCircleFunction and element.values.renderCircle %}
+  renderCircle={ {{ element.values.renderCircle }} }
+  {% else %}
   renderCircle={({ selectedTab, navigate }) => (
     {% if element.children %}
      {% for child in element.children %}
       {% if child.value != 'CurvedBottomBarExpoScreen' %}
-        {{ child.rendered | raw }}
+        {{ child.rendered | raw }}
       {% endif %}
      {% endfor %}
     {% else %}
@@ -115,12 +127,16 @@ children: []
     </View>
     {% endif %}
   )}
+  {% endif %}
   tabBar={ {{element.values.tabBar}} }
 >
+  {% if element.values.additionalContent %}
+  {{ element.values.additionalContent | raw }}
+  {% endif %}
   {% if element.children %}
     {% for child in element.children %}
      {% if child.value == 'CurvedBottomBarExpoScreen' %}
-      {{ child.rendered | raw }}
+      {{ child.rendered | raw }}
      {% endif %}
     {% endfor %}
   {% endif %}
