@@ -38,6 +38,13 @@ options:
   - name: scrollable
     display: Is Scrollable
     type: checkbox
+  - name: horizontal
+    display: Horizontal ScrollView
+    type: checkbox
+    options: ''
+    settings:
+      propertyCondition: scrollable
+      condition: true
   - name: nestedScrollEnabled
     display: Enable nested scrolling?
     type: checkbox
@@ -136,7 +143,8 @@ import Reanimated from 'react-native-reanimated'
     {% if element.values.scrollEventThrottle %}scrollEventThrottle={ {{ element.values.scrollEventThrottle }} }{% endif %}
   {% endif %}
   {% if element.values.contentContainerStyle %}contentContainerStyle={ {{ element.values.contentContainerStyle }} }{% endif %}
-  {% if element.values.autoAdjust %}automaticallyAdjustKeyboardInsets={true}{% endif %}
+  {% if element.values.horizontal %}horizontal{% endif %}
+  {% if element.values.autoAdjust %}automaticallyAdjustKeyboardInsets{% endif %}
 >
 {{ content | raw }}
 </{{ tag }}>
