@@ -30,7 +30,7 @@ const sc = StyleSheet.create({
 {{ save_delayed('bpr',bpr)}}
 const {{ page.name | friendly }} = (props) => {
   const { navigation } = props
-  const { params } = props.route
+  const { params, name: route } = props.route
   {% for delay in delayed %}
     {{ delay }}
   {% endfor %}
