@@ -7,6 +7,9 @@
   "default": "true",
   "templateCommandsAfter": "",
   "templateCommandsAfterDeploy": "",
+  "deployScript": [
+    { "server": "aptugoApp", "script": "templatescripts/deployAptugoApp.js" }
+  ],
   "renderingFolder": "/front-end/Pages",
   "tableTypes": [
     { "key": "Aptugo", "name": "Aptugo Table" },

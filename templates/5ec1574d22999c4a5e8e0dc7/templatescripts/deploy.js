@@ -1,4 +1,6 @@
 const deploy = (parameters) => {
+  console.log('called deply with parameters')
+  console.log('the params', parameters)
   return [{
     folders: ['build'],
     url: parameters.settings.url.substring(8).toLowerCase(),
