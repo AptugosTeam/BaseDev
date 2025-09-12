@@ -3,6 +3,7 @@ path: MultipleFileUpload.tsx
 keyPath: elements/99_ExtraFiles/MultipleFileUpload/MultipleFileUpload.tsx
 unique_id: ploiIy7s
 */
+import { Icon } from '@iconify/react/dist/iconify.js'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import React, { FunctionComponent, useMemo } from 'react'
 import { useDropzone } from 'react-dropzone'
@@ -25,10 +26,10 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
     )
 
     setFiles([...files, ...newFile])
+
     if (props.onChange) {
       props.onChange([...files, ...newFile])
     }
-    // console.log('Files:', [...files, ...newFile])
   }
 
   const cleanQueue = () => {
@@ -45,13 +46,26 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
       if (props.matchFieldName) {
         return file[props.matchFieldName] ? file[props.matchFieldName] : file.Image ? `/img/${file.Image}` : file.preview
       } else {
-        return file.Image ? `/img/${file.Image}` : file.preview
+        const fileType = file.type.split('/')[0]
+        switch (fileType) {
+          case 'image':
+            const thumbURL = file.Image ? `/img/${file.Image}` : file.preview
+            return <img className="thumbnailImage" src={thumbURL} onClick={(e) => e.stopPropagation()} />
+          case 'audio':
+            return <Icon icon="material-symbols:audio-file-outline" width="48" height="48" />
+          case 'video':
+            return <Icon icon="mdi:video" width="48" height="48" />
+          case 'application':
+            return <Icon icon="mdi:file-document" width="48" height="48" />
+          default:
+            return <Icon icon="mdi:file" width="48" height="48" />
+        }
       }
     })
   }, [files])
-  
+
   return (
-    <section className={props.className}>
+    <section className={`${props.className || 'fileDropUploader'} ${isDragActive ? 'dragActive' : ''}`}>
       <div {...getRootProps()}>
         <input {...getInputProps()} />
         {isDragActive ? <p>Drop the files here ...</p> : <p>{props.innerText || "Drag 'n' drop some files here, or click to select files"}</p>}
@@ -59,19 +73,13 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
       <aside className="thumbsContainer">
         {thumbnailSource.map((file, index) => {
           return (
-            <div
-              className="thumbnail"
-              // onClick={() => { setHighlight(file) }}
-            >
+            <div className="thumbnail" key={`thumb-${index}`}>
               <DeleteForeverIcon
                 className="deleteIcon"
-                onClick={(e) => {
-                  cleanQueue()
-                  // removeImage(file, e)
-                }}
+                onClick={cleanQueue}
               />
               <div className="thumbnailImageContainer">
-                <img className="thumbnailImage" src={file} onClick={(e) => e.stopPropagation()} />
+                {file}
               </div>
             </div>
           )

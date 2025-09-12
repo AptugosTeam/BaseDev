@@ -5,17 +5,28 @@ keyPath: src/lib/serializeData.js
 unique_id: GkGZBdWE
 */
 const isFile = (input) => 'File' in window && input instanceof File
+
 function serializeData(data) {
   const formData = new FormData()
 
   Object.keys(data).forEach((key) => {
-    if (isFile(data[key])) {
-      formData.append(key, data[key])
-    } else {
-      if (typeof data[key] === 'object') {
-        formData.append(key, JSON.stringify(data[key]))
+    const value = data[key];
+
+    if (isFile(value)) {
+      formData.append(key, value);
+    } 
+    
+    else if (Array.isArray(value) && value.every(isFile)) {
+      value.forEach(file => {
+        formData.append(key, file)
+      })
+    } 
+
+    else {
+      if (typeof value === 'object' && value !== null) {
+        formData.append(key, JSON.stringify(value))
       } else {
-        formData.append(key, data[key])
+        formData.append(key, value)
       }
     }
   })

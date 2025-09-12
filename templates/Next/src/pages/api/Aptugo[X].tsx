@@ -94,7 +94,10 @@ export const config = {
 }
 
 const upload = multer({
-  storage: multer.memoryStorage(),
+  storage: multer.diskStorage({
+    destination: '/tmp',
+    filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
+  }),
   limits: {
     fileSize: 5 * 1024 * 1024 * 1024, // limit file size to 5GB
   },
