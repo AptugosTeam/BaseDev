@@ -54,6 +54,12 @@ options:
     settings:
       default: false
     advanced: true
+  - name: arrow
+    display: Use Arrow Tooltip
+    type: checkbox
+    settings:
+      default: false
+      condition: ''  
   - name: dataAttribute
     display: Add Data Attribute
     type: checkbox
@@ -181,7 +187,11 @@ helpText: Basic HTML Div element
     onMouseOver={(e) => {{element.values.onMouseOver}} }
   {% endif %}
   {% if element.values.onMouseOut %}
+  {% if element.values.onMouseOut starts with '() =>' or element.values.onMouseOut starts with '(e) =>' %}
     onMouseOut={ {{element.values.onMouseOut}} }
+  {% else %}
+    onMouseOut={(e) => {{element.values.onMouseOut}} }
+  {% endif %}
   {% endif %}
   {% if element.values.onScroll %}
     onScroll={(e) => {{element.values.onScroll}} }
