@@ -39,15 +39,17 @@ import { Portal } from 'react-native-paper'
   <Modal
     animationType="fade"
     transparent={true}
-    visible={ {{ element.values.visible }} }
-    onDismiss={() => {{ element.values.onclose }} }
-    onRequestClose={() => {{ element.values.onclose }} }
+    {% if element.values.visible %}visible={ {{ element.values.visible }} }{% endif %}
+    {% if element.values.onclose %}
+      onDismiss={() => {{ element.values.onclose }} }
+      onRequestClose={() => {{ element.values.onclose }} }
+    {% endif %}
   >
     <TouchableOpacity
-      style={ {{ element.values.dimClass }}}
-      onPress={ {{ element.values.onclose | functionOrCall }} }
+      {% if element.values.dimClass %}style={ {{ element.values.dimClass }}}{% endif %}
+      {% if element.values.onclose %}onPress={ {{ element.values.onclose | functionOrCall }} }{% endif %}
     >
-      <TouchableOpacity style={ {{ element.values.viewClass }}} activeOpacity={1}>
+      <TouchableOpacity {% if element.values.viewClass %}style={ {{ element.values.viewClass }}}{% endif %} activeOpacity={1}>
         {{ content | raw }}
       </TouchableOpacity>
     </TouchableOpacity>

@@ -3,10 +3,13 @@ path: App.tsx
 completePath: front-end/App.tsx
 unique_id: Ue5mTTDJ
 */
+{% set hasTables = application.tables|length > 0 %}
 import React from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+{% if hasTables %}
 import { Provider as StateProvider } from 'react-redux'
 import store from './store/store'
+{% endif %}
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 {{ insert_setting('AppImport') | raw }}
@@ -29,7 +32,7 @@ export default function App() {
 {{ insert_setting('AppPH') | raw }}
 
   return (
-    <StateProvider store={store}>
+    {% if hasTables %}<StateProvider store={store}>{% endif %}
       <GestureHandlerRootView style={ { flex: 1 }}>
         {{ insert_setting('SiteWideWrapStart') | raw }}
           <NavigationContainer
@@ -82,6 +85,6 @@ export default function App() {
           </NavigationContainer>
         {{ insert_setting('SiteWideWrapEnd') | raw }}
       </GestureHandlerRootView>
-    </StateProvider>
+    {% if hasTables %}</StateProvider>{% endif %}
   )
 }
