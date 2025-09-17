@@ -8,7 +8,7 @@ children: []
 async (req, res) => {
   {% if table.beforeRetrieve %}{{ table.beforeRetrieve }}{% endif %}
   try {
-    const result = await {{ tableName }}Model.findOneAndUpdate(
+    const result = await {{ tableName }}Model.find(
       { _id: req.query.ID }
     )
     res.status(201).json({ success: true, data: result })

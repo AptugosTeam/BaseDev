@@ -1,0 +1,12 @@
+/*
+path: Json.json
+completePath: Fields/Json.json
+unique_id: ujsonFGc
+*/
+{
+  "label": "JSON (Object)",
+  "value": "Json",
+  "dataType": "mongoose.Schema.Types.Mixed",
+  "initialValue": "null",
+  "options": ""
+}

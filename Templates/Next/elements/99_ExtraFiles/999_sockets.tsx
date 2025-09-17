@@ -3,66 +3,85 @@ path: 999_sockets.js
 unique_id: Wq86Z8m6
 internalUse: true
 */
-import { WebSocketServer, WebSocket } from "ws"
-import { EventEmitter } from "events"
+import { WebSocketServer } from 'ws'
+import { IncomingMessage } from 'http'
+import { Socket } from 'net'
 
-type Listener = (ws: WebSocket, data?: any) => void
-
-class WSServer extends EventEmitter {
-  private wss: WebSocketServer | null = null
-
-  start(port: number = {{ element.values.port|default('3000') }}) {
-    if (this.wss) return this.wss
-
-    this.wss = new WebSocketServer({ port })
-
-    this.wss.on("connection", (ws) => {
-      console.log("Client connected")
-
-      this.emit("connection", ws)
-
-      ws.on("message", (data) => {
-        this.emit("message", ws, data)
-      })
-
-      ws.on("close", () => {
-        this.emit("disconnect", ws)
-      })
-    })
-
-    console.log(`WebSocket server started on port ${port}`)
-    return this.wss
-  }
-
-  stop() {
-    if (!this.wss) return false
-
-    this.wss.clients.forEach((client) => client.close())
-    this.wss.close()
-    this.wss = null
-    this.removeAllListeners()
-    console.log("WebSocket server stopped")
-    return true
-  }
-
-  restart(port: number = 3000) {
-    this.stop()
-    return this.start(port)
-  }
-
-  status() {
-    if (!this.wss) return { running: false }
-    return { running: true, clients: this.wss.clients.size }
-  }
-
-  broadcast(data: any) {
-    if (!this.wss) return
-    this.wss.clients.forEach((client) => {
-      if (client.readyState === client.OPEN) client.send(JSON.stringify(data))
-    })
-  }
+declare global {
+  var wss: WebSocketServer | undefined
 }
 
-// Singleton instance
-const wsServer = new WSServer()
-export default wsServer
+export const getWsServerInstance = (): WebSocketServer => {
+  if (global.wss) {
+    console.log("WebSocket server instance already exists. Returning it.")
+    return global.wss
+  }
+
+  console.log("Creating new WebSocket Server instance...")
+  
+  global.wss = new WebSocketServer({ noServer: true })
+
+  global.wss.on('connection', (ws: WebSocket, req: IncomingMessage) => {
+    console.log('Client connected!')
+    // Handle events here
+    ws.on('message', (data: any) => {
+      console.log(`Received message from client: ${data}`)
+    })
+
+    ws.on('close', () => {
+      console.log('Client disconnected.')
+    })
+  })
+
+  return global.wss
+}
+
+export const withWsServer = (handler: any) => async (req: IncomingMessage, res: any) => {
+  if (!res.socket.server.ws) {
+    const wss = getWsServerInstance()
+    res.socket.server.ws = wss
+
+    res.socket.server.on('upgrade', (request: IncomingMessage, socket: Socket, head: Buffer) => {
+      if (request.url.startsWith('/_next/')) {
+        console.log(`Ignoring HMR WebSocket request for: ${request.url}`)
+        return
+      }
+      
+      console.log(`WebSocket upgrade request for URL: ${request.url}`)
+
+      wss.handleUpgrade(request, socket, head, (websocket) => {
+        wss.emit('connection', websocket, request)
+      })
+    })
+  }
+  
+  return handler(req, res)
+}
+
+export const broadcast = (data: any) => {
+  const wss = getWsServerInstance()
+  if (!wss) return
+
+  wss.clients.forEach((client: WebSocket) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify(data))
+    }
+  })
+}
+
+export const stop = () => {
+    const wss = getWsServerInstance()
+    if (!wss) return false
+
+    wss.clients.forEach((client: WebSocket) => client.close())
+    wss.close()
+    delete global.wss
+    console.log('WebSocket server stopped')
+    return true
+}
+
+export const status = () => {
+  const wss = getWsServerInstance()
+  if (!wss) return { running: false }
+  return { running: true, clients: wss.clients.size }
+}
