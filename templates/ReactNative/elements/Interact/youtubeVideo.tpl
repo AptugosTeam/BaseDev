@@ -26,6 +26,13 @@ import YoutubePlayer from "react-native-youtube-iframe"
 <YoutubePlayer
   height={300}
   videoId={ {{ element.values.videoID}} }
+  webViewProps={ {
+    androidLayerType: Platform.OS === 'android' ? 'hardware' : 'software',
+    allowsInlineMediaPlayback: true,
+    mediaPlaybackRequiresUserAction: false,
+    javaScriptEnabled: true,
+    domStorageEnabled: true,
+  } }
 {% if element.values.onChangeState %}
   onChangeState={(state) => {
     {{ element.values.onChangeState }}
