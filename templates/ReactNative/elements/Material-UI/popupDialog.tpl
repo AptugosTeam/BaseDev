@@ -20,6 +20,10 @@ options:
     display: ClassName (view area)
     type: text
     options: ''
+  - name: customStructure
+    display: Use custom structure
+    type: checkbox
+    options: ''
 sourceType: javascript
 childs:
   - name: Title
@@ -43,6 +47,7 @@ import { Portal } from 'react-native-paper'
     onDismiss={() => {{ element.values.onclose }} }
     onRequestClose={() => {{ element.values.onclose }} }
   >
+    {% if not element.values.customStructure %}
     <TouchableOpacity
       style={ {{ element.values.dimClass }}}
       onPress={ {{ element.values.onclose | functionOrCall }} }
@@ -51,5 +56,8 @@ import { Portal } from 'react-native-paper'
         {{ content | raw }}
       </TouchableOpacity>
     </TouchableOpacity>
+    {% else %}
+    {{ content | raw }}
+    {% endif %}
   </Modal>
 </Portal>
