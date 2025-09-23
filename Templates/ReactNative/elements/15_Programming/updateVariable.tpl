@@ -17,4 +17,4 @@ options:
     type: checkbox
 */
 {% set variablePrefix = element.values.withoutThis == true ? '' : 'this.' %}
-{{ variablePrefix }}{{ element.values.variableName }}={% if element.children %}{{ content | raw }}{% else %}{{ element.values.newValue }}{% endif %}
+{{ variablePrefix }}{{ element.values.variableName }} ={% if element.children %}{{ content | raw }}{% else %} {{ element.values.newValue }}{% endif %}
