@@ -17,7 +17,7 @@ children: []
 */
 
 {% set bpr %}
-import { useSharedValue } from 'react-native-reanimated'
+import { useSharedValue, withTiming, runOnJS } from 'react-native-reanimated'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 
