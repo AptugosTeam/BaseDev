@@ -11,6 +11,10 @@ options:
     display: ClassName
     type: text
     options: ''
+  - name: onStateChange
+    display: onStateChange
+    type: function
+    options: ''
 settings:
   - name: Packages
     value: '"react-youtube": "^10.1.0",'
@@ -23,4 +27,9 @@ import YouTube from 'react-youtube'
   {% if element.values.className %}
     className={ {{element.values.className}} }
   {% endif %}
+{% if element.values.onStateChange %}
+  onStateChange={(state) => {
+    {{ element.values.onStateChange }}
+  }}
+{% endif %}
 />
