@@ -48,19 +48,38 @@ children: []
     {% set dest = (element.values.loginScreen | elementData).path %}
   {% endif %}
 {% endif %}
-{% set bpr %}
-import authHeaders from '@services/auth-header'
-{% endset %}
-{{ save_delayed('bpr',bpr)}}
-authHeaders().then(result => {
-    {% if element.values.loginScreenNot != 'none' %}
-      if (!result) {
-        navigation.push( {{ destNot | textOrVariable }} )
-      }
-    {% endif %}
-    {% if element.values.loginScreen != 'none' %}
-      if (result) {
-        navigation.push( {{ dest | textOrVariable }} )
-      }
-    {% endif %}
-  })
+{% set appImport %}import authService from '@services/auth.service'{% endset %}{{ add_setting('AppImport', appImport) }}
+
+{% set appPH %}
+ const [initialRoute, setInitialRoute] = React.useState<string | null>(null)
+ 
+ React.useEffect(() => {
+   const checkAuthStatus = async () => {
+     try {
+       const user = await authService.getCurrentUser()
+       
+       if (user) {
+         {% if element.values.loginScreen != 'none' %}
+         setInitialRoute({{ dest | textOrVariable }})
+         {% else %}
+         setInitialRoute('/')
+         {% endif %}
+       } else {
+         {% if element.values.loginScreenNot != 'none' %}
+         setInitialRoute({{ destNot | textOrVariable }})
+         {% else %}
+         setInitialRoute('/')
+         {% endif %}
+       }
+     } catch (error) {
+       console.error('Error checking auth status:', error)
+       setInitialRoute('/')
+     }
+   }
+   checkAuthStatus()
+ }, [])
+ {% endset %}
+{{ add_setting('AppPH',appPH)}}
+ 
+{% set appInitialRoute %}initialRoute || '/'{% endset %}
+{{ add_setting('AppInitialRoute',appInitialRoute)}}

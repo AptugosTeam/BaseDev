@@ -28,6 +28,12 @@ export default function App() {
 
 {{ insert_setting('AppPH') | raw }}
 
+{% for delay in delayed %}
+  {% for specificDelay in delay.AppPH %}
+    {{ specificDelay }}
+  {% endfor %}
+{% endfor %}
+
   return (
     <StateProvider store={store}>
       <GestureHandlerRootView style={ { flex: 1 }}>
@@ -49,7 +55,7 @@ export default function App() {
               }
             }}
           >
-            <Stack.Navigator screenOptions={ { headerShown: false } } initialRouteName="/">
+            <Stack.Navigator screenOptions={ { headerShown: false } } initialRouteName={ {{ insert_setting('AppInitialRoute') | default('"/"') | raw }} }>
             {% set AppBody = insert_setting('AppB') %}
             {% if AppBody %}
             {{ insert_setting('AppB') | raw }}
