@@ -96,6 +96,11 @@ options:
     settings:
       condition: true
       propertyCondition: usePlainTag
+  - name: customPictureContent
+    display: Custom Picture Content
+    type: code
+    options: ''
+    advanced: true
 */
 {% if element.values.background %}{%set tag = 'div' %}{% endif %}
 {% set path = element.values.path %}
@@ -122,6 +127,7 @@ options:
 {% endif %}
 {% if width and height and not usePlainTag %}
   {% set bpr %}import Image from 'next/image'{% endset %}{{ save_delayed('bpr', bpr ) }}
+  {% if element.values.customPictureContent %} {{ element.values.customPictureContent | raw }} {% endif %}
   <Image {% if element.values.priority %}priority={ {{ element.values.priority }} }{% endif %} {% if element.values.className %}className={ {{element.values.className}} }{% endif %} width={ {{width}} } height={ {{height}} } src={{ path|textOrVariable }} alt={{ element.values.alt|textOrVariable|default(path|textOrVariable) }} />
 {% else %}
   {% set tag = 'picture' %}
@@ -130,6 +136,9 @@ options:
   >
     {% if webppath %}
     <source type="image/webp" srcSet="{{ webppath }}" />
+    {% endif %}
+    {% if element.values.customPictureContent %}
+    {{  element.values.customPictureContent | raw }}
     {% endif %}
     <img
       src={{ path|textOrVariable }}
