@@ -17,6 +17,11 @@ options:
     display: On Change
     type: function
     options: ''
+  - name: onKeyDown
+    display: On Key Down
+    type: function
+    advanced: true
+    options: ''
   - name: placeholder
     display: Placeholder
     type: text
@@ -185,6 +190,7 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if fullWidth %}fullWidth{% endif %}
     {% if element.values.value %}value={{ element.values.value | textOrVariable }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
+    {% if element.values.onKeyDown %}onKeyDown={ {{ element.values.onKeyDown | functionOrCall }} }{% endif %}
     {% if element.values.endAdornment %}
       InputProps={ {
         endAdornment: <InputAdornment position="end">{{ content | raw }}</InputAdornment>

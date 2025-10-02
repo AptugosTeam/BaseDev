@@ -17,6 +17,7 @@ children: []
 {% else %}
   {% set pageFrom = page %}
 {% endif %}
+
 {% for item in pageFrom.children %}
 	{% if (item.type == 'page') %}
     {% if (item.path) %}

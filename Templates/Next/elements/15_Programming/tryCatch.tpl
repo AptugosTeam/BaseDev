@@ -18,8 +18,9 @@ children: []
 try {
   {{ content | raw }}
 } catch (e) {
-  console.log({% if element.values.messageError %} '{{ element.values.messageError }}', {% endif %} e)
   {% if element.values.catchContent %} 
     {{ element.values.catchContent | raw }}
+  {% else %}
+    console.log({% if element.values.messageError %} '{{ element.values.messageError }}', {% endif %} e)
   {% endif %}
 }

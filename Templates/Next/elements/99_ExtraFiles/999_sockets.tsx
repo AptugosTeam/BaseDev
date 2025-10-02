@@ -1,148 +1,87 @@
 /*
 path: 999_sockets.js
-completePath: elements/Experimental/Sockets/999_sockets.js
 unique_id: Wq86Z8m6
 internalUse: true
 */
-import { Server } from 'socket.io'
+import { WebSocketServer } from 'ws'
+import { IncomingMessage } from 'http'
+import { Socket } from 'net'
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
+declare global {
+  var wss: WebSocketServer | undefined
 }
 
-const SocketHandler = (req, res) => { 
-  if (res.socket.server.io) {
-    console.log('Socket is already running')
-  } else {
-    console.log('Socket is initializing')
-    const io = new Server(res.socket.server)
-
-    io.on('connection', socket => {
-      console.log('A user connected:', socket.id)
-      
-      socket.emit('message', { author: 'System', content: 'Welcome to the chat!' })
-
-      socket.on('message', msg => {
-        console.log('Received message:', msg)
-        io.emit('message', msg)
-      })
-
-      socket.on('disconnect', () => {
-        console.log('User disconnected:', socket.id)
-        io.emit('message', { author: 'System', content: 'A user left the chat.' })
-      })
-    })
-
-    res.socket.server.io = io
+export const getWsServerInstance = (): WebSocketServer => {
+  if (global.wss) {
+    console.log("WebSocket server instance already exists. Returning it.")
+    return global.wss
   }
 
-  res.end()
+  console.log("Creating new WebSocket Server instance...")
+  
+  global.wss = new WebSocketServer({ noServer: true })
+
+  global.wss.on('connection', (ws: WebSocket, req: IncomingMessage) => {
+    console.log('Client connected!')
+    // Handle events here
+    ws.on('message', (data: any) => {
+      console.log(`Received message from client: ${data}`)
+    })
+
+    ws.on('close', () => {
+      console.log('Client disconnected.')
+    })
+  })
+
+  return global.wss
 }
 
-export default SocketHandler
+export const withWsServer = (handler: any) => async (req: IncomingMessage, res: any) => {
+  if (!res.socket.server.ws) {
+    const wss = getWsServerInstance()
+    res.socket.server.ws = wss
 
+    res.socket.server.on('upgrade', (request: IncomingMessage, socket: Socket, head: Buffer) => {
+      if (request.url.startsWith('/_next/')) {
+        console.log(`Ignoring HMR WebSocket request for: ${request.url}`)
+        return
+      }
+      
+      console.log(`WebSocket upgrade request for URL: ${request.url}`)
 
-
-
-
-// const uuidv4 = require('uuid').v4
-
-// const messages = new Set()
-// const users = new Map()
-// const messageExpirationTimeMS = 5*60 * 1000;
-// const defaultUser = {
-//   id: 'anon',
-//   name: 'Anonymous',
-// }
-
-// {% for delay in delayed %}
-//   {% for specificDelay in delay.beforeClassDefinition %}
-//     {{ specificDelay }}
-//   {% endfor %}
-// {% endfor %}
-
-// class Connection {
-//   constructor(io, socket) {
-//     this.socket = socket
-//     this.io = io
-//     {% for delay in delayed %}
-//       {% for specificDelay in delay.theconstructor %}
-//         {{ specificDelay }}
-//       {% endfor %}
-//     {% endfor %}
-//     socket.on('getUsers', () => this.getUsers())
-//     socket.on('getMessages', () => this.getMessages())
-//     socket.on('message', (value) => this.handleMessage(value))
-//     socket.on('disconnect', () => this.disconnect())
-//     socket.on('connect_error', (err) => {
-//       console.log(`connect_error due to ${err.message}`)
-//     });
-//   }
-
-//   getUsers() {
-//     const theUsers = []
-//     for (let [id, socket] of this.io.of('/').sockets) {
-//       theUsers.push({ userID: id, username: socket.username || 'Anonymous' })
-//     }
-//     this.io.emit('users', theUsers)
-//   }
+      wss.handleUpgrade(request, socket, head, (websocket) => {
+        wss.emit('connection', websocket, request)
+      })
+    })
+  }
   
-//   sendMessage(message) {
-//     {% for delay in delayed %}
-//       {% for specificDelay in delay.onsendmessage %}
-//         {{ specificDelay }}
-//       {% endfor %}
-//     {% endfor %}
-//     this.io.sockets.emit('message', message);
-//   }
-  
-//   getMessages() {
-//     let msgs = [...messages]
-//     {% for delay in delayed %}
-//       {% for specificDelay in delay.ongetmessages %}
-//         {{ specificDelay }}
-//       {% endfor %}
-//     {% endfor %}
-//     msgs.forEach((message) => this.sendMessage(message));
-//   }
+  return handler(req, res)
+}
 
-//   handleMessage(value) {
-//     console.log(this.socket)
-//     const message = {
-//       id: uuidv4(),
-//       user: users.get(this.socket) || { ...defaultUser, name: 'Anonymous ' + users.size },
-//       value,
-//       time: Date.now()
-//     }
+export const broadcast = (data: any) => {
+  const wss = getWsServerInstance()
+  if (!wss) return
 
-//     {% for delay in delayed %}
-//       {% for specificDelay in delay.onhandlemessage %}
-//         {{ specificDelay }}
-//       {% endfor %}
-//     {% endfor %}
-//     messages.add(message)
-//     this.sendMessage(message)
+  wss.clients.forEach((client: WebSocket) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify(data))
+    }
+  })
+}
 
-//     setTimeout(
-//       () => {
-//         messages.delete(message)
-//         this.io.sockets.emit('deleteMessage', message.id)
-//       },
-//       messageExpirationTimeMS,
-//     );
-//   }
+export const stop = () => {
+    const wss = getWsServerInstance()
+    if (!wss) return false
 
-//   disconnect() {
-//     users.delete(this.socket)
-//   }
-// }
+    wss.clients.forEach((client: WebSocket) => client.close())
+    wss.close()
+    delete global.wss
+    console.log('WebSocket server stopped')
+    return true
+}
 
-// function chat(io) {
-//   io.on('connection', (socket) => {
-//     new Connection(io, socket)
-//   });
-// };
-
-// module.exports = chat
+export const status = () => {
+  const wss = getWsServerInstance()
+  if (!wss) return { running: false }
+  return { running: true, clients: wss.clients.size }
+}

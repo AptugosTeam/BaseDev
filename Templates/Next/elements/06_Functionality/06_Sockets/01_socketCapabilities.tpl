@@ -1,33 +1,25 @@
 /*
 path: socketCapabilities.tpl
-completePath: elements/Experimental/Sockets/socketCapabilities.tpl
 type: file
 unique_id: socketCapabilities
 helpText: Enables Socket capabilities into your application, both in front and back-end
-icon: f:../../z-images/sockets.svg
+icon: ico-plug
 children: []
-usesDelays: [theconstructor,onsendmessage,ongetmessages,onhandlemessage,beforeClassDefinition]
 settings:
   - name: Packages
-    value: '"socket.io": "^4.8.1","socket.io-client": "^4.8.1",'
+    value: '"ws": "^8.18.0",'
 options:
-  - name: serverurl
-    display: Server URL
+  - name: port
+    display: Server PORT
     type: text
 extraFiles:
   - source: 'elements/99_ExtraFiles/999_sockets.tsx'
-    destination: 'src/pages/api/socket.tsx'
+    destination: 'src/api-lib/sockets.tsx'
+  - source: 'elements/99_ExtraFiles/998_SocketEndpointsStart.tsx'
+    destination: 'src/pages/api/ws/start.tsx'
+  - source: 'elements/99_ExtraFiles/997_SocketEndpointsStop.tsx'
+    destination: 'src/pages/api/ws/stop.tsx'
+  - source: 'elements/99_ExtraFiles/996_SocketEndpointsStatus.tsx'
+    destination: 'src/pages/api/ws/status.tsx'
 */
-{% set bpr %}
-import io from 'socket.io-client'
-{% endset %}
-{{ save_delayed('bpr',bpr)}}
-{% set ph %}
-const socketRef = React.useRef(null)
-const socket = socketRef.current
-React.useEffect(() => {
-  socketRef.current = io('{{ element.values.serverurl }}')
-  return () => socketRef.current.disconnect();
-}, [])
-{% endset %}
-{{ save_delayed('ph',ph)}}
+//https://90f55a73f27d.ngrok-free.app/?wss=https://c2728be29a7c.ngrok-free.app

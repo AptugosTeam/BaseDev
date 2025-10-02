@@ -13,12 +13,15 @@ unique_id: AlPg3QRE
 
   const aggregate = []
   
+  // aca
+  {% set inaggregation = false %}
   if (populate !== 'false') {
     {% for field in table.fields %}
       {% set fieldWithData = field | fieldData %}
       {% include includeTemplate(['Fields' ~ field.data_type ~ 'find.tpl', 'Fieldsfind.tpl']) %}
     {% endfor %}
   }
+  // alla
 
   if (skip) aggregate.push({ $skip: skip })
   if (sortField && sortMethod) aggregate.push({ $sort: { [sortField]: sortMethod === 'desc' ? -1 : 1 } })

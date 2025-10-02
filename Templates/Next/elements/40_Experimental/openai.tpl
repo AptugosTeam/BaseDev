@@ -8,10 +8,10 @@ options:
     type: text
 settings:
   - name: Packages
-    value: '"openai": "^4.77.0","ws":"^8.18.0",'
+    value: '"openai": "5.20.2",'
 extraFiles:
   - source: 'elements/99_ExtraFiles/900_openai.js'
     destination: 'src/lib/openai.js'
 */
-{# {{ add_setting('openAIKey', element.values.openAIKey)}} #}
-{# {{ add_setting(tableSingleName ~ '_File_Start', 'import callAI from '@lib/openai')}} #}
+
+// OpenAI 5.20.2 enabled

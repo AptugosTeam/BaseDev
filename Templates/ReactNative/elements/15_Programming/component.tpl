@@ -1,9 +1,11 @@
 /*
 path: component.tpl
 keyPath: elements/Programming/component.tpl
-unique_id: zHZJ3XKp
-usesDelays: [bpr,ph]
+unique_id: zHZJ3Xpo
+usesDelays: [bpr]
 delayContext: true
+icon: ico-component
+order: 4
 options:
   - name: name
     display: ComponentName
@@ -12,9 +14,9 @@ options:
     settings:
       aptugoOnLoad: >-
         const element = arguments[0];
-        const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;
+        const page = aptugo.pageUtils.findContainerPage(element.unique_id);
         if (element.values.name) {
-          aptugo.variables.setComponent(element.values.name, `Defined in ${aptugo.plain[page].name}`)
+          aptugo.variables.setComponent(element.values.name, `Defined in ${page.name}`);
         }
       active: true
   - name: props
@@ -27,8 +29,8 @@ options:
     display: Also use it
     type: checkbox
 extraFiles:
-  - source: 'elements/Programming/baseComponent.tsx'
-    destination: 'front-end/components/{{ element.values.name | friendly }}/index.tsx'
+  - source: 'elements/99_ExtraFiles/baseComponent.tsx'
+    destination: 'front-end/components/{{ element.values.name | friendly }}/{{ element.values.name | friendly }}.tsx'
 childs:
   - name:  componentHeader
     element: componentHeader

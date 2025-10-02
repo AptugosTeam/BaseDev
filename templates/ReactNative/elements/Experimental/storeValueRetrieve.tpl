@@ -37,7 +37,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% if element.values.valueToVar %}
-  const {{ element.values.valueToVar }} ={% if element.values.Parse %}JSON.parse({% endif %}await AsyncStorage.getItem('{{ element.values.variableName }}'){% if element.values.Parse %}){% endif %}
+  AsyncStorage.getItem('{{ element.values.variableName }}').then(({{ element.values.valueToVar }}:any) => {
+    {{ content | raw }}
+  })
 {% else %}
   AsyncStorage.getItem('{{ element.values.variableName }}').then((res:any) => {
     {% if element.values.onLoad %}

@@ -5,15 +5,17 @@ unique_id: t9Bzg4Oy
 */
 {% set referencedField = field.reference | fieldData %}
 {% if field.relationshipType == 'm:1' %}
-  // m:1 - {{ field.column_name }}
-  aggregate.push({ $lookup: {
+  // m:1 - {{ field.column_name }} {{ inaggregation }}
+  {% set preparedLookup %}
+  $lookup: {
     from: '{{ referencedField.table.name | friendly }}',
     localField: '{{ field.column_name | friendly }}',
     foreignField: '_id',
     as: '{{ field.column_name | friendly }}'
-  } }, { $unwind: { path: '${{ field.column_name | friendly }}', preserveNullAndEmptyArrays: true } })
+  } }, { $unwind: { path: '${{ field.column_name | friendly }}', preserveNullAndEmptyArrays: true }
+  {% endset %}
 {% elseif field.relationshipType == '1:m' %}
-  // 1-m: {{field.column_name }}
+  // 1-m: {{field.column_name }}  {{ inaggregation }}
   {% set autocompleteFields = [] %}
   {% for f in referencedField.table.fields %}
     {% if f.data_type == 'Autocomplete' %}
@@ -35,10 +37,10 @@ unique_id: t9Bzg4Oy
     {% endif %}
   }
   {% endset %}
-  {% if inaggregation %}
-    { {{ preparedLookup }} }
-  {% else %}
-  
-    aggregate.push({ {{ preparedLookup }}})
-  {% endif %}
+{% endif %}
+{% if inaggregation %}
+  { {{ preparedLookup }} }
+{% else %}
+  aggregate.push({ {{ preparedLookup }}})
+  {% set inaggregation = true %}
 {% endif %}
