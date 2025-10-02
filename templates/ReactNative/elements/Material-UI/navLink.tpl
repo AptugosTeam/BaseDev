@@ -36,5 +36,5 @@ import { Text } from 'react-native'
     key='{{ element.unique_id }}'
 >
   <Text>{{ element.values.linkText }}</Text>
-  {{ content | raw }}
+  {{ content | raw }}
 </Link>

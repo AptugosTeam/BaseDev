@@ -11,12 +11,12 @@ options:
 */
 {% set bpr %}
 import { Provider as PaperProvider } from 'react-native-paper'
-import { SafeAreaView } from 'react-native'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% set bpr %}
 import { StyleSheet, Platform, StatusBar } from 'react-native'
-const sc = StyleSheet.create({
+const sc  = StyleSheet.create({
   droidSafeArea: {
     {% if element.values.style %}
     {{element.values.style}}
@@ -35,4 +35,4 @@ const {{ page.name | friendly }} = (props) => {
     {{ delay }}
   {% endfor %}
   {{ content|raw }}
-  return (<PaperProvider><SafeAreaView style={sc.droidSafeArea}>
+  return (<PaperProvider><SafeAreaProvider style={sc.droidSafeArea}>

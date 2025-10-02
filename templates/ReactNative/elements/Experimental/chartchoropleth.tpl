@@ -44,16 +44,16 @@ import { {% if element.values.Responsive %}ResponsiveChoropleth{% else %}Choropl
 import features from '../components/Geo/features.json'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{% include includeTemplate('loadFromRedux.tpl') with { 'data': countries.table.unique_id } %}
+{% include includeTemplate('loadFromRedux.tpl') with { 'data': countries.table.unique_id } %}
 {% set ph %}
 
 const geodata = []
 let geodatamax = null
 let geodatamin = null
-{{ countries.table.name | friendly | lower }}Data.{{ countries.table.name | friendly | lower }}.forEach({{ countries.table.singleName | friendly | lower }} => {
+{{ countries.table.name | friendly | lower }}Data.{{ countries.table.name | friendly | lower }}.forEach({{ countries.table.singleName | friendly | lower }} => {
     const newVal = { 
-      id: {{ countries.table.singleName | friendly | lower }}.{{ countries.column_name }},
-      value: {{ values.table.singleName | friendly | lower }}.{{ values.column_name }}
+      id: {{ countries.table.singleName | friendly | lower }}.{{ countries.column_name }},
+      value: {{ values.table.singleName | friendly | lower }}.{{ values.column_name }}
     }
     
     if (newVal.value > geodatamax) geodatamax = newVal.value

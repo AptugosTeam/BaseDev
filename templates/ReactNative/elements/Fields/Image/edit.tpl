@@ -3,7 +3,7 @@ path: edit.tpl
 completePath: elements/Fields/Image/edit.tpl
 unique_id: 1NX62QJ2
 */
-{% set tableName = ( field | fieldData ).table.name | friendly %}
+{% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import FileUpload from '../components/FileUpload/FileUpload'
 {% endset %}

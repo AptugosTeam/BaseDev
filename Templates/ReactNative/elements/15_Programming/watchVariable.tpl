@@ -11,10 +11,6 @@ options:
 helpText: Watch a variable for changes
 children: []
 */
-
-{% set ph %}
 React.useEffect(() => {
-    {{ content | raw }}
+    {{ content | raw }}
 },[{{ element.values.watchVariable }}])
-{% endset %}
-{{ save_delayed('ph',ph) }}

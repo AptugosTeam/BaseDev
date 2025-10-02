@@ -19,7 +19,7 @@ children: []
 */
 {% set service = element.values.service %}
 {% set addToService %}
-  {{ element.values.code | default( content | raw ) }}
+  {{ element.values.code | default( content | raw ) }}
 {% endset %}
 
 {{ add_setting(service, addToService) }}

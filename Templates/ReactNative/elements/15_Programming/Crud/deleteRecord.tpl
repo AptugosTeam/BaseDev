@@ -18,11 +18,11 @@ options:
     type: text
 children: []
 */
-{% set table = element.values.table | tableData %}
-{% set tableSingleName = table.singleName | friendly | capitalize %}
+{% set table = element.values.table | tableData %}
+{% set tableSingleName = table.singleName | friendly | capitalize %}
 {% set bpr %}
 // Remove Favorito
-  import { remove{{ tableSingleName }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+  import { remove{{ tableSingleName }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 dispatch(remove{{ tableSingleName }} ({{ element.values.record }}))

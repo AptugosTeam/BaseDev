@@ -25,6 +25,6 @@ const MyDocument = () => (
 )
 {% endset %}
 {{ save_delayed('ph', ph) }}
-<PDFDownloadLink document={<MyDocument />} fileName={{ element.values.fileName | textOrVariable | default('"download.pdf"')}}>
+<PDFDownloadLink document={<MyDocument />} fileName={{ element.values.fileName | textOrVariable | default('"download.pdf"')}}>
   {({ blob, url, loading, error }) => loading ? 'Loading document...' : 'Download now!'}
 </PDFDownloadLink>

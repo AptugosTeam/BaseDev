@@ -14,14 +14,14 @@ children: []
 import { useSelector } from 'react-redux'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
-{% set tableName = ( field | fieldData ).table.name | friendly %}
+{% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set referencedField = field.reference | fieldData %}
 {% set referencekey = '_id' %}
 
 {% set referencedTable = referencedField.table.name | friendly | capitalize %}
 {% set columnName = field.column_name | friendly %}
 {% set bpr %}
-import { search{{ referencedTable }} } from '../store/actions/{{ referencedTable | lower }}Actions'
+import { search{{ referencedTable }} } from '../store/actions/{{ referencedTable | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set bpr %}

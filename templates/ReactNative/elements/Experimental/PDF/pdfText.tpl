@@ -31,12 +31,12 @@ import { Text } from '@react-pdf/renderer'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Text
-  {% if element.values.wrap %}wrap={ {{ element.values.wrap }} }{% endif %}
-  {% if element.values.style %}style={{ element.values.style | textOrVariable }}{% endif %}
-  {% if element.values.render %}render={ {{ element.values.render |functionOrCall }} }{% endif %}
-  {% if element.values.hyphenationCallback %}hyphenationCallback={ {{ element.values.hyphenationCallback |functionOrCall }} }{% endif %}
-  {% if element.values.fixed %}fixed={ {{ element.values.fixed }} }{% endif %}
-  {% if element.values.debug %}debug={ {{ element.values.debug }} }{% endif %}
+  {% if element.values.wrap %}wrap={ {{ element.values.wrap }} }{% endif %}
+  {% if element.values.style %}style={{ element.values.style | textOrVariable }}{% endif %}
+  {% if element.values.render %}render={ {{ element.values.render |functionOrCall }} }{% endif %}
+  {% if element.values.hyphenationCallback %}hyphenationCallback={ {{ element.values.hyphenationCallback |functionOrCall }} }{% endif %}
+  {% if element.values.fixed %}fixed={ {{ element.values.fixed }} }{% endif %}
+  {% if element.values.debug %}debug={ {{ element.values.debug }} }{% endif %}
 >
-  {{ content | raw }}
+  {{ content | raw }}
 </Text>

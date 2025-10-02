@@ -16,7 +16,7 @@ childs:
     element: text
 */
 {% set bpr %}
-import { Caption } from 'react-native-paper'
+import { Text as PaperText } from 'react-native-paper'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<Caption>{{ content | raw }}</Caption>
+<PaperText variant="bodySmall">{{ content | raw }}</PaperText>

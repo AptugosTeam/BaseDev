@@ -6,6 +6,13 @@ internalUse: true
 */
 import React, { FunctionComponent } from 'react'
 import baseClasses from '@components/Themes/layout.module.scss'
+
+{% for child in element.children %}
+    {% if child.value == 'componentBeforePageRender' %} 
+      {{ child.rendered }}  
+    {% endif %}
+  {% endfor %}
+
 {% for delay in delayed %}
   {% for specificDelay in delay.bpr %}
     {{ specificDelay }}

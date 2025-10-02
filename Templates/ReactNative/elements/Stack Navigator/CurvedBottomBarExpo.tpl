@@ -106,7 +106,7 @@ children: []
     {% if element.children %}
      {% for child in element.children %}
       {% if child.value != 'CurvedBottomBarExpoScreen' %}
-        {{ child.rendered | raw }}
+        {{ child.rendered | raw }}
       {% endif %}
      {% endfor %}
     {% else %}
@@ -120,7 +120,7 @@ children: []
   {% if element.children %}
     {% for child in element.children %}
      {% if child.value == 'CurvedBottomBarExpoScreen' %}
-      {{ child.rendered | raw }}
+      {{ child.rendered | raw }}
      {% endif %}
     {% endfor %}
   {% endif %}

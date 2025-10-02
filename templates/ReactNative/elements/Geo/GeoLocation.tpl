@@ -18,6 +18,6 @@ options:
       }
 
       const position = await Location.getCurrentPositionAsync({})
-      {{ element.values.statevar }}(position.coords)
+      {{ element.values.statevar }}(position.coords)
       {{ content | raw }}
     })()

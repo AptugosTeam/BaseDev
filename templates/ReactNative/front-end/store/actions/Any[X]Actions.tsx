@@ -291,11 +291,11 @@ export interface IEditing{{ table.name | friendly | capitalize }}FailedAction {
 }
 
 export type {{ table.name | friendly | capitalize }}Action = 
-  | ISearch{{ table.name | friendly | capitalize }}Action
+  | ISearch{{ table.name | friendly | capitalize }}Action
   | ISearching{{ table.name | friendly | capitalize }}Action
   | IFound{{ table.name | friendly | capitalize }}Action
   | ISearching{{ table.name | friendly | capitalize }}FailedAction
-  | ILoad{{ table.name | friendly | capitalize }}Action
+  | ILoad{{ table.name | friendly | capitalize }}Action
   | ILoading{{ table.name | friendly | capitalize }}Action
   | ILoaded{{ table.name | friendly | capitalize }}Action
   | ILoading{{ table.name | friendly | capitalize }}FailedAction

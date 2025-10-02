@@ -13,7 +13,7 @@ options:
 children: []
 settings:
   - name: Packages
-    value: '"@react-native-async-storage/async-storage": "1.18.2",'
+    value: '"@react-native-async-storage/async-storage": "^2.2.0",'
 */
 {% set bpr %}
 import AuthService from '@services/auth.service'

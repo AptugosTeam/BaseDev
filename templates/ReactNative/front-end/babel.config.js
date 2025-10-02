@@ -9,7 +9,7 @@ module.exports = function(api) {
   const plugins = ['transform-inline-environment-variables']
   const presets = ['babel-preset-expo']
 
-  {{ insert_setting('BabelAdd') | raw }}
+  {{ insert_setting('BabelAdd') | raw }}
 
   plugins.push('react-native-reanimated/plugin')
   

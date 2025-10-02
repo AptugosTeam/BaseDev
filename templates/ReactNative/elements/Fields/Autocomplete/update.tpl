@@ -60,7 +60,7 @@ unique_id: zd6mrTlU
         const {{ field.column_name | friendly }}ID = require('mongoose').Types.ObjectId()
 
         Object.keys({{ field.column_name | friendly }}info).forEach(info => {
-          if ({{ field.column_name | friendly }}info[info] && typeof {{ field.column_name | friendly }}info[info] === 'object' && (typeof {{ field.column_name | friendly }}info[info].{{ reference.column_name }} === 'string' || typeof {{ field.column_name | friendly }}info.{{ reference.column_name }} === 'string')) {
+          if ({{ field.column_name | friendly }}info[info] && typeof {{ field.column_name | friendly }}info[info] === 'object' && (typeof {{ field.column_name | friendly }}info[info].{{ reference.column_name }} === 'string' || typeof {{ field.column_name | friendly }}info.{{ reference.column_name }} === 'string')) {
             {{ field.column_name | friendly }}Files[info] = {{ field.column_name | friendly }}info[info]
           }
         })

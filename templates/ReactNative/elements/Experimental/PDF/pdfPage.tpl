@@ -34,11 +34,11 @@ import { Page } from '@react-pdf/renderer'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Page
-  {% if element.values.size %}size={{ element.values.size | textOrVariable | default("'LEGAL'") }}{% endif %}
-  {% if element.values.orientation %}orientation={{ element.values.orientation | textOrVariable | default("'portrait'") }}{% endif %}
-  {% if element.values.wrap %}wrap={ {{ element.values.wrap }} }{% endif %}
-  {% if element.values.style %}style={{ element.values.style | textOrVariable }}{% endif %}
-  {% if element.values.debug %}debug={ {{ element.values.debug }} }{% endif %}
+  {% if element.values.size %}size={{ element.values.size | textOrVariable | default("'LEGAL'") }}{% endif %}
+  {% if element.values.orientation %}orientation={{ element.values.orientation | textOrVariable | default("'portrait'") }}{% endif %}
+  {% if element.values.wrap %}wrap={ {{ element.values.wrap }} }{% endif %}
+  {% if element.values.style %}style={{ element.values.style | textOrVariable }}{% endif %}
+  {% if element.values.debug %}debug={ {{ element.values.debug }} }{% endif %}
 >
-  {{ content | raw }}
+  {{ content | raw }}
 </Page>

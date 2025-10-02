@@ -22,5 +22,5 @@ settings:
       })
 */
 axios.get(`{{ settings.apiURL }}/stripe-order-details/${ {{ element.values.sessionID }} }`).then(res => {
-  {{ content | raw }}
+  {{ content | raw }}
 })

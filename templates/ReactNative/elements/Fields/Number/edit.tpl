@@ -3,7 +3,7 @@ path: edit.tpl
 completePath: elements/Fields/Number/edit.tpl
 unique_id: iTMTweVR
 */
-{% set tableName = ( field | fieldData ).table.name | friendly %}
+{% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import { TextInput } from 'react-native-paper'
 {% endset %}
@@ -21,6 +21,6 @@ import { TextInput } from 'react-native-paper'
     type="number"
     fullWidth
     variant="{{ element.values.variant|default('standard') }}"
-    value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
+    value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
     onChange={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
 />

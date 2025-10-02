@@ -16,5 +16,5 @@ import Hidden from '@mui/material/Hidden'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Hidden {{ element.values.hidevalue }}>
-{{ content | raw }}
+{{ content | raw }}
 </Hidden>

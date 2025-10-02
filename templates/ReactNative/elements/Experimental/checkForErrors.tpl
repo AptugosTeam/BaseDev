@@ -18,10 +18,10 @@ options:
     type: dropdown
     options: Top-Left;Top-Center;Top-Right;Bottom-Left;Bottom-Center;Bottom-Right
 */
-{% set table = element.values.table | tableData %}
-{% set friendlyTableName = table.name | friendly | capitalize %}
+{% set table = element.values.table | tableData %}
+{% set friendlyTableName = table.name | friendly | capitalize %}
 {% set dialogVariable = 'dialog' ~ friendlyTableName ~ 'Action' %}
-{% set element = element|merge({'values': (element.values | merge({'severity': 'error', 'varName': table.name|friendly|lower ~ 'snackbar' })) }) %}
+{% set element = element|merge({'values': (element.values | merge({'severity': 'error', 'varName': table.name|friendly|lower ~ 'snackbar' })) }) %}
 {% set ph %}
 React.useEffect(() => {
   if ({{ table.name|friendly|lower }}Data.errStatus) {

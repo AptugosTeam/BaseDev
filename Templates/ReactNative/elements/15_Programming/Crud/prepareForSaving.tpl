@@ -23,4 +23,4 @@ options:
 children: []
 */
 {% set theField = element.values.field | fieldData %}
-data.{{ theField.column_name | friendly }} = {{ element.values.value | default( content | raw ) }}
+data.{{ theField.column_name | friendly }} = {{ element.values.value | default( content | raw ) }}

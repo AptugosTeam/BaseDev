@@ -4,11 +4,11 @@ completePath: front-end/services/auth.service.tsx
 unique_id: dDixye51
 settings:
   - name: Packages
-    value: '"@react-native-async-storage/async-storage": "1.18.2",'
+    value: '"@react-native-async-storage/async-storage": "^2.2.0",'
 */
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
-{{ insert_setting('AuthServiceImports') | raw }}
+{{ insert_setting('AuthServiceImports') | raw }}
 
 const BASE_API_URL = '{{ settings.apiURL }}/api/'
 
@@ -121,7 +121,7 @@ class AuthService {
         throw e
       })
   }
-{{ insert_setting('auth.service') | raw }}
+{{ insert_setting('auth.service') | raw }}
 {{ insert_setting('AuthServiceAddenum') | raw }}
 }
 

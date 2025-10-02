@@ -7,7 +7,7 @@ unique_id: aFBU2rTB
 import CardHeader from '@mui/material/CardHeader';
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{% if element.values.title | slice(0,1) == '{' %}
+{% if element.values.title | slice(0,1) == '{' %}
     {% set theTitle = 'title=' ~ element.values.title %}
 {% else %}
     {% set theTitle = 'title="' ~ element.values.title ~ '"' %}

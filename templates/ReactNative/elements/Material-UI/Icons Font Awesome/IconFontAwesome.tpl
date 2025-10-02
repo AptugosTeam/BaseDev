@@ -18,6 +18,9 @@ options:
     options: ''
 sourceType: javascript
 children: []
+settings:
+  - name: Packages
+    value: '"react-native-vector-icons": "^10.0.3",'
 */
 {% set bpr %}
 import Icon from 'react-native-vector-icons/FontAwesome';

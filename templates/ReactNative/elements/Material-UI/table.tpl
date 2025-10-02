@@ -90,13 +90,13 @@ children: []
   {% endfor %}
   {% set tableData = element.values.variableToUse %}
 {% else %}
-  {% set table = element.values.table | tableData %}
+  {% set table = element.values.table | tableData %}
   {% set tableName = table.name | friendly %}
-  {% set tableSingleName = table.singleName | friendly | capitalize %}
+  {% set tableSingleName = table.singleName | friendly | capitalize %}
   {% set setEditDataFunctionName = 'set' ~ tableName ~ 'Data' %}
   {% set fields = table.fields %}
 
-  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
+  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
 
   {% if element.children %}
       {% for field in element.children %}
@@ -115,7 +115,7 @@ children: []
   {% endif %}
   {% set tableData = '(' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ '.length ? ' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ ' : ' ~ table.name|friendly|lower ~ 'Data.' ~ table.name|friendly|lower ~ ' as any)' %}
   {% set bpr %}
-  import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+  import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
   {% endset %}
   {{ save_delayed('bpr', bpr ) }}
 {% endif %}
@@ -151,7 +151,7 @@ children: []
       }}
     {% endif %}
 >{% if element.children %}
-  {{ content | raw }}
+  {{ content | raw }}
 {% else %}
 {% for field in fields %}
   {% set innerParams = { 'element': { values: { 'Field': field.unique_id } } } %}
@@ -165,7 +165,7 @@ children: []
       aria-label="edit"
       color="primary"
       onClickCapture={(e: any) => { 
-        const url = '{{ (element.values.detailsURL | elementData ).path }}'.replace(':id', e.element._id)
+        const url = '{{ (element.values.detailsURL | elementData ).path }}'.replace(':id', e.element._id)
         props.history.push(url)
       }}
     >
@@ -179,9 +179,9 @@ children: []
       onClickCapture={(e: any) => { 
         {% if editProc == 'Internal' %}
           {{ setEditDataFunctionName }}(e.element)
-          setdialog{{ tableName | capitalize }}Action('edit')
+          setdialog{{ tableName | capitalize }}Action('edit')
         {% else %}
-          const url = '{{ (editProc | elementData ).path }}'.replace(':id', e.element._id)
+          const url = '{{ (editProc | elementData ).path }}'.replace(':id', e.element._id)
           props.history.push(url)
         {% endif %}
       }}
@@ -193,7 +193,7 @@ children: []
     <IconButton aria-label="delete" color="primary" icon="Delete" onClickCapture={(e: any) => {
       {% if element.values.confirmDeletes %}
         {{ setEditDataFunctionName }}(e.element)
-        setdialog{{ tableName | capitalize }}Action('delete')
+        setdialog{{ tableName | capitalize }}Action('delete')
       {% else %}
         dispatch(remove{{ tableSingleName }} (e.element))
       {% endif %}
@@ -204,6 +204,6 @@ children: []
 {% endif %}
 </Table>
 {% if element.values.usePagination %}
-{% set innerParams = { 'element': { 'unique_id': item.unique_id, values: { 'variableToUse': table.name | friendly | lower ~ 'Data', 'table': element.values.table, 'elementsLimit': element.values.elementsLimit, 'totalDocs': element.values.variableToUse.totalDocs } } } %}
-{% include includeTemplate('SimplePagination.tpl') with innerParams %}
+{% set innerParams = { 'element': { 'unique_id': item.unique_id, values: { 'variableToUse': table.name | friendly | lower ~ 'Data', 'table': element.values.table, 'elementsLimit': element.values.elementsLimit, 'totalDocs': element.values.variableToUse.totalDocs } } } %}
+{% include includeTemplate('SimplePagination.tpl') with innerParams %}
 {% endif %}

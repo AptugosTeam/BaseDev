@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux'
 {{ save_delayed('bpr', bpr ) }}
 {% if element.values.autosave %}
 {% set bpr %}
-import { edit{{ tableInfo.table.name | friendly | capitalize }} } from '../store/actions/{{ tableInfo.table.name | friendly | lower }}Actions'
+import { edit{{ tableInfo.table.name | friendly | capitalize }} } from '../store/actions/{{ tableInfo.table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% endif %}
@@ -31,7 +31,7 @@ const initialData{{ tableInfo.table.name | friendly }} = {
       {% set fieldValue = "null" %}
     {% endif %}
   {% endif %}
-  {{ field.column_name | friendly }}: {{ fieldValue }},
+  {{ field.column_name | friendly }}: {{ fieldValue }},
 {% endfor %}
 }
 const [{{ tableInfo.table.name | friendly }}data, set{{ tableInfo.table.name | friendly }}Data] = React.useState<any>(initialData{{ tableInfo.table.name | friendly }})

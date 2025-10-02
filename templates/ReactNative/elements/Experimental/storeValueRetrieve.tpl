@@ -6,7 +6,7 @@ icon: ico-field
 helpText: Retrieves a stored value
 settings:
   - name: Packages
-    value: '"@react-native-async-storage/async-storage": "1.18.2",'
+    value: '"@react-native-async-storage/async-storage": "^2.2.0",'
 options:
   - name: variableName
     display: Name
@@ -45,7 +45,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
     {% if element.values.onLoad %}
       {{ element.values.onLoad }}(
         {% if element.values.makeItBoolean %}Boolean({% endif %}
-        {% if element.values.Parse %}JSON.parse({% endif %}res {% if element.values.default %}|| '{{ element.values.default }}'{% endif %}{% if element.values.Parse %}){% endif %}
+        {% if element.values.Parse %}JSON.parse({% endif %}res {% if element.values.default %}|| '{{ element.values.default }}'{% endif %}{% if element.values.Parse %}){% endif %}
         {% if element.values.makeItBoolean %}){% endif %}
       )
     {% endif %}

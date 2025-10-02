@@ -72,9 +72,9 @@ options:
     options: ''
 children: []
 */
-{% set table = element.values.table | tableData %}
-{% set friendlyTableName = table.name | friendly | capitalize %}
-{% set friendlySingleName = table.singleName | friendly | capitalize %}
+{% set table = element.values.table | tableData %}
+{% set friendlyTableName = table.name | friendly | capitalize %}
+{% set friendlySingleName = table.singleName | friendly | capitalize %}
 {% set dialogVariable = 'dialog' ~ friendlyTableName ~ 'Action' %}
 {% if element.children %}
 {% else %}
@@ -116,7 +116,7 @@ import AddDialog from '../components/Dialog/Dialog'
   {% if element.values.classname %}className={ {{ element.values.classname }} }{% endif %}
   {% if element.values.hideButton %}hideButton={true}{% endif %}
   isOpen={ {{ dialogVariable }} !== ''}
-  onOpen={() => {% if element.values.addProcedure != 'No' %}{% if element.values.addProcedure == 'Internal' %}set{{ dialogVariable }}('add'){% else %}props.history.push('{{ (element.values.addProcedure | elementData ).path | withoutVars }}'){% endif %}{% else %}{}{%endif%}}
+  onOpen={() => {% if element.values.addProcedure != 'No' %}{% if element.values.addProcedure == 'Internal' %}set{{ dialogVariable }}('add'){% else %}props.history.push('{{ (element.values.addProcedure | elementData ).path | withoutVars }}'){% endif %}{% else %}{}{%endif%}}
   {% if not element.values.manuallyManaged %}
     onSave={() => set{{ dialogVariable }}('')}
   {% endif %}
@@ -125,24 +125,24 @@ import AddDialog from '../components/Dialog/Dialog'
   addOptions={ { title: '{{ element.values.title }}', text: '{{ element.values.introText }}', button: '{{ element.values.button }}' } }
   editOptions={ { title: '{{ element.values.editTitle }}', text: '{{ element.values.editIntroText }}', button: '{{ element.values.editButton }}' } }
   removeOptions={ { title: '{{ element.values.deleteTitle }}', text: '{{ element.values.deleteIntroText }}', button: '{{ element.values.deleteButton }}' } }
-  saveDataHandler={ (data: I{{ table.name | friendly | capitalize }}Item ) => {
+  saveDataHandler={ (data: I{{ table.name | friendly | capitalize }}Item ) => {
     {% if element.values.addProcedure == 'Internal' %}
       if ({{ dialogVariable }} === 'delete') {
         dispatch(remove{{ friendlySingleName }}(data))
       } else {
-        {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(data)) : dispatch(edit{{ table.name | friendly | capitalize }}(data))
+        {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(data)) : dispatch(edit{{ table.name | friendly | capitalize }}(data))
       }      
     {% endif %}
   } }
   color='{{ element.values.color }}'
-  data={ {{ table.name | friendly }}data}
-  initialData={initialData{{ table.name | friendly }}}
-  setData={set{{ table.name | friendly }}Data}
+  data={ {{ table.name | friendly }}data}
+  initialData={initialData{{ table.name | friendly }}}
+  setData={set{{ table.name | friendly }}Data}
   allowMultipleSubmit={ {{ dialogVariable }} === 'add'}
 >
 {% for field in fields %}
  {% set subvalues = { element: { values: { Field: field.unique_id, Type: 'edit' } }  } %}
  {% include includeTemplate('field.tpl') with subvalues %}
 {% endfor %}
-{{ content | raw }}
+{{ content | raw }}
 </LocalAddDialog>

@@ -20,4 +20,4 @@ options:
     type: dropdown
     options: standard;filled;outlined
 */
-{{ content | raw }}
+{{ content | raw }}

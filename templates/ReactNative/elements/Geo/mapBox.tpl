@@ -77,7 +77,7 @@ setAccessToken('{{ element.values.accessToken }}')
   {% if element.values.scaleBarEnabled %}scaleBarPosition={ {{element.values.scaleBarPosition|default('{ bottom: 8, left: 8}')}} }{% endif %}
   {% if element.values.className %}style={ {{ element.values.className}} }{% endif %}
   {% if element.values.onMapIdle %}
-    onMapIdle={ {{ element.values.onMapIdle |functionOrCall }} }
+    onMapIdle={ {{ element.values.onMapIdle |functionOrCall }} }
   {% endif %}
 >{{ content | raw }}</MapView>
 

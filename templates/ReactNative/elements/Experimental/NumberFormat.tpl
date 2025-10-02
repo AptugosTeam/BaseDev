@@ -47,7 +47,7 @@ options:
   new Intl.NumberFormat({{ element.values.CountryCode }}, {
     {% if element.values.Style and element.values.Style != 'None' %}style: '{{ element.values.Style|lower }}',{% endif %}
     {% if element.values.Style == 'Currency' %}currency: {{ element.values.Currency|default('"USD"') }},{% endif %}
-    {% if element.values.CurrencyDisplay %}currencyDisplay: '{{ element.values.CurrencyDisplay }}',{% endif %}
+    {% if element.values.CurrencyDisplay %}currencyDisplay: '{{ element.values.CurrencyDisplay }}',{% endif %}
     maximumFractionDigits: 2 }).format({{ element.values.Content | raw }}{{ content | raw }})
 }
 {% if element.values.ClassName %}</span>{% endif %}

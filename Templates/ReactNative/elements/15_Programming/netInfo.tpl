@@ -25,11 +25,11 @@ settings:
 {% if element.values.addEvent %}
 const unsubscribe = NetInfo.addEventListener((state) => {
       {{ element.values.body }}
-      {{ content | raw }}
+      {{ content | raw }}
 })
 {% else %}
 NetInfo.fetch().then((state) => {
     {{ element.values.body }}
-    {{ content | raw }}
+    {{ content | raw }}
 })
 {% endif %}

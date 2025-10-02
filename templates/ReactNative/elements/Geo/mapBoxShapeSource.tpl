@@ -25,7 +25,7 @@ const shapeSourceRef{{ element.unique_id }} = React.useRef<ShapeSource>(null)
 <ShapeSource
   id="{{ element.unique_id }}"
   onPress={async (pressedShape) => {
-    {{ element.values.onPress | raw }}
+    {{ element.values.onPress | raw }}
   }}
   ref={shapeSourceRef{{ element.unique_id }}}
   cluster
@@ -34,5 +34,5 @@ const shapeSourceRef{{ element.unique_id }} = React.useRef<ShapeSource>(null)
   {% if element.values.clusterProperties %}clusterProperties={ {{ element.values.clusterProperties }} }{% endif %}
   shape={ {{ element.values.shape }} }
 >
-  {{ content | raw }}
+  {{ content | raw }}
 </ShapeSource>

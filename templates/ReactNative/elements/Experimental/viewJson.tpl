@@ -17,4 +17,4 @@ options:
 import ReactJson from 'react-json-view'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-<ReactJson src={{ element.values.jsonObject | textOrVariable }} />
+<ReactJson src={{ element.values.jsonObject | textOrVariable }} />

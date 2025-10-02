@@ -13,7 +13,7 @@ icon: ico-field
   {% set extraPlugins = friendlyTableName ~ "Schema.plugin(mongooseAutoPopulate)" %}
   {% set extraImports = "const mongooseAutoPopulate = require('mongoose-autopopulate')\n" %}
   {% set relatedFieldInfo = fieldInfo.reference | fieldData %}
-  {% set datatype = '{\ntype:' ~ fieldInfo.dataType ~ ',\nref: ' ~ '"' ~ relatedFieldInfo.table.name | friendly ~ '"' ~ ',\nautopopulate: true\n' ~ '}\n' %}
+  {% set datatype = '{\ntype:' ~ fieldInfo.dataType ~ ',\nref: ' ~ '"' ~ relatedFieldInfo.table.name | friendly ~ '"' ~ ',\nautopopulate: true\n' ~ '}\n' %}
 {% endif %}
-{% set friendlyColumnName = field.column_name | friendly  %}
-{{ friendlyColumnName ~ ': ' ~  datatype  ~ ',' }}
+{% set friendlyColumnName = field.column_name | friendly  %}
+{{ friendlyColumnName ~ ': ' ~  datatype  ~ ',' }}

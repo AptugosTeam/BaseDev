@@ -10,5 +10,5 @@ import Card from '@mui/material/Card'
 <Card
   {% if element.values.elevation %}elevation={ {{ element.values.elevation }} }{% endif %}
 >
-  {{ content | raw }}
+  {{ content | raw }}
 </Card>

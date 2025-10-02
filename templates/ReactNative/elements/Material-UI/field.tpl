@@ -96,7 +96,7 @@ children: []
 {{ save_delayed('bpr', bpr ) }}
 {% if (element.values.Field) and (element.values.Field != 'useVar') %}
   {% set ph %}
-  {% include includeTemplate('FieldseditInclude.tpl') with { 'tableInfo': element.values.Field | fieldData } %}
+  {% include includeTemplate('FieldseditInclude.tpl') with { 'tableInfo': element.values.Field | fieldData } %}
   {% endset %}
   {{ save_delayed('ph', ph ) }}
   {% set theField = element.values.Field | fieldData %}

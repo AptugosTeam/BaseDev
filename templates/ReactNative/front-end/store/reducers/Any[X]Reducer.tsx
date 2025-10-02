@@ -7,9 +7,9 @@ modelRelated: true
 helpText: Reducer file
 subtype: Any
 */
-{% set tableNameCap = table.name | friendly | capitalize %}
-{% set tableNameLow = table.name | friendly | lower %}
-{% set tableNameUp = table.name | friendly | upper %}
+{% set tableNameCap = table.name | friendly | capitalize %}
+{% set tableNameLow = table.name | friendly | lower %}
+{% set tableNameUp = table.name | friendly | upper %}
 
 import {produce} from 'immer'
 import { ApiStatus, Ipaginated{{ tableNameCap }}, I{{ tableNameCap }}Item } from '../models'
@@ -91,8 +91,8 @@ export default function {{ tableNameLow }}Reducer(state: I{{ tableNameCap }}Stat
         if (draft.searchString) draft.found{{ tableNameLow }}.push(action.payload.{{ tableNameLow }}.docs[0])
         break
         
-      case {{ tableNameCap }}ActionTypes.REMOVE_{{ table.singleName | friendly | upper }}:
-        draft.{{ tableNameLow }}.splice(draft.{{ tableNameLow }}.findIndex({{ table.singleName | friendly | lower }} => {{ table.singleName | friendly | lower }}._id === action.payload._id), 1)
+      case {{ tableNameCap }}ActionTypes.REMOVE_{{ table.singleName | friendly | upper }}:
+        draft.{{ tableNameLow }}.splice(draft.{{ tableNameLow }}.findIndex({{ table.singleName | friendly | lower }} => {{ table.singleName | friendly | lower }}._id === action.payload._id), 1)
         break
         
       case {{ tableNameCap }}ActionTypes.EDIT_{{ tableNameUp }}:
@@ -100,15 +100,15 @@ export default function {{ tableNameLow }}Reducer(state: I{{ tableNameCap }}Stat
         draft.addingStatus = ApiStatus.LOADING
         draft.searchingStatus = ApiStatus.NOTLOADED
         draft.{{ tableNameLow }}[draft.{{ tableNameLow }}.findIndex(
-          ({{ table.singleName | friendly | lower }}) => {{ table.singleName | friendly | lower }}._id === action.payload._id)] = action.payload
+          ({{ table.singleName | friendly | lower }}) => {{ table.singleName | friendly | lower }}._id === action.payload._id)] = action.payload
         break
         
       case {{ tableNameCap }}ActionTypes.EDITED_{{ tableNameUp }}:
         draft.addingStatus = ApiStatus.LOADED
         draft.{{ tableNameLow }}[draft.{{ tableNameLow }}.findIndex(
-          ({{ table.singleName | friendly | lower }}) => {{ table.singleName | friendly | lower }}._id === action.payload._id)] = action.payload
+          ({{ table.singleName | friendly | lower }}) => {{ table.singleName | friendly | lower }}._id === action.payload._id)] = action.payload
         draft.found{{ tableNameLow }}[draft.found{{ tableNameLow }}.findIndex(
-          ({{ table.singleName | friendly | lower }}) => {{ table.singleName | friendly | lower }}._id === action.payload._id)] = action.payload
+          ({{ table.singleName | friendly | lower }}) => {{ table.singleName | friendly | lower }}._id === action.payload._id)] = action.payload
         break
     }
   })

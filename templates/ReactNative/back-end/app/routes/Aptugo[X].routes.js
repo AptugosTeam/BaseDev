@@ -9,7 +9,7 @@ subtype: Aptugo
 children: []
 */
 module.exports = (app) => {
-  const {{ table.name | friendly | lower }} = require('../controllers/{{ table.name | friendly | lower }}.controller.js')
+  const {{ table.name | friendly | lower }} = require('../controllers/{{ table.name | friendly | lower }}.controller.js')
   {% if table.extraModules %}{{ table.extraModules }}{% endif %}
 
   {% for route in table.definedRoutes %}
@@ -17,7 +17,7 @@ module.exports = (app) => {
       // {{ route.route_name }}
       app.{{ route.route_method }}('{{ parse(route.route_path, { route: route, table: table }) }}', (req, res) => {
         {% if route.route_template != 'source' %}
-          {% include includeTemplate('Aptugo Routes' ~ route.route_template ~ '.tpl') %}
+          {% include includeTemplate('Aptugo Routes' ~ route.route_template ~ '.tpl') %}
         {% else %}
           {{ route.route_code | raw }}
         {% endif %}

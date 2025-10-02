@@ -73,7 +73,7 @@ let final = {}
     })
 
     req.body = final
-    {{ table.name | friendly | lower }}.update({ req, res })
+    {{ table.name | friendly | lower }}.update({ req, res })
       .then(result => {
         res.send(result)
     })

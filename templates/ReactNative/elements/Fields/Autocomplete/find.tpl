@@ -10,8 +10,8 @@ unique_id: t9Bzg4Oy
   {% set subpopulation = [] %}
   {% for everyField in builder.plainFields %}
     {% if everyField.reference %}
-      {% set everyFieldRelationshipData = everyField.reference | fieldData %}
-      {% set everyFieldData = everyField | fieldData %}
+      {% set everyFieldRelationshipData = everyField.reference | fieldData %}
+      {% set everyFieldData = everyField | fieldData %}
       {% if reference.table.unique_id == everyFieldData.table.unique_id %}
         {% set subpopulation = subpopulation|merge(["{ strictPopulate: false, model: '" ~ everyFieldRelationshipData.table.name | friendly ~ "', path: '" ~ everyField.column_name | friendly ~ "' }"]) %}
         {% set population = true %}
@@ -22,7 +22,7 @@ unique_id: t9Bzg4Oy
       {% endif %}
     {% endif %}
   {% endfor %}
-  .populate((query.populate === 'true' || query.populate?.indexOf('{{ reference.table.name | friendly }}') > -1) && { 
+  .populate((query.populate === 'true' || query.populate?.indexOf('{{ reference.table.name | friendly }}') > -1) && { 
     strictPopulate: false,
     model: '{{ reference.table.name | friendly }}',
     path: '{{ field.column_name }}'

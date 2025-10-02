@@ -18,6 +18,10 @@ options:
     display: Data
     type: text
     options: ''
+  - name: ref
+    display: Use Reference
+    type: text
+    options: ''
   - name: renderItem
     display: Render Item
     type: code
@@ -51,6 +55,9 @@ options:
     display: Is horizontal?
     type: checkbox
     options: ''  
+  - name: onContentSizeChange
+    display: Do something when content changes?
+    type: code
   - name: showsHorizontalScrollIndicator
     display: Disabled horizontal scroll indicators?
     type: checkbox
@@ -64,6 +71,7 @@ import { FlatList } from 'react-native'
 {{ save_delayed('bpr',bpr)}}
 <FlatList
   {% if element.values.Style %}style={ {{element.values.Style}} }{% endif %}
+  {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
   {% if element.values.contentContainerStyle %}contentContainerStyle={ {{element.values.contentContainerStyle}} }{% endif %}
   {% if element.values.nestedScrollEnabled %}nestedScrollEnabled{% endif %}
   {% if element.values.horizontal %}horizontal{% endif %}
@@ -75,7 +83,7 @@ import { FlatList } from 'react-native'
     {% endif %}
     return (
     {% for child in element.children %}
-      {{ child.rendered | raw }}
+      {{ child.rendered | raw }}
     {% endfor %}
     )
   }}
@@ -83,4 +91,5 @@ import { FlatList } from 'react-native'
   {% if element.values.keyExtractor %}keyExtractor={ {{element.values.keyExtractor}} }{% endif %}
   {% if element.values.getItemLayout %}getItemLayout={(data:any, index:number) => ({{ element.values.getItemLayout }})}{% endif %}
   {% if element.values.initialScrollIndex %}initialScrollIndex={{ element.values.initialScrollIndex | textOrVariable }}{% endif %}
+  {% if element.values.onContentSizeChange %}onContentSizeChange={ {{ element.values.onContentSizeChange | functionOrCall }} }{% endif %}
 />

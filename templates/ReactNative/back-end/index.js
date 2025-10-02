@@ -5,7 +5,7 @@ unique_id: QOxu9q3o
 children: []
 */
 const dotenv = require('dotenv')
-dotenv.config({ path: './config/.env.development' })
+dotenv.config({ path: './config/.env.development' })
 const fs = require('fs')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -47,7 +47,7 @@ function checkReq(req, res, next) {
   next();
 }
 
-{{ insert_setting('ServerAddenum') | raw }}
+{{ insert_setting('ServerAddenum') | raw }}
 
 const dbConfig = require('./config/database.config.js')
 const mongoose = require('mongoose')
@@ -67,10 +67,10 @@ mongoose.connect(dbConfig.url, {
 
 require('./app/routes/apiRoutes.js')(app)
 {% for table in application.tables %}
-require('./app/routes/{{ table.name | friendly | lower }}.routes.js')(app)
+require('./app/routes/{{ table.name | friendly | lower }}.routes.js')(app)
 {% endfor %}
 
-{{ insert_setting('ServerRoute') | raw }}
+{{ insert_setting('ServerRoute') | raw }}
 
 app.use('/images', express.static({{ insert_setting('filesFolder')|default("__dirname + '/../dist/img'") }}))
 

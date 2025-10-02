@@ -10,7 +10,7 @@ options:
     type: text
     options: ''
 */
-{% set tableName = ( field | fieldData ).table.name | friendly %}
+{% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import FileUpload from '../components/FileUpload/FileUpload'
 {% endset %}

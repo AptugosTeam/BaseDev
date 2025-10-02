@@ -20,9 +20,9 @@ options:
       default: false
 */
 {% set bpr %}
-import {{ element.values.name | friendly }} from '@classes/{{ element.values.name | friendly }}'
+import {{ element.values.name | friendly }} from '@classes/{{ element.values.name | friendly }}'
 {% endset %}
 {{ save_delayed('bpr', bpr)}}
 {% if not element.values.justImportIt %}
-new {{ element.values.name | friendly }}({{ element.values.props }})
+new {{ element.values.name | friendly }}({{ element.values.props }})
 {% endif %}

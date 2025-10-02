@@ -6,6 +6,6 @@ icon: ico-field
 children: []
 */
 {% if table.beforeRetrieve %}{{ table.beforeRetrieve }}{% endif %}
-{{ table.name | friendly | lower }}.findOne({ req, res }).then((result) => {
+{{ table.name | friendly | lower }}.findOne({ req, res }).then((result) => {
   res.send(result)
 })

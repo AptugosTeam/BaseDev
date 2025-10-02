@@ -25,13 +25,16 @@ unique_id: i1kD8rN4
       "tsconfigPaths": true
     },
     "ios": {
-      {{ insert_setting('AppJsonIos') | raw }}
+      {{ insert_setting('AppJsonIos') | raw }}
       "supportsTablet": {{ insert_setting('supportsTablet')|default('true') }},
       "bundleIdentifier": "com.aptugo.{{ application.settings.name | lower | friendly }}",
-      "buildNumber": "{{ insert_setting('versionCode')|default('1') }}"
+      "buildNumber": "{{ insert_setting('versionCode')|default('1') }}",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
-      {{ insert_setting('AppJsonAndroid') | raw }}
+      {{ insert_setting('AppJsonAndroid') | raw }}
       "package": "{{ insert_setting('androidPackage')|default('com.aptugo.' ~ application.settings.name | lower | friendly) }}",
       "versionCode": {{ insert_setting('versionCode')|default('1') }}
     },
@@ -44,12 +47,12 @@ unique_id: i1kD8rN4
     },
     "scheme": "{{ insert_setting('androidPackage')|default(application.settings.name | lower | friendly) }}",
     "plugins": [
-      {{ insert_setting('AppJsonPlugins') | raw }}
+      {{ insert_setting('AppJsonPlugins') | raw }}
       [
         "expo-build-properties",
         {
           "ios": {
-            "deploymentTarget": "13.4"
+            "deploymentTarget": "15.1"
           }
         }
       ],

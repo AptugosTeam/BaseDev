@@ -9,7 +9,7 @@ settings:
   - name: Packages
     value: '"@react-native-community/datetimepicker": "3.5.2",'
 */
-{% set tableName = ( field | fieldData ).table.name | friendly %}
+{% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import DateTimePicker from '@react-native-community/datetimepicker'
 {% endset %}
@@ -18,6 +18,6 @@ import DateTimePicker from '@react-native-community/datetimepicker'
   display='calendar'
   mode={'date'}
   testID="{{ element.values.unique_id }}"            
-  value={ {{ tableName }}data.{{ field.column_name | friendly }} || new Date() }
+  value={ {{ tableName }}data.{{ field.column_name | friendly }} || new Date() }
   onChange={(e,selectedDate) => { handle{{ tableName }}Change('{{ field.column_name | friendly }}')(selectedDate) }}
 />

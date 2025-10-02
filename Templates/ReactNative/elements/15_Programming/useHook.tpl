@@ -17,13 +17,13 @@ options:
     options: ''
 */
 {% set bpr %}
-import { use{{ element.values.name | friendly }} } from '@hooks/{{ element.values.name | friendly }}'
+import { use{{ element.values.name | friendly }} } from '@hooks/{{ element.values.name | friendly }}'
 {% endset %}
 {{ save_delayed('bpr', bpr)}}
 
 {% if element.values.var %}
 {% set ph %}
-  const {{ element.values.var }} = use{{ element.values.name | friendly }}({{ element.values.parameters }})
+  const {{ element.values.var }} = use{{ element.values.name | friendly }}({{ element.values.parameters }})
 {% endset %}
 {{ save_delayed('ph', ph)}}
 {% endif %}

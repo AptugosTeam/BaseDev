@@ -21,7 +21,7 @@ options:
     type: text
     options: ''
 */
-{% set parentElement = element.parent | elementData %}
+{% set parentElement = element.parent | elementData %}
   module.exports = (app) => {
   app.post('{{ parentElement.values.endpoint }}', (req, response) => {
     const { google } = require('googleapis')
@@ -42,8 +42,8 @@ options:
             viewId: '{{ parentElement.values.viewID }}',
             dateRanges: [
               {
-                startDate: req.body.dateFrom || 'Today',
-                endDate: req.body.dateTo || '7daysAgo',
+                startDate: req.body.dateFrom || 'Today',
+                endDate: req.body.dateTo || '7daysAgo',
               },
             ],
 

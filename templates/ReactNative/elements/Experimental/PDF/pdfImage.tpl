@@ -30,11 +30,11 @@ import { Image } from '@react-pdf/renderer'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Image
-  {% if element.values.src %}src={{ element.values.src | textOrVariable }}{% endif %}
-  {% if element.values.style %}style={{ element.values.style | textOrVariable }}{% endif %}
-  {% if element.values.debug %}debug={ {{ element.values.debug }} }{% endif %}
-  {% if element.values.fixed %}fixed={ {{ element.values.fixed }} }{% endif %}
-  {% if element.values.cache %}cache={ {{ element.values.cache }} }{% endif %}
+  {% if element.values.src %}src={{ element.values.src | textOrVariable }}{% endif %}
+  {% if element.values.style %}style={{ element.values.style | textOrVariable }}{% endif %}
+  {% if element.values.debug %}debug={ {{ element.values.debug }} }{% endif %}
+  {% if element.values.fixed %}fixed={ {{ element.values.fixed }} }{% endif %}
+  {% if element.values.cache %}cache={ {{ element.values.cache }} }{% endif %}
 >
-  {{ content | raw }}
+  {{ content | raw }}
 </Image>

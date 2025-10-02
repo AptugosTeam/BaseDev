@@ -13,4 +13,4 @@ import React, { FunctionComponent } from 'react'
   {{ delay }}
 {% endfor %}
   
-{{ content | raw }}
+{{ content | raw }}

@@ -5,7 +5,7 @@ unique_id: SNXsC89p
 icon: ico-field
 children: []
 */
-{% set tableName = ( field | fieldData ).table.name | friendly %}
+{% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import { TextInput } from 'react-native-paper'
 {% endset %}

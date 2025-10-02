@@ -22,6 +22,9 @@ options:
     options: ''
 sourceType: javascript
 children: []
+settings:
+  - name: Packages
+    value: '"react-native-vector-icons": "^10.0.3",'
 */
 {% set bpr %}
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -30,4 +33,4 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 <Icon name={ '{{element.values.name|default("square-o")}}' } size={ {{element.values.size|default(20)}} } color={ '{{element.values.color|default("#F96D4E")}}' } 
 {% if element.values.Action %}onPress={ {{ element.values.Action | functionOrCall }} }{% endif %}
 />
-  {{ content | raw }}
+  {{ content | raw }}

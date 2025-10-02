@@ -7,7 +7,7 @@ unique_id: y8fra7Zo
 icon: ico-div
 sourceType: javascript
 options:
-  - name: class
+  - name: className
     display: ClassName
     type: text
     options: ''
@@ -33,6 +33,9 @@ options:
     options: ''
   - name: scrollable
     display: Is Scrollable
+    type: checkbox
+  - name: animated
+    display: Is Animated
     type: checkbox
   - name: nestedScrollEnabled
     display: Enable nested scrolling?
@@ -65,27 +68,39 @@ options:
 children: []
 helpText: Basic HTML Div element
 */
+{% set class = element.values.className %}
+{% if element.values.class is defined and element.values.class is not empty %}
+  {% if element.values.className is not defined %}
+    {% set class = element.values.class %}
+  {% endif %}
+{% endif %}
+{% if class is not empty and element.values.style %}
+  {% set class = '[' ~ class ~ ',' ~ element.values.style ~ ']' %}
+{% endif %}
+{% if class is empty and element.values.style is not empty %}
+  {% set class = element.values.style %}
+{% endif %}
 {% set bpr %}
 import { View } from 'react-native'
+import { Pressable } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-{% if element.values.scrollable %}
+{% if element.values.scrollable or element.values.animated %}
 {% set bpr %}
 import { Animated } from 'react-native'
-import { ScrollView} from 'react-native'
+import { ScrollView } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% endif %}
 {% set tag = 'View' %}
 {% if element.values.scrollable %}{% set tag = 'ScrollView' %}{% endif %}
+{% if element.values.animated %}{% set tag = 'Animated.View' %}{% endif %}
 <{{ tag }}
   {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
   {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
-  {% if element.values.class %}style={ {{element.values.class}} }{% endif %}
-  {% if element.values.onclick %}onTouchStart={(e) => {{element.values.onclick}} }{% endif %}
+  {% if class is not empty %}style={ {{class}} }{% endif %}
   {% if element.values.ref %}ref={ {{element.values.ref}} }{% endif %}
   {% if element.values.nestedScrollEnabled %}nestedScrollEnabled{% endif %}
-  {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
   {% if element.values.scrollable %}
     {% if element.values.onScroll %}
       onScroll={(event) => {
@@ -100,4 +115,10 @@ import { ScrollView} from 'react-native'
   {% if element.values.autoAdjust %}automaticallyAdjustKeyboardInsets={true}{% endif %}
 >
 {{ content | raw }}
+  {% if element.values.onclick %}
+    <Pressable
+      onPress={ {{ element.values.onclick | functionOrCall }} }
+      style={ { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 } }
+    />
+  {% endif %}
 </{{ tag }}>

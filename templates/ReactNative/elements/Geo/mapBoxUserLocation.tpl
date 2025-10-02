@@ -29,6 +29,6 @@ import { UserLocation } from '@rnmapbox/maps'
 <UserLocation
   visible={ {{element.values.visible|default(true)}}}
   {% if element.values.onUpdate %}
-    onUpdate={ {{ element.values.onUpdate |functionOrCall }} }
+    onUpdate={ {{ element.values.onUpdate |functionOrCall }} }
   {% endif %}
 />

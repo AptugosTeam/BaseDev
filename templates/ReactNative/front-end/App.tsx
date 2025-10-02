@@ -15,7 +15,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 {{ insert_setting('AppImport') | raw }}
 {{ insert_setting('AppImports') | raw }}
 
-{% for page in application.pages | plain('type','page')  %}
+{% for page in application.pages | plain('type','page')  %}
   {% if page.filename %}
     import {{ page.name | friendly }} from './Pages/{{ page.filename | removeExtension }}'
   {% endif %}
@@ -57,7 +57,7 @@ export default function App() {
             {% if AppBody %}
             {{ insert_setting('AppB') | raw }}
             {% else %}
-            {% for page in application.pages | plain('type','page') %}
+            {% for page in application.pages | plain('type','page') %}
               {% if page.filename %}
                 {% set splitParts = page.path|split('/') %}
                 {% set initialPath = '' %}

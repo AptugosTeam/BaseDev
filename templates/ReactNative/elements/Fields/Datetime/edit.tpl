@@ -3,7 +3,7 @@ path: edit.tpl
 completePath: elements/Fields/Datetime/edit.tpl
 unique_id: 4nRlZ33x
 */
-{% set tableName = ( field | fieldData ).table.name | friendly %}
+{% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import { TextInput } from 'react-native-paper'
 {% endset %}

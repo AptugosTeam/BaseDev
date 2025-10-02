@@ -29,7 +29,7 @@ children: []
     "axios": "latest",
     "node_hash": "latest",
     "mongoose-paginate-v2": "latest",
-    {{ insert_setting('BackendPackages') | raw }}
+    {{ insert_setting('BackendPackages') | raw }}
     "mongodb": "latest",
   }
 }

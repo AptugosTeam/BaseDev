@@ -24,13 +24,13 @@ options:
     display: Upload Path (back-end)
     type: text
 */
-{% set table = element.values.saveTable | tableData %}
+{% set table = element.values.saveTable | tableData %}
 {% set bpr %}
 import ContEditor from '../components/ContentEdit'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set bpr %}
-import { edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <ContEditor

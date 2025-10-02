@@ -46,7 +46,7 @@ React.useEffect(() => {
 }, [{{ element.values.variableToUse }}])
 
 React.useEffect(() => {
-  dispatch(load{{ (element.values.table|tableData).name | friendly | capitalize }}({ page: pagination.currentPage, limit: pagination.itemsPerPage }))
+  dispatch(load{{ (element.values.table|tableData).name | friendly | capitalize }}({ page: pagination.currentPage, limit: pagination.itemsPerPage }))
 }, [pagination.currentPage])
 
 {% endset %}

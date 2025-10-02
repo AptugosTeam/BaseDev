@@ -5,7 +5,7 @@ unique_id: 76kg0duo
 children: []
 */
 const dotenv = require('dotenv')
-dotenv.config({ path: './config/.env.development' })
+dotenv.config({ path: './config/.env.development' })
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use( fileupload() )
 
-{{ insert_setting('ServerAddenum') | raw }}
+{{ insert_setting('ServerAddenum') | raw }}
 
 const dbConfig = require('./config/database.config.js')
 const mongoose = require('mongoose')
@@ -43,10 +43,10 @@ mongoose.connect(dbConfig.url, {
 })
 
 {% for table in application.tables %}
-require('./app/routes/{{ table.name | friendly | lower }}.routes.js')(app)
+require('./app/routes/{{ table.name | friendly | lower }}.routes.js')(app)
 {% endfor %}
 
-{{ insert_setting('ServerRoute') | raw }}
+{{ insert_setting('ServerRoute') | raw }}
 
 app.use('/images', express.static({{ insert_setting('filesFolder')|default("__dirname + '/../dist/img'") }}))
 

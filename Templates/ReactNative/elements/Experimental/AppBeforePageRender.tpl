@@ -9,7 +9,7 @@ children: []
 {% set appImports %}
   {% if element.children %}
     {% for child in element.children %}
-      {{ child.rendered | raw }}
+      {{ child.rendered | raw }}
     {% endfor %}
   {% else %}
     No children to render.

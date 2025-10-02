@@ -41,15 +41,15 @@ import { Document } from '@react-pdf/renderer'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Document
-  {% if element.values.title %}title={{ element.values.title | textOrVariable }}{% endif %}
-  {% if element.values.author %}author={{ element.values.author | textOrVariable }}{% endif %}
-  {% if element.values.subject %}subject={{ element.values.subject | textOrVariable }}{% endif %}
-  {% if element.values.keywords %}keywords={{ element.values.keywords | textOrVariable }}{% endif %}
-  {% if element.values.creator %}creator={{ element.values.creator | textOrVariable | default("'Aptugo'") }}{% endif %}
-  {% if element.values.producer %}producer={{ element.values.producer | textOrVariable | default("'Aptugo'") }}{% endif %}
-  {% if element.values.pdfVersion %}pdfVersion={{ element.values.pdfVersion | textOrVariable }}{% endif %}
-  {% if element.values.language %}language={{ element.values.language | textOrVariable }}{% endif %}
-  {% if element.values.onRender %}onRender={ {{ element.values.onRender |functionOrCall }} }{% endif %}
+  {% if element.values.title %}title={{ element.values.title | textOrVariable }}{% endif %}
+  {% if element.values.author %}author={{ element.values.author | textOrVariable }}{% endif %}
+  {% if element.values.subject %}subject={{ element.values.subject | textOrVariable }}{% endif %}
+  {% if element.values.keywords %}keywords={{ element.values.keywords | textOrVariable }}{% endif %}
+  {% if element.values.creator %}creator={{ element.values.creator | textOrVariable | default("'Aptugo'") }}{% endif %}
+  {% if element.values.producer %}producer={{ element.values.producer | textOrVariable | default("'Aptugo'") }}{% endif %}
+  {% if element.values.pdfVersion %}pdfVersion={{ element.values.pdfVersion | textOrVariable }}{% endif %}
+  {% if element.values.language %}language={{ element.values.language | textOrVariable }}{% endif %}
+  {% if element.values.onRender %}onRender={ {{ element.values.onRender |functionOrCall }} }{% endif %}
 >
-  {{ content | raw }}
+  {{ content | raw }}
 </Document>

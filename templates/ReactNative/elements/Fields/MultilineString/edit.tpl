@@ -6,7 +6,7 @@ icon: ico-field
 sourceType: javascript
 children: []
 */
-{% set tableName = ( field | fieldData ).table.name | friendly %}
+{% set tableName = ( field | fieldData ).table.name | friendly %}
 <TextInput
     {% if element.values.DisableUnderline %}
         InputProps={ { disableUnderline: true } }

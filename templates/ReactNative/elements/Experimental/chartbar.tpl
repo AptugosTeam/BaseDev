@@ -78,13 +78,13 @@ import { {% if element.values.Responsive %}ResponsiveBar{% else %}Bar{% endif %}
     {% set values = element.values.Values|fieldData %}
     {% set indexName = indexBy.column_name %}
     {% set valuesName = values.column_name %}
-    {% include includeTemplate('loadFromRedux.tpl') with { 'data': indexBy.table.unique_id } %}
+    {% include includeTemplate('loadFromRedux.tpl') with { 'data': indexBy.table.unique_id } %}
     {% set ph %}
     const chartdata = []
-    {{ element.values.Variable }}.forEach({{ indexBy.table.singleName | friendly | lower }} => {
+    {{ element.values.Variable }}.forEach({{ indexBy.table.singleName | friendly | lower }} => {
       chartdata.push({ 
-        {{ indexBy.column_name }}: {{ indexBy.table.singleName | friendly | lower }}.{{ indexBy.column_name }},
-        {{ values.column_name }}: {{ indexBy.table.singleName | friendly | lower }}.{{ values.column_name }}
+        {{ indexBy.column_name }}: {{ indexBy.table.singleName | friendly | lower }}.{{ indexBy.column_name }},
+        {{ values.column_name }}: {{ indexBy.table.singleName | friendly | lower }}.{{ values.column_name }}
       })  
     })
     {% endset %}
@@ -95,7 +95,7 @@ import { {% if element.values.Responsive %}ResponsiveBar{% else %}Bar{% endif %}
   {% if element.values.Width %}width={ {{ element.values.Width }} }{% endif %}
   {% if element.values.Height %}height={ {{ element.values.Height }} }{% endif %}
   colors={ { scheme: '{{ element.values.Scheme }}' } }
-  indexBy={ {{ indexName }} }
+  indexBy={ {{ indexName }} }
   data={ {% if element.values.Index == 'useVar' %}{{ element.values.Variable }}{% else %}chartdata{% endif %} }
   keys={ {{ valuesName }} }
   groupMode='grouped'

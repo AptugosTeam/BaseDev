@@ -103,6 +103,9 @@ options:
       active: true
 sourceType: javascript
 children: []
+settings:
+  - name: Packages
+    value: '"react-native-vector-icons": "^10.0.3",'
 */
 {% set tag = 'Icon' %}
 {% set bpr %}
@@ -121,5 +124,5 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 {% if element.values.Action %}onPress={ {{ element.values.Action | functionOrCall }} }{% endif %}
 {% if element.values.FontAwesomeStyle %}{{ element.values.FontAwesomeStyle }}{% endif %}
 >
-  {{ content | raw }}
+  {{ content | raw }}
 </{{ tag }}>

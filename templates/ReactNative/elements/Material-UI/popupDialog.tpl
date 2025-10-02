@@ -4,7 +4,7 @@ type: file
 unique_id: Rm5aRBZI
 icon: ico-pop-up-dialog
 options:
-  - name: visible
+  - name: open
     display: Visible Variable
     type: text
     options: ''
@@ -39,7 +39,7 @@ import { Portal } from 'react-native-paper'
   <Modal
     animationType="fade"
     transparent={true}
-    {% if element.values.visible %}visible={ {{ element.values.visible }} }{% endif %}
+    {% if element.values.open %}visible={ {{ element.values.open }} }{% endif %}
     {% if element.values.onclose %}
       onDismiss={() => {{ element.values.onclose }} }
       onRequestClose={() => {{ element.values.onclose }} }

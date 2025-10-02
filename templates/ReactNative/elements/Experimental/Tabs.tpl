@@ -60,7 +60,7 @@ import TabNavigation from '../components/TabNavigation'
 {% set bpr %}
 {% for child in element.children %}
 const TAB{{ child.unique_id}}Route = ({% if element.values.passVariable %}{ {{ element.values.passVariable }} }{% endif %}) => (
-  {{ child.rendered | raw }}
+  {{ child.rendered | raw }}
 )
 {% endfor %}
 {% endset %}

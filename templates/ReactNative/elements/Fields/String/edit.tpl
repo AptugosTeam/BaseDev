@@ -6,7 +6,7 @@ icon: ico-field
 sourceType: javascript
 children: []
 */
-{% set tableName = ( field | fieldData ).table.name | friendly %}
+{% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import { TextInput } from 'react-native-paper'
 {% endset %}
@@ -24,7 +24,7 @@ import { TextInput } from 'react-native-paper'
     fullWidth
     style={ {% if element.values.classname %}{{ element.values.classname }}{% else %}'field_{{ field.column_name | friendly }}'{% endif %}}
     mode="{{ element.values.variant|default('outlined') }}"
-    value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
+    value={ {{ tableName }}data.{{ field.column_name | friendly }} || '' }
     onChangeText={handle{{ tableName }}Change("{{ field.column_name | friendly }}")}
     error={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}'}
     helperText={ {{ tableName | lower }}Data?.errField === '{{ field.column_name | friendly }}' && {{ tableName | lower }}Data.errMessage}

@@ -108,9 +108,9 @@ children: []
   {% set innervarname = element.name | friendly %}
 {% endif %}
 
-{% set varName = element.values.variableName|default(table.name | friendly | lower ~ 'Data') %}
+{% set varName = element.values.variableName|default(table.name | friendly | lower ~ 'Data') %}
 {% set bpr %}
-import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
@@ -130,12 +130,12 @@ const dispatch = useDispatch()
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% set ph %}
-const {{ table.name | friendly | lower ~ 'Data' }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }})
+const {{ table.name | friendly | lower ~ 'Data' }} = useSelector((state: IState) => state.{{ table.name | friendly | lower }})
 {% endset %}
 {{ save_delayed('ph', ph, 1 ) }}
 {% if element.values.singleResult %}
 {% set bpr %}
-import { I{{ table.name | friendly }}Item } from '../store/models'
+import { I{{ table.name | friendly }}Item } from '../store/models'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% endif %}
@@ -158,10 +158,10 @@ const [{{ innervarname }}loadoptions, set{{ innervarname }}loadoptions] = React.
 const perform{{ innervarname }}load = (options) => {
   {% if element.values.searchString %}
     if (typeof options.searchString !== 'undefined') {
-      dispatch(search{{ table.name | friendly | capitalize }}(options))
+      dispatch(search{{ table.name | friendly | capitalize }}(options))
     }
   {% else %}
-    dispatch(options.searchString ? search{{ table.name | friendly | capitalize }}(options) : load{{ table.name | friendly | capitalize }}(options))
+    dispatch(options.searchString ? search{{ table.name | friendly | capitalize }}(options) : load{{ table.name | friendly | capitalize }}(options))
   {% endif %}
 }
 {% endset %}
@@ -185,7 +185,7 @@ React.useEffect(() => {
   {% set functionCall = 'loadingStatus' %}
 {% endif %}
 React.useEffect(() => {
-  if ({{ table.name | friendly | lower }}Data.{{ functionCall }} === 'loaded') {
+  if ({{ table.name | friendly | lower }}Data.{{ functionCall }} === 'loaded') {
     {{ element.values.onload }}
     {% if element.children %}{{ content | raw }}{% endif %}
   }

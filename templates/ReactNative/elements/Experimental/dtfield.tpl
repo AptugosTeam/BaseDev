@@ -67,4 +67,4 @@ options:
     type: checkbox
 children: []
 */
-{% include includeTemplate(['Fields' ~ field.data_type ~'datatable.tpl', 'Fieldsdatatable.tpl']) %}
+{% include includeTemplate(['Fields' ~ field.data_type ~'datatable.tpl', 'Fieldsdatatable.tpl']) %}

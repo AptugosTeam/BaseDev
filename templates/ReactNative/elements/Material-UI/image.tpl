@@ -96,7 +96,7 @@ import { {{tag}} } from 'react-native'
   {% set path = '/img/' ~ asset.name %}
   {% if asset.versions %}
     {% for version in asset.versions %}
-      {% if (version.type == 'webP' or version.type == 'webp') %}
+      {% if (version.type == 'webP' or version.type == 'webp') %}
         {% set webppath = '/img/' ~ version.name %}
       {% endif %}
     {% endfor %}
@@ -105,7 +105,7 @@ import { {{tag}} } from 'react-native'
   {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
   source={require('@assets{{ path }}')}
   {% if element.values.style %}style={ { {{element.values.style}} } }{% endif %}
-  {% if element.values.resizeMode %}resizeMode={ {{element.values.resizeMode | textOrVariable }} }{% endif %}
+  {% if element.values.resizeMode %}resizeMode={ {{element.values.resizeMode | textOrVariable }} }{% endif %}
 >{{ content | raw }}</{{tag}}>
 {% else %}
 <{{tag}}
@@ -117,6 +117,6 @@ import { {{tag}} } from 'react-native'
   {% endif %}
   {% if element.values.style %}style={ { {{element.values.style}} } }{% endif %}
   {% if element.values.imageStyles %}imageStyle={ { {{element.values.imageStyles}} } }{% endif %}
-  {% if element.values.resizeMode %}resizeMode={ {{element.values.resizeMode | textOrVariable }} }{% endif %}
+  {% if element.values.resizeMode %}resizeMode={ {{element.values.resizeMode | textOrVariable }} }{% endif %}
 >{{ content | raw }}</{{tag}}>
 {% endif %}

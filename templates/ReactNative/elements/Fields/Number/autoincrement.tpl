@@ -6,8 +6,8 @@ icon: file.svg
 children: []
 */
 // autoincrement validation
-{% set friendlyTableName = table.name | friendly %}
-{% set friendlyFieldName = field.column_name | friendly %}
+{% set friendlyTableName = table.name | friendly %}
+{% set friendlyFieldName = field.column_name | friendly %}
 {% set savedValidation %}
 {{ friendlyTableName }}Schema.pre('save', function (next) {
   var tat = this

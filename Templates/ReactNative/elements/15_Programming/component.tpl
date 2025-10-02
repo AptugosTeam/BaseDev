@@ -15,7 +15,7 @@ options:
       aptugoOnLoad: >-
         const element = arguments[0];
         const page = aptugo.pageUtils.findContainerPage(element.unique_id);
-        if (element.values.name) {
+        if (element.values.name) {
           aptugo.variables.setComponent(element.values.name, `Defined in ${page.name}`);
         }
       active: true
@@ -30,7 +30,7 @@ options:
     type: checkbox
 extraFiles:
   - source: 'elements/99_ExtraFiles/baseComponent.tsx'
-    destination: 'front-end/components/{{ element.values.name | friendly }}/{{ element.values.name | friendly }}.tsx'
+    destination: 'front-end/components/{{ element.values.name | friendly }}/{{ element.values.name | friendly }}.tsx'
 childs:
   - name:  componentHeader
     element: componentHeader

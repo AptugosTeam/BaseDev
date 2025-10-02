@@ -11,5 +11,5 @@ import * as Device from 'expo-device'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {Device.brand === 'Apple' && 
-  {{ content | raw }}
+  {{ content | raw }}
 }

@@ -47,12 +47,12 @@ settings:
         stripe.checkout.sessions.create({
           line_items: [
             {
-              price: req.params.productid || '{{ type == 'Development' ? element.values.devPriceItem : element.values.priceItem }}',
-              quantity: req.params.qty || 1,
+              price: req.params.productid || '{{ type == 'Development' ? element.values.devPriceItem : element.values.priceItem }}',
+              quantity: req.params.qty || 1,
             },
           ],
-          mode: req.params.mode || 'payment',
-          client_reference_id: req.body.client_reference_id || null,
+          mode: req.params.mode || 'payment',
+          client_reference_id: req.body.client_reference_id || null,
           success_url: successURL,
           cancel_url: cancelURL,
         }).then(session => {

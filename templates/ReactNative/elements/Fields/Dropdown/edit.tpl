@@ -9,7 +9,7 @@ settings:
   - name: Packages
     value: '"react-native-select-dropdown": "^3.3.3",'
 */
-{% set tableName = ( field | fieldData ).table.name | friendly %}
+{% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import SelectDropdown from 'react-native-select-dropdown'
 {% endset %}

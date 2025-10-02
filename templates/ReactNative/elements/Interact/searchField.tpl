@@ -14,7 +14,7 @@ options:
       variable'],...aptugo.store.getState().application.tables.map(({ unique_id,
       name }) => [unique_id, name])]
 */
-{% set table = element.values.table | tableData %}
+{% set table = element.values.table | tableData %}
 {% set bpr %}
   import { useDispatch } from 'react-redux'
 {% endset %}
@@ -24,7 +24,7 @@ const dispatch = useDispatch()
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% set bpr %}
-import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { load{{ table.name | friendly | capitalize }}, search{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set ph %}
@@ -37,6 +37,6 @@ const searchFor{{ table.name | friendly }} = (event) => {
 }
 {% endset %}
 {{ save_delayed('ph',ph)}}
-{% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
+{% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': element} %}
 {% set searchFieldParams = { element: { values: { onChange: 'searchFor' ~ table.name|friendly, placeholder: 'Search ' ~ table.singleName|friendly ~ '...', variant: 'outlined', margin: 'normal', className: 'theme.extensibleInput' } } } %}
 {% include includeTemplate('uncontrolledInput.tpl') with searchFieldParams %}

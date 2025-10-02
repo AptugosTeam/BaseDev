@@ -24,7 +24,7 @@ class UserService {
   getAdminBoard() {
     return axios.get(API_URL + 'admin', { headers: authHeader() });
   }
-  {{ insert_setting('user.service') | raw}}
+  {{ insert_setting('user.service') | raw}}
 
 }
 

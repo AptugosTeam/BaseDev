@@ -12,34 +12,33 @@ options:
     display: Icon
     type: text
     options: ''
+  - name: size
+    display: size
+    type: text
+    options: ''
+  - name: color
+    display: Color
+    type: text
+    options: ''
   - name: className
     display: ClassName
     type: text
     options: ''
-  - name: fontSize
-    display: Font Size
-    type: text
-    options: ''
-  - name: color
-    display: Color (in hexadecimal)
-    type: text
-    options: ''
 settings:
   - name: Packages
-    value: '"@iconify/react": "^4.1.1", "iconify": "^1.4.0",'
+    value: '"react-native-svg": "^15.12.1","react-native-iconify": "^1.0.0", "babel-plugin-macros": "^3.1.0",'
+  - name: BabelAdd
+    value: 'plugins.push("babel-plugin-macros")'
+  - name: BabelAdd
+    value: 'plugins.push("react-native-iconify/plugin")'
 */
 {% set bpr %}
-import { Icon } from '@iconify/react'
+import { Iconify } from 'react-native-iconify'
 {% endset %}
-{{ save_delayed('bpr',bpr) }}
-  <Icon 
-  {% if element.values.icon %}
-  icon={{element.values.icon | textOrVariable }}
-  {% endif %}
-  {% if element.values.className %}
-    className={ {{element.values.className}} }
-  {% endif %}
-  {% if element.values.fontSize or element.values.color %}
-    style={ { {% if element.values.fontSize %} fontSize: '{{element.values.fontSize}}', {% endif %} {% if element.values.color %} color: {{element.values.color | textOrVariableInCode}} {% endif %} } }
-  {% endif %}
-/>
+{{ save_delayed('bpr',bpr)}}
+
+{% if element.values.icon %}
+  <Iconify icon="{{element.values.icon}}" {% if element.values.size %}size={ {{element.values.size}} } {% endif %} {% if element.values.color %}color={{element.values.color | textOrVariable}} {% endif %} 
+  {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
+  />
+{% endif %}

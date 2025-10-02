@@ -27,4 +27,4 @@ options:
     options: ''
 children: []
 */
-{{ content | raw }}
+{{ content | raw }}

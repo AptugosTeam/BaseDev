@@ -23,7 +23,7 @@ options:
       default: 'data'
 children: []
 */
-{% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
+{% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
 {% set bpr %}
 import { useDispatch } from 'react-redux'
 {% endset %}
@@ -37,7 +37,7 @@ import { IState } from '../store/reducers/index'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import { add{{ table.name | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { add{{ table.name | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set ph %}
@@ -49,14 +49,14 @@ new Promise((resolve) => {
 {% endif %}
 {% if element.values.condition %}if ({{ element.values.condition }}) { {% endif %}
 if ({{ element.values.variablename | default('data') }}._id) {
-  dispatch(edit{{ table.name | friendly | capitalize }}({{ element.values.variablename | default('data') }} as any))
+  dispatch(edit{{ table.name | friendly | capitalize }}({{ element.values.variablename | default('data') }} as any))
 } else {
-  dispatch(add{{ table.name | friendly | capitalize }}({{ element.values.variablename | default('data') }} as any))
+  dispatch(add{{ table.name | friendly | capitalize }}({{ element.values.variablename | default('data') }} as any))
 }
 {% if element.values.condition %}}{% endif %}
 {% if element.children %}
   resolve('ok')
 }).then(result => {
-  {{ content | raw }}
+  {{ content | raw }}
 })
 {% endif %}

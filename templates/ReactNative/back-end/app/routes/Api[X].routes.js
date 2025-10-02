@@ -56,7 +56,7 @@ const paginate = (docs, options = {}) => {
 }
 
 module.exports = (app) => {
-  app.get('/api/{{ table.name | friendly | lower }}', async (req, res, next) => {
+  app.get('/api/{{ table.name | friendly | lower }}', async (req, res, next) => {
     const mc = new memCache()
     const url = '{{ table.source }}'
     
@@ -66,11 +66,11 @@ module.exports = (app) => {
       data = axiosdata.{{ table.pathtodata }}
       mc.save(url, data)
     }
-    res.json(paginate(data, { page: req.query.page || 1 }))
+    res.json(paginate(data, { page: req.query.page || 1 }))
   })
   
   // Perform a search
-  app.get('/api/{{ table.name | friendly | lower }}/search/:searchstring', async (req, res) => {
+  app.get('/api/{{ table.name | friendly | lower }}/search/:searchstring', async (req, res) => {
     const mc = new memCache()
     const url = '{{ table.source }}'
     var data = mc.getMemCache(url)
@@ -84,6 +84,6 @@ module.exports = (app) => {
       data = data.filter(item => item[req.query.field] === req.params.searchstring)
     }
     
-    res.json(paginate(data, { page: req.query.page || 1 }))
+    res.json(paginate(data, { page: req.query.page || 1 }))
   })
 }

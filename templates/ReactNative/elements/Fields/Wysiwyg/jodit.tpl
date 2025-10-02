@@ -9,7 +9,7 @@ settings:
     value: >-
       "jodit-react": "latest",
 */
-{% set tableName = ( field | fieldData ).table.name | friendly %}
+{% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
 import HTMLEditor from "../components/Jodit"
 {% endset %}

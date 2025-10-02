@@ -52,7 +52,7 @@ children: []
 */
 
 
-{% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
+{% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
 {% if element.values.addRecords %}
 {% set bpr %}
 import Button from '@mui/material/Button'
@@ -68,7 +68,7 @@ import { useDispatch } from 'react-redux'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
-import { edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
+import { edit{{ table.name | friendly | capitalize }} } from '../store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
@@ -118,7 +118,7 @@ const KanbanItem = ({ item, children, ...props }) => {
 <DndProvider backend={HTML5Backend}>       
 <div className={clsx(classes.kanban {% if element.values.className %}, {{ element.values.className }}{% endif %})}>
 { {{ element.values.Columns }}.map((columnItem, columnIndex) => {
-    return ({{ content | raw }})
+    return ({{ content | raw }})
 })}
 </div>
 </DndProvider>

@@ -12,4 +12,4 @@ options:
       aptugo.variables.retrievePageVariablesFromElement(arguments[0],'theme') )
 */
 {/* Paper */}
-{{ content | raw }}
+{{ content | raw }}

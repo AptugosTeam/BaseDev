@@ -37,7 +37,7 @@ options:
 {% set tableData = '(' ~ tableName|lower ~ 'Data.found' ~ tableName|lower ~ '.length ? ' ~ tableName|lower ~ 'Data.found' ~ tableName|lower ~ ' : ' ~ tableName|lower ~ 'Data.' ~ tableName|lower ~ ' as any)' %}
 {% set eleWithoutChilds = element %}
 {% set eleWithoutChilds = eleWithoutChilds|merge({'children': null,'name':'table'}) %}
-{% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage } %}
+{% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage } %}
 {% set bpr %}
 import DataTable from '../components/DataTable/dataTable'
 {% endset %}

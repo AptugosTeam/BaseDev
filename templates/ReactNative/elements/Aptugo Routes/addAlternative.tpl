@@ -73,7 +73,7 @@ let final = {}
     })
 
     req.body = final
-    {{ table.name | friendly | lower }}
+    {{ table.name | friendly | lower }}
       .createAsPromise({ req, res })
       .then((result) => {
         res.send(result)
