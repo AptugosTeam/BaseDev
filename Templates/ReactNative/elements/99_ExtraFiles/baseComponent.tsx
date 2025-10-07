@@ -44,6 +44,7 @@ const AptugoComponent: FunctionComponent<any> = (props) => {
 
   {% set tempCombined = combinedContent %}
   {% set tempSeen = seenLines %}
+
   {% for delay in delayed %}
     {% for specificDelay in delay.ph %}
       {% set lines = specificDelay|split("\n") %}
@@ -61,7 +62,6 @@ const AptugoComponent: FunctionComponent<any> = (props) => {
   
   {{ combinedContent|join("\n")|raw }}
   
-
   return (<React.Fragment>
     {% for child in element.children %}
     {% if child.value == 'componentBody' %} 

@@ -2,7 +2,7 @@
 path: component.tpl
 keyPath: elements/Programming/component.tpl
 unique_id: zHZJ3Xpo
-usesDelays: [bpr]
+usesDelays: [bpr,ph]
 delayContext: true
 icon: ico-component
 order: 4
@@ -28,9 +28,12 @@ options:
   - name: useIt
     display: Also use it
     type: checkbox
+  - name: subcomponent
+    display: It is a utility of...
+    type: text
 extraFiles:
   - source: 'elements/99_ExtraFiles/baseComponent.tsx'
-    destination: 'front-end/components/{{ element.values.name | friendly }}/{{ element.values.name | friendly }}.tsx'
+    destination: 'front-end/components/{{ element.values.subcomponent|default(element.values.name) | friendly }}/{{ element.values.name | friendly }}.tsx'
 childs:
   - name:  componentHeader
     element: componentHeader

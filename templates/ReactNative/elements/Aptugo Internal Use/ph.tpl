@@ -11,7 +11,7 @@ options:
 */
 {% set bpr %}
 import { Provider as PaperProvider } from 'react-native-paper'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { SafeAreaView } from 'react-native-safe-area-context'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% set bpr %}
@@ -35,4 +35,4 @@ const {{ page.name | friendly }} = (props) => {
     {{ delay }}
   {% endfor %}
   {{ content|raw }}
-  return (<PaperProvider><SafeAreaProvider style={sc.droidSafeArea}>
+  return (<PaperProvider><SafeAreaView style={sc.droidSafeArea}>

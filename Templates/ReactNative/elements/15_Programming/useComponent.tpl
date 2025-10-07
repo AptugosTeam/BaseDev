@@ -13,6 +13,9 @@ options:
   - name: keyprops
     display: Prop Keys (optional) 
     type: text
+  - name: Utility
+    display: Utility Component
+    type: checkbox
   - name: changePath
     display: Change Path (optional) 
     type: checkbox
@@ -21,7 +24,9 @@ options:
       default: false
 */
 {% set bpr %}
-{% if element.values.changePath %}
+{% if element.values.Utility %}
+  import {{ element.values.name | friendly }} from './{{ element.values.name | friendly }}'
+{% elseif element.values.changePath %}
 import {{ element.values.name | friendly }} from '../{{ element.values.name | friendly }}'
 {% else %}
 import {{ element.values.name | friendly }} from '@components/{{ element.values.name | friendly }}/{{ element.values.name | friendly }}'

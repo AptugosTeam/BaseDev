@@ -52,3 +52,34 @@ sendPushNotification(
     data: {{element.values.data | textOrVariableInCode }}
   }
 )
+{% set NavigationHandlers %}
+linking={ {
+  prefixes: ['https://p803mobile.app.link', 'p803mobile://'],
+  async getInitialURL() {
+    const url = await Linking.getInitialURL()
+    if (url != null) return url
+
+    const response = await Notifications.getLastNotificationResponse()
+    const notificationUrl = response?.notification.request.content.data.url as string
+
+    if (notificationUrl) return notificationUrl
+    return null
+  },
+  subscribe(listener) {
+    const onReceiveURL = ({ url }: { url: string }) => listener(url)
+
+    const eventListenerSubscription = Linking.addEventListener('url', onReceiveURL)
+
+    const subscription = Notifications.addNotificationResponseReceivedListener(response => {
+      const url:any = response.notification.request.content.data.url
+      listener(url)
+    })
+
+    return () => {
+      eventListenerSubscription.remove()
+      subscription.remove()
+    }
+  },
+}}
+{% endset %}
+{{ add_setting('NavigationHandlers', NavigationHandlers)}}

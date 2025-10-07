@@ -6,7 +6,7 @@ icon: ico-disqus
 helpText: Add Push messaging capabilities to your app
 settings:
   - name: Packages
-    value: '"expo-notifications": "~0.17.0","expo-device": "~5.0.0",'
+    value: '"expo-notifications": "~0.32.12","expo-device": "~8.0.9",'
 options:
   - name: WaitFor
     display: Wait for variable to be set
@@ -14,6 +14,9 @@ options:
   - name: projectId
     display: ProjectID
     type: text
+  - name: disableAlert
+    display: Disable Development Alert
+    type: checkbox
 children: []
 */
 {% set bpr %}
@@ -49,12 +52,12 @@ async function registerForPushNotificationsAsync() {
     }
     token = (await Notifications.getExpoPushTokenAsync({% if element.values.projectId %}{ projectId: '{{ element.values.projectId }}' }{% endif %})).data;
     const currentToken = await AsyncStorage.getItem('mypushtoken')
-    if (currentToken !== token) {
-      AsyncStorage.setItem('mypushtoken', token)
-    }
+    if (currentToken !== token) AsyncStorage.setItem('mypushtoken', token)
+  {% if not element.values.disableAlert %}
   } else {
-    alert('Must use physical device for Push Notifications');
+    alert('Must use physical device for Push Notifications')
+  {% endif %}
   }
 
-  return token;
+  return token
 }

@@ -28,7 +28,6 @@ options:
     options: ''
 children: []
 */
-
 {% set ph %}
 const [{{ element.values.variableName }}, set{{ element.values.variableName }}] = React.useState<{{element.values.typeAnnotation | default('any')}}>({{ element.values.defaultValue }})
 {% endset %}

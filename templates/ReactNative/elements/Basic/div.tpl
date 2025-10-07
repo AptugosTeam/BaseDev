@@ -20,7 +20,7 @@ options:
     type: text
     options: ''
   - name: onclick
-    display: On Click
+    display: On Touch
     type: text
     options: ''
   - name: ref
@@ -65,6 +65,16 @@ options:
     display: Content Container Style
     type: text
     advanced: true
+  - name: onpressin
+    display: On Press In
+    type: text
+    options: ''
+    advanced: true
+  - name: onpressout
+    display: On Press Out
+    type: text
+    options: ''
+    advanced: true
 children: []
 helpText: Basic HTML Div element
 */
@@ -83,6 +93,7 @@ helpText: Basic HTML Div element
 {% set bpr %}
 import { View } from 'react-native'
 import { Pressable } from 'react-native'
+import { KeyboardAvoidingView } from 'react-native'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% if element.values.scrollable or element.values.animated %}
@@ -95,6 +106,7 @@ import { ScrollView } from 'react-native'
 {% set tag = 'View' %}
 {% if element.values.scrollable %}{% set tag = 'ScrollView' %}{% endif %}
 {% if element.values.animated %}{% set tag = 'Animated.View' %}{% endif %}
+{% if element.values.autoAdjust %}{% set tag = 'KeyboardAvoidingView' %}{% endif %}
 <{{ tag }}
   {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
   {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
@@ -112,12 +124,21 @@ import { ScrollView } from 'react-native'
     {% if element.values.scrollEventThrottle %}scrollEventThrottle={ {{ element.values.scrollEventThrottle }} }{% endif %}
   {% endif %}
   {% if element.values.contentContainerStyle %}contentContainerStyle={ {{ element.values.contentContainerStyle }} }{% endif %}
-  {% if element.values.autoAdjust %}automaticallyAdjustKeyboardInsets={true}{% endif %}
+  {% if element.values.autoAdjust %}
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    keyboardVerticalOffset={Platform.OS === 'ios' ? 48 : 0}
+  {% endif %}
 >
 {{ content | raw }}
   {% if element.values.onclick %}
     <Pressable
       onPress={ {{ element.values.onclick | functionOrCall }} }
+      style={ { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 } }
+    />
+  {% elseif element.values.onpressin or element.values.onpressout %}
+    <Pressable
+      {% if element.values.onpressin %}onPressIn={ {{ element.values.onpressin | functionOrCall }} }{% endif %}
+      {% if element.values.onpressout %}onPressOut={ {{ element.values.onpressout | functionOrCall }} }{% endif %}
       style={ { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 } }
     />
   {% endif %}

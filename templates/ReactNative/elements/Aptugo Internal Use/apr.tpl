@@ -15,11 +15,11 @@ options:
 */
 
 {% if element.values.renderPosition == 'between' %}
-</SafeAreaProvider>
+</SafeAreaView>
 {{ content | raw }}
 </PaperProvider>)}
 {% else %}
-</SafeAreaProvider></PaperProvider>)}
+</SafeAreaView></PaperProvider>)}
 {{ content | raw }}
 {% endif %}
 {% for delay in delayed %}
