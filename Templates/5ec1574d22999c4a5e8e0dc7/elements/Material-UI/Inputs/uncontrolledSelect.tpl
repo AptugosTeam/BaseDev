@@ -19,6 +19,11 @@ options:
     display: On Change
     type: function
     options: ''
+  - name: selectProps
+    display: Select Props
+    type: function
+    options: ''
+    advanced: true
   - name: options
     display: Options
     type: text
@@ -124,8 +129,9 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if element.values.value %}value={{ element.values.value }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
     {% if element.values.defaultValue %}defaultValue={{ element.values.defaultValue }}{% endif %}
-    {% if element.values.displayEmpty %}SelectProps={ {
-      displayEmpty: true
+    {% if element.values.displayEmpty or element.values.selectProps %}SelectProps={ {
+    {% if element.values.displayEmpty %}displayEmpty: true{% endif %}
+      {{ element.values.selectProps }}
     } }{% endif %}
     {% if element.values.endAdornment %}
       InputProps={ {
