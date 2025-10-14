@@ -1,0 +1,17 @@
+{
+  "_id": "returnsource",
+  "name": "Return Source",
+  "__v": 0,
+  "desc": "Browses to a specific URL and returns the source code",
+  "icon": "icon.png",
+  "type": "structure",
+  "differentReturn": true,
+  "parameters": [
+    {
+      "name": "URL",
+      "display": "URL to browse to",
+      "type": "text",
+      "helpText": "Type the full url to browse to"
+    }
+  ]
+}

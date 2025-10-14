@@ -43,7 +43,6 @@ const userTable = {
 	}],
 	"beforeCreate": "",
 	"beforeUpdate": "const response = userService.jwtVerify(req.headers.authorization)\nif (response.error) { res.status(401).json(response); return }\n",
-	"beforeDelete": "const response = userService.jwtVerify(req.headers.authorization)\nif (response.error) { res.status(401).json(response); return }\n",
 	"extraRoutes": "// Authenticate User\n  app.post('/api/users/authenticate', function (req, res) {\n    userService\n      .authenticate(req.body)\n      .then((user) => {\n        res.json(user)\n      })\n      .catch((next) => {\n        res.statusCode = 401\n        res.json(next)\n        \n      })\n  })",
 	"extraModules": "const userService = require('../services/users.service')",
 	"definedRoutes": [{
@@ -81,13 +80,6 @@ const userTable = {
 		"route_path": "/api/" + friendlyName + "/:ID",
 		"route_code": null,
 		"route_template": "update"
-	}, {
-		"route_name": "Soft delete a record",
-		"route_active": true,
-		"route_method": "delete",
-		"route_path": "/api/" + friendlyName + "/soft/:ID",
-		"route_code": null,
-		"route_template": "softDelete"
 	}, {
 		"route_name": "Delete a record",
 		"route_active": true,

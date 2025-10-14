@@ -1,0 +1,15 @@
+{
+  "_id": "importOther",
+  "name": "Import as Other Asset",
+  "type": "importer",
+  "tester": "return loadedApps.length > 0",
+  "inApp": true,
+  "parameters": [
+    {
+      "name": "Source File",
+      "display": "File",
+      "type": "file",
+      "helpText": "Select the file to import"
+    }
+  ]
+}

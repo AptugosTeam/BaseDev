@@ -1,0 +1,15 @@
+{
+  "_id": "importStylesheet",
+  "name": "Import as Stylesheet",
+  "type": "importer",
+  "tester": "return loadedApps.length > 0 && input.name.substring(input.name.length - 4, input.name.length).toLowerCase() === 'scss'",
+  "inApp": true,
+  "parameters": [
+    {
+      "name": "Source File",
+      "display": "Stylesheet File",
+      "type": "file",
+      "helpText": "Select the file to import"
+    }
+  ]
+}

@@ -1,11 +1,13 @@
 {
   "_id": "csv2table",
   "name": "Import CSV into a Table",
+  "tester": "return loadedApps.length > 0 && input.name.substring(input.name.length - 4, input.name.length).toLowerCase() === '.csv'",
+  "inApp": true,
   "Created_date": {
     "$date": "2020-03-28T15:06:57.286Z"
   },
   "__v": 0,
-  "type": "structure",
+  "type": "importer",
   "parameters": [
     {
       "name": "Name",
@@ -16,7 +18,7 @@
     {
       "name": "csv",
       "display": "File with Data",
-      "type": "text",
+      "type": "file",
       "helpText": "Select the file to import"
     }
   ]

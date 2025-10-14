@@ -7,22 +7,29 @@ if (State.usersReducer) {
     Store.dispatch({ type: "SET_ERROR", error: error })
     return false
   }
-} else {
+} else if (State.apps) {
   if (State.apps.find(app => app.settings.name === Parameters.Name)) {
-    const error = 'Application with the same name exists'
-    return { error }
+    Parameters.name = Parameters.name + '_' + aptugo.generateID()
   }
 }
 
-
 // Backwards compatibility
 let defaultTemplate
-if (State.templatesReducer) {
-  defaultTemplate = State.templatesReducer.templates.filter(template => template.default )
-  State.templatesReducer.loadedTemplate = defaultTemplate[0]
-} else {
-  defaultTemplate = State.templates.filter(template => template.default)
+console.log('STATE', State)
+try {
+  if (State.templatesReducer) {
+    defaultTemplate = State.templatesReducer.templates.filter(template => template.default )
+    State.templatesReducer.loadedTemplate = defaultTemplate[0]
+  } else {
+    
+    defaultTemplate = State.templates.filter(template => template.default)
+  }
+} catch(e) {
+  console.log('Erorr when definining template', e)
+  const error = 'Something wrong with the templates'
+  Store.dispatch({ type: "SET_ERROR", error: error })
 }
+
 
 const username = aptugo.friendly(State.auth.user.name)
 const dbpassword = aptugo.generateID() + aptugo.generateID()
@@ -31,9 +38,9 @@ const dbusername = username + appname
 Application.createdAt = Date.now(),
 Application.settings = {
     name: Parameters.Name || 'Untitled Application',
+    icon: Parameters.icon || null,
     lastSaved: null,
     lastBuild: null,
-    language: "en",
     development: {
       apiURL: `http://127.0.0.1:4567`,
       type: 'Local',
@@ -61,6 +68,6 @@ Application.settings = {
 }
 
 // aptugo.createdbuser({ dbName: username, user: dbusername, pwd: dbpassword })
-
+console.log('This is the result of new app:', Application)
 Application._id = aptugo.generateID(16)
 return Application
