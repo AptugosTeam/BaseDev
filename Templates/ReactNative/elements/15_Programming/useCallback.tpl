@@ -16,6 +16,12 @@ options:
     display: Callback Parameters
     type: text
     options: ''
+  - name: async
+    display: Async
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
 helpText: Memoizes a callback function that only changes when its dependencies change, using React.useCallback. You can specify parameters for the callback and the function name.
 children: []
 */
@@ -23,7 +29,7 @@ children: []
 {% set params = element.values.callbackParams | default('') %}
 {% set functionName = element.values.functionName | default('AptugoCallback') %}
 {% set ph %}
-const {{ functionName }} = React.useCallback(({{ params }}) => {
+const {{ functionName }} = React.useCallback({% if element.values.async %}async{% endif %}({{ params }}) => {
     {{ content | raw }}
 },[{{ element.values.watchVariable }}])
 {% endset %}
