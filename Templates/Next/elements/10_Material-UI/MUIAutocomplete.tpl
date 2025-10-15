@@ -5,6 +5,9 @@ unique_id: MUIAUTOC
 icon: ico-uncontrolled-input
 sourceType: javascript
 options:
+  - name: className
+    display: ClassName
+    type: styles
   - name: options
     display: Options
     type: text
@@ -15,14 +18,29 @@ options:
   - name: onChange
     display: On Change
     type: function
+  - name: filterOptions 
+    display: Filter Options
+    type: function
+  - name: getOptionLabel 
+    display: Get Option Label
+    type: function
+  - name: renderOption 
+    display: Render Option
+    type: function
   - name: label
     display: Label
     type: text
-  - name: className
-    display: ClassName
-    type: styles
   - name: freeSolo
     display: Preserve Entry Text
+    type: checkbox
+  - name: selectOnFocus
+    display: selectOnFocus
+    type: checkbox
+  - name: clearOnBlur
+    display: clearOnBlur
+    type: checkbox
+  - name: handleHomeEndKeys
+    display: handleHomeEndKeys
     type: checkbox
   - name: filterSelectedOptions
     display: Hide Selected Value from List
@@ -104,25 +122,17 @@ import InputAdornment from '@mui/material/InputAdornment'
   {% if element.values.className %}
     className={ {{element.values.className|raw}} }
   {% endif %}
-  {% if element.values.DisableVariable %}
-    disabled={ {{ element.values.DisableVariable }} }
-  {% endif %}
-  {% if element.values.options %} 
-    options={ {{ element.values.options | raw  }} }
-  {% else %}
-    options={[]} 
-  {% endif %}
-  {% if element.values.value %}
-    value={ {{ element.values.value | raw }} }
-  {% endif %}
-  {% if element.values.onChange %}
-    onChange={ (e, newValue) => {
-        {{ element.values.onChange }} 
-    }
-  }
-  {% endif %}
   {% if element.values.freeSolo %}
     freeSolo
+  {% endif %}
+  {% if element.values.selectOnFocus %}
+    selectOnFocus
+  {% endif %}
+  {% if element.values.clearOnBlur %}
+    clearOnBlur
+  {% endif %}
+  {% if element.values.handleHomeEndKeys %}
+    handleHomeEndKeys
   {% endif %}
   {% if element.values.filterSelectedOptions %}
     filterSelectedOptions
@@ -133,10 +143,37 @@ import InputAdornment from '@mui/material/InputAdornment'
   {% if element.values.multiple %}
     multiple
   {% endif %}
-  {% if element.values.getOptionLabel %}
-    getOptionLabel={ (option) => {
-        {{ element.values.getOptionLabel }} 
-    }}
+  {% if element.values.value %}
+    value={ {{ element.values.value | raw }} }
+  {% endif %}
+  {% if element.values.options %} 
+    options={ {{ element.values.options | raw  }} }
+  {% else %}
+    options={[]} 
+  {% endif %}
+  {% if element.values.DisableVariable %}
+    disabled={ {{ element.values.DisableVariable }} }
+  {% endif %}
+  {% if element.values.noOptionsText %}
+    noOptionsText={{ element.values.noOptionsText | textOrVariable }}
+  {% endif %}
+  {% if element.values.clearText %}
+    clearText={{ element.values.clearText | textOrVariable }}
+  {% endif %}
+  {% if element.values.openText %}
+    openText={{ element.values.openText | textOrVariable }}
+  {% endif %}
+  {% if element.values.closeText %}
+    closeText={{ element.values.closeText | textOrVariable }}
+  {% endif %}
+  {% if element.values.isOptionEqualToValue %}
+    isOptionEqualToValue={ (option, value) => {{ element.values.isOptionEqualToValue }} }
+  {% endif %} 
+  {% if element.values.onChange %}
+    onChange={ (e, newValue) => {
+        {{ element.values.onChange }} 
+    }
+  }
   {% endif %}
   {% if element.values.onInputChange %}
     onInputChange={ (e, newInputValue) => { 
@@ -144,15 +181,24 @@ import InputAdornment from '@mui/material/InputAdornment'
       }  
     }
   {% endif %} 
-  {% if element.values.onClose %}
-    onClose={ (e, reason) => { 
-      {{ element.values.onClose }} 
+  {% if element.values.filterOptions %}
+    filterOptions={ (options, params) => { 
+      {{ element.values.filterOptions }} 
       }  
     }
-  {% endif %} 
-  {% if element.values.isOptionEqualToValue %}
-    isOptionEqualToValue={ (option, value) => {{ element.values.isOptionEqualToValue }} }
-  {% endif %} 
+  {% endif %}
+  {% if element.values.getOptionLabel %}
+    getOptionLabel={ (option) => { 
+      {{ element.values.getOptionLabel }} 
+      }  
+    }
+  {% endif %}
+  {% if element.values.renderOption %}
+    renderOption={ (props, option) => { 
+      {{ element.values.renderOption }} 
+      }  
+    }
+  {% endif %}
   renderInput={(params) => <TextField
     {...params}
     label=""
@@ -170,17 +216,5 @@ import InputAdornment from '@mui/material/InputAdornment'
     } }
     {% endif %} 
   />}
-  {% if element.values.noOptionsText %}
-    noOptionsText={{ element.values.noOptionsText | textOrVariable }}
-  {% endif %}
-  {% if element.values.clearText %}
-    clearText={{ element.values.clearText | textOrVariable }}
-  {% endif %}
-  {% if element.values.openText %}
-    openText={{ element.values.openText | textOrVariable }}
-  {% endif %}
-  {% if element.values.closeText %}
-    closeText={{ element.values.closeText | textOrVariable }}
-  {% endif %}
 
 />
