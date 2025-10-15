@@ -35,6 +35,7 @@ import { Audio } from 'expo-av'
 {% include includeTemplate('useState.tpl') with { 'element': { 'values': { variableName: recording , typeAnnotation: 'Audio.Recording | null', defaultValue: 'null' }}} %}
 {% include includeTemplate('useState.tpl') with { 'element': { 'values': { variableName: isRecording , defaultValue: 'false' }}} %}
 {% include includeTemplate('useState.tpl') with { 'element': { 'values': { variableName: sound, typeAnnotation: 'Audio.Sound | null', defaultValue: 'null' }}} %}
+{% include includeTemplate('useState.tpl') with { 'element': { 'values': { variableName: 'isProcessingAudio', defaultValue: 'false' }}} %}
 
 const playSound = async (uri: string) => {
   try {
@@ -91,15 +92,19 @@ const stopRecording = async (params = {}) => {
   Object.keys(params).forEach(key => {
     formData.append(key, params[key])
   })
-  
+
+  setisProcessingAudio(true)
   axios
     .post({{ element.values.endpoint | textOrVariableInCode }}, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
     .then((result) => {
-      setmessageHistory((old) => [...old, { from: 'User', type: 'audio', message: uri }])
+      setmessageHistory((old) => [...old, { from: 'User', type: 'audio', message: result.data.Message }])
     })
     .catch((error) => {
-      setmessageHistory((old) => [...old, { from: 'User', type: 'text', message: 'Bad message' }])
+      setmessageHistory((old) => [...old, { from: 'User', type: 'text', message: 'Bad message - Not sent' }])
+    })
+    .finally(() => {
+      setisProcessingAudio(false)
     })
 }

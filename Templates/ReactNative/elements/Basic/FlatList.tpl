@@ -88,7 +88,7 @@ import { FlatList } from 'react-native'
     )
   }}
   {% elseif element.values.renderItem %}renderItem={ {{element.values.renderItem | functionOrCall }} }{% endif %}
-  {% if element.values.keyExtractor %}keyExtractor={ {{element.values.keyExtractor}} }{% endif %}
+  {% if element.values.keyExtractor %}keyExtractor={(item, index) => {{element.values.keyExtractor}} }{% endif %}
   {% if element.values.getItemLayout %}getItemLayout={(data:any, index:number) => ({{ element.values.getItemLayout }})}{% endif %}
   {% if element.values.initialScrollIndex %}initialScrollIndex={{ element.values.initialScrollIndex | textOrVariable }}{% endif %}
   {% if element.values.onContentSizeChange %}onContentSizeChange={ {{ element.values.onContentSizeChange | functionOrCall }} }{% endif %}

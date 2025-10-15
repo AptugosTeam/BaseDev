@@ -8,9 +8,20 @@ options:
     display: Variable to Watch
     type: text
     options: ''
+  - name: useMemo
+    display: Use Memo instead of Use Effect
+    type: checkbox
+  - name: useCallback
+    display: Use Callback instead of Use Effect
+    type: checkbox
 helpText: Watch a variable for changes
 children: []
 */
+{% if element.values.useCallback %}
+React.useCallback(
+{% else %}
 React.useEffect(() => {
-    {{ content | raw }}
-},[{{ element.values.watchVariable }}])
+{% endif %}
+  {{ content | raw }}
+{% if not element.values.useCallback %} } {% endif %}
+,[{{ element.values.watchVariable }}])

@@ -13,6 +13,7 @@ import store from './store/store'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as Linking from 'expo-linking'
+import * as Notifications from 'expo-notifications'
 {{ insert_setting('AppImport') | raw }}
 {{ insert_setting('AppImports') | raw }}
 
@@ -33,6 +34,18 @@ export default function App() {
   const linking = {
     prefixes: [Linking.createURL('/'),'{{ insert_setting('fancyName')|default(application.settings.name) }}://']
   }
+
+  React.useEffect(() => {
+    const subscription = Notifications.addNotificationResponseReceivedListener((response) => {
+      const data = response.notification.request.content.data
+      if (data?.url) {
+        const url:any = data.url
+        Linking.openURL(url)
+      }
+    })
+
+    return () => subscription.remove()
+  }, [])
 
   {{ insert_setting('AppPH') | raw }}
 

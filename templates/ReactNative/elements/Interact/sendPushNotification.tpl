@@ -54,7 +54,7 @@ sendPushNotification(
 )
 {% set NavigationHandlers %}
 linking={ {
-  prefixes: ['https://p803mobile.app.link', 'p803mobile://'],
+  prefixes: ['https://p803mobile.app.link', 'P803mobile://'],
   async getInitialURL() {
     const url = await Linking.getInitialURL()
     if (url != null) return url

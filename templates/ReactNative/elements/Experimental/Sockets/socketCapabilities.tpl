@@ -6,47 +6,71 @@ unique_id: socketCapabilities
 helpText: Enables Socket capabilities into your application, both in front and back-end
 icon: f:socketCapabilities.svg
 children: []
-usesDelays: [theconstructor,onsendmessage,ongetmessages,onhandlemessage,beforeClassDefinition]
 options:
   - name: serverurl
     display: Server URL
     type: text
-extraFiles:
-  - source: 'elements/Experimental/Sockets/999_sockets.js'
-    destination: 'back-end/app/services/sockets.js'
-settings:
-  - name: Packages
-    value: '"socket.io-client": "^4.4.0",'
-  - name: BackendPackages
-    value: '"socket.io": "latest",'
-  - name: ServerAddenum
-    value: |-
-      var sockets = require('./app/services/sockets')
-      var socketio = require('socket.io')
-  - name: ServerAddenumAfterUp
-    value: |-
-      var io = socketio(server,{
-        cors: {
-          origin: '*',
-          methods: ['GET', 'POST']
-        }
-      })
-      sockets(io)
+  - name: WaitFor
+    display: Wait for variable to be set
+    type: text
+  - name: noconsole
+    display: Hide debugging information
+    type: checkbox
 */
-{% set bpr %}
-import io from 'socket.io-client'
-{% endset %}
-{{ save_delayed('bpr',bpr)}}
-{% set ph %}
-const [socket, setSocket] = React.useState<any>(null)
-React.useEffect(() => {
-  const skt = io('{{ element.values.serverurl }}')
-  setSocket(skt)
-  return () => {
-    if (socket) {
-      socket.disconnect()
-    }
+const [ws, setWs] = React.useState<WebSocket | null>(null)
+const reconnectAttempts = React.useRef(0)
+const reconnectTimeout = React.useRef<any>(null)
+
+const connectWebSocket = React.useCallback(() => {
+  {% if not element.values.noconsole %}console.log('🔌 Connecting WebSocket...'){% endif %}
+
+  const socket = new WebSocket('{{ element.values.serverurl }}')
+
+  socket.onopen = () => {
+    {% if not element.values.noconsole %}console.log('✅ WS connected'){% endif %}
+
+    reconnectAttempts.current = 0
   }
-}, [])
-{% endset %}
-{{ save_delayed('ph',ph)}}
+
+  socket.onmessage = (event) => {
+    {% if not element.values.noconsole %}console.log('📩 Received message:', event.data){% endif %}
+
+    {{ content | raw }}
+  }
+
+  socket.onclose = (event) => {
+    {% if not element.values.noconsole %}console.log('❌ WS closed', event.code, event.reason){% endif %}
+
+    if (event.code !== 1000) attemptReconnect()
+  }
+
+  socket.onerror = (error) => {
+    {% if not element.values.noconsole %}console.log('⚠️ WS Error:', error){% endif %}
+
+    socket.close()
+  }
+
+  setWs(socket)
+}, [{% if element.values.WaitFor %}{{ element.values.WaitFor }}{% endif %}])
+
+const attemptReconnect = React.useCallback(() => {
+  if (reconnectTimeout.current) return
+  reconnectAttempts.current += 1
+  const delay = Math.min(1000 * 2 ** reconnectAttempts.current, 30000)
+  {% if not element.values.noconsole %}console.log(`⏳ Attempting reconnect in ${delay / 1000}s...`){% endif %}
+
+  reconnectTimeout.current = setTimeout(() => {
+    reconnectTimeout.current = null
+    connectWebSocket()
+  }, delay)
+}, [connectWebSocket])
+
+React.useEffect(() => {
+  connectWebSocket()
+  return () => {
+    {% if not element.values.noconsole %}console.log('🔒 Cleanup WS'){% endif %}
+
+    if (reconnectTimeout.current) clearTimeout(reconnectTimeout.current)
+    ws?.close()
+  }
+}, [connectWebSocket])
