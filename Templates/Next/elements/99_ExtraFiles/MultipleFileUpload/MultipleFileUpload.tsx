@@ -25,10 +25,11 @@ const MultipleFileUpload: FunctionComponent<any> = (props) => {
       }),
     )
 
-    setFiles([...files, ...newFile])
+    const newFilesContent = props.maxFiles === '1' ? [newFile[0]] : [...files, ...newFile]
+    setFiles(newFilesContent)
 
     if (props.onChange) {
-      props.onChange([...files, ...newFile])
+      props.onChange(newFilesContent)
     }
   }
 
