@@ -57,7 +57,7 @@ options:
 */
 {% set tableName = ( field | fieldData ).table.name | friendly %}
 {% set bpr %}
-import FileUpload from '../components/FileUpload/FileUpload'
+import FileUpload from '@components/FileUpload/FileUpload'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <FileUpload
