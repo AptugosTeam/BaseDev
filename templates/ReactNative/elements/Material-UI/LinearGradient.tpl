@@ -15,18 +15,29 @@ options:
     display: ClassName
     type: text
     options: ''
+  - name: start
+    display: Gradient Start
+    type: text
+    options: ''
+    advanced: true
+  - name: end
+    display: Gradient End
+    type: text
+    options: ''
+    advanced: true
 settings:
   - name: Packages
-    value: '"expo-linear-gradient": "~12.3.0",'
+    value: '"expo-linear-gradient": "~15.0.7",'
 */
 {% set bpr %}
 import { LinearGradient } from 'expo-linear-gradient';
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 <LinearGradient
-  {% if element.values.class %}style={ {{element.values.class}} }{% endif %}
   colors={['{{ element.values.from|default('#000000')}}', '{{ element.values.to|default('#343c46')}}']}
-  locations={[0, 0.9]}
+  start={ {{ element.values.start|default('{ x: 0, y: 0 }') }} }
+  end={ {{ element.values.end|default('{ x: 1, y: 0 }') }} }
+  {% if element.values.class %}style={ {{element.values.class}} }{% endif %}
 >
   {{ content | raw }}
 </LinearGradient>

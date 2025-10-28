@@ -99,10 +99,11 @@ const stopRecording = async (params = {}) => {
       headers: { 'Content-Type': 'multipart/form-data' },
     })
     .then((result) => {
-      setmessageHistory((old) => [...old, { from: 'User', type: 'audio', message: result.data.Message }])
+      setmessageHistory((old) => [...old, { from: 'User', type: 'audio', message: result.data.message, file: result.data.fileUrl, when: new Date() }])
+      if (onSendMessage) onSendMessage({ from: 'User', type: 'audioMessage', message: result.data.message, file: result.data.fileUrl, when: new Date() })
     })
     .catch((error) => {
-      setmessageHistory((old) => [...old, { from: 'User', type: 'text', message: 'Bad message - Not sent' }])
+      setmessageHistory((old) => [...old, { from: 'User', type: 'text', message: 'Bad message - Not sent', when: new Date() }])
     })
     .finally(() => {
       setisProcessingAudio(false)

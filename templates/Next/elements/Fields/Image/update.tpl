@@ -69,11 +69,12 @@ unique_id: hILFvubz
   {% endset %}
   {{ add_setting(tableSingleName ~ '_Pre_Add', preAddInsert) }}
 {% else %}
-  {{ add_setting(tableSingleName ~ '_File_Start', 'import { writeFileSync } from "fs"')}}
+  {{ add_setting(tableSingleName ~ '_File_Start', 'import { writeFileSync, renameSync } from "fs"')}}
   const tmp{{ fieldName }} = req.files?.find(f => f.fieldname === '{{ fieldName }}')
   if ( tmp{{ fieldName }} ) {
     const uniqueFileName = Date.now() + '_' + tmp{{ fieldName }}.originalname
-    writeFileSync(`./public/img/${uniqueFileName}`, tmp{{ fieldName }}.buffer)
+    if (tmpProfilePicture.buffer) writeFileSync(`./public/img/${uniqueFileName}`, tmp{{ fieldName }}.buffer)
+    else renameSync(tmpProfilePicture.path, `./public/img/${uniqueFileName}`)
     req.body.{{ fieldName }} = `/img/${uniqueFileName}`
 
     {% if field.autogeneratethumbnail %}{{ thumbnailGeneration }}{% endif %}

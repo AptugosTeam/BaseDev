@@ -26,6 +26,14 @@ options:
   - name: endpoint
     display: Where to send the photos? (endpoint)
     type: url
+  - name: quality
+    type: text
+    settings:
+      default: '0.8'
+  - name: className
+    display: ClassName
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"expo-camera": "^17.0.8",'
@@ -36,50 +44,57 @@ import { CameraView, useCameraPermissions } from 'expo-camera'
 {{ save_delayed('bpr',bpr)}}
 {% set ph %}
   const [isCameraOpen, setIsCameraOpen] = React.useState(false)
+  const [isProcessingPicture, setisProcessingPicture] = React.useState<any>(false)
   const cameraRef = React.useRef<any>(null)
   const [permission, requestPermission] = useCameraPermissions()
+  {% if element.children %}
+    {{ content | raw }}
+  {% else %}
+    const takePhoto = async (params = {}) => {
+      if (cameraRef.current) {
+        setisProcessingPicture(true)
+        const photo = await cameraRef.current.takePictureAsync({ quality: {{ element.values.quality | default('0.8') }} })
+        setIsCameraOpen(false)
 
-  const takePhoto = async (params = {}) => {
-    if (cameraRef.current) {
-      const photo = await cameraRef.current.takePictureAsync({ quality: 0.8 })
-      setIsCameraOpen(false)
+        const formData = new FormData()
+        formData.append('file', {
+          uri: photo.uri,
+          type: 'image/jpeg',
+          name: 'photo.jpg',
+        } as any)
 
-      const formData = new FormData()
-      formData.append('file', {
-        uri: photo.uri,
-        type: 'image/jpeg',
-        name: 'photo.jpg',
-      } as any)
+        Object.keys(params).forEach(key => {
+          formData.append(key, params[key])
+        })
+        
+        try {
+          const response = await axios.post(
+            {{ element.values.endpoint | textOrVariableInCode }},
+            formData,
+            { headers: { 'Content-Type': 'multipart/form-data' } }
+          )
 
-      Object.keys(params).forEach(key => {
-        formData.append(key, params[key])
-      })
-      
-      try {
-        const response = await axios.post(
-          {{ element.values.endpoint | textOrVariableInCode }},
-          formData,
-          { headers: { 'Content-Type': 'multipart/form-data' } }
-        )
-
-        if (response.data?.fileUrl) {
-          setmessageHistory((old) => [
-            ...old,
-            { from: 'User', message: response.data.fileUrl, type: 'photo' },
-          ])
-        } else {
-          setmessageHistory((old) => [...old, { from: 'User', message: response.data.fileUrl, type: 'photo' }])
-          console.log(response.data)
+          setisProcessingPicture(false)
+          if (response.data?.fileUrl) {
+            setmessageHistory((old) => [
+              ...old,
+              { from: 'User', message: response.data.fileUrl, type: 'photo', when: new Date() },
+            ])
+            if (onSendMessage) onSendMessage({ from: 'User', type: 'photoMessage', file: response.data.fileUrl, when: new Date() })
+          } else {
+            setmessageHistory((old) => [...old, { from: 'User', message: response.data.message, type: 'message', when: new Date() }])
+          }
+        } catch (err) {
+          console.error('Upload failed:', err)
         }
-      } catch (err) {
-        console.error('Upload failed:', err)
       }
     }
-  }
+  {% endif %}
 {% endset %}
 {{ save_delayed('ph',ph)}}
 <CameraView
   ref={cameraRef}
   facing={{ element.values.facing|default('front')|textOrVariable}}
-  style={ { flex: 1, position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 } }
+  {% if element.values.className %}style={ {{ element.values.className }} }
+  {% else %}style={ { flex: 1, position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 } }{% endif %}
 />

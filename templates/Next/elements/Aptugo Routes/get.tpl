@@ -13,15 +13,13 @@ unique_id: AlPg3QRE
 
   const aggregate = []
   
-  // aca
   {% set inaggregation = false %}
   if (populate !== 'false') {
     {% for field in table.fields %}
-      {% set fieldWithData = field | fieldData %}
+      {% set fieldWithData = field | fieldData %}
       {% include includeTemplate(['Fields' ~ field.data_type ~ 'find.tpl', 'Fieldsfind.tpl']) %}
     {% endfor %}
   }
-  // alla
 
   if (skip) aggregate.push({ $skip: skip })
   if (sortField && sortMethod) aggregate.push({ $sort: { [sortField]: sortMethod === 'desc' ? -1 : 1 } })
@@ -33,7 +31,13 @@ unique_id: AlPg3QRE
     for (const filt of Object.keys(parsedFilter)) {
       let filterValue = parsedFilter[filt]
 
-      if ( {{ tableName }}Model.schema.path(filt as any)?.instance === 'ObjectId') filterValue = new mongoose.Types.ObjectId(filterValue)
+      const path = {{ tableName }}Model.schema.path(filt as any)
+      if (
+        path?.instance === 'ObjectId' || // direct ObjectId
+        (path?.instance === 'Array' && path?.caster?.instance === 'ObjectId') // array of ObjectIds
+      ) {
+        filterValue = new mongoose.Types.ObjectId(filterValue);
+      }
   
       if (Array.isArray(filterValue) && filterValue.length === 2) {
         let lowerBound = Number(filterValue[0])

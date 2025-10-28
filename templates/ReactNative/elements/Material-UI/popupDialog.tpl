@@ -20,6 +20,11 @@ options:
     display: ClassName (view area)
     type: text
     options: ''
+  - name: avoidPortal
+    display: Disable Portal Handling
+    type: checkbox
+    settings:
+      advanced: true
 sourceType: javascript
 childs:
   - name: Title
@@ -32,10 +37,10 @@ children: []
 */
 {% set bpr %}
 import { Modal, TouchableOpacity } from 'react-native'
-import { Portal } from 'react-native-paper'
+{% if not element.values.avoidPortal %}import { Portal } from 'react-native-paper'{% endif %}
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-<Portal>
+{% if not element.values.avoidPortal %}<Portal>{% endif %}
   <Modal
     animationType="fade"
     transparent={true}
@@ -45,13 +50,17 @@ import { Portal } from 'react-native-paper'
       onRequestClose={() => {{ element.values.onclose }} }
     {% endif %}
   >
-    <TouchableOpacity
-      {% if element.values.dimClass %}style={ {{ element.values.dimClass }}}{% endif %}
-      {% if element.values.onclose %}onPress={ {{ element.values.onclose | functionOrCall }} }{% endif %}
-    >
-      <TouchableOpacity {% if element.values.viewClass %}style={ {{ element.values.viewClass }}}{% endif %} activeOpacity={1}>
+    {% if not element.values.avoidPortal %}
+      <TouchableOpacity
+        {% if element.values.dimClass %}style={ {{ element.values.dimClass }}}{% endif %}
+        {% if element.values.onclose %}onPress={ {{ element.values.onclose | functionOrCall }} }{% endif %}
+      >
+        <TouchableOpacity {% if element.values.viewClass %}style={ {{ element.values.viewClass }}}{% endif %} activeOpacity={1}>
+    {% endif %}
         {{ content | raw }}
+    {% if not element.values.avoidPortal %}
       </TouchableOpacity>
     </TouchableOpacity>
+    {% endif %}
   </Modal>
-</Portal>
+{% if not element.values.avoidPortal %}</Portal>{% endif %}

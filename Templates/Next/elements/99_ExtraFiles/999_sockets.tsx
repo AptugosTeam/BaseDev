@@ -3,85 +3,122 @@ path: 999_sockets.js
 unique_id: Wq86Z8m6
 internalUse: true
 */
-import { WebSocketServer } from 'ws'
-import { IncomingMessage } from 'http'
-import { Socket } from 'net'
+import { WebSocket, WebSocketServer } from 'ws'
 
-declare global {
-  var wss: WebSocketServer | undefined
+interface ExtendedWebSocket extends WebSocket {
+  readyState: any
+  send(arg0: string): unknown
+  on(arg0: string, arg1: (msg: any) => void): unknown
+  groupId?: string
 }
 
-export const getWsServerInstance = (): WebSocketServer => {
-  if (global.wss) {
-    console.log("WebSocket server instance already exists. Returning it.")
-    return global.wss
-  }
-
-  console.log("Creating new WebSocket Server instance...")
-  
-  global.wss = new WebSocketServer({ noServer: true })
-
-  global.wss.on('connection', (ws: WebSocket, req: IncomingMessage) => {
-    console.log('Client connected!')
-    // Handle events here
-    ws.on('message', (data: any) => {
-      console.log(`Received message from client: ${data}`)
-    })
-
-    ws.on('close', () => {
-      console.log('Client disconnected.')
-    })
+// Singleton reference to the WebSocket server
+let wssInstance:
+  | (WebSocketServer & {
+    _listeners: Map<string, (ws: ExtendedWebSocket, data: any) => void>
+    onWsEvent: (event: string, callback: (ws: ExtendedWebSocket, data: any) => void) => void
+    groupMap: Map<string, Set<ExtendedWebSocket>>
+    getDetails: () => any  // ✅ Add this
   })
+  | null = null
 
-  return global.wss
-}
+const groupMap = new Map<string, Set<ExtendedWebSocket>>()
 
-export const withWsServer = (handler: any) => async (req: IncomingMessage, res: any) => {
-  if (!res.socket.server.ws) {
-    const wss = getWsServerInstance()
-    res.socket.server.ws = wss
+export const withWebSocketServer = (req, res, next) => {
+  if (!res.socket.server.wss) {
+    console.log('🔌 Initializing WebSocket server...')
 
-    res.socket.server.on('upgrade', (request: IncomingMessage, socket: Socket, head: Buffer) => {
-      if (request.url.startsWith('/_next/')) {
-        console.log(`Ignoring HMR WebSocket request for: ${request.url}`)
-        return
-      }
-      
-      console.log(`WebSocket upgrade request for URL: ${request.url}`)
+    const wss = new WebSocketServer({ noServer: true }) as typeof wssInstance
 
-      wss.handleUpgrade(request, socket, head, (websocket) => {
-        wss.emit('connection', websocket, request)
-      })
-    })
-  }
-  
-  return handler(req, res)
-}
-
-export const broadcast = (data: any) => {
-  const wss = getWsServerInstance()
-  if (!wss) return
-
-  wss.clients.forEach((client: WebSocket) => {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(JSON.stringify(data))
+    wss._listeners = new Map()
+    wss.groupMap = groupMap
+    wss.onWsEvent = (event, callback) => {
+      wss._listeners.set(event, callback)
     }
-  })
+
+    res.socket.server.wss = wss
+    res.socket.server.groupMap = groupMap
+
+    wssInstance = wss
+
+    wss.getDetails = () => {
+      return {
+        totalClients: wss.clients.size,
+        groups: Array.from(wss.groupMap.entries()).map(([groupId, clients]) => ({
+          groupId,
+          clientCount: clients.size,
+          clients: Array.from(clients).map((client: ExtendedWebSocket) => ({
+            readyState: client.readyState,
+            groupId: client.groupId || null,
+          })),
+        })),
+        allClients: Array.from(wss.clients).map((client: ExtendedWebSocket) => ({
+          readyState: client.readyState,
+          groupId: client.groupId || null,
+        })),
+      }
+    }
+
+    {{ content | raw }}
+
+    // --- UPGRADE HANDLER ---
+    res.socket.server.on('upgrade', (req, socket, head) => {
+      if (req.url === '/ws' || req.url === '/api/ws') {
+        wss.handleUpgrade(req, socket, head, (ws: ExtendedWebSocket) => {
+          wss.emit('connection', ws, req)
+
+          ws.on('message', (msg) => {
+            try {
+              const data = JSON.parse(msg.toString())
+              const listener = wss._listeners.get(data.type)
+              if (listener) {
+                console.log('got a listener for ', data.type)
+                listener(ws, data)
+              } else {
+                console.log('📦 WS Server parsed data:', JSON.stringify(data, null, 2))
+                const clients = groupMap.get('bot-console-room-' + data.data.bot.metadata.sessionID)
+                if (clients) {
+                  if (data.data.data.action === 'speech_on') {
+                    console.log('Got Clients', clients)
+                    clients.forEach((c) => {
+                      if (c !== ws && c.readyState === WebSocket.OPEN) {
+                        console.log('Boradcasting to client', c)
+                        c.send(JSON.stringify({ type: 'message', data: JSON.stringify(data, null, 2) }))
+                      }
+                    })
+                  }
+                  
+                } else {
+                  console.log('No clients for group bot-console-room' + + data.data.bot.metadata.sessionID)
+                }
+              }
+            } catch (err) {
+              console.error('Error parsing WS message:', err)
+            }
+          })
+
+          ws.on('close', () => {
+            if (ws.groupId && groupMap.has(ws.groupId)) groupMap.get(ws.groupId)!.delete(ws)
+          })
+        })
+      }
+
+    })
+
+    console.log('✅ WebSocket server initialized and attached.')
+  }
+
+  next()
 }
 
-export const stop = () => {
-    const wss = getWsServerInstance()
-    if (!wss) return false
+// --- Helper to retrieve status anywhere ---
+export const getWebSocketStatus = (server?: any) => {
+  const wss = server?.wss ?? (typeof window === 'undefined' ? null : null)
+  if (!wss) return { ok: false, message: 'WebSocket server not initialized yet' }
 
-    wss.clients.forEach((client: WebSocket) => client.close())
-    wss.close()
-    delete global.wss
-    console.log('WebSocket server stopped')
-    return true
-}
-
-export const status = () => {
-  const wss = getWsServerInstance()
-  if (!wss) return { running: false }
-  return { running: true, clients: wss.clients.size }
+  return {
+    ok: true,
+    clients: wss.clients.size,
+    groups: wss.groupMap.size,
+  }
 }

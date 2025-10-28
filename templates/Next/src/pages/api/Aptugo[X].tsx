@@ -108,11 +108,14 @@ handler.use(database)
 handler.use(upload.any())
 handler.use(parseBody)
 handler.use(parseBodyMiddleware)
+{{ insert_setting(singleName ~ '_Middlewares') |raw }}
+
 {{ mainRouteCode }}
+
 export default handler
+
 {% endblock %}
 {# ADD EXTRA FILES FROM ROUTE #}
-
 {% for externalRouteFile in externalRouteFiles %}
   {% set mainRouteCode = externalRouteFile.content %}
   {{ addExtraFile(externalRouteFile.path, block("baseRoute")) }}

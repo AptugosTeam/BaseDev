@@ -7,12 +7,14 @@ unique_id: t9Bzg4Oy
 {% if field.relationshipType == 'm:1' %}
   // m:1 - {{ field.column_name }} {{ inaggregation }}
   {% set preparedLookup %}
-  $lookup: {
-    from: '{{ referencedField.table.name | friendly }}',
-    localField: '{{ field.column_name | friendly }}',
-    foreignField: '_id',
-    as: '{{ field.column_name | friendly }}'
-  } }, { $unwind: { path: '${{ field.column_name | friendly }}', preserveNullAndEmptyArrays: true }
+    $lookup: {
+      from: '{{ referencedField.table.name | friendly }}',
+      localField: '{{ field.column_name | friendly }}',
+      foreignField: '_id',
+      as: '{{ field.column_name | friendly }}'
+    }
+    },
+    { $unwind: { path: '${{ field.column_name | friendly }}', preserveNullAndEmptyArrays: true }
   {% endset %}
 {% elseif field.relationshipType == '1:m' %}
   // 1-m: {{field.column_name }}  {{ inaggregation }}
@@ -28,7 +30,7 @@ unique_id: t9Bzg4Oy
     localField: '{{ field.column_name | friendly }}',
     foreignField: '_id',
     as: '{{ field.column_name | friendly }}'
-    {% if autocompleteFields|length > 0 %},
+    {% if inaggregation == false and autocompleteFields|length > 0 %},
       pipeline: [
         {% for subfield in autocompleteFields %}
           {% include includeTemplate(['FieldsAutocompletefind.tpl']) with { 'field': subfield, inaggregation: true } %}
@@ -39,8 +41,10 @@ unique_id: t9Bzg4Oy
   {% endset %}
 {% endif %}
 {% if inaggregation %}
-  { {{ preparedLookup }} }
+  { {{ preparedLookup }} },
 {% else %}
-  aggregate.push({ {{ preparedLookup }}})
+  aggregate.push({
+    {{ preparedLookup }}
+  })
   {% set inaggregation = true %}
 {% endif %}

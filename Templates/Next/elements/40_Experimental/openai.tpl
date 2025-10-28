@@ -10,8 +10,14 @@ settings:
   - name: Packages
     value: '"openai": "5.20.2",'
 extraFiles:
-  - source: 'elements/99_ExtraFiles/900_openai.js'
-    destination: 'src/lib/openai.js'
+  - source: 'elements/99_ExtraFiles/500_openaiIndex.tsx'
+    destination: 'src/api-lib/index.tsx'
+  - source: 'elements/99_ExtraFiles/500_openaiMiddleware.tsx'
+    destination: 'src/api-lib/middleware.tsx'
+  - source: 'elements/99_ExtraFiles/500_openaiPipelines.tsx'
+    destination: 'src/api-lib/pipelines.tsx'
+  - source: 'elements/99_ExtraFiles/500_openaiTasks.tsx'
+    destination: 'src/api-lib/tasks.tsx'
 */
 
 // OpenAI 5.20.2 enabled

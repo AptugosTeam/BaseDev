@@ -1,13 +1,23 @@
 /*
-path: 998_SocketEndpointsStart.tsx
-completePath: >-
-  /Users/Shared/Dev/BaseDev/Templates/Next/elements/99_ExtraFiles/998_SocketEndpointsStart.tsx
-keyPath: elements/99_ExtraFiles/998_SocketEndpointsStart.tsx
-unique_id: aXHUniqG
+path: 996_SocketEndpointsStatus.tsx
+keyPath: elements/99_ExtraFiles/996_SocketEndpointsStatus.tsx
+unique_id: aXHUniqE
 */
-import { NextApiRequest, NextApiResponse } from 'next'
-import wsServer from '@api-lib/sockets'
+import { getWebSocketStatus, withWebSocketServer } from '@api-lib/sockets'
+import nc from 'next-connect'
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json(wsServer.status())
-}
+const handler = nc()
+handler.use(withWebSocketServer)
+
+handler.get((req: any, res: any) => {
+  const wss = res.socket.server.wss
+
+  if (req.query.details === 'true' && wss?.getDetails) {
+    return res.status(200).json(wss.getDetails())
+  }
+
+  const status = getWebSocketStatus(res.socket.server)
+  res.status(200).json(status)
+})
+
+export default handler

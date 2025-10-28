@@ -41,7 +41,7 @@ unique_id: JBZcqdvZ
   {% endset %}
   {{ add_setting(tableSingleName ~ '_Pre_Add', preAddInsert) }}
 {% else %}
-  {{ add_setting(tableSingleName ~ '_File_Start', 'import { writeFileSync } from "fs"')}}
+  {{ add_setting(tableSingleName ~ '_File_Start', 'import { writeFileSync, renameSync } from "fs"')}}
   const tmp{{ fieldName }} = req.files?.find(f => f.fieldname === '{{ fieldName }}')
   if ( tmp{{ fieldName }} ) {
     const uniqueFileName = Date.now() + '_' + tmp{{ fieldName }}.originalname

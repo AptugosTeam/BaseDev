@@ -51,6 +51,12 @@ options:
     advanced: true
     settings:
       default: false
+  - name: anonymous
+    display: Anonymous function
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
 children: []
 */
 {% set parentElement = element.parent | elementData %}  

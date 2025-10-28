@@ -12,6 +12,14 @@ options:
   - name: port
     display: Server PORT
     type: text
+  - name: model
+    display: Add to model files
+    type: dropdown
+    options: >-
+      return [ ['inPlace','Render in place'],
+      ...aptugo.store.getState().application.tables.map(({ unique_id, singleName }) => [
+        aptugo.pageUtils.friendly(singleName).toLowerCase(),singleName]) ]
+    advanced: true
 extraFiles:
   - source: 'elements/99_ExtraFiles/999_sockets.tsx'
     destination: 'src/api-lib/sockets.tsx'
@@ -22,4 +30,12 @@ extraFiles:
   - source: 'elements/99_ExtraFiles/996_SocketEndpointsStatus.tsx'
     destination: 'src/pages/api/ws/status.tsx'
 */
-//https://90f55a73f27d.ngrok-free.app/?wss=https://c2728be29a7c.ngrok-free.app
+{% if element.values.model %}
+  {{ add_setting(element.values.model ~ '_File_Start', 'import { withWebSocketServer } from "@api-lib/sockets"')}}
+  {{ add_setting(element.values.model ~ '_Middlewares', 'handler.use(withWebSocketServer)')}}
+{% endif %}
+// App has Socket capabilities
+// /api/ws/start
+// /api/ws/stop
+// /api/ws/status
+//
