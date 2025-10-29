@@ -14,7 +14,7 @@ options:
     type: function
 settings:
   - name: Packages
-    value: '"expo-location": "~16.1.0",'
+    value: '"expo-location": "~18.1.6",'
 */
 {% set AppJsonPlugins %}[
   "expo-location",

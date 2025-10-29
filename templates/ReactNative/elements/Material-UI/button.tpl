@@ -74,7 +74,7 @@ sourceType: javascript
 children: []
 settings:
   - name: Packages
-    value: '"react-native-svg": "13.9.0","react-native-iconify": "^1.0.0",'
+    value: '"react-native-svg": "15.11.2","react-native-iconify": "^1.0.0",'
   - name: BabelAdd
     value: 'plugins.push("react-native-iconify/plugin")'
 */

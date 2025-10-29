@@ -66,7 +66,19 @@ options:
     display: Viewability Config
     type: code
     options: ''
-
+  - name: maxToRenderPerBatch
+    display: maxToRenderPerBatch
+    type: text
+  - name: initialNumToRender
+    display: initialNumToRender
+    type: text
+  - name: windowSize
+    display: windowSize
+    type: text
+  - name: removeClippedSubviews
+    display: removeClippedSubviews
+    type: checkbox
+    options: ''
 children: []
 helpText: Displays a scrollable list of data.
 */
@@ -82,6 +94,10 @@ import { FlatList } from 'react-native'
   {% if element.values.data %}data={ {{element.values.data}} }{% endif %}
   {% if element.values.showsHorizontalScrollIndicator %}showsHorizontalScrollIndicator={false} {% endif %}
   {% if element.values.pagingEnabled %}pagingEnabled{% endif %}
+  {% if element.values.maxToRenderPerBatch %}maxToRenderPerBatch={ {{element.values.maxToRenderPerBatch}} }{% endif %}
+  {% if element.values.initialNumToRender %}initialNumToRender={ {{element.values.initialNumToRender}} }{% endif %}
+  {% if element.values.windowSize %}windowSize={ {{element.values.windowSize}} }{% endif %}
+  {% if element.values.removeClippedSubviews %}removeClippedSubviews={true}{% endif %}
   {% if element.values.onViewableItemsChanged %}onViewableItemsChanged={ {{element.values.onViewableItemsChanged | functionOrCall }} }{% endif %}
   {% if element.values.viewabilityConfig %}viewabilityConfig={ {{element.values.viewabilityConfig}} }{% endif %}
   {% if element.children %}renderItem={({{element.values.parameter | default('item')}}) => {
