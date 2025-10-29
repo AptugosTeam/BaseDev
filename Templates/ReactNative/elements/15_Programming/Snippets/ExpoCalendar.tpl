@@ -7,6 +7,9 @@ options:
     display: Reason Text
     type: text
     options: ''
+  - name: Async
+    display: Async Load
+    type: checkbox
 settings:
   - name: Packages
     value: '"expo-calendar": "~15.0.7",'
@@ -24,7 +27,9 @@ settings:
 import * as Calendar from 'expo-calendar'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
+{% if element.values.Async %}(async () => { {% endif %}
 const { status } = await Calendar.requestCalendarPermissionsAsync()
 if (status === 'granted') {
   {{ content | raw }}
 }
+{% if element.values.Async %}})(){% endif %}
