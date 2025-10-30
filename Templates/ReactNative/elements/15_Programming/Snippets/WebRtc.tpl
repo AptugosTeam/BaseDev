@@ -7,6 +7,10 @@ options:
     display: ClassName
     type: text
     options: ''
+  - name: permissionText
+    display: Reason Text
+    type: text
+    options: ''
   - name: streamurl
     display: Stream URL
     type: text
@@ -23,7 +27,7 @@ settings:
 [
   "@config-plugins/react-native-webrtc",
   {
-    "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone"
+    "microphonePermission": "{{ element.values.permissionText|default("Allow $(PRODUCT_NAME) to access your microphone")}}"
   }
 ],
 {% endset %}

@@ -12,10 +12,6 @@ options:
     display: Auto Hide Duration (ms)
     type: text
     options: ''
-  - name: position
-    display: Position
-    type: dropdown
-    options: Top-Left;Top-Center;Top-Right;Bottom-Left;Bottom-Center;Bottom-Right
   - name: varName
     display: Variable Name (snackBarOpen)
     type: text
@@ -48,12 +44,11 @@ const [{{ element.values.varName }}, set{{ element.values.varName }}] = React.us
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% endif %}
-{% set splited = element.values.position|split('-') %}
 <Snackbar
   {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
   {% if element.values.autohide %}duration={ {{ element.values.autohide }} }{% endif %}
   visible={ {{ element.values.varName }} }
-  onDismiss={() => { {% if not element.values.dontCreateVar %}set{{ element.values.varName }}(false){% endif %} {% if element.values.onClose %} {{ element.values.onClose }} {% endif %} } }
+  onDismiss={ {{ element.values.onClose|functionOrCall }} }
 >
   {% if element.values.message %}{{ element.values.message }}{% endif %}
   {{ content | raw }}

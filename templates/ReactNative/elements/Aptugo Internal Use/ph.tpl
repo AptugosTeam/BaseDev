@@ -8,10 +8,16 @@ options:
     type: code
     options: ''
     advanced: true
+  - name: theme
+    display: Theme
+    type: code
+    options: ''
+    advanced: true   
 */
 {% set bpr %}
 import { Provider as PaperProvider } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
+{% if element.values.theme %}import { MD3LightTheme } from 'react-native-paper'{% endif %}
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% set bpr %}
@@ -27,6 +33,12 @@ const sc  = StyleSheet.create({
   }
 })
 {% endset %}
+{% if element.values.theme %}
+  const paperTheme = {
+    ...MD3LightTheme,
+    {{ element.values.theme }}
+  }
+{% endif %}
 {{ save_delayed('bpr',bpr)}}
 const {{ page.name | friendly }} = (props) => {
   const { navigation:router } = props
@@ -35,4 +47,4 @@ const {{ page.name | friendly }} = (props) => {
     {{ delay }}
   {% endfor %}
   {{ content|raw }}
-  return (<PaperProvider><SafeAreaView style={sc.droidSafeArea}>
+  return (<PaperProvider {% if element.values.theme %}theme={paperTheme}{% endif %}><SafeAreaView style={sc.droidSafeArea}>

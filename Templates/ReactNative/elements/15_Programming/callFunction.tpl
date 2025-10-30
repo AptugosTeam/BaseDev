@@ -19,7 +19,12 @@ options:
     display: Belongs to an object
     type: checkbox
     advanced: true
+  - name: await
+    display: Wait for results
+    type: checkbox
+    advanced: true
 children: []
 */
+{% if element.values.await %}await {% endif %}
 {% if element.values.objectProperty %}this.{% endif %}
 {{ element.values.functionName }}({{ element.values.functionParameters }})

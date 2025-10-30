@@ -93,9 +93,11 @@ export const config = {
   },
 }
 
+const localTmp = path.join(process.cwd(), 'tmp')
+if (!fs.existsSync(localTmp)) fs.mkdirSync(localTmp, { recursive: true })
 const upload = multer({
   storage: multer.diskStorage({
-    destination: '/tmp',
+    destination: localTmp,
     filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
   }),
   limits: {
