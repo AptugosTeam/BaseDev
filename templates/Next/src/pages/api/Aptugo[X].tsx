@@ -83,6 +83,8 @@ import nc from "next-connect"
 import mongoose from 'mongoose'
 import multer from 'multer'
 import parseBodyMiddleware from '@lib/parseBodyMiddleware'
+import fs from 'fs'
+import path from 'path'
 {{ mainRouteImports }}
 
 {{ insert_setting(singleName ~ '_File_Start') |raw }}
