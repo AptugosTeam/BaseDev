@@ -10,7 +10,7 @@ options:
     display: Style
     type: text
     options: ''
-  - name: contentContainerStyles
+  - name: contentContainerStyle
     display: Content Container Styles
     type: text
     options: ''
@@ -44,9 +44,6 @@ options:
   - name: parameter
     display: Parameter to Render Item
     type: text
-  - name: contentContainerStyle
-    display: Container Style
-    type: text
   - name: horizontal
     display: Is horizontal?
     type: checkbox
@@ -66,7 +63,24 @@ options:
     display: Viewability Config
     type: code
     options: ''
-
+  - name: columns
+    display: Number of Columns
+    type: text
+    options: ''
+  - name: columnWrapperStyle
+    display: Column Wrapper Style
+    type: text
+    options: ''
+  - name: onEndReached
+    display: On End Reached
+    type: code
+    options: ''
+    advanced: true
+  - name: onEndReachedThreshold
+    display: On End Reached Threshold
+    type: text
+    options: ''
+    advanced: true
 children: []
 helpText: Displays a scrollable list of data.
 */
@@ -79,6 +93,8 @@ import { FlatList } from 'react-native'
   {% if element.values.contentContainerStyle %}contentContainerStyle={ {{element.values.contentContainerStyle}} }{% endif %}
   {% if element.values.nestedScrollEnabled %}nestedScrollEnabled{% endif %}
   {% if element.values.horizontal %}horizontal{% endif %}
+  {% if element.values.columns %}numColumns={ {{element.values.columns}} }{% endif %}
+  {% if element.values.columnWrapperStyle %}columnWrapperStyle={ {{element.values.columnWrapperStyle}} }{% endif %}
   {% if element.values.data %}data={ {{element.values.data}} }{% endif %}
   {% if element.values.showsHorizontalScrollIndicator %}showsHorizontalScrollIndicator={false} {% endif %}
   {% if element.values.pagingEnabled %}pagingEnabled{% endif %}
@@ -98,4 +114,6 @@ import { FlatList } from 'react-native'
   {% if element.values.keyExtractor %}keyExtractor={ {{element.values.keyExtractor}} }{% endif %}
   {% if element.values.getItemLayout %}getItemLayout={(data:any, index:number) => ({{ element.values.getItemLayout }})}{% endif %}
   {% if element.values.initialScrollIndex %}initialScrollIndex={{ element.values.initialScrollIndex | textOrVariable }}{% endif %}
+  {% if element.values.onEndReached %}onEndReached={ {{element.values.onEndReached | functionOrCall }} }{% endif %}
+  {% if element.values.onEndReachedThreshold %}onEndReachedThreshold={ {{element.values.onEndReachedThreshold}} }{% endif %}
 />

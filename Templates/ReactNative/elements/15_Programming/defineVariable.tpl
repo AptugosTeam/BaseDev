@@ -17,6 +17,11 @@ options:
     display: Will it be modified?
     type: checkbox
     options: ''
+  - name: priority
+    display: Priiority
+    type: dropdown
+    options: Normal;High;Low
+    advanced: true
 sourceType: javascript
 children: []
 */
@@ -25,8 +30,19 @@ children: []
 {% set varValue = element.values.variableValue | default('') %}
 {% set isLet = element.values.willbeModified %}
 
-{% if isLet and varValue == '' %}
-    let {{ varName }}
+{% if element.values.priority %}
+{% set ph %}
+  {% if isLet and varValue == '' %}
+      let {{ varName }}
+  {% else %}
+      {% if isLet %}let{% else %}const{% endif %} {{ varName }} = {{ varValue }}
+  {% endif %}
+{% endset %}
+{{ save_delayed('ph',ph,1) }}
 {% else %}
-    {% if isLet %}let{% else %}const{% endif %} {{ varName }} = {{ varValue }}
+  {% if isLet and varValue == '' %}
+      let {{ varName }}
+  {% else %}
+      {% if isLet %}let{% else %}const{% endif %} {{ varName }} = {{ varValue }}
+  {% endif %}
 {% endif %}
