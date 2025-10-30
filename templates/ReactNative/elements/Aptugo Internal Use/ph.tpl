@@ -22,8 +22,7 @@ const sc = StyleSheet.create({
     {{element.values.style}}
     {% else %}
     flex: 1,
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-    backgroundColor: '#ffffff',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
     {% endif %}
   }
 })
@@ -31,7 +30,7 @@ const sc = StyleSheet.create({
 {{ save_delayed('bpr',bpr)}}
 const {{ page.name | friendly }} = (props) => {
   const { navigation } = props
-  const { params } = props.route
+  const { params, name: route } = props.route
   {% for delay in delayed %}
     {{ delay }}
   {% endfor %}

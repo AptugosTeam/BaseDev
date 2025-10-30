@@ -11,13 +11,6 @@ options:
     display: State Function Name
     type: text
     options: ''
-  - name: onImageMissing
-    display: onImageMissing
-    type: checkbox
-    options: ''
-    advanced: false
-    settings:
-      default: false
 */
 {% set bpr %}
 import { Images } from '@rnmapbox/maps'
@@ -25,12 +18,10 @@ import { Images } from '@rnmapbox/maps'
 {{ save_delayed('bpr',bpr)}}
 <Images
   images={ {{ element.values.variableToUse }}}
-  {% if element.values.onImageMissing %}
   onImageMissing={(url) => {
     {{ element.values.functionToUse }}({
       ...{{ element.values.variableToUse }},
       [url]: { uri: url },
     })
   }}
-  {% endif %}
 />

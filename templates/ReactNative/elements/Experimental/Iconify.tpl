@@ -23,7 +23,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"react-native-svg": "15.11.2","react-native-iconify": "^1.0.0", "babel-plugin-macros": "^3.1.0",'
+    value: '"react-native-svg": "13.9.0","react-native-iconify": "^1.0.0", "babel-plugin-macros": "^3.1.0",'
   - name: BabelAdd
     value: 'plugins.push("babel-plugin-macros")'
   - name: BabelAdd

@@ -58,19 +58,6 @@ options:
     display: Item Separator Style
     type: text
     options: ''
-  - name: maxToRenderPerBatch
-    display: maxToRenderPerBatch
-    type: text
-  - name: initialNumToRender
-    display: initialNumToRender
-    type: text
-  - name: windowSize
-    display: windowSize
-    type: text
-  - name: removeClippedSubviews
-    display: removeClippedSubviews
-    type: checkbox
-    options: ''
 
 children: []
 */
@@ -111,18 +98,6 @@ import { FlatList, View } from 'react-native'
     decelerationRate={ {{element.values.decelerationRate}} }
   {% else %}
     decelerationRate="fast"
-  {% endif %}
-    {% if element.values.maxToRenderPerBatch %}
-    maxToRenderPerBatch={ {{element.values.maxToRenderPerBatch}} }
-    {% endif %}
-  {% if element.values.initialNumToRender %}
-  initialNumToRender={ {{element.values.initialNumToRender}} }
-  {% endif %}
-  {% if element.values.windowSize %}
-  windowSize={ {{element.values.windowSize}} }
-  {% endif %}
-  {% if element.values.removeClippedSubviews %}
-  removeClippedSubviews={true}
   {% endif %}
   {% if element.values.itemSeparatorStyle %}
     ItemSeparatorComponent={() => <View style={ {{element.values.itemSeparatorStyle}} } />}

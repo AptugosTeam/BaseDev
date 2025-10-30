@@ -11,10 +11,6 @@ options:
     display: ClassName
     type: text
     options: ''
-  - name: height
-    display: height
-    type: text
-    options: ''
 settings:
   - name: Packages
     value: '"react-native-youtube-iframe": "^2.3.0","react-native-webview": "13.2.2",'
@@ -24,6 +20,6 @@ import YoutubePlayer from "react-native-youtube-iframe"
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 <YoutubePlayer
-  height={ {{ element.values.height}} }
+  height={300}
   videoId={ {{ element.values.videoID}} }
 />

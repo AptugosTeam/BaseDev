@@ -17,7 +17,7 @@ options:
     type: text
     options: ''
   - name: viewClass
-    display: ClassName (dialog view area)
+    display: ClassName (view area)
     type: text
     options: ''
   - name: customStructure
@@ -35,19 +35,29 @@ childs:
 children: []
 */
 {% set bpr %}
-import { Portal, Dialog } from 'react-native-paper'
+import { Modal, TouchableOpacity } from 'react-native'
+import { Portal } from 'react-native-paper'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 <Portal>
-  <Dialog
+  <Modal
+    animationType="fade"
+    transparent={true}
     visible={ {{ element.values.visible }} }
     onDismiss={() => {{ element.values.onclose }} }
-    style={ {{ element.values.viewClass }} }
+    onRequestClose={() => {{ element.values.onclose }} }
   >
     {% if not element.values.customStructure %}
-      {{ content | raw }}
+    <TouchableOpacity
+      style={ {{ element.values.dimClass }}}
+      onPress={ {{ element.values.onclose | functionOrCall }} }
+    >
+      <TouchableOpacity style={ {{ element.values.viewClass }}} activeOpacity={1}>
+        {{ content | raw }}
+      </TouchableOpacity>
+    </TouchableOpacity>
     {% else %}
-      {{ content | raw }}
+    {{ content | raw }}
     {% endif %}
-  </Dialog>
+  </Modal>
 </Portal>

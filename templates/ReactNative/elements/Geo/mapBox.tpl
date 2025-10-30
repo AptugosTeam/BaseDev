@@ -7,9 +7,6 @@ options:
   - name: accessToken
     display: Access Token
     type: text
-  - name: publicAccessToken
-    display: Public Access Token
-    type: text
   - name: className
     display: ClassName
     type: styles
@@ -39,9 +36,6 @@ options:
   - name: scaleBarPosition
     display: ScaleBar Position
     type: text
-  - name: styleURL
-    display: styleURL
-    type: text
   - name: ref
     display: Use Reference
     type: text
@@ -49,18 +43,15 @@ options:
   - name: onMapIdle
     display: On Map Idle
     type: function
-  - name: onDidFinishLoadingMap
-    display: Map Finish Loading
-    type: function
 settings:
   - name: Packages
-    value: '"expo-dev-client": "~5.2.4","@rnmapbox/maps": "github:AriadnaGoro/maps#main",'
+    value: '"expo-dev-client": "~2.4.13","@rnmapbox/maps": "github:rnmapbox/maps#main",'
 */
 {% set AppJsonPlugins %}
 [
   "@rnmapbox/maps",
   {
-    "RNMapboxMapsVersion": "11.16.0",
+    "RNMapboxMapsVersion": "10.16.2",
     "RNMapboxMapsDownloadToken": "{{ element.values.accessToken }}"
   }],
   [
@@ -73,7 +64,7 @@ settings:
 {{ add_setting('AppJsonPlugins', AppJsonPlugins)}}
 {% set bpr %}
 import { MapView, setAccessToken } from '@rnmapbox/maps'
-setAccessToken('{{ element.values.publicAccessToken }}')
+setAccessToken('{{ element.values.accessToken }}')
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 <MapView
@@ -85,12 +76,8 @@ setAccessToken('{{ element.values.publicAccessToken }}')
   scaleBarEnabled={ {{element.values.scaleBarEnabled|default(true)}}}
   {% if element.values.scaleBarEnabled %}scaleBarPosition={ {{element.values.scaleBarPosition|default('{ bottom: 8, left: 8}')}} }{% endif %}
   {% if element.values.className %}style={ {{ element.values.className}} }{% endif %}
-  {% if element.values.styleURL %}styleURL={ {{ element.values.styleURL}} }{% endif %}
   {% if element.values.onMapIdle %}
     onMapIdle={ {{ element.values.onMapIdle |functionOrCall }} }
-  {% endif %}
-  {% if element.values.onDidFinishLoadingMap %}
-  onDidFinishLoadingMap={() =>  {{ element.values.onDidFinishLoadingMap}} }
   {% endif %}
 >{{ content | raw }}</MapView>
 
