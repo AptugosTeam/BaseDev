@@ -16,7 +16,7 @@ options:
     options: ''
   - name: onChange
     display: On Change
-    type: text
+    type: code
     options: ''
   - name: onMount
     display: On Mount
