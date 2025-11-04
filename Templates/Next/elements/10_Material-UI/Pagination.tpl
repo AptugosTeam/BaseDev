@@ -11,6 +11,11 @@ options:
     type: text
     settings:
       default: '10'
+  - name: useDirectFunction
+    display: Usar función directa (OnChange)
+    type: checkbox
+    settings:
+      default: false
   - name: onChange
     display: On Change
     type: function
@@ -91,7 +96,11 @@ import Pagination from '@mui/material/Pagination'
     boundaryCount={ {{ element.values.boundaryCount }} }
   {% endif %}
   {% if element.values.onChange %}
-    onChange={ {{ element.values.onChange | functionOrCall }} }
+    {% if element.values.useDirectFunction %}
+      onChange={ {{ element.values.onChange }} }
+    {% else %}
+      onChange={ {{ element.values.onChange | functionOrCall }} }
+    {% endif %}
   {% endif %}
   {% if element.values.disabled %}
     disabled={ {{element.values.disabled}} }
