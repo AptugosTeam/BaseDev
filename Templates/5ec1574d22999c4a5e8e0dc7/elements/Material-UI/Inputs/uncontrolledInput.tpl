@@ -36,6 +36,11 @@ options:
     display: Placeholder
     type: text
     options: ''
+  - name: placeholderExpr
+    display: Placeholder (expression or function)
+    type: code
+    options: ''
+    advanced: true  
   - name: variant
     display: Variant
     type: dropdown
@@ -197,7 +202,11 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if element.values.id %}id="{{ element.values.id }}"{% endif %}
     variant="{{ element.values.variant|default('standard') }}"
     {% if element.values.Autofocus %}autoFocus{% endif %}
-    {% if element.values.placeholder %}placeholder={{ element.values.placeholder | textOrVariable }}{% endif %}
+    {% if element.values.placeholderExpr %}
+      placeholder={ {{ element.values.placeholderExpr }} }
+      {% elseif element.values.placeholder %}
+      placeholder={{ element.values.placeholder | textOrVariable }}
+    {% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
     {% if element.values.helperText %}helperText={ {{ element.values.helperText }} }{% endif %}
@@ -243,9 +252,9 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% endif %}
     {% if element.values.type != 'textarea' and element.values.type != 'numeric' %}
       {% if element.values.type == 'date' 
-       and element.values.placeholder 
-       and element.values.onFocus 
-       and element.values.onBlur %}  
+        and element.values.placeholder 
+        and element.values.onFocus 
+        and element.values.onBlur %}  
         type="text"
       {% else %}
         type="{{ element.values.type|default('text') }}"
