@@ -32,6 +32,9 @@ options:
     display: Type
     type: dropdown
     options: text;outlined;contained;elevated;contained-tonal
+  - name: buttonColor
+    type: text
+    advanced: true
   - name: icon
     display: Write the name of an icon
     type: text
@@ -89,6 +92,7 @@ import { Iconify } from 'react-native-iconify'
 {{ save_delayed('bpr',bpr)}}
 {% endif %}
 <Button
+  {% if element.values.buttonColor %}buttonColor={{ element.values.buttonColor | textOrVariable }}{% endif %}
   {% if element.values.className %}style={ {{ element.values.className }} }{% endif %}
   {% if element.values.type %}mode={'{{ element.values.type }}'}{% endif %}
   {% if element.values.labelStyle %}labelStyle={ {{ element.values.labelStyle }} }{% endif %}

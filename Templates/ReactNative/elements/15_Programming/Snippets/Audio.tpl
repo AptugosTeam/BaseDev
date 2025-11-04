@@ -37,26 +37,6 @@ import { Audio } from 'expo-av'
 {% include includeTemplate('useState.tpl') with { 'element': { 'values': { variableName: sound, typeAnnotation: 'Audio.Sound | null', defaultValue: 'null' }}} %}
 {% include includeTemplate('useState.tpl') with { 'element': { 'values': { variableName: 'isProcessingAudio', defaultValue: 'false' }}} %}
 
-const playSound = async (uri: string) => {
-  try {
-    if (sound) {
-      await sound.stopAsync()
-      await sound.unloadAsync()
-      set{{ sound }}(null)
-    }
-
-    const { sound: newSound } = await Audio.Sound.createAsync({ uri })
-    set{{ sound }}(newSound)
-    await newSound.playAsync()
-
-    newSound.setOnPlaybackStatusUpdate((status: any) => {
-      if (status.didJustFinish) set{{ sound }}(null)
-    })
-  } catch (err) {
-    console.error('Error playing audio', err)
-  }
-}
-
 const startRecording = async () => {
   try {
     await Audio.requestPermissionsAsync()
@@ -92,6 +72,10 @@ const stopRecording = async (params = {}) => {
   Object.keys(params).forEach(key => {
     formData.append(key, params[key])
   })
+
+  if (receiver) {
+    formData.append('to', receiver)
+  }
 
   setisProcessingAudio(true)
   axios

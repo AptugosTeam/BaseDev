@@ -66,6 +66,10 @@ import { CameraView, useCameraPermissions } from 'expo-camera'
         Object.keys(params).forEach(key => {
           formData.append(key, params[key])
         })
+
+        if (receiver) {
+          formData.append('to', receiver)
+        }
         
         try {
           const response = await axios.post(
@@ -76,11 +80,10 @@ import { CameraView, useCameraPermissions } from 'expo-camera'
 
           setisProcessingPicture(false)
           if (response.data?.fileUrl) {
-            setmessageHistory((old) => [
-              ...old,
-              { from: 'User', message: response.data.fileUrl, type: 'photo', when: new Date() },
-            ])
-            if (onSendMessage) onSendMessage({ from: 'User', type: 'photoMessage', file: response.data.fileUrl, when: new Date() })
+            const newMessage:any = { from: 'User', file: response.data.fileUrl, message: response.data.fileUrl, type: 'photo', when: new Date() }
+            if (receiver) newMessage.to = receiver
+            setmessageHistory((old) => [...old, newMessage])
+            if (onSendMessage) onSendMessage({ ...newMessage, type: 'photoMessage' })
           } else {
             setmessageHistory((old) => [...old, { from: 'User', message: response.data.message, type: 'message', when: new Date() }])
           }

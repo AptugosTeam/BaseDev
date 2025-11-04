@@ -38,7 +38,7 @@ children: []
 */
 {% set parentElement = element.parent | elementData %}  
 {% if parentElement.value == 'class' %}
-  {% if element.values.functionName == 'constructor' %}constructor{% else %}public {% if element.values.static %}static {% endif %}{{element.values.functionName}}{% endif %} ({{ element.values.functionParameters }}) {
+  {% if element.values.functionName == 'constructor' %}constructor{% else %}public {% if element.values.static %}static {% endif %}{% if element.values.async%}async {% endif %}{{element.values.functionName}}{% endif %} ({{ element.values.functionParameters }}) {
     {{ element.values.functionBody | raw }}
     {{ content | raw }}  
   }

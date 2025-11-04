@@ -37,6 +37,31 @@ options:
   - name: animated
     display: Is Animated
     type: checkbox
+  - name: Horizontal
+    display: Horizontal
+    type: checkbox
+    settings:
+      propertyCondition: scrollable
+      condition: true
+  - name: hideHorizontalScrollIndicator
+    display: Hide Horizontal Scroll Indicator
+    type: checkbox
+    settings:
+      propertyCondition: Horizontal
+      condition: true
+  - name: onMomentumScrollEnd
+    display: onMomentumScrollEnd
+    type: code
+    advanced: true
+    settings:
+      propertyCondition: scrollable
+      condition: true
+  - name: pagingEnabled
+    display: Enable Paging
+    type: checkbox
+    settings:
+      propertyCondition: scrollable
+      condition: true
   - name: nestedScrollEnabled
     display: Enable nested scrolling?
     type: checkbox
@@ -104,10 +129,16 @@ import { ScrollView } from 'react-native'
 {{ save_delayed('bpr',bpr)}}
 {% endif %}
 {% set tag = 'View' %}
-{% if element.values.scrollable %}{% set tag = 'ScrollView' %}{% endif %}
-{% if element.values.animated %}{% set tag = 'Animated.View' %}{% endif %}
 {% if element.values.autoAdjust %}{% set tag = 'KeyboardAvoidingView' %}{% endif %}
+{% if element.values.animated %}{% set tag = 'Animated.View' %}{% endif %}
+{% if element.values.scrollable %}
+  {% set tag = 'ScrollView' %}
+  {% if element.values.animated %}{% set tag = 'Animated.ScrollView' %}{% endif %}
+{% endif %}
 <{{ tag }}
+  {% if element.values.Horizontal %}horizontal{% endif %}
+  {% if element.values.pagingEnabled %}pagingEnabled{% endif %}
+  {% if element.values.hideHorizontalScrollIndicator %}showsHorizontalScrollIndicator={false}{% endif %}
   {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
   {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
   {% if class is not empty %}style={ {{class}} }{% endif %}
@@ -117,6 +148,11 @@ import { ScrollView } from 'react-native'
     {% if element.values.onScroll %}
       onScroll={(event) => {
         {{ element.values.onScroll }}
+      }}
+    {% endif %}
+    {% if element.values.onMomentumScrollEnd %}
+      onMomentumScrollEnd={(e) => {
+        {{ element.values.onMomentumScrollEnd }}
       }}
     {% endif %}
   {% endif %}

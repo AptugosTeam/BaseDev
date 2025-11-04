@@ -30,7 +30,11 @@ children: []
 
   
   if (filter) {
-    if (typeof filter === 'string') {
+    try {
+      const parsedFilter = JSON.parse(decodeURIComponent(filter))
+      console.log('parsedfilter', parsedFilter)
+      Object.assign(aggregate, parsedFilter)
+    } catch (e) {
       aggregate.push(
         {
           $match: {
@@ -42,9 +46,6 @@ children: []
           }
         }
       )
-    } else {
-      const parsedFilter = JSON.parse(decodeURIComponent(filter))
-      Object.assign(aggregate, parsedFilter)
     }
   }
 
