@@ -69,7 +69,14 @@ options:
   - name: rightIcon
     display: Icon (right side)
     type: dropdown
-    options: Use a variable;email-outline;eye;magnify;none
+    options: Use a variable;email-outline;eye;magnify;custom;none
+  - name: customRightIcon
+    display: Custom Icon JSX
+    type: code
+    options: ''
+    settings:
+      propertyCondition: rightIcon
+      condition: custom
   - name: variableToUseIcon
     display: Variable to use
     type: text
@@ -227,10 +234,30 @@ children: []
       {% if element.values.leftIcon and element.values.leftIcon != 'none' %}
       left={<TextInput.Icon {% if element.values.iconColor %}iconColor={{ element.values.iconColor | textOrVariable }} {% elseif element.values.placeholderTextColor %}iconColor={{ element.values.placeholderTextColor | textOrVariable }}{% endif%}
       {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %} {% if element.values.className %}style={ {{ element.values.className ~ 'LeftIcon' }} }{% endif %} icon='{{element.values.leftIcon}}' />}{% endif %}
-      {% if element.values.rightIcon and element.values.rightIcon != 'none' %}
-      right={<TextInput.Icon {% if element.values.iconColor %}iconColor={{ element.values.iconColor | textOrVariable }} {% elseif element.values.placeholderTextColor %}iconColor={{ element.values.placeholderTextColor | textOrVariable }}{% endif%}
-       {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %} {% if element.values.className %}style={ {{ element.values.className ~ 'RightIcon' }} }{% endif %}
-      icon={% if element.values.rightIcon != 'Use a variable' %}'{{element.values.rightIcon}}' {% else %} {{element.values.variableToUseIcon | textOrVariable}} {% endif %} />}{% endif %}
+{% if element.values.rightIcon and element.values.rightIcon != 'none' %}
+  {% if element.values.rightIcon == 'custom' %}
+    right={
+      <TextInput.Icon
+        forceTextInputFocus={false}
+        {% if element.values.iconColor %}iconColor={{ element.values.iconColor | textOrVariable }}{% endif %}
+        icon={() => (
+          {{ element.values.customRightIcon | raw }}
+        )}
+      />
+    }
+  {% else %}
+    right={
+      <TextInput.Icon
+        {% if element.values.iconColor %}iconColor={{ element.values.iconColor | textOrVariable }}
+        {% elseif element.values.placeholderTextColor %}iconColor={{ element.values.placeholderTextColor | textOrVariable }}{% endif %}
+        {% if element.values.useonChangeIcon %}onPress={ {{ element.values.onChangeIcon | functionOrCall }} }{% endif %}
+        {% if element.values.className %}style={ {{ element.values.className ~ 'RightIcon' }} }{% endif %}
+        icon={% if element.values.rightIcon != 'Use a variable' %}'{{element.values.rightIcon}}' {% else %} {{element.values.variableToUseIcon | textOrVariable}} {% endif %}
+      />
+    }
+  {% endif %}
+{% endif %}
+
   />
     {% if useHelperText %}
         <HelperText
