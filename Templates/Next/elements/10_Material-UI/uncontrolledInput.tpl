@@ -26,6 +26,9 @@ options:
     display: Placeholder
     type: text
     options: ''
+  - name: inputReferent
+    display: inputReferent
+    type: text
   - name: variant
     display: Variant
     type: dropdown
@@ -139,6 +142,7 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.placeholder %}placeholder={{ element.values.placeholder | textOrVariable }}{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
+    {% if element.values.inputReferent %}inputRef={{ element.values.inputReferent }}{% endif %}
     {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
     {% if element.values.helperText %}helperText={ {{ element.values.helperText }} }{% endif %}
     {% if element.values.margin %}margin="{{ element.values.margin }}"{% endif %}
