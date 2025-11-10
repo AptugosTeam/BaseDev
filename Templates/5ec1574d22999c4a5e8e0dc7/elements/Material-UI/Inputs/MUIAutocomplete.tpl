@@ -160,7 +160,9 @@ import TextField from '@mui/material/TextField';
     <TextField
       {...params}
       label="{{ element.values.label|default('') }}"
-      placeholder="{{ element.values.placeholder | default('') }}"
+      {% if element.values.placeholder %}
+        placeholder={{ element.values.placeholder | textOrVariable }}
+      {% endif %}
       {% if element.values.inputProps %}
         inputProps={ {
           ...params.inputProps,
