@@ -17,7 +17,7 @@ import * as Calendar from 'expo-calendar'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 Calendar.getCalendarsAsync(Calendar.EntityTypes.EVENT).then(calendars => {
-  Calendar.getEventsAsync( calendars.map(c => c.id), {{ element.values.fromDate | textOrVariableInCode }}, {{ element.values.toDate | textOrVariableInCode }}).then(events => {
+  return Calendar.getEventsAsync( calendars.map(c => c.id), {{ element.values.fromDate | textOrVariableInCode }}, {{ element.values.toDate | textOrVariableInCode }}).then(events => {
     {{ content | raw }}
   })
 })

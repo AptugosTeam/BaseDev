@@ -20,6 +20,10 @@ options:
       ...aptugo.store.getState().application.tables.map(({ unique_id, singleName }) => [
         aptugo.pageUtils.friendly(singleName).toLowerCase(),singleName]) ]
     advanced: true
+  - name: extraImports
+    display: Extra Imports in lib
+    type: code
+    advanced: true
 extraFiles:
   - source: 'elements/99_ExtraFiles/999_sockets.tsx'
     destination: 'src/api-lib/sockets.tsx'

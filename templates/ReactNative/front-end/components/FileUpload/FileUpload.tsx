@@ -4,7 +4,7 @@ completePath: front-end/components/FileUpload/FileUpload.tsx
 unique_id: QZm2nTtL
 settings:
   - name: Packages
-    value: '"expo-image-picker": "~14.3.2",'
+    value: '"expo-image-picker": "^17.0.8",'
 */
 import React, { useState } from 'react'
 import { Button, Image, View } from 'react-native'

@@ -39,6 +39,7 @@ settings:
     value: '"expo-camera": "^17.0.8",'
 */
 {% set bpr %}
+import axios from 'axios'
 import { CameraView, useCameraPermissions } from 'expo-camera'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
@@ -79,11 +80,11 @@ import { CameraView, useCameraPermissions } from 'expo-camera'
           )
 
           setisProcessingPicture(false)
+          const baseMessage: any = { To: receiver, Kind: 'photo' }
           if (response.data?.fileUrl) {
-            const newMessage:any = { from: 'User', file: response.data.fileUrl, message: response.data.fileUrl, type: 'photo', when: new Date() }
-            if (receiver) newMessage.to = receiver
-            setmessageHistory((old) => [...old, newMessage])
-            if (onSendMessage) onSendMessage({ ...newMessage, type: 'photoMessage' })
+            baseMessage.FileURL = response.data.fileUrl
+            baseMessage.Message = response.data.fileUrl
+            if (onSendMessage) onSendMessage(baseMessage)
           } else {
             setmessageHistory((old) => [...old, { from: 'User', message: response.data.message, type: 'message', when: new Date() }])
           }

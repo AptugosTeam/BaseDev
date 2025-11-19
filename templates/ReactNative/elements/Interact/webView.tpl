@@ -23,4 +23,5 @@ import WebView from 'react-native-webview'
   {% if element.values.className %}style={ {{element.values.className}} }{% endif %}
   source={ { uri: `{{ element.values.uri }}` } }
   javaScriptEnabled={true}
+  allowsInlineMediaPlayback={true}
 />

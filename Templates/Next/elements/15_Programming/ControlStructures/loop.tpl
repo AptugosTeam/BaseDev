@@ -50,7 +50,7 @@ children: []
 */
 {% set addExtra = '' %}
 {% if element.values.filtersource %}
-{% set addExtra = '.filter(tmp => tmp.' ~ element.values.filtersource ~ ')' %}
+{% set addExtra = '?.filter(tmp => tmp.' ~ element.values.filtersource ~ ')' %}
 {% endif %}
 {% if not element.values.filtersource and element.values.filterFunction%}
   {% set addExtra = '.filter(tmp => ' ~ (element.values.filterFunction|functionOrCall) ~ ')' %}

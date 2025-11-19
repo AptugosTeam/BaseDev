@@ -10,7 +10,8 @@ internalUse: true
   {% endfor %}
 {% endfor %}
 
-export default class {{ element.values.name }} {% if element.values.extends %}extends {{ element.values.extends }}{% endif %} {
+
+{% if not element.values.returnInstance %}export default {% endif %}class {{ element.values.name }} {% if element.values.extends %}extends {{ element.values.extends }}{% endif %} {
   {% for delay in delayed %}
     {% for specificDelay in delay.variableDeclarations %}
       {{ specificDelay }}
@@ -18,3 +19,8 @@ export default class {{ element.values.name }} {% if element.values.extends %}ex
   {% endfor %}
   {{ content | raw }}
 }
+
+{% if element.values.returnInstance %}
+const classInstance = new {{ element.values.name }}()
+export default classInstance
+{% endif %}

@@ -32,7 +32,7 @@ options:
     options: ''
 settings:
   - name: Packages
-    value: '"expo-image-picker": "~14.3.2",'
+    value: '"expo-image-picker": "^17.0.8",'
 children: []
 */
 {% set AppJsonIos %}

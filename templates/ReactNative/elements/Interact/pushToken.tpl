@@ -25,6 +25,8 @@ extraFiles:
   - source: 'elements/99_ExtraFiles/pushTokenNotificationHook.tsx'
     destination: 'front-end/components/NotificationsHook/index.tsx'
 */
+{% set AppJsonAndroid %}"googleServicesFile": "./google-services.json",{% endset %}
+{{ add_setting('AppJsonAndroid', AppJsonAndroid)}}
 {% set url = element.values.endpoint %}
 {% if element.values.urlFULL %}
   {% set url = settings.apiURL ~ element.values.endpoint %}

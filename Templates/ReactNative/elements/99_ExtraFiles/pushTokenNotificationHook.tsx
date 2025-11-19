@@ -39,7 +39,7 @@ export function usePushTokenRegister({ userId, endpoint }: UsePushTokenRegisterO
   const hasRegistered = useRef(false)
 
   useEffect(() => {
-    if (!userId || hasRegistered.current) return
+    if (!userId || hasRegistered.current || !Device.isDevice) return
 
     let isMounted = true
     const registerToken = async () => {

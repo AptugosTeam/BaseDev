@@ -9,7 +9,7 @@ options:
     options: ''
   - name: props
     display: Props 
-    type: text
+    type: code
   - name: keyprops
     display: Prop Keys (optional) 
     type: text

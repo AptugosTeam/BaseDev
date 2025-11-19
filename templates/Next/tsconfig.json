@@ -5,7 +5,7 @@ unique_id: Zw2zePwz
 */
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2018",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,

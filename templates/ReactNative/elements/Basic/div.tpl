@@ -49,6 +49,12 @@ options:
     settings:
       propertyCondition: Horizontal
       condition: true
+  - name: hideVerticalScrollIndicator
+    display: Hide Vertical Scroll Indicator
+    type: checkbox
+    settings:
+      propertyCondition: scrollable
+      condition: true
   - name: onMomentumScrollEnd
     display: onMomentumScrollEnd
     type: code
@@ -139,6 +145,7 @@ import { ScrollView } from 'react-native'
   {% if element.values.Horizontal %}horizontal{% endif %}
   {% if element.values.pagingEnabled %}pagingEnabled{% endif %}
   {% if element.values.hideHorizontalScrollIndicator %}showsHorizontalScrollIndicator={false}{% endif %}
+  {% if element.values.hideVerticalScrollIndicator %}showsVerticalScrollIndicator={false}{% endif %}
   {% if element.values.useid %}id="{{ element.unique_id }}"{% endif %}
   {% if element.values.id %}id={{ element.values.id | textOrVariable }}{% endif %}
   {% if class is not empty %}style={ {{class}} }{% endif %}

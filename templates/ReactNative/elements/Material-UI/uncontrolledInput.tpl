@@ -209,8 +209,8 @@ children: []
       {% if element.values.type == 'textarea' %}
         multiline
       {% endif %}
-      outlineColor={ {{ element.values.outlineColor|default('transparent') | textOrVariable }}}
-      activeOutlineColor={ {{ element.values.activeOutlineColor|default('#3A528A') | textOrVariable }}}
+      {% if element.values.outlineColor %}outlineColor={ {{ element.values.outlineColor | textOrVariable }}}{% endif %}
+      {% if element.values.activeOutlineColor %}activeOutlineColor={ {{ element.values.activeOutlineColor | textOrVariable }}}{% endif %}
       {% if element.values.textColor %}textColor={ {{ element.values.textColor | textOrVariable }}}{% endif %}
       {% if element.values.value %}value={{ element.values.value }}{% endif %}
       {% if element.values.onChange %}onChangeText={(value) => {

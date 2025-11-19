@@ -30,34 +30,35 @@ unique_id: AlPg3QRE
 
     for (const filt of Object.keys(parsedFilter)) {
       let filterValue = parsedFilter[filt]
-
-      const path = {{ tableName }}Model.schema.path(filt as any)
-      if (
-        path?.instance === 'ObjectId' || // direct ObjectId
-        (path?.instance === 'Array' && path?.caster?.instance === 'ObjectId') // array of ObjectIds
-      ) {
-        filterValue = new mongoose.Types.ObjectId(filterValue);
-      }
-  
-      if (Array.isArray(filterValue) && filterValue.length === 2) {
-        let lowerBound = Number(filterValue[0])
-        let upperBound = Number(filterValue[1])
-  
-        const filter:any = {}
-        if (lowerBound) filter.$gte = lowerBound
-        if (upperBound) filter.$lte = upperBound
-  
-        if (lowerBound || upperBound) {
+      if (filterValue !== '*') {
+        const path = {{ tableName }}Model.schema.path(filt as any)
+        if (
+          path?.instance === 'ObjectId' || // direct ObjectId
+          (path?.instance === 'Array' && path?.caster?.instance === 'ObjectId') // array of ObjectIds
+        ) {
+          filterValue = new mongoose.Types.ObjectId(filterValue);
+        }
+    
+        if (Array.isArray(filterValue) && filterValue.length === 2) {
+          let lowerBound = Number(filterValue[0])
+          let upperBound = Number(filterValue[1])
+    
+          const filter:any = {}
+          if (lowerBound) filter.$gte = lowerBound
+          if (upperBound) filter.$lte = upperBound
+    
+          if (lowerBound || upperBound) {
+            aggregate.push({
+              $match: {
+                [filt]: filter,
+              },
+            });
+          }
+        } else {
           aggregate.push({
-            $match: {
-              [filt]: filter,
-            },
+            $match: { [filt]: filterValue },
           });
         }
-      } else {
-        aggregate.push({
-          $match: { [filt]: filterValue },
-        });
       }
     }
   }

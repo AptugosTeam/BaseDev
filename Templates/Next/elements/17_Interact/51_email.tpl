@@ -64,6 +64,11 @@ options:
     type: text
     options: ''
     required: true
+  - name: sendingDomain
+    display: Sending Domain
+    type: text
+    options: ''
+    required: true
 settings:
   - name: Packages
     value: '"mailgun.js": "12.0.1",'
@@ -85,7 +90,7 @@ handler.post((req, res, next) => {
   
   const mg = mail.client({ username: '{{ element.values.smptuser }}', key: '{{ element.values.smptpass }}' })
   
-  mg.messages.create('www.aptugo.com', {
+  mg.messages.create('{{ element.values.sendingDomain }}', {
     from: req.body.name,
     to: [req.body.email],
     subject: req.body.subject,

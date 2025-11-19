@@ -3,6 +3,7 @@ path: 999_sockets.js
 unique_id: Wq86Z8m6
 internalUse: true
 */
+{{ element.values.extraImports | raw }}
 import { WebSocket, WebSocketServer } from 'ws'
 
 interface ExtendedWebSocket extends WebSocket {
@@ -10,6 +11,7 @@ interface ExtendedWebSocket extends WebSocket {
   send(arg0: string): unknown
   on(arg0: string, arg1: (msg: any) => void): unknown
   groupId?: string
+  studentId?: string
 }
 
 // Singleton reference to the WebSocket server
@@ -50,11 +52,13 @@ export const withWebSocketServer = (req, res, next) => {
           clients: Array.from(clients).map((client: ExtendedWebSocket) => ({
             readyState: client.readyState,
             groupId: client.groupId || null,
+            studentId: client.studentId || null
           })),
         })),
         allClients: Array.from(wss.clients).map((client: ExtendedWebSocket) => ({
           readyState: client.readyState,
           groupId: client.groupId || null,
+          studentId: client.studentId || null
         })),
       }
     }

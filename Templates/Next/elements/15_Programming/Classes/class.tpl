@@ -27,6 +27,10 @@ options:
     display: Extends another class
     type: text
     advanced: true
+  - name: returnInstance
+    display: Export the instance instead
+    type: checkbox
+    advanced: true
 extraFiles:
   - source: 'elements/99_ExtraFiles/baseClass.tsx'
     destination: 'src/classes/{{ element.values.name | friendly }}.tsx'
