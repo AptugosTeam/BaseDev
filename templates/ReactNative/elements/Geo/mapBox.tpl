@@ -31,6 +31,11 @@ options:
     type: checkbox
     settings:
       default: true
+  - name: pitchEnabled
+    display: Pitch Enabled (3D)
+    type: checkbox
+    settings:
+      default: false
   - name: scaleBarEnabled
     display: ScaleBar Enabled
     type: checkbox
@@ -82,6 +87,7 @@ setAccessToken('{{ element.values.publicAccessToken }}')
   compassEnabled={ {{element.values.compassEnabled|default(false)}}}
   rotateEnabled={ {{element.values.rotateEnabled|default(true)}}}
   attributionEnabled={ {{element.values.attributionEnabled|default(true)}}}
+  pitchEnabled={ {{element.values.pitchEnabled|default(false)}}}
   scaleBarEnabled={ {{element.values.scaleBarEnabled|default(true)}}}
   {% if element.values.scaleBarEnabled %}scaleBarPosition={ {{element.values.scaleBarPosition|default('{ bottom: 8, left: 8}')}} }{% endif %}
   {% if element.values.className %}style={ {{ element.values.className}} }{% endif %}

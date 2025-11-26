@@ -9,6 +9,28 @@ import { Provider as StateProvider } from 'react-redux'
 import store from './store/store'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as Sentry from '@sentry/react-native'
+
+Sentry.init({
+  dsn: 'https://b95c3fbb4e6394e0cdbef2da53681fd4@o4509882960052224.ingest.us.sentry.io/4510427572404224',
+
+  // Adds more context data to events (IP address, cookies, user, etc.)
+  // For more information, visit: https://docs.sentry.io/platforms/react-native/data-management/data-collected/
+  sendDefaultPii: true,
+  enableAutoSessionTracking: true,
+
+  // Enable Logs
+  enableLogs: true,
+
+  // Configure Session Replay
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1,
+  integrations: [Sentry.mobileReplayIntegration(), Sentry.feedbackIntegration()],
+
+  // uncomment the line below to enable Spotlight (https://spotlightjs.com)
+  // spotlight: __DEV__,
+})
+
 {{ insert_setting('AppImport') | raw }}
 {{ insert_setting('AppImports') | raw }}
 
@@ -22,7 +44,7 @@ const Stack = createNativeStackNavigator()
 
 {{ insert_setting('AppBPR') | raw }}
 
-export default function App() {
+export default Sentry.wrap(function App() {
   const routeNameRef = React.useRef()
   const navigationRef = React.useRef()
 
@@ -90,4 +112,4 @@ export default function App() {
       </GestureHandlerRootView>
     </StateProvider>
   )
-}
+})
