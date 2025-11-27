@@ -6,7 +6,7 @@ unique_id: i1kD8rN4
 {
   "expo": {
     "name": "{{ insert_setting('fancyName')|default(application.settings.name) }}",
-    "slug": "{{ application.settings.name | lower | friendly }}",
+    "slug": "{{ application.settings.name | lower | friendly }}app",
     "version": "{{ insert_setting('version')|default('1.0.0') }}",
     "orientation": "portrait",
     "icon": "./assets/img/icon.png",
@@ -27,7 +27,7 @@ unique_id: i1kD8rN4
     "ios": {
       {{ insert_setting('AppJsonIos') | raw }}
       "supportsTablet": {{ insert_setting('supportsTablet')|default('true') }},
-      "bundleIdentifier": "com.aptugo.{{ application.settings.name | lower | friendly }}",
+      "bundleIdentifier": "com.weblabs.{{ application.settings.name | lower | friendly }}",
       "buildNumber": "{{ insert_setting('versionCode')|default('1') }}"
     },
     "android": {
