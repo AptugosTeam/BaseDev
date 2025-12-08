@@ -45,7 +45,8 @@ unique_id: JBZcqdvZ
   const tmp{{ fieldName }} = req.files?.find(f => f.fieldname === '{{ fieldName }}')
   if ( tmp{{ fieldName }} ) {
     const uniqueFileName = Date.now() + '_' + tmp{{ fieldName }}.originalname
-    writeFileSync(`./public/img/${uniqueFileName}`, tmp{{ fieldName }}.buffer)
+    if (tmp{{ fieldName }}.buffer) writeFileSync(`./public/img/${uniqueFileName}`, tmp{{ fieldName }}.buffer)
+    else renameSync(tmp{{ fieldName }}.path, `./public/img/${uniqueFileName}`)
     req.body.{{ fieldName }} = `/img/${uniqueFileName}`
 
     {% if field.autogeneratethumbnail %}{{ thumbnailGeneration }}{% endif %}

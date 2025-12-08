@@ -16,6 +16,10 @@ options:
   - name: Utility
     display: Utility Component
     type: checkbox
+  - name: UtilityOf
+    display: Is an Utility from another component
+    type: text
+    advanced: true
   - name: changePath
     display: Change Path (optional) 
     type: checkbox
@@ -25,7 +29,11 @@ options:
 */
 {% set bpr %}
 {% if element.values.Utility %}
-  import {{ element.values.name | friendly }} from './{{ element.values.name | friendly }}'
+  {% if element.values.UtilityOf %}
+    import {{ element.values.name | friendly }} from '@components/{{ element.values.UtilityOf }}/{{ element.values.name | friendly }}'
+  {% else %}
+    import {{ element.values.name | friendly }} from './{{ element.values.name | friendly }}'
+  {% endif %}
 {% elseif element.values.changePath %}
 import {{ element.values.name | friendly }} from '../{{ element.values.name | friendly }}'
 {% else %}

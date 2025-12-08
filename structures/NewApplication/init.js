@@ -15,7 +15,7 @@ if (State.usersReducer) {
 
 // Backwards compatibility
 let defaultTemplate
-console.log('STATE', State)
+
 try {
   if (State.templatesReducer) {
     defaultTemplate = State.templatesReducer.templates.filter(template => template.default )
@@ -29,7 +29,6 @@ try {
   const error = 'Something wrong with the templates'
   Store.dispatch({ type: "SET_ERROR", error: error })
 }
-
 
 const username = aptugo.friendly(State.auth.user.name)
 const dbpassword = aptugo.generateID() + aptugo.generateID()
@@ -68,6 +67,5 @@ Application.settings = {
 }
 
 // aptugo.createdbuser({ dbName: username, user: dbusername, pwd: dbpassword })
-console.log('This is the result of new app:', Application)
 Application._id = aptugo.generateID(16)
 return Application
