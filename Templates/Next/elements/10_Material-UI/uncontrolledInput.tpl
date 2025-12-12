@@ -58,9 +58,44 @@ options:
   - name: type
     display: Type
     type: dropdown
-    options: text;password;date;number;textarea;numeric
+    options: text;password;date;number;textarea;numeric;file
     settings:
       default: text
+      active: true
+  - name: accept
+    display: Accept File Types
+    type: text
+    options: ''
+    advanced: true
+    settings:
+      propertyCondition: type
+      condition: file
+      active: true
+  - name: capture
+    display: Capture (for cameras)
+    type: dropdown
+    options: user;environment;none
+    advanced: true
+    settings:
+      propertyCondition: type
+      condition: file
+      active: true
+  - name: multiple
+    display: Multiple files?
+    type: checkbox
+    advanced: true
+    settings:
+      propertyCondition: type
+      condition: file
+      active: true
+  - name: inputProps
+    display: Additional Input Props
+    type: text
+    advanced: true
+    options: ''
+    settings:
+      propertyCondition: type
+      condition: file
       active: true
   - name: shrink
     display: Shrink Label?
@@ -124,19 +159,10 @@ options:
 children: []
 */
 {% if element.values.fullWidth %}{% set fullWidth = true %}{% endif %}
-{% if element.values.readOnly %}
-  {% set readOnly = true %}
-{% endif %}
-{% set bpr %}
-import TextField from '@mui/material/TextField'
-{% endset %}
-{{ save_delayed('bpr', bpr) }}
-{% if element.values.endAdornment %}
-{% set bpr %}
-import InputAdornment from '@mui/material/InputAdornment'
-{% endset %}
-{{ save_delayed('bpr', bpr) }}
-{% endif %}
+{% if element.values.readOnly %}{% set readOnly = true %}{% endif %}
+{% set bpr %}import TextField from '@mui/material/TextField'{% endset %}{{ save_delayed('bpr', bpr) }}
+{% if element.values.endAdornment %}{% set bpr %}import InputAdornment from '@mui/material/InputAdornment'{% endset %}{{ save_delayed('bpr', bpr) }}{% endif %}
+{% set inputType = element.values.type|default('text') %}
 <TextField
     variant="{{ element.values.variant|default('standard') }}"
     {% if element.values.Autofocus %}autoFocus{% endif %}
@@ -149,53 +175,61 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if element.values.size %}size="{{ element.values.size }}"{% endif %}
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
-    {% if element.values.shrink %}
-      InputLabelProps={ { shrink: true } }
-    {% endif %}
+    {% if element.values.shrink %}InputLabelProps={ { shrink: true } }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
-    {% if readOnly %}
-      inputProps={ {
-        readOnly: true,
-      } }
-    {% endif %}
-    {% if element.values.type == 'number' %}
-      {% if element.values.minNum or element.values.maxNum %}
+    {% if inputType == 'file' %}
+      type="file"
+      {% if element.values.accept %}accept={{ element.values.accept | textOrVariable }}{% endif %}
+      {% if element.values.capture %}capture={{ element.values.capture | textOrVariable }}{% endif %}
+      {% if element.values.multiple %}
+        InputProps={ { inputProps: { multiple: true } } }
+      {% endif %}
+      {% if element.values.inputProps %}InputProps={ {{ element.values.inputProps }} }{% endif %}
+    {% else %}
+      {% if readOnly %}
         inputProps={ {
-            {% if element.values.minNum %}
-              min: {{ element.values.minNum }},
-            {% endif %}
-            {% if element.values.maxNum %}
-              max: {{ element.values.maxNum }}
-            {% endif %}
-          } }
+          readOnly: true,
+        } }
+      {% endif %}
+      {% if inputType == 'number' %}
+        {% if element.values.minNum or element.values.maxNum %}
+          inputProps={ {
+              {% if element.values.minNum %}
+                min: {{ element.values.minNum }},
+              {% endif %}
+              {% if element.values.maxNum %}
+                max: {{ element.values.maxNum }}
+              {% endif %}
+            } }
+        {% endif %}
+      {% endif %}
+      {% if inputType == 'numeric' %}
+          inputProps={ {
+              inputMode: 'numeric',
+              pattern: '[0-9]*',
+              {% if element.values.minLength %}
+                minLength: {{ element.values.minLength }},
+              {% endif %}
+              {% if element.values.maxLength %}
+                maxLength: {{ element.values.maxLength }}
+              {% endif %}
+            } }
+      {% endif %}
+      {% if inputType == 'textarea' %}
+        multiline
+        type="text"
+        {% if element.values.minRows %}minRows={{ element.values.minRows | textOrVariable}} {% endif %}
+        {% if element.values.maxRows %}maxRows={{ element.values.maxRows | textOrVariable}} {% endif %}
+      {% endif %}
+      {% if inputType != 'textarea' and inputType != 'numeric' and inputType != 'file' %}
+        type="{{ inputType }}"
       {% endif %}
     {% endif %}
-    {% if element.values.type == 'numeric' %}
-        inputProps={ {
-            inputMode: 'numeric',
-            pattern: '[0-9]*',
-            {% if element.values.minLength %}
-              minLength: {{ element.values.minLength }},
-            {% endif %}
-            {% if element.values.maxLength %}
-              maxLength: {{ element.values.maxLength }}
-            {% endif %}
-          } }
-    {% endif %}
-    {% if element.values.type == 'textarea' %}
-      multiline
-      type="text"
-      {% if element.values.minRows %}minRows={{ element.values.minRows | textOrVariable}} {% endif %}
-      {% if element.values.maxRows %}maxRows={{ element.values.maxRows | textOrVariable}} {% endif %}
-    {% endif %}
-    {% if element.values.type != 'textarea' and element.values.type != 'numeric' %}
-      type="{{ element.values.type|default('text') }}"
-    {% endif %}
     {% if fullWidth %}fullWidth{% endif %}
-    {% if element.values.value %}value={{ element.values.value | textOrVariable }}{% endif %}
+    {% if element.values.value and inputType != 'file' %}value={{ element.values.value | textOrVariable }}{% endif %}
     {% if element.values.onChange %}onChange={ {{ element.values.onChange | functionOrCall }} }{% endif %}
     {% if element.values.onKeyDown %}onKeyDown={ {{ element.values.onKeyDown | functionOrCall }} }{% endif %}
-    {% if element.values.endAdornment %}
+    {% if element.values.endAdornment and inputType != 'file' %}
       InputProps={ {
         endAdornment: <InputAdornment position="end">{{ content | raw }}</InputAdornment>
       } }
