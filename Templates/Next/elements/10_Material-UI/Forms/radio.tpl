@@ -23,6 +23,10 @@ options:
     type: function
     options: ''
     advanced: true
+  - name: className
+    display: ClassName
+    type: styles
+    options: ''
   - name: sx
     display: Extra Styles
     type: text
@@ -97,6 +101,9 @@ options:
       {% endif %}
         color='{{ element.values.Color | default('primary') }}'
         size='{{ element.values.size | default('medium') }}'
+      {% if element.values.className %}
+        className={ {{element.values.className|raw}} }
+      {% endif %}
       {% if element.values.name %}
         name={{ element.values.name |textOrVariable }}
       {% endif %}
