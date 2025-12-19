@@ -97,6 +97,11 @@ options:
       propertyCondition: type
       condition: file
       active: true
+  - name: inputPropsFull
+    display: inputPropsFull
+    type: code
+    advanced: true
+    options: ''
   - name: shrink
     display: Shrink Label?
     type: checkbox
@@ -162,6 +167,7 @@ children: []
 {% if element.values.readOnly %}{% set readOnly = true %}{% endif %}
 {% set bpr %}import TextField from '@mui/material/TextField'{% endset %}{{ save_delayed('bpr', bpr) }}
 {% if element.values.endAdornment %}{% set bpr %}import InputAdornment from '@mui/material/InputAdornment'{% endset %}{{ save_delayed('bpr', bpr) }}{% endif %}
+{% if element.values.inputPropsFull %}{% set bpr %}import InputAdornment from '@mui/material/InputAdornment'{% endset %}{{ save_delayed('bpr', bpr) }}{% endif %}
 {% set inputType = element.values.type|default('text') %}
 <TextField
     variant="{{ element.values.variant|default('standard') }}"
@@ -177,6 +183,7 @@ children: []
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
     {% if element.values.shrink %}InputLabelProps={ { shrink: true } }{% endif %}
     {% if element.values.fieldname %}name={{ element.values.fieldname | textOrVariable}} {% endif %}
+    {% if element.values.inputPropsFull %}InputProps={ {{ element.values.inputPropsFull | raw }} }{% endif %}
     {% if inputType == 'file' %}
       type="file"
       {% if element.values.accept %}accept={{ element.values.accept | textOrVariable }}{% endif %}
