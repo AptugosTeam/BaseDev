@@ -59,10 +59,7 @@ mongoose.Promise = global.Promise
 
 // Connecting to the database
 mongoose.set('strictQuery', false);
-mongoose.connect(dbConfig.url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
+mongoose.connect(dbConfig.url).then(() => {
   console.log("Successfully connected to the database")  
 }).catch(err => {
   console.log('Could not connect to the database. Exiting now...', err)

@@ -36,9 +36,9 @@ options:
 
 settings:
   - name: Packages
-    value: '"@mui/x-date-pickers": "latest",'
+    value: '"@mui/x-date-pickers": "6.20.2",'
   - name: Packages
-    value: '"@mui/x-date-pickers-pro": "latest",'
+    value: '"@mui/x-date-pickers-pro": "6.20.2",'
   - name: Packages
     value: '"dayjs": "^1.11.10",'
 children: []
