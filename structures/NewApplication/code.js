@@ -23,7 +23,8 @@ Application.pages = [{
 					"type": "element",
 					"value": "loadFont",
 					"values": {
-						"font": "Fira_Sans"
+						"font": "Fira_Sans",
+						"weight400": true,
 					},
 					"expanded": true
 				},
@@ -34,7 +35,8 @@ Application.pages = [{
 					"type": "element",
 					"value": "loadFont",
 					"values": {
-						"font": "Merriweather"
+						"font": "Merriweather",
+						"weight700": true,
 					}
 				}
 			]
