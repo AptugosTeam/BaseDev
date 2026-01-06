@@ -50,6 +50,17 @@ export default Sentry.wrap(function App() {
 
 {{ insert_setting('AppPH') | raw }}
 
+  const sanitizeScreenName = (name) => {
+  if (!name) return 'unknown'
+
+  // 1) remover slash inicial
+  let sanitized = name.startsWith('/') ? name.substring(1) : name
+
+  // 2) reemplazar cualquier cosa rara por underscore
+  sanitized = sanitized.replace(/[^A-Za-z0-9_]/g, '_')
+
+  return sanitized
+}
 {% for delay in delayed %}
   {% for specificDelay in delay.AppPH %}
     {{ specificDelay }}
@@ -63,6 +74,7 @@ export default Sentry.wrap(function App() {
           <NavigationContainer
             ref={navigationRef}
             onReady={async () => {
+              log()
               if (navigationRef.current) routeNameRef.current = (navigationRef.current as any).getCurrentRoute().name;
             }}
             onStateChange={async () => {
@@ -72,6 +84,11 @@ export default Sentry.wrap(function App() {
               
                 if (previousRouteName !== currentRouteName) {
                   {{ insert_setting('AppPageChange') | raw }}
+                    const sanitized = sanitizeScreenName(currentRouteName)
+                  await analytics().logScreenView({
+                    screen_name: sanitized,
+                    screen_class: sanitized,
+                  })
                 }
                 routeNameRef.current = currentRouteName
               }
