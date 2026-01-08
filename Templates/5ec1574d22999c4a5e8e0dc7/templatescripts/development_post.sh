@@ -3,7 +3,7 @@
 export NODE_ENV=development
 
 PKG="package.json"
-BACK="package.json.back"
+BACK="package.json.bak"
 
 # Check npm existence
 if ! which npm >/dev/null 2>&1; then
@@ -13,7 +13,7 @@ fi
 
 # Ensure both files exist
 if [ ! -f "$PKG" ] || [ ! -f "$BACK" ]; then
-  echo "package.json or package.json.back missing, running npm install"
+  echo "package.json or package.json.bak missing, running npm install"
   npm install --loglevel notice 2>&1
   cp "$PKG" "$BACK"
   exit 0
@@ -26,7 +26,7 @@ else
   echo "package.json changed, running npm install"
   npm install --loglevel notice 2>&1
   cp "$PKG" "$BACK"
-  echo "package.json.back updated"
+  echo "package.json.bak updated"
 fi
 
 # Cleanup
