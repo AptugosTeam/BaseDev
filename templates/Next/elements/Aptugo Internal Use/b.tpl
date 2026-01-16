@@ -27,6 +27,6 @@ import clsx from 'clsx'
 {% for delay in delayed %}
   {{ delay }}
 {% endfor %}
-<div {% if class %}className={ {{ class }} }{% endif %} >
+<div {% if class %}className={ {{ class }} }{% endif %} role='main'>
 {{ content|raw }}
 </div>
