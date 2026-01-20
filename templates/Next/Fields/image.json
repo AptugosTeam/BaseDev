@@ -31,6 +31,10 @@ unique_id: sd4A39xT
           {
             "label": "Google Storage",
             "value": "gs"
+          },
+          {
+            "label": "Custom Location",
+            "value": "custom"
           }
         ]
       },
@@ -162,6 +166,14 @@ unique_id: sd4A39xT
         "settings": {
           "propertyCondition": "storage",
           "condition": "gs"
+        }
+      },{
+        "display": "Custom Location Path",
+        "value": "customLocationPath",
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "custom"
         }
       },{
         "display": "Resize Width Before Upload",
