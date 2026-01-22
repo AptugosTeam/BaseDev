@@ -47,7 +47,7 @@ children: []
 import scrollIntoView from 'scroll-into-view'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-const element = document.querySelector('#{{element.values.document}}');
+const element = document.querySelector(`#{{element.values.document}}`);
     if (element) {
       scrollIntoView(element, {
         time: {{ element.values.time | default(2500) }},
