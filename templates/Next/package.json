@@ -14,6 +14,8 @@ unique_id: siFqPBQK
     "lint": "next lint"
     {% set npmScripts = insert_setting('npmScripts') %}
     {% if npmScripts %},{{ npmScripts | raw }}{% endif %}
+    {% set customScripts = insert_setting('customScripts') %}
+    {% if customScripts %},{{ customScripts | raw }}{% endif %}
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
