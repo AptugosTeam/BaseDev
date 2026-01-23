@@ -2,6 +2,11 @@
 path: InCallManager.tpl
 keyPath: elements/15_Programming/Snippets/InCallManager.tpl
 unique_id: BJJyTZOn
+options:
+  - name: waitforvar
+    display: Wait for variable
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"react-native-incall-manager": "^4.2.1",'
@@ -13,11 +18,13 @@ import InCallManager from 'react-native-incall-manager'
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}
 useEffect(() => {
+  {% if element.values.waitforvar %}if ({{ element.values.waitforvar }}) { {% endif %}
   InCallManager.start({ media: 'audio' })
   InCallManager.setForceSpeakerphoneOn(true)
-  return () => {
+return () => {
     InCallManager.stop()
   }
-}, [])
+  {% if element.values.waitforvar %} } {% endif %}
+}, [{{ element.values.waitforvar }}])
 {% endset %}
 {{ save_delayed('ph', ph) }}

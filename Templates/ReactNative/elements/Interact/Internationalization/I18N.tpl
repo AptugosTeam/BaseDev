@@ -9,6 +9,7 @@ extraFiles:
   - source: 'elements/99_ExtraFiles/i18n.tsx'
     destination: 'front-end/i18n.tsx'
 */
+{% set bpr %}import { useFocusEffect } from '@react-navigation/native'{% endset %}{{ save_delayed('bpr',bpr)}}
 {% set SWBS %}<I18nextProvider i18n={i18n}>{% endset %}{{ add_setting('SiteWideWrapStart', SWBS) }}
 {% set SWBS %}</I18nextProvider>{% endset %}{{ add_setting('SiteWideWrapEnd', SWBS) }}
 {% set appImports %}

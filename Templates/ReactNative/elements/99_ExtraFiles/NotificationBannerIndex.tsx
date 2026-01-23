@@ -4,20 +4,10 @@ keyPath: elements/99_ExtraFiles/NotificationBannerIndex.tsx
 unique_id: lr1WWBUP
 */
 import React from 'react'
-import {
-  Animated,
-  Dimensions,
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Easing,
-} from 'react-native'
+import { Animated, Dimensions, Easing, Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 // import * as Haptics from 'expo-haptics'
-import { Audio } from 'expo-av'
 import { registerNotificationHandler, unregisterNotificationHandler } from '@components/NotificationBanner/notificationService'
+import { Audio } from 'expo-av'
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window')
 
@@ -29,6 +19,7 @@ type State = {
   message?: string
   avatar?: string
   onPress?: () => void
+  numberOfLines?: number
 }
 
 export default class NotificationBanner extends React.PureComponent<Props, State> {
@@ -75,13 +66,7 @@ export default class NotificationBanner extends React.PureComponent<Props, State
     }
   }
 
-  show = async (payload: {
-    fromName?: string
-    message?: string
-    avatar?: string
-    onPress?: () => void
-    duration?: number
-  }) => {
+  show = async (payload: { fromName?: string; message?: string; avatar?: string; onPress?: () => void; duration?: number, numberOfLines?: number }) => {
     if (this.hideTimeout) {
       clearTimeout(this.hideTimeout)
       this.hideTimeout = null
@@ -93,6 +78,7 @@ export default class NotificationBanner extends React.PureComponent<Props, State
       message: payload.message,
       avatar: payload.avatar,
       onPress: payload.onPress,
+      numberOfLines: payload.numberOfLines
     })
 
     // feedback
@@ -148,7 +134,7 @@ export default class NotificationBanner extends React.PureComponent<Props, State
   }
 
   render() {
-    const { visible, fromName, message, avatar } = this.state
+    const { visible, fromName, message, avatar, numberOfLines } = this.state
 
     // If not visible, render null to avoid intercepting touches
     if (!visible) return null
@@ -165,18 +151,12 @@ export default class NotificationBanner extends React.PureComponent<Props, State
         ]}
       >
         <TouchableOpacity activeOpacity={0.9} onPress={this.handlePress} style={styles.banner}>
-          {avatar &&
-            <Image
-              source={ { uri: avatar } }
-              style={styles.avatar}
-              resizeMode="cover"
-            />
-          }
+          {avatar && <Image source={{ uri: avatar }} style={styles.avatar} resizeMode="cover" />}
           <View style={styles.textContainer}>
             <Text numberOfLines={1} style={styles.name}>
               {fromName ?? 'New message'}
             </Text>
-            <Text numberOfLines={2} style={styles.message}>
+            <Text numberOfLines={numberOfLines || 2} style={styles.message}>
               {message ?? ''}
             </Text>
           </View>
@@ -233,5 +213,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     opacity: 0.9,
     marginTop: 2,
+    marginBottom: 2
   },
 })
