@@ -12,7 +12,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Sentry from '@sentry/react-native'
 
 Sentry.init({
-  dsn: 'https://b95c3fbb4e6394e0cdbef2da53681fd4@o4509882960052224.ingest.us.sentry.io/4510427572404224',
+  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
 
   // Adds more context data to events (IP address, cookies, user, etc.)
   // For more information, visit: https://docs.sentry.io/platforms/react-native/data-management/data-collected/

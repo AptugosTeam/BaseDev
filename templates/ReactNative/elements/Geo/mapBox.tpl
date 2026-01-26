@@ -66,12 +66,12 @@ settings:
   "@rnmapbox/maps",
   {
     "RNMapboxMapsVersion": "11.16.0",
-    "RNMapboxMapsDownloadToken": "{{ element.values.accessToken }}"
+    "RNMapboxMapsDownloadToken": {{ element.values.accessToken }}
   }],
   [
     "expo-build-properties",
     {
-      "MAPBOX_DOWNLOADS_TOKEN": "{{ element.values.accessToken }}"
+      "MAPBOX_DOWNLOADS_TOKEN": {{ element.values.accessToken }}
     }
 ],
 {% endset %}
