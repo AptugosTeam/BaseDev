@@ -15,7 +15,7 @@ unique_id: uXS2fFGc
         "display": "Data Type",
         "value": "datatype",
         "type": "select",
-        "options": "[{ label: 'String', value: 'String' },{ label: 'Number', value: 'Number' },{ label: 'Array of Objects', value: '[{}]' }]"
+        "options": "[{ label: 'String', value: 'String' },{ label: 'Number', value: 'Number' },{ label: 'Array of Objects', value: '[{}]' },{ label: 'Array of Numbers', value: '[Number]' }]"
       },
       {
         "display": "How the value is calculated?",

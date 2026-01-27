@@ -7,6 +7,10 @@ options:
     display: Wait for variable
     type: text
     options: ''
+  - name: condition
+    display: Only start if condition mets
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"react-native-incall-manager": "^4.2.1",'
@@ -19,11 +23,13 @@ import InCallManager from 'react-native-incall-manager'
 {% set ph %}
 useEffect(() => {
   {% if element.values.waitforvar %}if ({{ element.values.waitforvar }}) { {% endif %}
+    {% if element.values.condition %}if ({{ element.values.condition }}) { {% endif %}
   InCallManager.start({ media: 'audio' })
   InCallManager.setForceSpeakerphoneOn(true)
 return () => {
     InCallManager.stop()
   }
+    {% if element.values.condition %} } {% endif %}
   {% if element.values.waitforvar %} } {% endif %}
 }, [{{ element.values.waitforvar }}])
 {% endset %}

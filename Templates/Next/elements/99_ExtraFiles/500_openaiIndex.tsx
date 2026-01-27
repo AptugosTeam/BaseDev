@@ -1,7 +1,5 @@
 /*
 path: 500_openaiIndex.tsx
-completePath: >-
-  /Users/Shared/Dev/BaseDev/Templates/Next/elements/99_ExtraFiles/500_openaiIndex.tsx
 keyPath: elements/99_ExtraFiles/500_openaiIndex.tsx
 unique_id: Nc4Ese1F
 */
