@@ -213,10 +213,15 @@ children: []
       {% if element.values.activeOutlineColor %}activeOutlineColor={ {{ element.values.activeOutlineColor | textOrVariable }}}{% endif %}
       {% if element.values.textColor %}textColor={ {{ element.values.textColor | textOrVariable }}}{% endif %}
       {% if element.values.value %}value={{ element.values.value }}{% endif %}
-      {% if element.values.onChange %}onChangeText={(value) => {
-        {{ element.values.onChange | replace({ 'e.target.value': 'value' }) }} }
-      }
-      {% endif %}
+      {% if element.values.onChange %}onChangeText={
+        {% if element.values.onChange|slice(0,4) == 'var:' %}
+          {{ element.values.onChange|slice(4)}}
+        {% else %}
+          (value) => {
+            {{ element.values.onChange | replace({ 'e.target.value': 'value' }) }} 
+          }
+        {% endif %}
+      } {% endif %}
       {% if element.values.onSubmitEdit %}onSubmitEditing={() => {{ element.values.onSubmitEdit }} }{% endif %}
       {% if element.values.keyboardType %}keyboardType={{ element.values.keyboardType | textOrVariable }}{% endif %}
       {% if element.values.outlineStyle %}outlineStyle={ {{ element.values.outlineStyle }} }{% endif %}

@@ -70,7 +70,6 @@ children: []
 */
 {% set varValue = element.values.variableValue|default(content | raw) %}
 {% if element.values.variableValue %}
-  // {{ element.values.variableValue }}
   {% set varValue = element.values.variableValue|default(content | raw) %}
 {% endif %}
 {% if not element.values.serverSide %}

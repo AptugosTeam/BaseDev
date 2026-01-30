@@ -27,4 +27,4 @@ children: []
 */
 {% if element.values.await %}await {% endif %}
 {% if element.values.objectProperty %}this.{% endif %}
-{{ element.values.functionName }}({{ element.values.functionParameters }})
+{{ element.values.functionName }}({{ element.values.functionParameters }}{% if element.children %}{{ content | raw }}{% endif %})
