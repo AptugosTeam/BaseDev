@@ -6,9 +6,9 @@
   "namingSchema": "{% if pageDefinition.path == '/' %}index{% else %}{{ pageDefinition.path }}{% endif %}.tsx",
   "namingSchemaParameter": "[]",
   "templateCommandsAfter": "$(which pnpm) i --force",
-  "templateCommandsAfterWIN": "npm i",
+  "templateCommandsAfterWIN": "set npm_config_progress=false && set npm_config_color=false && npm --loglevel=info i",
   "templateCommandsAfterDeploy": "$(which pnpm) i --force && $(which pnpm) run build",
-  "templateCommandsAfterDeployWIN": "npm i && npm run build",
+  "templateCommandsAfterDeployWIN": "set npm_config_progress=false && set npm_config_color=false && npm --loglevel=info i && npm run build",
   "deployScript": "templatescripts/deploy.js",
   "assetsFolder": "/public",
   "tableTypes": [
