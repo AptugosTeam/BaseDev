@@ -33,7 +33,6 @@ options:
     options: ''
     settings:
       default: true
-
 settings:
   - name: Packages
     value: '"@mui/x-date-pickers": "6.20.2",'

@@ -12,6 +12,21 @@ unique_id: sd4A39xT
     "frontEndType": "string",
     "extra": [
       {
+        "display": "Use Watermark",
+        "value": "useWatermark",
+        "type": "select",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "1"
+          },
+          {
+            "label": "No",
+            "value": "0"
+          }
+        ]
+      },
+      {
         "display": "Store in S3",
         "value": "s3",
         "type": "select",
