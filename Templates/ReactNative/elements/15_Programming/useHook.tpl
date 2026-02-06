@@ -15,6 +15,9 @@ options:
     display: Storage in Variable
     type: text
     options: ''
+  - name: withoutUse
+    display: Without use
+    type: checkbox
 */
 {% set bpr %}
 import { use{{ element.values.name | friendly }} } from '@hooks/{{ element.values.name | friendly }}'
@@ -23,7 +26,7 @@ import { use{{ element.values.name | friendly }} } from '@hooks/{{ element.value
 
 {% if element.values.var %}
 {% set ph %}
-  const {{ element.values.var }} = use{{ element.values.name | friendly }}({{ element.values.parameters }})
+  const {{ element.values.var }} = {% if element.values.withoutUse %}{{ element.values.name | friendly }}{% else %}use{{ element.values.name | friendly }}{% endif %}({{ element.values.parameters }})
 {% endset %}
 {{ save_delayed('ph', ph)}}
 {% endif %}
