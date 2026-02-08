@@ -43,7 +43,7 @@ import { TouchableOpacity, Linking } from "react-native"
   {% elseif element.values.tagToUse == "A" %}
     onPress={() => Linking.openURL( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
   {% else %}
-    onPress={() => navigation.{{ element.values.tagToUse|default('push') }}( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
+    onPress={() => router.{{ element.values.tagToUse|default('push') }}( {{ element.values.destination|textOrVariableInCode }}{% if element.values.parameters %}, {{ element.values.parameters }}{% endif %} )}
   {% endif %}
   key='{{ element.unique_id }}'
   {% if element.values.activeOpacity %}activeOpacity={ {{ element.values.activeOpacity}} }{% endif %}
