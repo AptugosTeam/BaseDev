@@ -101,8 +101,7 @@ helpText: Basic HTML Div element
     className={ {{element.values.className|raw}} }
   {% endif %}
   {% if element.values.style %}
-  /* {{ element.values.style | raw }} */
-    render={2} style={ {{element.values.style }} }
+    style={ {{element.values.style }} }
   {% endif %}
   {% if element.values.ref %}
     ref={ {{element.values.ref}} }

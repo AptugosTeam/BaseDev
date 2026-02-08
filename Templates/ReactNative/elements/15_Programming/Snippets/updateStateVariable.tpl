@@ -17,4 +17,4 @@ options:
     options: ''  
 children: []
 */
-set{{ element.values.variable }}({{ element.values.newvalue}})
+set{{ element.values.variable }}({% if element.children %}{{ content | raw }}{% endif %}{{ element.values.newvalue}})
