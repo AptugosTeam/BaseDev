@@ -54,4 +54,13 @@ handler.post((req, res, next) => {
   })(req, res, next)
 });
 
+handler.delete((req, res, next) => {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.status(200).json({ status: 200 });
+  });
+});
+
 export default handler

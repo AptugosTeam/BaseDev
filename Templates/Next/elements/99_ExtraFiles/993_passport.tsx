@@ -25,13 +25,6 @@ passport.use(new LocalStrategy(
     findUserWithEmailAndPassword(username, password).then((user) => {
       console.log('found', user, done.toString())
 
-      req.session.regenerate = (cb) => {
-        cb()
-      }
-      req.session.save = (cb) => {
-        cb()
-      }
-
       if (user) done(null, user)
       else done(null, false, { message: 'Email or password is incorrect' })
     }).catch((error) => {

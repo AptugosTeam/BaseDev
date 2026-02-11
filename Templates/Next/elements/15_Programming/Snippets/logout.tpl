@@ -16,8 +16,10 @@ children: []
 import { fetcher } from '@lib/fetch'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
+{% set pageFrom = element.values.OnLogout | elementData %}
 fetcher('/api/auth', {
   method: 'DELETE'
 }).then(res => {
   console.log('logged out', res)
+  router.push( '{{ pageFrom.path }}' )
 })

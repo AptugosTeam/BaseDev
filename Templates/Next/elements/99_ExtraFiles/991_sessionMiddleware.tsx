@@ -26,5 +26,18 @@ const getSession = nextSession({
 
 export default async function session(req, res, next) {
   await getSession(req, res)
+
+  if (!req.session.regenerate) {
+    req.session.regenerate = function (cb) {
+      if (cb) cb();
+    };
+  }
+
+  if (!req.session.save) {
+    req.session.save = function (cb) {
+      if (cb) cb();
+    };
+  }
+
   next()
 }
