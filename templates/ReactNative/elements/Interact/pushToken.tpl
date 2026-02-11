@@ -6,7 +6,7 @@ icon: ico-disqus
 helpText: Add Push messaging capabilities to your app
 settings:
   - name: Packages
-    value: '"expo-notifications": "~0.32.12","expo-device": "~8.0.9",'
+    value: '"expo-device": "~8.0.9",'
 options:
   - name: WaitFor
     display: Wait for variable to be set

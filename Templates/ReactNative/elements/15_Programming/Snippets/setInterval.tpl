@@ -18,10 +18,10 @@ options:
   - name: variableType
     display: Variable Type
     type: dropdown
-    options: const;let;var
+    options: const;let;var;existing let
     settings:
       default: const
 */
-{% if element.values.variableName %}{{ element.values.variableType | default('const') }} {{ element.values.variableName }} = {% endif %}setInterval(() => {
+{% if element.values.variableName %}{% if element.values.variableType == 'existing let' %}{{ element.values.variableName }} = {% else %}{{ element.values.variableType | default('const') }} {{ element.values.variableName }} = {% endif %}{% endif %}setInterval(() => {
   {{ content | raw }}
 }, {{ element.values.interval | default(1000) }})

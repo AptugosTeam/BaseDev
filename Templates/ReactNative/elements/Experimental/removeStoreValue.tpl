@@ -4,9 +4,6 @@ type: file
 unique_id: removeStoreValue
 icon: ico-field
 helpText: Remove a stored value from AsyncStorage
-settings:
-  - name: Packages
-    value: '"@react-native-async-storage/async-storage": "^2.2.0",'
 options:
   - name: remove
     display: Select a option to remove

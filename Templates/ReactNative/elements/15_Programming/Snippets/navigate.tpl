@@ -17,4 +17,4 @@ options:
 children: []
 */
 {% set pageFrom = element.values.to | elementData %}
-navigation.{{ element.values.navigationType | default('navigate') }}('{{ pageFrom.path }}')
+router.{{ element.values.navigationType | default('navigate') }}('{{ pageFrom.path }}')

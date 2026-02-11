@@ -2,9 +2,6 @@
 path: auth.service.tsx
 completePath: front-end/services/auth.service.tsx
 unique_id: dDixye51
-settings:
-  - name: Packages
-    value: '"@react-native-async-storage/async-storage": "^2.2.0",'
 */
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'

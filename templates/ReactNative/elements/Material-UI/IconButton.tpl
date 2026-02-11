@@ -103,9 +103,6 @@ options:
       active: true
 sourceType: javascript
 children: []
-settings:
-  - name: Packages
-    value: '"react-native-vector-icons": "^10.0.3",'
 */
 {% set tag = 'Icon' %}
 {% set bpr %}

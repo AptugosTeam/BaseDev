@@ -56,9 +56,6 @@ options:
     display: Underline Color (Active)
     type: text
 children: []
-settings:
-  - name: Packages
-    value: '"react-native-vector-icons": "^10.0.3",'
 */
 {% set bpr %}
 import { View, TextInput, TouchableOpacity } from 'react-native';

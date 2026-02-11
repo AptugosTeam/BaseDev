@@ -11,9 +11,6 @@ options:
     options: >-
       return [...aptugoUtils.variables.retrievePageVariablesFromElement(arguments[0]).filter(rpvfe => rpvfe.type === 'Variable').map(({ unique_id, name }) => [unique_id, name])]
 children: []
-settings:
-  - name: Packages
-    value: '"@react-native-async-storage/async-storage": "^2.2.0",'
 */
 {% set bpr %}
 import AuthService from '@services/auth.service'

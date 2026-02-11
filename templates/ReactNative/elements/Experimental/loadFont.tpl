@@ -24,9 +24,6 @@ options:
     type: checkbox
     options: ''
     advanced: true
-settings:
-  - name: Packages
-    value: '"expo-font": "~13.0.4",'
 */
 {% if element.values.addAppJsonPlugins %}
 {% set AppJsonPlugins %}

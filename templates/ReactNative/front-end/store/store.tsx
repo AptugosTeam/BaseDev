@@ -3,23 +3,27 @@ path: store.tsx
 completePath: front-end/store/store.tsx
 unique_id: 6E6TtRQh
 */
-{% if application.tables.length > 0 %}{% set hasTables = true %}{% else %}{% set hasTables = false %}{% endif %}
-import { applyMiddleware, createStore } from 'redux'
-import { composeWithDevTools } from '@redux-devtools/extension'
+import { configureStore } from '@reduxjs/toolkit'
+import { useDispatch } from 'react-redux'
 
-import rootReducer, { initialState } from './reducers'
-import epicMiddleware, { rootEpic } from './epics'
+{% for table in application.tables %}
+import {{ table.name | friendly | lower }}Reducer from './slices/{{ table.name | friendly | lower }}Slice'
+{% endfor %}
 
-{% if hasTables %}
-const store = createStore(
-  rootReducer,
-  initialState,
-  applyMiddleware(epicMiddleware)
-)
+export const store = configureStore({
+  reducer: {
+    {% for table in application.tables %}
+    {{ table.name | friendly | lower }}: {{ table.name | friendly | lower }}Reducer,
+    {% endfor %}
+  },
+  middleware: (getDefaultMiddleware) => 
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+})
 
-epicMiddleware.run(rootEpic)
-{% else %}
-const store = {}
-{% endif %}
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
+export const useAppDispatch = () => useDispatch<AppDispatch>()
 
 export default store
