@@ -1,0 +1,35 @@
+/*
+path: 02_Model.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Database/02_Model.json
+keyPath: elements/Code Snippets/Database/02_Model.json
+unique_id: CSqD946d
+name: Model
+fullload: true
+*/
+{
+  init: function() {
+    this.jsonInit({
+      "message0": "%2 %1",
+      "args0": [
+        {
+          "type": "input_dummy",
+          "name": "MODEL"
+        },
+        {
+          "type": "field_image",
+          "src": "media/js.svg",
+          "width": 16,
+          "height": 16
+        }
+      ],
+      "colour": 70,
+      "output": null,
+      "tooltip": "Select a Table",
+      "extensions": ["get_tables_list"]
+    })
+
+    this.tablesFieldName = 'MODEL'
+  }
+}

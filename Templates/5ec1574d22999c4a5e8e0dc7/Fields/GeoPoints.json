@@ -1,0 +1,20 @@
+/*
+path: GeoPoints.json
+keyPath: Fields/GeoPoints.json
+unique_id: qdEPQIcS
+*/
+{
+  "label": "GeoPoints",
+  "value": "GeoPoints",
+  "dataType": "String",
+  "initialValue": "",
+  "options": {
+    "extra": [
+      {
+        "display": "G-Places API key",
+        "value": "apikey",
+        "type": "text"
+      }
+    ]
+  }
+}

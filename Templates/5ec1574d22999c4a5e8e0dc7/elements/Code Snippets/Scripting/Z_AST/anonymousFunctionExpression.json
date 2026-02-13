@@ -1,0 +1,35 @@
+/*
+path: anonymousFunctionExpression.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/anonymousFunctionExpression.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/anonymousFunctionExpression.json
+unique_id: BnBZa0L5
+name: js_anonimous_function_expression
+fullload: true
+*/
+{
+  "type": "js_anonimous_function_expression",
+  "message0": "function ( %1 ) %2",
+  "mutator": "clone",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "PARAM0"
+    },
+    {
+      "type": "input_statement",
+      "name": "STACK"
+    }
+  ],
+  "inputsInline": true,
+  "output": null,
+  "previousStatement": null,
+  "nextStatement": null,
+  "mutatorConfig": {
+    "baseName": "PARAM",
+    "sourceBlock": "PARAM0",
+    "xmlAttrName": "parameters"
+  },
+  "elementsCount": 1
+}

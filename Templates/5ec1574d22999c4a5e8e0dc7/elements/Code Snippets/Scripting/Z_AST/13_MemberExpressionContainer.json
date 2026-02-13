@@ -1,0 +1,19 @@
+/*
+path: 13_MemberExpressionContainer.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/13_MemberExpressionContainer.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/13_MemberExpressionContainer.json
+unique_id: 5u9qcCLH
+name: js_member_expression_container
+fullload: true
+*/
+{
+  init: function() {
+    this.setColour(240);
+    this.appendDummyInput().appendField("member expression");
+    this.appendStatementInput("STACK");
+    this.setTooltip("Mutator block for Member Expression.");
+    this.contextMenu = false;
+  }
+}

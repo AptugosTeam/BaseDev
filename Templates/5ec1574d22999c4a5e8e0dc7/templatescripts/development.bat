@@ -1,0 +1,1 @@
+npm install --loglevel notice 2>&1 

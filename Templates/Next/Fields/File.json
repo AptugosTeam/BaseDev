@@ -1,0 +1,77 @@
+/*
+path: File.json
+completePath: Fields/File.json
+unique_id: LleJ843P
+*/
+{
+  "label": "File",
+  "value": "File",
+  "dataType": "String",
+  "initialValue": "",
+  "extraOptions": {
+    "frontEndType": "string",
+    "extra": [
+      {
+        "display": "File extensions",
+        "value": "filetype",
+        "type": "text"
+      },
+      {
+        "display": "Storage",
+        "value": "storage",
+        "type": "select",
+        "settings": {
+          "default": "Local"
+        },
+        "options": [
+          {
+            "label": "Local",
+            "value": "Local",
+            "default": true
+          },
+          {
+            "label": "Amazon S3",
+            "value": "s3"
+          },
+          {
+            "label": "Google Storage",
+            "value": "gs"
+          }
+        ]
+      },
+      {
+        "display": "S3 Bucket Name",
+        "value": "s3Bucket",
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "s3"
+        }
+      },{
+        "display": "S3 Region",
+        "value": "s3Region",
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "s3"
+        }
+      },{
+        "display": "S3 Access Key ID",
+        "value": "s3AccessKeyID",
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "s3"
+        }
+      },{
+        "display": "S3 Access Key Secret",
+        "value": "s3AccessKeySecret",
+        "type": "text",
+        "settings": {
+          "propertyCondition": "storage",
+          "condition": "s3"
+        }
+      }
+    ]
+  }
+}

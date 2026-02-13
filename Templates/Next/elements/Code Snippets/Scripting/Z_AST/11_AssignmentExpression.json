@@ -1,0 +1,54 @@
+/*
+path: 11_AssignmentExpression.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/11_AssignmentExpression.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/11_AssignmentExpression.json
+unique_id: tLTcwK7N
+name: js_assignment_expression
+fullload: true
+*/
+{
+  init: function() {
+    var OPERATORS = [
+      ['=', '='],
+      ['+=', '+='],
+      ['-=', '-='],
+      ['*=', '*='],
+      ['/=', '/='],
+      ['%=', '%='],
+      ['&=', '&='],
+      ['^=', '^='],
+      ['|=', '|='],
+      ['>>=', '>>='],
+      ['<<=', '<<='],
+      ['>>>=', '>>>=']
+    ];
+    this.jsonInit({
+      "id": "js_assignment_expression",
+      "message0": "set %1 %2 %3",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VAR"
+        },
+        {
+          "type": "field_dropdown",
+          "name": "OPERATOR",
+          "options": OPERATORS
+        },
+        {
+          "type": "input_value",
+          "name": "VALUE",
+          "align": "RIGHT"
+        }
+      ],
+      "colour": 330,
+      "output": null,
+      "previousStatement": "Statement",
+      "nextStatement": "Statement",
+      "inputsInline": true,
+      "tooltip": "AST -> Assignment expression."
+    });
+  }
+}

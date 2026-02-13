@@ -1,0 +1,32 @@
+/*
+path: math_constant.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/C_Math/math_constant.json
+keyPath: elements/Code Snippets/Scripting/C_Math/math_constant.json
+unique_id: qZFVB32C
+name: math_constant
+fullload: true
+*/
+{
+  "type": "math_constant",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "CONSTANT",
+      "options": [
+        ["\u03c0", "PI"],
+        ["e", "E"],
+        ["\u03c6", "GOLDEN_RATIO"],
+        ["sqrt(2)", "SQRT2"],
+        ["sqrt(\u00bd)", "SQRT1_2"],
+        ["\u221e", "INFINITY"]
+      ]
+    }
+  ],
+  "output": "Number",
+  "style": "math_blocks",
+  "tooltip": "%{BKY_MATH_CONSTANT_TOOLTIP}",
+  "helpUrl": "%{BKY_MATH_CONSTANT_HELPURL}"
+}

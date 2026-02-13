@@ -1,0 +1,35 @@
+/*
+path: importModel.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Database/importModel.json
+keyPath: elements/Code Snippets/Database/importModel.json
+unique_id: c13ldo09
+name: importModel
+fullload: true
+*/
+{
+  init: function() {
+    this.jsonInit({
+      "type": "importModel",
+      "message0": "%2 Load Model %1",
+      "args0": [
+        {
+          "type": "input_dummy",
+          "name": "MODEL"
+        },
+        {
+          "type": "field_image",
+          "src": "media/js.svg",
+          "width": 16,
+          "height": 16
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "tooltip": "Database -> Prepares table data to be worked with",
+      "extensions": ["get_tables_list"]
+    })
+    this.tablesFieldName = 'MODEL'
+  }
+}

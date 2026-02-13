@@ -1,0 +1,14 @@
+/*
+path: layout.scss
+keyPath: src/components/Themes/layout.scss
+unique_id: iaLnUTdx
+*/
+{{ insert_setting('directives') | raw }}
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

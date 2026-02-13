@@ -1,0 +1,7 @@
+{
+  "_id": "Bootstrap",
+  "name": "Front-end: NextJS-Bootstrap / Back-end: NodeJS",
+  "renderingFolder": "/front-end/src/app",
+  "namingSchema": "{{ pageDefiniton.path }}/page.tsx",
+  "assetsFolder": "/front-end/public"
+}

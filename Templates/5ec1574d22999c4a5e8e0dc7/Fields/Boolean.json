@@ -1,0 +1,12 @@
+/*
+path: Boolean.json
+completePath: Fields/Boolean.json
+unique_id: uXS2fFGc
+*/
+{
+  "label": "Yes / No",
+  "value": "Boolean",
+  "dataType": "Boolean",
+  "initialValue": "false",
+  "options": ""
+}

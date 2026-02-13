@@ -1,0 +1,52 @@
+/*
+path: 999_searchField.module.scss
+completePath: >-
+  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Bootstrap/elements/Interact/999_searchField.module.scss
+keyPath: elements/Interact/999_searchField.module.scss
+unique_id: bcBizcHS
+*/
+@import './../../app/globals.module.scss';
+
+.searchEncloser {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  
+  & > label {
+    margin-right: .5rem;
+  }
+
+  & .searchInput {
+    & .magIcon {
+      position: absolute;
+      margin-left: 0.3rem;
+      width: 1.2rem;
+      margin-top: 0.2rem;
+      margin-left: 0.5rem;
+    }
+
+    & .searchInputField {
+      text-indent: 1.5rem;
+      height: 2rem;
+      outline: none;
+      border-radius: 0.2rem;
+    }
+  }
+
+  & .pendingArea {
+    position: absolute;
+    right: 0;
+    & .spinner {
+      animation: spin 1s linear infinite; 
+      width: 1.2rem;
+      margin-right: 0.3rem;
+      & .circle {
+        opacity: .25;
+      }
+
+      & .path {
+        opacity: .75;
+      }
+    }
+  }
+}

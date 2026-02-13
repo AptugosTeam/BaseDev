@@ -1,0 +1,31 @@
+/*
+path: String.json
+completePath: Fields/String.json
+unique_id: gaESHtLJ
+*/
+{
+  "label": "Text",
+  "value": "String",
+  "dataType": "String",
+  "initialValue": "''",
+  "options": {
+    "frontEndType": "string",
+    "validations": [
+      {
+        "display": "Requires a value",
+        "value": "required",
+        "type": "checkbox"
+      },
+      {
+        "display": "Require a unique value",
+        "value": "unique",
+        "type": "checkbox"
+      },
+      {
+        "display": "Validation Regexp",
+        "value": "regexp",
+        "type": "text"
+      }
+    ]
+  }
+}

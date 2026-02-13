@@ -1,0 +1,32 @@
+/*
+path: Computed.json
+completePath: Fields/Computed.json
+unique_id: uXS2fFGc
+*/
+{
+  "label": "Computed",
+  "value": "Computed",
+  "dataType": "Number",
+  "initialValue": "false",
+  "options": {
+    "frontEndType": "string",
+    "extra": [
+      {
+        "display": "Default Value",
+        "value": "defaultValue",
+        "type": "text"
+      },
+      {
+        "display": "Data Type",
+        "value": "datatype",
+        "type": "select",
+        "options": "[{ label: 'String', value: 'String' },{ label: 'Number', value: 'Number' },{ label: 'Array of Objects', value: '[{}]' },{ label: 'Array of Strings', value: '[String]'}]"
+      },
+      {
+        "display": "How the value is calculated?",
+        "value": "computeValue",
+        "type": "text"
+      }
+    ]
+  }
+}

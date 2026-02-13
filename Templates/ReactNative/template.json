@@ -1,0 +1,7 @@
+{
+  "_id": "ReactNative",
+  "name": "Front-end: React Native / Back-end: NodeJS",
+  "renderingFolder": "/front-end/Pages",
+  "templateCommandsAfterDeploy": "yarn install",
+  "assetsFolder": "/front-end/assets"
+}

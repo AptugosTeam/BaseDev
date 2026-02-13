@@ -1,0 +1,17 @@
+/*
+path: 00_Program.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/00_Program.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/00_Program.json
+unique_id: 4flTPx5V
+name: Program
+fullload: true
+*/
+{
+  "type": "Program",
+  "message0": "Start!",
+  "nextStatement": null,
+  "style": "start_block",
+  "tooltip": "AST -> Program"
+}

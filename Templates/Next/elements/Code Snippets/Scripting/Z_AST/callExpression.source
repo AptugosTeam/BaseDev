@@ -1,0 +1,30 @@
+/*
+path: callExpression.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Basic/callExpression.source
+keyPath: elements/Code Snippets/Basic/callExpression.source
+unique_id: eCyafFGf
+name: js_call_expression
+fullload: true
+*/
+
+let expressionName
+try {
+  expressionName = Blockly.JavaScript.valueToCode(Block, 'NAME', Blockly.JavaScript.ORDER_FUNCTION_CALL)
+} catch(e) {
+  console.log('something fishy here', Block)
+}
+
+const args = []
+for (var i = 0; i < Block.elementsCount; i++) {
+  args.push( Blockly.JavaScript.valueToCode(Block, 'ARGUMENT' + i, Blockly.JavaScript.ORDER_ATOMIC) )
+}
+const joinedArgs = args.join(', ')
+const code = `${expressionName}(${joinedArgs})`
+
+if (Block.outputConnection.targetConnection) {
+  return  [code, Blockly.JavaScript.ORDER_ATOMIC]
+} else {
+  return code + '\n'
+}

@@ -1,0 +1,16 @@
+/*
+path: source_01_nullValue.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/source_01_nullValue.source
+keyPath: elements/Code Snippets/Scripting/Z_AST/source_01_nullValue.source
+unique_id: PgXDCvfB
+name: js_null_value
+fullload: true
+*/
+var code = 'null'
+if (Block.outputConnection) {
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+} else {
+  return [code + '\n', Blockly.JavaScript.ORDER_ATOMIC];
+}

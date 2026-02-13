@@ -1,0 +1,51 @@
+/*
+path: functionExpression.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/functionExpression.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/functionExpression.json
+unique_id: WKDwqImC
+name: js_function_expression
+fullload: true
+*/
+{
+  init: function() {
+    this.jsonInit({
+      "type": "js_function_expression",
+      "message0": "Function: %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "NAME"
+        }
+      ],
+      "message1": "Arguments: %1",
+      "args1": [
+        {
+          "type": "input_value",
+          "name": "PARAM0"
+        }
+      ],
+      "message2": "%1",
+      "args2": [
+        {
+          "type": "input_statement",
+          "name": "STACK"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "inputsInline": true,
+      "tooltip": "Function Expression",
+      "helpUrl": "",
+      "output": null,
+      "style": "loop_blocks"
+    })
+    this.mutatorConfig = {
+      baseName: "PARAM",
+      sourceBlock: "PARAM0",
+      xmlAttrName: "params"
+    }
+    this.elementsCount = 1
+  }
+}
