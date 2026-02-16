@@ -34,10 +34,29 @@ options:
     display: ClassName
     type: text
     options: ''
+  - name: permissionText
+    display: Reason Text
+    type: text
+    options: ''
+  - name: micpermissionText
+    display: Mic Reason Text
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"expo-camera": "^17.0.8",'
 */
+{% set AppJsonPlugins %}
+[
+  "expo-camera",
+  {
+    "cameraPermission": "{{ element.values.permissionText|default("The app needs to access your camera.")}}",
+    "microphonePermission": "{{ element.values.micpermissionText|default("The app needs to access your microphone.")}}",
+    "recordAudioAndroid": true
+  }
+],
+{% endset %}
+{{ add_setting('AppJsonPlugins', AppJsonPlugins)}}
 {% set bpr %}
 import axios from 'axios'
 import { CameraView, useCameraPermissions } from 'expo-camera'

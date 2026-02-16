@@ -13,7 +13,7 @@ unique_id: i1kD8rN4
     "splash": {
       "image": "./assets/img/splash.png",
       "resizeMode": "{{ insert_setting('resizeMode')|default('contain') }}",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "{{ insert_setting('splashBackgroundColor')|default('#ffffff') }}"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

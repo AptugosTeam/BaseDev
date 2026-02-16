@@ -1,11 +1,24 @@
 /*
 path: FileUpload.tsx
-completePath: front-end/components/FileUpload/FileUpload.tsx
 unique_id: QZm2nTtL
+options:
+  - name: permissionText
+    display: Reason Text
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"expo-image-picker": "^17.0.8",'
 */
+{% set AppJsonPlugins %}
+[
+  "expo-image-picker",
+  {
+    "photosPermission": "{{ element.values.permissionText|default("The app accesses your photos to let you share them with your friends.")}}"
+  }
+],
+{% endset %}
+{{ add_setting('AppJsonPlugins', AppJsonPlugins)}}
 import React, { useState } from 'react'
 import { Button, Image, View } from 'react-native'
 import * as ImagePicker from 'expo-image-picker'

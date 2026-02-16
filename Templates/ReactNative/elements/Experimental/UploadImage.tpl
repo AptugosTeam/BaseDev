@@ -30,15 +30,22 @@ options:
     display: Disable
     type: text
     options: ''
+  - name: permissionText
+    display: Reason Text
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"expo-image-picker": "^17.0.8",'
 children: []
 */
-{% set AppJsonIos %}
-"infoPlist": {
-  "NSPhotoLibraryUsageDescription": "Para setear la imagen de perfil, necesitamos permiso de acceder a tus fotos"
-},
+{% set AppJsonPlugins %}
+[
+  "expo-image-picker",
+  {
+    "photosPermission": "{{ element.values.permissionText|default("The app accesses your photos to let you share them with your friends.")}}"
+  }
+],
 {% endset %}
 {{ add_setting('AppJsonIos', AppJsonIos)}}
 {% set bpr %}

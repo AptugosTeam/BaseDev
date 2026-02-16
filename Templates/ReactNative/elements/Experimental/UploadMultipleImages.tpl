@@ -23,11 +23,24 @@ options:
     type: text
     options: ''
     default: "Drag 'n' drop some files here, or click to select files"
+  - name: permissionText
+    display: Reason Text
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"expo-image-picker": "^17.0.8",'
 children: []
 */
+{% set AppJsonPlugins %}
+[
+  "expo-image-picker",
+  {
+    "photosPermission": "{{ element.values.permissionText|default("The app accesses your photos to let you share them with your friends.")}}"
+  }
+],
+{% endset %}
+{{ add_setting('AppJsonIos', AppJsonIos)}}
 {% set bpr %}
 import { TouchableOpacity } from 'react-native'
 {% endset %}

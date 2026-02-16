@@ -151,7 +151,7 @@ export default class NotificationBanner extends React.PureComponent<Props, State
         ]}
       >
         <TouchableOpacity activeOpacity={0.9} onPress={this.handlePress} style={styles.banner}>
-          {avatar && <Image source={{ uri: avatar }} style={styles.avatar} resizeMode="cover" />}
+          {avatar && <Image source={ { uri: avatar }} style={styles.avatar} resizeMode="cover" />}
           <View style={styles.textContainer}>
             <Text numberOfLines={1} style={styles.name}>
               {fromName ?? 'New message'}
