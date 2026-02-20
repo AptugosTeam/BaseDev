@@ -30,6 +30,7 @@ options:
     advanced: true
   - name: redirectTimeout
     display: Waiting time before redirect
+    type: text
     advanced: true
     propertyCondition: OnSuccess
     condition: true
