@@ -5,7 +5,7 @@ unique_id: UPhKOA4J
 */
 import ContentTools from 'ContentTools'
 import 'ContentTools/build/content-tools.min.css'
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import axios from 'axios'
 
 const ContEditor: FunctionComponent = (props: any) => {

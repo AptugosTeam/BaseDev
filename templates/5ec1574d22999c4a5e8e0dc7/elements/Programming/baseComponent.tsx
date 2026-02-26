@@ -4,7 +4,7 @@ keyPath: elements/Programming/baseComponent.tsx
 unique_id: spqWQO2m
 internalUse: true
 */
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import baseClasses from '@components/Themes/layout.module.scss'
 {% for delay in delayed %}
   {% for specificDelay in delay.bpr %}

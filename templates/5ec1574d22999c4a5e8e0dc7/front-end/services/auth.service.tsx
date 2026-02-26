@@ -5,8 +5,6 @@ unique_id: dDixye51
 */
 import axios from 'axios'
 
-
-
 {% set url = settings.apiURL ~ '/api/' %}
 {% set customUrl = insert_setting('customApiUrl') %}
 {% if customUrl %}
@@ -14,7 +12,6 @@ const API_URL = `{{ customUrl }}/api/`
 {% else %}
 const API_URL = '{{ url }}'
 {% endif %}
-
 
 interface LoginOptions {
   remember?: boolean;
@@ -203,7 +200,7 @@ class AuthService {
         throw e;
       });
   }
-{{ insert_setting('auth.service') | raw}}
+{{ insert_setting('auth.service') | raw}}
 }
 
 export default new AuthService()

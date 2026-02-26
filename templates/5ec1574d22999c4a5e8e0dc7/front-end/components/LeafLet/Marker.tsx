@@ -3,7 +3,7 @@ path: Marker.tsx
 completePath: front-end/components/LeafLet/Marker.tsx
 unique_id: 9gvN8tTs
 */
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import { Marker as Mrk, Popup } from 'react-leaflet'
 import L from 'leaflet'
 

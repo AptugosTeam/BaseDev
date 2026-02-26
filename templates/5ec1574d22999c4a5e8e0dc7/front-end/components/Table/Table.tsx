@@ -9,7 +9,7 @@ import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import TableSortLabel from '@mui/material/TableSortLabel'
 import TableRow from '@mui/material/TableRow'
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import styles from './table.module.scss'
 
 interface tableProps extends React.PropsWithChildren {

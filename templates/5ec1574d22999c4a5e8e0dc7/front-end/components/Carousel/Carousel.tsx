@@ -11,7 +11,7 @@ import Slide from '@mui/material/Slide'
 import { styled } from '@mui/material/styles'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 
 const classes = {
   root: 'carousel-root',

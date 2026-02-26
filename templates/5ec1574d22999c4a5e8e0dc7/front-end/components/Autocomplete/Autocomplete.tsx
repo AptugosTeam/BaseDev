@@ -4,7 +4,7 @@ completePath: front-end/components/Autocomplete/Autocomplete.tsx
 unique_id: wpHBmu7F
 */
 import clsx from 'clsx'
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import Select from 'react-select'
 import classes from './autocomplete.module.scss'
 import { FormControl, InputLabel, Input, FormHelperText } from '@mui/material'

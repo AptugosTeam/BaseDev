@@ -4,7 +4,7 @@ keyPath: elements/Experimental/Kanban/999_kanbanColumn.js
 unique_id: 0Pg5OUMF
 internalUse: true
 */
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import { useDrop } from 'react-dnd'
 import clsx from 'clsx'
 

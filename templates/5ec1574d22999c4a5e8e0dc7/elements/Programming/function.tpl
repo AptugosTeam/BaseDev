@@ -19,7 +19,7 @@ options:
     type: function
     options: ''
   - name: priority
-    display: Priiority
+    display: Priority
     type: dropdown
     options: Normal;High;Low
   - name: async
@@ -53,16 +53,34 @@ options:
     type: function
     options: ''
     advanced: true
+  - name: regularFunction
+    display: Use Regular Function (instead of Arrow)
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
+  - name: classFunction
+    display: Function is part of a class (instead of Arrow)
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
 settings:
   - name: ServerAddenum
     value: |-
       {% if element.values.serverSide %}
-      {% if element.values.comment %}
+        {% if element.values.comment %}
         /**
-        {{ element.values.comment }}
+          {{ element.values.comment }}
         */
-      {% endif %}
-      global.{{ element.values.functionName }} = {% if element.values.async%}async {% endif %}({{ element.values.functionParameters }}) => {
+        {% endif %}
+
+        {% if element.values.regularFunction %}
+          global.{{ element.values.functionName }} = {% if element.values.async %}async {% endif %}function({{ element.values.functionParameters }}) {
+        {% else %}
+          global.{{ element.values.functionName }} = {% if element.values.async %}async {% endif %}({{ element.values.functionParameters }}) => {
+        {% endif %}
+
         {{ element.values.functionBody | raw }}
         {{ content | raw }}  
       }
@@ -85,20 +103,30 @@ children: []
   {{ element.values.comment }}
   */
 {% endif %}
-
 {% if not element.values.serverSide %}
-  {% if element.values.priority %}
-  {% set ph %}
-  {% if element.values.export%}export{% endif %} const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} {% if element.values.debounce %}debounce({% endif %}({{ element.values.functionParameters }}) => {
+
+{% if element.values.export %}export {% endif %}
+
+{% if element.values.regularFunction %}
+  {% if element.values.async %}async {% endif %}function {{ element.values.functionName }}({{ element.values.functionParameters }}) {
     {{ element.values.functionBody | raw }}
-    {{ content | raw }}  
-  }{% if element.values.debounce %}, {{element.values.debounceTime|default('300')}}){% endif %}
-  {% endset %}
-  {{ save_delayed('ph',ph,1) }}
-  {% else %}
-  {% if element.values.export%}export{% endif %} const {{ element.values.functionName }} = {% if element.values.async%}async{% endif %} {% if element.values.debounce %}debounce({% endif %}({{ element.values.functionParameters }}) => {
+    {{ content | raw }}
+  }
+{% elseif element.values.classFunction %}
+  {% if element.values.async %}async {% endif %}{{ element.values.functionName }}({{ element.values.functionParameters }}) {
     {{ element.values.functionBody | raw }}
-    {{ content | raw }}  
-  }{% if element.values.debounce %}, {{element.values.debounceTime|default('300')}}){% endif %}
-  {% endif %}
+    {{ content | raw }}
+  }
+{% else %}
+const {{ element.values.functionName }} =
+{% if element.values.async %}async {% endif %}
+{% if element.values.debounce %}debounce({% endif %}
+({{ element.values.functionParameters }}) => {
+  {{ element.values.functionBody | raw }}
+  {{ content | raw }}
+}
+{% if element.values.debounce %}, {{ element.values.debounceTime|default('300') }}){% endif %}
+
+{% endif %}
+
 {% endif %}
