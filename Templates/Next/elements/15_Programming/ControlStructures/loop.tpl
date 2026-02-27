@@ -45,6 +45,10 @@ options:
     type: checkbox
     options: ''
     advanced: true
+  - name: alternateKey
+    display: Use an alternate key method
+    type: text
+    advanced: true
   
 children: []
 */
@@ -60,5 +64,10 @@ children: []
 {% endif %}
 { {{ element.values.variable }}{{ addExtra }}?.map(({{ element.values.variablename | default('item') }},{{ element.values.indexName | default('index') }}) => {
 {% if element.values.code %}{{ element.values.code }}{% endif %}
-    return ({% if not element.values.usefragment %}<React.Fragment key={ '{{ element.unique_id }}_' + {{ element.values.indexName | default('index') }}}>{% endif %}{{ content | raw }}{% if not element.values.usefragment %}</React.Fragment>{% endif %})
+    return (
+      {% if not element.values.usefragment %}<React.Fragment
+        key={ {% if element.values.alternateKey %}{{ element.values.alternateKey }}{% else %}'{{ element.unique_id }}_' + {{ element.values.indexName | default('index') }}{% endif %} }
+      >{% endif %}
+        {{ content | raw }}
+      {% if not element.values.usefragment %}</React.Fragment>{% endif %})
 })}

@@ -48,6 +48,7 @@ export function use{{ tableName }}Pages(options) {
     {{ singleName }}isLoading: !error && !data,
     {{ singleName }}isError: error,
     {{ singleName }}pages: data?.data.totalPages,
-    {{ singleName }}mutate: mutate
+    {{ singleName }}mutate: mutate,
+    {{ singleName }}fetched: !!shouldFetch
   }
 }

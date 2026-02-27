@@ -48,6 +48,10 @@ options:
     display: Title Property
     type: text
     advanced: true
+  - name: disabletitle
+    display: Do not render title Property
+    type: checkbox
+    advanced: true
   - name: dataAttribute
     display: Add Data Attribute
     type: checkbox
@@ -82,12 +86,14 @@ helpText: Basic HTML Div element
 {% set tag = element.values.tag|default('div') %}
 <{{tag}}
   {% if type == 'DevelopmentDebug' %}data-aptugo="{{ element.unique_id }}"{% endif %}
-  {% if element.values.title %}
-    title={{ element.values.title | textOrVariable }}
-    data-title={{ element.values.title | textOrVariable }}
-  {% else %}
-    title="{{ element.name }}"
-    data-title="{{ element.name }}"
+  {% if not element.values.disabletitle %}
+    {% if element.values.title %}
+      title={{ element.values.title | textOrVariable }}
+      data-title={{ element.values.title | textOrVariable }}
+    {% else %}
+      title="{{ element.name }}"
+      data-title="{{ element.name }}"
+    {% endif %}
   {% endif %}
   {% if element.values.dataAttribute and element.values.nameAttribute and element.values.valueAttribute %}
     data-{{ element.values.nameAttribute }}={ {{ element.values.valueAttribute }} }
