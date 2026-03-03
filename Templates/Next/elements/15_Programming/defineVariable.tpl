@@ -68,8 +68,10 @@ settings:
 sourceType: javascript
 children: []
 */
-{# {% set varValue = element.values.variableValue|retrieveVariableName(element) %} #}
-{% set varValue = element.values.variableValue|default(content | raw) %}
+{% set varValue = content | raw %}
+{% if element.values.variableValue is not empty %}
+  {% set varValue = element.values.variableValue|default(content | raw) %}
+{% endif %}
 {% if not element.values.serverSide %}
   {% set variableContent %}
     {% set prev = 'const ' %}

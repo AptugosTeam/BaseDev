@@ -8,7 +8,10 @@ sourceType: javascript
 subtype: Aptugo
 children: []
 */
+
+{{ add_setting('Packages', '"mongoose-autopopulate" : "^1.1.0",') }}
 {% set tableName = table.name | friendly %}
+{% if table.lowercase %}{% set tableName = tableName | lower %}{% endif %}
 {% set singleName = table.singleName | friendly %}
 import mongoose from "mongoose"
 import paginate from 'mongoose-aggregate-paginate-v2'

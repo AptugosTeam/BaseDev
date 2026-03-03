@@ -15,10 +15,33 @@ options:
   - name: keyprops
     display: Prop Keys (optional) 
     type: text
+  - name: Utility
+    display: Utility Component
+    type: checkbox
+  - name: UtilityOf
+    display: Is an Utility from another component
+    type: text
+    advanced: true
+  - name: changePath
+    display: Change Path (optional) 
+    type: checkbox
+    advanced: true
+    settings: 
+      default: false
 */
 {% set bpr %}
-import {{ element.values.name | friendly }} from '@components/{{ element.values.name | friendly }}/{{ element.values.name | friendly }}'
+{% if element.values.Utility %}
+  {% if element.values.UtilityOf %}
+    import {{ element.values.name | friendly }} from '@components/{{ element.values.UtilityOf }}/{{ element.values.name | friendly }}'
+  {% else %}
+    import {{ element.values.name | friendly }} from './{{ element.values.name | friendly }}'
+  {% endif %}
+{% elseif element.values.changePath %}
+import {{ element.values.name | friendly }} from '../{{ element.values.name | friendly }}'
+{% else %}
+import {{ element.values.name | friendly }} from '@components/{{ element.values.name | friendly }}/{{ element.values.name | friendly }}'
+{% endif %}
 {% endset %}
 {{ save_delayed('bpr', bpr)}}
-<{{ element.values.name | friendly }} {% if element.values.props %}properties={ { {{ element.values.props }} } }{% endif %} {% if not element.children %}/{% endif %}>
-{% if element.children %} {{ content | raw }}</{{ element.values.name | friendly }}>{% endif %}
+<{{ element.values.name | friendly }} {% if element.values.props %}properties={ { {{ element.values.props }} } }{% endif %} {% if not element.children %}/{% endif %}>
+{% if element.children %} {{ content | raw }}</{{ element.values.name | friendly }}>{% endif %}

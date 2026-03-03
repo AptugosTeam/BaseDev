@@ -2,7 +2,7 @@
 path: onPageLoad.tpl
 type: file
 unique_id: flR4cNG4
-icon: f:onPageLoad.svg
+icon: ico-play-circle
 helpText: Executes commands when DOM has been loaded and renderized
 options:
   - name: useEffectBody
