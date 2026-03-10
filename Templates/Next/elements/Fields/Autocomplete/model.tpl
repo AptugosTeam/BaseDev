@@ -14,13 +14,15 @@ icon: ico-field
   {% set extraPlugins = singleName ~ "Schema.plugin(mongooseAutoPopulate)\n" %}
   {% set extraImports = "import mongooseAutoPopulate from 'mongoose-autopopulate'\n" %}
   {% set relatedFieldInfo = fieldInfo.reference | fieldData %}
+  {% set tableName = relatedFieldInfo.table.name %}
+  {% if relatedFieldInfo.table.lowercase %}{% set tableName = tableName | lower %}{% endif %}
   {% set datatype = fieldInfo.dataType %}
   {% if fieldInfo.relationshipType == '1:1' %}
     {% set fieldInfo = fieldInfo|merge({'dataType': fieldInfo.dataType}) %}
   {% elseif fieldInfo.relationshipType == '1:m' %}
-    {% set datatype = '[{\ntype:' ~ fieldInfo.dataType ~ ',\nref: ' ~ '"' ~ relatedFieldInfo.table.name | friendly ~ '"' ~ ',\nautopopulate: true\n' ~ '}]\n' %}
+    {% set datatype = '[{\ntype:' ~ fieldInfo.dataType ~ ',\nref: ' ~ '"' ~ tableName | friendly ~ '"' ~ ',\nautopopulate: true\n' ~ '}]\n' %}
   {% elseif output.fieldInfo.relationshipType == 'm:1' %}
-    {% set datatype = '{\ntype:' ~ fieldInfo.dataType ~ ',\nref: ' ~ '"' ~ relatedFieldInfo.table.name | friendly ~ '"' ~ ',\nautopopulate: true\n' ~ '}\n' %}
+    {% set datatype = '{\ntype:' ~ fieldInfo.dataType ~ ',\nref: ' ~ '"' ~ tableName | friendly ~ '"' ~ ',\nautopopulate: true\n' ~ '}\n' %}
   {% endif %}
   {% set rawString = friendlyColumnName ~ ': ' ~  datatype ~ ',' %}
 {% endif %}
