@@ -9,6 +9,10 @@ options:
     display: Data to Download
     type: text
     options: ''
+  - name: filename
+    display: File Name
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"react-csv": "^2.0.3",'
@@ -20,4 +24,5 @@ import { CSVLink } from "react-csv"
 {{ save_delayed('bpr',bpr) }}
 <CSVLink
   data={ {{ element.values.data }} }
+  {% if element.values.filename %} filename={ '{{element.values.filename}}' } {% endif %}
 >{{ content|raw }}</CSVLink>
