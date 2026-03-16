@@ -15,7 +15,7 @@ options:
     options: ''
   - name: onPress
     display: On Press
-    type: text
+    type: code
     options: ''
   - name: disabled
     display: Disabled

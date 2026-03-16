@@ -23,19 +23,19 @@ options:
     options: ''
   - name: onPress
     display: On Press
-    type: text
+    type: code
     options: ''
   - name: onLongPress
     display: On Long Press
-    type: text
+    type: code
     options: ''
   - name: onPressIn
     display: On Press In
-    type: text
+    type: code
     options: ''
   - name: onPressOut
     display: On Press Out
-    type: text
+    type: code
     options: ''
   - name: disabled
     display: Disabled
