@@ -19,7 +19,7 @@ options:
       return [['navigate', 'Navigate'], ['push', 'Push'], ['A', 'External'], ['self','Self Managed']]
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: style
     display: Extra Styles

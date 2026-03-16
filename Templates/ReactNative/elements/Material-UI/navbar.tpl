@@ -17,9 +17,9 @@ options:
     display: Position
     type: dropdown
     options: absolute;fixed;relative;static;sticky
-  - name: ClassName
+  - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: Elevation
     display: Elevation

@@ -6,9 +6,9 @@ unique_id: UIXcm47q
 icon: file.svg
 helpText: Allows you to upload a single image file
 options:
-  - name: classname
+  - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: value
     display: Value

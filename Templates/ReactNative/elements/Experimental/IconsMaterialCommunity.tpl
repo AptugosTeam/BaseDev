@@ -19,7 +19,7 @@ options:
     options: ''
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
 settings:
   - name: Packages

@@ -5,7 +5,7 @@ unique_id: tTcK4Rth
 options:
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: permissionText
     display: Reason Text

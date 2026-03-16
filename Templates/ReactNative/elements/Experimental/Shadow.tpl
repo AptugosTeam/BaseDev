@@ -8,7 +8,7 @@ helpText: Allows you to upload multiple image files by selection or drag and dro
 options:
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: containerStyle
     display: Container Style

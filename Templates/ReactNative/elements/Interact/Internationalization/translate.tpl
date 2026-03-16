@@ -8,7 +8,7 @@ options:
     type: text
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: lines
     display: Display lines

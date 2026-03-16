@@ -3,9 +3,9 @@ path: versionAndBuildInfo.tpl
 keyPath: elements/15_Programming/Snippets/versionAndBuildInfo.tpl
 unique_id: 6rUXkVV3
 options:
-  - name: classname
+  - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
 */
 {% set bpr %}

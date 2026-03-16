@@ -10,7 +10,7 @@ options:
     options: ''
   - name: onclose
     display: On Close
-    type: text
+    type: code
     options: ''
   - name: dimClass
     display: ClassName (dimmed area)
@@ -46,8 +46,8 @@ import { Modal, TouchableWithoutFeedback } from 'react-native'
     transparent={true}
     {% if element.values.open %}visible={ {{ element.values.open }} }{% endif %}
     {% if element.values.onclose %}
-      onDismiss={() => {{ element.values.onclose }} }
-      onRequestClose={() => {{ element.values.onclose }} }
+      onDismiss={() => { {{ element.values.onclose }} } }
+      onRequestClose={() => { {{ element.values.onclose }} }}
     {% endif %}
   >
     {% if not element.values.avoidPortal %}
