@@ -31,6 +31,10 @@ options:
   - name: subcomponent
     display: It is a utility of...
     type: text
+  - name: interface
+    display: Interface
+    type: text
+    advanced: true
 extraFiles:
   - source: 'elements/99_ExtraFiles/baseComponent.tsx'
     destination: 'front-end/components/{{ element.values.subcomponent|default(element.values.name) | friendly }}/{{ element.values.name | friendly }}.tsx'
