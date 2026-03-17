@@ -47,28 +47,6 @@ unique_id: i1kD8rN4
     },
     "scheme": "{{ insert_setting('androidPackage')|default(application.settings.name | lower | friendly) }}",
     "plugins": [
-{% set fontsFound = false %}
-{% for asset in application.assets %}
-{% if asset.type == 'font' %}
-{% set fontsFound = true %}
-{% endif %}
-{% endfor %}
-{% if fontsFound %}
-      [
-        "expo-font",
-        {
-          "fonts": [
-{% set comma = "" %}
-{% for asset in application.assets %}
-{% if asset.type == 'font' %}
-            {{ comma }}"./assets/fonts/{{ asset.name }}"{% set comma = "," %}
-            
-{% endif %}
-{% endfor %}
-          ]
-        }
-      ],
-{% endif %}
       {{ insert_setting('AppJsonPlugins') | raw }}
       [
         "expo-build-properties",

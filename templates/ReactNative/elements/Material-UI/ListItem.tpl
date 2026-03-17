@@ -15,7 +15,7 @@ options:
     options: ''
   - name: className
     display: ClassName
-    type: styles
+    type: text
     options: ''
   - name: disableGutters
     display: Disable Gutters

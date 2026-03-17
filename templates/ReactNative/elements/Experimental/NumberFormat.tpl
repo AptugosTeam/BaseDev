@@ -15,9 +15,9 @@ options:
     settings:
       default: '''en-US'''
       active: true
-  - name: className
+  - name: ClassName
     display: ClassName
-    type: styles
+    type: text
     options: ''
   - name: Style
     display: Style

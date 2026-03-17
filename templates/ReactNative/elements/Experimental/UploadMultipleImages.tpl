@@ -6,9 +6,9 @@ unique_id: AcXumHAq
 icon: file.svg
 helpText: Allows you to upload multiple image files by selection or drag and drop
 options:
-  - name: className
+  - name: classname
     display: ClassName
-    type: styles
+    type: text
     options: ''
   - name: value
     display: Initial Value

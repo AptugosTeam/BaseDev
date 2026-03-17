@@ -10,7 +10,7 @@ settings:
 options:
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: numberOfCards
     display: Number of Cards
