@@ -20,8 +20,8 @@ options:
     type: dropdown
     options: lg;md;sm;xl;xs;false
   - name: className
-    display: ClassName
-    type: styles
+    display: className
+    type: text
     options: ''
   - name: avoidKeyboard
     display: Avoid Keyboard

@@ -10,7 +10,7 @@ options:
     options: ''
   - name: onclose
     display: On Close
-    type: text
+    type: code
     options: ''
   - name: dimClass
     display: ClassName (dimmed area)
@@ -36,7 +36,7 @@ childs:
 children: []
 */
 {% set bpr %}
-import { Modal, TouchableOpacity } from 'react-native'
+import { Modal, TouchableWithoutFeedback } from 'react-native'
 {% if not element.values.avoidPortal %}import { Portal } from 'react-native-paper'{% endif %}
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
@@ -46,21 +46,21 @@ import { Modal, TouchableOpacity } from 'react-native'
     transparent={true}
     {% if element.values.open %}visible={ {{ element.values.open }} }{% endif %}
     {% if element.values.onclose %}
-      onDismiss={() => {{ element.values.onclose }} }
-      onRequestClose={() => {{ element.values.onclose }} }
+      onDismiss={() => { {{ element.values.onclose }} } }
+      onRequestClose={() => { {{ element.values.onclose }} }}
     {% endif %}
   >
     {% if not element.values.avoidPortal %}
-      <TouchableOpacity
+      <TouchableWithoutFeedback
         {% if element.values.dimClass %}style={ {{ element.values.dimClass }}}{% endif %}
         {% if element.values.onclose %}onPress={ {{ element.values.onclose | functionOrCall }} }{% endif %}
       >
-        <TouchableOpacity {% if element.values.viewClass %}style={ {{ element.values.viewClass }}}{% endif %} activeOpacity={1}>
+        <View {% if element.values.viewClass %}style={ {{ element.values.viewClass }}}{% endif %}>
     {% endif %}
         {{ content | raw }}
     {% if not element.values.avoidPortal %}
-      </TouchableOpacity>
-    </TouchableOpacity>
+      </View>
+    </TouchableWithoutFeedback>
     {% endif %}
   </Modal>
 {% if not element.values.avoidPortal %}</Portal>{% endif %}

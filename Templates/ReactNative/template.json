@@ -3,6 +3,5 @@
   "name": "Front-end: React Native / Back-end: NodeJS",
   "renderingFolder": "/front-end/Pages",
   "templateCommandsAfterDeploy": "yarn install",
-  "assetsFolder": "/front-end/assets",
-  "fontsAllowed": true
+  "assetsFolder": "/front-end/assets"
 }

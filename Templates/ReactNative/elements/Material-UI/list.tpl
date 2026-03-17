@@ -8,7 +8,7 @@ children: []
 options:
   - name: className
     display: ClassName
-    type: styles
+    type: text
     options: ''
   - name: disablePadding
     display: Disable Padding

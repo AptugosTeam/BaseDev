@@ -20,9 +20,9 @@ options:
     display: Group
     type: text
     options: ''
-  - name: className
+  - name: classname
     display: ClassName
-    type: styles
+    type: text
     options: ''
   - name: keyValue
     display: Key Value

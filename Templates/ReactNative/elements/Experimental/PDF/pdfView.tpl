@@ -10,7 +10,7 @@ options:
     type: text
   - name: className
     display: ClassName
-    type: styles
+    type: text
     options: ''
   - name: extraStyles
     display: PDF Style

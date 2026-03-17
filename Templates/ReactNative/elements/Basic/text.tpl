@@ -14,7 +14,7 @@ options:
     options: ''
   - name: className
     display: ClassName
-    type: styles
+    type: text
     options: ''
   - name: lines
     display: Display lines

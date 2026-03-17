@@ -9,7 +9,7 @@ children: []
 options:
   - name: className
     display: ClassName
-    type: styles
+    type: text
     options: ''
 */
 {% set bpr %}

@@ -20,7 +20,7 @@ options:
       active: true
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: dontCreateVar
     display: Use Existing Variable

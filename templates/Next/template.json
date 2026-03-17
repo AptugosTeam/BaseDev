@@ -3,6 +3,7 @@
   "name": "React/Typescript Server Side Rendering",
   "renderingFolder": "/src/pages",
   "default": "true",
+  "fontsAllowed": false,
   "namingSchema": "{% if pageDefinition.path == '/' %}index{% else %}{{ pageDefinition.path }}{% endif %}.tsx",
   "namingSchemaParameter": "[]",
   "templateCommandsAfter": "$(which pnpm) i --force",
@@ -33,7 +34,6 @@
           "helperText": "one per line (key:value)",
           "multiline": true
         }
-        
       ]
     },
     {
@@ -55,7 +55,7 @@
           "label": "Private Key",
           "multiline": true,
           "helperText": "Copy the value for private_key at serviceAccount.json"
-        }  
+        }
       ],
       "extraActions": [
         {

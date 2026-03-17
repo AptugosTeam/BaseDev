@@ -18,7 +18,7 @@ options:
     options: ''
   - name: className
     display: ClassName
-    type: styles
+    type: text
     options: ''
 settings:
   - name: Packages
