@@ -7,7 +7,7 @@ sourceType: javascript
 options:
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: activeStyle
     display: Active Style
@@ -23,19 +23,19 @@ options:
     options: ''
   - name: onPress
     display: On Press
-    type: text
+    type: code
     options: ''
   - name: onLongPress
     display: On Long Press
-    type: text
+    type: code
     options: ''
   - name: onPressIn
     display: On Press In
-    type: text
+    type: code
     options: ''
   - name: onPressOut
     display: On Press Out
-    type: text
+    type: code
     options: ''
   - name: disabled
     display: Disabled

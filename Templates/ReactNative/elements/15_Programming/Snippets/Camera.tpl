@@ -32,7 +32,7 @@ options:
       default: '0.8'
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: permissionText
     display: Reason Text

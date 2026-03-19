@@ -25,9 +25,9 @@ options:
   - name: Switch
     display: Use a Switch instead of a checkbox
     type: checkbox
-  - name: ClassName
+  - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: activeOpacity
     display: Opacity

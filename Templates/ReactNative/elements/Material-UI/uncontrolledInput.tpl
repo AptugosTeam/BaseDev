@@ -31,7 +31,7 @@ options:
     options: flat;outlined
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: textColor
     display: Text Color

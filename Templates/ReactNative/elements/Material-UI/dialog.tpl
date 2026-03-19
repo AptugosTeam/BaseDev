@@ -30,9 +30,9 @@ options:
     display: Do not auto close
     type: checkbox
     options: ''
-  - name: classname
+  - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: title
     display: Add - Title

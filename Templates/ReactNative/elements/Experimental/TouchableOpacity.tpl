@@ -7,7 +7,7 @@ sourceType: javascript
 options:
   - name: className
     display: ClassName
-    type: text
+    type: styles
     options: ''
   - name: activeOpacity
     display: Opacity
@@ -15,7 +15,7 @@ options:
     options: ''
   - name: onPress
     display: On Press
-    type: text
+    type: code
     options: ''
   - name: disabled
     display: Disabled

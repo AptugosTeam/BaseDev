@@ -19,7 +19,7 @@ import baseClasses from '@components/Themes/layout.module.scss'
   {% endfor %}
 {% endfor %}
 
-const AptugoComponent: FunctionComponent<any> = (props) => {
+const AptugoComponent: FunctionComponent<{{element.values.interface|default('any')}}> = (props) => {
   {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props?.properties || {}{% endif %}
 
   {% set combinedContent = [] %}
