@@ -1,0 +1,56 @@
+/*
+path: Datetime.json
+completePath: Fields/Datetime.json
+unique_id: HRTcaQa2
+*/
+{
+  "label": "Date-Time",
+  "value": "Datetime",
+  "dataType": "Date",
+  "initialValue": "",
+  "options": {
+    "validations": [
+      {
+        "display": "Requires a value",
+        "value": "required",
+        "type": "checkbox"
+      }
+    ],
+    "extra": [
+      {
+        "display": "Date Format",
+        "value": "dateFormat",
+        "type": "select",
+        "options": [
+          {
+            "label": "DD/MM/YYYY HH:mm",
+            "value": "DD/MM/YYYY HH:mm"
+          },
+          {
+            "label": "MM/DD/YYYY HH:mm",
+            "value": "MM/DD/YYYY HH:mm"
+          },
+          {
+            "label": "YYYY/MM/DD HH:mm",
+            "value": "YYYY/MM/DD HH:mm"
+          }
+        ]
+      },
+      {
+        "display": "Default to Today",
+        "value": "defaultToToday",
+        "type": "select",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "1"
+          },
+          {
+            "label": "No",
+            "value": "0"
+          }
+        ]
+      }
+    ]
+  }
+}

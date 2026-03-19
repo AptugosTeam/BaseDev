@@ -1,0 +1,25 @@
+/*
+path: text_length.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/D_Text/text_length.json
+keyPath: elements/Code Snippets/Scripting/D_Text/text_length.json
+unique_id: ZL8VP6g1
+name: text_length
+fullload: true
+*/
+{
+  "type": "text_length",
+  "message0": "%{BKY_TEXT_LENGTH_TITLE}",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "check": ["String", "Array"]
+    }
+  ],
+  "output": "Number",
+  "style": "text_blocks",
+  "tooltip": "%{BKY_TEXT_LENGTH_TOOLTIP}",
+  "helpUrl": "%{BKY_TEXT_LENGTH_HELPURL}"
+}

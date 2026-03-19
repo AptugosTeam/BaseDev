@@ -1,0 +1,21 @@
+/*
+path: source_18_AnonymousFunctionExpression.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/source_18_AnonymousFunctionExpression.source
+keyPath: >-
+  elements/Code
+  Snippets/Scripting/Z_AST/source_18_AnonymousFunctionExpression.source
+unique_id: D4mQKKUL
+name: js_anonimous_function_expression
+fullload: true
+*/
+const args = []
+for (var i = 0; i < Block.argumentsCount; i++) {
+  args.push( Blockly.JavaScript.valueToCode(Block, 'PARAM' + i, Blockly.JavaScript.ORDER_ATOMIC) )
+}
+const joinedArgs = args.join(', ')
+
+var branch = Blockly.JavaScript.statementToCode(Block, 'STACK')
+var code = 'function (' + joinedArgs + ') {\n' + branch + '}';
+return [code, Blockly.JavaScript.ORDER_TYPEOF];

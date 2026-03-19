@@ -1,0 +1,24 @@
+/*
+path: functionExpression.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/functionExpression.source
+keyPath: elements/Code Snippets/Scripting/Z_AST/functionExpression.source
+unique_id: KT6NfC2H
+name: js_function_expression
+fullload: true
+*/
+var branch = Blockly.JavaScript.statementToCode(Block, 'STACK');
+var name = Blockly.JavaScript.valueToCode(Block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+var args = [];
+for (var i = 0; i < Block.elementsCount; i++) {
+  args[i] = Blockly.JavaScript.valueToCode(Block, 'PARAM' + i, Blockly.JavaScript.ORDER_ATOMIC);
+}
+
+var code = 'function ' + name + '(' + args.join(', ') + ') {\n' +
+  branch + '}';
+if (Block.outputConnection) {
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
+} else {
+  return code + ';\n';
+}

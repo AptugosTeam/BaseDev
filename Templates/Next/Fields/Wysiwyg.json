@@ -1,0 +1,35 @@
+/*
+path: Wysiwyg.json
+completePath: Fields/Wysiwyg.json
+unique_id: RkF1LGZf
+*/
+{
+  "label": "Wysiwyg",
+  "value": "Wysiwyg",
+  "dataType": "String",
+  "initialValue": "",
+  "extraOptions": {
+    "frontEndType": "string",
+    "extra": [
+      {
+        "display": "Use Editor",
+        "value": "editor",
+        "type": "select",
+        "options": [
+          {
+            "label": "Jodit",
+            "value": "jodit"
+          },
+          {
+            "label": "React Quill",
+            "value": "quill"
+          },
+          {
+            "label": "CKEditor",
+            "value": "ckeditor"
+          }
+        ]
+      }
+    ]
+  }
+}

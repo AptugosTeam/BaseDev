@@ -1,0 +1,20 @@
+/*
+path: tsconfig.json
+completePath: front-end/tsconfig.json
+unique_id: alNzyRKN
+*/
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@classes/*": ["classes/*"],
+      "@hooks/*": ["hooks/*"],
+      "@components/*": ["components/*"],
+      "@services/*": ["services/*"],
+    }
+  }
+}

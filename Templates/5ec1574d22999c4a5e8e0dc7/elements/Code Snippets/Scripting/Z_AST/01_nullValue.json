@@ -1,0 +1,23 @@
+/*
+path: nullValue.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/nullValue.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/nullValue.json
+unique_id: lkInRHKw
+name: js_null_value
+fullload: true
+*/
+{
+  "type": "js_null_value",
+  "message0": "null",
+  "args": [
+    {
+      "type": "input_dummy",
+      "name": "null"
+    }
+  ],
+  "output": null,
+  "style": "variable_blocks",
+  "tooltip": "AST -> Null value"
+}

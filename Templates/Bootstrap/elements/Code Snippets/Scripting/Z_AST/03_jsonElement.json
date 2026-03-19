@@ -1,0 +1,30 @@
+/*
+path: 03_jsonElement.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/03_jsonElement.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/03_jsonElement.json
+unique_id: DeeoyFFP
+name: js_json_element
+fullload: true
+*/
+{
+  "id": "js_json_element",
+  "message0": "JSON Element %1 : %2",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "KEY"
+    },
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "align": "RIGHT"
+    }
+  ],
+  "previousStatement": "js_json_element",
+  "nextStatement": "js_json_element",
+  "inputsInline": true,
+  "style": "variable_blocks",
+  "tooltip": "AST -> Element of an object in JSON format."
+}

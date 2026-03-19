@@ -1,0 +1,53 @@
+/*
+path: controls_for.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/B_Loops/controls_for.json
+keyPath: elements/Code Snippets/Scripting/B_Loops/controls_for.json
+unique_id: cEfpMfHP
+name: controls_for
+fullload: true
+*/
+{
+  "type": "controls_for",
+  "message0": "%{BKY_CONTROLS_FOR_TITLE}",
+  "args0": [
+    {
+      "type": "field_variable",
+      "name": "VAR",
+      "variable": null
+    },
+    {
+      "type": "input_value",
+      "name": "FROM",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "TO",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "BY",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "message1": "%{BKY_CONTROLS_REPEAT_INPUT_DO} %1",
+  "args1": [{
+    "type": "input_statement",
+    "name": "DO"
+  }],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "style": "loop_blocks",
+  "helpUrl": "%{BKY_CONTROLS_FOR_HELPURL}",
+  "extensions": [
+    "contextMenu_newGetVariableBlock",
+    "controls_for_tooltip"
+  ]
+}

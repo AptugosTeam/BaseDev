@@ -1,0 +1,22 @@
+/*
+path: groupByField.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Database/groupByField.source
+keyPath: elements/Code Snippets/Database/groupByField.source
+unique_id: dkMRWQtO
+name: js_groupbyfield
+fullload: true
+*/
+var table = Block.getFieldValue('SELECTEDFIELD')
+var output = `
+  .aggregate([{
+    $group: {
+      _id: '$Type',
+      total: {
+        $sum: 1,
+      },
+    },
+  }])
+`;
+return output

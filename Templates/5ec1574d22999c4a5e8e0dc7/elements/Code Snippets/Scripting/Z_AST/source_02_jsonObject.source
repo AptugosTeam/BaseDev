@@ -1,0 +1,13 @@
+/*
+path: source_02_jsonObject.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/source_02_jsonObject.source
+keyPath: elements/Code Snippets/Scripting/Z_AST/source_02_jsonObject.source
+unique_id: XJbVcz3c
+name: js_json_object
+fullload: true
+*/
+var elements = Blockly.JavaScript.statementToCode(Block, 'ELEMENTS')
+var code = '{' + (elements !== ''?'\n':'') + elements + '}'
+return [code, Blockly.JavaScript.ORDER_ATOMIC]

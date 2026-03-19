@@ -1,0 +1,24 @@
+/*
+path: text_create_join_container.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/D_Text/text_create_join_container.json
+keyPath: elements/Code Snippets/Scripting/D_Text/text_create_join_container.json
+unique_id: 2yDuRhbh
+name: text_create_join_container
+fullload: true
+*/
+{
+  "type": "text_create_join_container",
+  "message0": "%{BKY_TEXT_CREATE_JOIN_TITLE_JOIN} %1 %2",
+  "args0": [{
+    "type": "input_dummy"
+  },
+  {
+    "type": "input_statement",
+    "name": "STACK"
+  }],
+  "style": "text_blocks",
+  "tooltip": "%{BKY_TEXT_CREATE_JOIN_TOOLTIP}",
+  "enableContextMenu": false
+}

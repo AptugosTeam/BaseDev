@@ -1,0 +1,35 @@
+/*
+path: pickRandom.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Aptugo
+  Internal Use/Code Snippets/Operators/pickRandom.json
+keyPath: elements/Aptugo Internal Use/Code Snippets/Operators/pickRandom.json
+unique_id: Exkn97sD
+name: js_pick_random
+fullload: true
+*/
+{
+  "message0": "%1 Pick Random %2 to %3",
+  "args0": [
+    {
+      "type": "field_image",
+      "src": "media/js.svg",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "type": "input_value",
+      "name": "NUMBER",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "NUMBERTO",
+      "check": "Number"
+    }
+  ],
+  "output": "Number",
+  "colour": "#33515c",
+  "tooltip": "Returns a random number between two values",
+  "inputsInline": true
+}

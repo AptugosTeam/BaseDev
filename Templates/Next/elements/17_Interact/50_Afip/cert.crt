@@ -1,0 +1,8 @@
+/*
+path: cert
+completePath: >-
+  /Users/robrondon/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/elements/Experimental/Afip/cert
+keyPath: elements/Experimental/Afip/cert
+unique_id: 5WTvvKLG
+*/
+{{ insert_setting('Certificate') }}

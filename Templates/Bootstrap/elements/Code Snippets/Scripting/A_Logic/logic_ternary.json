@@ -1,0 +1,40 @@
+/*
+path: logic_ternary.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/A_Logic/logic_ternary.json
+keyPath: elements/Code Snippets/Scripting/A_Logic/logic_ternary.json
+unique_id: wbsg1cS1
+name: logic_ternary
+fullload: true
+*/
+{
+  "type": "logic_ternary",
+  "message0": "%{BKY_LOGIC_TERNARY_CONDITION} %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "IF",
+      "check": "Boolean"
+    }
+  ],
+  "message1": "%{BKY_LOGIC_TERNARY_IF_TRUE} %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "THEN"
+    }
+  ],
+  "message2": "%{BKY_LOGIC_TERNARY_IF_FALSE} %1",
+  "args2": [
+    {
+      "type": "input_value",
+      "name": "ELSE"
+    }
+  ],
+  "output": null,
+  "style": "logic_blocks",
+  "tooltip": "%{BKY_LOGIC_TERNARY_TOOLTIP}",
+  "helpUrl": "%{BKY_LOGIC_TERNARY_HELPURL}",
+  "extensions": ["logic_ternary"]
+}

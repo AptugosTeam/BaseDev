@@ -1,0 +1,11 @@
+/*
+path: .htaccess
+completePath: dist/.htaccess
+unique_id: RowQXGEs
+*/
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteRule ^ index.html [L]

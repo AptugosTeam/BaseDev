@@ -1,0 +1,36 @@
+/*
+path: dropdown.json
+completePath: Fields/dropdown.json
+unique_id: 8H1LaeTw
+*/
+{
+  "label": "Dropdown",
+  "value": "Dropdown",
+  "dataType": "String",
+  "initialValue": "",
+  "options": {
+    "frontEndType": "string",
+    "extra": [
+      {
+        "display": "Options",
+        "value": "options",
+        "type": "text"
+      },
+      {
+        "display": "Display",
+        "value": "displaytype",
+        "type": "select",
+        "options": [
+          {
+            "label": "Standard",
+            "value": "standard"
+          },
+          {
+            "label": "Button Group",
+            "value": "btngroup"
+          }
+        ]
+      }
+    ]
+  }
+}

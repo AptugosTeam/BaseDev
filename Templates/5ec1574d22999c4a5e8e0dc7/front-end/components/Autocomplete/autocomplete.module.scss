@@ -1,0 +1,30 @@
+/*
+path: autocomplete.module.scss
+completePath: front-end/components/Autocomplete/autocomplete.module.scss
+unique_id: gJ2B9fc6
+*/
+.autocomplete {
+  & .aptugoDropdown {
+    & :global(.aptugo__control) {
+      &:hover {
+        border-color: rgba(0, 0, 0, 0.87);
+      }
+    }
+
+    & :global(.aptugo__value-container) {
+      height: 54px;
+    }
+
+    & :global(.aptugo__menu) {
+      position: relative;
+      :global(.css-1nmdiq5-menu) {
+        position: relative !important;
+      }
+    }
+
+    & :global(.aptugo__control--is-focused) {
+      border-width: 0;
+      box-shadow: none;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+/*
+path: 04_undefinedValue.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/04_undefinedValue.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/04_undefinedValue.json
+unique_id: 5aeCnClm
+name: js_undefined_value
+fullload: true
+*/
+{
+  init: function() {
+    this.setStyle("variable_blocks")
+    this.appendDummyInput().appendField('undefined');
+    this.setOutput(true);
+    this.setTooltip("AST -> Undefined value.");
+  }
+}

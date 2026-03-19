@@ -1,0 +1,42 @@
+/*
+path: memberExpression.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/memberExpression.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/memberExpression.json
+unique_id: euEN0k2T
+name: js_member_expression
+fullload: true
+*/
+{
+  init: function() {
+    this.jsonInit({
+      "type": "js_member_expression",
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "MEMBER0"
+        }
+      ],
+      "style": "logic_blocks",
+      "helpUrl": "https://github.com/google/blockly/wiki/IfElse",
+      "mutator": "clone",
+      "output": null,
+      "previousStatement": null,
+      "nextStatement": null,
+      "inputsInline": true,
+      "tooltip": "AST -> Member expression.",
+      "mutatorConfig": {
+        "baseName": "MEMBER",
+        "sourceBlock": "MEMBER0",
+        "xmlAttrName": "members"
+      }
+    })
+    this.mutatorConfig = {
+      baseName: "MEMBER",
+      sourceBlock: "MEMBER0",
+      xmlAttrName: "members"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+/*
+path: text_charAt.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/D_Text/text_charAt.json
+keyPath: elements/Code Snippets/Scripting/D_Text/text_charAt.json
+unique_id: 8Wvrurw6
+name: text_charAt
+fullload: true
+*/
+{
+  "type": "text_charAt",
+  "message0": "%{BKY_TEXT_CHARAT_TITLE}",
+  "args0": [
+    {
+      "type":"input_value",
+      "name": "VALUE",
+      "check": "String"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "WHERE",
+      "options": [
+        ["%{BKY_TEXT_CHARAT_FROM_START}", "FROM_START"],
+        ["%{BKY_TEXT_CHARAT_FROM_END}", "FROM_END"],
+        ["%{BKY_TEXT_CHARAT_FIRST}", "FIRST"],
+        ["%{BKY_TEXT_CHARAT_LAST}", "LAST"],
+        ["%{BKY_TEXT_CHARAT_RANDOM}", "RANDOM"]
+      ]
+    }
+  ],
+  "output": "String",
+  "style": "text_blocks",
+  "helpUrl": "%{BKY_TEXT_CHARAT_HELPURL}",
+  "inputsInline": true,
+  "mutator": "text_charAt_mutator"
+}

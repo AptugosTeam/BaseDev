@@ -1,0 +1,123 @@
+/*
+path: 10_actionLookup.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Database/10_actionLookup.json
+keyPath: elements/Code Snippets/Database/10_actionLookup.json
+unique_id: EboyU72W
+name: actionLookup
+fullload: true
+*/
+{
+  init: function() {
+    this.jsonInit({
+      "type": "actionLookup",
+      "message0": "%2 Lookup %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "MODEL"
+        },
+        {
+          "type": "field_image",
+          "src": "media/js.svg",
+          "width": 16,
+          "height": 16
+        }
+      ],
+      "inputsInline": false,
+      "message1": "Match %1",
+      "args1": [
+        {
+          "type": "input_value",
+          "name": "LOCALFIELD"
+        }
+      ],
+      "message2": "Against %1",
+      "args2": [
+        {
+          "type": "input_value",
+          "name": "FOREIGNFIELD"
+        }
+      ],
+      "message3": "As %1",
+      "args3": [
+        {
+          "type": "field_input",
+          "name": "AS"
+        }
+      ],
+      "output": "modelAction",
+      "tooltip": "Database -> Prepares table data to be worked with",
+      // "extensions": ["get_tables_list", "get_fields_list", "get_parent_fields_list"]
+    })
+    this.fieldsFieldName = 'FOREIGNFIELD'
+    this.tablesFieldName = 'MODEL'
+    this.parentFieldsFieldName = 'LOCALFIELD'
+    this.updateShape_()
+  },
+  updateShape_: function() {
+    var ModelConnection = this.getInput('MODEL').connection
+    var otherConnectionA
+    if (ModelConnection.isConnected()) {
+      var otherBlock = ModelConnection.targetConnection.getSourceBlock()
+      if (otherBlock.isShadow()) {
+        connection.setShadowDom(null)
+        otherBlock.dispose(false)
+      } else {
+        otherConnectionA = connection.targetConnection;
+      }
+    }
+
+    var dom = _globalBlockly.Xml.textToDom('<xml><shadow type="Model"></shadow></xml>')
+    dom = dom.children[0]
+    ModelConnection.setShadowDom(dom)
+    ModelConnection.respawnShadow_()
+
+    if (otherConnectionA) {
+      connection.connect(otherConnectionA);
+    }
+
+    var LocalFieldConnection = this.getInput('LOCALFIELD').connection
+    var otherConnectionB
+    if (LocalFieldConnection.isConnected()) {
+      var otherBlock = LocalFieldConnection.targetConnection.getSourceBlock()
+      if (otherBlock.isShadow()) {
+        connection.setShadowDom(null)
+        otherBlock.dispose(false)
+      } else {
+        otherConnectionB = connection.targetConnection;
+      }
+    }
+
+    var dom = _globalBlockly.Xml.textToDom('<xml><shadow type="Field"></shadow></xml>')
+    dom = dom.children[0]
+    LocalFieldConnection.setShadowDom(dom)
+    LocalFieldConnection.respawnShadow_()
+
+    if (otherConnectionB) {
+      connection.connect(otherConnectionB);
+    }
+
+    var ForeignFieldConnection = this.getInput('FOREIGNFIELD').connection
+    var otherConnectionC
+    if (ForeignFieldConnection.isConnected()) {
+      var otherBlock = ForeignFieldConnection.targetConnection.getSourceBlock()
+      if (otherBlock.isShadow()) {
+        connection.setShadowDom(null)
+        otherBlock.dispose(false)
+      } else {
+        otherConnectionC = connection.targetConnection;
+      }
+    }
+
+    var dom = _globalBlockly.Xml.textToDom('<xml><shadow type="Field"></shadow></xml>')
+    dom = dom.children[0]
+    ForeignFieldConnection.setShadowDom(dom)
+    ForeignFieldConnection.respawnShadow_()
+
+    if (otherConnectionC) {
+      connection.connect(otherConnectionC);
+    }
+  }
+}

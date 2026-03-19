@@ -1,0 +1,22 @@
+/*
+path: returnStatement.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/returnStatement.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/returnStatement.json
+unique_id: detCoGtM
+name: js_return_statement
+fullload: true
+*/
+{
+  "message0": "Return %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "VALUE"
+    }
+  ],
+  "colour": 220,
+  "previousStatement": null,
+  "tooltip": "Function returns the value of input."
+}

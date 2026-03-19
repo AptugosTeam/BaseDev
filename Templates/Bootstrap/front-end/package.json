@@ -1,0 +1,42 @@
+/*
+path: package.json
+completePath: >-
+  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/Bootstrap/front-end/package.json
+keyPath: front-end/package.json
+unique_id: brgFrn7W
+*/
+{
+  "name": "nexttest",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 8080",
+    "build": "next build",
+    "start": "next start -p 8080",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.14",
+    "@heroicons/react": "^2.0.17",
+    "@types/node": "18.15.11",
+    "@types/react": "18.0.35",
+    "@types/react-dom": "18.0.11",
+    "autoprefixer": "10.4.14",
+    "bootstrap": "^5.2.3",
+    "eslint": "8.38.0",
+    "eslint-config-next": "13.3.0",
+    "loader-utils": "^3.2.1",
+    "next": "13.3.0",
+    "postcss": "8.4.22",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "3.3.1",
+    {{ insert_setting('Packages') | raw }}
+    "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "heroicons": "^2.0.17",
+    {{ insert_setting('DevPackages') | raw }}
+    "sass": "^1.62.0"
+  }
+}

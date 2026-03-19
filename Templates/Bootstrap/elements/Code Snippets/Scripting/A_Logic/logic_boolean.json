@@ -1,0 +1,28 @@
+/*
+path: logic_boolean.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/A_Logic/logic_boolean.json
+keyPath: elements/Code Snippets/Scripting/A_Logic/logic_boolean.json
+unique_id: sSTPHHzW
+name: logic_boolean
+fullload: true
+*/
+{
+  "type": "logic_boolean",
+  "message0": "%1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "BOOL",
+      "options": [
+        ["%{BKY_LOGIC_BOOLEAN_TRUE}", "TRUE"],
+        ["%{BKY_LOGIC_BOOLEAN_FALSE}", "FALSE"]
+      ]
+    }
+  ],
+  "output": "Boolean",
+  "style": "logic_blocks",
+  "tooltip": "%{BKY_LOGIC_BOOLEAN_TOOLTIP}",
+  "helpUrl": "%{BKY_LOGIC_BOOLEAN_HELPURL}"
+}

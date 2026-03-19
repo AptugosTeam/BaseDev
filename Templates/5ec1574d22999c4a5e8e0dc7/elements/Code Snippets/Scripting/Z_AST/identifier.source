@@ -1,0 +1,15 @@
+/*
+path: identifier.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Basic/identifier.source
+keyPath: elements/Code Snippets/Basic/identifier.source
+unique_id: 4yTlNMEq
+name: js_identifier
+fullload: true
+*/
+if (Block.outputConnection) {
+  return [Block.getFieldValue('NAME'), Blockly.JavaScript.ORDER_ATOMIC];
+} else {
+  return Block.getFieldValue('NAME')
+}

@@ -1,0 +1,77 @@
+/*
+path: minimum.module.scss
+completePath: front-end/components/Themes/minimum.module.scss
+unique_id: E3v9GDNm
+*/
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+$color1: hsl(209, 36%, 86%);
+$color2: hsl(224, 44%, 95%);
+$color3: rgb(202, 216, 228);
+
+.pages {
+  min-height: 100vh;
+  margin: 0;
+  background-attachment: fixed;
+  background-color: rgba(53, 49, 60, 0.75);
+  background-size: 100vw 100vh;
+  background-image: radial-gradient(50% 50% at 50% 50%, rgb(60 49 49 / 75%) 0%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(180deg, rgb(51 55 58) 0%, hsl(240, 13%, 31%) 15%, hsl(224deg 4.63% 19.75%) 50%);
+  display: flex;
+  flex-direction: row;
+
+  & .mainarea {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    & .bigHello {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+
+      & h1 {
+        font-family: 'Bebas Neue';
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 12rem;
+        margin: 5rem 0 0;
+        letter-spacing: 12px;
+        font-weight: 700;
+        color: #f5f5f5;
+        text-shadow: 1px 1px 1px #919191, 1px 2px 1px #919191, 1px 3px 1px #919191, 1px 4px 1px #919191, 1px 10px 1px #919191,
+          1px 18px 6px rgba(16, 16, 16, 0.4), 1px 22px 10px rgba(13, 16, 16, 0.2), 1px 22px 15px rgba(16, 16, 16, 0.2),
+          16px 30px 40px rgba(16, 16, 16, 0.4);
+      }
+
+      & :global(p.MuiTypography-root) {
+        color: #f5f5f5;
+        text-transform: uppercase;
+        /* width: 28.5rem; */
+        letter-spacing: 0.4rem;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+
+      & span {
+        text-align: center;
+        color: rgba(240, 240, 240, 0.5);
+        font-size: 1rem;
+        text-transform: lowercase;
+      }
+    }
+
+    & .tableHeading {
+      padding: 1rem;
+      color: var(--white-color);
+      background-color: var(--dark-color);
+    }
+
+    & :global(.MuiContainer-root) {
+      flex-grow: 1;
+      background-color: var(--dark-color);
+    }
+  }
+}

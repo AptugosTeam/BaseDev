@@ -1,0 +1,44 @@
+/*
+path: 08_ArrayExpression.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/08_ArrayExpression.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/08_ArrayExpression.json
+unique_id: nwJpSHvU
+name: js_array_expression
+fullload: true
+*/
+{
+  init: function() {
+    this.jsonInit({
+      "type": "js_array_expression",
+      "message0": "Array: %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "ARGUMENT0"
+        }
+      ],
+      "mutator": "clone",
+      "inputsInline": false,
+      "tooltip": "AST -> Array Expression",
+      "helpUrl": "",
+      "output": null,
+      "style": "loop_blocks",
+      "previousStatement": null,
+      "nextStatement": null,
+      "mutatorConfig": {
+        "baseName": "ARGUMENT",
+        "sourceBlock": "ARGUMENT0",
+        "xmlAttrName": "arguments"
+      }
+    })
+    this.mutatorConfig = {
+      baseName: "ARGUMENT",
+      sourceBlock: "ARGUMENT0",
+      xmlAttrName: "arguments",
+      mutatorContainer: "js_array_expression_container",
+      mutatorArgument: "js_array_expression_element",
+    }
+  }
+}

@@ -1,0 +1,9 @@
+/*
+path: robots.txt
+completePath: /Users/Shared/Dev/BaseDev/Templates/Next/public/robots.txt
+keyPath: public/robots.txt
+unique_id: 6spHWQKM
+*/
+User-Agent: *
+Allow: /
+Disallow: /private/

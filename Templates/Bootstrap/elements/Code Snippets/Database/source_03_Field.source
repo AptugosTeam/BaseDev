@@ -1,0 +1,15 @@
+/*
+path: source_03_Field.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Database/source_03_Field.source
+keyPath: elements/Code Snippets/Database/source_03_Field.source
+unique_id: cP8bc2fa
+name: Field
+fullload: true
+*/
+if (Block.outputConnection) {
+  return [Block.getFieldValue('FIELD'), Blockly.JavaScript.ORDER_MEMBER];
+} else {
+  return Block.getFieldValue('FIELD')
+}

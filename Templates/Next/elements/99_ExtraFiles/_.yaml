@@ -1,0 +1,7 @@
+path: ExtraFiles
+completePath: elements/ExtraFiles
+type: folder
+unique_id: extraFiles
+open: true
+internalUse: true
+order: 99

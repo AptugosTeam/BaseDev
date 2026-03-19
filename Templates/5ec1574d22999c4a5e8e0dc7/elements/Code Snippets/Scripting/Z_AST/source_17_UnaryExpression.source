@@ -1,0 +1,19 @@
+/*
+path: source_17_UnaryExpression.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/source_17_UnaryExpression.source
+keyPath: elements/Code Snippets/Scripting/Z_AST/source_17_UnaryExpression.source
+unique_id: AvVLf515
+name: js_unary_expression
+fullload: true
+*/
+var operator = Block.getFieldValue('OPERATOR')
+var argument = Blockly.JavaScript.valueToCode(Block, 'ARGUMENT', Blockly.JavaScript.ORDER_ASSIGNMENT)
+var code = operator + ' ' + argument;
+
+if (Block.outputConnection) {
+  return [code, Blockly.JavaScript.ORDER_UNARY_NEGATION]
+} else {
+  return code + ';\n';
+}

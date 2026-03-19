@@ -1,0 +1,32 @@
+/*
+path: sidebar.module.scss
+completePath: front-end/components/Sidebar/sidebar.module.scss
+unique_id: CL5VFILG
+*/
+.drawer {
+  flex-shrink: 0;
+  white-space: 'nowrap';
+
+  &:global(.MuiPaper-root) {
+    color: var(--palette-primary-300);
+
+    & :global(.active) {
+      background-color: var(--palette-primary-600);
+      border-right: 2px solid var(--palette-primary-900);
+      color: var(--palette-primary-100);
+      display:block;
+    }
+  }
+}
+
+.drawerOpen {
+  @extend .drawer;
+  width: 15rem;
+  transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+
+.drawerClose {
+  overflow-x: hidden;
+  transition: width 195ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+  width: 57px;
+}

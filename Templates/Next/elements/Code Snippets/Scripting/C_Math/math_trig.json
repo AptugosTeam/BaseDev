@@ -1,0 +1,37 @@
+/*
+path: math_trig.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/C_Math/math_trig.json
+keyPath: elements/Code Snippets/Scripting/C_Math/math_trig.json
+unique_id: 7SacVZXM
+name: math_trig
+fullload: true
+*/
+{
+  "type": "math_trig",
+  "message0": "%1 %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "OP",
+      "options": [
+        ["%{BKY_MATH_TRIG_SIN}", "SIN"],
+        ["%{BKY_MATH_TRIG_COS}", "COS"],
+        ["%{BKY_MATH_TRIG_TAN}", "TAN"],
+        ["%{BKY_MATH_TRIG_ASIN}", "ASIN"],
+        ["%{BKY_MATH_TRIG_ACOS}", "ACOS"],
+        ["%{BKY_MATH_TRIG_ATAN}", "ATAN"]
+      ]
+    },
+    {
+      "type": "input_value",
+      "name": "NUM",
+      "check": "Number"
+    }
+  ],
+  "output": "Number",
+  "style": "math_blocks",
+  "helpUrl": "%{BKY_MATH_TRIG_HELPURL}",
+  "extensions": ["math_op_tooltip"]
+}

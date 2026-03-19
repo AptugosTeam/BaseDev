@@ -1,0 +1,24 @@
+/*
+path: 17_UnaryExpression.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/17_UnaryExpression.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/17_UnaryExpression.json
+unique_id: fD5tprw8
+name: js_unary_expression
+fullload: true
+*/
+{
+  init: function() {
+    var OPERATORS = [
+      ['+', '+'],
+      ['-', '-']
+    ];
+    this.setColour(230);
+    this.setOutput(true);
+    this.appendValueInput('ARGUMENT')
+      .appendField(new _globalBlockly.FieldDropdown(OPERATORS), 'OPERATOR')
+      .setAlign(_globalBlockly.ALIGN_RIGHT);
+    this.setTooltip('Unary expression.');
+  }
+}

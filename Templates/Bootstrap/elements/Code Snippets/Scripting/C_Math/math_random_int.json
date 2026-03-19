@@ -1,0 +1,31 @@
+/*
+path: math_random_int.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/C_Math/math_random_int.json
+keyPath: elements/Code Snippets/Scripting/C_Math/math_random_int.json
+unique_id: JmL7WDSv
+name: math_random_int
+fullload: true
+*/
+{
+  "type": "math_random_int",
+  "message0": "%{BKY_MATH_RANDOM_INT_TITLE}",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "FROM",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "TO",
+      "check": "Number"
+    }
+  ],
+  "inputsInline": true,
+  "output": "Number",
+  "style": "math_blocks",
+  "tooltip": "%{BKY_MATH_RANDOM_INT_TOOLTIP}",
+  "helpUrl": "%{BKY_MATH_RANDOM_INT_HELPURL}"
+}

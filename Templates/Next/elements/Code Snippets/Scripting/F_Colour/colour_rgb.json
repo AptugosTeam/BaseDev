@@ -1,0 +1,38 @@
+/*
+path: colour_rgb.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/F_Colour/colour_rgb.json
+keyPath: elements/Code Snippets/Scripting/F_Colour/colour_rgb.json
+unique_id: 2gshoC9n
+name: colour_rgb
+fullload: true
+*/
+{
+  "type": "colour_rgb",
+  "message0": "%{BKY_COLOUR_RGB_TITLE} %{BKY_COLOUR_RGB_RED} %1 %{BKY_COLOUR_RGB_GREEN} %2 %{BKY_COLOUR_RGB_BLUE} %3",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "RED",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "GREEN",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "BLUE",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "output": "Colour",
+  "helpUrl": "%{BKY_COLOUR_RGB_HELPURL}",
+  "style": "colour_blocks",
+  "tooltip": "%{BKY_COLOUR_RGB_TOOLTIP}"
+}

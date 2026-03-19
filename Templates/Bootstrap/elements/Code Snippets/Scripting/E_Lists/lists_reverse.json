@@ -1,0 +1,26 @@
+/*
+path: lists_reverse.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/E_Lists/lists_reverse.json
+keyPath: elements/Code Snippets/Scripting/E_Lists/lists_reverse.json
+unique_id: 17X9z0Nb
+name: lists_reverse
+fullload: true
+*/
+{
+  "type": "lists_reverse",
+  "message0": "%{BKY_LISTS_REVERSE_MESSAGE0}",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "LIST",
+      "check": "Array"
+    }
+  ],
+  "output": "Array",
+  "inputsInline": true,
+  "style": "list_blocks",
+  "tooltip": "%{BKY_LISTS_REVERSE_TOOLTIP}",
+  "helpUrl": "%{BKY_LISTS_REVERSE_HELPURL}"
+}

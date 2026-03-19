@@ -1,0 +1,7 @@
+path: Assets
+name: Assets Management
+completePath: Games/Assets
+type: folder
+unique_id: assetsgames
+open: true
+order: 10

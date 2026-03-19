@@ -1,0 +1,12 @@
+/*
+path: Datetime.json
+completePath: Fields/Datetime.json
+unique_id: HRTcaQa2
+*/
+{
+  "label": "Date-Time",
+  "value": "Datetime",
+  "dataType": "Date",
+  "initialValue": "",
+  "options": ""
+}

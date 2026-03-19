@@ -1,0 +1,27 @@
+/*
+path: number.json
+completePath: Fields/number.json
+unique_id: 5wQBTRfF
+*/
+{
+  "label": "Number",
+  "value": "Number",
+  "dataType": "Number",
+  "initialValue": "",
+  "options": {
+    "extra": [
+      {
+        "display": "Default Value",
+        "value": "defaultValue",
+        "type": "text"
+      }
+    ],
+    "validations": [
+      {
+        "display": "Auto increment",
+        "value": "autoincrement",
+        "type": "checkbox"
+      }
+    ]
+  }
+}

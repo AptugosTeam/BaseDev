@@ -1,0 +1,12 @@
+/*
+path: PhoneNumber.json
+completePath: Fields/PhoneNumber.json
+unique_id: fIWMK09RR
+*/
+{
+  "label": "Phone Number",
+  "value": "PhoneNumber",
+  "dataType": "String",
+  "initialValue": "",
+  "options": null
+}

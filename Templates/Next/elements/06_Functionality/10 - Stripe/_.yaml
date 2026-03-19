@@ -1,0 +1,8 @@
+path: Stripe
+completePath: elements/Experimental/Stripe
+type: folder
+unique_id: stripefolder
+open: true
+order: 10
+name: Payments - Stripe
+

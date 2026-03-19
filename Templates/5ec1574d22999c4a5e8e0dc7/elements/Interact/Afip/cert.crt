@@ -1,0 +1,6 @@
+/*
+path: cert
+keyPath: elements/Experimental/Afip/cert
+unique_id: 5WTvvKLG
+*/
+{{ insert_setting('Certificate') }}

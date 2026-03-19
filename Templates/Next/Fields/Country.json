@@ -1,0 +1,12 @@
+/*
+path: Country.json
+completePath: Fields/Country.json
+unique_id: fIWMK09D
+*/
+{
+  "label": "Country",
+  "value": "Country",
+  "dataType": "String",
+  "initialValue": "",
+  "options": null
+}

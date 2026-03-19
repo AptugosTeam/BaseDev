@@ -1,0 +1,11 @@
+/*
+path: source_01_testShadow.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Database/source_01_testShadow.source
+keyPath: elements/Code Snippets/Database/source_01_testShadow.source
+unique_id: F024k4pX
+name: testShadow
+fullload: true
+*/
+return 'hello'

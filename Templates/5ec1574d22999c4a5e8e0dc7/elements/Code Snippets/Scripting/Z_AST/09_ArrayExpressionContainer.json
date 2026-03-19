@@ -1,0 +1,20 @@
+/*
+path: 09_ArrayExpressionContainer.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/09_ArrayExpressionContainer.json
+keyPath: elements/Code Snippets/Scripting/Z_AST/09_ArrayExpressionContainer.json
+unique_id: T3u428Bg
+name: js_array_expression_container
+fullload: true
+*/
+{
+  init: function() {
+  this.setColour(240);
+  this.appendDummyInput()
+      .appendField("array");
+  this.appendStatementInput('STACK');
+  this.setTooltip("Add, remove or reorder elements of the array.");
+  this.contextMenu = false;
+  }
+}

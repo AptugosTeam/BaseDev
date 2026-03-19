@@ -1,0 +1,54 @@
+/*
+path: binaryExpression.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Basic/binaryExpression.json
+keyPath: elements/Code Snippets/Basic/binaryExpression.json
+unique_id: AhBTRy3I
+name: js_binary_expression
+fullload: true
+*/
+{
+  "id": "js_binary_expression",
+  "message0": "%1 %2 %3",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "LEFT"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "OPERATOR",
+      "options": [
+        ["+", "+"],
+        ["-", "-"],
+        ["*", "*"],
+        ["/", "/"],
+        ["%", "%"],
+        ["==", "=="],
+        ["!=", "!="],
+        [">", ">"],
+        ["<", "<"],
+        [">=", ">="],
+        ["<=", "<="],
+        ["===", "==="],
+        ["!==", "!=="],
+        ["&", "&"],
+        ["^", "^"],
+        ["|", "|"],
+        [">>", ">>"],
+        ["<<", "<<"],
+        [">>>", ">>>"]
+      ]
+    },
+    {
+      "type": "input_value",
+      "name": "RIGHT",
+      "align": "RIGHT"
+    }
+  ],
+  "colour": 230,
+  "output": null,
+  "inputsInline": true,
+  "tooltip": "Binary expression."
+}

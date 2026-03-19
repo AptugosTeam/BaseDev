@@ -1,0 +1,25 @@
+/*
+path: lists_isEmpty.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/E_Lists/lists_isEmpty.json
+keyPath: elements/Code Snippets/Scripting/E_Lists/lists_isEmpty.json
+unique_id: AEU8flR8
+name: lists_isEmpty
+fullload: true
+*/
+{
+  "type": "lists_isEmpty",
+  "message0": "%{BKY_LISTS_ISEMPTY_TITLE}",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "check": ["String", "Array"]
+    }
+  ],
+  "output": "Boolean",
+  "style": "list_blocks",
+  "tooltip": "%{BKY_LISTS_ISEMPTY_TOOLTIP}",
+  "helpUrl": "%{BKY_LISTS_ISEMPTY_HELPURL}"
+}

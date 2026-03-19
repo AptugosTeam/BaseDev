@@ -1,0 +1,12 @@
+/*
+path: Rating.json
+completePath: Fields/Rating.json
+unique_id: kkD3vAUs
+*/
+{
+  "label": "Rating",
+  "value": "Rating",
+  "dataType": "Number",
+  "initialValue": "",
+  "options": null
+}

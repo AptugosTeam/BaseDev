@@ -1,0 +1,21 @@
+/*
+path: Url.json
+completePath: Fields/Url.json
+unique_id: hTWaRbOr
+*/
+{
+  "label": "URL",
+  "value": "Url",
+  "dataType": "String",
+  "initialValue": "",
+  "options": {
+    "frontEndType": "string",
+    "extra": [
+      {
+        "display": "Prepend",
+        "value": "prepend",
+        "type": "text"
+      }
+    ]
+  }
+}

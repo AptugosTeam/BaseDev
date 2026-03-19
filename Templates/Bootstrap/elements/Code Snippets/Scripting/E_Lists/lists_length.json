@@ -1,0 +1,25 @@
+/*
+path: lists_length.json
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/E_Lists/lists_length.json
+keyPath: elements/Code Snippets/Scripting/E_Lists/lists_length.json
+unique_id: MbIs6ZKl
+name: lists_length
+fullload: true
+*/
+{
+  "type": "lists_length",
+  "message0": "%{BKY_LISTS_LENGTH_TITLE}",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "VALUE",
+      "check": ["String", "Array"]
+    }
+  ],
+  "output": "Number",
+  "style": "list_blocks",
+  "tooltip": "%{BKY_LISTS_LENGTH_TOOLTIP}",
+  "helpUrl": "%{BKY_LISTS_LENGTH_HELPURL}"
+}

@@ -1,0 +1,21 @@
+/*
+path: File.json
+completePath: Fields/File.json
+unique_id: LleJ843P
+*/
+{
+  "label": "File",
+  "value": "File",
+  "dataType": "String",
+  "initialValue": "",
+  "options": {
+    "frontEndType": "string",
+    "extra": [
+      {
+        "display": "File extensions",
+        "value": "filetype",
+        "type": "text"
+      }
+    ]
+  }
+}

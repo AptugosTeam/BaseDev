@@ -1,0 +1,12 @@
+/*
+path: source_16_literal.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Scripting/Z_AST/source_16_literal.source
+keyPath: elements/Code Snippets/Scripting/Z_AST/source_16_literal.source
+unique_id: ZgQ8mUGb
+name: js_literal
+fullload: true
+*/
+console.log('<<<<< Block', Block)
+return 'aca'

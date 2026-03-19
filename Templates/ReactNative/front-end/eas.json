@@ -1,0 +1,27 @@
+/*
+path: eas.json
+completePath: /Users/Shared/Dev/BaseDev/Templates/ReactNative/front-end/eas.json
+keyPath: front-end/eas.json
+unique_id: 2Tz8lLnN
+*/
+{
+  "cli": {
+    "version": ">= 16.19.3",
+    "appVersionSource": "local"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {
+      "autoIncrement": false
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

@@ -1,0 +1,21 @@
+/*
+path: brindData.source
+completePath: >-
+  /Users/gaston/Aptugo/templates/5ec1574d22999c4a5e8e0dc7/elements/Code
+  Snippets/Database/brindData.source
+keyPath: elements/Code Snippets/Database/brindData.source
+unique_id: dkM4UQtO
+name: js_bringData
+fullload: true
+*/
+var tableID = Block.getFieldValue('SELECTEDTABLE')
+var table = Aptugo.activeApplication.tables.find(table => table.unique_id === tableID)
+var tableName = table.name
+var thenCode = Blockly.JavaScript.statementToCode(Block, 'THEN')
+var output = `
+  const ${tableName}Model = require('../models/${tableName}.model')
+  ${tableName}Model${thenCode}.then(result => {
+    res.send(result)
+  })
+`;
+return output
