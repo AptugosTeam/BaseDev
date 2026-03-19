@@ -1,0 +1,55 @@
+{
+  "_id": "updateelementstructure",
+  "name": "Update Element",
+  "desc": "Updates an existing element",
+  "icon": "",
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "Element",
+      "display": "Element unique ID",
+      "type": "text"
+    },
+    {
+      "name": "Name",
+      "display": "Element name",
+      "type": "text"
+    },
+    {
+      "name": "Path",
+      "display": "Element path",
+      "type": "text"
+    },
+    {
+      "name": "Value",
+      "display": "Element value",
+      "type": "text"
+    },
+    {
+      "name": "Parent",
+      "display": "New parent unique ID",
+      "type": "text"
+    },
+    {
+      "name": "ChildOrder",
+      "display": "Child order position",
+      "type": "number"
+    },
+    {
+      "name": "Cascades",
+      "display": "Cascades",
+      "type": "boolean"
+    },
+    {
+      "name": "Prevent_delete",
+      "display": "Prevent delete",
+      "type": "boolean"
+    },
+    {
+      "name": "Values",
+      "display": "Full values object",
+      "type": "code"
+    }
+  ],
+  "afterRun": ""
+}

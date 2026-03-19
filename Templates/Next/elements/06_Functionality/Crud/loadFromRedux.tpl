@@ -6,20 +6,33 @@ type: file
 unique_id: 2uzdPTtK
 icon: ico-load-redux
 sourceType: javascript
+helpText: >
+  Loads data from a database table into the UI.
+
+  Use this element when:
+  - You need to display a list of records
+  - You need to search/filter data
+  - You need pagination or sorting
+  - You want reactive data updates
+
+  Do NOT use this for:
+  - Static data
+  - Local state only
 calculatedName: >-
   function (ele) { 
     try {
       const tblname = aptugo.store.getState().application.tables.find(tbl => tbl.unique_id === ele.values.data).name
-      const calc = 'Load ' + tblname + ' from database'
+      const calc = 'Fetch data from database table: ' + tblname
       return calc
     } catch(e) {
       return ele.name
     }
   }
 options:
-  - name: tableOrData
-    display: Data
+  - name: table
+    display: Database Table
     type: dropdown
+    helpText: The database table unique_id, this element goes as a child of the PH element
     options: >-
       return aptugo.store.getState().application.tables.map(({ unique_id, name
       }) => [unique_id, name])
@@ -33,10 +46,10 @@ options:
         aptugo.variables.setPageVariable(page, element.unique_id, { [tableInfo.name]: fields });
       aptugoOnLoad: |-
         const element = arguments[0];
-        if ( element.values.tableOrData ) {
+        if ( element.values.table ) {
           const varsToAdd = {};
           const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;
-          const tableInfo = aptugo.store.getState().application.tables.find(table => table.unique_id === element.values.tableOrData )
+          const tableInfo = aptugo.store.getState().application.tables.find(table => table.unique_id === element.values.table )
           const tableFields = tableInfo.fields;
           tableFields.forEach(tableField => { varsToAdd[tableField.column_name] = 'String' });
           const finalVarsToAdd = {
@@ -135,27 +148,19 @@ children: []
 {% if data %}
   {% set table = data | tableData %}
 {% else %}
-  {% if element.values.tableOrData is not empty %}
-    {% set table = element.values.tableOrData | tableData %}
+  {% if element.values.table is not empty %}
+    {% set table = element.values.table | tableData %}
   {% elseif element.values.data is not empty %}
     {% set table = element.values.data | tableData %}
   {% endif %}
 {% endif %}
-
 {% set tableName = table.name | friendly | lower %}
 {% set singleName = table.singleName | friendly | lower %}
 {% set innervarname = table.name | friendly %}
 {% if element.name != 'loadFromDatabase' %}{% set innervarname = element.name | friendly %}{% endif %}
 {% set varName = element.values.variableName|default(singleName ~ 'data') %}
 {% if element.values.singleResult %}{% set varName = '[' ~ varName ~ '] = []' %}{% endif %}
-{% if element.values.loadWhenSiteLoads %}
-  {# Special method to load on page load #}
-  {% set goesToIndex %}
-    import { load{{ table.name | friendly | capitalize }} } from './store/actions/{{ table.name | friendly | lower }}Actions'
-    store.dispatch(load{{ table.name | friendly | capitalize }}({ limit: 500 }))
-  {% endset %}
-  {{ add_setting('IndexPreAdd', goesToIndex)}}
-{% else %}
+
   {# Standard usage #}
   {% set bpr %}
     import { use{{ tableName }}Pages } from "@lib/{{ tableName }}";
@@ -202,4 +207,3 @@ React.useEffect(() => {
   }
 }, [{{ varName }}])
   {% endif %}
-{% endif %}

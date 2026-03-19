@@ -4,6 +4,37 @@
   "desc": "",
   "icon": "",
   "type": "structure",
-  "parameters": "",
+  "parameters": [
+    {
+      "name": "name",
+      "display": "Name of the new page",
+      "type": "text"
+    },
+    {
+      "name": "parentPage",
+      "display": "Unique ID of the parent page",
+      "type": "text"
+    },
+    {
+      "name": "path",
+      "display": "Page path",
+      "type": "text"
+    },
+    {
+      "name": "filename",
+      "display": "Filename",
+      "type": "text"
+    },
+    {
+      "name": "unique_id",
+      "display": "Unique page ID",
+      "type": "text"
+    },
+    {
+      "name": "pageTemplate",
+      "display": "Page template structure",
+      "type": "text"
+    }
+  ],
   "afterRun": ""
 }

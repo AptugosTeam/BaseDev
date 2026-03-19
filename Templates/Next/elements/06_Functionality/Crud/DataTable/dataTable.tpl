@@ -21,6 +21,8 @@ options:
   - name: table
     display: Table
     type: dropdown
+    required: true
+    helpText: Containst the unique_id of the table associated with this table
     options: >-
       return [['useVar','Use a
       variable'],...aptugo.store.getState().application.tables.map(({ unique_id,name }) => [unique_id, name])]

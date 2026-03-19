@@ -6,7 +6,7 @@ icon: ico-function2
 sourceType: javascript
 holder: true
 order: 5
-helpText: Prepares a function to be called by other components and actions
+helpText: Prepares a function to be called by other components and actions. This element usually goes as a child of the PH element
 options:
   - name: functionName
     display: Function Name

@@ -1,6 +1,6 @@
 {
-  "_id": "returnsource",
-  "name": "Return Source",
+  "_id": "browsetheweb",
+  "name": "Browse The Web",
   "__v": 0,
   "desc": "Browses to a specific URL and returns the source code",
   "icon": "icon.png",

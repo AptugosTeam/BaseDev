@@ -4,6 +4,10 @@
   "desc": "",
   "icon": "",
   "type": "structure",
-  "parameters": "",
+  "parameters": [{
+    "name": "id",
+    "display": "Asset ID to remove",
+    "type": "text"
+  }],
   "afterRun": ""
 }

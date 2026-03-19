@@ -11,8 +11,6 @@ if (Parameters.file) {
   file = aptugo.readFile(Parameters.path)
 }
 
-console.log('saving file contents:', file)
-
 const fileName = `${newAsset.id}_${Parameters.path}`;
 const filePath = aptugo.join(aptugo.apps._getAppDropsFolder(Parameters.app), fileName);
 console.log('saving file to:', filePath);

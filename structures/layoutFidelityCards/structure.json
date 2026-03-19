@@ -4,6 +4,7 @@
   "desc": "",
   "icon": "icon.png",
   "type": "layout",
+  "isActive": false,
   "parameters": "",
   "afterRun": ""
 }

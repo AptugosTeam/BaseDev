@@ -3,6 +3,7 @@ path: themeSelection.tpl
 type: file
 unique_id: rtGqPUwH
 icon: ico-theme-selection
+helpText: Use this element when the goal is to apply a pre-built theme, load a stylesheet asset, attach existing CSS/SCSS styling, merge an asset stylesheet with a theme, or configure page/theme-level visual styling. Prefer this over manual style imports when the desired result is theme or stylesheet loading rather than custom component styling.
 options:
   - name: primaryColor
     display: Primary Color
@@ -15,6 +16,7 @@ options:
     options: website;whatsapp;layout;crm;minimum;newMinimum;prototyping;lite
   - name: useAsset
     display: Use an Asset
+    helpText: Use the id of the asset to load instead of a pre-made theme
     type: dropdown
     options: >-
       return [['none', 'none'],
@@ -23,6 +25,7 @@ options:
   - name: merge
     display: Merge with theme
     type: checkbox
+    helpText: When merging with theme, the stylesheet extends theme definitions instead of replacing
     settings:
       propertyCondition: useAsset
       denyCondition: 'none'
@@ -33,7 +36,6 @@ options:
 sourceType: javascript
 children: []
 */
-// Theme selection
 {% if element.values.primaryColor %}
   {% set bpr %}
     import { {{ element.values.primaryColor }} } from '@mui/material/colors'

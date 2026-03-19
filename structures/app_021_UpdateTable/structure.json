@@ -1,0 +1,63 @@
+{
+  "_id": "updatetablestructure",
+  "name": "Modify Table",
+  "desc": "Modify an existing table with a single action per execution",
+  "icon": "",
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "Table",
+      "display": "Table unique_id or name to modify",
+      "type": "text"
+    },
+    {
+      "name": "Action",
+      "display": "Action to execute",
+      "type": "dropdown",
+      "options": "renametable;addfield;updatefield;removefield;updatetableprops"
+    },
+
+    {
+      "name": "SingleName",
+      "display": "New single name for the table records",
+      "type": "text"
+    },
+    {
+      "name": "Name",
+      "display": "New table name",
+      "type": "text"
+    },
+    {
+      "name": "Field",
+      "display": "Field unique_id or column_name to update/remove",
+      "type": "text"
+    },
+    {
+      "name": "ColumnName",
+      "display": "Field column name",
+      "type": "text"
+    },
+    {
+      "name": "Value",
+      "display": "Field Value from the available values",
+      "type": "text"
+    },
+    {
+      "name": "FieldPayload",
+      "display": "JSON object with full field data for add/update",
+      "type": "text"
+    },
+
+    {
+      "name": "Lowercase",
+      "display": "Set lowercase flag",
+      "type": "checkbox"
+    },
+    {
+      "name": "Subtype",
+      "display": "Set table subtype",
+      "type": "text"
+    }
+  ],
+  "afterRun": ""
+}

@@ -4,8 +4,9 @@ completePath: Fields/autocomplete.json
 unique_id: 6IVx7DRZ
 */
 {
-  "label": "Autocomplete",
+  "label": "Autocomplete (Relationship)",
   "value": "Autocomplete",
+  "description": "Relationship field. Use this field type to link records between tables. Stores an ObjectId reference and supports 1:m, m:1, and 1:1 relationships through relationshipType, reference, and referencekey.",
   "dataType": "mongoose.Schema.Types.ObjectId",
   "initialValue": "",
   "extraOptions": {

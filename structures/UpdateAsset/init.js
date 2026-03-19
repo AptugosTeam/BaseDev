@@ -1,49 +1,68 @@
-let assetId = Parameters.asset.id ? Parameters.asset.id : Parameters.asset
-const existing = Application.assets.find(asset => asset.id === assetId)
+const assetInput =
+  typeof Parameters.asset === 'object' && Parameters.asset !== null
+    ? Parameters.asset
+    : {
+        id: Parameters.asset,
+        name: Parameters.name,
+        path: Parameters.path,
+        type:
+          Parameters.type === 'stylesheetAsset'
+            ? 'stylesheet'
+            : Parameters.type === 'imageAsset'
+              ? 'image'
+              : Parameters.assetType || 'other',
+        fileContents: Parameters.fileContents || Parameters.file
+      }
+
+let assetId = assetInput.id ? assetInput.id : Parameters.asset
+const existing = Application.assets.find((asset) => asset.id === assetId)
 
 let newAsset
-let _id = null
+
 if (existing) {
-    var foundIndex = Application.assets.findIndex(asset => asset.id == assetId)
-    Application.assets[foundIndex] = Parameters.asset
-    newAsset = {
-        type: Parameters.asset.type,
-        id: assetId || aptugo.generateID(),
-        name: Parameters.asset.name || Parameters.asset.source.name
-    }
+  const foundIndex = Application.assets.findIndex((asset) => asset.id === assetId)
+
+  newAsset = {
+    type: assetInput.type || existing.type,
+    id: assetId || aptugo.generateID(),
+    name: assetInput.name || assetInput.source?.name || existing.name
+  }
+
+  Application.assets[foundIndex] = {
+    ...existing,
+    ...newAsset
+  }
 } else {
-    newAsset = {
-        type: Parameters.asset.type,
-        id: assetId || aptugo.generateID(),
-        name: Parameters.asset.name || Parameters.asset.source.name
-    }
+  newAsset = {
+    type: assetInput.type,
+    id: assetId || aptugo.generateID(),
+    name: assetInput.name || assetInput.source?.name
+  }
 
-    if (Parameters.type === 'stylesheetAsset') {
-        newAsset.type = 'stylesheet'
-    } else if (Parameters.type === "imageAsset") {
-        newAsset.type = 'image'
-    }
+  if (Parameters.type === 'stylesheetAsset') {
+    newAsset.type = 'stylesheet'
+  } else if (Parameters.type === 'imageAsset') {
+    newAsset.type = 'image'
+  }
 
-    Application.assets.push(newAsset)
-    assetId = newAsset.id
+  Application.assets.push(newAsset)
+  assetId = newAsset.id
 }
 
-const parms = { _: ['assets', 'setfile'], binary: false, app: Application._id, id: assetId, details: newAsset }
-if (Parameters.state.writeFolder) {
-    parms.auth = Parameters.state.writeFolder
+const parms = {
+  _: ['assets', 'setfile'],
+  binary: false,
+  app: Application._id,
+  id: assetId,
+  details: newAsset
 }
-if (Parameters.asset.fileContents) {
-    aptugo.run(parms, { file: JSON.stringify(Parameters.asset.fileContents) })
-    // if ( window.sendAptugoCommand ) {
-    //     window.sendAptugoCommand({
-    //         section: 'assets',
-    //         command: 'setfile',
-    //         options: `--app ${Application.settings.name} --id '${assetId}' --filename '${newAsset.name}'`,
-    //         file: JSON.stringify(Parameters.asset.fileContents)
-    //     }).then(res => {
-    //         console.log('Asset created')
-    //     })
-    // }
+
+if (Parameters.state?.writeFolder) {
+  parms.auth = Parameters.state.writeFolder
+}
+
+if (assetInput.fileContents) {
+  aptugo.run(parms, { file: JSON.stringify(assetInput.fileContents) })
 }
 
 return Application

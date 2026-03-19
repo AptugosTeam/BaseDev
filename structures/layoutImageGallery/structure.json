@@ -5,6 +5,7 @@
   "icon": "icon.png",
   "type": "layout",
   "afterRun": "",
+  "isActive": false,
   "parameters": [
     {
       "name": "parentPage",

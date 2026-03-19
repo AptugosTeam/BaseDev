@@ -3,11 +3,11 @@ path: typography.tpl
 unique_id: hmTuTaFz
 children: []
 icon: ico-typography
-helpText: Renders different typographic html elements
+helpText: Renders a semantic typography wrapper such as h1, h2, h3, h4, h5, h6, or p. This element defines the HTML tag only. Add a Text element inside it to provide the visible content.
 order: 10
 renderTag: (elem) => { return elem.values.tag }
 calculatedName: >-
-  function (ele) { 
+  function (ele) {
     try {
       return ele.values.tag
     } catch(e) {
@@ -16,7 +16,7 @@ calculatedName: >-
   }
 options:
   - name: tag
-    display: Tag
+    display: HTML Tag
     type: dropdown
     options: h1;h2;h3;h4;h5;h6;p
   - name: className

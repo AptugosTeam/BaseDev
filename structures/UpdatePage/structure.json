@@ -1,0 +1,45 @@
+{
+  "_id": "oefy4TrgXerou43ds",
+  "name": "Modify Page",
+  "desc": "Modify an existing page",
+  "icon": "",
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "Page",
+      "display": "Page unique_id to modify",
+      "type": "text"
+    },
+    {
+      "name": "Name",
+      "display": "New name for the page",
+      "type": "text"
+    },
+    {
+      "name": "Path",
+      "display": "New Path for the page",
+      "type": "text"
+    },
+    {
+      "name": "Filename",
+      "display": "New Filename for the page",
+      "type": "text"
+    },
+    {
+      "name": "Parentpage",
+      "display": "optional, move page under another page, this holds the id for the parent page",
+      "type": "text"
+    },
+    {
+      "name": "resetShell",
+      "display": "optional boolean, recreate bpr/ph/b/pf/apr",
+      "type": "text"
+    },
+    {
+      "name": "ensureShell",
+      "display": "optional boolean, create missing default containers only",
+      "type": "text"
+    }
+  ],
+  "afterRun": ""
+}

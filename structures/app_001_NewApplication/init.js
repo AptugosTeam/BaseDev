@@ -13,24 +13,14 @@ if (State.usersReducer) {
   }
 }
 
-// Backwards compatibility
-let defaultTemplate
+const templates = await aptugo.run({ section: 'templates', command: 'list' })
+let defaultTemplate = templates.data.find(t => t.default === 'true')
 
-try {
-  if (State.templatesReducer) {
-    defaultTemplate = State.templatesReducer.templates.filter(template => template.default )
-    State.templatesReducer.loadedTemplate = defaultTemplate[0]
-  } else {
-    
-    defaultTemplate = State.templates.filter(template => template.default)
-  }
-} catch(e) {
-  console.log('Erorr when definining template', e)
-  const error = 'Something wrong with the templates'
-  Store.dispatch({ type: "SET_ERROR", error: error })
+let username = 'anonymous'
+if (State.auth) {
+  username = aptugo.friendly(State.auth.user.name)
 }
 
-const username = aptugo.friendly(State.auth.user.name)
 const dbpassword = aptugo.generateID() + aptugo.generateID()
 const appname = aptugo.friendly(Parameters.Name)
 const dbusername = username + appname
@@ -44,7 +34,7 @@ Application.settings = {
       apiURL: `http://127.0.0.1:4567`,
       type: 'Local',
       folder: appname,
-      template: defaultTemplate ? defaultTemplate[0]._id : '',
+      template: defaultTemplate ? defaultTemplate._id : '',
       url: `https://${appname.toLowerCase()}${aptugo.friendly(aptugo.ls.getItem('license'))}.aptugo.com`,
       dbconnectstring: `mongodb://127.0.0.1:27017/${appname.toLowerCase()}`
     },
@@ -52,7 +42,7 @@ Application.settings = {
       apiURL: `https://${appname.toLowerCase()}${aptugo.friendly(aptugo.ls.getItem('license'))}.aptugo.app`,
       type: 'Local',
       folder: `${appname}_stagging`,
-      template: defaultTemplate ? defaultTemplate[0]._id : '',
+      template: defaultTemplate ? defaultTemplate._id : '',
       url: `https://${appname.toLowerCase()}${aptugo.friendly(aptugo.ls.getItem('license'))}.aptugo.com`,
       dbconnectstring: `mongodb://127.0.0.1:27017/${appname.toLowerCase()}`
     },
@@ -60,12 +50,11 @@ Application.settings = {
       apiURL: `https://${appname.toLowerCase()}${aptugo.friendly(aptugo.ls.getItem('license'))}.backend.aptugo.app`,
       type: 'Remote (Aptugo)',
       folder: appname,
-      template: defaultTemplate ? defaultTemplate[0]._id : '',
+      template: defaultTemplate ? defaultTemplate._id : '',
       url: `https://${appname.toLowerCase()}${aptugo.friendly(aptugo.ls.getItem('license'))}.aptugo.app`,
       dbconnectstring: `mongodb://127.0.0.1:27017/${appname.toLowerCase()}`
     }
 }
 
-// aptugo.createdbuser({ dbName: username, user: dbusername, pwd: dbpassword })
 Application._id = aptugo.generateID(16)
 return Application

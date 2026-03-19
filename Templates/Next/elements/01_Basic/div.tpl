@@ -19,7 +19,7 @@ options:
     type: checkbox
     options: ''
   - name: id
-    display: ID
+    display: The ID for the HTML Element
     type: text
     options: ''
   - name: style
@@ -84,6 +84,19 @@ children: []
 helpText: Basic HTML Div element
 */
 {% set tag = element.values.tag|default('div') %}
+{% set styleValue = null %}
+{% if element.values.style is defined and element.values.style %}
+  {% if element.values.style is iterable %}
+    {% set styleValue = element.values.style|json_encode %}
+  {% else %}
+    {% set trimmedStyle = element.values.style|trim %}
+    {% if trimmedStyle|slice(0, 1) != '{' %}
+      {% set styleValue = '{' ~ trimmedStyle ~ '}' %}
+    {% else %}
+      {% set styleValue = trimmedStyle %}
+    {% endif %}
+  {% endif %}
+{% endif %}
 <{{tag}}
   {% if type == 'DevelopmentDebug' %}data-aptugo="{{ element.unique_id }}"{% endif %}
   {% if not element.values.disabletitle %}
@@ -106,8 +119,8 @@ helpText: Basic HTML Div element
   {% if element.values.className %}
     className={ {{element.values.className|raw}} }
   {% endif %}
-  {% if element.values.style %}
-    style={ {{element.values.style }} }
+  {% if styleValue %}
+    style={ {{ styleValue|raw }} }
   {% endif %}
   {% if element.values.ref %}
     ref={ {{element.values.ref}} }

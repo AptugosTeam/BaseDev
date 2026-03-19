@@ -7,6 +7,23 @@
       "display": "Asset Type",
       "type": "text",
       "helpText": "Asset Type (stylesheet, image, etc)"
+    },
+    {
+      "name": "file",
+      "display": "Asset Content",
+      "type": "text",
+      "helpText": "Asset Content"
+    },
+    {
+      "name": "path",
+      "display": "Asset Path (just the filename, example: carsshowcase.module.scss)",
+      "type": "text",
+      "helpText": "The filename for the file without the path (example: carsshowcase.module.scss)"
+    },
+    {
+      "name": "name",
+      "display": "Asset Name",
+      "type": "text"
     }
   ],
   "afterRun": "",

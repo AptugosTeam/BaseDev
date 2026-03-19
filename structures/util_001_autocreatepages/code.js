@@ -177,16 +177,18 @@ const apr = {
 }
 
 const parent = Parameters.parent ? Parameters.parent.unique_id : Application.pages ? Application.pages[0].unique_id : null
-console.log(Application)
+
+const table = Application.tables.find(table => table.unique_id === Parameters.unique_id)
+if (!table) throw new Error(`Table not found: ${Parameters.unique_id}`)
 const newPage = {
 	"asociated_table": Parameters.unique_id,
-	"name": `() => aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").name`,
+	"name": table.name,
+	"path": `/${table.name}`,
+	"filename": `${table.name}.tsx`,
 	"type": "page",
 	"children": [bpr, ph, b, pf, apr],
-	"path": `() => '/' + aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").name`,
 	"parent": parent,
 	"collapseStatus": "collapse",
-	"filename": `() => aptugo.store.getState().application.tables.find(table => table.unique_id === "${Parameters.unique_id}").name + '.tsx'`
 }
 
 if (Parameters.parent) {

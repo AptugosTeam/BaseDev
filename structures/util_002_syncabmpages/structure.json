@@ -1,0 +1,18 @@
+{
+  "_id": "5e7f681182eb69b8dsdfdsfds",
+  "name": "Sync ABM Pages From Table",
+  "runable": true,
+  "Created_date": {
+    "$date": "2020-03-28T15:06:57.286Z"
+  },
+  "__v": 0,
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "unique_id",
+      "display": "Table unique ID",
+      "type": "text",
+      "helpText": "Unique ID for the table to update"
+    }
+  ]
+}

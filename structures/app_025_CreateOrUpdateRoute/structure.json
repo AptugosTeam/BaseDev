@@ -1,0 +1,61 @@
+{
+  "_id": "modifytableroute",
+  "name": "Modify Table Route",
+  "desc": "Add, update, or remove a route/endpoint from an existing table",
+  "icon": "",
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "Table",
+      "display": "Table unique_id or name",
+      "type": "text"
+    },
+    {
+      "name": "Action",
+      "display": "Action to execute",
+      "type": "dropdown",
+      "options": "addroute;updateroute;removeroute"
+    },
+    {
+      "name": "Route",
+      "display": "Route unique identifier, route_name, or route_path to update/remove",
+      "type": "text"
+    },
+    {
+      "name": "RouteName",
+      "display": "Route name",
+      "type": "text"
+    },
+    {
+      "name": "RouteMethod",
+      "display": "HTTP method",
+      "type": "text"
+    },
+    {
+      "name": "RoutePath",
+      "display": "Route path",
+      "type": "text"
+    },
+    {
+      "name": "RouteTemplate",
+      "display": "Route template",
+      "type": "text"
+    },
+    {
+      "name": "RouteCode",
+      "display": "Route code",
+      "type": "text"
+    },
+    {
+      "name": "RouteActive",
+      "display": "Route active",
+      "type": "checkbox"
+    },
+    {
+      "name": "RoutePayload",
+      "display": "JSON object with full route data for add/update",
+      "type": "text"
+    }
+  ],
+  "afterRun": ""
+}

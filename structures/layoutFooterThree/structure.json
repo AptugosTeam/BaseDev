@@ -6,6 +6,7 @@
     "desc": "",
     "icon": "icon.png",
     "type": "layout",
+    "isActive": false,
     "afterRun": "",
     "parameters": [
       {

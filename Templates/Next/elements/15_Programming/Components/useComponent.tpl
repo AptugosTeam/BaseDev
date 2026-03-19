@@ -4,29 +4,46 @@ keyPath: elements/Programming/useComponent.tpl
 unique_id: CGNFDsui
 icon: ico-use-component
 order: 5
+helpText: Renders an existing reusable React component inside the current page or component. Use this when the component already exists and you want to place it in the current layout, optionally passing props.
 options:
   - name: name
-    display: ComponentName
+    display: Component Name
     type: text
     options: ''
+    required: true
+    helpText: Name of the component to import and render.
+
   - name: props
-    display: Props 
+    display: Props
     type: text
+    options: ''
+    helpText: Comma-separated props passed into the component, you must make sure it is build as [propName] colon [propValue] comma  [propName] colon [propValue], etc
+
   - name: keyprops
-    display: Prop Keys (optional) 
+    display: Prop Keys
     type: text
+    options: ''
+    helpText: Optional prop keys used when rendering this component inside lists or repeated structures.
+
   - name: Utility
     display: Utility Component
     type: checkbox
+    options: ''
+    helpText: Enable if this component should be imported as a utility/helper component rather than from the standard @components root.
+
   - name: UtilityOf
-    display: Is an Utility from another component
+    display: Utility Parent Component
     type: text
+    options: ''
     advanced: true
+    helpText: Optional parent component folder when importing a utility component from inside another component group.
+
   - name: changePath
-    display: Change Path (optional) 
+    display: Use Parent Relative Path
     type: checkbox
     advanced: true
-    settings: 
+    helpText: Import the component using ../ComponentName instead of the default @components path.
+    settings:
       default: false
 */
 {% set bpr %}
@@ -43,5 +60,5 @@ import {{ element.values.name | friendly }} from '@components/{{ element.values.
 {% endif %}
 {% endset %}
 {{ save_delayed('bpr', bpr)}}
-<{{ element.values.name | friendly }} {% if element.values.props %}properties={ { {{ element.values.props }} } }{% endif %} {% if not element.children %}/{% endif %}>
-{% if element.children %} {{ content | raw }}</{{ element.values.name | friendly }}>{% endif %}
+<{{ element.values.name | friendly }} {% if element.values.props %}properties={ { {{ element.values.props }} } }{% endif %}{% if not element.children %} /{% endif %}>
+{% if element.children %}{{ content | raw }}</{{ element.values.name | friendly }}>{% endif %}

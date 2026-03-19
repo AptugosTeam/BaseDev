@@ -1,0 +1,61 @@
+{
+  "_id": "oefy4TdfvrR0tt",
+  "name": "New Element",
+  "desc": "Creates a new element. Supports nested children to build full element trees in one operation. Each child follows the same structure (Element, Name, Path, Value, Values, Children). Use Children to define hierarchical UI structures.",
+  "icon": "",
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "Element",
+      "display": "Element unique ID",
+      "type": "text"
+    },
+    {
+      "name": "Name",
+      "display": "Element name",
+      "type": "text"
+    },
+    {
+      "name": "Path",
+      "display": "Element path",
+      "type": "text"
+    },
+    {
+      "name": "Value",
+      "display": "Element value, it is the element path without the .tpl portion",
+      "type": "text"
+    },
+    {
+      "name": "Parent",
+      "display": "New parent unique ID",
+      "type": "text"
+    },
+    {
+      "name": "ChildOrder",
+      "display": "Child order position",
+      "type": "number"
+    },
+    {
+      "name": "Cascades",
+      "display": "Cascades",
+      "type": "boolean"
+    },
+    {
+      "name": "Prevent_delete",
+      "display": "Prevent delete",
+      "type": "boolean"
+    },
+    {
+      "name": "Values",
+      "display": "Full values object",
+      "type": "code"
+    },
+    {
+      "name": "Children",
+      "display": "Child elements (recursive structure)",
+      "type": "code",
+      "helpText": "Array of child elements. Each child can include Element, Name, Path, Value, Values, and its own Children. Used to create nested UI structures in one call."
+    }
+  ],
+  "afterRun": ""
+}
