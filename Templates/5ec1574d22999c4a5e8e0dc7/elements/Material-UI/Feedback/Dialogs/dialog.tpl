@@ -61,6 +61,14 @@ options:
     display: Edit - Button Text
     type: text
     options: ''
+  - name: viewTitle
+    display: View - Title
+    type: text
+    options: ''
+  - name: viewIntroText
+    display: View - Intro Text
+    type: text
+    options: ''
   - name: deleteTitle
     display: Delete - Title
     type: text
@@ -92,9 +100,9 @@ options:
       default: false
 children: []
 */
-{% set table = element.values.table | tableData %}
-{% set friendlyTableName = table.name | friendly | capitalize %}
-{% set friendlySingleName = table.singleName | friendly | capitalize %}
+{% set table = element.values.table | tableData %}
+{% set friendlyTableName = table.name | friendly | capitalize %}
+{% set friendlySingleName = table.singleName | friendly | capitalize %}
 {% set dialogVariable = 'dialog' ~ friendlyTableName ~ 'Action' %}
 {% if element.children %}
 {% else %}
@@ -117,6 +125,14 @@ import { edit{{ friendlyTableName }} } from '@store/actions/{{ table.name | frie
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
 {% set bpr %}
+import { view{{ friendlyTableName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
+{% set bpr %}
+import { softRemove{{ friendlyTableName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
+{% endset %}
+{{ save_delayed('bpr', bpr ) }}
+{% set bpr %}
 import { remove{{ friendlySingleName }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
 {% endset %}
 {{ save_delayed('bpr', bpr ) }}
@@ -125,7 +141,7 @@ import AddDialog from '../components/Dialog/Dialog'
 {% endset %}
 {{ save_delayed('bpr', bpr2 ) }}
 {% set ph %}
-  const [{{ dialogVariable }}, set{{ dialogVariable }}] = React.useState<'add' | 'edit' | 'delete' | "">('')
+  const [{{ dialogVariable }}, set{{ dialogVariable }}] = React.useState<'add' | 'edit' | 'view' | 'softDelete' | 'delete' | "">('')
 {% endset %}
 {{ save_delayed('ph', ph ) }}
 {% set ph %}
@@ -144,14 +160,17 @@ import AddDialog from '../components/Dialog/Dialog'
   action={ {{ dialogVariable }} }
   addOptions={ { title: '{{ element.values.title }}', text: '{{ element.values.introText }}', button: '{{ element.values.button }}' } }
   editOptions={ { title: '{{ element.values.editTitle }}', text: '{{ element.values.editIntroText }}', button: '{{ element.values.editButton }}' } }
+  viewOptions={ { title: '{{ element.values.viewTitle }}', text: '{{ element.values.viewIntroText }}' } }
   removeOptions={ { title: '{{ element.values.deleteTitle }}', text: '{{ element.values.deleteIntroText }}', button: '{{ element.values.deleteButton }}' } }
   saveDataHandler={ (data: I{{ table.name | friendly | capitalize }}Item ) => {
     {% if element.values.addProcedure == 'Internal' %}
       if ({{ dialogVariable }} === 'delete') {
         dispatch(remove{{ friendlySingleName }}(data))
+      } else if ({{ dialogVariable }} === 'softDelete') {
+        dispatch(softRemove{{ table.name | friendly | capitalize }}(data))
       } else {
         const cleanData:any = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== null && v !== '' && (v.length !== 0 || v.length === undefined)));
-        {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(cleanData)) : dispatch(edit{{ table.name | friendly | capitalize }}(cleanData))
+        {{ dialogVariable }} === 'add' ? dispatch(add{{ table.name | friendly | capitalize }}(cleanData)) : dispatch(edit{{ table.name | friendly | capitalize }}(cleanData))
       }
     {% endif %}
     {% if element.values.addProcedure == 'Custom' %}
@@ -163,6 +182,7 @@ import AddDialog from '../components/Dialog/Dialog'
   initialData={initialData{{ table.name | friendly }}}
   setData={set{{ table.name | friendly }}data}
   allowMultipleSubmit={ {{ dialogVariable }} === 'add'}
+  disabledFields={ {{ dialogVariable }} === 'view'}
 >
 {% if not element.values.notRenderFields %}
 {% for field in fields %}
@@ -170,5 +190,5 @@ import AddDialog from '../components/Dialog/Dialog'
  {% include includeTemplate('field.tpl') with subvalues %}
 {% endfor %}
 {% endif %}
-{{ content | raw }}
+{{ content | raw }}
 </LocalAddDialog>

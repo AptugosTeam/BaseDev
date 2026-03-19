@@ -46,12 +46,18 @@ options:
     display: GravityY
     type: text
     options: ''
+  - name: EditUseEffect
+    display: Edit useEffect
+    type: code
+    options: ''
+    advanced: true
   - name: Friction
     display: Friction
     type: text
     options: ''
-
+    advanced: true
 */
+
 {% set scenes = [] %}
 {% for child in element.children %}
   {% set scenes = scenes|merge([child.values.name|default(child.unique_id) | friendly | capitalize ]) %}
@@ -67,7 +73,7 @@ options:
   {% endfor %}
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
-{% set bpr %}
+{% set ph %}
 const config_{{ element.unique_id }}: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   parent: '{{ id }}',
@@ -95,17 +101,26 @@ const config_{{ element.unique_id }}: Phaser.Types.Core.GameConfig = {
     createContainer: true,
   },
   {% endif %}
+
 }
 {% endset %}
-{{ save_delayed('bpr',bpr) }}
+{{ save_delayed('ph',ph) }}
 {% set ph %}
 React.useEffect(() => {
+  {% if element.values.EditUseEffect  %}
+  const game = new Phaser.Game(config_{{ element.unique_id }})
+  {{ element.values.EditUseEffect|default('') }}
+  return () => {
+    game.destroy(true) 
+  }
+{% endif %}
+{% if not element.values.EditUseEffect  %}
   new Phaser.Game(config_{{ element.unique_id }})
-},[])
+{% endif %}
+}, [])
 {% endset %}
-{{ save_delayed('ph',ph)}}
+{{ save_delayed('ph', ph)}}
 <div
   id="{{ id }}"
   {% if element.values.class %}className={ {{element.values.class}} }{% endif %}>
 </div>
-

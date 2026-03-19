@@ -5,7 +5,7 @@ unique_id: DUBMDXan
 icon: f:rule_settings.svg
 options:
   - name: spriteName
-    display: Sprite
+    display: Sprite Variable Name
     type: text
     options: ''
   - name: property

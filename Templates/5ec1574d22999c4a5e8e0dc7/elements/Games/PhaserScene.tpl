@@ -5,6 +5,15 @@ unique_id: xdlC7Hpo
 icon: f:movie.svg
 usesDelays: [variableDeclarations]
 delayContext: true
+renderTag: (elem) => { return elem.values.name }
+calculatedName: >-
+  function (ele) { 
+    try {
+      return ele.values.name ? 'PhaserScene ' + ele.values.name : 'PhaserScene';
+    } catch(e) {
+      return 'PhaserScene'
+    }
+  }
 options:
   - name: name
     display: Scene Name

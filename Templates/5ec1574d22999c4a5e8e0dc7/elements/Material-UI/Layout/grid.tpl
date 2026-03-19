@@ -58,12 +58,20 @@ options:
     settings:
       propertyCondition: container
       condition: true
+
   - name: spacing
     display: Spacing
     type: text
     settings:
       propertyCondition: container
       condition: true
+  - name: gap
+    display: Gap
+    type: text
+    settings:
+      propertyCondition: container
+      condition: true
+
   - name: item
     display: Is an item
     type: checkbox
@@ -111,6 +119,7 @@ import Grid from '@mui/material/Grid'
     {% if element.values.direction %}direction="{{ element.values.direction }}"{% endif %}
     {% if element.values.wrap %}wrap="{{ element.values.wrap }}"{% endif %}
     {% if element.values.spacing %}spacing={ {{ element.values.spacing }} }{% endif %}
+    {% if element.values.gap %}gap={ {{ element.values.gap }} }{% endif %}
   {% endif %}
   {% if element.values.item %}
     item
@@ -123,4 +132,5 @@ import Grid from '@mui/material/Grid'
 >
 {{ content | raw }}
 </Grid>
+
 

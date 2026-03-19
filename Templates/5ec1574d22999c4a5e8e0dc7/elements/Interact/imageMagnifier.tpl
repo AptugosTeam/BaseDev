@@ -23,8 +23,13 @@ options:
     options: Custom;SideBySide;GlassMagnifier;ClassicMagnifier;PictureInPicture
     settings:
       default: Custom
+  - name: SimpleActivation
+    display: Simple Mouse Activation
+    type: checkbox
+    settings:
+      default: false
   - name: mouseActivation
-    display: MouseActivation
+    display: Double Mouse Activation
     type: checkbox
     settings:
       default: false
@@ -112,6 +117,7 @@ import {
   largeImageSrc={{ path|textOrVariable }}
   {% if element.values.inPlace %} alwaysInPlace={ {{element.values.inPlace}} } {% endif %}
   {% if element.values.mouseActivation %} mouseActivation={MOUSE_ACTIVATION.DOUBLE_CLICK} {% endif %}
+  {% if element.values.SimpleActivation %} mouseActivation={MOUSE_ACTIVATION.CLICK} {% endif %}
   {% if element.values.touchActivation %} touchActivation={TOUCH_ACTIVATION.DOUBLE_TAP} {% endif %}
 />
 {% endif %}

@@ -8,27 +8,37 @@ options:
     display: Descriptive Name
     type: text
   - name: useOther
-    display: Use other files (not images)
+    display: Use other files (not images, yes sound)
     type: checkbox
+    options: ''
+    settings:
+      default: 'false'
   - name: useAsset
     display: Use an asset
     type: dropdown
     options: >-
       return [['none', 'None'],
       ...aptugo.assetUtils.images().map(image => [image.id, image.name])]
+    settings: 
+      propertyCondition: useOther
+      conditionNegate: true
+      condition: true
   - name: useOtherAsset
     display: Use other asset
     type: dropdown
     options: >-
       return [['none', 'None'],
       ...aptugo.assetUtils.other().map(image => [image.id, image.name])]
-  - name: path
-    display: Image Path
-    type: text
-    options: ''
+    settings: 
+      propertyCondition: useOther
+      condition: true
   - name: useSpritesheet
     display: Use spritesheet
     type: checkbox
+    settings: 
+      propertyCondition: useOther
+      conditionNegate: true
+      condition: true
   - name: frameWidth
     display: Frame Width
     type: text
@@ -46,7 +56,7 @@ options:
       propertyCondition: useSpritesheet
       condition: true
 */
-{% set path = element.values.path %}
+{% set useOther = element.values.useOther | default(false) %}
 {% if element.values.useAsset and element.values.useAsset != 'none' %}
   {% set asset = element.values.useAsset|assetData %}
   {% if element.values.useSpritesheet %}

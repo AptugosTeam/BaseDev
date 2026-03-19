@@ -72,6 +72,12 @@ options:
     settings:
       default: true
       condition: ''
+  - name: allowView
+    display: Allow View
+    type: checkbox
+    settings:
+      default: false
+      condition: ''
   - name: editionTable
     display: Table used in Edits (or deletes)
     type: dropdown
@@ -83,6 +89,16 @@ options:
     settings:
       default: true
       condition: ''
+  - name: useSoftDelete
+    display: Use Soft Delete
+    type: checkbox
+    settings:
+      default: false
+      condition: ''
+  - name: variableToCheck
+    display: Variable to check before fetching
+    type: text
+    options: ''
   - name: detailsURL
     display: Details Page
     type: dropdown
@@ -100,15 +116,16 @@ options:
     display: Search String
     type: text
     options: ''
+  - name: rowClassName
+    display: ClassName for the row
+    type: styles
+    options: ''
   - name: usePagination
     display: Use Pagination
     type: checkbox
     options: ''
     settings:
       default: false
-  - name: startSeparatorPagination
-    display: Start Pagination Properties
-    type: separator
   - name: elementsLimit
     display: Elements Per Page
     type: text
@@ -172,9 +189,6 @@ options:
       propertyCondition: usePagination
       condition: '"true"'
       active: true
-  - name: endSeparatorPagination
-    display: End Pagination Properties
-    type: separator
   - name: confirmDeletes
     display: Show a confirmation before deleting
     type: checkbox
@@ -196,11 +210,19 @@ options:
     display: Sort Method
     type: dropdown
     options: desc;asc
+  - name: onRowClick
+    display: On Row Click
+    type: text
+    options: ''
+    settings:
+      default: ''  
 children: []
 */
 {% set editProc = element.values.editProcedure|default('No') %}
 {% set allowEdit = element.values.allowEdit|default(true) %}
+{% set allowView = element.values.allowView|default(false) %}
 {% set allowDeletion = element.values.allowDeletion|default(true) %}
+{% set useSoftDelete = element.values.useSoftDelete|default(false) %}
 {% set tableFields = [] %}
 {% if element.values.table == 'useVar' or element.values.table == 'var' %}
   {% set table = element.values.editionTable | tableData %}
@@ -225,7 +247,7 @@ children: []
   {% set innervarname = element.name | friendly %}
   {% set eleWithoutChilds = element %}
   {% set eleWithoutChilds = eleWithoutChilds|merge({'children': null}) %}
-  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage, 'sortColumn':element.values.sortColumn, sortMethod: element.values.sortMethod, 'fixedSearchField': element.values.fixedSearchField, 'fixedSearchString': element.values.fixedSearchString } %}
+  {% include includeTemplate('loadFromRedux.tpl') with { 'data': element.values.table, 'element': eleWithoutChilds, 'defaultPage': element.values.defaultPage, 'sortColumn':element.values.sortColumn, sortMethod: element.values.sortMethod, 'fixedSearchField': element.values.fixedSearchField, 'fixedSearchString': element.values.fixedSearchString, 'variableToCheck': element.values.variableToCheck } %}
   {% if element.children %}
       {% for field in element.children %}
         {% if field.values.Field == 'useVar' %}
@@ -243,7 +265,7 @@ children: []
   {% endif %}
   {% set tableData = '(' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ '.length ? ' ~ table.name|friendly|lower ~ 'Data.found' ~ table.name|friendly|lower ~ ' : ' ~ table.name|friendly|lower ~ 'Data.' ~ table.name|friendly|lower ~ ' as any)' %}
   {% set bpr %}
-  import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }}, edit{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
+  import { add{{ table.name | friendly | capitalize }}, load{{ table.name | friendly | capitalize }}, remove{{ table.singleName | friendly | capitalize }},{% if useSoftDelete %} softRemove{{ table.name | friendly | capitalize }},{% endif %} edit{{ table.name | friendly | capitalize }}, view{{ table.name | friendly | capitalize }} } from '@store/actions/{{ table.name | friendly | lower }}Actions'
   {% endset %}
   {{ save_delayed('bpr', bpr ) }}
 {% endif %}
@@ -251,6 +273,7 @@ children: []
 {% set bpr %}
   import Table from '../components/Table/Table'
   import EditIcon from '@mui/icons-material/Edit'
+  import VisibilityIcon from '@mui/icons-material/Visibility'
   import DeleteIcon from '@mui/icons-material/Delete'
   import IconButton from '@mui/material/IconButton'
   import {{ element.values.icon | default('More') }}Icon from '@mui/icons-material/{{ element.values.icon | default('More') }}'
@@ -261,10 +284,13 @@ children: []
       {% if element.values.headerVariable %}
         {{element.values.headerVariable}}
       {% else %}
-        [{% for field in tableFields %}"{{ field }}",{% endfor %}{% if editProc != 'No' or allowEdit or allowDeletion %}"Actions"{% endif %}]
+        [{% for field in tableFields %}"{{ field }}",{% endfor %}{% if editProc != 'No' or allowEdit or allowView or allowDeletion %}"Actions"{% endif %}]
       {% endif %}
     }
     tableData={ {{ tableData }} }
+    {% if element.values.rowClassName %}
+      rowClassName={ {{element.values.rowClassName}} }
+    {% endif %}
     {% if element.values.table != 'useVar' and element.values.table != 'var' %}
       orderBy={ {{ innervarname }}loadoptions.sort.field }
       order={ {{ innervarname }}loadoptions.sort.method }
@@ -278,6 +304,13 @@ children: []
         })
       }}
     {% endif %}
+    onRowClick={(rowData) => {
+    {% if element.values.onRowClick and element.values.onRowClick != '' %}
+      {{ element.values.onRowClick }}
+    {% else %}
+      return;
+    {% endif %}
+    }}
 >{% if element.children %}
   {{ content | raw }}
 {% else %}
@@ -298,6 +331,26 @@ children: []
       } }
     >
       <{{element.values.icon | default('More')}}Icon fontSize="small" />
+    </IconButton>
+    {% endif %}
+    {% if allowView %}
+    <IconButton
+      aria-label="View"
+      color="primary"
+      onClickCapture={(e: any) => { 
+        {% if editProc == 'Internal' %}
+          {{ setEditDataFunctionName }}(e.element)
+          setdialog{{ tableName | capitalize }}Action('view')
+          {% elseif element.values.customUrl %}
+          const url = `{{ element.values.customUrl }}`
+          props.history.push(url)
+        {% else %}
+          const url = '{{ (editProc | elementData ).path }}'.replace(':id', e.element._id)
+          props.history.push(url)
+        {% endif %}
+      } }
+    >
+      <VisibilityIcon fontSize="small" />
     </IconButton>
     {% endif %}
     {% if allowEdit %}
@@ -324,9 +377,9 @@ children: []
     <IconButton aria-label="delete" color="primary" onClickCapture={(e: any) => {
       {% if element.values.confirmDeletes %}
         {{ setEditDataFunctionName }}(e.element)
-        setdialog{{ tableName | capitalize }}Action('delete')
+        setdialog{{ tableName | capitalize }}Action({% if useSoftDelete %}'softDelete'{% else %}'delete'{% endif %})
       {% else %}
-        dispatch(remove{{ tableSingleName }} (e.element))
+        dispatch({% if useSoftDelete %}softRemove{{ tableName | capitalize }}{% else %}remove{{ tableSingleName }}{% endif %} (e.element))
       {% endif %}
     }}>
       <DeleteIcon fontSize="small" />

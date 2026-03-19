@@ -20,6 +20,10 @@ options:
   - name: label
     display: Label
     type: text
+  - name: placeholder
+    display: Placeholder
+    type: text
+    advanced: true  
   - name: className
     display: ClassName
     type: styles
@@ -85,6 +89,10 @@ options:
     display: Multiple Selections
     type: checkbox
     advanced: true
+  - name: inputProps
+    display: Enter your inputProps 
+    type: code
+    advanced: true 
 children: []
 */
 {% set bpr %}
@@ -129,9 +137,9 @@ import TextField from '@mui/material/TextField';
     multiple
   {% endif %}
   {% if element.values.getOptionLabel %}
-    getOptionLabel={ (option) => {
+    getOptionLabel={ (option) => 
         {{ element.values.getOptionLabel }} 
-    }}
+    }
   {% endif %}
   {% if element.values.onInputChange %}
     onInputChange={ (e, newInputValue) => { 
@@ -149,7 +157,19 @@ import TextField from '@mui/material/TextField';
     isOptionEqualToValue={ (option, value) => {{ element.values.isOptionEqualToValue }} }
   {% endif %} 
   renderInput={(params) => (
-    <TextField {...params} label="{{ element.values.label|default('') }}" />
+    <TextField
+      {...params}
+      label="{{ element.values.label|default('') }}"
+      {% if element.values.placeholder %}
+        placeholder={{ element.values.placeholder | textOrVariable }}
+      {% endif %}
+      {% if element.values.inputProps %}
+        inputProps={ {
+          ...params.inputProps,
+          {{element.values.inputProps}}
+        } }
+      {% endif %}
+      />
   )}
   {% if element.values.noOptionsText %}
     noOptionsText={{ element.values.noOptionsText | textOrVariable }}

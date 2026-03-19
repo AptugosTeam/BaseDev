@@ -24,6 +24,15 @@ options:
   - name: className
     display: className
     type: styles
+  - name: TransitionProps
+    display: Transition Props from MUI
+    type: code
+    advanced: true
+  - name: disableScrollLock
+    display: Disable Scroll Lock
+    type: checkbox
+    settings:
+      default: false  
 sourceType: javascript
 childs:
   - name: Title
@@ -46,6 +55,8 @@ import Dialog from '@mui/material/Dialog'
   {% if element.values.className %}
     className={ {{element.values.className}} }
   {% endif %}
+  {% if element.values.TransitionProps %} TransitionProps={ {{element.values.TransitionProps}} } {% endif %}
+  {% if element.values.disableScrollLock %}disableScrollLock={ {{ element.values.disableScrollLock|default("false") }} }{% endif %}
 >
 {{ content | raw }}
 </Dialog>

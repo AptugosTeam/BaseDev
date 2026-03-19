@@ -24,6 +24,10 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: style
+    display: Extra Styles
+    type: text
+    options: ''
 childs:
   - name: Text Content
     element: text
@@ -36,6 +40,9 @@ import Typography from '@mui/material/Typography'
   {% if type == 'DevelopmentDebug' %}data-aptugo="{{ element.unique_id }}"{% endif %}
   variant="{{ element.values.tag }}"
   {% if element.values.color %}color="{{ element.values.color }}"{% endif %}
+  {% if element.values.style %}
+    style={ {{element.values.style}} }
+  {% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}>
 {{ content | raw }}
 </Typography>

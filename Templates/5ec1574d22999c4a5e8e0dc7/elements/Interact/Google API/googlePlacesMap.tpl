@@ -21,6 +21,12 @@ options:
   - name: renderMarker
     display: Render Marker
     type: checkbox
+  - name: disableDefaultUI
+    display: Disable Default UI
+    type: checkbox
+    options: ''
+    settings:
+      default: false
 extraFiles:
   - source: 'elements/Interact/Google API/997_googleplaces.tsx'
     destination: 'front-end/Components/PlacesAutoComplete/index.tsx'
@@ -38,4 +44,5 @@ import { PlacesMap } from '@components/PlacesAutocomplete'
   {% if element.values.lng %}lng={ {{ element.values.lng }} }{% endif %}
   {% if element.values.zoom %}zoom={ {{ element.values.zoom }} }{% endif %}
   {% if element.values.renderMarker %}renderMarker{% endif %}
+  {% if element.values.disableDefaultUI %}disableDefaultUI={ {{ element.values.disableDefaultUI }} }{% endif %}
 />

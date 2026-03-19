@@ -45,6 +45,10 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: extraStyles
+    display: Extra Styles
+    type: styles
+    options: ''
   - name: shrink
     display: Shrink Label?
     type: checkbox
@@ -60,6 +64,10 @@ options:
     settings:
       condition: true
       propertyCondition: displayEmpty
+  - name: endAdornment
+    display: Child is end adornment
+    type: checkbox
+    advanced: true    
   - name: DisableVariable
     display: Variable to disable input
     type: text
@@ -76,6 +84,13 @@ options:
   - name: helperText
     display: Helper Text
     type: text
+  - name: alternativeOptions
+    display: alternative Options
+    type: checkbox
+    advanced: true
+    settings: 
+      default: false
+
 children: []
 */
 {% set bpr %}
@@ -83,6 +98,12 @@ import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
+{% if element.values.endAdornment %}
+{% set bpr %}
+import InputAdornment from '@mui/material/InputAdornment'
+{% endset %}
+{{ save_delayed('bpr', bpr) }}
+{% endif %}
 
 <TextField
     {% if element.values.Autofocus %}autoFocus{% endif %}
@@ -95,6 +116,7 @@ import MenuItem from '@mui/material/MenuItem'
     size='{{ element.values.size|default("medium") }}'
     {% if element.values.label %}label={{ element.values.label | textOrVariable }}{% endif %}
     {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
+    {% if element.values.extraStyles %}style={ {{ element.values.extraStyles }} }{% endif %}
     select
     {% if element.values.fullwidth %}fullWidth{% endif %}
     {% if element.values.error %}error={ {{ element.values.error }} }{% endif %}
@@ -105,6 +127,11 @@ import MenuItem from '@mui/material/MenuItem'
     {% if element.values.displayEmpty %}SelectProps={ {
       displayEmpty: true
     } }{% endif %}
+    {% if element.values.endAdornment %}
+      InputProps={ {
+        endAdornment: <InputAdornment position="end">{{ content | raw }}</InputAdornment>
+      } }
+    {% endif %}
 >
 {% if element.values.showall %}<MenuItem value="all"><em>All</em></MenuItem>{% endif %}
 {% if element.values.displayEmptyText %}
@@ -112,5 +139,10 @@ import MenuItem from '@mui/material/MenuItem'
   {{element.values.displayEmptyText}}
 </MenuItem>
 {% endif %}
+{% if element.values.alternativeOptions %}
+{ {{ element.values.options }} }
+{{ content|raw }}
+{% else %}
 { {{ element.values.options }}.map((item: { value: any, name: string } | any, index: number) => <MenuItem value={item?.value ? item.value : item} key={index}>{item?.name ? item.name : item}</MenuItem> )}
+{% endif %}
 </TextField>

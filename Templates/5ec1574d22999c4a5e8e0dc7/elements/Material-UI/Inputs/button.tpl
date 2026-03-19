@@ -86,5 +86,5 @@ import Button from '@mui/material/Button'
   {% if element.values.extraCode %} {{element.values.extraCode}} {% endif %}
   {% if element.values.style %} style={ {{element.values.style}} }{% endif %}
 >
-  {{ element.values.ButtonText }}{{ content | raw }}
+  {% if element.values.ButtonText %}{{ element.values.ButtonText }}{% endif %}{{ content | raw }}
 </Button>

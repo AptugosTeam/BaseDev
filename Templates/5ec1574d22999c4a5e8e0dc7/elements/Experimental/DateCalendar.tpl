@@ -23,7 +23,7 @@ options:
     type: text
 settings:
   - name: Packages
-    value: '"@mui/x-date-pickers": "latest","dayjs":"1.11.5",'
+    value: '"@mui/x-date-pickers": "6.20.2","dayjs":"1.11.5",'
 */
 {% set bpr %}
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'

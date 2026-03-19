@@ -16,4 +16,10 @@ options:
     settings:
       default: play
 */
-this.{{ element.values.asset }}.{{element.values.soundOptions}}();
+{% if element.values.soundOptions == 'play' %}
+if(!this.{{ element.values.asset }}.isPlaying) {
+  this.{{ element.values.asset }}.{{element.values.soundOptions}}();
+}
+{% else %}
+  this.{{ element.values.asset }}.{{element.values.soundOptions}}();
+{% endif %}

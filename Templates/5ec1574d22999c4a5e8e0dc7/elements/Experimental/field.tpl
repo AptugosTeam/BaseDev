@@ -11,16 +11,6 @@ options:
     type: dropdown
     options: return [['useVar','Use a Variable'], ...aptugo.tableUtils.getAllFields()]
     settings:
-      aptugoOnChange: >-
-        const value = arguments[0];
-        const element = arguments[1];
-        const page = arguments[2];
-        if (value !== 'useVar') {
-          const tableName = aptugoUtils.helpers.friendly(aptugoUtils.findContainerTable(value).name);
-          aptugo.variables.setPageVariable(page, 'id' + element.unique_id, { [`initialData${tableName}`]: null });
-          aptugo.variables.setPageVariable(page, element.unique_id, { [`${tableName}data`]: null });
-          aptugo.variables.setPageFunction(page, 'f' + element.unique_id, `set${tableName}data` );
-        }
       active: true
   - name: fieldVariable
     display: Variable
@@ -136,9 +126,25 @@ options:
     settings:
       propertyCondition: Type
       condition: edit
+  - name: inputRef
+    display: Input Ref
+    type: text
+    options: ''
+    advanced: true
+    settings:
+      propertyCondition: Type
+      condition: edit
   - name: textFieldPropsNumeric
     display: Text Field Props (Numeric Format)
     type: text
+    advanced: true
+  - name: allowError
+    display: Display Field Error (Type edit)
+    type: checkbox
+    advanced: true
+  - name: allowHelperText
+    display: Display Helper Text (Type edit)
+    type: checkbox
     advanced: true
 children: []
 */

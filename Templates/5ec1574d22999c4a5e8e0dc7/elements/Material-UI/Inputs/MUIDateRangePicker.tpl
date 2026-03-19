@@ -22,46 +22,46 @@ options:
   - name: shouldDisableDate
     display: shouldDisableDate
     type: function
+  - name: onClose
+    display: onClose
+    type: function
+    options: ''
+    advanced: true 
   - name: disablePreviousMonths
     display: Disable Previous Months?
     type: checkbox
     options: ''
     settings:
       default: true
-
 settings:
   - name: Packages
-    value: '"@mui/x-date-pickers": "5.0.20",'
+    value: '"@mui/x-date-pickers": "6.20.2",'
   - name: Packages
-    value: '"@mui/x-date-pickers-pro": "5.0.20",'
+    value: '"@mui/x-date-pickers-pro": "6.20.2",'
   - name: Packages
     value: '"dayjs": "^1.11.10",'
 children: []
 */
 {% set bpr %}
-import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import 'dayjs/locale/es'
-import { TextField, Box } from '@mui/material'
+import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import 'dayjs/locale/es';
+import dayjs from 'dayjs';
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-<LocalizationProvider
-  dateAdapter={AdapterDayjs}
-  adapterLocale="en"
-  localeText={ { start: {{ element.values.startText | default('from') | textOrVariable }}, end: {{ element.values.endText | default('to') | textOrVariable }} } }  
->
-  <DateRangePicker
-    value={ {{ element.values.value | default('[null, null]') }} }
-    onChange={ {{ element.values.onChange | default('() => {}') | functionOrCall }} }
-    {% if element.values.shouldDisableDate %} shouldDisableDate={ {{ element.values.shouldDisableDate | functionOrCall }} }{% endif %}
-    {% if element.values.disablePreviousMonths %}disablePast{% endif %}
-    renderInput={(startProps, endProps) => (
-      <React.Fragment>
-        <TextField {...startProps} />
-        <Box sx={ { mx: 2 } }> to </Box>
-        <TextField {...endProps} />
-      </React.Fragment>
-    )}
-  />
-</LocalizationProvider>
+<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="es">
+      <DateRangePicker
+        localeText={ { start: {{ element.values.startText | textOrVariable }}, end: {{ element.values.endText | textOrVariable }} } }  
+        value={ {{ element.values.value }} }
+        {% if element.values.onChange %}
+            onChange={ {{ element.values.onChange | functionOrCall }} }
+        {% endif %}
+        {% if element.values.shouldDisableDate %}
+            shouldDisableDate={ {{ element.values.shouldDisableDate | functionOrCall }} }
+        {% endif %}
+        {% if element.values.disablePreviousMonths %}disablePast{% endif %}
+        {% if element.values.onClose %}
+          onClose={ () => { {{ element.values.onClose }} } }{% endif %}
+      />
+    </LocalizationProvider>

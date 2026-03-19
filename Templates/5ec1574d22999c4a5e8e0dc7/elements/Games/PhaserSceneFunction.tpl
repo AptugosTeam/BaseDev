@@ -3,6 +3,20 @@ path: PhaserSceneFunction.tpl
 keyPath: elements/Games/PhaserSceneFunction.tpl
 unique_id: qbOerz9a
 icon: f:frame_source.svg
+renderTag: (elem) => { return elem.values.stage }
+calculatedName: >-
+  function (ele) { 
+    try {
+      const stageName = ele.values.stage === 'other' 
+                        ? ele.values.customFunctionName 
+                        : ele.values.stage;
+      return stageName 
+             ? 'PhaserSceneFunction ' + (ele.values.stage === 'other' ? stageName : stageName.charAt(0).toUpperCase() + stageName.slice(1)) 
+             : 'PhaserSceneFunction';
+    } catch(e) {
+      return 'PhaserSceneFunction';
+    }
+  }
 options:
   - name: stage
     display: Stage

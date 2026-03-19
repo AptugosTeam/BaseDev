@@ -26,6 +26,7 @@ const Map = (props: any) => {
       center: { lat: props.lat || 40.749933, lng: props.lng || -73.98633 },
       zoom: props.zoom || 13,
       mapTypeControl: false,
+      disableDefaultUI: props.disableDefaultUI || false,
     })
     window.mapsApi[inputId].bindTo("bounds", window.mapsApi['map_' + inputId])
 

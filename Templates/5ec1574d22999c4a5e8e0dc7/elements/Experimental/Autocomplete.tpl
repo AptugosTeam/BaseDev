@@ -42,6 +42,18 @@ options:
     advanced: true
     settings:
       default: false
+  - name: fullWidth
+    display: Full width?
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
+  - name: add
+    display: Allow add
+    type: checkbox
+    advanced: true
+    settings:
+      default: false
   - name: margin
     display: margin
     type: dropdown
@@ -78,5 +90,7 @@ import TextField from '@mui/material/TextField'
       {% if element.values.variant %}variant={{ element.values.variant | textOrVariable }}{% endif %}
       {% if element.values.margin %}margin={{ element.values.margin | textOrVariable }}{% endif %}
       {% if element.values.chips %}chips{% endif %}
+      {% if element.values.add %}add{% endif %}
+      {% if element.values.fullWidth %}fullWidth{% endif %}
       {% if element.values.disabled %}disabled={ {{element.values.disabled}} } {% endif %}
   />

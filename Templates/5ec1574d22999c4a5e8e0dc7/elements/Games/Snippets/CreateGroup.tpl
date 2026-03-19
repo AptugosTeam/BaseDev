@@ -8,6 +8,7 @@ options:
     display: Group Name
     type: text
     options: ''
+    required: true
   - name: addPhysics
     display: Add Physics
     type: checkbox

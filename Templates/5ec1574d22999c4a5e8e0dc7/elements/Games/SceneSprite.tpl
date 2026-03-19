@@ -19,9 +19,6 @@ options:
   - name: collide
     display: Collide with World Bounds
     type: checkbox
-  - name: isCircle
-    display: Is A Circle? (set the radius)
-    type: checkbox
   - name: Physics
     display: Use Physics?
     type: checkbox
@@ -63,7 +60,6 @@ options:
 */
 this.{% if element.values.Physics %} physics.{% endif %}add.sprite({{ element.values.posX }}, {{ element.values.posY }}, '{{ element.values.asset }}')
 {% if element.values.collide %}.setCollideWorldBounds(true){% endif %}
-{% if element.values.isCircle %}.setCircle({{ element.values.isCircle }}){% endif %}
 {% if element.values.immovable %}.setImmovable(true){% endif %}
 {% if element.values.pushable %}.setPushable(true){% else %}.setPushable(false){% endif %}
 {% if element.values.bounce %}.setBounce({{ element.values.bounce }}){% endif %}

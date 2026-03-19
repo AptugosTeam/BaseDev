@@ -28,7 +28,7 @@ import Badge from '@mui/material/Badge';
 {{ save_delayed('bpr', bpr ) }}
 <Badge
   {% if element.values.badgeContent %}
-    badgeContent={ {{ element.values.badgeContent|default(0)|textOrVariable }} }
+    badgeContent={ {{ element.values.badgeContent|default(0) }} }
   {% endif %}
   {% if element.values.color %}
     color='{{ element.values.color|default("default") }}'
