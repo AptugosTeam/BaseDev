@@ -29,7 +29,7 @@ calculatedName: >-
     }
   }
 options:
-  - name: table
+  - name: tableOrData
     display: Database Table
     type: dropdown
     helpText: The database table unique_id, this element goes as a child of the PH element
@@ -46,10 +46,10 @@ options:
         aptugo.variables.setPageVariable(page, element.unique_id, { [tableInfo.name]: fields });
       aptugoOnLoad: |-
         const element = arguments[0];
-        if ( element.values.table ) {
+        if ( element.values.tableOrData ) {
           const varsToAdd = {};
           const page = aptugo.pageUtils.findContainerPage(element.unique_id).unique_id;
-          const tableInfo = aptugo.store.getState().application.tables.find(table => table.unique_id === element.values.table )
+          const tableInfo = aptugo.store.getState().application.tables.find(table => table.unique_id === element.values.tableOrData )
           const tableFields = tableInfo.fields;
           tableFields.forEach(tableField => { varsToAdd[tableField.column_name] = 'String' });
           const finalVarsToAdd = {
@@ -148,8 +148,8 @@ children: []
 {% if data %}
   {% set table = data | tableData %}
 {% else %}
-  {% if element.values.table is not empty %}
-    {% set table = element.values.table | tableData %}
+  {% if element.values.tableOrData is not empty %}
+    {% set table = element.values.tableOrData | tableData %}
   {% elseif element.values.data is not empty %}
     {% set table = element.values.data | tableData %}
   {% endif %}
