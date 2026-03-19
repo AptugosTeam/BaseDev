@@ -20,6 +20,5 @@ import { fetcher } from '@lib/fetch'
 fetcher('/api/auth', {
   method: 'DELETE'
 }).then(res => {
-  console.log('logged out', res)
   router.push( '{{ pageFrom.path }}' )
 })
