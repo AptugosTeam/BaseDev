@@ -6,7 +6,7 @@ icon: ico-field
 sourceType: typescript
 children: []
 */
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import styles from './table.module.scss'
 
 interface fieldProps {

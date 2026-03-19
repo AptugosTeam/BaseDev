@@ -46,7 +46,7 @@ childs:
     element: pdfPage
 */
 {% set bpr %}
-import { Document } from '@react-pdf/renderer'
+import { Document, pdf } from '@react-pdf/renderer'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Document

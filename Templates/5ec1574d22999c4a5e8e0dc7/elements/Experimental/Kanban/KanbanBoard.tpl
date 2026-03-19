@@ -8,14 +8,6 @@ options:
     display: Columns
     type: text
     options: ''
-  - name: ColumnName
-    display: Column Name
-    type: text
-    options: ''
-  - name: Subtitle
-    display: Subtitle
-    type: text
-    options: ''
   - name: className
     display: ClassName
     type: styles
@@ -30,14 +22,6 @@ options:
     options: >-
       return aptugo.store.getState().application.tables.map(({ unique_id, name
       }) => [unique_id, name])
-  - name: addRecords
-    display: Add Records
-    type: text
-    options: ''
-  - name: columnHeaderColor
-    display: Column Header Color
-    type: text
-    options: ''
   - name: ref
     display: Use Reference
     type: text
@@ -47,6 +31,10 @@ options:
     display: On Mouse Down
     type: text
     advanced: true
+  - name: code
+    display: Code before render
+    type: function
+    options: ''
 sourceType: javascript
 settings:
   - name: Packages
@@ -55,19 +43,7 @@ settings:
       "react-dnd-html5-backend": "11.1.3",
 children: []
 */
-
-
 {% if data %}{% set table = data | tableData %}{% else %}{% set table = element.values.data | tableData %}{% endif %}
-{% if element.values.addRecords %}
-{% set bpr %}
-import Button from '@mui/material/Button'
-{% endset %}
-{{ save_delayed('bpr', bpr ) }}
-{% set bpr %}
-import AddIcon from '@mui/icons-material/Add'
-{% endset %}
-{{ save_delayed('bpr', bpr ) }}
-{% endif %}
 {% set bpr %}
 import { useDispatch } from 'react-redux'
 {% endset %}
@@ -86,22 +62,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 {% set ph %}
-const KanbanColumn = ({ channel, children, ...props }) => {
-    const ref = React.useRef(null)
-    const [{ isOver }, drop] = useDrop({
-      accept: 'card',
-      drop(item: any) {
-        {{ element.values.onDrop | raw }}
-      },
-      collect: (monitor) => ({
-        isOver: monitor.isOver()
-      })
-    })
-    drop(ref)
-    return <div ref={ref} {...props} >{children}</div>
-  }
-
-const KanbanItem = ({ item, children, ...props }) => {
+const KanbanItem = React.memo(({ item, children, ...props }) => {
     const ref = React.useRef(null)
     const [{ isDragging }, drag] = useDrag({
       item: { type: 'card', item },
@@ -117,7 +78,7 @@ const KanbanItem = ({ item, children, ...props }) => {
         {children}
       </div>
     )
-  }
+  })
 {% endset %}
 {{ save_delayed('ph',ph) }}
 <DndProvider backend={HTML5Backend}>       
@@ -129,8 +90,6 @@ const KanbanItem = ({ item, children, ...props }) => {
     onMouseDown={ {{element.values.onMouseDown}} }
   {% endif %}
 >
-{ {{ element.values.Columns }}.map((columnItem, columnIndex) => {
-    return ({{ content | raw }})
-})}
+{{ content | raw }}
 </div>
 </DndProvider>

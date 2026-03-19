@@ -4,7 +4,7 @@ keyPath: elements/Programming/baseComponent.tsx
 unique_id: spqWQO2m
 internalUse: true
 */
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import baseClasses from '@components/Themes/layout.module.scss'
 {% for delay in delayed %}
   {% for specificDelay in delay.bpr %}
@@ -20,8 +20,8 @@ import baseClasses from '@components/Themes/layout.module.scss'
 {% endfor %}
 
 
-const AptugoComponent: FunctionComponent<any> = (props) => {
-  {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props.properties{% endif %}
+const AptugoComponent: FunctionComponent<{{ element.values.interface|default('any') }}> = (props) => {
+  {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props?.properties || {}{% endif %}
   {% for child in element.children %}
     {% if child.value == 'componentHeader' %} 
       {{ child.rendered }}

@@ -8,7 +8,7 @@ children: []
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import Button from '@mui/material/Button'
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import classes from './pagination.module.scss'
 
 interface paginationProps {

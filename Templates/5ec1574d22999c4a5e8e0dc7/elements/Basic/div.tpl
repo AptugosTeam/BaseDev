@@ -10,7 +10,7 @@ backColor: rgba(6, 201, 210, 0.25)
 sourceType: javascript
 order: 1
 options:
-  - name: className
+  - name: class
     display: ClassName
     type: styles
     options: ''
@@ -54,6 +54,12 @@ options:
     settings:
       default: false
     advanced: true
+  - name: arrow
+    display: Use Arrow Tooltip
+    type: checkbox
+    settings:
+      default: false
+      condition: ''  
   - name: dataAttribute
     display: Add Data Attribute
     type: checkbox
@@ -74,6 +80,19 @@ options:
     settings:
       condition: true
       propertyCondition: dataAttribute
+  - name: ariaLabel
+    display: Add ARIA Label
+    type: checkbox
+    settings:
+      default: false
+    advanced: true
+  - name: ariaLabelValue
+    display: Value of ARIA Label
+    type: text
+    advanced: true
+    settings:
+      condition: true
+      propertyCondition: ariaLabel
   - name: key
     display: Key
     type: text
@@ -89,6 +108,30 @@ options:
   - name: onMouseOut
     display: On Mouse Out
     type: text
+    advanced: true
+  - name: onScroll
+    display: On Scroll
+    type: text
+    advanced: true
+  - name: onTouchStart
+    display: On Touch Start
+    type: text
+    options: ''
+    advanced: true
+  - name: onTouchMove
+    display: On Touch Move
+    type: text
+    options: ''
+    advanced: true
+  - name: onTouchEnd
+    display: On Touch End
+    type: text
+    options: ''
+    advanced: true
+  - name: onTransitionEnd
+    display: On Transition End
+    type: text
+    options: ''
     advanced: true
 children: []
 helpText: Basic HTML Div element
@@ -114,13 +157,16 @@ helpText: Basic HTML Div element
   {% if element.values.dataAttribute and element.values.nameAttribute and element.values.valueAttribute %}
     data-{{ element.values.nameAttribute }}={ {{ element.values.valueAttribute }} }
   {% endif %}
+  {% if element.values.ariaLabel and element.values.ariaLabelValue %}
+    aria-label={ {{ element.values.ariaLabelValue }} }
+  {% endif %}
   {% if element.values.useid %}
     id="{{ element.unique_id }}"
   {% elseif element.values.id %}
     id={{ element.values.id | textOrVariable }}
   {% endif %}
-  {% if element.values.className %}
-    className={ {{element.values.className|raw}} }
+  {% if element.values.class %}
+    className={ {{element.values.class|raw}} }
   {% endif %}
   {% if element.values.style %}
     style={ {{element.values.style}} }
@@ -141,7 +187,26 @@ helpText: Basic HTML Div element
     onMouseOver={(e) => {{element.values.onMouseOver}} }
   {% endif %}
   {% if element.values.onMouseOut %}
+  {% if element.values.onMouseOut starts with '() =>' or element.values.onMouseOut starts with '(e) =>' %}
     onMouseOut={ {{element.values.onMouseOut}} }
+  {% else %}
+    onMouseOut={(e) => {{element.values.onMouseOut}} }
+  {% endif %}
+  {% endif %}
+  {% if element.values.onScroll %}
+    onScroll={(e) => {{element.values.onScroll}} }
+  {% endif %}
+  {% if element.values.onTouchStart %}
+    onTouchStart={(e) => {{element.values.onTouchStart}} }
+  {% endif %}
+  {% if element.values.onTouchMove %}
+    onTouchMove={(e) => {{element.values.onTouchMove}} }
+  {% endif %}
+  {% if element.values.onTouchEnd %}
+    onTouchEnd={(e) => {{element.values.onTouchEnd}} }
+  {% endif %}
+  {% if element.values.onTransitionEnd %}
+    onTransitionEnd={(e) => {{element.values.onTransitionEnd}} }
   {% endif %}
 >
 {{ content | raw }}

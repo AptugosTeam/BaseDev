@@ -3,7 +3,7 @@ path: update.tpl
 completePath: elements/Fields/Image/update.tpl
 unique_id: hILFvubz
 */
-if (!options.req?.files && typeof data.{{ field.column_name | friendly }} !== 'undefined') updatedData['{{ field.column_name | friendly }}'] = data.{{ field.column_name | friendly }}
+if (!options.req?.files && typeof data.{{ field.column_name | friendly }} !== 'undefined') updatedData['{{ field.column_name | friendly }}'] = data.{{ field.column_name | friendly }}
 if (options.req?.files && options.req.files.{{ field.column_name | friendly }} && options.req.files.{{ field.column_name | friendly }}.data) {
     {% if field.s3 == '1' %}
       {% set theRegion = field.s3Region|default('us-east-2') %}
@@ -43,7 +43,15 @@ if (options.req?.files && options.req.files.{{ field.column_name | friendly }} &
             imageName = `${name}(${index})${extension}`;
         }
 
-        fs.writeFileSync(`${options.req.app.get('filesFolder')}/${imageName}`, options.req.files.{{ field.column_name | friendly }}.data)
+        {% if field.useWatermark == '1' %}
+          await imageWatermark(
+            options.req.files.{{ field.column_name | friendly }}.data,
+            `${options.req.app.get('filesFolder')}/${imageName}`
+          )
+        {% else %}
+          fs.writeFileSync(`${options.req.app.get('filesFolder')}/${imageName}`, options.req.files.{{ field.column_name | friendly }}.data)
+        {% endif %}
+        
         updatedData['{{ field.column_name | friendly }}'] = imageName
     {% endif %}
 }

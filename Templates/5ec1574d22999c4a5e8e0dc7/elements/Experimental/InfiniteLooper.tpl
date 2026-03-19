@@ -18,6 +18,11 @@ options:
       return [['right', 'Right'], ['left', 'Left']]
     settings:
       default: 'left'
+  - name: finalGap
+    display: Final Gap
+    type: text
+    settings:
+      default: '1'
 children: []
 */
 
@@ -32,6 +37,7 @@ import InfiniteLooper from '@components/InfiniteLooper/InfiniteLooper'
   {% if element.values.direction %}
     direction='{{ element.values.direction|default("left") }}'
   {% endif %}
+    finalGap={{ element.values.finalGap|default("1") | textOrVariable }}
 >   
   {{ content | raw }}
 </InfiniteLooper>

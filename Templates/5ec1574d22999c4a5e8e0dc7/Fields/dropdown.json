@@ -12,8 +12,8 @@ unique_id: 8H1LaeTw
     "frontEndType": "string",
     "extra": [
       {
-        "display": "Options",
-        "value": "options",
+        "display": "Default Value",
+        "value": "defaultValue",
         "type": "text"
       },
       {
@@ -30,6 +30,13 @@ unique_id: 8H1LaeTw
             "value": "btngroup"
           }
         ]
+      }
+    ],
+    "validations": [
+      {
+        "display": "Only allow specified options",
+        "value": "onlyAllowed",
+        "type": "checkbox"
       }
     ]
   }

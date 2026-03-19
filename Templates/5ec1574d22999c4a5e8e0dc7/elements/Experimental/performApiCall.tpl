@@ -29,6 +29,27 @@ options:
   - name: extraOptions
     display: Extra options
     type: text
+  - name: await
+    display: Await?
+    type: checkbox
+    options: ''
+    settings:
+      value: 'false'
+  - name: variableStore
+    display: store in variable?
+    type: checkbox
+    options: ''
+    advanced: true
+    settings:
+      value: 'false'
+  - name: variableStoreType
+    display: Variable Type
+    type: dropdown
+    options: const;let;existing let
+    advanced: true
+    settings:
+      propertyCondition: variableStore
+      condition: true
   - name: resultVar
     display: Result Variable Name
     type: text
@@ -51,12 +72,36 @@ import axios from 'axios'
 {% if element.values.urlFULL %}
 {% set url = settings.apiURL ~ element.values.url %}
 {% endif %}
-axios.{{ element.values.method|default('get') }}({{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %}, {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}).then({{ element.values.resultVar|default('result') }} => {
- {{ content | raw }}
-}).catch((error) => {
-  {% if element.values.onError %}
-    {{ element.values.onError }} 
+{% set storeName = element.values.resultVar | default('response') %}
+{% set storeType = element.values.variableStoreType | default('const') %}
+
+{% if element.values.variableStore %}
+  {% if storeType == 'existing let' %}
+    {{ storeName }} = {% if element.values.await %}await{% endif %} axios.{{ element.values.method|default('get') }}(
+      {{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %},
+      {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}
+    )
   {% else %}
-    console.error(error)
+    {{ storeType }} {{ storeName }} = {% if element.values.await %}await{% endif %} axios.{{ element.values.method|default('get') }}(
+      {{ url | textOrVariableInCode }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %},
+      {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}
+    )
   {% endif %}
-})
+{% else %}
+
+axios.{{ element.values.method|default('get') }}(
+    {{ url | textOrVariableInCode }}{% if element.values.dataVariable %},{{ element.values.dataVariable }}{% endif %}{% if element.values.extraOptions %},
+    {{ element.values.extraOptions | raw }}{% endif %}
+  )
+  .then({{ element.values.resultVar|default('result') }} => {
+    {{ content | raw }}
+  })
+  .catch((error) => {
+    {% if element.values.onError %}
+    {{ element.values.onError }}
+    {% else %}
+    console.error(error)
+    {% endif %}
+  })
+
+{% endif %}

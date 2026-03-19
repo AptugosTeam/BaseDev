@@ -11,6 +11,10 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: style
+    display: Extra Styles
+    type: text
+    options: ''  
   - name: disablePadding
     display: Disable Padding
     type: checkbox
@@ -23,6 +27,7 @@ import List from '@mui/material/List'
 <List
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   {% if element.values.disablePadding %}disablePadding={true}{% endif %}
+  {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
 >
 {{ content | raw }}
 </List>

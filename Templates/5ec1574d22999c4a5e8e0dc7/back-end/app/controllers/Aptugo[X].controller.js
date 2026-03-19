@@ -9,7 +9,7 @@ subtype: Aptugo
 children: []
 */
 
-
+{% set friendlyTableName = table.name | friendly %}
 const {{ table.name | friendly }} = require('../models/{{ table.name | friendly | lower }}.model.js')
 const fs = require('fs')
 const paginate = require('../paginate')
@@ -262,4 +262,25 @@ exports.delete = (options) => {
       })
   })
 }
+
+// Soft Delete a {{ table.singleName | friendly | lower }} with the specified ID in the request
+exports.softDelete = (options) => {
+  return new Promise((resolve, reject) => {
+    const params = options.req ? options.req.params : options
+    const id = params.ID
+
+    {{ table.name | friendly }}.findByIdAndUpdate(id, { isDeleted: true, deletedAt: new Date() }, { new: true })
+      .then((result) => {
+        if(!result) {
+          return reject({ message: 'Record not found', status: 404 })
+        }
+        resolve({ message: 'Record deleted', record: result })
+      })
+      .catch((e) => {
+        reject(e)
+      })
+  })
+}
+
+{{ insert_setting('controller' ~ friendlyTableName) | raw }}
 

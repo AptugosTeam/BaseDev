@@ -13,7 +13,8 @@ children: []
 {% set bpr %}
 import MUIDataTable, { Display, FilterType, MUIDataTableOptions, Responsive } from 'mui-datatables'
 import axios from 'axios'
-import NumberFormat from 'react-number-format'
+import Button from '@mui/material/Button'
+import { NumericFormat } from 'react-number-format'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
 
@@ -49,8 +50,7 @@ const DefaultStockMuiTableOptions = {
   const [clickedSymbol, setClickedSymbol] = React.useState('')
   const [modalShow, setModalShow] = React.useState(false)
 
-  const apiHost = 'https://api.fantasystockx.com'
-  const apiEndpoint = `${apiHost}/stocks/mui`
+
 
   const handleClick = (event: any): void => {
     const { target: { innerText } } = event
@@ -58,324 +58,58 @@ const DefaultStockMuiTableOptions = {
     setModalShow(true)
   }
 
-  const columns = [{
-    name: 'Sector',
-    options: {
-      // sort: false,
-      display: stockMuiTableOptions.displaySector,
-      sortDirection: sectorSortDirection,
-    },
-  }, {
-    name: 'Name',
-    options: {
-      // display: displayFalse,
-      // sort: false,
-      display: stockMuiTableOptions.displayName,
-      sortDirection: nameSortDirection,
-    }
-  }, {
-    name: 'Symbol',
-    options: {
-      customBodyRender: (value: any, tableMeta: any, updateValue: any) => (
-        <Button value={value} key={value} onClick={(event: any) => handleClick(event)}>{value}</Button>
-      ),
-      filter: false,
-      hint: 'click ticker symbol to trade',
-      // sort: t,
-      sortDirection: symbolSortDirection,
-    }
-  }, {
-    name: 'Price', options: {
-      customBodyRender: (value: any, tableMeta: any, updateValue: any) => (
-        <NumberFormat value={value} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-      ),
-      sortDirection: priceSortDirection,
-    },
-    // sort: sortColumn === 'Price' ? true : false,
-  }, {
-    name: '% ∆',
-    options: {
-      customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
-        let className = ''
-
-        if (value > 0) {
-          className = 'tickerGain'
-        } else if (value < 0) {
-          className = 'tickerLoss'
-        }
-
-        return (
-          <span className={className}>
-            <NumberFormat value={value} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} suffix={'%'} />
-          </span>
-        )
+    const columns = [ // Se tendria que crear con objetos dentro de la tabla
+    {
+      name: 'Curso',
+      options: {
+        // sort: false,
+        display: stockMuiTableOptions.displaySector,
+        sortDirection: sectorSortDirection,
       },
-      // sort: false,
-      sortDirection: percentChangeSortDirection,
-    }
-  }, {
-    name: '$ ∆',
-    options: {
-      customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
-        let className = ''
-
-        if (value > 0) {
-          className = 'tickerGain'
-        } else if (value < 0) {
-          className = 'tickerLoss'
-        }
-
-        return (
-          <span className={className}>
-            <NumberFormat value={value} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-          </span>
-        )
+    },
+    {
+      name: 'Clicks por usuario',
+      options: {
+        // display: displayFalse,
+        // sort: false,
+        display: stockMuiTableOptions.displayName,
+        sortDirection: nameSortDirection,
       },
-      // sort: false,
-      sortDirection: percentChangeSortDirection,
-    }
-  }, {
-    name: 'Target $', options: {
-      customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
-        if (value === 0 || value === '0') {
-          return <span>-</span>
-        }
-
-        return (
-          <NumberFormat value={value} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-        )
+    },
+    {
+      name: 'Clicks totales',
+      options: {
+        // display: displayFalse,
+        // sort: false,
+        display: stockMuiTableOptions.displayName,
+        sortDirection: nameSortDirection,
       },
-      sort: false,
-      // sortDirection: priceSortDirection,
     },
-      // sortDirection: priceSortDirection,
-    // },
-    // sort: sortColumn === 'Price' ? true : false,
-  }, {
-    name: 'T High $', options: {
-      customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
-        if (value === 0 || value === '0') {
-          return <span>-</span>
-        }
-
-        return (
-          <NumberFormat value={value} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-        )
+    {
+      name: 'Quiero inscribirme',
+      options: {
+        // display: displayFalse,
+        // sort: false,
+        display: stockMuiTableOptions.displayName,
+        sortDirection: nameSortDirection,
       },
-      display: false,
-      sort: false,
-      // sortDirection: priceSortDirection,
     },
-      // sortDirection: priceSortDirection,
-    // },
-    // sort: sortColumn === 'Price' ? true : false,
-  }, {
-    name: 'T Low $', options: {
-      customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
-        if (value === 0 || value === '0') {
-          return <span>-</span>
-        }
+  ]
 
-        return (
-          <NumberFormat value={value} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-        )
-      },
-      display: false,
-      sort: false,
-      // sortDirection: priceSortDirection,
+  const options = { 
+    download: true,
+    downloadOptions: {
+      filename: 'table.csv',
+      separator: ',', 
     },
-      // sortDirection: priceSortDirection,
-    // },
-    // sort: sortColumn === 'Price' ? true : false,
-  }, {
-    name: 'LC $', options: {
-      customBodyRender: (value: any, tableMeta: any, updateValue: any) => (
-        <NumberFormat value={value} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-      ),
-      display: false,
-      sort: false,
-      // sortDirection: priceSortDirection,
-    },
-    // sort: sortColumn === 'Price' ? true : false,
-  }, {
-    name: 'Earnings Date',
-    options: {
-      display: stockMuiTableOptions.displayEarningDate,
-      sort: false,
-      // sortDirection: nameSortDirection,
-    }
-  }, {
-    name: 'Rating',
-    options: {
-      customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
-        let className = ''
-
-        if (value === 'buy') {
-          className = 'tickerBuy'
-        } else if (value === 'sell') {
-          className = 'tickerSell'
-        }
-
-        return (
-          <span className={className}>
-            {value}
-          </span>
-        )
-      },
-      display: stockMuiTableOptions.displayRating,
-      sort: false,
-      // sortDirection: percentChangeSortDirection,
-    }
-  }, {
-    name: '52 Wk', options: {
-      customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
-        const pieces = value.split(' - ')
-        return (
-          <span>
-            <NumberFormat value={pieces[0]} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-             &nbsp;-&nbsp;
-            <NumberFormat value={pieces[1]} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-          </span>
-        )
-      },
-      sort: false,
-    }
-  }, {
-    name: 'EPS Avg', options: {
-      customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
-        if (value === 0 || value === '0') {
-          return <span>-</span>
-        }
-
-        return (
-          <NumberFormat value={value} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-        )
-      },
-      display: stockMuiTableOptions.displayEPS,
-      sort: false
-      // sortDirection: priceSortDirection,
-    },
-    // sort: sortColumn === 'Price' ? true : false,
-  }, {
-    name: 'P/E',
-    options: {
-      customBodyRender: (value: any, tableMeta: any, updateValue: any) => {
-        let className = ''
-
-        if (value === 0 || value === '0') {
-          return <span>-</span>
-        }
-
-        if (value >= 30) {
-          className = 'peVeryHigh'
-        } else if (value >= 20) {
-          className = 'peHigh'
-        } else if (value >= 10 && value <= 20) {
-          className = 'peNormal'
-        } else if (value < 10) {
-          className = 'peLow'
-        }
-
-        return (
-          <span className={className}>
-            <NumberFormat value={value} decimalScale={2} fixedDecimalScale={true} displayType={'text'} thousandSeparator={true} suffix={'x'} />
-          </span>
-        )
-      },
-      display: stockMuiTableOptions.displayPE,
-      sortDirection: priceEarningsSortDirection,
-    },
-  }, {
-    name: 'Vol',
-    options: {
-      display: false,
-      sort: false,
-    },
-  }, {
-    name: 'Shrs Out',
-    options: {
-      display: false,
-      sort: false,
-    },
-  }, {
-    name: 'Mkt Cap',
-    options: {
-      display: false,
-      sort: false,
-    },
-  }]
-
-  const options: MUIDataTableOptions = {
-    count,
-    FilterType: 'dropdown',
-    onChangePage: (currentPage: number) => {
-      // tslint:disable-next-line:no-console
-      // console.log('onChangePage1', { currentPage, page, rowsPerPage })
-
-      // TODO figure out a non-hack way to handle this
-      if (currentPage <= 0) {
-        if (currentPage < page) {
-          currentPage = page - 1
-        } else if (currentPage >= page) {
-          currentPage = page + 1
-        }
-      } else if (currentPage >= page) {
-        currentPage = page + 1
-      } else if (currentPage < page) {
-        currentPage = page - 1
-      }
-
-      setPage(currentPage)
-      // tslint:disable-next-line:no-console
-      // console.log('onChangePage2', { currentPage, page, rowsPerPage })
-
-      // API.post(apiEndpoint, { searchText, page: currentPage, limit: rowsPerPage, sortColumn, sortDirection, userId }).then(response => {
-      //   setData(response.data.Payload)
-      //   setCount(response.data.TotalRecordCount)
-      // })
-    },
-    onChangeRowsPerPage: (numberOfRows: number) => {
-      setRowsPerPage(numberOfRows)
-        // tslint:disable-next-line:no-console
-        // console.log('onChangeRowsPerPage', { numberOfRows, page, rowsPerPage })
-
-      // API.post(apiEndpoint, { searchText: '', page, limit: numberOfRows, sortColumn, sortDirection, userId }).then(response => {
-      //   setData(response.data.Payload)
-      //   setCount(response.data.TotalRecordCount)
-      // })
-    },
-    onColumnSortChange: (changedColumn: string, direction: string) => {
-      if (['Sector', 'Symbol', 'Name', 'Price', '% Change', 'P/E'].includes(changedColumn)) {
-        setSortColumn(changedColumn)
-        const columnSortDirection = direction === 'descending' ? 'desc' : 'asc'
-        setSortDirection(columnSortDirection)
-
-        // tslint:disable-next-line:no-console
-        // console.log('onColumnSortChange', { changedColumn, direction })
-
-        // API.post(apiEndpoint, { searchText, page, limit: rowsPerPage, sortColumn: changedColumn, sortDirection: direction, userId }).then(response => {
-        //   setData(response.data.Payload)
-        //   setCount(response.data.TotalRecordCount)
-        // })
-      }
-    },
-    onTableInit: (action, tableState) => {
-      axios.post(apiEndpoint, { searchText: '', page, limit: rowsPerPage }).then(response => {
-        setData(response.data.Payload)
-        setCount(response.data.TotalRecordCount)
-      })
-    },
-    page,
-    Responsive: 'scrollFullHeight',
-    rowHover: true,
-    rowsPerPage,
-    // searchOpen: tableOptions.searchOpen,
-    searchPlaceholder: 'search ticker, company name or sector...',
-    // searchText,
-    selectableRows: 'none',
-    selectableRowsHeader: false,
-    serverSide: true,
-  }
+    selectableRows: 'none', 
+    pagination: false, 
+    search: false, 
+    filter: false, 
+    print: false, 
+    viewColumns: false, 
+    responsive: 'simple', 
+  };
 {% endset %}
 {{ save_delayed('ph',ph) }}
 <MUIDataTable

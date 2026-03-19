@@ -18,14 +18,17 @@ export default function JoditSetup(props) {
     overrides,
   } = props;
 
-  let config = {
-    enableDragAndDropFileToEditor: false,
+  const config = React.useMemo(() => ({
+    enableDragAndDropFileToEditor: true,
     readonly: readOnly,
     iframe: false,
     theme: darkMode ? "dark" : undefined,
     showPlaceholder: false,
     image: { openOnDblClick: false },
     toolbarButtonSize: "small",
+    uploader: {
+      insertImageAsBase64URI: true,
+    },
     minWidth: "100%",
     tabIndex: 0,
     allowResizeY: false,
@@ -42,9 +45,22 @@ export default function JoditSetup(props) {
         tooltip: "Attach Files",
       },
     },
-    events: { paste: onPaste, drop: onDrop },
+    events: {
+      click: (event) => {
+        if (event.target.tagName === "A") {
+          window.open(event.target.href, "_blank");
+          event.preventDefault();
+        }
+      },
+      paste: onPaste,
+      drop: onDrop
+    },
+    askBeforePasteHTML: false,
+    askBeforePasteFromWord: false,
+    processPasteHTML: true,
+    processPasteFromWord: true,
     ...overrides,
-  };
+  }), [darkMode, readOnly, overrides])
 
   function executeToggle(e) {
     e.toggleFullSize();

@@ -17,7 +17,7 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table'
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import styles from './table.module.scss'
 import AptugoDataTableTH from './thHeader'
 

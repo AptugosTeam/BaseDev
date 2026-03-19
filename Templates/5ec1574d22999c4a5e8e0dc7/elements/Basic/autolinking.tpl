@@ -2,7 +2,7 @@
 path: autolinking.tpl
 type: file
 unique_id: Gzc1T1q0
-icon: ico-auto-linking
+icon: ico-autolinking
 sourceType: javascript
 options:
   - name: fromLink

@@ -8,7 +8,7 @@ internalUse: true
 prevent_delete: true
 children: []
 */
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import baseClasses from '@components/Themes/layout.module.scss'
 {% for delay in delayed %}
   {{ delay }}

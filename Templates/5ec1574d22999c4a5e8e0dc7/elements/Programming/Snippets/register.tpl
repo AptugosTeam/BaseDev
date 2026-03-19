@@ -102,6 +102,10 @@ options:
     settings:
       default: 'en'
     advanced: true
+  - name: url
+    display: Custom User Endpoint URL (optional)
+    type: text
+    advanced: true
 children: []
 */
 {% set bpr %}
@@ -123,7 +127,14 @@ AuthService.register({{ element.values.Data }}{% if element.values.loginOptions 
       {% if element.values.validationMessage %} message: {{ element.values.validationMessage }},{% endif %}
     }
     {% endif %} 
-  }{% endif %} 
+  }{% endif %}
+  {% if element.values.url %}
+   {% if not element.values.loginOptions and not element.values.validate and not element.values.lang %}
+    , undefined, {{ element.values.url }}
+   {% else %}
+    , {{ element.values.url }}
+    {% endif %}
+  {% endif %}
 ).then(_result => {
     {% if element.values.code %}
       {{ element.values.code }}

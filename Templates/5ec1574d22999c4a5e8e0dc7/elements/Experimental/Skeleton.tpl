@@ -4,6 +4,7 @@ type: file
 unique_id: skeleton666
 icon: f:Skeleton.svg
 helpText: Display a placeholder preview of your content before the data gets loaded to reduce load-time frustration.
+internalUse: true
 children: []
 options:
   - name: variant

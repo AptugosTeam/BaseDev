@@ -9,18 +9,20 @@ import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import TableSortLabel from '@mui/material/TableSortLabel'
 import TableRow from '@mui/material/TableRow'
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import styles from './table.module.scss'
 
 interface tableProps extends React.PropsWithChildren {
   addProcedure?: Function
   addTitle?: string
   addText?: string
+  rowClassName?: string
   tableData: Array<Array<string>> | Array<any>
   tableHead: string[]
   orderBy?: string
   order?: 'asc' | 'desc'
   onRequestSort?: Function
+  onRowClick?: (rowData: any) => void;
 }
 
 const TableHeader = (tableProps) => {
@@ -96,8 +98,9 @@ const AptugoTable: FunctionComponent<tableProps> = (props) => {
         <TableBody>
           {props.tableData?.map((row, key) => {
             const fields = Object.values(row)
+            const rowClass = typeof props.rowClassName === 'function' ? props.rowClassName(row) : props.rowClassName
             return (
-              <TableRow key={key} className={styles.tableBodyRow}>
+              <TableRow key={key} className={rowClass || styles.tableBodyRow} onClick={() => props.onRowClick && props.onRowClick(row)} >
                 {Array.isArray(props.children)
                   ? RenderCells({...row, key})
                   : fields.map((field:React.ReactNode, subkey) => (

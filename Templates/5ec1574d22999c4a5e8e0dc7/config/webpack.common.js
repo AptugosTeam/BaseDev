@@ -24,6 +24,7 @@ module.exports = {
       '@services': resolve(__dirname, '../', 'front-end/services'),
       '@store': resolve(__dirname, '../', 'front-end/store'),
       '@helpers': resolve(__dirname, '../', 'front-end/helpers'),
+      '@hooks': resolve(__dirname, '../', 'front-end/hooks'),
       "react/jsx-dev-runtime.js": "react/jsx-dev-runtime",
       "react/jsx-runtime.js": "react/jsx-runtime",
     },
@@ -59,7 +60,7 @@ module.exports = {
               localIdentName: "[path][name]__[local]--[hash:base64:5]",
             },
           }
-        }, { loader: 'sass-loader', options: { sourceMap: true } }]
+        }, { loader: 'sass-loader', options: { api: "modern", sourceMap: true } }]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,

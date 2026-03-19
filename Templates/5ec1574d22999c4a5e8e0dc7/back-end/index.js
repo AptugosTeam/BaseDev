@@ -5,7 +5,7 @@ unique_id: QOxu9q3o
 children: []
 */
 const dotenv = require('dotenv')
-dotenv.config({ path: './config/.env.development' })
+dotenv.config({ path: `${__dirname}/config/.env.development` })
 const fs = require('fs')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -59,10 +59,7 @@ mongoose.Promise = global.Promise
 
 // Connecting to the database
 mongoose.set('strictQuery', false);
-mongoose.connect(dbConfig.url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
+mongoose.connect(dbConfig.url).then(() => {
   console.log("Successfully connected to the database")  
 }).catch(err => {
   console.log('Could not connect to the database. Exiting now...', err)

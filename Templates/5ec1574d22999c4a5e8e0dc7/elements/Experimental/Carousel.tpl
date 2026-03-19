@@ -32,7 +32,9 @@ import Carousel from '@components/Carousel/Carousel'
     height='{{ element.values.height }}'
     {% if element.values.autoplay %}autoPlay={true}{% else %}autoPlay={false}{% endif %}
     arrowsOrDotsMethod='{{ element.values.arrowsOrDotsMethod }}'
-    {% if element.values.showSlide %}showSlide={ {{ element.values.showSlide }} }{% endif %}
+    showSlide={ {{ element.values.showSlide | default(0) }} }
+    {% if element.values.arrowsOrDotsMethod == 'dots' %}dots={true}{% else %}dots={false}{% endif %}
+    {% if element.values.arrowsOrDotsMethod == 'arrows' %}arrows={true}{% else %}arrows={false}{% endif %}
 >   
     {{ content | raw }}
 </Carousel>

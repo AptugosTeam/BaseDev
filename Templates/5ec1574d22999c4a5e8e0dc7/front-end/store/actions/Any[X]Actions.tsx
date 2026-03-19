@@ -30,11 +30,21 @@ export enum {{ table.name | friendly | capitalize }}ActionTypes {
   REMOVING_{{ table.singleName | friendly | upper }} = '{{ table.name | friendly | lower }}/removing',
   REMOVED_{{ table.singleName | friendly | upper }} = '{{ table.name | friendly | lower }}/removed',
   REMOVING_{{ table.singleName | friendly | upper }}_FAILED = '{{ table.name | friendly | lower }}/removing_failed',
+
+  SOFT_REMOVE_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/soft_remove',
+  SOFT_REMOVING_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/soft_removing',
+  SOFT_REMOVED_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/soft_removed',
+  SOFT_REMOVING_{{ table.name | friendly | upper }}_FAILED = '{{ table.name | friendly | lower }}/soft_removing_failed',
   
   EDIT_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/edit',
   EDITING_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/editing',
   EDITED_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/edited',
-  EDITING_{{ table.name | friendly | upper }}_FAILED = '{{ table.name | friendly | lower }}/editing_failed'
+  EDITING_{{ table.name | friendly | upper }}_FAILED = '{{ table.name | friendly | lower }}/editing_failed',
+
+  VIEW_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/view',
+  VIEWING_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/viewing',
+  VIEWED_{{ table.name | friendly | upper }} = '{{ table.name | friendly | lower }}/viewed',
+  VIEWING_{{ table.name | friendly | upper }}_FAILED = '{{ table.name | friendly | lower }}/viewing_failed'
 }
 
 export function search{{ table.name | friendly | capitalize }}(searchOptions: TSearchOptions | string, keep?: boolean): ISearch{{ table.name | friendly | capitalize }}Action {
@@ -151,6 +161,35 @@ export function removing{{ table.singleName | friendly | capitalize }}Failed(): 
   }
 }
 
+export function softRemove{{ table.name | friendly | capitalize }}({{ table.singleName | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item): ISoftRemove{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.SOFT_REMOVE_{{ table.name | friendly | upper }},
+    payload: {{ table.singleName | friendly | lower }}
+  }
+}
+
+export function softRemoving{{ table.name | friendly | capitalize }}(): ISoftRemoving{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.SOFT_REMOVING_{{ table.name | friendly | upper }},
+  }
+}
+
+export function softRemoved{{ table.name | friendly | capitalize }}({{ table.singleName | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item): ISoftRemoved{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.SOFT_REMOVED_{{ table.name | friendly | upper }},
+    payload: {{ table.singleName | friendly | lower }}
+  }
+}
+
+export function softRemoving{{ table.name | friendly | capitalize }}Failed(errData: { data: { message: string, field?: string }, status: number }): ISoftRemoving{{ table.name | friendly | capitalize }}FailedAction {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.SOFT_REMOVING_{{ table.name | friendly | upper }}_FAILED,
+    message: errData.data.message,
+    status: errData.status,
+    field: errData.data.field,
+  }
+}
+
 export function edit{{ table.name | friendly | capitalize }}({{ table.singleName | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item): IEdit{{ table.name | friendly | capitalize }}Action {
   return {
     type: {{ table.name | friendly | capitalize }}ActionTypes.EDIT_{{ table.name | friendly | upper }},
@@ -171,11 +210,41 @@ export function edited{{ table.name | friendly | capitalize }}({{ table.name | f
   }
 }
 
-export function editing{{ table.name | friendly | capitalize }}Failed(): IEditing{{ table.name | friendly | capitalize }}FailedAction {
+export function editing{{ table.name | friendly | capitalize }}Failed(errData: { data: { message: string, field?: string }, status: number }): IEditing{{ table.name | friendly | capitalize }}FailedAction {
   return {
     type: {{ table.name | friendly | capitalize }}ActionTypes.EDITING_{{ table.name | friendly | upper }}_FAILED,
+    message: errData.data.message,
+    status: errData.status,
+    field: errData.data.field,
   }
 }
+
+export function view{{ table.name | friendly | capitalize }}({{ table.singleName | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item): IView{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.VIEW_{{ table.name | friendly | upper }},
+    payload: {{ table.singleName | friendly | lower }}
+  }
+}
+
+export function viewing{{ table.name | friendly | capitalize }}(): IViewing{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.VIEWING_{{ table.name | friendly | upper }},
+  }
+}
+
+export function viewed{{ table.name | friendly | capitalize }}({{ table.name | friendly | lower }}: I{{ table.name | friendly | capitalize }}Item): IViewed{{ table.name | friendly | capitalize }}Action {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.VIEWED_{{ table.name | friendly | upper }},
+    payload: {{ table.name | friendly | lower }}
+  }
+}
+
+export function viewing{{ table.name | friendly | capitalize }}Failed(): IViewing{{ table.name | friendly | capitalize }}FailedAction {
+  return {
+    type: {{ table.name | friendly | capitalize }}ActionTypes.VIEWING_{{ table.name | friendly | upper }}_FAILED,
+  }
+}
+
 
 type TSearchOptions = {
   searchString?: string
@@ -272,6 +341,27 @@ export interface IRemoving{{ table.singleName | friendly | capitalize }}FailedAc
   type: {{ table.name | friendly | capitalize }}ActionTypes.REMOVING_{{ table.singleName | friendly | upper }}_FAILED
 }
 
+export interface ISoftRemove{{ table.name | friendly | capitalize }}Action {
+  type: {{ table.name | friendly | capitalize }}ActionTypes.SOFT_REMOVE_{{ table.name | friendly | upper }}
+  payload: I{{ table.name | friendly | capitalize }}Item
+}
+
+export interface ISoftRemoving{{ table.name | friendly | capitalize }}Action {
+  type: {{ table.name | friendly | capitalize }}ActionTypes.SOFT_REMOVING_{{ table.name | friendly | upper }}
+}
+
+export interface ISoftRemoved{{ table.name | friendly | capitalize }}Action {
+  type: {{ table.name | friendly | capitalize }}ActionTypes.SOFT_REMOVED_{{ table.name | friendly | upper }},
+  payload: I{{ table.name | friendly | capitalize }}Item
+}
+
+export interface ISoftRemoving{{ table.name | friendly | capitalize }}FailedAction {
+  type: {{ table.name | friendly | capitalize }}ActionTypes.SOFT_REMOVING_{{ table.name | friendly | upper }}_FAILED
+  message: string;
+  status: number;
+  field?: string;
+}
+
 export interface IEdit{{ table.name | friendly | capitalize }}Action {
   type: {{ table.name | friendly | capitalize }}ActionTypes.EDIT_{{ table.name | friendly | upper }}
   payload: I{{ table.name | friendly | capitalize }}Item
@@ -288,14 +378,35 @@ export interface IEdited{{ table.name | friendly | capitalize }}Action {
 
 export interface IEditing{{ table.name | friendly | capitalize }}FailedAction {
   type: {{ table.name | friendly | capitalize }}ActionTypes.EDITING_{{ table.name | friendly | upper }}_FAILED
+  message: string;
+  status: number;
+  field?: string;
+}
+
+export interface IView{{ table.name | friendly | capitalize }}Action {
+  type: {{ table.name | friendly | capitalize }}ActionTypes.VIEW_{{ table.name | friendly | upper }}
+  payload: I{{ table.name | friendly | capitalize }}Item
+}
+
+export interface IViewing{{ table.name | friendly | capitalize }}Action {
+  type: {{ table.name | friendly | capitalize }}ActionTypes.VIEWING_{{ table.name | friendly | upper }}
+}
+
+export interface IViewed{{ table.name | friendly | capitalize }}Action {
+  type: {{ table.name | friendly | capitalize }}ActionTypes.VIEWED_{{ table.name | friendly | upper }}
+  payload: I{{ table.name | friendly | capitalize }}Item
+}
+
+export interface IViewing{{ table.name | friendly | capitalize }}FailedAction {
+  type: {{ table.name | friendly | capitalize }}ActionTypes.VIEWING_{{ table.name | friendly | upper }}_FAILED
 }
 
 export type {{ table.name | friendly | capitalize }}Action = 
-  | ISearch{{ table.name | friendly | capitalize }}Action
+  | ISearch{{ table.name | friendly | capitalize }}Action
   | ISearching{{ table.name | friendly | capitalize }}Action
   | IFound{{ table.name | friendly | capitalize }}Action
   | ISearching{{ table.name | friendly | capitalize }}FailedAction
-  | ILoad{{ table.name | friendly | capitalize }}Action
+  | ILoad{{ table.name | friendly | capitalize }}Action
   | ILoading{{ table.name | friendly | capitalize }}Action
   | ILoaded{{ table.name | friendly | capitalize }}Action
   | ILoading{{ table.name | friendly | capitalize }}FailedAction
@@ -307,7 +418,15 @@ export type {{ table.name | friendly | capitalize }}Action =
   | IRemoving{{ table.singleName | friendly | capitalize }}Action
   | IRemoved{{ table.singleName | friendly | capitalize }}Action
   | IRemoving{{ table.singleName | friendly | capitalize }}FailedAction
+  | ISoftRemove{{ table.name | friendly | capitalize }}Action
+  | ISoftRemoving{{ table.name | friendly | capitalize }}Action
+  | ISoftRemoved{{ table.name | friendly | capitalize }}Action
+  | ISoftRemoving{{ table.name | friendly | capitalize }}FailedAction
   | IEdit{{ table.name | friendly | capitalize }}Action
   | IEditing{{ table.name | friendly | capitalize }}Action
   | IEdited{{ table.name | friendly | capitalize }}Action
   | IEditing{{ table.name | friendly | capitalize }}FailedAction
+  | IView{{ table.name | friendly | capitalize }}Action
+  | IViewing{{ table.name | friendly | capitalize }}Action
+  | IViewed{{ table.name | friendly | capitalize }}Action
+  | IViewing{{ table.name | friendly | capitalize }}FailedAction

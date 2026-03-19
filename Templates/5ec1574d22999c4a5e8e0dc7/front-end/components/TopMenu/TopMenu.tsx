@@ -5,7 +5,7 @@ unique_id: 4yBozeZw
 */
 import Button from '@mui/material/Button'
 import clsx from 'clsx'
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import { NavLink } from 'react-router-dom'
 import classes from './topmenu.module.scss'
 

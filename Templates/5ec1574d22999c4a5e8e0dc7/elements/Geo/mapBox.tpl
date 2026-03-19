@@ -14,6 +14,9 @@ options:
   - name: onMapIdle
     display: On Map Idle
     type: function
+  - name: onMoveEnd
+    display: On Map Move (e)
+    type: function
   - name: onClick
     display: On Click
     type: function
@@ -93,7 +96,7 @@ options:
     settings:
       default: true
   - name: dragRotate
-    display: Drag Pan
+    display: Drag Rotate
     type: checkbox
     settings:
       default: true
@@ -140,7 +143,7 @@ options:
     settings:
       default: 'bottom-left'
   - name: maxBounds
-    display: MAx Bounds
+    display: Max Bounds
     type: text
   - name: maxPitch
     display: Max Pitch
@@ -246,14 +249,20 @@ options:
   - name: zoom
     display: Zoom
     type: text
-  - name: maxBounds
-    display: Max bounds
-    type: text
-    settings:
-      default: 0
   - name: circleColor
     display: Cluster circle color
     type: text
+  - name: modifyOnLoad
+    display: Modify load field
+    type: checkbox
+    settings:
+      default: false
+  - name: onLoad
+    display: on load field
+    type: code
+    settings:
+      propertyCondition: modifyOnLoad
+      condition: true
 extraFiles:
   - source: 'elements/Geo/MapBox/mapbox.css'
     destination: 'front-end/components/MapBox/mapbox.css'
@@ -267,7 +276,7 @@ settings:
 */
 {% set bpr %}
   import '@components/MapBox/mapbox.css'
-  import Map, { Layer, Source, NavigationControl, ScaleControl, MapRef} from 'react-map-gl'
+  import Map, { Popup, Layer, Source, NavigationControl, ScaleControl, MapRef} from 'react-map-gl'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% if element.values.navigationControl %}
@@ -350,28 +359,35 @@ export const unclusteredPointLayer: LayerProps = {
     ref={mapRef}
     mapStyle={{ element.values.style |default('mapbox://styles/mapbox/light-v9') | textOrVariable }}
     mapboxAccessToken='{{ element.values.accessToken }}'
-    onLoad={(e) => {
-      if (mapRef.current) {
-        const loadURL = (url) => {
-          return axios.get(url, { responseType: 'arraybuffer' }).then(response => {
-            const imageBlob = new Blob([response.data], { type: 'image/jpeg' })
-            return URL.createObjectURL(imageBlob)
-          })
-        }
-        
-        mapRef.current.on('styleimagemissing', (e) => {
-          loadURL(e.id).then(response => {
-            mapRef.current.loadImage(response, (error, image) => {
-              if (error) return
-              mapRef.current.addImage(e.id, image)
+    {% if element.values.modifyOnLoad %}
+      onLoad={(e) => { {{ element.values.onLoad }} }}
+    {% else %}
+      onLoad={(e) => {
+        if (mapRef.current) {
+          const loadURL = (url) => {
+            return axios.get(url, { responseType: 'arraybuffer' }).then(response => {
+              const imageBlob = new Blob([response.data], { type: 'image/jpeg' })
+              return URL.createObjectURL(imageBlob)
+            })
+          }
+          
+          mapRef.current.on('styleimagemissing', (e) => {
+            loadURL(e.id).then(response => {
+              mapRef.current.loadImage(response, (error, image) => {
+                if (error) return
+                mapRef.current.addImage(e.id, image)
+              })
             })
           })
-        })
-      }
-    }}
+        }
+      }}
+    {% endif %}
+    {% if element.values.onMoveEnd %}
+      onMoveEnd={(e) => { {{ element.values.onMoveEnd }} }}
+    {% endif %}
     {% if element.values.maxBounds %}maxBounds={ {{ element.values.maxBounds }} }{% endif %}
     onIdle={onMapIdle}
-    {% if onPressArray %}
+    {% if onPressArray and not element.values.onClick  %}
       onClick={async(pressedShape) => { {{ onPressArray | join | raw }} }}
     {% endif %}
 {% if element.values.onClick %}onClick={ {{ element.values.onClick | functionOrCall }} }{% endif %}

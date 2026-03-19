@@ -10,6 +10,20 @@ options:
     display: ClassName
     type: styles
     options: ''
+  - name: key
+    display: Key
+    type: text
+    options: ''
+  - name: ref
+    display: Use ref
+    type: text
+    options: ''
+  - name: niceArrows
+    display: Show nice arrows
+    type: checkbox
+    options: ''
+    settings:
+      default: false
   - name: minimumTouchDrag
     display: Distance to swipe to the next slide
     type: text
@@ -217,6 +231,12 @@ options:
     options: ''
     settings:
       default: false
+  - name: centerModeVariable
+    display: Use a variable for Center mode
+    type: text
+    settings:
+      condition: true
+      propertyCondition: centerMode
   - name: infinite
     display: Enable Infinite mode
     type: checkbox
@@ -246,6 +266,12 @@ import "react-multi-carousel/lib/styles.css";
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <Carousel
+{% if element.values.key %}
+  key={ {{ element.values.key }} }
+{% endif %}
+{% if element.values.ref %}
+  ref={ {{ element.values.ref }} }
+{% endif %}
 {% if element.values.className %}
   className={ {{ element.values.className }} }
 {% endif %}
@@ -256,8 +282,30 @@ import "react-multi-carousel/lib/styles.css";
   itemClass={ {{ element.values.itemClass }} }
 {% endif %}
 {% if element.values.arrows %}
-  arrows
+  arrows={true}
+{% else %}
+  arrows={false}
 {% endif %}
+{% if element.values.niceArrows %}
+            customLeftArrow={
+            <button className={theme.arrowLeft}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24">
+                <path d="M15 6l-6 6 6 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          }
+              customRightArrow={
+              <button className={theme.arrowRight}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24">
+                  <path d="M9 6l6 6-6 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            }
+{% endif %}
+
+
+
+
 {% if element.values.showDots %}
   showDots={true}
 {% endif %}
@@ -273,7 +321,11 @@ import "react-multi-carousel/lib/styles.css";
   draggable={false}
 {% endif %}
 {% if element.values.centerMode %}
-  centerMode={true}
+  {% if element.values.centerModeVariable %}
+    centerMode={ {{ element.values.centerModeVariable }} }
+  {% else %}
+    centerMode={true}
+  {% endif %}
 {% endif %}
 {% if element.values.infinite %}
   infinite={true}

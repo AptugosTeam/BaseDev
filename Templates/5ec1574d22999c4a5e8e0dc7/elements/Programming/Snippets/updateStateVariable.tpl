@@ -3,7 +3,7 @@ path: updateStateVariable.tpl
 completePath: elements/Programming/Snippets/updateStateVariable.tpl
 type: file
 unique_id: updateStateVariable
-icon: f:../../Z-Icons/updateStateVariable.svg
+icon: f:updateStateVariable.svg
 sourceType: javascript
 helpText: Updates the value of a state variable
 options:
@@ -17,4 +17,4 @@ options:
     options: ''  
 children: []
 */
-set{{ element.values.variable }}({{ element.values.newvalue}})
+set{{ element.values.variable }}({% if element.children %}{{ content | raw }}{% else %}{{ element.values.newvalue}}{% endif %})

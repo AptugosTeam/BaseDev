@@ -5,7 +5,7 @@ unique_id: T3LtVHwT
 */
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import React, { FunctionComponent } from 'react';
+import React, { type FunctionComponent } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 

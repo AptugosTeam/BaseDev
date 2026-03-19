@@ -23,6 +23,9 @@ options:
   - name: keyprops
     display: Prop Keys (optional) 
     type: text
+  - name: interface
+    display: Interface (optional) 
+    type: text
   - name: useIt
     display: Also use it
     type: checkbox

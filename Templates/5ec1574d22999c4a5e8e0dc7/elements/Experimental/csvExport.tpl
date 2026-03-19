@@ -26,6 +26,15 @@ options:
     type: dropdown
     options: 
       return [[';', 'Semicolon'],[',', 'Comma']]
+  - name: style
+    display: Extra Styles
+    type: text
+    options: ''
+  - name: ref
+    display: Use Reference
+    type: text
+    options: ''
+    advanced: true
 settings:
   - name: Packages
     value: '"react-csv": "^2.0.3",'
@@ -44,9 +53,15 @@ import { CSVLink } from "react-csv"
   headers={ {{element.values.headers}} }
   {% endif %}
   {% if element.values.filename %}
-  filename={ {{element.values.filename}} }
+  filename={{ element.values.filename | textOrVariable }}
   {% endif %}
   {% if element.values.separator %}
   separator={"{{element.values.separator}}"}
+  {% endif %}
+  {% if element.values.style %}
+  style={ {{element.values.style}} }
+  {% endif %}
+  {% if element.values.ref %}
+    ref={ {{element.values.ref}} }
   {% endif %}
 >{{ content|raw }}</CSVLink>

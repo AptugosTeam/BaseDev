@@ -5,7 +5,13 @@ unique_id: dDixye51
 */
 import axios from 'axios'
 
-const API_URL = '{{ settings.apiURL }}/api/users/'
+{% set url = settings.apiURL ~ '/api/' %}
+{% set customUrl = insert_setting('customApiUrl') %}
+{% if customUrl %}
+const API_URL = `{{ customUrl }}/api/`
+{% else %}
+const API_URL = '{{ url }}'
+{% endif %}
 
 interface LoginOptions {
   remember?: boolean;
@@ -25,10 +31,20 @@ interface RecoverOptions {
 }
 
 class AuthService {
+  private apiUrl: string;
+
+  constructor(endpoint: string = 'users') {
+    this.apiUrl = API_URL + endpoint + '/';
+  }
+
+  public setEndpoint(endpoint: string) {
+    this.apiUrl = API_URL + endpoint + '/';
+  }
+
   login(email, password, options: LoginOptions = {}) {
     const { remember = true} = options
     return axios
-      .post(API_URL + 'authenticate', {
+      .post(this.apiUrl + 'authenticate', {
         email,
         password,
         options,
@@ -55,7 +71,7 @@ class AuthService {
 
   loginWithSession(email, password, fullUser = true, fieldsToRetrieve = [], lang = 'en') {
     return axios
-      .post(API_URL + 'authenticate', {
+      .post(this.apiUrl + 'authenticate', {
         email,
         password,
         fullUser,
@@ -74,7 +90,7 @@ class AuthService {
   socialLogin(data){
     console.log("Authservice",data)
     return axios
-      .post(API_URL + 'socialauthenticate', {
+      .post(this.apiUrl + 'socialauthenticate', {
         data
       })
       .then((response) => {
@@ -95,21 +111,24 @@ class AuthService {
     sessionStorage.removeItem('tokenSession');
   }
 
-  register(data, options: LoginOptions = {}) {
+  register(data, options: LoginOptions = {}, url = this.apiUrl) {
     const { validate = false, lang = 'en' } = options;
     const messages = {
       en: {
-        success: 'Successful registration, check your email to validate your account',
+        success: 'Registration successful. Check your inbox or spam folder to confirm your account',
         invalidEmailSettings: 'Invalid settings for validation email',
       },
       es: {
-        success: 'Registro exitoso, revisa tu correo electrónico para validar tu cuenta',
+        success: 'Registro realizado con éxito. Revisa tu bandeja de entrada o spam para confirmar tu cuenta',
         invalidEmailSettings: 'Configuración inválida para la verificación por email',
       },
     };
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' },
+    }
 
     return axios
-      .post(API_URL, data)
+      .post(url, data, config)
       .then((_result) => {
         if (validate) {
           if (
@@ -137,7 +156,7 @@ class AuthService {
 
   registerWithSession(data) {
     const { fullUser = true , fieldsToRetrieve = [] } = data
-    return axios.post(API_URL, data).then((_result) => {
+    return axios.post(this.apiUrl, data).then((_result) => {
         return this.loginWithSession(data.Email, data.Password, fullUser, fieldsToRetrieve).then((afterLogin) => { return afterLogin})
       }).catch(e => { throw e })
   }
@@ -152,7 +171,7 @@ class AuthService {
 
   recoverPassword({ email, subject, message, name, model = '', lang = 'en', username = '' }) {
     return axios
-      .post(API_URL + 'recoverpassword', {
+      .post(this.apiUrl + 'recoverpassword', {
         email,
         subject,
         message,
@@ -168,7 +187,7 @@ class AuthService {
 
   checkNonce(nonce, email) {
     return axios
-      .post(API_URL + 'checknonce', {
+      .post(this.apiUrl + 'checknonce', {
         nonce,
         email,
       })
@@ -181,6 +200,7 @@ class AuthService {
         throw e;
       });
   }
+{{ insert_setting('auth.service') | raw}}
 }
 
 export default new AuthService()

@@ -4,7 +4,7 @@ keyPath: elements/Experimental/DataTable/thHeader.tsx
 unique_id: N4ewiTpp
 */
 import { flexRender } from '@tanstack/react-table'
-import React, { FunctionComponent } from 'react'
+import React, { type FunctionComponent } from 'react'
 import styles from './table.module.scss'
 
 const AptugoDataTableTH: FunctionComponent<any> = (props) => {

@@ -18,5 +18,5 @@ import AuthService from '@services/auth.service'
 {{ save_delayed('bpr',bpr)}}
 AuthService.logout().then(
   (res) => {
-    navigation.push('{{ (element.values.Logout | elementData).path }}')
+    navigation.push('{{ (element.values.OnLogout | elementData).path }}')
   })

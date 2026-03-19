@@ -25,16 +25,18 @@ options:
     display: Debug Mode
     type: checkbox
     advanced: true
+  - name: key
+    display: React Key
+    type: text
+    advanced: true  
 */
 {% set bpr %}
 import { View } from '@react-pdf/renderer'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
 <View
-  {% if element.values.wrap %}
-    wrap={ {{ element.values.wrap }} }
-  {% endif %}
-  {% if element.values.style %}
+   wrap={ {{ element.values.wrap | default('false') }} }
+   {% if element.values.style %}
     style={ {{ element.values.style | raw }} }
   {% endif %}
   {% if element.values.debug %}
@@ -45,6 +47,9 @@ import { View } from '@react-pdf/renderer'
   {% endif %}
   {% if element.values.render %}
     render={ {{ element.values.render |functionOrCall }} }
+  {% endif %}
+  {% if element.values.key %}
+    key={ {{ element.values.key | raw }} }
   {% endif %}
 >
   {{ content | raw }}

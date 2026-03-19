@@ -44,6 +44,12 @@ options:
     display: Autoplay
     type: checkbox
     options: ''
+  - name: centeredSlides
+    display: Enable Center Slides
+    type: checkbox
+    options: ''
+    settings:
+      default: false
   - name: delay
     display: Delay (ms)
     type: text
@@ -64,6 +70,10 @@ options:
   - name: onChange
     display: When Active Index Changes
     type: text
+  - name: breakpoints
+    display: Breakpoints
+    type: text
+    options: ''
   - name: effectCards
     display: Effect - Cards
     type: checkbox
@@ -120,6 +130,9 @@ import { EffectCards } from 'swiper'
     {% else %}
       loop={true}
     {% endif %}
+    {% if element.values.centeredSlides %}
+      centeredSlides={true}
+    {% endif %}
     {% if element.values.navigation %}
     {% else %}
       navigation={true}
@@ -143,6 +156,9 @@ import { EffectCards } from 'swiper'
         delay: {{ element.values.delay | default(2500) }},
         disableOnInteraction: false
       } }
+    {% endif %}
+   {% if element.values.breakpoints %}
+      breakpoints={ {{ element.values.breakpoints }} }
     {% endif %}
     {% if element.values.onSlideNextTransitionStart %}
        onSlideNextTransitionStart={() => {

@@ -74,6 +74,11 @@ unique_id: 5wQBTRfF
         "display": "Auto increment",
         "value": "autoincrement",
         "type": "checkbox"
+      },
+      {
+        "display": "Requires a value",
+        "value": "required",
+        "type": "checkbox"
       }
     ]
   }

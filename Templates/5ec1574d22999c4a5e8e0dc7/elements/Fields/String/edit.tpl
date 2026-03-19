@@ -19,6 +19,9 @@ import TextField from '@mui/material/TextField'
     {% if element.values.maxLength %}
         inputProps={ { maxLength: {{ element.values.maxLength }}, } }
     {% endif %}
+    {% if element.values.inputRef %}
+        inputRef={ {{ element.values.inputRef }} }
+    {% endif %}
     {% if element.values.Autofocus %}autoFocus{% endif %}
     {% if element.values.DisableVariable %}disabled={ {{ element.values.DisableVariable }} }{% endif %}
     {% if field.placeholder %}placeholder={{ field.placeholder | textOrVariable }}{% endif %}

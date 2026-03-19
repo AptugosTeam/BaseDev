@@ -14,6 +14,10 @@ options:
     display: On Click
     type: function
     options: ''
+  - name: value
+    display: Value
+    type: text
+    options: ''
   - name: separator
     display: Advanced Properties
     type: separator
@@ -37,6 +41,9 @@ childs:
 <MenuItem
   {% if element.values.className %}
     className={ {{element.values.className}} }
+  {% endif %}
+  {% if element.values.value %}
+    value={{ element.values.value | textOrVariable }}
   {% endif %}
   {% if element.values.onclick %}
     onClick={ {{ element.values.onclick | functionOrCall }} }

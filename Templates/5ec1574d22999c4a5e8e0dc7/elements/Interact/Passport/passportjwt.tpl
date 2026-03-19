@@ -15,34 +15,47 @@ options:
     display: Allowed Routes (array)
     type: text
     options: ''
+  - name: useCustomCode
+    display: Use Custom Code
+    type: checkbox
+    options: ''
+  - name: customCode
+    display: Custom Code
+    type: code
+    settings:
+      propertyCondition: useCustomCode
+      condition: true
+    options: ''
 settings:
   - name: BackendPackages
     value: '"passport": "^0.7.0", "passport-jwt": "^4.0.1",'
+  - name: BackendImports
+    value: |-
+      const passport = require('passport');
+      const JwtStrategy = require('passport-jwt').Strategy;
+      const { ExtractJwt } = require('passport-jwt');
   - name: ServerAddenum
     value: |-
-      const passport = require('passport')
-      const JwtStrategy = require('passport-jwt').Strategy;
 
-      const getJwtFromReq = (req) => {
-        try {
-          return req.headers.authorization
-        } catch (error) {
-          return null
-        }
-      }
-
-      passport.use(new JwtStrategy({ secretOrKey: {{ element.values.secret | default("'thisisthesecretandshouldbeconfigurable'") }}, jwtFromRequest: getJwtFromReq }, async (jwt_payload, done) => {
+      passport.use(new JwtStrategy({ secretOrKey: {{ element.values.secret | default("'thisisthesecretandshouldbeconfigurable'") }}, jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken() }, async (jwt_payload, done) => {
         done(null,jwt_payload)
       }))
 
       const authMiddleware = (req, res, next) => {
         if (req.method === 'OPTIONS') return res.status(200).end();
-        const allowedRoutes = {{ element.values.routes | default('[]') }}
-        if (allowedRoutes.some(route => req.url.startsWith(route))) {
-          next()
-        } else {
-          return passport.authenticate('jwt', { session: false })(req, res, next)
-        }
+        {%  if element.values.useCustomCode%}
+        {%  if element.values.customCode%}
+        {{ element.values.customCode }}
+        {% endif %}
+        {{ content | raw }}
+        {% else %}
+          const allowedRoutes = {{ element.values.routes | default('[]') }}
+          if (allowedRoutes.some(route => req.url.startsWith(route))) {
+            next()
+          } else {
+            return passport.authenticate('jwt', { session: false })(req, res, next)
+          }
+        {% endif %}
       }
 
       app.use(authMiddleware)
