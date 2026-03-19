@@ -88,9 +88,15 @@ helpText: Basic HTML Div element
 {% if element.values.style is defined and element.values.style %}
   {% if element.values.style is iterable %}
     {% set styleValue = element.values.style|json_encode %}
+    {% set isFunction = false %}
   {% else %}
     {% set trimmedStyle = element.values.style|trim %}
-    {% if trimmedStyle|slice(0, 1) != '{' %}
+    
+    {% set isFunction = trimmedStyle matches '/^[a-zA-Z0-9_]+\(.*\)$/' %}
+    
+    {% if isFunction %}
+      {% set styleValue = trimmedStyle %}
+    {% elseif trimmedStyle|slice(0, 1) != '{' %}
       {% set styleValue = '{' ~ trimmedStyle ~ '}' %}
     {% else %}
       {% set styleValue = trimmedStyle %}
