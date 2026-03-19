@@ -1,7 +1,0 @@
-/*
-path: pnpm-workspace.yaml
-keyPath: pnpm-workspace.yaml
-unique_id: OxklNsC2
-*/
-packages:
-  - 'packages/*'

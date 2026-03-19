@@ -1,1 +1,0 @@
-npm install --loglevel timing 2>&1 
