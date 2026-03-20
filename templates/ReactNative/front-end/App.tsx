@@ -11,6 +11,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Sentry from '@sentry/react-native'
 
+import { AuthProvider } from './assets/authContext'
+import { LocationProvider } from './assets/locationContext' 
 Sentry.init({
   dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
 
@@ -70,6 +72,8 @@ export default Sentry.wrap(function App() {
   return (
     <StateProvider store={store}>
       <GestureHandlerRootView style={ { flex: 1 }}>
+        <AuthProvider>
+          <LocationProvider>
         {{ insert_setting('SiteWideWrapStart') | raw }}
           <NavigationContainer
             ref={navigationRef}
@@ -126,6 +130,8 @@ export default Sentry.wrap(function App() {
             </Stack.Navigator>
           </NavigationContainer>
         {{ insert_setting('SiteWideWrapEnd') | raw }}
+          </LocationProvider>
+        </AuthProvider>
       </GestureHandlerRootView>
     </StateProvider>
   )
