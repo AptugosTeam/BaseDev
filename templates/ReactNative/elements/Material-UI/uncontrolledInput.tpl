@@ -224,7 +224,7 @@ children: []
       }
       {% endif %}
       {% if element.values.onSubmitEdit %}onSubmitEditing={() => {{ element.values.onSubmitEdit }} }{% endif %}
-      {% if element.values.keyboardType %}keyboardType={{ element.values.keyboardType | textOrVariable }}{% endif %}
+      {% if element.values.keyboardType %}returnKeyType={{ element.values.keyboardType | textOrVariable }}{% endif %}
       {% if element.values.underlineColor %}underlineColor={ {{ element.values.underlineColor | textOrVariable }}}{% endif %}
       {% if element.values.activeUnderlineColor %}activeUnderlineColor={ {{ element.values.activeUnderlineColor | textOrVariable }}}{% endif %}
       {% if element.values.placeholderTextColor %}placeholderTextColor={{ element.values.placeholderTextColor | textOrVariable }}{% endif %}

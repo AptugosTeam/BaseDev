@@ -37,6 +37,7 @@ export default {
       bundleIdentifier: 'com.weblabs.{{ application.settings.name | lower | friendly }}',
       buildNumber: "{{ insert_setting('versionCode')|default('1') }}",
       googleServicesFile: './GoogleService-Info.plist',
+      usesAppleSignIn: true,  
 
       /** ⬇️ FACEBOOK iOS ⬇️ */
       infoPlist: {
@@ -70,6 +71,7 @@ export default {
 
     plugins: [
       {{ insert_setting('AppJsonPlugins') | raw }}
+      "expo-apple-authentication", 
       [
         'expo-build-properties',
         {
