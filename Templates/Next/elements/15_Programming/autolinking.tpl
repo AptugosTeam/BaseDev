@@ -3,11 +3,13 @@ path: autolinking.tpl
 type: file
 unique_id: Gzc1T1q0
 icon: ico-links
+helpText: Creates links for all the children pages
 sourceType: javascript
 options:
   - name: fromLink
     display: From Link
     type: dropdown
+    helpText: Links will be created for all the pages that are children of this one.
     options: return aptugo.pageUtils.getAllPages()
     required: true
 children: []

@@ -23,7 +23,8 @@
     {
       "name": "name",
       "display": "Asset Name",
-      "type": "text"
+      "type": "text",
+      "helpText": "this is the same as path (the filename in complete form, example: carsshowcase.module.scss"
     }
   ],
   "afterRun": "",

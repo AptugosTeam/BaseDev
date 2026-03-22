@@ -35,7 +35,7 @@ children: []
   
   {% set referencedField = field.reference | fieldData %}
   {% if field.referencekey %}
-    {% set referencekey = (field.referencekey | fieldData).column_name %}
+    {% set referencekey = field.referencekey %}
   {% else %}
     {% set referencekey = '_id' %}
   {% endif %}

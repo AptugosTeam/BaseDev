@@ -5,6 +5,7 @@
   "icon": "icon.png",
   "type": "template",
   "liteReady": false,
+  "isActive": false,
   "parameters": [
     {
       "name": "Name",

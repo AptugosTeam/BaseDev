@@ -1,0 +1,20 @@
+{
+  "type": "structure",
+  "_id": "aptugoloaddataintodb",
+  "name": "Load Data Into DB",
+  "parameters": [
+    {
+      "name": "Name",
+      "display": "Table name",
+      "type": "text",
+      "helpText": "Target table name where the rows will be inserted."
+    },
+    {
+      "name": "finalData",
+      "display": "Rows to insert",
+      "type": "code",
+      "helpText": "Array of plain objects to insert into the target table."
+    }
+  ],
+  "afterRun": ""
+}

@@ -1,0 +1,45 @@
+{
+  "type": "structure",
+  "_id": "aptugoloaddatafromdb",
+  "name": "Load Data From DB",
+  "differentReturn": true,
+  "parameters": [
+    {
+      "name": "Name",
+      "display": "Table name",
+      "type": "text",
+      "helpText": "Target table name to read from."
+    },
+    {
+      "name": "Query",
+      "display": "Query",
+      "type": "code",
+      "helpText": "Optional Mongo-style filter object. Example: {\"category\":\"Basics\"}"
+    },
+    {
+      "name": "Sort",
+      "display": "Sort",
+      "type": "code",
+      "helpText": "Optional sort object. Example: {\"orderIndex\":1}"
+    },
+    {
+      "name": "Limit",
+      "display": "Limit",
+      "type": "text",
+      "helpText": "Optional maximum number of rows to return."
+    },
+    {
+      "name": "Skip",
+      "display": "Skip",
+      "type": "text",
+      "helpText": "Optional number of rows to skip."
+    },
+    {
+      "name": "Projection",
+      "display": "Projection",
+      "type": "code",
+      "helpText": "Optional field projection object. Example: {\"name\":1,\"slug\":1}"
+    }
+  ],
+  "afterRun": ""
+}

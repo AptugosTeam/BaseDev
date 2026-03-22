@@ -1,7 +1,7 @@
 {
   "_id": "updateelementstructure",
   "name": "Update Element",
-  "desc": "Updates an existing element",
+  "desc": "Updates an existing element, element can be resolved by unique_id",
   "icon": "",
   "type": "structure",
   "parameters": [

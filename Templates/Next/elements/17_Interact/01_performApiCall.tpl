@@ -8,7 +8,33 @@ color: rgb(0,230,230)
 backColor: rgba(6, 201, 210, 0.25)
 order: 1
 name: Perform API Call
-helpText: Performs a call to an api and returns the response
+helpText: >
+  Performs an HTTP request using fetcher.
+
+  If the element has children, the response is available inside the block using the Result Variable Name.
+
+  If there are no children, the result is assigned using:
+  const resultVar = await fetcher(...)
+
+  RESULT:
+    response.data <- The content
+    response.status <- The HTTP status
+
+  RULES:
+  - The result variable is only available inside the block (when using children)
+  - Always use the exact Result Variable Name
+  - Provide Data Variable for POST/PUT requests
+  - Enable Serialize Data if the API expects formatted payload
+
+  Errors are handled in Catch Error (default: console.error(error)).
+
+  This element executes an API call and exposes the result inside the success block.
+
+  BASIC USAGE:
+  - URL: endpoint to call
+  - Method: GET, POST, PUT, DELETE
+  - Data Variable: (optional) variable to send as request body
+  - Result Variable Name: name of the response inside the success block
 options:
   - name: url
     display: URL
@@ -54,20 +80,29 @@ import { fetcher } from '@lib/fetch'
 {% if element.values.serializeData %}import serializeData from '@lib/serializeData'{% endif %}
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
+
 {% set url = element.values.url %}
 {% if element.values.urlFULL %}
-{% set url = settings.apiURL ~ element.values.url %}
+  {% set url = settings.apiURL ~ element.values.url %}
 {% endif %}
+
+{% set fetchCall %}
 fetcher({{ url | textOrVariableInCode }}, { 
   method: '{{ element.values.method|default('GET') }}'
   {% if element.values.dataVariable %}, body: {% if element.values.serializeData %}serializeData({% endif %}{{ element.values.dataVariable }}{% if element.values.serializeData %}){% endif %}{% endif %}
   {% if element.values.extraOptions %}, {{ element.values.extraOptions | raw }}{% endif %}
-}).then({{ element.values.resultVar|default('result') }} => {
- {{ content | raw }}
-}).catch((error) => {
-  {% if element.values.onError %}
-    {{ element.values.onError }} 
-  {% else %}
-    console.error(error)
-  {% endif %}
 })
+{% endset %}
+{% if element.children %}
+  {{ fetchCall }}.then({{ element.values.resultVar|default('result') }} => {
+    {{ content | raw }}
+  }).catch((error) => {
+    {% if element.values.onError %}
+      {{ element.values.onError }} 
+    {% else %}
+      console.error(error)
+    {% endif %}
+  })
+{% else %}
+  const {{ element.values.resultVar|default('result') }} = await {{ fetchCall }}
+{% endif %}

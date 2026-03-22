@@ -44,7 +44,37 @@ if (!Parameters.Element) {
   throw new Error('Update Element requires parameter: Element')
 }
 
-const found = findNodeAndParent(Application.pages, Parameters.Element)
+const findNodeFlexible = (nodes, selector, parent = null) => {
+  let matchByName = null
+  let matchByValue = null
+
+  for (const node of nodes || []) {
+    if (node.unique_id === selector) {
+      return { node, parent }
+    }
+
+    if (!matchByName && node.name === selector) {
+      matchByName = { node, parent }
+    }
+
+    if (!matchByValue && node.value === selector) {
+      matchByValue = { node, parent }
+    }
+
+    if (node.children && node.children.length) {
+      const found = findNodeFlexible(node.children, selector, node)
+      if (found) return found
+    }
+  }
+
+  return matchByName || matchByValue || null
+}
+
+const found = findNodeFlexible(Application.pages, Parameters.Element)
+
+if (!found || !found.node || found.node.type !== 'element') {
+  throw new Error(`Element not found (by id, name, or value): ${Parameters.Element}`)
+}
 
 if (!found || !found.node || found.node.type !== 'element') {
   throw new Error(`Element not found: ${Parameters.Element}`)

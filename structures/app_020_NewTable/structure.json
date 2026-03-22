@@ -1,9 +1,62 @@
 {
   "type": "structure",
-  "parameters": "",
-  "afterRun": "",
   "_id": "5e7f65b282eb69b8d2751e97",
   "name": "New Table",
-  "Created_date": "2020-03-28T14:56:50.076Z",
-  "__v": 0
+  "parameters": [
+    {
+      "name": "name",
+      "display": "Table name",
+      "type": "text",
+      "helpText": "Name of the table. Used if TablePayload or Tables is not provided."
+    },
+    {
+      "name": "singleName",
+      "display": "Single name",
+      "type": "text",
+      "helpText": "Singular form of the table name (e.g., User for Users)."
+    },
+    {
+      "name": "subtype",
+      "display": "Subtype",
+      "type": "text",
+      "helpText": "Optional subtype for the table. Defaults to 'Aptugo'."
+    },
+    {
+      "name": "lowercase",
+      "display": "Lowercase",
+      "type": "boolean",
+      "helpText": "If true, forces lowercase naming behavior."
+    },
+    {
+      "name": "fields",
+      "display": "Fields array",
+      "type": "code",
+      "helpText": "Array of field objects.\n\nEach field must include:\n- column_name (string)\n- data_type (string)\n\nMANDATORY:\nBefore creating fields, the assistant MUST call:\n\ntemplates.fields\n\nwith the active template.\n\nThe assistant must:\n- use ONLY the returned field types\n- respect required properties for each type\n- NOT invent or guess data types\n\nIf field types were already retrieved in the conversation, reuse them."
+    },
+    {
+      "name": "Tables",
+      "display": "Multiple tables payload",
+      "type": "code",
+      "helpText": "Array of table definitions. Each item can include name, singleName, subtype, and fields."
+    },
+    {
+      "name": "TablePayload",
+      "display": "Single table payload",
+      "type": "code",
+      "helpText": "Full table definition object. Overrides individual parameters like name and fields."
+    },
+    {
+      "name": "x",
+      "display": "Position X",
+      "type": "number",
+      "helpText": "Optional X position in the canvas."
+    },
+    {
+      "name": "y",
+      "display": "Position Y",
+      "type": "number",
+      "helpText": "Optional Y position in the canvas."
+    }
+  ],
+  "afterRun": ""
 }

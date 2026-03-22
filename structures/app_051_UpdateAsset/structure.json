@@ -7,6 +7,12 @@
       "display": "Asset",
       "type": "text",
       "helpText": "Asset"
+    },
+    {
+      "name": "file",
+      "display": "Asset contents (complete, not chunks)",
+      "type": "text",
+      "helpDesk": "set the full file contents here to replace the original"
     }
   ],
   "afterRun": "",
