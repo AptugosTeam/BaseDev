@@ -60,5 +60,12 @@ import {{ element.values.name | friendly }} from '@components/{{ element.values.
 {% endif %}
 {% endset %}
 {{ save_delayed('bpr', bpr)}}
-<{{ element.values.name | friendly }} {% if element.values.props %}properties={ { {{ element.values.props }} } }{% endif %}{% if not element.children %} /{% endif %}>
-{% if element.children %}{{ content | raw }}</{{ element.values.name | friendly }}>{% endif %}
+<{{ element.values.name | friendly }} 
+  {% if element.values.keyprops %}key={ {{ element.values.keyprops }} }{% endif %}
+  {% if element.values.props %}properties={ { {{ element.values.props }} } }{% endif %} 
+  {% if not element.children %}/{% endif %}
+>
+{% if element.children %}
+  {{ content | raw }}
+</{{ element.values.name | friendly }}>
+{% endif %}
