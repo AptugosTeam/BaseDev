@@ -18,7 +18,7 @@ settings:
 */
 {% set AppJsonPlugins %}[
   "expo-location",
-  { "locationWhenInUsePermission": "Show current location on map." }
+  { "locationWhenInUsePermission": "RealTravel uses your location to show you nearby places, attractions, and travel recommendations relevant to where you are. For example, when browsing destinations, the app will display points of interest within your current area." }
 ],{% endset %}
 {{ add_setting('AppJsonPlugins', AppJsonPlugins)}}
 {% set bpr %}
