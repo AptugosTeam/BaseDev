@@ -5,6 +5,7 @@ unique_id: 6E6TtRQh
 */
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
+import userReducer from './slices/userSlice'
 
 {% for table in application.tables %}
 import {{ table.name | friendly | lower }}Reducer from './slices/{{ table.name | friendly | lower }}Slice'
@@ -12,6 +13,7 @@ import {{ table.name | friendly | lower }}Reducer from './slices/{{ table.name |
 
 export const store = configureStore({
   reducer: {
+    user: userReducer,
     {% for table in application.tables %}
     {{ table.name | friendly | lower }}: {{ table.name | friendly | lower }}Reducer,
     {% endfor %}
