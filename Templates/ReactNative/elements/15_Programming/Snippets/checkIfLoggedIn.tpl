@@ -38,6 +38,9 @@ children: []
     {% set destNot = element.values.fieldVariableNot %}
   {% else %}
     {% set destNot = (element.values.loginScreenNot | elementData).path %}
+    {% if destNot|first == '/' %}
+      {% set destNot = destNot|slice(1) %}
+    {% endif %}
   {% endif %}
 {% endif %}
 
@@ -46,6 +49,9 @@ children: []
     {% set dest = element.values.fieldVariable %}
   {% else %}
     {% set dest = (element.values.loginScreen | elementData).path %}
+    {% if dest|first == '/' %}
+      {% set dest = dest|slice(1) %}
+    {% endif %}
   {% endif %}
 {% endif %}
 {% set appImport %}import authHeaders from '@services/auth-header'{% endset %}
