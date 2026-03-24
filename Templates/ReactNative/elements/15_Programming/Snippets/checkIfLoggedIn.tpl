@@ -48,19 +48,52 @@ children: []
     {% set dest = (element.values.loginScreen | elementData).path %}
   {% endif %}
 {% endif %}
-{% set bpr %}
-import authHeaders from '@services/auth-header'
+{% set appImport %}import authHeaders from '@services/auth-header'{% endset %}
+{{ add_setting('AppImport', appImport) }}
+
+{% set appPh %}
+const [initialRouteName, setInitialRouteName] = React.useState<string | null>(null)
+
+React.useEffect(() => {
+  let isMounted = true
+
+  const resolveInitialRoute = async () => {
+    try {
+      const isLoggedIn = await authHeaders()
+
+      if (!isMounted) return
+
+      if (isLoggedIn) {
+        {% if element.values.loginScreen != 'none' %}
+        setInitialRouteName({{ dest | textOrVariable }})
+        {% else %}
+        setInitialRouteName('Dashboard')
+        {% endif %}
+        return
+      }
+
+      {% if element.values.loginScreenNot != 'none' %}
+      setInitialRouteName({{ destNot | textOrVariable }})
+      {% else %}
+      setInitialRouteName('Dashboard')
+      {% endif %}
+    } catch (error) {
+      console.error('Error checking auth status:', error)
+
+      if (isMounted) {
+        setInitialRouteName('Dashboard')
+      }
+    }
+  }
+
+  resolveInitialRoute()
+
+  return () => {
+    isMounted = false
+  }
+}, [])
 {% endset %}
-{{ save_delayed('bpr',bpr)}}
-authHeaders().then(result => {
-    {% if element.values.loginScreenNot != 'none' %}
-      if (!result) {
-        navigation.push( {{ destNot | textOrVariable }} )
-      }
-    {% endif %}
-    {% if element.values.loginScreen != 'none' %}
-      if (result) {
-        navigation.push( {{ dest | textOrVariable }} )
-      }
-    {% endif %}
-  })
+{{ add_setting('AppPH', appPh) }}
+
+{% set appInitialRoute %}initialRouteName{% endset %}
+{{ add_setting('AppInitialRoute', appInitialRoute) }}

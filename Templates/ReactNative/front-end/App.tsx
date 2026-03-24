@@ -28,6 +28,7 @@ const Stack = createNativeStackNavigator()
 {{ insert_setting('AppBPR') | raw }}
 
 export default function App() {
+  {% set AppInitialRoute = insert_setting('AppInitialRoute') %}
   const routeNameRef = React.useRef(null)
   const navigationRef = React.useRef(null)
 
@@ -48,6 +49,12 @@ export default function App() {
   }, [])
 
   {{ insert_setting('AppPH') | raw }}
+
+  {% if AppInitialRoute %}
+  if (!{{ AppInitialRoute | raw }}) {
+    return null
+  }
+  {% endif %}
 
   return (
     {% if hasTables %}<StateProvider store={store}>{% endif %}
@@ -72,7 +79,10 @@ export default function App() {
               }
             }}
           >
-            <Stack.Navigator screenOptions={ { headerShown: false } } initialRouteName="Dashboard">
+            <Stack.Navigator
+              screenOptions={ { headerShown: false } }
+              initialRouteName={ {% if AppInitialRoute %}{{ AppInitialRoute | raw }}{% else %}"Dashboard"{% endif %} }
+            >
             {% set AppBody = insert_setting('AppB') %}
             {% if AppBody %}
             {{ insert_setting('AppB') | raw }}
