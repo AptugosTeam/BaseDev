@@ -38,7 +38,9 @@ children: []
     {% set destNot = element.values.fieldVariableNot %}
   {% else %}
     {% set destNot = (element.values.loginScreenNot | elementData).path %}
-    {% if destNot|first == '/' %}
+    {% if destNot == '/' %}
+      {% set destNot = 'Dashboard' %}
+    {% elseif destNot|first == '/' %}
       {% set destNot = destNot|slice(1) %}
     {% endif %}
   {% endif %}
@@ -49,14 +51,15 @@ children: []
     {% set dest = element.values.fieldVariable %}
   {% else %}
     {% set dest = (element.values.loginScreen | elementData).path %}
-    {% if dest|first == '/' %}
+    {% if dest == '/' %}
+      {% set dest = 'Dashboard' %}
+    {% elseif dest|first == '/' %}
       {% set dest = dest|slice(1) %}
     {% endif %}
   {% endif %}
 {% endif %}
 {% set appImport %}
 import AuthService from '@services/auth.service'
-import authHeaders from '@services/auth-header'
 import store from '@store/store'
 import { clearUser, setUser } from '@store/slices/userSlice'
 {% endset %}
@@ -66,55 +69,31 @@ import { clearUser, setUser } from '@store/slices/userSlice'
 const [initialRouteName, setInitialRouteName] = React.useState<string | null>(null)
 
 React.useEffect(() => {
-  let isMounted = true
-
-  const resolveInitialRoute = async () => {
+  const checkAuthStatus = async () => {
     try {
-      const isLoggedIn = await authHeaders()
+      const user = await AuthService.getCurrentUser()
 
-      if (!isMounted) return
-
-      if (isLoggedIn) {
-        const currentUser = await AuthService.getCurrentUser()
-
-        if (!isMounted) return
-
-        if (currentUser) {
-          store.dispatch(setUser(currentUser))
+        if (user && Object.keys(user).length > 0) {
+          store.dispatch(setUser(user))
+          {% if element.values.loginScreen != 'none' %}
+          setInitialRouteName({{ dest | textOrVariable }})
+          {% else %}
+          setInitialRouteName('Dashboard')
+          {% endif %}
         } else {
-          store.dispatch(clearUser())
+          {% if element.values.loginScreenNot != 'none' %}
+          setInitialRouteName({{ destNot | textOrVariable }})
+          {% else %}
+          setInitialRouteName('Dashboard')
+          {% endif %}
         }
-
-        {% if element.values.loginScreen != 'none' %}
-        setInitialRouteName({{ dest | textOrVariable }})
-        {% else %}
-        setInitialRouteName('Dashboard')
-        {% endif %}
-        return
-      }
-
-      store.dispatch(clearUser())
-
-      {% if element.values.loginScreenNot != 'none' %}
-      setInitialRouteName({{ destNot | textOrVariable }})
-      {% else %}
-      setInitialRouteName('Dashboard')
-      {% endif %}
     } catch (error) {
       console.error('Error checking auth status:', error)
       store.dispatch(clearUser())
-
-      if (isMounted) {
-        setInitialRouteName('Dashboard')
-      }
     }
   }
 
-  resolveInitialRoute()
-
-  return () => {
-    isMounted = false
-  }
+  checkAuthStatus()
 }, [])
 {% endset %}
 {{ add_setting('AppPH', appPh) }}
