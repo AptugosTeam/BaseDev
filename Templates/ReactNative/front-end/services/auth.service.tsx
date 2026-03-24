@@ -71,8 +71,8 @@ class AuthService {
   }
 
   async getCurrentUser() {
-    const user = (await AsyncStorage.getItem('user')) || (await AsyncStorage.getItem('userSession')) || (await AsyncStorage.getItem('user'))
-    return user ? JSON.parse(user) : {}
+    const user = (await AsyncStorage.getItem('user')) || (await AsyncStorage.getItem('userSession'))
+    return user ? JSON.parse(user) : null
   }
 
   async recoverPassword({

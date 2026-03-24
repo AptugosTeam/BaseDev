@@ -54,7 +54,12 @@ children: []
     {% endif %}
   {% endif %}
 {% endif %}
-{% set appImport %}import authHeaders from '@services/auth-header'{% endset %}
+{% set appImport %}
+import AuthService from '@services/auth.service'
+import authHeaders from '@services/auth-header'
+import store from '@store/store'
+import { clearUser, setUser } from '@store/slices/userSlice'
+{% endset %}
 {{ add_setting('AppImport', appImport) }}
 
 {% set appPh %}
@@ -70,6 +75,16 @@ React.useEffect(() => {
       if (!isMounted) return
 
       if (isLoggedIn) {
+        const currentUser = await AuthService.getCurrentUser()
+
+        if (!isMounted) return
+
+        if (currentUser) {
+          store.dispatch(setUser(currentUser))
+        } else {
+          store.dispatch(clearUser())
+        }
+
         {% if element.values.loginScreen != 'none' %}
         setInitialRouteName({{ dest | textOrVariable }})
         {% else %}
@@ -78,6 +93,8 @@ React.useEffect(() => {
         return
       }
 
+      store.dispatch(clearUser())
+
       {% if element.values.loginScreenNot != 'none' %}
       setInitialRouteName({{ destNot | textOrVariable }})
       {% else %}
@@ -85,6 +102,7 @@ React.useEffect(() => {
       {% endif %}
     } catch (error) {
       console.error('Error checking auth status:', error)
+      store.dispatch(clearUser())
 
       if (isMounted) {
         setInitialRouteName('Dashboard')

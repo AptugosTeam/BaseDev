@@ -7,19 +7,21 @@ sourceType: javascript
 options:
   - name: variableName
     display: Store In
-    type: dropdown
-    options: >-
-      return [...aptugoUtils.variables.retrievePageVariablesFromElement(arguments[0]).filter(rpvfe => rpvfe.type === 'Variable').map(({ unique_id, name }) => [unique_id, name])]
+    type: text
 children: []
 */
 {% set bpr %}
-import AuthService from '@services/auth.service'
+import { useSelector } from 'react-redux'
+import { RootState } from '@store/store'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
-useFocusEffect(
-    React.useCallback(() => {
-    AuthService.getCurrentUser().then(result => {
-        set{{ (element.values.variableName | elementData).values.variableName }}(result)
-    })
-    }, [])
-)
+{% set ph %}
+const currentUserData = useSelector((state: RootState) => state.user.userData)
+
+{% if element.values.variableName %}
+React.useEffect(() => {
+  set{{ (element.values.variableName | elementData).values.variableName }}(currentUserData || {})
+}, [currentUserData])
+{% endif %}
+{% endset %}
+{{ save_delayed('ph', ph) }}
