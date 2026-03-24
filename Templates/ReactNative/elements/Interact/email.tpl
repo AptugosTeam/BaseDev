@@ -100,6 +100,10 @@ children: []
 import axios from 'axios'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
+{% set bpr %}
+import { resolveApiUrl } from '@services/api'
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
 {% set ph %}
 {% if element.values.functionName %}
 {% set functionName = element.values.functionName %}
@@ -110,7 +114,7 @@ const {{ functionName }} = (to) => {
     const messageHtml = InlineLink({{ element.values.parameters }})
     axios({
       method: "POST", 
-      url:"{{ settings.apiURL | raw }}/api/sendEmail",
+      url: resolveApiUrl('/api/sendEmail'),
       data: {
         name: '{{ element.values.from }}',
         email: to,

@@ -27,15 +27,17 @@ extraFiles:
 */
 {% set AppJsonAndroid %}"googleServicesFile": "./google-services.json",{% endset %}
 {{ add_setting('AppJsonAndroid', AppJsonAndroid)}}
-{% set url = element.values.endpoint %}
-{% if element.values.urlFULL %}
-  {% set url = settings.apiURL ~ element.values.endpoint %}
-{% endif %}
 {% set bpr %}
 import { usePushTokenRegister } from '@components/NotificationsHook'
 {% endset %}
 {{ save_delayed('bpr', bpr)}}
+{% if element.values.urlFULL %}
+{% set bpr %}
+import { resolveApiUrl } from '@services/api'
+{% endset %}
+{{ save_delayed('bpr', bpr)}}
+{% endif %}
 usePushTokenRegister({
   userId: userInfo?._id,
-  endpoint: {{ url | textOrVariableInCode }},
+  endpoint: {% if element.values.urlFULL %}resolveApiUrl({{ element.values.endpoint | textOrVariableInCode }}){% else %}{{ element.values.endpoint | textOrVariableInCode }}{% endif %},
 })

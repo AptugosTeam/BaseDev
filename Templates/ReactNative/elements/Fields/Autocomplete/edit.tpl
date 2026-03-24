@@ -32,6 +32,10 @@ import Autocomplete from '../components/Autocomplete'
 import axios from 'axios'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
+{% set bpr %}
+import { resolveApiUrl } from '@services/api'
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
 {% set ph %}
 const {{ referencedTable | lower }}AutocompleteData = useSelector((state: IState) => state.{{ referencedTable | lower }})
 {% endset %}
@@ -49,7 +53,7 @@ const typeInSearch{{ field.column_name | friendly }}{{ referencedTable }} = (typ
     {% endif %}
     sortLanguage: '{{ element.values.sortLanguage|default('en') }}',
   }
-  axios.get('{{ settings.apiURL }}/api/{{ referencedTable | lower }}/search/', { params: searchOptions }).then(result => { 
+  axios.get(resolveApiUrl('/api/{{ referencedTable | lower }}/search/'), { params: searchOptions }).then(result => {
     set{{ columnName }}Options(result.data.docs.map({{ referencedField.table.singleName | friendly | lower }} => { return { label: {{ referencedField.table.singleName | friendly | lower }}.{{ referencedField.column_name | friendly }}, value: {{ referencedField.table.singleName | friendly | lower }}.{{ referencekey }} }}))
   })
 }

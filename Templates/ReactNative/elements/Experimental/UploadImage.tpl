@@ -16,11 +16,11 @@ options:
     options: ''
   - name: permissionResultGrantedDenied
     display: Permission Result Granted Denied Message
-    type: text
+    type: code
     options: ''
   - name: pickerResultCanceled
     display: Picker Result Canceled Message
-    type: text
+    type: code
     options: ''
   - name: innerText
     display: Text for dropzone
@@ -63,7 +63,7 @@ const [image, setImage] = React.useState(null)
 
     if (!permissionResult.granted) {
       {% if element.values.permissionResultGrantedDenied %}
-      {{element.values.permissionResultGrantedDenied}}
+      {{ element.values.permissionResultGrantedDenied }}
       {% elseif not element.values.permissionResultGrantedDenied %}
       alert('Permission to access camera roll is required!')
       {% endif %}
@@ -73,7 +73,7 @@ const [image, setImage] = React.useState(null)
     let pickerResult = await ImagePicker.launchImageLibraryAsync()
     if (pickerResult.canceled) {
       {% if element.values.pickerResultCanceled %}
-      {{element.values.pickerResultCanceled}}
+      {{ element.values.pickerResultCanceled }}
       {% elseif not element.values.pickerResultCanceled %}
       alert('Image picker was cancelled')
       {% endif %}
