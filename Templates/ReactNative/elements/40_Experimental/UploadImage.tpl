@@ -100,9 +100,9 @@ const [image, setImage] = React.useState(null)
   {% endif %}
 {% endset %}
 {{ save_delayed('ph',ph) }}
-<TouchableOpacity onPress={openImagePickerAsync} {% if element.values.classname %}style={ {{ element.values.classname }} }{% endif %} {% if element.values.disabled %}disabled={ {{ element.values.disabled }} }{% endif %}>
+<TouchableOpacity onPress={openImagePickerAsync} {% if element.values.className %}style={ {{ element.values.className }} }{% endif %} {% if element.values.disabled %}disabled={ {{ element.values.disabled }} }{% endif %}>
   {% if element.children %}{% for child in element.children %}{{ child.rendered | raw }}{% endfor %}
   {% elseif not element.children %}
-  <Text {% if element.values.classname %}style={ {{ element.values.classname ~ 'text' }} }{% endif %}>{{ element.values.innerText | default('Pick a Photo') }}</Text>
+  <Text {% if element.values.className %}style={ {{ element.values.className ~ 'text' }} }{% endif %}>{{ element.values.innerText | default('Pick a Photo') }}</Text>
   {% endif %}
 </TouchableOpacity>

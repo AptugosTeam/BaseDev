@@ -17,4 +17,10 @@ options:
 children: []
 */
 {% set pageFrom = element.values.to | elementData %}
-router.{{ element.values.navigationType | default('navigate') }}('{{ pageFrom.path }}')
+{% set routeTo = pageFrom.path %}
+{% if routeTo == '/' %}
+  {% set routeTo = 'Dashboard' %}
+{% elseif routeTo|first == '/' %}
+  {% set routeTo = routeTo|slice(1) %}
+{% endif %}
+router.{{ element.values.navigationType | default('navigate') }}('{{ routeTo }}')

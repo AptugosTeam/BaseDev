@@ -8,6 +8,9 @@ options:
   - name: variableName
     display: Store In
     type: text
+  - name: code
+    display: On Load
+    type: code
 children: []
 */
 {% set bpr %}
@@ -16,12 +19,14 @@ import { RootState } from '@store/store'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% set ph %}
-const currentUserData = useSelector((state: RootState) => state.user.userData)
+{% set storeName = element.values.variableName | default('currentUserData') %}
+const {{ storeName }} = useSelector((state: RootState) => state.user.userData)
 
-{% if element.values.variableName %}
+{% if element.values.code or content %}
 React.useEffect(() => {
-  set{{ (element.values.variableName | elementData).values.variableName }}(currentUserData || {})
-}, [currentUserData])
+  {{ element.values.code }}
+  {{ content | raw }}
+}, [{{ storeName }}])
 {% endif %}
 {% endset %}
 {{ save_delayed('ph', ph) }}
