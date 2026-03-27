@@ -14,6 +14,7 @@ import * as Notifications from 'expo-notifications'
 interface UsePushTokenRegisterOptions {
   userId?: string
   endpoint: string
+  method?: 'post' | 'put'
 }
 
 async function registerForPushNotificationsAsync() {
@@ -35,7 +36,7 @@ async function registerForPushNotificationsAsync() {
   return token
 }
 
-export function usePushTokenRegister({ userId, endpoint }: UsePushTokenRegisterOptions) {
+export function usePushTokenRegister({ userId, endpoint, method = 'post' }: UsePushTokenRegisterOptions) {
   const hasRegistered = useRef(false)
 
   useEffect(() => {
@@ -47,8 +48,8 @@ export function usePushTokenRegister({ userId, endpoint }: UsePushTokenRegisterO
         const token = await registerForPushNotificationsAsync()
         await AsyncStorage.setItem('mypushtoken', token)
 
-        await axios.post(endpoint, {
-          Student: userId,
+        await axios[method](endpoint, {
+          User: userId,
           Token: token,
           Device: Device.modelName,
         })
@@ -64,5 +65,5 @@ export function usePushTokenRegister({ userId, endpoint }: UsePushTokenRegisterO
     return () => {
       isMounted = false
     }
-  }, [userId, endpoint])
+  }, [userId, endpoint, method])
 }
