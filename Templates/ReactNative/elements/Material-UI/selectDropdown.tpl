@@ -84,7 +84,7 @@ options:
 children: []
 settings:
   - name: Packages
-    value: '"react-native-select-dropdown": "^3.3.3",'
+    value: '"react-native-select-dropdown": "^3.3.3", "lodash": "^4.17.23",'
 */
 {% set bpr %}
 import SelectDropdown from 'react-native-select-dropdown'

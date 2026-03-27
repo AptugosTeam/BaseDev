@@ -33,10 +33,14 @@ children: []
 import AsyncStorage from '@react-native-async-storage/async-storage'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
+{% set retrievedValue %}
+{% if element.values.makeItBoolean %}Boolean({% endif %}
+{% if element.values.Parse %}JSON.parse({% endif %}await AsyncStorage.getItem('{{ element.values.variableName }}'){% if element.values.default %} || '{{ element.values.default }}'{% endif %}{% if element.values.Parse %}){% endif %}
+{% if element.values.makeItBoolean %}){% endif %}
+{% endset %}
 {% if element.values.valueToVar %}
-  AsyncStorage.getItem('{{ element.values.variableName }}').then(({{ element.values.valueToVar }}:any) => {
-    {{ content | raw }}
-  })
+const {{ element.values.valueToVar }} = {{ retrievedValue | raw }}
+{{ content | raw }}
 {% else %}
   AsyncStorage.getItem('{{ element.values.variableName }}').then((res:any) => {
     {% if element.values.onLoad %}

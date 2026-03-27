@@ -64,6 +64,11 @@ options:
     advanced: true
     settings:
       default: console.error(error)
+  - name: finallyContent
+    display: Finally content
+    type: function
+    options: ''
+    advanced: true
 sourceType: javascript
 children: []
 */
@@ -81,33 +86,105 @@ import { resolveApiUrl } from '@services/api'
 {% set storeName = element.values.variableStoreName %}
 {% set storeType = element.values.variableStoreType | default('const') %}
 {% set onError = element.values.onError | default('console.error(error)') %}
+{% set finallyContent = element.values.finallyContent %}
 {% if element.values.urlFULL %}
   {% set requestUrl %}resolveApiUrl({{ element.values.url | textOrVariableInCode }}){% endset %}
 {% else %}
   {% set requestUrl %}{{ element.values.url | textOrVariableInCode }}{% endset %}
 {% endif %}
+{% set requestCall %}
+axios.{{ element.values.method|default('get') }}(
+  {{ requestUrl | raw }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %},
+  {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}
+)
+{% endset %}
 
 {% if element.values.variableStore %}
-  {% if storeType == 'existing let' %}
-    {{ storeName }} = {% if element.values.await %}await{% endif %} axios.{{ element.values.method|default('get') }}(
-      {{ requestUrl | raw }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %},
-      {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}
-    )
+  {% if element.values.await %}
+    {% if finallyContent %}
+      {% if storeType == 'existing let' %}
+        {{ storeName }} = await (async () => {
+          try {
+            return await {{ requestCall | raw }}
+          } catch (error) {
+            {{ onError | raw }}
+          } finally {
+            {{ finallyContent | raw }}
+          }
+        })()
+      {% else %}
+        {{ storeType }} {{ storeName }} = await (async () => {
+          try {
+            return await {{ requestCall | raw }}
+          } catch (error) {
+            {{ onError | raw }}
+          } finally {
+            {{ finallyContent | raw }}
+          }
+        })()
+      {% endif %}
+    {% else %}
+      {% if storeType == 'existing let' %}
+        {{ storeName }} = await {{ requestCall | raw }}
+      {% else %}
+        {{ storeType }} {{ storeName }} = await {{ requestCall | raw }}
+      {% endif %}
+    {% endif %}
   {% else %}
-    {{ storeType }} {{ storeName }} = {% if element.values.await %}await{% endif %} axios.{{ element.values.method|default('get') }}(
-      {{ requestUrl | raw }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %},
-      {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}
-    )
+    {% if storeType == 'existing let' %}
+      {{ storeName }} = {{ requestCall | raw }}
+      .catch(error => {
+        {{ onError | raw }}
+      })
+      {% if finallyContent %}
+      .finally(() => {
+        {{ finallyContent | raw }}
+      })
+      {% endif %}
+    {% else %}
+      {{ storeType }} {{ storeName }} = {{ requestCall | raw }}
+      .catch(error => {
+        {{ onError | raw }}
+      })
+      {% if finallyContent %}
+      .finally(() => {
+        {{ finallyContent | raw }}
+      })
+      {% endif %}
+    {% endif %}
   {% endif %}
 {% else %}
-  axios.{{ element.values.method|default('get') }}(
-    {{ requestUrl | raw }}{% if element.values.dataVariable %}, {{ element.values.dataVariable }}{% endif %},
-    {% if element.values.extraOptions %}{{ element.values.extraOptions | raw }}{% endif %}
-  )
-  .then(result => {
-    {{ content | raw }}
-  })
-  .catch(error => {
-    {{ onError | raw }}
-  })
+  {% if element.values.await %}
+    {% if content | trim %}
+      try {
+        const result = await {{ requestCall | raw }}
+        {{ content | raw }}
+      } catch (error) {
+        {{ onError | raw }}
+      }{% if finallyContent %}
+      finally {
+        {{ finallyContent | raw }}
+      }{% endif %}
+    {% else %}
+      try {
+        await {{ requestCall | raw }}
+      } catch (error) {
+        {{ onError | raw }}
+      }{% if finallyContent %}
+      finally {
+        {{ finallyContent | raw }}
+      }{% endif %}
+    {% endif %}
+  {% else %}
+    {{ requestCall | raw }}
+    .then(result => {
+      {{ content | raw }}
+    })
+    .catch(error => {
+      {{ onError | raw }}
+    }){% if finallyContent %}
+    .finally(() => {
+      {{ finallyContent | raw }}
+    }){% endif %}
+  {% endif %}
 {% endif %}

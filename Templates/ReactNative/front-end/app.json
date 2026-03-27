@@ -30,6 +30,7 @@ unique_id: i1kD8rN4
       "bundleIdentifier": "com.aptugo.{{ application.settings.name | lower | friendly }}",
       "buildNumber": "{{ insert_setting('versionCode')|default('1') }}",
       "infoPlist": {
+        {{ insert_setting('infoPlist') | raw }}
         "ITSAppUsesNonExemptEncryption": false
       }
     },
