@@ -1,7 +1,7 @@
 {
   "_id": "modifytableroute",
   "name": "Modify Table Route",
-  "desc": "Add, update, or remove a route/endpoint from an existing table",
+  "desc": "Add, update, remove, or batch update routes/endpoints from an existing table",
   "icon": "",
   "type": "structure",
   "parameters": [
@@ -14,7 +14,7 @@
       "name": "Action",
       "display": "Action to execute",
       "type": "dropdown",
-      "options": "addroute;updateroute;removeroute"
+      "options": "addroute;updateroute;removeroute;batchupdateroutes"
     },
     {
       "name": "Route",
@@ -52,8 +52,26 @@
       "type": "checkbox"
     },
     {
+      "name": "UseAuth",
+      "display": "Use auth middleware",
+      "type": "checkbox",
+      "helpText": "If route should be protected and only authorized users can reach it"
+    },
+    {
+      "name": "UseBody",
+      "display": "Use body middleware",
+      "type": "checkbox",
+      "helpText": "If it should parse the payload into req.body (NextJS already does that, usebody adds CORS for it)"
+    },
+    {
+      "name": "UseUploads",
+      "display": "Use uploads middleware",
+      "type": "checkbox",
+      "helpText": "If entity has some kind of file, this activates the middleware that parses those"
+    },
+    {
       "name": "RoutePayload",
-      "display": "JSON object with full route data for add/update",
+      "display": "JSON object for single add/update or JSON array for batch update",
       "type": "text"
     }
   ],

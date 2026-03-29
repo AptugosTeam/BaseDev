@@ -5,7 +5,7 @@ unique_id: 36m5BEAd
 icon: ico-field
 children: []
 */
-(req, _res, next) => {
+async (req, res, next) => {
   const { before, after, filter, sortField, sortMethod, skip, limit, page, populate, fields } = req.query || {}
   const options = {
     page: Number(page) || 1,
@@ -14,7 +14,7 @@ children: []
     projection: {}
   }
 
-  const aggregate = []
+  const aggregate:any = []
 
   if (populate && populate === 'true') {
     {% for field in table.fields %}
@@ -49,13 +49,8 @@ children: []
     }
   }
 
-  req.aggregate = aggregate
-  req.options = options
-  next()
-},
-async (req, res) => {
   try {
-    const results = await {{ tableName }}Model.aggregatePaginate(req.aggregate, req.options)
+    const results = await {{ tableName }}Model.aggregatePaginate(aggregate, options)
     res.status(200).json({ success: true, data: results })
   } catch(error) {
     res.status(400).json({ success: false, error: error.toString() })

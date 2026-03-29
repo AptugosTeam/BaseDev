@@ -1,0 +1,80 @@
+{
+  "type": "structure",
+  "_id": "5ee4f8c74011a97e1dbbe02d",
+  "name": "New Field",
+  "parameters": [
+    {
+      "name": "Table",
+      "display": "Table unique_id or name",
+      "type": "text",
+      "helpText": "Target table to update. Accepts table unique_id or table name."
+    },
+    {
+      "name": "Tables",
+      "display": "Multiple tables",
+      "type": "code",
+      "helpText": "Optional array of table unique_id or names. If provided, the field(s) will be added to all matching tables."
+    },
+    {
+      "name": "ColumnName",
+      "display": "Column name",
+      "type": "text",
+      "helpText": "Field name to create."
+    },
+    {
+      "name": "DataType",
+      "display": "Data type",
+      "type": "text",
+      "helpText": "Field data type. Example: String, Datetime, Boolean, Json, Dropdown, Autocomplete."
+    },
+    {
+      "name": "FieldPayload",
+      "display": "Single field payload",
+      "type": "code",
+      "helpText": "Full field definition object. Overrides ColumnName/DataType if provided."
+    },
+    {
+      "name": "Fields",
+      "display": "Multiple fields payload",
+      "type": "code",
+      "helpText": "Array of field objects to add."
+    },
+    {
+      "name": "Value",
+      "display": "Default value",
+      "type": "text",
+      "helpText": "Optional default value for the field."
+    },
+    {
+      "name": "Options",
+      "display": "Dropdown options",
+      "type": "text",
+      "helpText": "Optional semicolon-separated options for Dropdown fields."
+    },
+    {
+      "name": "RelationshipType",
+      "display": "Relationship type",
+      "type": "text",
+      "helpText": "Optional relationship type. Example: m:1"
+    },
+    {
+      "name": "Reference",
+      "display": "Reference",
+      "type": "text",
+      "helpText": "Optional reference unique_id for relationship fields."
+    },
+    {
+      "name": "Key",
+      "display": "Key",
+      "type": "text",
+      "helpText": "Optional key metadata. Example: Auto Number"
+    },
+    {
+      "name": "CHARACTER_MAXIMUM_LENGTH",
+      "display": "Character max length",
+      "type": "text",
+      "helpText": "Optional CHARACTER_MAXIMUM_LENGTH value."
+    }
+  ],
+  "afterRun": ""
+}

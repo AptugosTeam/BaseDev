@@ -10,7 +10,7 @@ if (State.usersReducer) {
 } else if (State.apps) {
   if (State.apps.find(app => app.settings.name === Parameters.Name)) {
     Parameters.name = Parameters.name + '_' + aptugo.generateID()
-  }
+  } 
 }
 
 const templates = await aptugo.run({ section: 'templates', command: 'list' })
@@ -24,6 +24,9 @@ if (State.auth) {
 const dbpassword = aptugo.generateID() + aptugo.generateID()
 const appname = aptugo.friendly(Parameters.Name)
 const dbusername = username + appname
+
+if (typeof Application !== 'undefined') Application = {}
+else var Application = {}
 Application.createdAt = Date.now(),
 Application.settings = {
     name: Parameters.Name || 'Untitled Application',
@@ -47,11 +50,11 @@ Application.settings = {
       dbconnectstring: `mongodb://127.0.0.1:27017/${appname.toLowerCase()}`
     },
     production: {
-      apiURL: `https://${appname.toLowerCase()}${aptugo.friendly(aptugo.ls.getItem('license'))}.backend.aptugo.app`,
+      apiURL: `https://${appname.toLowerCase()}.next.aptugo.app`,
       type: 'Remote (Aptugo)',
       folder: appname,
       template: defaultTemplate ? defaultTemplate._id : '',
-      url: `https://${appname.toLowerCase()}${aptugo.friendly(aptugo.ls.getItem('license'))}.aptugo.app`,
+      url: `https://${appname.toLowerCase()}.next.aptugo.app`,
       dbconnectstring: `mongodb://127.0.0.1:27017/${appname.toLowerCase()}`
     }
 }

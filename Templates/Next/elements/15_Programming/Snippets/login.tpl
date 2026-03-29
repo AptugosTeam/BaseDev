@@ -16,7 +16,8 @@ options:
   - name: OnSuccess
     display: On Successful login
     type: dropdown
-    options: return aptugo.pageUtils.getAllPages()
+    options: >-
+      return [['none', 'none'],...aptugo.pageUtils.getAllPages()]
     required: true
   - name: alternativeCall
     display: Alternative Call to AuthService
@@ -53,11 +54,12 @@ fetcher('/api/auth', {
   {% else %}
     {{ content | raw }}
   {% endif %}
-  {% if element.values.OnSuccess %}
+  {% if element.values.OnSuccess and element.values.OnSuccess != 'none' %}
     setTimeout(() => {
       router.push('{{ (element.values.OnSuccess | elementData).path }}')
     },{{ element.values.redirectTimeout|default( 3000 ) }})
   {% endif %}
+  {{ content | raw }}
 }).catch(error => {
   {% if element.children|length > 1 %}
     {{ element.children[1].rendered | raw }}

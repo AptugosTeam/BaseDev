@@ -16,7 +16,7 @@ options:
     options: website;whatsapp;layout;crm;minimum;newMinimum;prototyping;lite
   - name: useAsset
     display: Use an Asset
-    helpText: Use the id of the asset to load instead of a pre-made theme
+    helpText: Use the id of the asset stylesheet to load instead of or in addition to a pre-made theme.
     type: dropdown
     options: >-
       return [['none', 'none'],
@@ -25,7 +25,7 @@ options:
   - name: merge
     display: Merge with theme
     type: checkbox
-    helpText: When merging with theme, the stylesheet extends theme definitions instead of replacing
+    helpText: When enabled and both Theme and Asset are selected, the asset stylesheet is merged on top of the theme. When disabled, the asset stylesheet replaces the theme.
     settings:
       propertyCondition: useAsset
       denyCondition: 'none'
@@ -44,6 +44,10 @@ children: []
   {{ save_delayed('bpr', bpr) }}
 {% endif %}
 
+{% set useAsset = false %}
+{% set useTheme = false %}
+{% set themeSource = '{}' %}
+
 {% if element.values.useAsset and element.values.useAsset != 'none' %}
   {% set useAsset = true %}
   {% set asset = element.values.useAsset|assetData %}
@@ -58,20 +62,35 @@ children: []
     import {{ asset.name|friendly }} from 'public/css/{{ asset.name }}'
     import {{ element.values.theme }} from '@components/Themes/{{ element.values.theme }}.module.scss'
   {% endset %}
-  {% set theme = element.values.theme ~ ', ...' ~ asset.name|friendly %}
+  {% if element.values.merge %}
+    {% set themeSource = '{ ...' ~ element.values.theme ~ ', ...' ~ asset.name|friendly ~ ' }' %}
+  {% else %}
+    {% set themeSource = asset.name|friendly %}
+  {% endif %}
 {% elseif useAsset %}
-  {% set bpr %}import {{ asset.name|friendly }} from 'public/css/{{ asset.name }}'{% endset %}
-  {% set theme = asset.name|friendly %}
+  {% set bpr %}
+    import {{ asset.name|friendly }} from 'public/css/{{ asset.name }}'
+  {% endset %}
+  {% set themeSource = asset.name|friendly %}
 {% elseif useTheme %}
-  {% set bpr %}import {{ element.values.theme }} from '@components/Themes/{{ element.values.theme }}.module.scss'{% endset %}
-  {% set theme = element.values.theme %}
+  {% set bpr %}
+    import {{ element.values.theme }} from '@components/Themes/{{ element.values.theme }}.module.scss'
+  {% endset %}
+  {% set themeSource = element.values.theme %}
 {% endif %}
-{{ save_delayed('bpr',bpr) }}
+{{ save_delayed('bpr', bpr) }}
+
 {% set ph %}
-const theme = { {%if element.values.primaryColor %}...colors_{{ element.values.primaryColor }}, {% endif %}...{{ theme }} }
+const theme = {
+  {% if element.values.primaryColor %}
+  ...colors_{{ element.values.primaryColor }},
+  {% endif %}
+  ...{{ themeSource }}
+}
 const classes = theme
 {% endset %}
-{{ save_delayed('ph',ph, 1) }}
+{{ save_delayed('ph', ph, 1) }}
+
 {% if element.values.primaryColor or element.values.extraThemeOptions %}
   {% set bpr %}
   import { createTheme, ThemeProvider } from '@mui/material/styles'

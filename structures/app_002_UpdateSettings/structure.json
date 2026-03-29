@@ -1,0 +1,74 @@
+{
+  "_id": "updateappsettings",
+  "name": "Update App Settings",
+  "desc": "Updates application settings and environment configuration",
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "Environment",
+      "display": "Environment",
+      "type": "dropdown",
+      "options": [
+        ["development", "Development"],
+        ["stagging", "Stagging"],
+        ["production", "Production"]
+      ],
+      "helpText": "Target environment block inside Application.settings"
+    },
+    {
+      "name": "Name",
+      "display": "Application name",
+      "type": "text",
+      "helpText": "Optional application display name"
+    },
+    {
+      "name": "URL",
+      "display": "Public URL",
+      "type": "text",
+      "helpText": "Optional environment URL"
+    },
+    {
+      "name": "ApiURL",
+      "display": "API URL",
+      "type": "text",
+      "helpText": "Optional environment API URL"
+    },
+    {
+      "name": "Type",
+      "display": "Environment type",
+      "type": "text",
+      "helpText": "Optional environment type"
+    },
+    {
+      "name": "Folder",
+      "display": "Folder",
+      "type": "text",
+      "helpText": "Optional environment folder"
+    },
+    {
+      "name": "Template",
+      "display": "Template",
+      "type": "text",
+      "helpText": "Optional environment template id"
+    },
+    {
+      "name": "DbConnectString",
+      "display": "DB connection string",
+      "type": "text",
+      "helpText": "Optional environment DB connection string"
+    },
+    {
+      "name": "Variables",
+      "display": "Variables",
+      "type": "text",
+      "helpText": "Optional environment variables block"
+    },
+    {
+      "name": "SettingsPatch",
+      "display": "Advanced settings patch",
+      "type": "code",
+      "helpText": "Optional JSON object merged into Application.settings"
+    }
+  ],
+  "afterRun": ""
+}

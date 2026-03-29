@@ -1,5 +1,5 @@
 /*
-path: "{{ table.name |\_friendly }}.tsx"
+path: "{{ table.name |friendly }}.tsx"
 type: file
 unique_id: gmodelURo
 icon: ico-field

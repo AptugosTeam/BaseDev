@@ -23,9 +23,9 @@ try {
   const table = Application.tables[tableIndex]
   if (!table.definedRoutes) table.definedRoutes = []
 
+  const hasOwn = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key)
+
   const parseRoutePayload = () => {
-    console.log('Parsing Route Payload')
-    console.log(Parameters)
     if (!Parameters.RoutePayload) return {}
     try {
       return JSON.parse(Parameters.RoutePayload)
@@ -42,8 +42,48 @@ try {
     )
   }
 
+  const buildRouteMiddlewaresFromCheckboxes = (source) => {
+    const checkboxKeys = ['UseAuth', 'UseBody', 'UseUploads']
+    const anyProvided = checkboxKeys.some((key) => hasOwn(source, key))
+
+    if (!anyProvided) return undefined
+
+    const middlewares = []
+    if (source.UseAuth === true) middlewares.push('auth')
+    if (source.UseBody === true) middlewares.push('body')
+    if (source.UseUploads === true) middlewares.push('uploads')
+
+    return middlewares
+  }
+
+  const buildSingleRoutePatch = (source, basePayload = {}) => {
+    const patch = { ...basePayload }
+
+    if (source.RouteName) patch.route_name = source.RouteName
+    if (source.RouteMethod) patch.route_method = source.RouteMethod
+    if (source.RoutePath) patch.route_path = source.RoutePath
+    if (source.RouteTemplate) patch.route_template = source.RouteTemplate
+    if (typeof source.RouteActive === 'boolean') patch.route_active = source.RouteActive
+    if (typeof source.RouteCode !== 'undefined') patch.route_code = source.RouteCode
+
+    // Explicit route_middlewares in payload wins
+    if (hasOwn(basePayload, 'route_middlewares')) {
+      patch.route_middlewares = basePayload.route_middlewares
+    } else {
+      const checkboxMiddlewares = buildRouteMiddlewaresFromCheckboxes(source)
+      if (typeof checkboxMiddlewares !== 'undefined') {
+        patch.route_middlewares = checkboxMiddlewares
+      }
+    }
+
+    return patch
+  }
+
   if (action === 'addroute') {
     const payload = parseRoutePayload()
+    if (Array.isArray(payload)) {
+      return { error: 'RoutePayload for addroute must be a JSON object, not an array' }
+    }
 
     const newRoute = {
       unique_id: payload.unique_id || aptugo.generateID(),
@@ -57,7 +97,14 @@ try {
     if (typeof newRoute.route_active === 'undefined' && typeof Parameters.RouteActive === 'boolean') {
       newRoute.route_active = Parameters.RouteActive
     }
-    if (!newRoute.route_code && typeof Parameters.RouteCode !== 'undefined') newRoute.route_code = Parameters.RouteCode
+    if (!newRoute.route_code && typeof Parameters.RouteCode !== 'undefined') {
+      newRoute.route_code = Parameters.RouteCode
+    }
+
+    const checkboxMiddlewares = buildRouteMiddlewaresFromCheckboxes(Parameters)
+    if (!hasOwn(newRoute, 'route_middlewares') && typeof checkboxMiddlewares !== 'undefined') {
+      newRoute.route_middlewares = checkboxMiddlewares
+    }
 
     if (!newRoute.route_name) return { error: 'Missing route_name' }
     if (!newRoute.route_method) return { error: 'Missing route_method' }
@@ -66,6 +113,7 @@ try {
     if (typeof newRoute.route_active === 'undefined') newRoute.route_active = true
     if (typeof newRoute.route_template === 'undefined') newRoute.route_template = null
     if (typeof newRoute.route_code === 'undefined') newRoute.route_code = null
+    if (typeof newRoute.route_middlewares === 'undefined') newRoute.route_middlewares = []
 
     table.definedRoutes.push(newRoute)
   }
@@ -77,18 +125,95 @@ try {
     if (routeIndex === -1) return { error: `Route not found: ${Parameters.Route}` }
 
     const payload = parseRoutePayload()
-    const patch = { ...payload }
+    if (Array.isArray(payload)) {
+      return { error: 'RoutePayload for updateroute must be a JSON object, not an array' }
+    }
 
-    if (Parameters.RouteName) patch.route_name = Parameters.RouteName
-    if (Parameters.RouteMethod) patch.route_method = Parameters.RouteMethod
-    if (Parameters.RoutePath) patch.route_path = Parameters.RoutePath
-    if (Parameters.RouteTemplate) patch.route_template = Parameters.RouteTemplate
-    if (typeof Parameters.RouteActive === 'boolean') patch.route_active = Parameters.RouteActive
-    if (typeof Parameters.RouteCode !== 'undefined') patch.route_code = Parameters.RouteCode
+    const patch = buildSingleRoutePatch(Parameters, payload)
 
     table.definedRoutes[routeIndex] = {
       ...table.definedRoutes[routeIndex],
       ...patch
+    }
+  }
+
+  else if (action === 'batchupdateroutes') {
+    const payload = parseRoutePayload()
+    if (!Array.isArray(payload)) {
+      return { error: 'RoutePayload for batchupdateroutes must be a JSON array' }
+    }
+
+    const result = {
+      updated: [],
+      failed: []
+    }
+
+    for (const item of payload) {
+      try {
+        if (!item || typeof item !== 'object') {
+          result.failed.push({
+            route: null,
+            error: 'Each batch item must be an object'
+          })
+          continue
+        }
+
+        const routeRef = item.Route || item.route || item.route_name || item.route_path || item.unique_id
+        if (!routeRef) {
+          result.failed.push({
+            route: null,
+            error: 'Missing Route in batch item'
+          })
+          continue
+        }
+
+        const routeIndex = findRouteIndex(routeRef)
+        if (routeIndex === -1) {
+          result.failed.push({
+            route: routeRef,
+            error: `Route not found: ${routeRef}`
+          })
+          continue
+        }
+
+        const itemPayload =
+          item.RoutePayload && typeof item.RoutePayload === 'string'
+            ? JSON.parse(item.RoutePayload)
+            : (item.RoutePayload && typeof item.RoutePayload === 'object'
+                ? item.RoutePayload
+                : { ...item })
+
+        delete itemPayload.Route
+        delete itemPayload.route
+        delete itemPayload.RoutePayload
+
+        const patch = buildSingleRoutePatch(item, itemPayload)
+
+        table.definedRoutes[routeIndex] = {
+          ...table.definedRoutes[routeIndex],
+          ...patch
+        }
+
+        result.updated.push(routeRef)
+      } catch (e) {
+        result.failed.push({
+          route: item && (item.Route || item.route || item.route_name || item.route_path || item.unique_id) || null,
+          error: e.message
+        })
+      }
+    }
+
+    table.updatedAt = new Date().toISOString()
+    Application.tables[tableIndex] = table
+
+    return {
+      ok: result.failed.length === 0,
+      summary: {
+        updatedCount: result.updated.length,
+        failedCount: result.failed.length
+      },
+      ...result,
+      Application
     }
   }
 

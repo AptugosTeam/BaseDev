@@ -1,5 +1,5 @@
 /*
-path: "{{ table.name |\_friendly |\_lower }}/index.tsx"
+path: "{{ table.name |friendly |lower }}/index.tsx"
 type: file
 unique_id: gSp3dURo
 icon: ico-field

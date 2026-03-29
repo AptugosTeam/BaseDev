@@ -5,6 +5,7 @@ unique_id: nX9yXneu
 order: 1
 icon: ico-googlefonts
 name: Load Google Font
+helpText: Loads a Google Font through next/font/google and exposes it as a global CSS variable and helper class.
 options:
   - name: font
     display: Font
@@ -29,25 +30,41 @@ options:
     display: Weight - 800
     type: checkbox
 */
+{% set selectedFont = element.values.font|default('Inter') %}
+{% set fontSlug = selectedFont|replace({'_':'-'})|lower %}
+{% set fontVarName = 'font_' ~ element.unique_id %}
+
+{% set weights = [] %}
+{% if element.values.weight300 %}{% set weights = weights|merge(['300']) %}{% endif %}
+{% if element.values.weight400 %}{% set weights = weights|merge(['400']) %}{% endif %}
+{% if element.values.weight500 %}{% set weights = weights|merge(['500']) %}{% endif %}
+{% if element.values.weight600 %}{% set weights = weights|merge(['600']) %}{% endif %}
+{% if element.values.weight700 %}{% set weights = weights|merge(['700']) %}{% endif %}
+{% if element.values.weight800 %}{% set weights = weights|merge(['800']) %}{% endif %}
+
+{% if weights|length == 0 %}
+  {% set weights = ['400'] %}
+{% endif %}
+
 {% set IBA %}
-import { {{ element.values.font }} } from 'next/font/google'
-const {{ element.values.font }}_init = {{ element.values.font }}({
+import { {{ selectedFont }} } from 'next/font/google'
+
+const {{ fontVarName }} = {{ selectedFont }}({
   subsets: ['latin'],
-  weight: [
-    {% if element.values.weight300 %}'300',{% endif %}
-    {% if element.values.weight400 %}'400',{% endif %}
-    {% if element.values.weight500 %}'500',{% endif %}
-    {% if element.values.weight600 %}'600',{% endif %}
-    {% if element.values.weight700 %}'700',{% endif %}
-    {% if element.values.weight800 %}'800',{% endif %}
-  ]
+  weight: {{ weights|json_encode|raw }},
+  display: 'swap'
 })
 {% endset %}
 {{ add_setting('SiteWideBeforePageRenderAddenum', IBA) }}
+
 {% set IBB %}
 <style jsx global>{`
   :root {
-    --{{ element.values.font }}: ${ {{ element.values.font }}_init.style.fontFamily }
+    --font-{{ fontSlug }}: ${ {{ fontVarName }}.style.fontFamily };
+  }
+
+  .font-{{ fontSlug }} {
+    font-family: var(--font-{{ fontSlug }});
   }
 `}</style>
 {% endset %}

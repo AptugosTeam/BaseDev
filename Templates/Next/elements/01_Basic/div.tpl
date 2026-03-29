@@ -36,6 +36,7 @@ options:
     type: function
     options: ''
     advanced: true
+    helpText: Use only the onclick handler, Aptugo will auto enclose it in a function using "e" as the event variable
   - name: tag
     display: Use a different HTML element
     type: text
@@ -123,7 +124,7 @@ helpText: Basic HTML Div element
     id={{ element.values.id | textOrVariable }}
   {% endif %}
   {% if element.values.className %}
-    className={ {{element.values.className|raw}} }
+    className={ {{element.values.className|parseStyles}} }
   {% endif %}
   {% if styleValue %}
     style={ {{ styleValue|raw }} }

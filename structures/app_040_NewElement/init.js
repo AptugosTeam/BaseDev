@@ -47,7 +47,6 @@ const createdIds = []
 const createElementRecursive = (elementParams, parentContainer) => {
   const unique = elementParams.unique_id || aptugo.generateID()
 
-  console.log(`creating recursive element ${unique} in ${parentContainer.unique_id} (${parentContainer.name})`)
   const newElement = {
     unique_id: unique,
     name: elementParams.name || 'Untitled',
@@ -73,13 +72,10 @@ const createElementRecursive = (elementParams, parentContainer) => {
 
 createElementRecursive(Parameters, container)
 
-// ✅ validation
-console.log('container.children', container.children)
-// for (const id of createdIds) {
-//   const found = container.children.find(child => child && child.unique_id === id)
-//   if (!found) {
-//     throw new Error(`Element creation failed. Element ${id} not found.`)
-//   }
-// }
+const toReturn = {
+  version: 2,
+  app: Application
+}
 
-return Application
+if (Parameters.expectedReturn === 'SMALL') toReturn.outcome = container
+return toReturn

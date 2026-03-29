@@ -54,10 +54,10 @@ options:
 } %}
 {% if not element.children %}
   {% set content %}
-    {% set profilePicturePath = fillPathTo(element.values.ownerPicture|fieldData, mainTable) %}
-    {% set ownerNamePath = fillPathTo(element.values.ownerName|fieldData, mainTable) %}
     <div className={theme.wallItem}>
       {% if element.values.showOwner %}
+        {% set profilePicturePath = fillPathTo(element.values.ownerPicture|fieldData, mainTable) %}
+        {% set ownerNamePath = fillPathTo(element.values.ownerName|fieldData, mainTable) %}
         <div className={theme.wallOwnerContainer}>
           <div className={theme.wallOwnerPicture}>{% include includeTemplate('field.tpl') with { element: { values: { Type: 'raw' }}, 'pre': 'item.' ~ profilePicturePath, 'field': element.values.ownerPicture|fieldData } %}</div>
           <div className={theme.wallOwnerDetails}>
@@ -78,7 +78,7 @@ options:
   content: content, 
   element: {
     values: {
-      variable: 'wallData?.data?.docs'
+      variable: 'wallData'
     }
   }
 } %}

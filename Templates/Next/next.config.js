@@ -38,6 +38,16 @@ module.exports = {
       },
     ];
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+        port: '',
+        pathname: '/photos/**',
+      },
+    ],
+  },
   transpilePackages: ['mui-file-input'],
   typescript: {
     ignoreBuildErrors: true,

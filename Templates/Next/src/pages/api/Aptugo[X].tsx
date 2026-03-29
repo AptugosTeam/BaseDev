@@ -1,5 +1,5 @@
 /*
-path: "{{ table.name |\_friendly |\_lower }}/index.tsx"
+path: "{{ table.name |friendly |lower }}/index.tsx"
 type: file
 unique_id: aqp3dURo
 icon: ico-field
@@ -29,22 +29,27 @@ children: []
 {% set singleName = table.singleName | friendly | lower %}
 {% set mainRouteCode = '' %}
 {% set externalRouteFiles = [] %}
-{% set mainRouteImports = '' %} 
+{% set mainRouteImports = '' %}
 
 {# Create Routes #}
 {% for route in table.definedRoutes %}
   {% set mainLoopIndex = loop.index %}
   {% if route.route_active %}
     {% set routePath = parse(route.route_path, { route: route, table: table }) %}
-    {% set routeCode %} 
+    {% set routeMiddlewares = route.route_middlewares|default([]) %}
+    {% set routeCode %}
       // {{ route.route_name }}
       {% if route.route_imports %}{% set mainRouteImports = mainRouteImports ~ route.route_imports ~ '\n' %}{% endif %}
       {% if route.route_template != 'source' %}
-        handler.{{ route.route_method }}({% include includeTemplate('Aptugo Routes' ~ route.route_template ~ '.tpl') %})
+        handler.{{ route.route_method }}(
+          applyRouteMiddlewares({{ routeMiddlewares|json_encode|raw }}, {% include includeTemplate('Aptugo Routes' ~ route.route_template ~ '.tpl') %})
+        )
       {% else %}
-        handler.{{ route.route_method }}( async (req, res) => {
-          {{ route.route_code | raw }}
-        } )
+        handler.{{ route.route_method }}(
+          applyRouteMiddlewares({{ routeMiddlewares|json_encode|raw }}, async (req, res) => {
+            {{ route.route_code | raw }}
+          })
+        )
       {% endif %}
     {% endset %}
     {% if routePath != '/api/' ~ (tableName|lower) %}
@@ -57,7 +62,6 @@ children: []
         {% if erf.path == path %}
           {% set nrf = nrf|merge([{ path: erf.path, content: erf.content ~ routeCode }]) %}
           {% set notFound = false %}
-          
         {% endif %}
       {% endfor %}
       {% if notFound %}
@@ -69,7 +73,23 @@ children: []
     {% endif %}
   {% endif %}
 {% endfor %}
+
+{% set usesAuth = false %}
+{% set usesBody = false %}
+{% set usesParseBodyMiddleware = false %}
+{% set usesUploads = false %}
+
+{% for route in table.definedRoutes %}
+  {% if route.route_active %}
+    {% set routeMiddlewares = route.route_middlewares|default([]) %}
+    {% if 'auth' in routeMiddlewares %}{% set usesAuth = true %}{% endif %}
+    {% if 'body' in routeMiddlewares %}{% set usesBody = true %}{% endif %}
+    {% if 'uploads' in routeMiddlewares %}{% set usesUploads = true %}{% endif %}
+  {% endif %}
+{% endfor %}
+
 {% block baseRoute %}
+
 import { ValidateProps } from "@api-lib/constants"
 
 import {
@@ -77,26 +97,32 @@ import {
     {{ subtable.name | friendly }}Model,
   {% endfor %}
 } from '@/models'
-import { database, validateBody, parseBody } from "@api-lib/middlewares"
+import { database{% if usesAuth %}, auths{% endif %}{% if usesBody %}, parseBody{% endif %} } from '@api-lib/middlewares'
 import { ncOpts } from "@api-lib/nc"
 import nc from "next-connect"
 import mongoose from 'mongoose'
-import multer from 'multer'
-import parseBodyMiddleware from '@lib/parseBodyMiddleware'
+{% if usesParseBodyMiddleware %}import parseBodyMiddleware from '@lib/parseBodyMiddleware'{% endif %}
+{% if usesUploads %}
 import fs from 'fs'
+import multer from 'multer'
 import path from 'path'
+{% endif %}
 {{ mainRouteImports }}
 
 {{ insert_setting(singleName ~ '_File_Start') |raw }}
 
+{% if usesUploads or usesBody %}
 export const config = {
   api: {
     bodyParser: false,
   },
 }
+{% endif %}
 
+{% if usesUploads %}
 const localTmp = path.join(process.cwd(), 'tmp')
 if (!fs.existsSync(localTmp)) fs.mkdirSync(localTmp, { recursive: true })
+
 const upload = multer({
   storage: multer.diskStorage({
     destination: localTmp,
@@ -106,12 +132,56 @@ const upload = multer({
     fileSize: 5 * 1024 * 1024 * 1024, // limit file size to 5GB
   },
 })
+{% endif %}
 
 const handler = nc(ncOpts)
 handler.use(database)
-handler.use(upload.any())
-handler.use(parseBody)
-handler.use(parseBodyMiddleware)
+
+const runMiddleware = (req, res, middleware) =>
+  new Promise((resolve, reject) => {
+    try {
+      middleware(req, res, (result) => {
+        if (result instanceof Error) return reject(result)
+        return resolve(result)
+      })
+    } catch (e) {
+      reject(e)
+    }
+  })
+
+const applyRouteMiddlewares = (middlewares, handlerFn) => {
+  return async (req, res) => {
+    const middlewareList = Array.isArray(middlewares) ? middlewares : []
+
+    for (const mw of middlewareList) {
+      {% if usesAuth %}
+      if (mw === 'auth') {
+        for (const authMiddleware of auths) {
+          await runMiddleware(req, res, authMiddleware)
+        }
+        continue
+      }
+      {% endif %}
+
+      {% if usesUploads %}
+      if (mw === 'uploads') {
+        await runMiddleware(req, res, upload.any())
+        continue
+      }
+      {% endif %}
+
+      {% if usesBody %}
+      if (mw === 'body') {
+        await runMiddleware(req, res, parseBody)
+        continue
+      }
+      {% endif %}
+    }
+
+    return handlerFn(req, res)
+  }
+}
+
 {{ insert_setting(singleName ~ '_Middlewares') |raw }}
 
 {{ mainRouteCode }}
@@ -119,9 +189,9 @@ handler.use(parseBodyMiddleware)
 export default handler
 
 {% endblock %}
+
 {# ADD EXTRA FILES FROM ROUTE #}
 {% for externalRouteFile in externalRouteFiles %}
   {% set mainRouteCode = externalRouteFile.content %}
   {{ addExtraFile(externalRouteFile.path, block("baseRoute")) }}
 {% endfor %}
-

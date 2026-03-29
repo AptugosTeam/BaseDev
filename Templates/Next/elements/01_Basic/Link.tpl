@@ -73,7 +73,13 @@ import Link from 'next/link'
   {% if element.values.draggable %} draggable={false}{% endif %}
   key='{{ element.unique_id }}'
   href={{ dest | textOrVariable }} 
-  {% if element.values.style %}style={ {{element.values.style}} }{% endif %}
+  {% if element.values.style %}
+  {% if element.values.style is iterable %}
+    style={ {{ element.values.style|json_encode|raw }} }
+  {% else %}
+    style={ {{ element.values.style|raw }} }
+  {% endif %}
+{% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   {% if element.values.Action %}onClickCapture={ {{ element.values.Action | functionOrCall }} }{% endif %}
   {% if element.values.target %}target={{ element.values.target | textOrVariable }}{% endif %}

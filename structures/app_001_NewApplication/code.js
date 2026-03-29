@@ -363,7 +363,6 @@ const Dashboard = {
 	]
 }
 
-console.log('here 2')
 try {
 	const file = aptugo.readFile( Parameters.structure.fullFolder +  '/HaltugoBLocks001.png')
 	Application = await aptugo.structures.run('importImage', {

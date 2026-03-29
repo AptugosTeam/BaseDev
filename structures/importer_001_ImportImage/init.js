@@ -11,7 +11,9 @@ for (var file of Parameters.uploadFiles) {
 
   const buffer = Buffer.from(new Uint8Array(file.contents))
 
-  aptugo.writeFile(aptugo.join(aptugo.apps._getAppDropsFolder(Parameters.app),`${newAsset.id}_${file.name}`), buffer, { pretify: false })
+  aptugo.writeFile(
+    aptugo.join(aptugo.apps._getAppDropsFolder(Parameters.app),`${newAsset.id}_${file.name}`), buffer, { pretify: false }
+  )
 
   if (!Application.assets) Application.assets = []
   Application.assets.push(newAsset)

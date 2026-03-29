@@ -1,0 +1,45 @@
+{
+  "_id": "patch-asset-structure",
+  "type": "structure",
+  "name": "Patch Asset",
+  "differentReturn": true,
+  "desc": "Patches an existing text asset without replacing the whole file",
+  "parameters": [
+    {
+      "name": "asset",
+      "display": "Asset",
+      "type": "text",
+      "helpText": "Asset id"
+    },
+    {
+      "name": "operation",
+      "display": "Operation",
+      "type": "dropdown",
+      "options": [
+        "replace_text",
+        "insert_before",
+        "insert_after",
+        "append",
+        "prepend"
+      ],
+      "helpText": "Patch operation to apply"
+    },
+    {
+      "name": "target",
+      "display": "Target text",
+      "type": "text",
+      "helpText": "Required for replace_text, insert_before, and insert_after"
+    },
+    {
+      "name": "content",
+      "display": "Content",
+      "type": "text",
+      "helpText": "Text to insert or use as replacement"
+    }
+  ],
+  "afterRun": "",
+  "Created_date": {
+    "$date": "2026-03-28T00:00:00.000Z"
+  },
+  "__v": 0
+}

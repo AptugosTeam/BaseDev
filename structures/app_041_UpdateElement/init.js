@@ -153,4 +153,10 @@ if (typeof Parameters.ChildOrder !== 'undefined' && currentParentRef && Array.is
 
 element.updatedAt = new Date().toISOString()
 
-return Application
+const toReturn = {
+  version: 2,
+  app: Application
+}
+
+if (Parameters.expectedReturn === 'SMALL') toReturn.outcome = element
+return toReturn

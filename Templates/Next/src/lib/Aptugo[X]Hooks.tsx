@@ -1,5 +1,5 @@
 /*
-path: "{{ table.name |\_friendly |\_lower }}/hooks.tsx"
+path: "{{ table.name |friendly |lower }}/hooks.tsx"
 type: file
 unique_id: gSp3dUQW
 icon: ico-field

@@ -1,0 +1,92 @@
+{
+  "type": "structure",
+  "_id": "aptugopexelssearch",
+  "name": "Pexels Search",
+  "differentReturn": true,
+  "parameters": [
+    {
+      "name": "Query",
+      "display": "Query",
+      "type": "text",
+      "helpText": "Search phrase for Pexels photos. Example: modern startup office"
+    },
+    {
+      "name": "Orientation",
+      "display": "Orientation",
+      "type": "dropdown",
+      "options": [
+        ["", "Any"],
+        ["landscape", "Landscape"],
+        ["portrait", "Portrait"],
+        ["square", "Square"]
+      ],
+      "helpText": "Optional Pexels orientation filter."
+    },
+    {
+      "name": "Size",
+      "display": "Size",
+      "type": "dropdown",
+      "options": [
+        ["", "Any"],
+        ["large", "Large"],
+        ["medium", "Medium"],
+        ["small", "Small"]
+      ],
+      "helpText": "Optional Pexels size filter."
+    },
+    {
+      "name": "Color",
+      "display": "Color",
+      "type": "text",
+      "helpText": "Optional Pexels color filter. Example: blue"
+    },
+    {
+      "name": "Page",
+      "display": "Page",
+      "type": "text",
+      "helpText": "Optional page number. Default: 1"
+    },
+    {
+      "name": "PerPage",
+      "display": "Results per page",
+      "type": "text",
+      "helpText": "Optional number of results. Max 80. Default: 8"
+    },
+    {
+      "name": "Mode",
+      "display": "Mode",
+      "type": "dropdown",
+      "options": [
+        ["agentPick", "Agent Pick"],
+        ["userPick", "User Pick"]
+      ],
+      "helpText": "Agent Pick returns a selected image plus alternatives. User Pick returns candidates for display."
+    },
+    {
+      "name": "TargetUse",
+      "display": "Target Use",
+      "type": "dropdown",
+      "options": [
+        ["generic", "Generic"],
+        ["hero", "Hero"],
+        ["card", "Card"],
+        ["team", "Team"],
+        ["background", "Background"]
+      ],
+      "helpText": "Helps the agent rank results."
+    },
+    {
+      "name": "PickIndex",
+      "display": "Pick Index",
+      "type": "text",
+      "helpText": "Optional manual pick from the returned candidates, zero-based."
+    },
+    {
+      "name": "ApiKey",
+      "display": "Pexels API Key",
+      "type": "text",
+      "helpText": "Optional explicit API key. If empty, the structure will try environment variables."
+    }
+  ],
+  "afterRun": ""
+}
