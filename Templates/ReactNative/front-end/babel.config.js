@@ -24,6 +24,7 @@ module.exports = function(api) {
         '@classes': './classes',
         '@components': './components',
         '@services': './services',
+        '@store': './store',
       },
     },
 ])

@@ -21,6 +21,14 @@ settings:
         res.send(session)
       })
 */
-axios.get(`{{ settings.apiURL }}/stripe-order-details/${ {{ element.values.sessionID }} }`).then(res => {
+{% set bpr %}
+import axios from 'axios'
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
+{% set bpr %}
+import { resolveApiUrl } from '@services/api'
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
+axios.get(resolveApiUrl(`/stripe-order-details/${ {{ element.values.sessionID }} }`)).then(res => {
   {{ content | raw }}
 })

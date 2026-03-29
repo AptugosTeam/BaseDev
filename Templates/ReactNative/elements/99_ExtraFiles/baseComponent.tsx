@@ -7,62 +7,70 @@ internalUse: true
 import React, { FunctionComponent } from 'react'
 import baseClasses from '@components/Themes/layout.module.scss'
 
-{% for child in element.children %}
-    {% if child.value == 'componentBeforePageRender' %} 
-      {{ child.rendered }}  
-    {% endif %}
-  {% endfor %}
-
 {% for delay in delayed %}
   {% for specificDelay in delay.bpr %}
     {{ specificDelay }}
   {% endfor %}
 {% endfor %}
 
+{% for child in element.children %}
+    {% if child.value == 'componentBeforePageRender' %} 
+      {{ child.rendered }}  
+    {% endif %}
+{% endfor %}
+
 const AptugoComponent: FunctionComponent<{{element.values.interface|default('any')}}> = (props) => {
   {% if element.values.props %}const { {{ element.values.keyprops|default(element.values.props) }} } = props?.properties || {}{% endif %}
 
   {% set combinedContent = [] %}
-  {% set seenLines = {} %}
+  {% set seenBlocks = {} %}
   
   {% set tempCombined = combinedContent %}
-  {% set tempSeen = seenLines %}
+  {% set tempSeen = seenBlocks %}
 
   {% for delay in delayed %}
     {% for specificDelay in delay.ph %}
-      {% set lines = specificDelay|split("\n") %}
-      {% for line in lines %}
-        {% set trimmedLine = line|trim %}
-        {% if trimmedLine != "" and (trimmedLine not in tempSeen) %}
-          {% set tempCombined = tempCombined|merge([trimmedLine]) %}
-          {% set tempSeen = tempSeen|merge({ (trimmedLine): true }) %}
-        {% endif %}
-      {% endfor %}
+      {% set trimmedBlock = specificDelay|trim %}
+      {% if trimmedBlock != "" and (trimmedBlock not in tempSeen) %}
+        {% set tempCombined = tempCombined|merge([trimmedBlock]) %}
+        {% set tempSeen = tempSeen|merge({ (trimmedBlock): true }) %}
+      {% endif %}
     {% endfor %}
   {% endfor %}
   {% set combinedContent = tempCombined %}
-  {% set seenLines = tempSeen %}
+  {% set seenBlocks = tempSeen %}
   
   {% set tempCombined = combinedContent %}
-  {% set tempSeen = seenLines %}
+  {% set tempSeen = seenBlocks %}
   {% for child in element.children %}
     {% if child.value == 'componentHeader' %}
-      {% set lines = child.rendered|split("\n") %}
-      {% for line in lines %}
-        {% set trimmedLine = line|trim %}
-        {% if trimmedLine != "" and (trimmedLine not in tempSeen) %}
-          {% set tempCombined = tempCombined|merge([trimmedLine]) %}
-          {% set tempSeen = tempSeen|merge({ (trimmedLine): true }) %}
-        {% endif %}
-      {% endfor %}
+      {% set trimmedBlock = child.rendered|trim %}
+      {% if trimmedBlock != "" and (trimmedBlock not in tempSeen) %}
+        {% set tempCombined = tempCombined|merge([trimmedBlock]) %}
+        {% set tempSeen = tempSeen|merge({ (trimmedBlock): true }) %}
+      {% endif %}
     {% endif %}
   {% endfor %}
   {% set combinedContent = tempCombined %}
-  {% set seenLines = tempSeen %}
+  {% set seenBlocks = tempSeen %}
 
-  
-  
-  {{ combinedContent|join("\n")|raw }}
+  {% set renderedContent = '' %}
+  {% for block in combinedContent %}
+    {% set currentIsMultiline = block|split("\n")|length > 1 %}
+    {% if loop.first %}
+      {% set renderedContent = block %}
+    {% else %}
+      {% set previousBlock = combinedContent[loop.index0 - 1] %}
+      {% set previousIsMultiline = previousBlock|split("\n")|length > 1 %}
+      {% if previousIsMultiline or currentIsMultiline %}
+        {% set renderedContent = renderedContent ~ '\n\n' ~ block %}
+      {% else %}
+        {% set renderedContent = renderedContent ~ '\n' ~ block %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {{ renderedContent|raw }}
   
   return (<React.Fragment>
     {% for child in element.children %}

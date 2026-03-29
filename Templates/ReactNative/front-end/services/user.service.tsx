@@ -5,24 +5,25 @@ unique_id: QcDotLgm
 */
 import axios from 'axios';
 import authHeader from './auth-header';
+import { resolveApiUrl } from '@services/api'
 
-const API_URL = "{{ settings.apiURL }}/api/users/";
+const API_URL = resolveApiUrl('/api/users');
 
 class UserService {
   getPublicContent() {
-    return axios.get(API_URL + 'all');
+    return axios.get(`${API_URL}/all`);
   }
 
   getUserBoard() {
-    return axios.get(API_URL + 'user', { headers: authHeader() });
+    return axios.get(`${API_URL}/user`, { headers: authHeader() });
   }
 
   getModeratorBoard() {
-    return axios.get(API_URL + 'mod', { headers: authHeader() });
+    return axios.get(`${API_URL}/mod`, { headers: authHeader() });
   }
 
   getAdminBoard() {
-    return axios.get(API_URL + 'admin', { headers: authHeader() });
+    return axios.get(`${API_URL}/admin`, { headers: authHeader() });
   }
   {{ insert_setting('user.service') | raw}}
 

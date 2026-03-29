@@ -52,12 +52,15 @@ options:
 
 {% set bpr %}
 import AuthService from '@services/auth.service'
+import store from '@store/store'
+import { setUser } from '@store/slices/userSlice'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 
 {% set storeName = element.values.variableStoreName %}
 
 {% if element.values.variableStore %}
+{% if element.values.await %}
 const {{ storeName }} = {% if element.values.await %}await{% endif %} AuthService.login(
   {{ element.values.Email }},
   {{ element.values.Password }},
@@ -65,9 +68,24 @@ const {{ storeName }} = {% if element.values.await %}await{% endif %} AuthServic
   {% if element.values.options %}{ {{ element.values.options }} }{% endif %}
 )
     if ({{ storeName }}) {
+      store.dispatch(setUser({{ storeName }}?.data || {{ storeName }}))
       {{ content | raw }}
       navigation.replace('{{ (element.values.OnSuccess | elementData).path }}')
     }
+{% else %}
+AuthService.login(
+  {{ element.values.Email }},
+  {{ element.values.Password }},
+  {% if element.values.model %}'{{ element.values.model }}',{% endif %}
+  {% if element.values.options %}{ {{ element.values.options }} }{% endif %}
+).then({{ storeName }} => {
+    store.dispatch(setUser({{ storeName }}?.data || {{ storeName }}))
+    {{ content | raw }}
+    navigation.replace('{{ (element.values.OnSuccess | elementData).path }}')
+}).catch(error => {
+    {{ element.values.CustomError | raw }}
+})
+{% endif %}
 {% else %}
 {% if element.values.await %}await{% endif %} AuthService.login(
   {{ element.values.Email }},
@@ -75,6 +93,7 @@ const {{ storeName }} = {% if element.values.await %}await{% endif %} AuthServic
   {% if element.values.model %}'{{ element.values.model }}',{% endif %}
   {% if element.values.options %}{ {{ element.values.options }} }{% endif %}
 ).then(result => {
+    store.dispatch(setUser(result?.data || result))
     {{ content | raw }}
     navigation.replace('{{ (element.values.OnSuccess | elementData).path }}')
 }).catch(error => {

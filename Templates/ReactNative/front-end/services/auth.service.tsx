@@ -5,9 +5,10 @@ unique_id: dDixye51
 */
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import axios from 'axios'
+import { resolveApiUrl } from '@services/api'
 {{ insert_setting('AuthServiceImports') | raw }}
 
-const BASE_API_URL = '{{ settings.apiURL }}/api/'
+const BASE_API_URL = resolveApiUrl('/api')
 
 interface LoginOptions {
   remember?: boolean
@@ -27,7 +28,7 @@ interface RecoverOptions {
 
 class AuthService {
   getModelPath(model: string | null = null) {
-    return `${BASE_API_URL}${model || 'users'}`
+    return `${BASE_API_URL}/${model || 'users'}`
   }
 
   login(email, password, model: string | null = null, options: LoginOptions = {}) {
@@ -70,8 +71,8 @@ class AuthService {
   }
 
   async getCurrentUser() {
-    const user = (await AsyncStorage.getItem('user')) || (await AsyncStorage.getItem('userSession')) || (await AsyncStorage.getItem('user'))
-    return user ? JSON.parse(user) : {}
+    const user = (await AsyncStorage.getItem('user')) || (await AsyncStorage.getItem('userSession'))
+    return user ? JSON.parse(user) : null
   }
 
   async recoverPassword({

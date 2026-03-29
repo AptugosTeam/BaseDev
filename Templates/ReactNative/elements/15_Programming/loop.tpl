@@ -37,7 +37,7 @@ options:
     advanced: true
   - name: code
     display: Code
-    type: text
+    type: code
     options: ''
   
 children: []

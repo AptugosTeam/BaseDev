@@ -6,10 +6,8 @@ unique_id: Ue5mTTDJ
 {% set hasTables = application.tables|length > 0 %}
 import React from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-{% if hasTables %}
 import { Provider as StateProvider } from 'react-redux'
-import store from './store/store'
-{% endif %}
+import store from '@store/store'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import * as Linking from 'expo-linking'
@@ -28,6 +26,7 @@ const Stack = createNativeStackNavigator()
 {{ insert_setting('AppBPR') | raw }}
 
 export default function App() {
+  {% set AppInitialRoute = insert_setting('AppInitialRoute') %}
   const routeNameRef = React.useRef(null)
   const navigationRef = React.useRef(null)
 
@@ -49,8 +48,14 @@ export default function App() {
 
   {{ insert_setting('AppPH') | raw }}
 
+  {% if AppInitialRoute %}
+  if (!{{ AppInitialRoute | raw }}) {
+    return null
+  }
+  {% endif %}
+
   return (
-    {% if hasTables %}<StateProvider store={store}>{% endif %}
+    <StateProvider store={store}>
       <GestureHandlerRootView style={ { flex: 1 }}>
         {{ insert_setting('SiteWideWrapStart') | raw }}
           <NavigationContainer
@@ -72,7 +77,10 @@ export default function App() {
               }
             }}
           >
-            <Stack.Navigator screenOptions={ { headerShown: false } } initialRouteName="Dashboard">
+            <Stack.Navigator
+              screenOptions={ { headerShown: false } }
+              initialRouteName={ {% if AppInitialRoute %}{{ AppInitialRoute | raw }}{% else %}"Dashboard"{% endif %} }
+            >
             {% set AppBody = insert_setting('AppB') %}
             {% if AppBody %}
             {{ insert_setting('AppB') | raw }}
@@ -105,6 +113,6 @@ export default function App() {
           </NavigationContainer>
         {{ insert_setting('SiteWideWrapEnd') | raw }}
       </GestureHandlerRootView>
-    {% if hasTables %}</StateProvider>{% endif %}
+    </StateProvider>
   )
 }

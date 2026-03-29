@@ -7,6 +7,7 @@ import ContentTools from 'ContentTools'
 import 'ContentTools/build/content-tools.min.css'
 import React, { FunctionComponent } from 'react'
 import axios from 'axios'
+import { resolveApiUrl } from '@services/api'
 
 const ContEditor: FunctionComponent = (props: any) => {
   const [state, setstate] = React.useState({ content: '' })
@@ -25,7 +26,7 @@ const ContEditor: FunctionComponent = (props: any) => {
       var formData = new FormData()
       formData.append("image", file)
 
-      axios.post(`{{ settings.apiURL }}${props.uploadPath}`, formData, {
+      axios.post(resolveApiUrl(props.uploadPath), formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

@@ -38,6 +38,11 @@ children: []
     {% set destNot = element.values.fieldVariableNot %}
   {% else %}
     {% set destNot = (element.values.loginScreenNot | elementData).path %}
+    {% if destNot == '/' %}
+      {% set destNot = 'Dashboard' %}
+    {% elseif destNot|first == '/' %}
+      {% set destNot = destNot|slice(1) %}
+    {% endif %}
   {% endif %}
 {% endif %}
 
@@ -46,21 +51,52 @@ children: []
     {% set dest = element.values.fieldVariable %}
   {% else %}
     {% set dest = (element.values.loginScreen | elementData).path %}
+    {% if dest == '/' %}
+      {% set dest = 'Dashboard' %}
+    {% elseif dest|first == '/' %}
+      {% set dest = dest|slice(1) %}
+    {% endif %}
   {% endif %}
 {% endif %}
-{% set bpr %}
-import authHeaders from '@services/auth-header'
+{% set appImport %}
+import AuthService from '@services/auth.service'
+import store from '@store/store'
+import { clearUser, setUser } from '@store/slices/userSlice'
 {% endset %}
-{{ save_delayed('bpr',bpr)}}
-authHeaders().then(result => {
-    {% if element.values.loginScreenNot != 'none' %}
-      if (!result) {
-        navigation.push( {{ destNot | textOrVariable }} )
-      }
-    {% endif %}
-    {% if element.values.loginScreen != 'none' %}
-      if (result) {
-        navigation.push( {{ dest | textOrVariable }} )
-      }
-    {% endif %}
-  })
+{{ add_setting('AppImport', appImport) }}
+
+{% set appPh %}
+const [initialRouteName, setInitialRouteName] = React.useState<string | null>(null)
+
+React.useEffect(() => {
+  const checkAuthStatus = async () => {
+    try {
+      const user = await AuthService.getCurrentUser()
+
+        if (user && Object.keys(user).length > 0) {
+          store.dispatch(setUser(user))
+          {% if element.values.loginScreen != 'none' %}
+          setInitialRouteName({{ dest | textOrVariable }})
+          {% else %}
+          setInitialRouteName('Dashboard')
+          {% endif %}
+        } else {
+          {% if element.values.loginScreenNot != 'none' %}
+          setInitialRouteName({{ destNot | textOrVariable }})
+          {% else %}
+          setInitialRouteName('Dashboard')
+          {% endif %}
+        }
+    } catch (error) {
+      console.error('Error checking auth status:', error)
+      store.dispatch(clearUser())
+    }
+  }
+
+  checkAuthStatus()
+}, [])
+{% endset %}
+{{ add_setting('AppPH', appPh) }}
+
+{% set appInitialRoute %}initialRouteName{% endset %}
+{{ add_setting('AppInitialRoute', appInitialRoute) }}

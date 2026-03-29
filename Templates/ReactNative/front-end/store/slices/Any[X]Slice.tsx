@@ -10,10 +10,11 @@ children: []
 */
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { resolveApiUrl } from '@services/api'
 import buildFormData from '../epics/buildFormData'
 import { I{{ table.name | friendly | capitalize }}Item } from '../models'
 
-const API_URL = `{{ settings.apiURL | raw }}/api/{{ table.name | friendly | lower }}/`
+const API_URL = resolveApiUrl('/api/{{ table.name | friendly | lower }}')
 
 interface {{ table.name | friendly | capitalize }}State {
   list: I{{ table.name | friendly | capitalize }}Item[]
@@ -39,7 +40,7 @@ export const search{{ table.name | friendly | capitalize }} = createAsyncThunk(
       if (typeof options === "string") {
         params = { searchString: options, page: 1, searchField: '_id' }
       }
-      const response = await axios.get(`${API_URL}search/`, { params })
+      const response = await axios.get(`${API_URL}/search/`, { params })
       return { data: response.data, keep: options.keep }
     } catch (err: any) {
       return rejectWithValue(err.response?.data || 'Error searching')
@@ -81,7 +82,7 @@ export const edit{{ table.name | friendly | capitalize }} = createAsyncThunk(
       const data = new FormData()
       buildFormData(data, payload)
       const config = { headers: { 'content-type': 'multipart/form-data' } }
-      const response = await axios.put(`${API_URL}${payload._id}`, data, config)
+      const response = await axios.put(`${API_URL}/${payload._id}`, data, config)
       return response.data
     } catch (err: any) {
       return rejectWithValue(err.response?.data || 'Error editing')
@@ -93,7 +94,7 @@ export const remove{{ table.singleName | friendly | capitalize }} = createAsyncT
   '{{ table.name | friendly | lower }}/remove',
   async (item: any, { rejectWithValue }) => {
     try {
-      await axios.delete(`${API_URL}${item._id}`)
+      await axios.delete(`${API_URL}/${item._id}`)
       return item._id
     } catch (err: any) {
       return rejectWithValue(err.response?.data || 'Error removing')

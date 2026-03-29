@@ -15,6 +15,7 @@ unique_id: alNzyRKN
       "@hooks/*": ["hooks/*"],
       "@components/*": ["components/*"],
       "@services/*": ["services/*"],
+      "@store/*": ["store/*"]
     }
   }
 }
