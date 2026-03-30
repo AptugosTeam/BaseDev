@@ -94,54 +94,60 @@ try {
     fieldsToAdd = fieldsInput.map(normalizeField)
   } else {
     const singleField = buildFieldFromParameters()
-    if (!singleField) {
+    if (!singleField && !Parameters.fromUI) {
       throw new Error('You must provide either Fields, FieldPayload, or ColumnName + DataType')
     }
     fieldsToAdd = [singleField]
   }
 
-  let tablesInput =
-    parseValue(Parameters.Tables) ||
-    parseValue(Parameters.tables)
+  if (Parameters.fromUI) {
+    // If called from UI, return from here
+    return { ...fieldsToAdd[0], unique_id: aptugo.generateID(), column_name: 'New Field', data_type: 'String' }
+  } else {
+    let tablesInput =
+      parseValue(Parameters.Tables) ||
+      parseValue(Parameters.tables)
 
-  if (!tablesInput || (Array.isArray(tablesInput) && tablesInput.length === 0)) {
-    tablesInput = [Parameters.Table || Parameters.table]
-  }
-
-  const tableRefs = toArray(tablesInput).filter(Boolean)
-
-  if (!tableRefs.length) {
-    throw new Error('You must provide Table or Tables')
-  }
-
-  tableRefs.forEach((tableRef) => {
-    const table = findTable(tableRef)
-    if (!table) {
-      throw new Error(`Table not found: ${tableRef}`)
+    if (!tablesInput || (Array.isArray(tablesInput) && tablesInput.length === 0)) {
+      tablesInput = [Parameters.Table || Parameters.table]
     }
 
-    if (!table.fields) table.fields = []
+    const tableRefs = toArray(tablesInput).filter(Boolean)
 
-    fieldsToAdd.forEach((field) => {
-      const exists = table.fields.find(
-        (f) =>
-          f.unique_id === field.unique_id ||
-          f.column_name === field.column_name
-      )
+    if (!tableRefs.length ) {
+      throw new Error('You must provide Table or Tables')
+    }
 
-      if (exists) {
-        throw new Error(
-          `Field already exists in table ${table.name}: ${field.column_name}`
-        )
+    tableRefs.forEach((tableRef) => {
+      const table = findTable(tableRef)
+      if (!table) {
+        throw new Error(`Table not found: ${tableRef}`)
       }
 
-      table.fields.push({
-        ...field,
-        unique_id: field.unique_id || aptugo.generateID()
+      if (!table.fields) table.fields = []
+
+      fieldsToAdd.forEach((field) => {
+        const exists = table.fields.find(
+          (f) =>
+            f.unique_id === field.unique_id ||
+            f.column_name === field.column_name
+        )
+
+        if (exists) {
+          throw new Error(
+            `Field already exists in table ${table.name}: ${field.column_name}`
+          )
+        }
+
+        table.fields.push({
+          ...field,
+          unique_id: field.unique_id || aptugo.generateID()
+        })
       })
     })
-  })
 
+  }
+  
 } catch (e) {
   console.log('ERROR', e)
   throw e

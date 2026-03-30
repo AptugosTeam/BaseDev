@@ -2,6 +2,7 @@
   "type": "structure",
   "_id": "5ee4f8c74011a97e1dbbe02d",
   "name": "New Field",
+  "differentReturn": true,
   "parameters": [
     {
       "name": "Table",

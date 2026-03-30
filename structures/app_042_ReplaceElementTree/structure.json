@@ -1,0 +1,35 @@
+{
+  "_id": "replaceelementtreestructure",
+  "name": "Replace Element Tree",
+  "desc": "Atomically replaces an existing element subtree and returns the persisted resulting subtree",
+  "icon": "",
+  "type": "structure",
+  "parameters": [
+    {
+      "name": "Element",
+      "display": "Target element unique ID, name, or value",
+      "type": "text"
+    },
+    {
+      "name": "Tree",
+      "display": "Full replacement subtree object",
+      "type": "code"
+    },
+    {
+      "name": "PreserveRootUniqueId",
+      "display": "Preserve target root unique ID",
+      "type": "boolean"
+    },
+    {
+      "name": "PreserveDescendantUniqueIds",
+      "display": "Preserve descendant unique IDs when provided",
+      "type": "boolean"
+    },
+    {
+      "name": "expectedReturn",
+      "display": "Return mode",
+      "type": "text"
+    }
+  ],
+  "afterRun": ""
+}
