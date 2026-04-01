@@ -154,7 +154,7 @@ import TextField from '@mui/material/TextField';
     }
   {% endif %} 
   {% if element.values.isOptionEqualToValue %}
-    isOptionEqualToValue={ (option, value) => {{ element.values.isOptionEqualToValue }} }
+    isOptionEqualToValue={ (option, value) => { {{ element.values.isOptionEqualToValue  }} } }
   {% endif %} 
   renderInput={(params) => (
     <TextField
