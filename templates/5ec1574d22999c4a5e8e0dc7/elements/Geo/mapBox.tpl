@@ -252,6 +252,9 @@ options:
   - name: circleColor
     display: Cluster circle color
     type: text
+  - name: customInteractiveLayerIds
+    display: Custom Interactive Layer IDs
+    type: text
   - name: modifyOnLoad
     display: Modify load field
     type: checkbox
@@ -348,7 +351,11 @@ export const unclusteredPointLayer: LayerProps = {
 
 <div className={ {{ element.values.className}} }>
   <Map
-    interactiveLayerIds={ {{ interactiveLayerIds|json_encode }} }
+  {% if element.values.customInteractiveLayerIds %}
+  interactiveLayerIds={ {{ element.values.customInteractiveLayerIds }} }
+  {% else %}
+  interactiveLayerIds={ {{ interactiveLayerIds|json_encode }} }
+{% endif %}
     initialViewState={ {
       latitude: locat.latitude,
       longitude: locat.longitude,
@@ -386,7 +393,6 @@ export const unclusteredPointLayer: LayerProps = {
       onMoveEnd={(e) => { {{ element.values.onMoveEnd }} }}
     {% endif %}
     {% if element.values.maxBounds %}maxBounds={ {{ element.values.maxBounds }} }{% endif %}
-    onIdle={onMapIdle}
     {% if onPressArray and not element.values.onClick  %}
       onClick={async(pressedShape) => { {{ onPressArray | join | raw }} }}
     {% endif %}
