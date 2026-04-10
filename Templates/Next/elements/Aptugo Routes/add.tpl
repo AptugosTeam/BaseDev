@@ -17,6 +17,7 @@ async (req, res) => {
 
     {% for field in table.fields %}
       {% set fieldWithData = field | fieldData %}
+      // {{ field.column_name }} {{ field.data_type }}
       {% include includeTemplate(['Fields' ~ field.data_type ~'update.tpl', 'Fieldsupdate.tpl']) %}
     {% endfor %}
 

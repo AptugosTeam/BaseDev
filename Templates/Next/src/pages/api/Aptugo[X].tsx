@@ -37,19 +37,24 @@ children: []
   {% if route.route_active %}
     {% set routePath = parse(route.route_path, { route: route, table: table }) %}
     {% set routeMiddlewares = route.route_middlewares|default([]) %}
-    {% if route.route_middlewareAuth and routeMiddlewares.indexOf('auth') == -1 %}
+    {% if route.route_middlewareAuth and 'auth' not in routeMiddlewares %}
       {% set routeMiddlewares = routeMiddlewares|merge(['auth']) %}
     {% endif %}
+    
+    {% if route.route_imports %}
+      {% set mainRouteImports = mainRouteImports ~ route.route_imports ~ '\n' %}
+    {% endif %}
+
     {% set routeCode %}
-      // --> {{ route.route_name }}
-      {% if route.route_imports %}{% set mainRouteImports = mainRouteImports ~ route.route_imports ~ '\n' %}{% endif %}
+      // {{ route.route_name }} - {{ type }}
       {% if route.route_template != 'source' %}
-        handler.{{ route.route_method }}(
-          applyRouteMiddlewares({{ routeMiddlewares|json_encode|raw }}, {% include includeTemplate('Aptugo Routes' ~ route.route_template ~ '.tpl') %})
+        handler.{{ route.route_method|lower }}(
+          applyRouteMiddlewares({{ routeMiddlewares|json_encode|raw }}, {% include 
+            includeTemplate('Aptugo Routes' ~ route.route_template ~ '.tpl') 
+          %})
         )
       {% else %}
-        // {{ routeMiddlewares }}
-        handler.{{ route.route_method }}(
+        handler.{{ route.route_method|lower }}(
           applyRouteMiddlewares({{ routeMiddlewares|json_encode|raw }}, async (req, res) => {
             {{ route.route_code | raw }}
           })

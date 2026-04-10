@@ -5,16 +5,8 @@ completePath: >-
 keyPath: elements/99_ExtraFiles/805_expoPushService.tsx
 unique_id: VZ0BT3ov
 */
-import { Expo } from 'expo-server-sdk'
-
-const expo = new Expo({ accessToken: process.env.EXPO_ACCESS_TOKEN, useFcmV1: false })
 
 export const sendPushNotification = async (pushToken, title, body, data = {}) => {
-  if (!Expo.isExpoPushToken(pushToken)) {
-    console.error(`Push token ${pushToken} is not a valid Expo push token`)
-    return false
-  }
-
   const message = {
     to: pushToken,
     sound: 'default',

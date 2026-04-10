@@ -5,20 +5,20 @@ unique_id: UPjrYrt3y
 sourceType: javascript
 options:
   - name: activeStep
-    display: Value defining the active step
+    display: Active step index
     type: text
   - name: className
     display: className
     type: styles
     options: ''
   - name: linear?
-    display: Determines wether you can advance if the step isnt finished or not
+    display: Enforce linear flow
     type: checkbox
     settings:
       default: false
     options: ''
   - name: alternativeLabel?
-    display: If set to 'true' and orientation is horizontal, then the step label will be positioned under the icon.
+    display: If true and orientation is horizontal, the label is rendered below the icon
     type: checkbox
     settings:
       default: false
@@ -31,23 +31,26 @@ options:
 {% set bpr %}
 import Stepper from '@mui/material/Stepper';
 {% endset %}
-{{ save_delayed('bpr',bpr) }}
+{{ save_delayed('bpr', bpr) }}
 <Stepper
-    {% if element.values.activeStep %}
-        activeStep='{{ element.values.activeStep|default('1') }}'
+    {% if element.values.activeStep is defined and element.values.activeStep != '' %}
+        activeStep={ {{ element.values.activeStep|default('0') }} }
     {% endif %}
     {% if element.values.className %}
-        className='{{ element.values.className }}'
+        className={ {{ element.values.className }} }
     {% endif %}
-    {% if element.values.linear %}
-        linear={ {{ element.values.linear|default('false') }} }
+    {% if element.values['linear?'] is defined and element.values['linear?'] %}
+        nonLinear={ false }
     {% endif %}
-    {% if element.values.alternativeLabel %}
-        alternativeLabel={ {{ element.values.alternativeLabel }} }
+    {% if element.values['linear?'] is defined and not element.values['linear?'] %}
+        nonLinear={ true }
+    {% endif %}
+    {% if element.values['alternativeLabel?'] is defined and element.values['alternativeLabel?'] %}
+        alternativeLabel={ true }
     {% endif %}
     {% if element.values.orientation %}
-        orientation={ {{ element.values.orientation }} }
+        orientation="{{ element.values.orientation|default('horizontal') }}"
     {% endif %}
-    >
+>
     {{ content | raw }}
 </Stepper>

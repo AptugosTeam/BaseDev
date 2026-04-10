@@ -22,6 +22,11 @@ const parseMaybeObject = (value, fieldName) => {
   return value
 }
 
+const getElementTree = () => {
+  if (Array.isArray(Application?.pages)) return Application.pages
+  throw new Error('Application.pages is not available. Make sure the application is fully loaded before running Replace Element Tree.')
+}
+
 const findNodeFlexible = (nodes, selector, parent = null) => {
   let matchByName = null
   let matchByValue = null
@@ -168,7 +173,8 @@ if (!parsedTree || typeof parsedTree !== 'object' || Array.isArray(parsedTree)) 
   throw new Error('Tree must be a valid object')
 }
 
-const found = findNodeFlexible(Application.pages, Parameters.Element)
+const elementTree = getElementTree()
+const found = findNodeFlexible(elementTree, Parameters.Element)
 
 if (!found || !found.node || found.node.type !== 'element') {
   throw new Error(`Element not found (by id, name, or value): ${Parameters.Element}`)
@@ -190,7 +196,7 @@ if (oldTargetIndex === -1) {
   throw new Error('Target element is not present in parent.children')
 }
 
-const allExistingIds = buildExistingIdSet(Application.pages)
+const allExistingIds = buildExistingIdSet(elementTree)
 const targetSubtreeIds = new Set(collectIds(target))
 for (const id of targetSubtreeIds) allExistingIds.delete(id)
 

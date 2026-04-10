@@ -253,21 +253,27 @@ options:
     settings:
       default: 0
 extraFiles:
-  - source: 'elements/99_ExtraFiles/MapBox/mapbox.css'
-    destination: 'front-end/components/MapBox/mapbox.css'
+  - source: 'elements/99_ExtraFiles/MapBox/mapbox.module.scss'
+    destination: 'src/components/MapBox/mapbox.module.scss'
   - source: 'elements/99_ExtraFiles/MapBox/Marker.tsx'
-    destination: 'front-end/components/MapBox/Marker.tsx'
+    destination: 'src/components/MapBox/Marker.tsx'
   - source: 'elements/99_ExtraFiles/MapBox/index.tsx'
-    destination: 'front-end/components/MapBox/index.tsx'
+    destination: 'src/components/MapBox/index.tsx'
   - source: 'elements/99_ExtraFiles/MapBox/MapBox.tsx'
-    destination: 'front-end/components/MapBox/MapBox.tsx'
+    destination: 'src/components/MapBox/MapBox.tsx'
 settings:
   - name: Packages
-    value: '"mapbox-gl": "2.13.0","react-map-gl": "^7.1.3",'
+    value: '"mapbox-gl": "3.21.0","react-map-gl": "^8.1.0",'
 */
 {% set bpr %}
-  import '@components/MapBox/mapbox.css'
-  import Map, { Layer, Source, NavigationControl, ScaleControl, MapRef} from 'react-map-gl'
+  import '@components/MapBox/mapbox.module.scss'
+  import Map, {
+    Layer,
+    NavigationControl,
+    ScaleControl,
+    Source,
+    type MapRef,
+  } from 'react-map-gl/mapbox'
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% if element.values.navigationControl %}
@@ -276,47 +282,6 @@ settings:
 {% endset %}
 {{ save_delayed('bpr',bpr)}}
 {% endif %}
-{% set bpr %}
-  import type {LayerProps} from 'react-map-gl';
-
-export const clusterLayer: LayerProps = {
-  id: 'clusters',
-  type: 'circle',
-  source: 'earthquakes',
-  filter: ['has', 'point_count'],
-  paint: {
-    'circle-color': ['step', ['get', 'point_count'], 'rgba(206, 13, 45, 0.75)', 10, 'rgba(206, 13, 45, 0.5)', 750, '#f28cb1'],
-    'circle-radius': ['step', ['get', 'point_count'], 16, 10, 32, 750, 64]
-  }
-};
-
-export const clusterCountLayer: LayerProps = {
-  id: 'cluster-count',
-  type: 'symbol',
-  source: 'earthquakes',
-  filter: ['has', 'point_count'],
-  layout: {
-    'text-field': '{point_count_abbreviated}',
-    'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-    'text-size': 10
-  }
-};
-
-export const unclusteredPointLayer: LayerProps = {
-  id: 'unclustered-point',
-  type: 'circle',
-  source: 'earthquakes',
-  filter: ['!', ['has', 'point_count']],
-  paint: {
-    'circle-color': 'rgb(206, 13, 45)',
-    'circle-opacity': 0.84,
-    'circle-radius': 8,
-    'circle-stroke-width': 2,
-    'circle-stroke-color': '#fff'
-  }
-};
-{% endset %}
-{{ save_delayed('bpr',bpr)}}
 {% set interactiveLayerIds = [] %}
 {% set onPressArraySource = [] %}
 {% for child in element.children %}
@@ -352,20 +317,20 @@ export const unclusteredPointLayer: LayerProps = {
     mapboxAccessToken='{{ element.values.accessToken }}'
     onLoad={(e) => {
       if (mapRef.current) {
-        const loadURL = (url) => {
-          return axios.get(url, { responseType: 'arraybuffer' }).then(response => {
-            const imageBlob = new Blob([response.data], { type: 'image/jpeg' })
-            return URL.createObjectURL(imageBlob)
-          })
+        const loadURL = async (url) => {
+          const response = await fetch(url)
+          if (!response.ok) throw new Error(`Failed to load image: ${url}`)
+          const imageBlob = await response.blob()
+          return URL.createObjectURL(imageBlob)
         }
-        
+
         mapRef.current.on('styleimagemissing', (e) => {
           loadURL(e.id).then(response => {
             mapRef.current.loadImage(response, (error, image) => {
               if (error) return
               mapRef.current.addImage(e.id, image)
             })
-          })
+          }).catch(() => {})
         })
       }
     }}

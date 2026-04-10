@@ -73,4 +73,4 @@ import Step from '@mui/material/Step';
     {% endif %}
     >
 {{ content | raw }}
-<Step/>
+</Step>

@@ -16,7 +16,7 @@ settings:
     value: '"expo-server-sdk": "latest",'
 extraFiles:
   - source: 'elements/99_ExtraFiles/805_expoPushService.tsx'
-    destination: '/src/pages/api-lib/expoPushNotifications.tsx'
+    destination: '/src/api-lib/expoPushNotifications.tsx'
 */
 {% if element.values.model %}
   {{ add_setting(element.values.model ~ '_File_Start', 'import { sendPushNotification } from "@api-lib/expoPushNotifications"')}}
