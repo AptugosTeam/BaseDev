@@ -1,12 +1,12 @@
 /*
 path: FortAwesomeIcon.tpl
-completePath: >-
-  /Users/gastongorosterrazu/Aptugo/BaseDev/templates/5ec1574d22999c4a5e8e0dc7/elements/Material-UI/FortAwesomeIcon.tpl
 keyPath: elements/Material-UI/FortAwesomeIcon.tpl
 type: file
 icon: f:MaterialIcon.svg
 helpText: Shows a fort awesome icon from the list
 children: []
+deprecated: true
+deprecatedText: Use Icon instead
 options:
   - name: icon
     display: Icon
