@@ -37,8 +37,13 @@ children: []
   {% if route.route_active %}
     {% set routePath = parse(route.route_path, { route: route, table: table }) %}
     {% set routeMiddlewares = route.route_middlewares|default([]) %}
+    
     {% if route.route_middlewareAuth and 'auth' not in routeMiddlewares %}
       {% set routeMiddlewares = routeMiddlewares|merge(['auth']) %}
+    {% endif %}
+
+    {% if route.route_middlewareFiles and 'uploads' not in routeMiddlewares %}
+      {% set routeMiddlewares = routeMiddlewares|merge(['uploads']) %}
     {% endif %}
     
     {% if route.route_imports %}
@@ -91,6 +96,13 @@ children: []
 {% for route in table.definedRoutes %}
   {% if route.route_active %}
     {% set routeMiddlewares = route.route_middlewares|default([]) %}
+    {% if route.route_middlewareAuth and 'auth' not in routeMiddlewares %}
+      {% set routeMiddlewares = routeMiddlewares|merge(['auth']) %}
+    {% endif %}
+    {% if route.route_middlewareFiles and 'uploads' not in routeMiddlewares %}
+      {% set routeMiddlewares = routeMiddlewares|merge(['uploads']) %}
+    {% endif %}
+
     {% if 'auth' in routeMiddlewares %}{% set usesAuth = true %}{% endif %}
     {% if 'body' in routeMiddlewares %}{% set usesBody = true %}{% endif %}
     {% if 'uploads' in routeMiddlewares %}{% set usesUploads = true %}{% endif %}
