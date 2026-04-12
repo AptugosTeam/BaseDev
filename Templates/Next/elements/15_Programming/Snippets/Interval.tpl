@@ -8,7 +8,7 @@ options:
     type: text
 extraFiles:
   - source: 'elements/99_ExtraFiles/999_interval.tsx'
-    destination: 'front-end/Components/Interval/index.tsx'
+    destination: 'src/components/Interval/index.tsx'
 */
 {% set bpr %}
 import useInterval from '@components/Interval'
