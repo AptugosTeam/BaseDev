@@ -6,6 +6,7 @@ type: file
 unique_id: 2uzdPTtK
 icon: ico-load-redux
 sourceType: javascript
+helpText: Load records for a selected table into page state and expose loading, search, and result metadata for the current screen
 calculatedName: >-
   function (ele) { 
     try {
@@ -19,6 +20,7 @@ calculatedName: >-
 options:
   - name: data
     display: Data
+    helpText: Table whose records will be loaded into the generated Redux-backed page state
     type: dropdown
     options: >-
       return aptugo.store.getState().application.tables.map(({ unique_id, name
@@ -54,46 +56,57 @@ options:
       active: true
   - name: variableName
     display: Variable Name
+    helpText: Optional custom variable name used to store the main result object
     type: text
     options: ''
   - name: singleResult
     display: Obtain a single (or first) result
+    helpText: Return only the first matching record instead of keeping the full list
     type: checkbox
   - name: onload
     display: Run code upon loading
+    helpText: Code executed after data is loaded successfully
     type: function
     options: ''
   - name: searchString
     display: Search String
+    helpText: Search text used when dispatching the generated table search action
     type: text
     options: ''
   - name: useExactMatch
     display: Should use an exact match?
+    helpText: Restrict the search to exact matches instead of partial matches
     type: checkbox
     options: ''
   - name: fieldToSearch
     display: Field To Search
+    helpText: Specific table field used when searching for matching records
     type: text
     options: ''
   - name: sortColumn
     display: Sort Column
+    helpText: Table field used to sort the loaded records
     type: text
     options: ''
   - name: sortMethod
     display: Sort Method
+    helpText: Sort direction applied to the selected sort column
     type: dropdown
     options: desc;asc
   - name: sortLanguage
     display: Sort Language
+    helpText: Locale used when sorting text values
     type: dropdown
     options: 
       return [['en', 'English'],['es', 'Spanish']]
   - name: elementsLimit
     display: Limit of Elements
+    helpText: Maximum number of records to load for this query
     type: text
     options: ''
   - name: donotpopulate
     display: Do NOT populate related tables
+    helpText: Disable automatic population of related table data for the loaded records
     type: checkbox
     options: ''
 children: []
@@ -191,4 +204,3 @@ React.useEffect(() => {
   }
 }, [{{ table.name | friendly | lower }}Data.{{ functionCall }}])
 {% endif %}
-

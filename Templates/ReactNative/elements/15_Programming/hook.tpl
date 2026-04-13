@@ -4,9 +4,11 @@ keyPath: elements/Programming/hook.tpl
 unique_id: HokApoto
 usesDelays: [bpr,ph]
 delayContext: true
+helpText: Define a reusable custom React hook in its own generated file
 options:
   - name: name
     display: Hook Name
+    helpText: Hook name used for the generated file and exported hook function
     type: text
     options: ''
     settings:
@@ -19,13 +21,16 @@ options:
       active: true
   - name: folderName
     display: Folder name for the hook
+    helpText: Optional output folder name for the generated hook file
     type: text
     options: ''
   - name: parameters
     display: Parameters 
+    helpText: Parameter list used in the hook signature
     type: text
   - name: return
     display: Return Value 
+    helpText: Descriptive return metadata for the hook editor or generator context
     type: text
 extraFiles:
   - source: 'elements/15_Programming/baseHook.tsx'

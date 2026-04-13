@@ -5,9 +5,11 @@ type: file
 unique_id: OhQu8og7
 icon: ico-save-to-redux
 sourceType: javascript
+helpText: Save a record to the Redux-backed store, creating or updating it depending on whether the record already has an id
 options:
   - name: data
     display: Data
+    helpText: Table whose add or edit action will be dispatched
     type: dropdown
     required: true
     options: >-
@@ -15,9 +17,11 @@ options:
       }) => [unique_id, name])
   - name: condition
     display: Condition
+    helpText: Optional condition that must be true before dispatching the save action
     type: text
   - name: variablename
     display: Variable name to save
+    helpText: Name of the local variable containing the record to create or update
     type: text
     settings:
       default: 'data'
