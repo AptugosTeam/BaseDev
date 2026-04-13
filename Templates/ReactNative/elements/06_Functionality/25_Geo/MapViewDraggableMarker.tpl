@@ -34,6 +34,16 @@ options:
     display: Map Style
     type: styles
     options: ''
+  - name: androidGoogleMapsApiKey
+    display: Android Google Maps API Key
+    type: text
+    options: ''
+    advanced: true
+  - name: iosGoogleMapsApiKey
+    display: iOS Google Maps API Key
+    type: text
+    options: ''
+    advanced: true
   - name: renderManagedMarker
     display: Render Managed Marker
     type: checkbox
@@ -58,6 +68,24 @@ settings:
   - name: Packages
     value: '"react-native-maps": "^1.26.1",'
 */
+{% if element.values.androidGoogleMapsApiKey %}
+{% set AppJsonAndroid %}
+"config": {
+  "googleMaps": {
+    "apiKey": "{{ element.values.androidGoogleMapsApiKey }}"
+  }
+},
+{% endset %}
+{{ add_setting('AppJsonAndroid', AppJsonAndroid)}}
+{% endif %}
+{% if element.values.iosGoogleMapsApiKey %}
+{% set AppJsonIos %}
+"config": {
+  "googleMapsApiKey": "{{ element.values.iosGoogleMapsApiKey }}"
+},
+{% endset %}
+{{ add_setting('AppJsonIos', AppJsonIos)}}
+{% endif %}
 {% set bpr %}
 {% if element.values.renderManagedMarker %}
 import MapView, { Marker } from 'react-native-maps'
