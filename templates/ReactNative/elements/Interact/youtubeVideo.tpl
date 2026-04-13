@@ -15,6 +15,10 @@ options:
     display: height
     type: text
     options: ''
+  - name: onReady
+    display: On Ready
+    type: text
+    options: ''
 settings:
   - name: Packages
     value: '"react-native-youtube-iframe": "^2.3.0","react-native-webview": "13.13.5",'
@@ -26,4 +30,5 @@ import YoutubePlayer from "react-native-youtube-iframe"
 <YoutubePlayer
   height={ {{ element.values.height}} }
   videoId={ {{ element.values.videoID}} }
+  {% if element.values.onReady %}onReady={ () => {{ element.values.onReady }} }{% endif %}
 />
