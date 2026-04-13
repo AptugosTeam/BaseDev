@@ -3,7 +3,7 @@ path: SocialSharing.tpl
 type: file
 unique_id: fldZPyDc
 icon: ico-social-sharing
-helpText: Allows to share your current page in Social Networks
+helpText: Share a link through a selected social network component from inside the app
 settings:
   - name: Packages
     value: '"react-social-sharing": "latest",'

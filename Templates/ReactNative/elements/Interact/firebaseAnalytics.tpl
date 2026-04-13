@@ -5,7 +5,7 @@ type: file
 unique_id: MdBfgy9K
 icon: f:Stripe.svg
 display: Firebase Analytics
-helpText: Add Firebase Analytics to your Application
+helpText: Configure Firebase Analytics for the React Native app and wire the native Firebase project files
 children: []
 settings:
   - name: Packages

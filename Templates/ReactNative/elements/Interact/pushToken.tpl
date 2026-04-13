@@ -3,7 +3,7 @@ path: pushToken.tpl
 type: file
 unique_id: pushToken
 icon: ico-disqus
-helpText: Add Push messaging capabilities to your app
+helpText: Register the device push token and optionally send it to your backend for the current user
 settings:
   - name: Packages
     value: '"expo-device": "~8.0.9",'

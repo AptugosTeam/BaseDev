@@ -3,7 +3,7 @@ path: sendPushNotification.tpl
 type: file
 unique_id: sendPushNotification
 icon: ico-disqus
-helpText: Sends a notification to the push service (Expo)
+helpText: Send an Expo push notification payload to a specific push token
 options:
   - name: pushToken
     display: Push Token

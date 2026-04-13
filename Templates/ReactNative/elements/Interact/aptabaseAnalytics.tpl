@@ -3,7 +3,7 @@ path: aptabaseAnalytics.tpl
 type: file
 unique_id: hSVmFQccc
 icon: ico-disqus
-helpText: Add Aptabase Analytics to your Application
+helpText: Initialize Aptabase analytics for the app or track a specific Aptabase event
 settings:
   - name: Packages
     value: '"@aptabase/react-native": "^0.3.9",'
