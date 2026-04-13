@@ -63,7 +63,7 @@ options:
     type: checkbox
 
 children: []
-helpText: Basic HTML Div element
+helpText: Render a performant scrollable list from an array using React Native FlatList
 */
 {% set bpr %}
 import { FlatList } from 'react-native'

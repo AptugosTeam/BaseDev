@@ -111,7 +111,7 @@ options:
     options: ''
     advanced: true
 children: []
-helpText: Basic HTML Div element
+helpText: Render a React Native View container, with optional scrolling, animation, press handlers, and layout styles
 */
 {% set class = element.values.className %}
 {% if element.values.class is defined and element.values.class is not empty %}

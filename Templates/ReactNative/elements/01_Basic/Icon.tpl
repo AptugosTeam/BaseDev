@@ -3,6 +3,7 @@ path: Icon.tpl
 completePath: elements/Basic/Icon.tpl
 type: file
 unique_id: TTit6AJV
+helpText: Render an Iconify icon in React Native with optional size, color, and style
 icon: ico-icon
 sourceType: javascript
 children: []
