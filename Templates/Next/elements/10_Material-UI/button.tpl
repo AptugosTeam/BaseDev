@@ -49,7 +49,14 @@ options:
     display: Icon
     type: dropdown
     options: >-
-      None;Add;Home;Link;Send;AllInbox;Map;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;Settings;ThumbUp
+      None;Add;Home;Link;Send;AllInbox;Map;Menu;DeleteOutline;Favorite;Clear;Google;Facebook;Twitter;Person;Settings;ThumbUp;Custom
+  - name: customIcon
+    display: Custom Icon
+    type: text
+    settings:
+      propertyCondition: icon
+      condition: Custom
+      active: true
   - name: buttonType
     display: Type Submit
     type: checkbox
@@ -63,7 +70,7 @@ options:
 sourceType: javascript
 children: []
 */
-{% if element.values.icon and element.values.icon != 'None' %}
+{% if element.values.icon and element.values.icon != 'None'  and element.values.icon != 'Custom' %}
 {% set bpr %}
 import {{ element.values.icon }}Icon from '@mui/icons-material/{{ element.values.icon }}'
 {% endset %}
@@ -81,7 +88,8 @@ import Button from '@mui/material/Button'
   {% if element.values.Action %}onClickCapture={ {{ element.values.Action | functionOrCall }} }{% endif %}
   {% if element.values.className %}className={ {{ element.values.className }} }{% endif %}
   {% if element.values.fullWidth %}fullWidth{% endif %}
-  {% if element.values.icon and element.values.icon != 'None' %}startIcon={<{{ element.values.icon }}Icon />}{% endif %}
+  {% if element.values.icon and element.values.icon != 'None' and element.values.icon != 'Custom' %}startIcon={<{{ element.values.icon }}Icon />}{% endif %}
+  {% if element.values.icon == 'Custom' %}startIcon={ {{ element.values.customIcon }} }{% endif %}
   {% if element.values.disabled %}disabled={ {{element.values.disabled}} }{% endif %}
   {% if element.values.extraCode %} {{element.values.extraCode}} {% endif %}
 >
