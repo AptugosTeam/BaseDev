@@ -2,6 +2,7 @@
 path: MapViewMarker.tpl
 completePath: elements/Geo/MapViewMarker.tpl
 type: file
+display: Map View Marker
 unique_id: MapViewMarkerTplD3k8
 icon: ico-geolocalization
 order: 2

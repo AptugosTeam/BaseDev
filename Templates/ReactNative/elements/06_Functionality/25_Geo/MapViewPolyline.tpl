@@ -2,11 +2,22 @@
 path: MapViewPolyline.tpl
 completePath: elements/Geo/MapViewPolyline.tpl
 type: file
+display: Map View Polyline
 unique_id: MapViewPolylineTplQ5n7
 icon: ico-geolocalization
 order: 3
 helpText: Render a react-native-maps Polyline inside a MapView
+extraFiles:
+  - source: 'elements/99_ExtraFiles/googleRoutes.tsx'
+    destination: 'front-end/services/googleRoutes.tsx'
 options:
+  - name: importGoogleRoutesHelper
+    display: Import Google Routes Helper
+    type: checkbox
+    options: ''
+    advanced: true
+    settings:
+      default: false
   - name: coordinatesCode
     display: Coordinates
     type: code
@@ -52,6 +63,12 @@ settings:
 import { Polyline } from 'react-native-maps'
 {% endset %}
 {{ save_delayed('bpr',bpr) }}
+{% if element.values.importGoogleRoutesHelper %}
+{% set bpr %}
+import { computeDrivingRoute } from '@services/googleRoutes'
+{% endset %}
+{{ save_delayed('bpr',bpr) }}
+{% endif %}
 <Polyline
   coordinates={ {{ element.values.coordinatesCode | raw }} }
   strokeColor={{ element.values.strokeColor | default("'#0A1D46'") | textOrVariable }}

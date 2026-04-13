@@ -2,6 +2,7 @@
 path: MapViewDraggableMarker.tpl
 completePath: elements/Geo/MapViewDraggableMarker.tpl
 type: file
+display: Map View
 unique_id: KmQpRzhN
 icon: ico-geolocalization
 helpText: Render a react-native-maps MapView with an optional managed draggable marker synced to your form state. You can also add extra MapViewMarker children.
