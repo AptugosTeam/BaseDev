@@ -2,9 +2,11 @@
 path: translate.tpl
 keyPath: elements/15_Programming/Snippets/translate.tpl
 unique_id: x1VTiUTp
+helpText: Translate a key with i18next and render it as text or return only the translated value
 options:
   - name: text
     display: Text
+    helpText: Translation key or expression to resolve through i18next
     type: text
   - name: className
     display: ClassName
@@ -12,11 +14,13 @@ options:
     options: ''
   - name: lines
     display: Display lines
+    helpText: Maximum number of lines to render before truncating the text
     type: text
     settings:
       default: 1
   - name: justtranslate
     display: Render just the value
+    helpText: Return only the translated value instead of wrapping it in a Text component
     type: checkbox
     options: ''
     settings:

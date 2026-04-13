@@ -2,9 +2,11 @@
 path: youtubeVideo.tpl
 keyPath: elements/Interact/youtubeVideo.tpl
 unique_id: mDZain0m
+helpText: Render a YouTube video player inside the app using a YouTube video ID
 options:
   - name: videoID
     display: YouTube Video ID
+    helpText: Identifier of the YouTube video to embed
     type: text
     options: ''
   - name: className

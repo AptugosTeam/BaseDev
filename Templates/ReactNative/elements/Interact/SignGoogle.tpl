@@ -2,24 +2,29 @@
 path: SignGoogle.tpl
 type: file
 unique_id: qgwpCNG
+helpText: Sign in with Google using Expo Auth Session and expose the authenticated user in a local state variable
 settings:
   - name: Packages
     value: '"expo-web-browser": "~12.3.2", "expo-auth-session": "~5.0.2",'
 options:
   - name: varUserInfo
     display: Name Variable userInfo
+    helpText: Name of the state variable that will store the authenticated Google user data
     type: text
     options: ''
   - name: varAndroidClientId
     display: Name Variable androidClientId
+    helpText: OAuth client ID configured for the Android app
     type: text
     options: ''
   - name: varIosClientId
     display: Name Variable iosClientId
+    helpText: OAuth client ID configured for the iOS app
     type: text
     options: ''
   - name: varWebClientId
     display: Name Variable webClientId
+    helpText: OAuth client ID used by Expo Auth Session for web or universal flows
     type: text
     options: ''
 */

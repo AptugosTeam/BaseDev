@@ -3,18 +3,22 @@ path: FlickSearch.tpl
 type: file
 unique_id: nZQBVwLf
 icon: ico-flick-search
+helpText: Search Flickr photos by API key and optional geo radius, then use the results inside the child block
 children: []
 options:
   - name: apikey
     display: API Key
+    helpText: Flickr API key used to authenticate the search request
     type: text
     options: ''
   - name: hasgeo
     display: Only pics with Geo Data
+    helpText: When enabled, only photos with geolocation metadata are returned
     type: checkbox
     options: ''
   - name: radius
     display: Radius in KM
+    helpText: Search radius in kilometers when filtering by geolocated photos
     type: text
     options: ''
 */

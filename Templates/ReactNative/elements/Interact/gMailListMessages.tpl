@@ -3,9 +3,11 @@ path: gMailListMessages.tpl
 type: file
 unique_id: qgwpdQL5
 icon: ico-email
+helpText: Fetch Gmail messages through the configured Gmail service and expose the hydrated results in the child block
 options:
   - name: filter
     display: Filter
+    helpText: Gmail search query used to filter which messages are listed
     type: text
     options: ''
 */

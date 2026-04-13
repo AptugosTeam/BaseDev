@@ -5,6 +5,7 @@ unique_id: 5lG5PAMZ
 icon: ico-field
 internalUse: true
 sourceType: javascript
+helpText: Define the HTML body generator used by the parent email element
 children: []
 */
 

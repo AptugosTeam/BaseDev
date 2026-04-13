@@ -4,13 +4,16 @@ type: file
 unique_id: bn5ppsxe
 icon: ico-google-analytics
 children: []
+helpText: Request Google Analytics reporting data from a backend endpoint and store the response in a local state variable
 options:
   - name: viewID
     display: View ID (/admin/view/settings)
+    helpText: Google Analytics view identifier used by the reporting service
     type: text
     options: ''
   - name: metric
     display: Metrics
+    helpText: One or more Analytics metric expressions to request in the report
     type: chips
     options: >-
       ga:users,Users;ga:newUsers,New Users;ga:1dayUsers,1 Day Active
@@ -18,18 +21,22 @@ options:
       Users;ga:28dayUsers,28 Day Active Users;ga:30dayUsers,30 Day Active Users
   - name: endpoint
     display: Endpoint URL
+    helpText: Backend route that proxies the Google Analytics reporting request
     type: text
     options: ''
   - name: stateName
     display: State Variable Name
+    helpText: Name of the state variable that will hold the report response
     type: text
     options: ''
   - name: dateFrom
     display: Date From
+    helpText: Start date sent to the backend report request
     type: text
     options: ''
   - name: dateTo
     display: Date To
+    helpText: End date sent to the backend report request
     type: text
     options: ''
 childs:
