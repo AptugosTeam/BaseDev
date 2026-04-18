@@ -1,12 +1,18 @@
+/*
+path: googleRoutes.tsx
+completePath: >-
+  /home/user/Aptugo/BaseDev/Templates/ReactNative/elements/99_ExtraFiles/googleRoutes.tsx
+keyPath: elements/99_ExtraFiles/googleRoutes.tsx
+unique_id: 5NKGTbma
+*/
+import { decodeGooglePolyline, type RouteCoordinate } from './polylineUtils'
+
 export type LatLngPoint = {
   lat: number
   lng: number
 }
 
-export type RouteCoordinate = {
-  latitude: number
-  longitude: number
-}
+export type { RouteCoordinate } from './polylineUtils'
 
 type ComputeRouteParams = {
   origin: LatLngPoint
@@ -25,45 +31,6 @@ const GOOGLE_ROUTES_FIELD_MASK = ['routes.distanceMeters', 'routes.duration', 'r
 
 export const getGoogleMapsApiKey = () =>
   process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY?.trim() || process.env.GOOGLE_MAPS_API_KEY?.trim() || ''
-
-const decodePolylineValue = (encodedPolyline: string) => {
-  const coordinates: RouteCoordinate[] = []
-  let latitude = 0
-  let longitude = 0
-  let index = 0
-
-  while (index < encodedPolyline.length) {
-    let result = 0
-    let shift = 0
-    let byte = 0
-
-    do {
-      byte = encodedPolyline.charCodeAt(index++) - 63
-      result |= (byte & 0x1f) << shift
-      shift += 5
-    } while (byte >= 0x20)
-
-    latitude += result & 1 ? ~(result >> 1) : result >> 1
-
-    result = 0
-    shift = 0
-
-    do {
-      byte = encodedPolyline.charCodeAt(index++) - 63
-      result |= (byte & 0x1f) << shift
-      shift += 5
-    } while (byte >= 0x20)
-
-    longitude += result & 1 ? ~(result >> 1) : result >> 1
-
-    coordinates.push({
-      latitude: latitude / 1e5,
-      longitude: longitude / 1e5,
-    })
-  }
-
-  return coordinates
-}
 
 const parseDurationSeconds = (duration: string | undefined) => {
   if (!duration) return null
@@ -139,7 +106,7 @@ export const computeDrivingRoute = async ({ origin, destinations }: ComputeRoute
   }
 
   return {
-    coordinates: decodePolylineValue(encodedPolyline),
+    coordinates: decodeGooglePolyline(encodedPolyline),
     distanceMeters: typeof route?.distanceMeters === 'number' ? route.distanceMeters : null,
     durationSeconds: parseDurationSeconds(route?.duration),
   }
