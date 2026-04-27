@@ -4,32 +4,38 @@ type: file
 unique_id: r0mQRZ4N
 icon: ico-function
 sourceType: javascript
-helpText: Prepares a function to be called by other components and actions
+helpText: Defines a reusable function that can be called from other components, handlers, hooks, or actions in the generated React Native code
 options:
   - name: functionName
     display: Function Name
+    helpText: Name of the generated function. Required unless the function is intentionally anonymous.
     type: text
     options: ''
   - name: functionParameters
     display: Parameters
+    helpText: Comma-separated parameter list used in the function signature, for example value, index or event
     type: text
     options: ''
   - name: functionBody
     display: Body
+    helpText: Raw code inserted at the beginning of the function body before child content is rendered
     type: function
     options: ''
   - name: priority
     display: Priiority
+    helpText: Optional execution priority metadata used by the builder or editor
     type: dropdown
     options: Normal;High;Low
   - name: async
     display: Async
+    helpText: Adds the async keyword so the function can await asynchronous work
     type: checkbox
     advanced: true
     settings:
       default: false
   - name: anonymous
     display: Anonymous function
+    helpText: Generates an anonymous arrow function instead of assigning it to a named constant
     type: checkbox
     advanced: true
     settings:
@@ -55,5 +61,4 @@ children: []
     {{ functionContent }}
   {% endif %}
 {% endif %}
-
 

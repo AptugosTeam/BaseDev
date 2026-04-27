@@ -3,7 +3,7 @@ path: searchField.tpl
 type: file
 unique_id: i13FZRpA
 icon: ico-flick-search
-helpText: Adds a search field and performs searches on a specific table when changed
+helpText: Render a search input that updates the selected table query as the user types
 children: []
 options:
   - name: table

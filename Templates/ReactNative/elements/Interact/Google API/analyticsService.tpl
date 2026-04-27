@@ -6,6 +6,7 @@ icon: ico-field
 internalUse: true
 children: []
 renderpath: back-end/app/services/analytics.js
+helpText: Generate the backend service that queries Google Analytics Reporting API for the parent analytics element
 settings:
   - name: ExtraRoutes
     value: analytics
@@ -14,10 +15,12 @@ settings:
 options:
   - name: endpoint
     display: Service URL
+    helpText: Relative backend route that receives the analytics POST request
     type: text
     options: ''
   - name: viewid
     display: View ID (/admin/view/settings)
+    helpText: Google Analytics view identifier used for the reporting API request
     type: text
     options: ''
 */

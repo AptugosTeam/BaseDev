@@ -37,6 +37,9 @@ children: []
   {% if route.route_active %}
     {% set routePath = parse(route.route_path, { route: route, table: table }) %}
     {% set routeMiddlewares = route.route_middlewares|default([]) %}
+    {% if route.route_method|upper in ['POST', 'PUT', 'PATCH'] and 'body' not in routeMiddlewares %}
+      {% set routeMiddlewares = routeMiddlewares|merge(['body']) %}
+    {% endif %}
     
     {% if route.route_middlewareAuth and 'auth' not in routeMiddlewares %}
       {% set routeMiddlewares = routeMiddlewares|merge(['auth']) %}
@@ -96,6 +99,10 @@ children: []
 {% for route in table.definedRoutes %}
   {% if route.route_active %}
     {% set routeMiddlewares = route.route_middlewares|default([]) %}
+    {% if route.route_method|upper in ['POST', 'PUT', 'PATCH'] and 'body' not in routeMiddlewares %}
+      {% set routeMiddlewares = routeMiddlewares|merge(['body']) %}
+    {% endif %}
+    
     {% if route.route_middlewareAuth and 'auth' not in routeMiddlewares %}
       {% set routeMiddlewares = routeMiddlewares|merge(['auth']) %}
     {% endif %}

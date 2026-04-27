@@ -2,6 +2,7 @@
 path: autolinking.tpl
 type: file
 unique_id: Gzc1T1q0
+helpText: Automatically render navigation links for the child pages of the current page or a selected source page
 icon: ico-autolinking
 sourceType: javascript
 options:

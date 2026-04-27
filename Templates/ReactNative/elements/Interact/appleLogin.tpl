@@ -4,6 +4,7 @@ completePath: >-
   /Users/gastongorosterrazu/Aptugo/BaseDev/templates/ReactNative/elements/Interact/appleLogin.tpl
 keyPath: elements/Interact/appleLogin.tpl
 unique_id: zo8Ko18x
+helpText: Sign in with Apple through Expo Apple Authentication and continue with the success block
 settings:
   - name: Packages
     value: '"expo-apple-authentication": "~6.1.0",'

@@ -3,7 +3,7 @@ path: disqus.tpl
 type: file
 unique_id: hSVmFQvy
 icon: ico-disqus
-helpText: Add Disqus commenting into your website
+helpText: Embed a Disqus discussion thread inside the app for a specific page URL and identifier
 settings:
   - name: Packages
     value: '"disqus-react": "latest",'

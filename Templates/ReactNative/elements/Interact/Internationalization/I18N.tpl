@@ -2,6 +2,7 @@
 path: I18N.tpl
 keyPath: elements/15_Programming/Snippets/I18N.tpl
 unique_id: SoIcXKlJ
+helpText: Initialize i18next for the app and restore the saved language from storage
 settings:
   - name: Packages
     value: '"i18next": "^25.6.3","react-i18next": "^16.3.5",'

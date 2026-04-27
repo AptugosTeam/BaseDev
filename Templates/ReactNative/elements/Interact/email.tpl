@@ -3,7 +3,7 @@ path: email.tpl
 type: file
 unique_id: urGd2l4d
 icon: ico-email
-helpText: Allows you to send emails
+helpText: Define a reusable email-sending helper backed by the generated server route and child email content
 sourceType: javascript
 options:
   - name: functionName

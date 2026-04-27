@@ -3,9 +3,11 @@ path: googleAnalytics.tpl
 type: file
 unique_id: l7PZVEme
 icon: ico-google-analytics
+helpText: Initialize Google Analytics for the mobile app using the configured Firebase or Expo setup
 options:
   - name: trackingid
     display: Tracking ID
+    helpText: Analytics or measurement identifier used by the configured provider
     type: text
     options: ''
 settings:

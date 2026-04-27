@@ -5,10 +5,11 @@ type: file
 unique_id: E3aMS2PI
 order: 2
 icon: ico-variable
-helpText: Allows you to define a variable that will be used later
+helpText: Define a local variable or object property that can be reused later in the current generated scope
 options:
   - name: variableName
     display: Variable Name
+    helpText: Name of the variable that will be declared and exposed to the builder metadata
     type: text
     options: ''
     settings:
@@ -28,6 +29,7 @@ options:
       active: true
   - name: variableValue
     display: Value
+    helpText: Initial value assigned to the variable. If omitted, child content is used instead.
     type: variable
     options: ''
     settings:
@@ -36,13 +38,16 @@ options:
       active: true
   - name: willbeModified
     display: Will it be modified?
+    helpText: When enabled, the variable is declared with let instead of const
     type: checkbox
     options: ''
   - name: serverSide
     display: Back-End Variable
+    helpText: Emit this variable only in backend-generated code instead of the frontend scope
     type: checkbox
   - name: renderElsewhere
     display: Render Elsewhere
+    helpText: Optional alternate render target for emitting the declaration into another generated section
     type: dropdown
     options: >-
       return [ ['inPlace','Render in place'],
@@ -53,10 +58,12 @@ options:
     advanced: true
   - name: type
     display: Type Definition
+    helpText: Optional TypeScript type annotation for the generated variable
     type: text
     advanced: true
   - name: objectProperty
     display: Belongs to an object
+    helpText: Generate the variable as a property on this instead of a standalone declaration
     type: checkbox
     advanced: true
 settings:

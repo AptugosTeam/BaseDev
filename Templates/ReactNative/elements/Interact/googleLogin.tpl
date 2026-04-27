@@ -4,6 +4,7 @@ completePath: >-
   /Users/gastongorosterrazu/Aptugo/BaseDev/templates/ReactNative/elements/Interact/googleLogin.tpl
 keyPath: elements/Interact/googleLogin.tpl
 unique_id: zo8Ko17z
+helpText: Authenticate users with Google Sign-In through Firebase Auth and continue with the success block
 settings:
   - name: Packages
     value: '"expo-build-properties": "~0.8.3","@react-native-firebase/app": "^18.0.0", "@react-native-firebase/auth": "^18.0.0", "@react-native-google-signin/google-signin": "^10.0.1",'
