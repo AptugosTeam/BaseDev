@@ -62,6 +62,11 @@ options:
     settings:
       default: true
     helpText: When enabled, generates an arrow function. Inside classes, this renders a class property initialized with an arrow function. Outside classes, this renders const name = (...) => {}.
+  - name: typeDefinition
+    display: Type Definition
+    type: text
+    options: ''
+    helpText: Typescript type definition for the expected returned value
 children: []
 */
 {% set parentElement = element.parent | elementData %}  
@@ -73,12 +78,12 @@ constructor({{ element.values.functionParameters }}) {
 }
   {% else %}
     {% if element.values.useArrow %}
-public {% if element.values.static %}static {% endif %}{{ element.values.functionName }} = {% if element.values.async %}async {% endif %}({{ element.values.functionParameters }}) => {
+public {% if element.values.static %}static {% endif %}{{ element.values.functionName }} = {% if element.values.async %}async {% endif %}({{ element.values.functionParameters }}){% if element.values.typeDefinition %}{{ element.values.typeDefinition|raw}}{% endif %} => {
   {{ element.values.functionBody | raw }}
   {{ content | raw }}  
 }
     {% else %}
-public {% if element.values.static %}static {% endif %}{{ element.values.functionName }}({{ element.values.functionParameters }}) {
+public {% if element.values.static %}static {% endif %}{{ element.values.functionName }}({{ element.values.functionParameters }}){% if element.values.typeDefinition %}{{ element.values.typeDefinition|raw}}{% endif %} {
   {{ element.values.functionBody | raw }}
   {{ content | raw }}  
 }
@@ -87,18 +92,18 @@ public {% if element.values.static %}static {% endif %}{{ element.values.functio
 {% else %}
   {% set functionContent %}
 {% if element.values.useArrow %}
-  {% if element.values.functionName %}const {{ element.values.functionName }} = {% endif %}{% if element.values.async %}async {% endif %}({{ element.values.functionParameters }}) => {
+  {% if element.values.functionName %}const {{ element.values.functionName }} = {% endif %}{% if element.values.async %}async {% endif %}({{ element.values.functionParameters }}){% if element.values.typeDefinition %}{{ element.values.typeDefinition|raw}}{% endif %} => {
     {{ element.values.functionBody | raw }}
     {{ content | raw }}  
   }
 {% else %}
   {% if element.values.anonymous %}
-    {% if element.values.async %}async {% endif %}function({{ element.values.functionParameters }}) {
+    {% if element.values.async %}async {% endif %}function({{ element.values.functionParameters }}){% if element.values.typeDefinition %}{{ element.values.typeDefinition|raw}}{% endif %} {
       {{ element.values.functionBody | raw }}
       {{ content | raw }}  
     }
   {% else %}
-    {% if element.values.async %}async {% endif %}function {{ element.values.functionName }}({{ element.values.functionParameters }}) {
+    {% if element.values.async %}async {% endif %}function {{ element.values.functionName }}({{ element.values.functionParameters }}){% if element.values.typeDefinition %}{{ element.values.typeDefinition|raw}}{% endif %} {
       {{ element.values.functionBody | raw }}
       {{ content | raw }}  
     }

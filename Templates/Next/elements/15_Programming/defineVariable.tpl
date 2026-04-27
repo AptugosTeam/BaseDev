@@ -73,18 +73,19 @@ children: []
   {% set varValue = element.values.variableValue|default(content | raw) %}
 {% endif %}
 {% if not element.values.serverSide %}
-  {% set variableContent %}
-    {% set prev = 'const ' %}
-    {% if element.values.objectProperty %}
-      {% set prev = 'this.' %}
-      {% set variableDeclarations %}
+  {% set variableContent -%}
+    {%- set prev = 'const ' -%}
+    {%- if element.values.objectProperty -%}
+      {%- set prev = 'this.' -%}
+      {%- set variableDeclarations -%}
         {{ element.values.variableName }}:{{ element.values.type|default('any') }}
-      {% endset %}
-      {{ save_delayed('variableDeclarations', variableDeclarations) }}
-    {% elseif element.values.willbeModified %}{% set prev = 'let ' %}
-    {% endif %}
-    {{prev}}{{ element.values.variableName }}{% if element.values.type %}{% if not element.values.objectProperty %}:{{ element.values.type }}{% endif %}{% endif %} = {{ varValue }}
-  {% endset %}
+      {%- endset -%}
+      {{- save_delayed('variableDeclarations', variableDeclarations|trim) -}}
+    {%- elseif element.values.willbeModified -%}
+      {%- set prev = 'let ' -%}
+    {%- endif -%}
+    {{- prev -}}{{ element.values.variableName }}{% if element.values.type and not element.values.objectProperty %}:{{ element.values.type }}{% endif %} = {{ varValue }}
+  {%- endset %}
   {% if element.values.renderElsewhere and element.values.renderElsewhere != 'inPlace' %}
     {{ add_setting(element.values.renderElsewhere, variableContent) }}
   {% else %}{{ variableContent }}{% endif %}

@@ -28,7 +28,7 @@ options:
   {% if element.values.UtilityOf %}
     import use{{ element.values.name | friendly }} from '@components/{{ element.values.UtilityOf }}/use{{ element.values.name | friendly }}'
   {% else %}
-    import { use{{ element.values.name | friendly }} } from '@hooks/{{ element.values.name | friendly }}'
+    import {% if not element.values.withoutUse %}use{% endif %}{{ element.values.name | friendly }} from '@hooks/{{ element.values.name | friendly }}'
   {% endif %}
 {% endset %}
 {{ save_delayed('bpr', bpr)}}

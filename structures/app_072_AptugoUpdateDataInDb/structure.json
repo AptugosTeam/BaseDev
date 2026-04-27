@@ -1,0 +1,26 @@
+{
+  "type": "structure",
+  "_id": "aptugoupdatedataindb",
+  "name": "Update Data In DB",
+  "parameters": [
+    {
+      "name": "Name",
+      "display": "Table name",
+      "type": "text",
+      "helpText": "Target table name where the rows will be updated."
+    },
+    {
+      "name": "keyField",
+      "display": "Key field",
+      "type": "text",
+      "helpText": "Field used to match existing rows, for example _id, id or code."
+    },
+    {
+      "name": "finalData",
+      "display": "Rows to update",
+      "type": "code",
+      "helpText": "Array of plain objects to update. Each object must include the key field."
+    }
+  ],
+  "afterRun": ""
+}

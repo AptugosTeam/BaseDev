@@ -31,5 +31,5 @@ options:
 {% if element.values.customroute %}
 {{ addExtraFile(element.values.customroute ~ '/' ~ element.values.filename , theconstructor) }}
 {% else %}
-{{ addExtraFile( element.values.mainFolder | default("pages") ~ '/' ~ element.values.folderPath ~ '/' ~ element.values.filename, theconstructor) }}
+{{ addExtraFile( element.values.mainFolder | default("src/pages") ~ '/' ~ element.values.folderPath ~ '/' ~ element.values.filename, theconstructor) }}
 {% endif %}
