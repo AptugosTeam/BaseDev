@@ -57,6 +57,9 @@ options:
   - name: onDidFinishLoadingMap
     display: Map Finish Loading
     type: function
+  - name: onRegionDidChange
+    display: New Region Finish Loading
+    type: function
 settings:
   - name: Packages
     value: '"expo-dev-client": "~5.2.4","@rnmapbox/maps": "github:AriadnaGoro/maps#main",'
@@ -97,6 +100,9 @@ setAccessToken('{{ element.values.publicAccessToken }}')
   {% endif %}
   {% if element.values.onDidFinishLoadingMap %}
   onDidFinishLoadingMap={() =>  {{ element.values.onDidFinishLoadingMap}} }
+  {% endif %}
+  {% if element.values.onRegionDidChange %}
+  onRegionDidChange={() =>  {{ element.values.onRegionDidChange}} }
   {% endif %}
 >{{ content | raw }}</MapView>
 

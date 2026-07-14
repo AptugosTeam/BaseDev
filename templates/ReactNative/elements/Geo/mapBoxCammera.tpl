@@ -30,6 +30,9 @@ options:
   - name: maxBounds
     display: Variable with max Bounds
     type: text
+  - name: heading
+    display: Variable with heading
+    type: text
   - name: defaultSettings
     display: Code for default Settings
     type: function
@@ -62,6 +65,9 @@ const cameraRef{{ element.unique_id }} = React.useRef<Camera>(null)
   {% endif %}
   {% if element.values.maxBounds %}
     maxBounds={  {{ element.values.maxBounds }}  }
+  {% endif %}
+  {% if element.values.heading %}
+    heading={  {{ element.values.heading }}  }
   {% endif %}
     {% if element.values.defaultZoom %}
   defaultSettings={ {{ element.values.defaultSettings }} }

@@ -41,6 +41,26 @@ options:
     display: Row Text Style
     type: text
     options: ''
+  - name: buttonTextAfterSelection
+    display: Button Text After Selection
+    type: code
+    options: ''
+  - name: rowTextForSelection
+    display: Row Text For Selection
+    type: code
+    options: ''
+  - name: search
+    display: Enable Search
+    type: checkbox
+    options: false
+  - name: searchPlaceHolder
+    display: Search Placeholder
+    type: text
+    options: 'Buscar...'
+  - name: searchInputTxtColor
+    display: Search Input Text Color
+    type: text
+    options: ''
 children: []
 settings:
   - name: Packages
@@ -54,17 +74,54 @@ import SelectDropdown from 'react-native-select-dropdown'
   {% if element.values.value %}defaultValue={{ element.values.value | textOrVariable }}{% endif %}
   {% if element.values.buttonText %}defaultButtonText={{ element.values.buttonText | textOrVariable }}{% endif %}
   data={ {{ element.values.options }} }
+
   {% if element.values.buttonStyle %}
     buttonStyle={ {{ element.values.buttonStyle }} }
     buttonTextStyle={ {{ element.values.buttonStyle ~ 'Text' }} }
   {% endif %}
+
   {% if element.values.onChange %}
   onSelect={(selectedItem) => {
     {{ element.values.onChange }}
-  } }
+  }}
   {% endif %}
-  {% if element.values.dropdownStyle %}dropdownStyle={ {{ element.values.dropdownStyle }} }{% endif %}
-  {% if element.values.dropdownOverlayColor %}dropdownOverlayColor={{ element.values.dropdownOverlayColor | textOrVariable }}{% endif %}
-  {% if element.values.rowStyle %}rowStyle={ {{ element.values.rowStyle }} }{% endif %}
-  {% if element.values.rowTextStyle %}rowTextStyle={ {{ element.values.rowTextStyle }} }{% endif %}
+
+  {% if element.values.buttonTextAfterSelection %}
+  buttonTextAfterSelection={(selectedItem) => {
+    {{ element.values.buttonTextAfterSelection }}
+  }}
+  {% endif %}
+
+  {% if element.values.rowTextForSelection %}
+  rowTextForSelection={(item) => {
+    {{ element.values.rowTextForSelection }}
+  }}
+  {% endif %}
+
+{% if element.values.search %}
+  search
+  {% if element.values.searchPlaceHolder %}
+  searchPlaceHolder={{ element.values.searchPlaceHolder | textOrVariable }}
+  {% endif %}
+{% endif %}
+
+  {% if element.values.searchInputTxtColor %}
+  searchInputTxtColor={{ element.values.searchInputTxtColor | textOrVariable }}
+  {% endif %}
+
+  {% if element.values.dropdownStyle %}
+  dropdownStyle={ {{ element.values.dropdownStyle }} }
+  {% endif %}
+
+  {% if element.values.dropdownOverlayColor %}
+  dropdownOverlayColor={{ element.values.dropdownOverlayColor | textOrVariable }}
+  {% endif %}
+
+  {% if element.values.rowStyle %}
+  rowStyle={ {{ element.values.rowStyle }} }
+  {% endif %}
+
+  {% if element.values.rowTextStyle %}
+  rowTextStyle={ {{ element.values.rowTextStyle }} }
+  {% endif %}
 />
