@@ -57,11 +57,14 @@ options:
     type: checkbox
     settings:
       default: true
-  - name: center
-    display: Center
+  - name: initialLatitude
+    display: Initial Latitude
     type: text
-    settings:
-      default: [[0,0]]
+    options: ''
+  - name: initialLongitude
+    display: Initial Longitude
+    type: text
+    options: ''
   - name: clickTolerance
     display: Click Tolerance
     type: text
@@ -356,6 +359,15 @@ export const unclusteredPointLayer: LayerProps = {
   {% else %}
   interactiveLayerIds={ {{ interactiveLayerIds|json_encode }} }
 {% endif %}
+{% if element.values.initialLatitude %}
+    initialViewState={ {
+      latitude: {{ element.values.initialLatitude }},
+      longitude: {{ element.values.initialLongitude }},
+      zoom: zoom,
+      bearing: 0,
+      pitch: 0
+    } }
+    {% else %}
     initialViewState={ {
       latitude: locat.latitude,
       longitude: locat.longitude,
@@ -363,6 +375,7 @@ export const unclusteredPointLayer: LayerProps = {
       bearing: 0,
       pitch: 0
     } }
+{% endif %}
     ref={mapRef}
     mapStyle={{ element.values.style |default('mapbox://styles/mapbox/light-v9') | textOrVariable }}
     mapboxAccessToken='{{ element.values.accessToken }}'

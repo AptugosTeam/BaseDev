@@ -145,6 +145,10 @@ options:
     display: Child is end adornment
     type: checkbox
     advanced: true
+  - name: startAdornment
+    display: Child is start adornment
+    type: checkbox
+    advanced: true
   - name: inputProps
     display: Enter your inputProps
     type: code
@@ -171,7 +175,7 @@ children: []
 import TextField from '@mui/material/TextField'
 {% endset %}
 {{ save_delayed('bpr', bpr) }}
-{% if element.values.endAdornment %}
+{% if element.values.endAdornment or element.values.startAdornment %}
 {% set bpr %}
 import InputAdornment from '@mui/material/InputAdornment'
 {% endset %}
@@ -254,6 +258,11 @@ import InputAdornment from '@mui/material/InputAdornment'
     {% if element.values.endAdornment %}
       InputProps={ {
         endAdornment: <InputAdornment position="end">{{ content | raw }}</InputAdornment>
+      } }
+    {% endif %}
+    {% if element.values.startAdornment %}
+      InputProps={ {
+        startAdornment: <InputAdornment position="start">{{ content | raw }}</InputAdornment>
       } }
     {% endif %}
     {% if element.values.inputRef %}inputRef={ {{ element.values.inputRef }} }{% endif %}
